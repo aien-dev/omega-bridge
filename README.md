@@ -1,3 +1,7 @@
+<!-- github-native-navigation -->
+[Source](https://github.com/aien-dev/omega-bridge) · [Replay receipt](docs/teaching-replay.txt) · [Issues](https://github.com/aien-dev/omega-bridge/issues)
+<!-- /github-native-navigation -->
+
 # Omega Bridge
 
 Pre-alpha. An Omega-first interoperability project: conversion targets and language bindings, so existing applications can adopt Omega without rewriting their visible interface.
