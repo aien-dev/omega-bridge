@@ -1,0 +1,77 @@
+#!/bin/sh
+# POSIX shell host glue. All source checking, conversion and math run in Omega.
+set -eu
+LC_ALL=C; export LC_ALL
+fail() { printf 'omega: %s\n' "$2" >&2; exit "$1"; }
+root=$(dirname "$(realpath -- "$0")")
+(cd "$root" && sha256sum --status -c files.sha256) 2>/dev/null || fail 65 'installed file integrity mismatch'
+[ "$(uname -s)/$(uname -m)" = Linux/aarch64 ] || fail 69 'requires Linux AArch64'
+case ${1:-help} in
+    help|--help|-h) cat "$root/HELP.txt"; exit 0;;
+    version|--version) cat "$root/pins"; exit 0;;
+    attach|discover|status)
+        printf 'UNSUPPORTED: native host discovery and runtime hooks are not qualified; no runtimes attached.\n'
+        exit 69;;
+    uninstall) [ "$#" = 1 ] || fail 64 'usage: om uninstall'; exec "$root/uninstall.sh" --prefix "$(dirname "$(dirname "$root")")";;
+    math|convert) command=$1; shift;;
+    *) fail 64 'unknown command; use om help';;
+esac
+if [ "$command" = math ] && [ "$#" = 0 ]; then
+    exec "$root/math"
+fi
+tmp=$(mktemp -d "${TMPDIR:-/tmp}/omega-command.XXXXXXXX") || fail 74 'cannot create request directory'
+outtmp=
+cleanup() {
+    [ -z "$outtmp" ] || rm -f -- "$outtmp"
+    rm -f -- "$tmp/input" "$tmp/native" "$tmp/output" "$tmp/error"
+    rmdir "$tmp"
+}
+trap cleanup EXIT
+trap 'exit 129' HUP
+trap 'exit 130' INT
+trap 'exit 143' TERM
+if [ "$command" = math ]; then
+    [ "$#" = 1 ] || fail 64 'usage: om math [one quoted request]'
+    case $1 in *'
+'*) fail 64 'one-shot math requires one line; use stdin for streams';; esac
+    printf '%s\n' "$1" > "$tmp/input"
+    rc=0
+    "$root/math" < "$tmp/input" > "$tmp/output" || rc=$?
+    cat "$tmp/output"
+    [ "$rc" = 0 ] || exit "$rc"
+    if grep -q '^REFUSED ' "$tmp/output"; then exit 65; fi
+    exit 0
+fi
+# Frozen syntax: convert --to c|python input.om [-o output]. Use -- before
+# an option-like input name. Input and destination paths never reach eval.
+[ "$#" -ge 3 ] && [ "$1" = --to ] || fail 64 'usage: om convert --to c|python [--] input.om [-o output]'
+case $2 in c) mode=C;; python) mode=P;; *) fail 64 'unsupported conversion target';; esac
+shift 2
+if [ "${1-}" = -- ]; then shift; fi
+[ "$#" = 1 ] || { [ "$#" = 3 ] && [ "$2" = -o ]; } || fail 64 'usage: om convert --to c|python [--] input.om [-o output]'
+input=$1
+output=
+if [ "$#" = 3 ]; then output=$3; [ -n "$output" ] || fail 64 'empty output path'; fi
+[ -f "$input" ] && [ -r "$input" ] || fail 66 'input is not a readable regular file'
+cat -- "$input" > "$tmp/input" || fail 74 'cannot snapshot input'
+if ! "$root/omc" < "$tmp/input" > "$tmp/native" 2> "$tmp/error"; then
+    cat "$tmp/error" >&2
+    fail 65 'native source check refused'
+fi
+[ -s "$tmp/native" ] || fail 65 'native source check produced no executable'
+printf '%s' "$mode" > "$tmp/native"
+cat "$tmp/input" >> "$tmp/native"
+if ! "$root/bridge" < "$tmp/native" > "$tmp/output" 2> "$tmp/error"; then
+    cat "$tmp/error" >&2
+    fail 65 'native conversion refused'
+fi
+[ -s "$tmp/output" ] || fail 65 'native conversion produced no output'
+if [ -z "$output" ]; then cat "$tmp/output"; exit 0; fi
+# Same-directory staging makes publication atomic. Refuse nonregular destinations.
+case $output in /*) ;; *) output=./$output;; esac
+[ ! -L "$output" ] && { [ ! -e "$output" ] || [ -f "$output" ]; } || fail 73 'output must be a regular file, not a symlink'
+outdir=$(dirname -- "$output")
+outtmp=$(mktemp "$outdir/.omega-output.XXXXXXXX") || fail 73 'cannot stage output'
+cat "$tmp/output" > "$outtmp" || fail 74 'cannot write output'
+mv -fT -- "$outtmp" "$output" || fail 73 'cannot publish output'
+outtmp=

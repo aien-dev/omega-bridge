@@ -1,0 +1,37 @@
+Omega native commands: om and omg share one implementation and installation.
+
+  om help                         Show this help
+  om version                      Exact upstream source pins and seed hash
+  om math 'diff (x+1)^5'           One request; REFUSED returns exit 65
+  om math                         Stream stdin, one request per line
+  om convert --to c|python [--] input.om [-o output]
+  om uninstall                    Remove unchanged owned files and aliases
+  om attach|discover|status       UNSUPPORTED (exit 69); no runtime hooks
+
+Math: eval, expand, collect, diff, integ, subst E ; R, solve L ; R,
+gcd A ; B, linear a;b;c;d;e;f. Exact Q[x], variable x, explicit *, degree <=16,
+128 decimal digits per magnitude (including intermediates), exponent magnitude
+<=1024, request <=4095 bytes, parser nesting <32, output <=8192 bytes,
+4096 rational slots, 512 polynomial nodes, 200000 fuel units. Antiderivatives
+omit the arbitrary constant. No floats, units, transcendental functions or
+symbolic denominators. See MATH-CONTRACT.md beside this command for all limits.
+REFUSED 1 syntax, 2 zero/domain arithmetic, 3 unsupported, 4 capacity,
+5 arena, 6 fuel/depth, 7 underdetermined, 8 inconsistent; REFUSED 9 invariant.
+Streaming preserves native replies and exit status: ordinary refusals continue
+and EOF exits 0; transport bound exits 1, I/O failure 2, session bound 3.
+The session limit is 65536 requests; a line transport limit is 65536 bytes.
+One-shot input must be exactly one quoted line, without a newline.
+
+Conversion accepts only the checked Omega subset documented in CAPABILITIES.md.
+C output targets GNU C11/POSIX; Python output targets Python 3. Conversion never
+executes the source or emitted program. No Python/C input conversion. Both source
+checking and conversion finish before output is published. -o uses atomic rename
+and refuses symlinks; a successful replacement gets private file permissions.
+Spaces and leading dashes in filenames are supported. No shell evaluation.
+
+Exit statuses: 64 usage, 65 refusal/integrity, 66 input unavailable, 69 unsupported,
+73 output/install collision, 74 I/O. Native transport failures retain their status.
+Linux AArch64 only. POSIX shell and standard host utilities provide argument,
+file and process glue. Omega provides all checking, conversion and calculation.
+No first-party C/Rust launcher or fallback. No implicit discovery, services,
+PATH edits or system retirement. Runtime attachment remains incomplete.

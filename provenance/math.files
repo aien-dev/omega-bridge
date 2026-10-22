@@ -1,0 +1,11 @@
+seed/math/core.om
+seed/math/cli.om
+seed/math/unit.om
+seed/math/CONTRACT.md
+seed/math/cases.json
+seed/math/gate.mjs
+seed/math/oracle.mjs
+seed/math/checks.mjs
+seed/math/robustness.mjs
+seed/math/calc-oracle.mjs
+evidence/math-native/wolfram-oracle.json

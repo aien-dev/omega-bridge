@@ -1,35 +1,79 @@
-# Omega Bridge
+# Omega native commands
 
-An Omega-written compiler that emits executable C and Python from a checked, bounded Omega subset. Existing C and Python applications can also call generated library functions. AGPL-3.0.
+I provide `om` and `omg` as two names for the same installation. My source-only
+build starts with the audited hex seed, reproduces the pinned Omega compiler,
+and uses that compiler to build the converter and exact math executable.
+All source checking, conversion and calculation run in native Omega. I use a
+small POSIX shell dispatcher for arguments, files and processes because the
+current seed does not expose those capabilities. There is no first-party C or
+Rust launcher, compiler or calculator in this default command path.
 
-The source-only compiler bootstrap currently requires Linux AArch64. Generated C uses GNU C11 and POSIX; generated Python uses Python 3. This branch has local differential tests and caller demos; independent review remains required before release. No universal conversion or performance improvement is claimed.
+I currently qualify Linux AArch64 only, without a GPU. I keep this staging
+repository private pending separate audit and release. I do not claim a speedup,
+Wolfram parity, automatic runtime replacement or completed system retirement.
 
-Build from exact pinned source:
-
-```sh
-quiet-build tools/bootstrap.sh
-quiet-build tools/build.sh
-quiet-build tools/test.sh
-```
-
-On a host without quiet-build, run those scripts directly. The bootstrap fetches the exact Omega source commit recorded in docs/PROVENANCE.md. Access to the upstream repository is required. An existing checkout can supply it through OMEGA_SOURCE; it is read only. No compiler binary is stored in this repository. If you already have the qualified seed, OMEGA_SEED can name it; its fingerprint is enforced.
-
-Convert and run an example:
+## Install from this source checkout
 
 ```sh
-tools/bridge c tests/fixtures/fib.om > build/fib.c
-gcc -std=gnu11 -O2 build/fib.c -o build/fib
-build/fib
-tools/bridge python tests/fixtures/fib.om > build/fib.py
-python3 build/fib.py
+quiet-build tools/install.sh --offline --prefix "$HOME/.local"
 ```
 
-Output goes to stdout only after the complete conversion succeeds. Source validation is mandatory. Conversion creates isolated temporary build files and never installs or replaces an application. Inspect generated output before opting to link or import it.
-
-Run real C and Python application callers:
+The prefix's parent must exist. On hosts without `quiet-build`, run the script
+directly. Both command names are checked for collisions before writes. Installation
+builds the seed chain once and shares the qualified compiler between components.
+All pinned source is committed, so installation needs no network, sibling checkout,
+prebuilt executable or source override. `--offline` makes this intent explicit;
+installation is always offline. I leave PATH and shell startup files unchanged.
+Use the absolute command path if the prefix's `bin` directory is not already on PATH.
 
 ```sh
-quiet-build python3 tests/attachments.py
+"$HOME/.local/bin/om" math 'diff (x+1)^5'
+printf 'eval 1/3+1/6\nexpand (x+1)^3\n' | "$HOME/.local/bin/omg" math
+"$HOME/.local/bin/om" convert --to c tests/fixtures/fib.om -o /tmp/fib.c
+"$HOME/.local/bin/omg" help
+"$HOME/.local/bin/om" version
 ```
 
-See [supported features and limits](docs/CAPABILITIES.md), [caller ABI and ownership](docs/ABI.md), [design and study decisions](docs/DESIGN.md), and [provenance](docs/PROVENANCE.md). Text constants, floats, heap operations, GPU work and other target languages are explicitly unsupported. Python/C input conversion is not implemented. The Python test harness is infrastructure; all conversion logic and both runtime emitters are in [src/toc.om](src/toc.om).
+For a real input available in this checkout, `tests/fixtures/fib.om` can be used
+with either conversion target. C output targets GNU C11/POSIX; Python output targets
+Python 3. Target compilers/interpreters are needed only when you choose to run that
+output. Conversion itself does not execute the source or emitted program.
+Existing applications can call generated library functions under the [caller
+contract](docs/ABI.md). Python/C source input conversion is not supported.
+
+I preserve native `OK`/`REFUSED` text. A one-shot math refusal exits 65. Streaming
+math preserves the native session contract: ordinary refusals allow subsequent
+requests, and EOF returns zero. Transport failures retain native nonzero statuses.
+Math supports bounded exact rationals, degree-16 polynomials, differentiation,
+polynomial antiderivatives, substitution, GCD and linear solving. Magnitudes,
+including intermediates, are limited to 128 decimal digits. My [command
+contract](docs/NATIVE-COMMANDS.md), [math contract](seed/math/CONTRACT.md) and
+[converter capabilities](docs/CAPABILITIES.md) define the remaining limits.
+
+I snapshot conversion input before checking it. Conversion failures publish no
+output and leave an existing destination unchanged. Successful `-o` publication
+uses an atomic rename in the destination directory, with private permissions.
+Symlink destinations are refused. Filenames may contain spaces or start with a
+dash; `--` may precede an option-like input name. Requests never pass through eval.
+
+## Remove and verify
+
+```sh
+"$HOME/.local/bin/omg" uninstall
+quiet-build tools/test-native.sh
+```
+
+Removal checks both aliases, file contents, types and modes before deleting owned
+files. Changed installation files cause refusal; unrelated files and user data
+remain. Installation rolls back synchronous failures. Crash/power-loss recovery,
+concurrent hostile filesystem changes and multi-file atomic visibility are not
+qualified. I install no watchers, runtime hooks, services, PATH rewrites or global
+state. `attach`, `discover` and `status` report unsupported and exit 69.
+
+The [qualification record](evidence/native-commands/README.md) records actual
+counts and commands. The source import and exact-byte lock are documented in
+[provenance](docs/NATIVE-PROVENANCE.md). My build dependencies are POSIX sh and
+standard Linux text/file/hash utilities plus `readelf`; Node, Python, GCC and
+`strace` are test tools only. The [upstream AGPL-3.0 licence](provenance/OMEGA-LICENSE)
+is preserved with the copied source. Retirement of existing Rust/C services and
+native argument/process support remain separate work.
