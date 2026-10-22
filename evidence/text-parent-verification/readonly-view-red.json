@@ -1,0 +1,11 @@
+{
+  "text_type": "bytes",
+  "text_result": [
+    8,
+    null
+  ],
+  "mutable_result": [
+    0,
+    99
+  ]
+}
