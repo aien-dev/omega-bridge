@@ -17,7 +17,7 @@ Tests use isolated HOME/prefix under /tmp; no actual account installation occurs
 | Installed commands | 69/69 |
 | Source/provenance/build controls | 18/18 |
 | Pinned owner binary equivalence | Same bytes/hash; 42 request outputs compared |
-| Clean checkout replay | Recorded separately in replay.json after milestone commit |
+| Clean checkout replay | PASS: all 3 binary hashes and both conversion outputs match; 69 command and 18 provenance checks repeated |
 
 full.log records the combined gate result. commands.json and provenance.json name
 each integration check. Converter and math logs retain actual suite counts. Math
@@ -57,8 +57,10 @@ node tests/native/provenance.mjs
 tools/test-native.sh
 ```
 
-Source source pins, lock verification and exact-byte import mapping are in
-../../provenance and ../../docs/NATIVE-PROVENANCE.md. A later clean clone is required
-for final READY, not inferred from the incremental build. No benchmark speed claim,
+Source pins, lock verification and exact-byte import mapping are in
+../../provenance and ../../docs/NATIVE-PROVENANCE.md. The independent clean clone and full suite passed at the implementation commit
+recorded in replay.json. Both PATH aliases were invoked from an unrelated directory
+and the isolated installation was then removed. shared-seed.log records exact
+byte equality of all consumed seed sources at the seed and math commits. No benchmark speed claim,
 real language attachment, external service replacement, PR/merge, visibility change
 or GPU/model/server access is part of this qualification. System retirements: 0.
