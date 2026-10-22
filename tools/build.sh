@@ -11,3 +11,4 @@ mkdir -p build
 file build/bridge.tmp | grep -q 'ELF 64-bit.*ARM aarch64'
 chmod +x build/bridge.tmp
 mv build/bridge.tmp build/bridge
+sha256sum src/toc.om build/bridge > build/compiler.sha256

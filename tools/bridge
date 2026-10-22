@@ -1,15 +1,17 @@
 #!/bin/sh
 # The pinned Omega frontend checks the complete unit before either backend runs.
 set -eu
-cd "$(dirname "$0")/.."
 case ${1-} in c) mode=C;; python) mode=P;; *) echo 'usage: tools/bridge c|python source.om' >&2; exit 64;; esac
 [ "$#" = 2 ] || exit 64
+input=$(realpath -- "$2")
+cd "$(dirname "$0")/.."
+sha256sum --status -c build/compiler.sha256 || { echo "rebuild required: tools/build.sh" >&2; exit 65; }
 seed=${OMEGA_SEED:-build/bootstrap/omc}
 [ "$(sha256sum "$seed" | cut -d' ' -f1)" = 191b776ef98821597c3e30655da6d680a9b66edbc9ceaca3c39c61ea6df098e9 ] || exit 65
 # Snapshot once: validation and generation must read identical bytes.
 tmp=$(mktemp -d build/request.XXXXXX)
 trap 'find "$tmp" -type f -delete; rmdir "$tmp"' EXIT HUP INT TERM
-cat "$2" > "$tmp/input.om"
+cat "$input" > "$tmp/input.om"
 "$seed" < "$tmp/input.om" > "$tmp/native"
 [ -s "$tmp/native" ] || exit 65
 { printf '%s' "$mode"; cat "$tmp/input.om"; } | build/bridge

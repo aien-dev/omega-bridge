@@ -43,6 +43,7 @@ global bk ulong 32
 global cfi ulong 1
 global hasmain ulong 1
 
+global localuse ulong 1
 global target ulong 1
 global nn ulong 1
 global nk ulong 1024
@@ -56,8 +57,9 @@ global args ulong 4096
 global saved ulong 32
 global loopvar ulong 32
 global loopty ulong 32
-text z0 "/* Emitted by Omega Bridge. GNU C11, POSIX. Scalars use canonical 64-bit bits. */\n#include <stdint.h>\n#include <stddef.h>\n#include <unistd.h>\n#include <errno.h>\nstatic void o_trap(int c){_exit(100+c);}\nstatic unsigned o_depth;\nstatic void o_enter(void){if(++o_depth>128)o_trap(6);}\nstatic uint64_t o_leave(uint64_t v){--o_depth;return v;}\nstatic unsigned o_width(unsigned t){static const unsigned w[]={0,1,8,16,32,64,8,16,32,64};return w[t];}\nstatic __int128 o_value(unsigned t,uint64_t v){return t>=6 && v>>63 ? (__int128)v-(((__int128)1)<<64):(__int128)v;}\nstatic uint64_t o_norm(unsigned t,__int128 v,int code){unsigned w=o_width(t);if(t>=6){__int128 m=((__int128)1)<<(w-1);if(v< -m||v>=m)o_trap(code);}else {if(v<0||(__uint128_t)v>=(((__uint128_t)1)<<w))o_trap(code);}return (uint64_t)v;}\nstatic uint64_t o_cast(unsigned t,unsigned s,uint64_t a){return o_norm(t,o_value(s,a),5);}\nstatic uint64_t o_op(unsigned op,unsigned t,uint64_t a,uint64_t b){\n __int128 x=o_value(t,a),y=o_value(t,b),z=0;unsigned w=o_width(t);uint64_t mask=w==64?UINT64_MAX:(((uint64_t)1<<w)-1);\n if(op>=6&&op<=11){switch(op){case 6:return x==y;case 7:return x!=y;case 8:return x<y;case 9:return x<=y;case 10:return x>y;default:return x>=y;}}\n if(op==12)return a&b;if(op==13)return a|b;if(op==14)return a^b;\n if(op==15||op==16){if(b>=w)o_trap(7);if(op==15)return t>=6?o_norm(t,x*(((__int128)1)<<b),1):(a<<b)&mask;if(t<6)return a>>b;if(!b)return a;return (a>>b)|((a>>63)?(UINT64_MAX<<(64-b)):0);}\n if(op==17){if(t<6)return (0-a)&mask;return o_norm(t,-x,1);}if(op==18)return t==1?!a:(t>=6?~a:(~a)&mask);\n if(op==4||op==5){if(!b)o_trap(2);z=op==4?x/y:x%y;return t>=6?o_norm(t,z,1):(uint64_t)z;}\n if(t<6){if(op==1)return (a+b)&mask;if(op==2)return (a-b)&mask;return (a*b)&mask;}\n if(op==1)z=x+y;if(op==2)z=x-y;if(op==3)z=x*y;return o_norm(t,z,1);\n}\nstatic uint64_t o_get(void *p,uint64_t n,uint64_t i,unsigned t){if(i>=n)o_trap(3);return t==2?((uint8_t*)p)[i]:((uint64_t*)p)[i];}\nstatic void o_put(void *p,uint64_t n,uint64_t i,uint64_t v,unsigned t){if(i>=n)o_trap(3);o_norm(t,o_value(t,v),5);if(t==2)((uint8_t*)p)[i]=(uint8_t)v;else ((uint64_t*)p)[i]=v;}\nstatic void o_fill(void *p,uint64_t n,uint64_t v,unsigned t){for(uint64_t i=0;i<n;i++)o_put(p,n,i,v,t);}\nstatic uint64_t o_io(unsigned op,uint64_t fd,void *p,uint64_t n,uint64_t off,uint64_t len){if(off>n||len>n-off)o_trap(3);int f=(int)o_value(8,fd);ssize_t r=op==1?read(f,(uint8_t*)p+off,(size_t)len):write(f,(uint8_t*)p+off,(size_t)len);return r<0?(uint64_t)(-(int64_t)errno):(uint64_t)r;}\n"
-text z1 "# Emitted by Omega Bridge. Scalar values use canonical 64-bit bits.\nimport os as _os\n_MASK = (1 << 64) - 1\n_depth = 0\ndef o_trap(c):\n    _os._exit(100 + c)\ndef o_enter():\n    global _depth\n    _depth += 1\n    if _depth > 128: o_trap(6)\ndef o_leave(v):\n    global _depth\n    _depth -= 1\n    return v\ndef o_width(t):\n    return (0,1,8,16,32,64,8,16,32,64)[t]\ndef o_value(t,v):\n    return v - (1 << 64) if t >= 6 and v >> 63 else v\ndef o_norm(t,v,code):\n    w = o_width(t)\n    lo,hi = (-(1 << (w-1)),1 << (w-1)) if t >= 6 else (0,1 << w)\n    if not lo <= v < hi: o_trap(code)\n    return v & _MASK\ndef o_cast(t,s,a):\n    return o_norm(t,o_value(s,a),5)\ndef o_op(op,t,a,b):\n    x,y = o_value(t,a),o_value(t,b)\n    w = o_width(t)\n    mask = (1 << w)-1\n    if 6 <= op <= 11: return int((x==y,x!=y,x<y,x<=y,x>y,x>=y)[op-6])\n    if op == 12: return a & b\n    if op == 13: return a | b\n    if op == 14: return a ^ b\n    if op in (15,16):\n        if b >= w: o_trap(7)\n        if op == 15: return o_norm(t,x*(1<<b),1) if t>=6 else (a<<b)&mask\n        return (x >> b) & _MASK\n    if op == 17: return ((-a)&mask) if t < 6 else o_norm(t,-x,1)\n    if op == 18: return int(not a) if t==1 else (~a)&(_MASK if t>=6 else mask)\n    if op in (4,5):\n        if not b: o_trap(2)\n        q = abs(x)//abs(y)\n        if (x<0) != (y<0): q = -q\n        z = q if op == 4 else x-q*y\n    elif op == 1: z=x+y\n    elif op == 2: z=x-y\n    else: z=x*y\n    return o_norm(t,z,1) if t>=6 else z & mask\ndef o_get(p,n,i,t):\n    if i>=n: o_trap(3)\n    return p[i]\ndef o_put(p,n,i,v,t):\n    if i>=n: o_trap(3)\n    p[i]=o_norm(t,o_value(t,v),5)\ndef o_fill(p,n,v,t):\n    for i in range(n): o_put(p,n,i,v,t)\ndef o_io(op,fd,p,n,off,length):\n    if off>n or length>n-off: o_trap(3)\n    try:\n        if op==1:\n            data=_os.read(o_value(8,fd),length)\n            p[off:off+len(data)]=data\n            return len(data)\n        return _os.write(o_value(8,fd),bytes(p[off:off+length]))\n    except OSError as exc: return (-exc.errno)&_MASK\n"
+text capmsg "unsupported bridge capability\n"
+text z0 "/* Emitted by Omega Bridge. GNU C11, POSIX. Scalars use canonical 64-bit bits. */\n#include <stdint.h>\n#include <stddef.h>\n#include <unistd.h>\n#include <errno.h>\n#include <setjmp.h>\nstatic _Thread_local jmp_buf o_jmp;\nstatic _Thread_local int o_busy;\nstatic __attribute__((noreturn)) void o_trap(int c){if(o_busy)longjmp(o_jmp,c);_exit(100+c);}\nstatic _Thread_local unsigned o_depth;\nstatic void o_enter(void){if(++o_depth>128)o_trap(6);}\nstatic uint64_t o_leave(uint64_t v){--o_depth;return v;}\nstatic unsigned o_width(unsigned t){static const unsigned w[]={0,1,8,16,32,64,8,16,32,64};return w[t];}\nstatic __int128 o_value(unsigned t,uint64_t v){return t>=6 && v>>63 ? (__int128)v-(((__int128)1)<<64):(__int128)v;}\nstatic uint64_t o_norm(unsigned t,__int128 v,int code){unsigned w=o_width(t);if(t>=6){__int128 m=((__int128)1)<<(w-1);if(v< -m||v>=m)o_trap(code);}else {if(v<0||(__uint128_t)v>=(((__uint128_t)1)<<w))o_trap(code);}return (uint64_t)v;}\nstatic uint64_t o_cast(unsigned t,unsigned s,uint64_t a){return o_norm(t,o_value(s,a),5);}\nstatic uint64_t o_op(unsigned op,unsigned t,uint64_t a,uint64_t b){\n __int128 x=o_value(t,a),y=o_value(t,b),z=0;unsigned w=o_width(t);uint64_t mask=w==64?UINT64_MAX:(((uint64_t)1<<w)-1);\n if(op>=6&&op<=11){switch(op){case 6:return x==y;case 7:return x!=y;case 8:return x<y;case 9:return x<=y;case 10:return x>y;default:return x>=y;}}\n if(op==12)return a&b;if(op==13)return a|b;if(op==14)return a^b;\n if(op==15||op==16){if(b>=w)o_trap(7);if(op==15)return t>=6?o_norm(t,x*(((__int128)1)<<b),1):(a<<b)&mask;if(t<6)return a>>b;if(!b)return a;return (a>>b)|((a>>63)?(UINT64_MAX<<(64-b)):0);}\n if(op==17){if(t<6)return (0-a)&mask;return o_norm(t,-x,1);}if(op==18)return t==1?!a:(t>=6?~a:(~a)&mask);\n if(op==4||op==5){if(!b)o_trap(2);z=op==4?x/y:x%y;return t>=6?o_norm(t,z,1):(uint64_t)z;}\n if(t<6){if(op==1)return (a+b)&mask;if(op==2)return (a-b)&mask;return (a*b)&mask;}\n if(op==1)z=x+y;if(op==2)z=x-y;if(op==3)z=x*y;return o_norm(t,z,1);\n}\nstatic uint64_t o_get(void *p,uint64_t n,uint64_t i,unsigned t){if(i>=n)o_trap(3);switch(t){case 2:return ((uint8_t*)p)[i];case 3:return ((uint16_t*)p)[i];case 4:return ((uint32_t*)p)[i];case 5:return ((uint64_t*)p)[i];case 6:return (uint64_t)((int8_t*)p)[i];case 7:return (uint64_t)((int16_t*)p)[i];case 8:return (uint64_t)((int32_t*)p)[i];default:return (uint64_t)((int64_t*)p)[i];}}\nstatic void o_put(void *p,uint64_t n,uint64_t i,uint64_t v,unsigned t){if(i>=n)o_trap(3);o_norm(t,o_value(t,v),5);switch(t){case 2:((uint8_t*)p)[i]=(uint8_t)v;break;case 3:((uint16_t*)p)[i]=(uint16_t)v;break;case 4:((uint32_t*)p)[i]=(uint32_t)v;break;case 5:((uint64_t*)p)[i]=v;break;case 6:((int8_t*)p)[i]=(int8_t)o_value(t,v);break;case 7:((int16_t*)p)[i]=(int16_t)o_value(t,v);break;case 8:((int32_t*)p)[i]=(int32_t)o_value(t,v);break;default:((int64_t*)p)[i]=(int64_t)o_value(t,v);}}\nstatic void o_fill(void *p,uint64_t n,uint64_t v,unsigned t){for(uint64_t i=0;i<n;i++)o_put(p,n,i,v,t);}\nstatic uint64_t o_io(unsigned op,uint64_t fd,void *p,uint64_t n,uint64_t off,uint64_t len){if(off>n||len>n-off)o_trap(3);int f=(int)o_value(8,fd);ssize_t r=op==1?read(f,(uint8_t*)p+off,(size_t)len):write(f,(uint8_t*)p+off,(size_t)len);return r<0?(uint64_t)(-(int64_t)errno):(uint64_t)r;}\nstatic int o_valid(unsigned t,uint64_t v){unsigned w=o_width(t);__int128 x=o_value(t,v);__int128 m=((__int128)1)<<(t>=6?w-1:w);return t>=6?x>=-m&&x<m:x>=0&&x<m;}\nstatic int o_buf(void *p,uint64_t n,uint64_t want,unsigned t){uintptr_t a=(uintptr_t)p;uint64_t z=t==2?1:8;return p&&n==want&&a%z==0&&n<=UINTPTR_MAX/z&&a<=UINTPTR_MAX-n*z;}\nstatic int o_overlap(void *a,uint64_t an,void *b,uint64_t bn){uintptr_t x=(uintptr_t)a,y=(uintptr_t)b;return x<y+bn&&y<x+an;}\n"
+text z1 "# Emitted by Omega Bridge. Scalar values use canonical 64-bit bits.\nimport os as _os\n_MASK = (1 << 64) - 1\n_depth = 0\n_busy = False\nclass _Trap(Exception):\n    pass\ndef o_trap(c):\n    if _busy: raise _Trap(c)\n    _os._exit(100 + c)\ndef o_enter():\n    global _depth\n    _depth += 1\n    if _depth > 128: o_trap(6)\ndef o_leave(v):\n    global _depth\n    _depth -= 1\n    return v\ndef o_width(t):\n    return (0,1,8,16,32,64,8,16,32,64)[t]\ndef o_value(t,v):\n    return v - (1 << 64) if t >= 6 and v >> 63 else v\ndef o_norm(t,v,code):\n    w = o_width(t)\n    lo,hi = (-(1 << (w-1)),1 << (w-1)) if t >= 6 else (0,1 << w)\n    if not lo <= v < hi: o_trap(code)\n    return v & _MASK\ndef o_cast(t,s,a):\n    return o_norm(t,o_value(s,a),5)\ndef o_op(op,t,a,b):\n    x,y = o_value(t,a),o_value(t,b)\n    w = o_width(t)\n    mask = (1 << w)-1\n    if 6 <= op <= 11: return int((x==y,x!=y,x<y,x<=y,x>y,x>=y)[op-6])\n    if op == 12: return a & b\n    if op == 13: return a | b\n    if op == 14: return a ^ b\n    if op in (15,16):\n        if b >= w: o_trap(7)\n        if op == 15: return o_norm(t,x*(1<<b),1) if t>=6 else (a<<b)&mask\n        return (x >> b) & _MASK\n    if op == 17: return ((-a)&mask) if t < 6 else o_norm(t,-x,1)\n    if op == 18: return int(not a) if t==1 else (~a)&(_MASK if t>=6 else mask)\n    if op in (4,5):\n        if not b: o_trap(2)\n        q = abs(x)//abs(y)\n        if (x<0) != (y<0): q = -q\n        z = q if op == 4 else x-q*y\n    elif op == 1: z=x+y\n    elif op == 2: z=x-y\n    else: z=x*y\n    return o_norm(t,z,1) if t>=6 else z & mask\ndef o_get(p,n,i,t):\n    if i>=n: o_trap(3)\n    return p[i]\ndef o_put(p,n,i,v,t):\n    if i>=n: o_trap(3)\n    p[i]=o_norm(t,o_value(t,v),5)\ndef o_fill(p,n,v,t):\n    for i in range(n): o_put(p,n,i,v,t)\ndef o_io(op,fd,p,n,off,length):\n    if off>n or length>n-off: o_trap(3)\n    try:\n        if op==1:\n            data=_os.read(o_value(8,fd),length)\n            p[off:off+len(data)]=data\n            return len(data)\n        return _os.write(o_value(8,fd),bytes(p[off:off+length]))\n    except OSError as exc: return (-exc.errno)&_MASK\ndef o_valid(t,v):\n    if type(v) is not int or not 0<=v<=_MASK: return False\n    w=o_width(t)\n    x=o_value(t,v)\n    return -(1<<(w-1))<=x<(1<<(w-1)) if t>=6 else x<(1<<w)\ndef o_buf(p,n,want,t,edit):\n    if type(n) is not int or n!=want: return False\n    if t==2:\n        return type(p) is bytearray and len(p)==n\n    return type(p) is list and len(p)==n and all(o_valid(t,x) for x in p)\n"
 text z2 "_n"
 text z3 "    "
 text z4 "uint64_t "
@@ -76,14 +78,14 @@ text z16 ";o_io("
 text z17 "o_io("
 text z18 "_fd"
 text z19 "_off,_cnt);})"
-text z20 "uint8_t "
-text z21 "uint64_t "
+text z20 "int"
+text z21 "_t "
 text z22 "]={0};\n"
 text z23 "=bytearray("
 text z24 ")\n"
 text z25 "=[0]*"
 text z26 "o_fill("
-text z27 "uint64_t "
+text z27 "static uint64_t "
 text z28 "def "
 text z29 "void *"
 text z30 "_n"
@@ -143,6 +145,47 @@ text z83 "()&255)\n"
 text z84 "({"
 text z85 "uint64_t "
 text z86 ";})"
+text z87 "omega_"
+text z88 "_n"
+text z89 ")return 8;\n"
+text z90 ": return (8,None)\n"
+text z91 "if(!"
+text z92 "if not "
+text z93 "o_valid("
+text z94 "o_buf("
+text z95 "_n,"
+text z96 "if(o_overlap(result,8,"
+text z97 "_n*"
+text z98 "))return 8;\n"
+text z99 "if(o_overlap("
+text z100 "_n*"
+text z101 "_n*"
+text z102 "))return 8;\n"
+text z103 "if "
+text z104 " is "
+text z105 ": return (8,None)\n"
+text z106 "uint32_t "
+text z107 "def "
+text z108 "uint64_t *result"
+text z109 "void *"
+text z110 "uint64_t "
+text z111 "_n"
+text z112 "){\nif(!o_buf(result,1,1,5))return 8;\n"
+text z113 "):\n"
+text z114 "if(o_busy)return 9;\no_busy=1;o_depth=0;int code=setjmp(o_jmp);\nif(!code)*result="
+text z115 ");\no_busy=0;o_depth=0;return (uint32_t)code;\n}\n"
+text z116 "global _busy, _depth\n"
+text z117 "if _busy: return (9,None)\n"
+text z118 "_busy=True\n"
+text z119 "_depth=0\n"
+text z120 "try:\n"
+text z121 "return (0,"
+text z122 "))\n"
+text z123 "except _Trap as exc:\n"
+text z124 "return (exc.args[0],None)\n"
+text z125 "finally:\n"
+text z126 "_busy=False\n"
+text z127 "_depth=0\n"
 
 fn mputb b uchar to void
 m = get mc 0
@@ -193,6 +236,9 @@ mputb 32
 mputn code
 mputb 10
 w = write 2 msg 0 get mc 0
+if eq code 24
+w = write 2 capmsg 0 len capmsg
+end
 exit int code
 end
 
@@ -1257,6 +1303,293 @@ i = add i 1
 end
 ret
 end
+if eq k 87
+while lt i len z87
+e_b ulong get z87 i
+i = add i 1
+end
+ret
+end
+if eq k 88
+while lt i len z88
+e_b ulong get z88 i
+i = add i 1
+end
+ret
+end
+if eq k 89
+while lt i len z89
+e_b ulong get z89 i
+i = add i 1
+end
+ret
+end
+if eq k 90
+while lt i len z90
+e_b ulong get z90 i
+i = add i 1
+end
+ret
+end
+if eq k 91
+while lt i len z91
+e_b ulong get z91 i
+i = add i 1
+end
+ret
+end
+if eq k 92
+while lt i len z92
+e_b ulong get z92 i
+i = add i 1
+end
+ret
+end
+if eq k 93
+while lt i len z93
+e_b ulong get z93 i
+i = add i 1
+end
+ret
+end
+if eq k 94
+while lt i len z94
+e_b ulong get z94 i
+i = add i 1
+end
+ret
+end
+if eq k 95
+while lt i len z95
+e_b ulong get z95 i
+i = add i 1
+end
+ret
+end
+if eq k 96
+while lt i len z96
+e_b ulong get z96 i
+i = add i 1
+end
+ret
+end
+if eq k 97
+while lt i len z97
+e_b ulong get z97 i
+i = add i 1
+end
+ret
+end
+if eq k 98
+while lt i len z98
+e_b ulong get z98 i
+i = add i 1
+end
+ret
+end
+if eq k 99
+while lt i len z99
+e_b ulong get z99 i
+i = add i 1
+end
+ret
+end
+if eq k 100
+while lt i len z100
+e_b ulong get z100 i
+i = add i 1
+end
+ret
+end
+if eq k 101
+while lt i len z101
+e_b ulong get z101 i
+i = add i 1
+end
+ret
+end
+if eq k 102
+while lt i len z102
+e_b ulong get z102 i
+i = add i 1
+end
+ret
+end
+if eq k 103
+while lt i len z103
+e_b ulong get z103 i
+i = add i 1
+end
+ret
+end
+if eq k 104
+while lt i len z104
+e_b ulong get z104 i
+i = add i 1
+end
+ret
+end
+if eq k 105
+while lt i len z105
+e_b ulong get z105 i
+i = add i 1
+end
+ret
+end
+if eq k 106
+while lt i len z106
+e_b ulong get z106 i
+i = add i 1
+end
+ret
+end
+if eq k 107
+while lt i len z107
+e_b ulong get z107 i
+i = add i 1
+end
+ret
+end
+if eq k 108
+while lt i len z108
+e_b ulong get z108 i
+i = add i 1
+end
+ret
+end
+if eq k 109
+while lt i len z109
+e_b ulong get z109 i
+i = add i 1
+end
+ret
+end
+if eq k 110
+while lt i len z110
+e_b ulong get z110 i
+i = add i 1
+end
+ret
+end
+if eq k 111
+while lt i len z111
+e_b ulong get z111 i
+i = add i 1
+end
+ret
+end
+if eq k 112
+while lt i len z112
+e_b ulong get z112 i
+i = add i 1
+end
+ret
+end
+if eq k 113
+while lt i len z113
+e_b ulong get z113 i
+i = add i 1
+end
+ret
+end
+if eq k 114
+while lt i len z114
+e_b ulong get z114 i
+i = add i 1
+end
+ret
+end
+if eq k 115
+while lt i len z115
+e_b ulong get z115 i
+i = add i 1
+end
+ret
+end
+if eq k 116
+while lt i len z116
+e_b ulong get z116 i
+i = add i 1
+end
+ret
+end
+if eq k 117
+while lt i len z117
+e_b ulong get z117 i
+i = add i 1
+end
+ret
+end
+if eq k 118
+while lt i len z118
+e_b ulong get z118 i
+i = add i 1
+end
+ret
+end
+if eq k 119
+while lt i len z119
+e_b ulong get z119 i
+i = add i 1
+end
+ret
+end
+if eq k 120
+while lt i len z120
+e_b ulong get z120 i
+i = add i 1
+end
+ret
+end
+if eq k 121
+while lt i len z121
+e_b ulong get z121 i
+i = add i 1
+end
+ret
+end
+if eq k 122
+while lt i len z122
+e_b ulong get z122 i
+i = add i 1
+end
+ret
+end
+if eq k 123
+while lt i len z123
+e_b ulong get z123 i
+i = add i 1
+end
+ret
+end
+if eq k 124
+while lt i len z124
+e_b ulong get z124 i
+i = add i 1
+end
+ret
+end
+if eq k 125
+while lt i len z125
+e_b ulong get z125 i
+i = add i 1
+end
+ret
+end
+if eq k 126
+while lt i len z126
+e_b ulong get z126 i
+i = add i 1
+end
+ret
+end
+if eq k 127
+while lt i len z127
+e_b ulong get z127 i
+i = add i 1
+end
+ret
+end
 fail 24
 end
 
@@ -1416,6 +1749,9 @@ a = arr
 ret node 6 5 a 0 0
 end
 if or eq w 1684104562 eq w 435744764535
+if eq get hasmain 0 0
+fail 24
+end
 fd = expr 8
 expect fd 8
 a = arr
@@ -1699,11 +2035,12 @@ end
 fn earray a ulong n ulong t ulong init ulong to void
 indent
 if eq get target 0 0
-if eq t 2
-emitstr 20
-else
-emitstr 21
+if eq signed t 0
+e_b 117
 end
+emitstr 20
+e_dec width t
+emitstr 21
 arrp a
 e_b 91
 e_dec n
@@ -1805,6 +2142,11 @@ fail 16
 end
 ln = get tw 0
 if or eq ln 0 gt ln 524288
+fail 23
+end
+sz = mul ln div width t 8
+put localuse 0 add get localuse 0 sz
+if gt get localuse 0 32768
 fail 23
 end
 v = expr t
@@ -2122,6 +2464,9 @@ semi
 ret 1
 end
 if eq w 1953069157
+if eq get hasmain 0 0
+fail 24
+end
 v = expr 8
 expect v 8
 indent
@@ -2165,6 +2510,7 @@ else
 emitstr 77
 end
 put nloc 0 0
+put localuse 0 0
 i = ulong 0
 while lt i get fn_np f
 s = add mul f 4 i
@@ -2239,6 +2585,13 @@ end
 end
 end
 tok
+end
+if eq get hasmain 0 0
+i = ulong 0
+while lt i get nf 0
+exportfn i
+i = add i 1
+end
 end
 if eq get hasmain 0 1
 i = ulong 0
@@ -2343,4 +2696,215 @@ if eq py 0
 emitstr 86
 end
 ret
+end
+
+fn exname f ulong to void
+emitstr 87
+e_src get fn_off f get fn_nl f
+end
+
+fn exargs f ulong to void
+i = ulong 0
+while lt i get fn_np f
+if gt i 0
+e_comma
+end
+named 112 i
+s = add mul f 4 i
+if gt get fn_pk s 0
+e_comma
+named 112 i
+emitstr 88
+end
+i = add i 1
+end
+end
+
+fn invalid to void
+if eq get target 0 0
+emitstr 89
+else
+emitstr 90
+end
+end
+
+fn excheck f ulong i ulong to void
+s = add mul f 4 i
+indent
+if eq get target 0 0
+emitstr 91
+else
+emitstr 92
+end
+if eq get fn_pk s 0
+emitstr 93
+e_dec get fn_pt s
+e_comma
+named 112 i
+e_b 41
+else
+t = get fn_pt s
+if and ne t 2 ne t 5
+fail 24
+end
+emitstr 94
+named 112 i
+e_comma
+named 112 i
+emitstr 95
+e_dec get fn_pl s
+e_comma
+e_dec t
+if eq get target 0 1
+e_comma
+e_dec get fn_pk s
+end
+e_b 41
+end
+invalid
+if and eq get target 0 0 gt get fn_pk s 0
+emitstr 96
+named 112 i
+e_comma
+named 112 i
+emitstr 97
+if eq get fn_pt s 2
+e_b 49
+else
+e_b 56
+end
+emitstr 98
+end
+end
+
+fn exalias f ulong i ulong j ulong to void
+s = add mul f 4 i
+r = add mul f 4 j
+if and gt get fn_pk s 0 gt get fn_pk r 0
+if or eq get fn_pk s 3 eq get fn_pk r 3
+indent
+if eq get target 0 0
+emitstr 99
+named 112 i
+e_comma
+named 112 i
+emitstr 100
+if eq get fn_pt s 2
+e_b 49
+else
+e_b 56
+end
+e_comma
+named 112 j
+e_comma
+named 112 j
+emitstr 101
+if eq get fn_pt r 2
+e_b 49
+else
+e_b 56
+end
+emitstr 102
+else
+emitstr 103
+named 112 i
+emitstr 104
+named 112 j
+emitstr 105
+end
+end
+end
+end
+
+fn exportfn f ulong to void
+py = get target 0
+put bd 0 0
+if eq py 0
+emitstr 106
+else
+emitstr 107
+end
+exname f
+e_b 40
+if eq py 0
+emitstr 108
+end
+i = ulong 0
+while lt i get fn_np f
+s = add mul f 4 i
+if or eq py 0 gt i 0
+e_comma
+end
+if eq py 0
+if gt get fn_pk s 0
+emitstr 109
+else
+emitstr 110
+end
+end
+named 112 i
+if gt get fn_pk s 0
+e_comma
+euint
+named 112 i
+emitstr 111
+end
+i = add i 1
+end
+if eq py 0
+emitstr 112
+else
+emitstr 113
+end
+put bd 0 1
+i = ulong 0
+while lt i get fn_np f
+excheck f i
+j = ulong 0
+while lt j i
+exalias f i j
+j = add j 1
+end
+i = add i 1
+end
+if eq py 0
+emitstr 114
+named 102 f
+e_b 40
+exargs f
+emitstr 115
+else
+indent
+emitstr 116
+indent
+emitstr 117
+indent
+emitstr 118
+indent
+emitstr 119
+indent
+emitstr 120
+put bd 0 2
+indent
+emitstr 121
+named 102 f
+e_b 40
+exargs f
+emitstr 122
+put bd 0 1
+indent
+emitstr 123
+put bd 0 2
+indent
+emitstr 124
+put bd 0 1
+indent
+emitstr 125
+put bd 0 2
+indent
+emitstr 126
+indent
+emitstr 127
+end
+put bd 0 0
 end

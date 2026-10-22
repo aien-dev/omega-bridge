@@ -1,0 +1,8 @@
+PASS detected c num_ulong_add native_exit 0 mutant_exit 126
+PASS detected python num_ulong_add native_exit 0 mutant_exit 126
+PASS detected c t_bounds native_exit 103 mutant_exit 1
+PASS detected python t_bounds native_exit 103 mutant_exit 1
+PASS detected c order_calls native_exit 1 mutant_exit 105
+PASS detected python order_calls native_exit 1 mutant_exit 105
+PASS deterministic nonempty output
+control cases=7 failures=0 RC=0

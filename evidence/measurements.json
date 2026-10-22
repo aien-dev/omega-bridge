@@ -1,0 +1,235 @@
+{
+  "context": "Shared Linux AArch64 host; quiet-build coordination, not an isolated performance window. Startup included for program runs. Python module call loop includes list construction; ctypes loop reuses C storage. Do not treat the two caller timings as a fair language speed comparison.",
+  "results": [
+    {
+      "workload": "fib",
+      "phase": "checked_conversion",
+      "target": "c",
+      "median_seconds": 0.012775693990988657,
+      "samples_seconds": [
+        0.012775693990988657,
+        0.012766541010932997,
+        0.012821502023143694
+      ],
+      "source_bytes": 429,
+      "output_bytes": 5412
+    },
+    {
+      "workload": "fib",
+      "phase": "checked_conversion",
+      "target": "python",
+      "median_seconds": 0.013066238985629752,
+      "samples_seconds": [
+        0.011007984983734787,
+        0.013463827024679631,
+        0.013066238985629752
+      ],
+      "source_bytes": 429,
+      "output_bytes": 3364
+    },
+    {
+      "workload": "fib",
+      "phase": "process_execution",
+      "target": "native",
+      "median_seconds": 0.002359585021622479,
+      "samples_seconds": [
+        0.0008489349856972694,
+        0.002359585021622479,
+        0.002365329011809081,
+        0.0008669829985592514,
+        0.002382417005719617
+      ],
+      "input_bytes": 0
+    },
+    {
+      "workload": "fib",
+      "phase": "process_execution",
+      "target": "c",
+      "median_seconds": 0.0032027270062826574,
+      "samples_seconds": [
+        0.0020947510201949626,
+        0.005108198005473241,
+        0.00513528601732105,
+        0.0032027270062826574,
+        0.002101518999552354
+      ],
+      "input_bytes": 0
+    },
+    {
+      "workload": "fib",
+      "phase": "process_execution",
+      "target": "python",
+      "median_seconds": 0.3527148879948072,
+      "samples_seconds": [
+        0.3527148879948072,
+        0.35999523001373746,
+        0.3500872839940712,
+        0.3375486320001073,
+        0.35538834700128064
+      ],
+      "input_bytes": 0
+    },
+    {
+      "workload": "sort",
+      "phase": "checked_conversion",
+      "target": "c",
+      "median_seconds": 0.012844366021454334,
+      "samples_seconds": [
+        0.012317499000346288,
+        0.012844366021454334,
+        0.01349656202364713
+      ],
+      "source_bytes": 1049,
+      "output_bytes": 7220
+    },
+    {
+      "workload": "sort",
+      "phase": "checked_conversion",
+      "target": "python",
+      "median_seconds": 0.012838110007578507,
+      "samples_seconds": [
+        0.013098688010359183,
+        0.012838110007578507,
+        0.012656172999413684
+      ],
+      "source_bytes": 1049,
+      "output_bytes": 4672
+    },
+    {
+      "workload": "sort",
+      "phase": "process_execution",
+      "target": "native",
+      "median_seconds": 0.001725389010971412,
+      "samples_seconds": [
+        0.001725389010971412,
+        0.0017478049849160016,
+        0.0003239059878978878,
+        0.001741229003528133,
+        0.0002913459902629256
+      ],
+      "input_bytes": 0
+    },
+    {
+      "workload": "sort",
+      "phase": "process_execution",
+      "target": "c",
+      "median_seconds": 0.004206846992019564,
+      "samples_seconds": [
+        0.00422510298085399,
+        0.004206846992019564,
+        0.002675250987522304,
+        0.004218526999466121,
+        0.004154991009272635
+      ],
+      "input_bytes": 0
+    },
+    {
+      "workload": "sort",
+      "phase": "process_execution",
+      "target": "python",
+      "median_seconds": 0.27117998598259874,
+      "samples_seconds": [
+        0.2703362829925027,
+        0.27192448801361024,
+        0.28610259099514224,
+        0.27061202900949866,
+        0.27117998598259874
+      ],
+      "input_bytes": 0
+    },
+    {
+      "workload": "echo",
+      "phase": "checked_conversion",
+      "target": "c",
+      "median_seconds": 0.012700541003141552,
+      "samples_seconds": [
+        0.012989342998480424,
+        0.010936159989796579,
+        0.012700541003141552
+      ],
+      "source_bytes": 257,
+      "output_bytes": 4508
+    },
+    {
+      "workload": "echo",
+      "phase": "checked_conversion",
+      "target": "python",
+      "median_seconds": 0.011906183994142339,
+      "samples_seconds": [
+        0.011906183994142339,
+        0.0116424209845718,
+        0.011990711995167658
+      ],
+      "source_bytes": 257,
+      "output_bytes": 2961
+    },
+    {
+      "workload": "echo",
+      "phase": "process_execution",
+      "target": "native",
+      "median_seconds": 0.0013974019966553897,
+      "samples_seconds": [
+        0.0014166500186547637,
+        0.001401098008500412,
+        0.0012647300027310848,
+        0.0013974019966553897,
+        0.00021121700410731137
+      ],
+      "input_bytes": 49920
+    },
+    {
+      "workload": "echo",
+      "phase": "process_execution",
+      "target": "c",
+      "median_seconds": 0.0017948290042113513,
+      "samples_seconds": [
+        0.0018103980110026896,
+        0.0017948290042113513,
+        0.00041285098996013403,
+        0.0018711340089794248,
+        0.0014858029899187386
+      ],
+      "input_bytes": 49920
+    },
+    {
+      "workload": "echo",
+      "phase": "process_execution",
+      "target": "python",
+      "median_seconds": 0.017544881004141644,
+      "samples_seconds": [
+        0.01865061599528417,
+        0.017544881004141644,
+        0.010546668985625729,
+        0.009970073006115854,
+        0.017931858979864046
+      ],
+      "input_bytes": 49920
+    },
+    {
+      "workload": "total4",
+      "phase": "10000_checked_calls",
+      "target": "python_module",
+      "median_seconds": 0.03213206000509672,
+      "samples_seconds": [
+        0.03228052399936132,
+        0.03213206000509672,
+        0.03211857101996429,
+        0.03214377100812271,
+        0.032110250991536304
+      ]
+    },
+    {
+      "workload": "total4",
+      "phase": "10000_checked_calls",
+      "target": "ctypes_c",
+      "median_seconds": 0.004605154012097046,
+      "samples_seconds": [
+        0.004615106008714065,
+        0.004607777984347194,
+        0.004605154012097046,
+        0.004604896996170282,
+        0.004593650024617091
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+C caller: values, mutation, traps, invalid lengths and recovery OK
+Python caller: values, mutation, traps, invalid lengths and recovery OK
+attachment cases=2 failures=0 RC=0
