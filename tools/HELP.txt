@@ -2,11 +2,23 @@ Omega native commands: om and omg share one implementation and installation.
 
   om help                         Show this help
   om version                      Exact upstream source pins and seed hash
+  om check [--] input.om           Compile/check silently; never execute
+  om build [--] input.om -o output Build a native executable atomically
+  om run [--] input.om             Compile and run native code with caller stdin
   om math 'diff (x+1)^5'           One request; REFUSED returns exit 65
   om math                         Stream stdin, one request per line
   om convert --to c|python [--] input.om [-o output]
   om uninstall                    Remove unchanged owned files and aliases
   om attach|discover|status       UNSUPPORTED (exit 69); no runtime hooks
+
+Native check/build/run use the seed-built Omega compiler, not the narrower
+conversion subset. Source must be a readable regular file. check/build never
+execute it. run forwards program I/O and exit status; no program arguments yet.
+run is explicit native code execution, not a sandbox. Static AArch64 EXEC ELF
+qualification uses the owned hash-checked verify-elf.sh and host GNU readelf.
+build -o atomically replaces a regular output with mode 700; failed builds
+preserve existing output. Output symlinks and nonregular files are refused.
+Use -- for a leading-dash filename; a literal - names a file, not stdin.
 
 Math: eval, expand, collect, diff, integ, subst E ; R, solve L ; R,
 gcd A ; B, linear a;b;c;d;e;f. Exact Q[x], variable x, explicit *, degree <=16,

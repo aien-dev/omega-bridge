@@ -1,6 +1,6 @@
 # Omega native commands
 
-I provide `om` and `omg` as two names for the same installation. My source-only
+I provide `om` as the primary command and `omg` as its alias. My source-only
 build starts with the audited hex seed, reproduces the pinned Omega compiler,
 and uses that compiler to build the converter and exact math executable.
 All source checking, conversion and calculation run in native Omega. I use a
@@ -36,7 +36,16 @@ printf 'eval 1/3+1/6\nexpand (x+1)^3\n' | "$HOME/.local/bin/omg" math
 "$HOME/.local/bin/om" convert --to c tests/fixtures/fib.om -o /tmp/fib.c
 "$HOME/.local/bin/omg" help
 "$HOME/.local/bin/om" version
+"$HOME/.local/bin/om" check tests/fixtures/fib.om
+"$HOME/.local/bin/om" build tests/fixtures/fib.om -o /tmp/omega-fib
+"$HOME/.local/bin/omg" run tests/fixtures/fib.om
 ```
+
+Native [check/build/run](docs/NATIVE-DEVELOPMENT.md) use the seeded compiler
+directly. Check and build never execute the source; run explicitly executes the
+qualified native program with the caller's input/output and program exit status.
+It is not a sandbox. Program arguments are not implemented yet. Build publishes
+a private executable atomically and refuses to overwrite its own source.
 
 For a real input available in this checkout, `tests/fixtures/fib.om` can be used
 with either conversion target. C output targets GNU C11/POSIX; Python output targets
@@ -79,7 +88,8 @@ state. `attach`, `discover` and `status` report unsupported and exit 69.
 The [qualification record](evidence/native-commands/README.md) records actual
 counts and commands. The source import and exact-byte lock are documented in
 [provenance](docs/NATIVE-PROVENANCE.md). My build dependencies are POSIX sh and
-standard Linux text/file/hash utilities plus `readelf`; Node, Python, GCC and
+standard Linux text/file/hash utilities plus `readelf`, also used for native
+check/build/run metadata qualification. Node, Python, GCC and
 `strace` are test tools only. The [upstream AGPL-3.0 licence](provenance/OMEGA-LICENSE)
 is preserved with the copied source. Retirement of existing Rust/C services and
 native argument/process support remain separate work.

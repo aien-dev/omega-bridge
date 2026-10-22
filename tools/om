@@ -22,7 +22,7 @@ case ${1:-help} in
             named=$(dirname -- "$named")
         done
         exec "$root/uninstall.sh" --prefix "$(dirname "$(dirname "$root")")";;
-    math|convert) command=$1; shift;;
+    math|convert|check|build|run) command=$1; shift;;
     *) fail 64 'unknown command; use om help';;
 esac
 if [ "$command" = math ] && [ "$#" = 0 ]; then
@@ -51,6 +51,47 @@ if [ "$command" = math ]; then
     if grep -q '^REFUSED ' "$tmp/output"; then exit 65; fi
     exit 0
 fi
+if [ "$command" = check ] || [ "$command" = build ] || [ "$command" = run ]; then
+    if [ "${1-}" = -- ]; then shift; fi
+    if [ "$command" = build ]; then
+        [ "$#" = 3 ] && [ "$2" = -o ] || fail 64 'usage: om build [--] input.om -o output'
+        [ -n "$3" ] || fail 64 'empty output path'
+        output=$3
+    else
+        [ "$#" = 1 ] || fail 64 'usage: om check|run [--] input.om; program arguments are not supported'
+    fi
+    input=$1
+    # A literal file named - is a filename, never the program's stdin.
+    case $input in /*) ;; *) input=./$input;; esac
+    [ -f "$input" ] && [ -r "$input" ] || fail 66 'input is not a readable regular file'
+    cat -- "$input" > "$tmp/input" || fail 74 'cannot snapshot input'
+    if ! "$root/omc" < "$tmp/input" > "$tmp/native" 2> "$tmp/error"; then
+        cat "$tmp/error" >&2
+        fail 65 'native source check refused'
+    fi
+    "$root/verify-elf.sh" "$tmp/native" || fail 65 'native executable qualification refused'
+    [ "$command" != check ] || exit 0
+    chmod 700 "$tmp/native" || fail 74 'cannot prepare native executable'
+    if [ "$command" = run ]; then
+        # Compilation reads the snapshot; the child inherits the caller's stdin.
+        # This is explicit native execution, not a sandbox or interpreter.
+        rc=0
+        "$tmp/native" || rc=$?
+        exit "$rc"
+    fi
+    case $output in /*) ;; *) output=./$output;; esac
+    if [ -e "$output" ] && [ "$input" -ef "$output" ]; then
+        fail 73 'source and executable output must be different files'
+    fi
+    [ ! -L "$output" ] && { [ ! -e "$output" ] || [ -f "$output" ]; } || fail 73 'output must be a regular file, not a symlink'
+    outdir=$(dirname -- "$output")
+    outtmp=$(mktemp "$outdir/.omega-output.XXXXXXXX") || fail 73 'cannot stage output'
+    cat "$tmp/native" > "$outtmp" || fail 74 'cannot write output'
+    chmod 700 "$outtmp" || fail 74 'cannot prepare output permissions'
+    mv -fT -- "$outtmp" "$output" || fail 73 'cannot publish output'
+    outtmp=
+    exit 0
+fi
 # Frozen syntax: convert --to c|python input.om [-o output]. Use -- before
 # an option-like input name. Input and destination paths never reach eval.
 [ "$#" -ge 3 ] && [ "$1" = --to ] || fail 64 'usage: om convert --to c|python [--] input.om [-o output]'
@@ -59,6 +100,7 @@ shift 2
 if [ "${1-}" = -- ]; then shift; fi
 [ "$#" = 1 ] || { [ "$#" = 3 ] && [ "$2" = -o ]; } || fail 64 'usage: om convert --to c|python [--] input.om [-o output]'
 input=$1
+case $input in /*) ;; *) input=./$input;; esac
 output=
 if [ "$#" = 3 ]; then output=$3; [ -n "$output" ] || fail 64 'empty output path'; fi
 [ -f "$input" ] && [ -r "$input" ] || fail 66 'input is not a readable regular file'
