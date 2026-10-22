@@ -31,8 +31,17 @@ non-ELF response cannot be accepted or published as a program. This is not a
 compiler-error-counted-as-caught control. run-exec.trace checks actual child execs
 for absence of foreign compiler/interpreter fallback.
 
-Source-only committed replay and independent whole-feature review remain pending
-at the implementation milestone. Their receipts must be added before acceptance;
-previous qualified command evidence does not prove new source by implication.
-Host shell/GNU readelf orchestration is disclosed, run is not a sandbox, no program
-argv/process-control extension is claimed, and production retirement remains0.
+## Committed source-only replay
+
+The parent exported exact committed source51bb72a into a fresh directory with no
+build artifacts, reconstructed the seed/compiler and rebuilt native compiler,
+converter and math. All3 binary hashes matched the separately built artifacts.
+The full37 installed developer regressions passed again from an unrelated working
+directory with isolated HOME/prefix, including raw program input, actual native
+execution/status, alias behavior, file safety and uninstall. `replay/` contains
+those logs, the machine-readable37/37/0 result and exit0 receipt.
+
+Independent whole-feature review L548 remains pending at this checkpoint; test
+success is not merge approval. Host shell/GNU readelf orchestration is disclosed,
+run is not a sandbox, no program argv/process-control extension is claimed, and
+production retirement remains0.
