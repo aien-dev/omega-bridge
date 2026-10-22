@@ -1,0 +1,3 @@
+PASS source-only seed bootstrap and compiler fixpoint
+PASS native converter, math and CUDA C++ CPU/lab-GPU frontend; shared source-born compiler
+Installed om and omg in /home/drakestapleton/handoffs/cuda-cpp-L605/gpu-candidate/bin (PATH unchanged)

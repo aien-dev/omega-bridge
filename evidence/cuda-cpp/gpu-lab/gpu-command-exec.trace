@@ -1,0 +1,37 @@
+1229997 execve("/home/drakestapleton/handoffs/cuda-cpp-L605/gpu-candidate/bin/om", ["/home/drakestapleton/handoffs/cu"..., "build", "--from", "cuda-cpp", "--target", "sm_121-lab", "/home/drakestapleton/handoffs/cu"..., "-o", "/home/drakestapleton/handoffs/cu"...], 0xffffc630eff0 /* 18 vars */) = 0
+1230006 execve("/usr/bin/realpath", ["realpath", "--", "/home/drakestapleton/handoffs/cu"...], 0xc7636b878aa0 /* 19 vars */) = 0
+1230003 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1230006, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1230003 execve("/usr/bin/dirname", ["dirname", "/home/drakestapleton/handoffs/cu"...], 0xc7636b878aa8 /* 19 vars */) = 0
+1229997 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1230003, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1230011 execve("/usr/bin/sha256sum", ["sha256sum", "--status", "-c", "files.sha256"], 0xc7636b878d08 /* 19 vars */) = 0
+1229997 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1230011, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1230021 execve("/usr/bin/uname", ["uname", "-s"], 0xc7636b878b48 /* 19 vars */) = 0
+1229997 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1230021, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1230025 execve("/usr/bin/uname", ["uname", "-m"], 0xc7636b878b48 /* 19 vars */) = 0
+1229997 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1230025, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1230028 execve("/usr/bin/mktemp", ["mktemp", "-d", "/tmp/omega-command.XXXXXXXX"], 0xc7636b878fb0 /* 19 vars */) = 0
+1229997 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1230028, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1230032 execve("/usr/bin/cat", ["cat", "--", "/home/drakestapleton/handoffs/cu"...], 0xc7636b87ebd8 /* 19 vars */) = 0
+1229997 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1230032, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1230034 execve("/usr/bin/cat", ["cat", "/tmp/omega-command.fKoI7qqU/inpu"...], 0xc7636b87ebd8 /* 19 vars */) = 0
+1229997 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1230034, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1230036 execve("/home/drakestapleton/handoffs/cuda-cpp-L605/gpu-candidate/lib/omega-native/cuda-cpp", ["/home/drakestapleton/handoffs/cu"...], 0xc7636b87ec10 /* 19 vars */) = 0
+1229997 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1230036, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1230040 execve("/usr/bin/cat", ["cat", "/tmp/omega-command.fKoI7qqU/lowe"...], 0xc7636b87ebd8 /* 19 vars */) = 0
+1229997 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1230040, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1230043 execve("/usr/bin/chmod", ["chmod", "600", "/tmp/omega-command.fKoI7qqU/nati"...], 0xc7636b87ebd8 /* 19 vars */) = 0
+1229997 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1230043, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1230045 execve("/usr/bin/dirname", ["dirname", "--", "/home/drakestapleton/handoffs/cu"...], 0xc7636b87ebd8 /* 19 vars */) = 0
+1229997 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1230045, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1230047 execve("/usr/bin/mktemp", ["mktemp", "/home/drakestapleton/handoffs/cu"...], 0xc7636b87ebd8 /* 19 vars */) = 0
+1229997 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1230047, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1230049 execve("/usr/bin/cat", ["cat", "/tmp/omega-command.fKoI7qqU/nati"...], 0xc7636b87ebd8 /* 19 vars */) = 0
+1229997 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1230049, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1230051 execve("/usr/bin/chmod", ["chmod", "600", "/home/drakestapleton/handoffs/cu"...], 0xc7636b87ebd8 /* 19 vars */) = 0
+1229997 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1230051, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1230054 execve("/usr/bin/mv", ["mv", "-fT", "--", "/home/drakestapleton/handoffs/cu"..., "/home/drakestapleton/handoffs/cu"...], 0xc7636b87ec10 /* 19 vars */) = 0
+1229997 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1230054, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1230062 execve("/usr/bin/rm", ["rm", "-f", "--", "/tmp/omega-command.fKoI7qqU/inpu"..., "/tmp/omega-command.fKoI7qqU/nati"..., "/tmp/omega-command.fKoI7qqU/outp"..., "/tmp/omega-command.fKoI7qqU/erro"..., "/tmp/omega-command.fKoI7qqU/lowe"..., "/tmp/omega-command.fKoI7qqU/fram"...], 0xc7636b881138 /* 19 vars */) = 0
+1229997 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1230062, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1230067 execve("/usr/bin/rmdir", ["rmdir", "/tmp/omega-command.fKoI7qqU"], 0xc7636b87ebf8 /* 19 vars */) = 0
+1229997 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1230067, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---

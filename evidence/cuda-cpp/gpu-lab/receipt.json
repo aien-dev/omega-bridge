@@ -1,0 +1,80 @@
+{
+  "schema": "omega.cuda-cpp.sm121-lab.v1",
+  "source_commit": "0e0b486c300c78ed335b26e86b1fed29d858adad",
+  "source_closure": {
+    "src/cuda-cpp.om": "2e120d7c215da632e3396c3536a38f7513650dd2b09637524a35623813c4e132",
+    "src/cuda-sm121.om": "f4795af1ec38ba14ed2b6a602f761c80d90d00a5d06baba02d9a307a849171a2",
+    "tools/om": "0061200c7fb5924a8f5cecb62b7f16720c2b90cc8055d547090011d89fb181ce",
+    "tools/build-native.sh": "08c12b267d59ef883ace4429048117fff007cef55748019c8d67a0b848f512a1",
+    "tools/install.sh": "c19cfa1c71e2430bbb6698a99085876f271de2ae9d8ce20a1927c4e792fc8b45",
+    "tools/uninstall.sh": "3e59ee2257404f93f8022eaef9e6f8e8d94907e5ad739dd8b14da08c500de3e4",
+    "tools/HELP.txt": "e1c2be408147cf9e6bd7794048a63971ffe54de63f1641ef6527648a5f4b385b",
+    "tools/test-native.sh": "8e5f709bdc6dc306b40bd9deccdac6be967ff1444fa4429948b2db37296b4cf0",
+    "tools/build-cuda-cpp-reference.sh": "4640b90ed1fc4b84301f58ad01a07eae19164958a5de11f8df8bb48a0bc1d79a",
+    "tests/cuda-cpp/gate.py": "d0a0fef15560af3662b9a3b662651f9e33600b348b0e971620c74bdcc9012719",
+    "tests/cuda-cpp/commands.py": "5015b91bdf18787120f36b8b1e9be3a5e4c5fbd731c26149a33d7717623ff646",
+    "tests/cuda-cpp/review-regressions.py": "c42efd584cb378d4fc64b449c3c824ba08933141946c5f3976bdef9380302408",
+    "tests/cuda-cpp/gpu-gate.py": "4f48e24ee63e09b25e0cc94e6d24381792acd30f49f68b50f7c550fb1af298c3",
+    "tests/cuda-cpp/encoder-oracle.c": "35dfc7420f6c16d481cb11cae47031ea4fdbbc39c0c25eefd7b0c5b88cf557e2",
+    "tests/cuda-cpp/vector.cu": "ce5e27f9b8f452c072f2efef96efe73ce850121677daf0250c8e545ba9f055f9",
+    "tests/cuda-cpp/reference/vecadd.bin": "39f3dfdfc529a75a8274a27900acf4e7382b7f280a211e0412c51609f44b62a1"
+  },
+  "results": {
+    "native": {
+      "checks": 549,
+      "passed": 549
+    },
+    "commands": {
+      "checks": 38,
+      "passed": 38
+    },
+    "review_regressions": {
+      "checks": 185,
+      "passed": 185
+    },
+    "gpu_offline": {
+      "checks": 521,
+      "passed": 521
+    }
+  },
+  "decoded_original_cpp_differentials": 224,
+  "canonical_encoder_compared_arithmetic_instructions": 180,
+  "external_encoder_pin": "232332422bfdc31c8918085b50f13c1e18ab702e",
+  "cpu_compiled_semantic_mutants_caught": 3,
+  "gpu_compiled_semantic_mutants_caught": 3,
+  "full_suite_exit": 0,
+  "cold_source_replay_exit": 0,
+  "compiler_sha256": "191b776ef98821597c3e30655da6d680a9b66edbc9ceaca3c39c61ea6df098e9",
+  "frontend_backend_sha256": "91747e50c88519b21364b6598f6f4c9bfa78a33e682ff16eca235fedaac9102d",
+  "product_trace_executed_programs": [
+    "/home/drakestapleton/handoffs/cuda-cpp-L605/gpu-candidate/bin/om",
+    "/usr/bin/realpath",
+    "/usr/bin/dirname",
+    "/usr/bin/sha256sum",
+    "/usr/bin/uname",
+    "/usr/bin/uname",
+    "/usr/bin/mktemp",
+    "/usr/bin/cat",
+    "/usr/bin/cat",
+    "/home/drakestapleton/handoffs/cuda-cpp-L605/gpu-candidate/lib/omega-native/cuda-cpp",
+    "/usr/bin/cat",
+    "/usr/bin/chmod",
+    "/usr/bin/dirname",
+    "/usr/bin/mktemp",
+    "/usr/bin/cat",
+    "/usr/bin/chmod",
+    "/usr/bin/mv",
+    "/usr/bin/rm",
+    "/usr/bin/rmdir"
+  ],
+  "hardware_execution": "NOT_RUN",
+  "scheduling_correctness": "NOT_QUALIFIED",
+  "native_runtime_attachment": "NOT_IMPLEMENTED",
+  "checker_gpu_proof": "NOT_IMPLEMENTED",
+  "full_CUDA_Cpp": "NOT_IMPLEMENTED",
+  "launch_policy": "lab capsule flags1, mode600; installed run refused69 with no stdout",
+  "independent_review": "PENDING L612",
+  "candidate_prefix": "/home/drakestapleton/handoffs/cuda-cpp-L605/gpu-candidate",
+  "production_or_driver_changes": false,
+  "timestamp_utc": "2026-10-22T23:48:21.710806+00:00"
+}

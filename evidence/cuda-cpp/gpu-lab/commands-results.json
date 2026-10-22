@@ -1,0 +1,174 @@
+[
+  {
+    "name": "offline source install",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "aliases same implementation",
+    "pass": true
+  },
+  {
+    "name": "check om",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "run om",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "check omg",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "run omg",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "build",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "built executable",
+    "pass": true
+  },
+  {
+    "name": "executable private mode",
+    "pass": true
+  },
+  {
+    "name": "offline native GPU capsule build",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "GPU capsule identity and lab-only flag",
+    "pass": true
+  },
+  {
+    "name": "GPU capsule is non-executable private data",
+    "pass": true
+  },
+  {
+    "name": "lab GPU check emits no public output",
+    "pass": true
+  },
+  {
+    "name": "unqualified lab GPU launch refused",
+    "pass": true
+  },
+  {
+    "name": "run target refusal []",
+    "pass": true,
+    "rc": 69
+  },
+  {
+    "name": "run target refusal ['--target', 'sm_121']",
+    "pass": true,
+    "rc": 69
+  },
+  {
+    "name": "run target refusal ['--target', 'cuda']",
+    "pass": true,
+    "rc": 69
+  },
+  {
+    "name": "run target refusal ['--target', 'gpu']",
+    "pass": true,
+    "rc": 69
+  },
+  {
+    "name": "build target refusal []",
+    "pass": true,
+    "rc": 69
+  },
+  {
+    "name": "build target refusal ['--target', 'sm_121']",
+    "pass": true,
+    "rc": 69
+  },
+  {
+    "name": "build target refusal ['--target', 'cuda']",
+    "pass": true,
+    "rc": 69
+  },
+  {
+    "name": "build target refusal ['--target', 'gpu']",
+    "pass": true,
+    "rc": 69
+  },
+  {
+    "name": "bad source transactional",
+    "pass": true
+  },
+  {
+    "name": "same input output preserves source",
+    "pass": true
+  },
+  {
+    "name": "hardlinked source refusal",
+    "pass": true
+  },
+  {
+    "name": "symlink destination preserves victim",
+    "pass": true
+  },
+  {
+    "name": "literal dash file caller stdin",
+    "pass": true
+  },
+  {
+    "name": "simulator refusal exit status",
+    "pass": true,
+    "rc": 77
+  },
+  {
+    "name": "simulator refusal exit status",
+    "pass": true,
+    "rc": 77
+  },
+  {
+    "name": "simulator refusal exit status",
+    "pass": true,
+    "rc": 77
+  },
+  {
+    "name": "check explicit simulator target",
+    "pass": true
+  },
+  {
+    "name": "check refuses unqualified GPU target",
+    "pass": true
+  },
+  {
+    "name": "unknown source language",
+    "pass": true
+  },
+  {
+    "name": "original Omega run status",
+    "pass": true
+  },
+  {
+    "name": "math unchanged",
+    "pass": true
+  },
+  {
+    "name": "changed frontend integrity refusal",
+    "pass": true
+  },
+  {
+    "name": "install collision preserves candidate",
+    "pass": true
+  },
+  {
+    "name": "uninstall owns frontend and aliases",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  }
+]

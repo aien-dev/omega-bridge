@@ -1,0 +1,2390 @@
+[
+  {
+    "name": "pinned seed reference",
+    "pass": true
+  },
+  {
+    "name": "external canonical C encoder available",
+    "pass": true
+  },
+  {
+    "name": "length LDC equals canonical C encoder",
+    "pass": true
+  },
+  {
+    "name": "upstream CPU/oracle gate complete",
+    "pass": true
+  },
+  {
+    "name": "upstream source and executable closure is current",
+    "pass": true
+  },
+  {
+    "name": "e0 native GPU emission",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e0 all arithmetic words match canonical encoder",
+    "pass": true,
+    "instructions": 3
+  },
+  {
+    "name": "e0 capsule/prefix qualified",
+    "pass": true,
+    "instructions": 32,
+    "gprs": 19
+  },
+  {
+    "name": "e0 oracle run 0",
+    "pass": true
+  },
+  {
+    "name": "e0 decoded instructions vs original C++ 0",
+    "pass": true,
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e0 oracle run 1",
+    "pass": true
+  },
+  {
+    "name": "e0 decoded instructions vs original C++ 1",
+    "pass": true,
+    "output_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+  },
+  {
+    "name": "e0 oracle run 2",
+    "pass": true
+  },
+  {
+    "name": "e0 decoded instructions vs original C++ 2",
+    "pass": true,
+    "output_sha256": "6aab71d6efca3ef73be669f9336d77c6112435ae4ed8e4dbc1dd055b68748c5e"
+  },
+  {
+    "name": "e0 oracle run 3",
+    "pass": true
+  },
+  {
+    "name": "e0 decoded instructions vs original C++ 3",
+    "pass": true,
+    "output_sha256": "57c8f2d5236b23e100d428c2d12ec70d6d9607856ea00aec48641c180caad28d"
+  },
+  {
+    "name": "e0 oracle run 4",
+    "pass": true
+  },
+  {
+    "name": "e0 decoded instructions vs original C++ 4",
+    "pass": true,
+    "output_sha256": "073a15d4a487d19e534c0c0459723eeb88efce7b01942340486a8c07e4585d8f"
+  },
+  {
+    "name": "e0 oracle run 5",
+    "pass": true
+  },
+  {
+    "name": "e0 decoded instructions vs original C++ 5",
+    "pass": true,
+    "output_sha256": "1708c3385899f295385455be2b57677d24f77d8f3a5406ca00c7d8850a4da6aa"
+  },
+  {
+    "name": "e0 oracle run 6",
+    "pass": true
+  },
+  {
+    "name": "e0 decoded instructions vs original C++ 6",
+    "pass": true,
+    "output_sha256": "b7be43723edb3788d16fc37d6451c7194e588135c6a997ff45d5e962f9598eb8"
+  },
+  {
+    "name": "e0 oracle run 7",
+    "pass": true
+  },
+  {
+    "name": "e0 decoded instructions vs original C++ 7",
+    "pass": true,
+    "output_sha256": "dca78397c56df6df5b070485f4ac1d741bfb88068a08e753701f17b078f7c8e2"
+  },
+  {
+    "name": "e0 oracle run 8",
+    "pass": true
+  },
+  {
+    "name": "e0 decoded instructions vs original C++ 8",
+    "pass": true,
+    "output_sha256": "284f49dd5aff20834f70ebacddf654d442aa79dfcf86910a63f08658186c24c0"
+  },
+  {
+    "name": "e0 oracle run 9",
+    "pass": true
+  },
+  {
+    "name": "e0 decoded instructions vs original C++ 9",
+    "pass": true,
+    "output_sha256": "31fce3f2f4950313c1d8689720591c10533b772a5ec490f9120fba7c70339316"
+  },
+  {
+    "name": "e0 oracle run 10",
+    "pass": true
+  },
+  {
+    "name": "e0 decoded instructions vs original C++ 10",
+    "pass": true,
+    "output_sha256": "10f239b459edd14da3be3c962933b52ca03b2564a5caea8093dfe42744803d18"
+  },
+  {
+    "name": "e0 oracle run 11",
+    "pass": true
+  },
+  {
+    "name": "e0 decoded instructions vs original C++ 11",
+    "pass": true,
+    "output_sha256": "cf2d061da6cb4837c83103d26bccefded63eae657b0021e4bb6bc4a203d88579"
+  },
+  {
+    "name": "e0 oracle run 12",
+    "pass": true
+  },
+  {
+    "name": "e0 decoded instructions vs original C++ 12",
+    "pass": true,
+    "output_sha256": "eb5d3c44c808af0ad6036178f67f2a554120826077962501e454c0184b37a469"
+  },
+  {
+    "name": "e0 oracle run 13",
+    "pass": true
+  },
+  {
+    "name": "e0 decoded instructions vs original C++ 13",
+    "pass": true,
+    "output_sha256": "93d98a8585ae37efba27c24d203c4351d010ed7c5a2888a0a8b3fa499363723d"
+  },
+  {
+    "name": "e1 native GPU emission",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e1 all arithmetic words match canonical encoder",
+    "pass": true,
+    "instructions": 4
+  },
+  {
+    "name": "e1 capsule/prefix qualified",
+    "pass": true,
+    "instructions": 32,
+    "gprs": 19
+  },
+  {
+    "name": "e1 oracle run 0",
+    "pass": true
+  },
+  {
+    "name": "e1 decoded instructions vs original C++ 0",
+    "pass": true,
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e1 oracle run 1",
+    "pass": true
+  },
+  {
+    "name": "e1 decoded instructions vs original C++ 1",
+    "pass": true,
+    "output_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+  },
+  {
+    "name": "e1 oracle run 2",
+    "pass": true
+  },
+  {
+    "name": "e1 decoded instructions vs original C++ 2",
+    "pass": true,
+    "output_sha256": "3e3bf059cd36daeac0adb7df081afe95902de07337398e3efdd07a5685b695d6"
+  },
+  {
+    "name": "e1 oracle run 3",
+    "pass": true
+  },
+  {
+    "name": "e1 decoded instructions vs original C++ 3",
+    "pass": true,
+    "output_sha256": "9aeda18803ae10f9d636dc847bcf84619786e39b85256507e223af704d58c51d"
+  },
+  {
+    "name": "e1 oracle run 4",
+    "pass": true
+  },
+  {
+    "name": "e1 decoded instructions vs original C++ 4",
+    "pass": true,
+    "output_sha256": "3e355c651d20b6f9e499d600210f64cc508da3a7af801db0b685390fd72d6ac6"
+  },
+  {
+    "name": "e1 oracle run 5",
+    "pass": true
+  },
+  {
+    "name": "e1 decoded instructions vs original C++ 5",
+    "pass": true,
+    "output_sha256": "49ab432a74988cee490faf408917399dea5f6366a9648d550d2e5e4a730640a5"
+  },
+  {
+    "name": "e1 oracle run 6",
+    "pass": true
+  },
+  {
+    "name": "e1 decoded instructions vs original C++ 6",
+    "pass": true,
+    "output_sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+  },
+  {
+    "name": "e1 oracle run 7",
+    "pass": true
+  },
+  {
+    "name": "e1 decoded instructions vs original C++ 7",
+    "pass": true,
+    "output_sha256": "cb85a5dd171a6f1bd55db13928d649696090a974379ae7c2ba9bfb3ab6973912"
+  },
+  {
+    "name": "e1 oracle run 8",
+    "pass": true
+  },
+  {
+    "name": "e1 decoded instructions vs original C++ 8",
+    "pass": true,
+    "output_sha256": "a949e7c3084a7e35063cd6f431dc14457f4b8c3204c3e9fae8a8a7804e969896"
+  },
+  {
+    "name": "e1 oracle run 9",
+    "pass": true
+  },
+  {
+    "name": "e1 decoded instructions vs original C++ 9",
+    "pass": true,
+    "output_sha256": "7b24e78433dd453cd57f8f273f806ce33bfef2bf739d0176945ef790f0b58441"
+  },
+  {
+    "name": "e1 oracle run 10",
+    "pass": true
+  },
+  {
+    "name": "e1 decoded instructions vs original C++ 10",
+    "pass": true,
+    "output_sha256": "29b03dabc08f3323a18c101c30f1443f668f32338aeb41e39c9cb080294635c9"
+  },
+  {
+    "name": "e1 oracle run 11",
+    "pass": true
+  },
+  {
+    "name": "e1 decoded instructions vs original C++ 11",
+    "pass": true,
+    "output_sha256": "0f9c7473308c9a9dcbb777e93bc72ba4c5e5fd5a9f5cf91c686605a6a13d78c0"
+  },
+  {
+    "name": "e1 oracle run 12",
+    "pass": true
+  },
+  {
+    "name": "e1 decoded instructions vs original C++ 12",
+    "pass": true,
+    "output_sha256": "f83dec6429860d6f3e017a2e5dda99f56ae6a6361b52576ae1b3964011efc831"
+  },
+  {
+    "name": "e1 oracle run 13",
+    "pass": true
+  },
+  {
+    "name": "e1 decoded instructions vs original C++ 13",
+    "pass": true,
+    "output_sha256": "d4d1f2322bdf7a5e8e1cdf9a265b28b83bf51c539e1689324c3dd04e7092a972"
+  },
+  {
+    "name": "e2 native GPU emission",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e2 all arithmetic words match canonical encoder",
+    "pass": true,
+    "instructions": 3
+  },
+  {
+    "name": "e2 capsule/prefix qualified",
+    "pass": true,
+    "instructions": 32,
+    "gprs": 19
+  },
+  {
+    "name": "e2 oracle run 0",
+    "pass": true
+  },
+  {
+    "name": "e2 decoded instructions vs original C++ 0",
+    "pass": true,
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e2 oracle run 1",
+    "pass": true
+  },
+  {
+    "name": "e2 decoded instructions vs original C++ 1",
+    "pass": true,
+    "output_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+  },
+  {
+    "name": "e2 oracle run 2",
+    "pass": true
+  },
+  {
+    "name": "e2 decoded instructions vs original C++ 2",
+    "pass": true,
+    "output_sha256": "4af15ee03b813f9d70e28951fcb6f307e7433c89a29ba2a3d1716b2ac8f269d4"
+  },
+  {
+    "name": "e2 oracle run 3",
+    "pass": true
+  },
+  {
+    "name": "e2 decoded instructions vs original C++ 3",
+    "pass": true,
+    "output_sha256": "23a1c6d313db6a57df07e6d4a844f1ae6558b6dcfbc2424710f956c7e86e3a27"
+  },
+  {
+    "name": "e2 oracle run 4",
+    "pass": true
+  },
+  {
+    "name": "e2 decoded instructions vs original C++ 4",
+    "pass": true,
+    "output_sha256": "5ddf58d1ae24de80a5193df3969ba39be4fd41fbf294bf2e21cdd544c9002f64"
+  },
+  {
+    "name": "e2 oracle run 5",
+    "pass": true
+  },
+  {
+    "name": "e2 decoded instructions vs original C++ 5",
+    "pass": true,
+    "output_sha256": "189a7a69d611734717bee76dfc8c34d1025cd54899acb910f8eaf1878afdc1d3"
+  },
+  {
+    "name": "e2 oracle run 6",
+    "pass": true
+  },
+  {
+    "name": "e2 decoded instructions vs original C++ 6",
+    "pass": true,
+    "output_sha256": "869f3b44c052bfaef61b39f2f8d0c8ea5755db594a7c1382648110135708827f"
+  },
+  {
+    "name": "e2 oracle run 7",
+    "pass": true
+  },
+  {
+    "name": "e2 decoded instructions vs original C++ 7",
+    "pass": true,
+    "output_sha256": "da65103b9bdd999ea2b1bde9d44e89b7223c8727bf5a9deb754facbfd9947709"
+  },
+  {
+    "name": "e2 oracle run 8",
+    "pass": true
+  },
+  {
+    "name": "e2 decoded instructions vs original C++ 8",
+    "pass": true,
+    "output_sha256": "b596dc5018879a92030e7af1d7fd45a921d8471810636e3ade9d89ebdc2eb9cc"
+  },
+  {
+    "name": "e2 oracle run 9",
+    "pass": true
+  },
+  {
+    "name": "e2 decoded instructions vs original C++ 9",
+    "pass": true,
+    "output_sha256": "6e49c26e45601d58f952eefb0e3d926e13a5a3c51b6004d8d2cd486fcb866918"
+  },
+  {
+    "name": "e2 oracle run 10",
+    "pass": true
+  },
+  {
+    "name": "e2 decoded instructions vs original C++ 10",
+    "pass": true,
+    "output_sha256": "8a5badfa2552b87d21704b739ea5a643efb0cf42b59a7ae02138af3cca193963"
+  },
+  {
+    "name": "e2 oracle run 11",
+    "pass": true
+  },
+  {
+    "name": "e2 decoded instructions vs original C++ 11",
+    "pass": true,
+    "output_sha256": "beedc78e22a19ffa25026c358a975c54fedb90bbade01e9920d805cb4b28ef37"
+  },
+  {
+    "name": "e2 oracle run 12",
+    "pass": true
+  },
+  {
+    "name": "e2 decoded instructions vs original C++ 12",
+    "pass": true,
+    "output_sha256": "e8d8e82d4612d8921222199312070f95c2bee5b9d30c1cd8e9dfa0510c7fc90b"
+  },
+  {
+    "name": "e2 oracle run 13",
+    "pass": true
+  },
+  {
+    "name": "e2 decoded instructions vs original C++ 13",
+    "pass": true,
+    "output_sha256": "71224ebb9a95dea07df0b5b96cdb5b7fb0e3056ad8c9ae0e2a73c6abf68ff0bd"
+  },
+  {
+    "name": "e3 native GPU emission",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e3 all arithmetic words match canonical encoder",
+    "pass": true,
+    "instructions": 3
+  },
+  {
+    "name": "e3 capsule/prefix qualified",
+    "pass": true,
+    "instructions": 32,
+    "gprs": 19
+  },
+  {
+    "name": "e3 oracle run 0",
+    "pass": true
+  },
+  {
+    "name": "e3 decoded instructions vs original C++ 0",
+    "pass": true,
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e3 oracle run 1",
+    "pass": true
+  },
+  {
+    "name": "e3 decoded instructions vs original C++ 1",
+    "pass": true,
+    "output_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+  },
+  {
+    "name": "e3 oracle run 2",
+    "pass": true
+  },
+  {
+    "name": "e3 decoded instructions vs original C++ 2",
+    "pass": true,
+    "output_sha256": "14250711f57138cb3dfae97e94430d888e9e00e3d325acfc0d9ce4894b505812"
+  },
+  {
+    "name": "e3 oracle run 3",
+    "pass": true
+  },
+  {
+    "name": "e3 decoded instructions vs original C++ 3",
+    "pass": true,
+    "output_sha256": "03bf113bf04a67686b1abbe690552469c62c03fadafd4acd4eff23c8ab763614"
+  },
+  {
+    "name": "e3 oracle run 4",
+    "pass": true
+  },
+  {
+    "name": "e3 decoded instructions vs original C++ 4",
+    "pass": true,
+    "output_sha256": "fc0c102beca4a9574aeaeec77d3362eb86847a5d40d99dd1cf8b3f4cbd3695ec"
+  },
+  {
+    "name": "e3 oracle run 5",
+    "pass": true
+  },
+  {
+    "name": "e3 decoded instructions vs original C++ 5",
+    "pass": true,
+    "output_sha256": "982d11b9fb5b68707fcbe335eb9a66fde48e1b4ce7b2a4cf55a4a3ea1c0511a7"
+  },
+  {
+    "name": "e3 oracle run 6",
+    "pass": true
+  },
+  {
+    "name": "e3 decoded instructions vs original C++ 6",
+    "pass": true,
+    "output_sha256": "076e3e72748b5684bbe3372ba31b596be5f69761523769d81781cc7f178c676f"
+  },
+  {
+    "name": "e3 oracle run 7",
+    "pass": true
+  },
+  {
+    "name": "e3 decoded instructions vs original C++ 7",
+    "pass": true,
+    "output_sha256": "b26c2b69e1a6fb25f21acf5ffd775de6e6af27984551f1d43ff08131f2bf5549"
+  },
+  {
+    "name": "e3 oracle run 8",
+    "pass": true
+  },
+  {
+    "name": "e3 decoded instructions vs original C++ 8",
+    "pass": true,
+    "output_sha256": "e149a2cf6ec4369b1f7cf79e82320dcc4081fcec8508dfefe9c188d78452493d"
+  },
+  {
+    "name": "e3 oracle run 9",
+    "pass": true
+  },
+  {
+    "name": "e3 decoded instructions vs original C++ 9",
+    "pass": true,
+    "output_sha256": "53dc75ed366c1e6e3c73175991d14065ce17229a209ace954deeda9ac865ac5b"
+  },
+  {
+    "name": "e3 oracle run 10",
+    "pass": true
+  },
+  {
+    "name": "e3 decoded instructions vs original C++ 10",
+    "pass": true,
+    "output_sha256": "9c84e603631e43715fabe553cf16333ee112ee7989974588e0bf6c6ede93c2ef"
+  },
+  {
+    "name": "e3 oracle run 11",
+    "pass": true
+  },
+  {
+    "name": "e3 decoded instructions vs original C++ 11",
+    "pass": true,
+    "output_sha256": "77564ebefbb6165423cd97fe5f937e01fa5f2f603d16747b25eefe1dc73d3100"
+  },
+  {
+    "name": "e3 oracle run 12",
+    "pass": true
+  },
+  {
+    "name": "e3 decoded instructions vs original C++ 12",
+    "pass": true,
+    "output_sha256": "0a3b9282cf1be8532ea287f68009ab3d19d8ce342c0141abd0c19d6c7f4efa6f"
+  },
+  {
+    "name": "e3 oracle run 13",
+    "pass": true
+  },
+  {
+    "name": "e3 decoded instructions vs original C++ 13",
+    "pass": true,
+    "output_sha256": "a5786d825932ed1165f6cde93f3805d21bef8f164daa1b784e8c2f1d50d48510"
+  },
+  {
+    "name": "e4 native GPU emission",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e4 all arithmetic words match canonical encoder",
+    "pass": true,
+    "instructions": 3
+  },
+  {
+    "name": "e4 capsule/prefix qualified",
+    "pass": true,
+    "instructions": 32,
+    "gprs": 19
+  },
+  {
+    "name": "e4 oracle run 0",
+    "pass": true
+  },
+  {
+    "name": "e4 decoded instructions vs original C++ 0",
+    "pass": true,
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e4 oracle run 1",
+    "pass": true
+  },
+  {
+    "name": "e4 decoded instructions vs original C++ 1",
+    "pass": true,
+    "output_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+  },
+  {
+    "name": "e4 oracle run 2",
+    "pass": true
+  },
+  {
+    "name": "e4 decoded instructions vs original C++ 2",
+    "pass": true,
+    "output_sha256": "dedf9b1baad6cd9ccb8254395a859010e1d7deb77911866e3357597df8441e81"
+  },
+  {
+    "name": "e4 oracle run 3",
+    "pass": true
+  },
+  {
+    "name": "e4 decoded instructions vs original C++ 3",
+    "pass": true,
+    "output_sha256": "e59ca74554c7c9dc54d016d4897478cca9e216d541c05243343cdf8355df89d4"
+  },
+  {
+    "name": "e4 oracle run 4",
+    "pass": true
+  },
+  {
+    "name": "e4 decoded instructions vs original C++ 4",
+    "pass": true,
+    "output_sha256": "2e181a474343c4c7b27509590dce5928b4142ae0372dd6616183b08bb18e7492"
+  },
+  {
+    "name": "e4 oracle run 5",
+    "pass": true
+  },
+  {
+    "name": "e4 decoded instructions vs original C++ 5",
+    "pass": true,
+    "output_sha256": "69d92e2e88a550c990a4a856460d9b5da159393ea91b56a87051ef01257e4e29"
+  },
+  {
+    "name": "e4 oracle run 6",
+    "pass": true
+  },
+  {
+    "name": "e4 decoded instructions vs original C++ 6",
+    "pass": true,
+    "output_sha256": "0f1ff5e85949aedd49b0437e21d4818bd642c0627f1012c88fdefae1fde879dd"
+  },
+  {
+    "name": "e4 oracle run 7",
+    "pass": true
+  },
+  {
+    "name": "e4 decoded instructions vs original C++ 7",
+    "pass": true,
+    "output_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+  },
+  {
+    "name": "e4 oracle run 8",
+    "pass": true
+  },
+  {
+    "name": "e4 decoded instructions vs original C++ 8",
+    "pass": true,
+    "output_sha256": "98871539e844629cf6d396d172343a38f233e468b24aef9046cd43e039fce894"
+  },
+  {
+    "name": "e4 oracle run 9",
+    "pass": true
+  },
+  {
+    "name": "e4 decoded instructions vs original C++ 9",
+    "pass": true,
+    "output_sha256": "031a990875844fe258e0cc83bbbe9794c45adebf6bdacd1a380b03bffd5c7f32"
+  },
+  {
+    "name": "e4 oracle run 10",
+    "pass": true
+  },
+  {
+    "name": "e4 decoded instructions vs original C++ 10",
+    "pass": true,
+    "output_sha256": "e750c121c31f9dc95d4038169e492d6542515ceb9806f367dc5832284b12fc4a"
+  },
+  {
+    "name": "e4 oracle run 11",
+    "pass": true
+  },
+  {
+    "name": "e4 decoded instructions vs original C++ 11",
+    "pass": true,
+    "output_sha256": "471357468e944483e9f51ec8d585ac82e63558e27d2698bbbbd9947d19d64f6a"
+  },
+  {
+    "name": "e4 oracle run 12",
+    "pass": true
+  },
+  {
+    "name": "e4 decoded instructions vs original C++ 12",
+    "pass": true,
+    "output_sha256": "7430ed6b64b13051a6cf6d76b869456158ae8bfa26c916f6116af31eb749d54d"
+  },
+  {
+    "name": "e4 oracle run 13",
+    "pass": true
+  },
+  {
+    "name": "e4 decoded instructions vs original C++ 13",
+    "pass": true,
+    "output_sha256": "c40de5e56e1381475b84364b81407fd1ad8caa232b66ec1b20a5921e73786f0e"
+  },
+  {
+    "name": "e5 native GPU emission",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e5 all arithmetic words match canonical encoder",
+    "pass": true,
+    "instructions": 3
+  },
+  {
+    "name": "e5 capsule/prefix qualified",
+    "pass": true,
+    "instructions": 32,
+    "gprs": 19
+  },
+  {
+    "name": "e5 oracle run 0",
+    "pass": true
+  },
+  {
+    "name": "e5 decoded instructions vs original C++ 0",
+    "pass": true,
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e5 oracle run 1",
+    "pass": true
+  },
+  {
+    "name": "e5 decoded instructions vs original C++ 1",
+    "pass": true,
+    "output_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+  },
+  {
+    "name": "e5 oracle run 2",
+    "pass": true
+  },
+  {
+    "name": "e5 decoded instructions vs original C++ 2",
+    "pass": true,
+    "output_sha256": "95c8114f4e8b586017f627fab791a64999fe508e8e4b763222f0f7147fda3e8d"
+  },
+  {
+    "name": "e5 oracle run 3",
+    "pass": true
+  },
+  {
+    "name": "e5 decoded instructions vs original C++ 3",
+    "pass": true,
+    "output_sha256": "d07186626e6b93b26e714bf6d3464b2231db641821e9578fb4c47ebad3fa71b8"
+  },
+  {
+    "name": "e5 oracle run 4",
+    "pass": true
+  },
+  {
+    "name": "e5 decoded instructions vs original C++ 4",
+    "pass": true,
+    "output_sha256": "f2e4038637aad36733a5094b8252be3163eb86228eec26ac202daea951c36aaf"
+  },
+  {
+    "name": "e5 oracle run 5",
+    "pass": true
+  },
+  {
+    "name": "e5 decoded instructions vs original C++ 5",
+    "pass": true,
+    "output_sha256": "6044bcaea8a6c0c8604dd6d5234146e93c42501d1a1df2f15560706a72b930f0"
+  },
+  {
+    "name": "e5 oracle run 6",
+    "pass": true
+  },
+  {
+    "name": "e5 decoded instructions vs original C++ 6",
+    "pass": true,
+    "output_sha256": "6f128fdd59469cf5e09cff28b17cfdebd1cc44e7721bbe98bfc1235cb5c9be9e"
+  },
+  {
+    "name": "e5 oracle run 7",
+    "pass": true
+  },
+  {
+    "name": "e5 decoded instructions vs original C++ 7",
+    "pass": true,
+    "output_sha256": "4f5963db239c35d981a4d6d6e13fbd34d94873756f50a605253ad72c1d04852b"
+  },
+  {
+    "name": "e5 oracle run 8",
+    "pass": true
+  },
+  {
+    "name": "e5 decoded instructions vs original C++ 8",
+    "pass": true,
+    "output_sha256": "cf1caad89c107f8e1bb3d5cf82383e8a795ce2698a622831944ec99a682651a9"
+  },
+  {
+    "name": "e5 oracle run 9",
+    "pass": true
+  },
+  {
+    "name": "e5 decoded instructions vs original C++ 9",
+    "pass": true,
+    "output_sha256": "1040f3bae4e4116b95abcb74a5025e871c96f80fac5a5026c470117853c9de0c"
+  },
+  {
+    "name": "e5 oracle run 10",
+    "pass": true
+  },
+  {
+    "name": "e5 decoded instructions vs original C++ 10",
+    "pass": true,
+    "output_sha256": "7dc01f7e54231be06b1b4b46cc1b684c2c63f8e135f6ca6cca52385b40a0403c"
+  },
+  {
+    "name": "e5 oracle run 11",
+    "pass": true
+  },
+  {
+    "name": "e5 decoded instructions vs original C++ 11",
+    "pass": true,
+    "output_sha256": "16cc38d1e49d379040b08070cb9a9204c13d23a6cd33a8765d8148fbb4565515"
+  },
+  {
+    "name": "e5 oracle run 12",
+    "pass": true
+  },
+  {
+    "name": "e5 decoded instructions vs original C++ 12",
+    "pass": true,
+    "output_sha256": "ed5f8abf6777be43160eb717b198e6803281bde06802b86d7f4494aa88684c37"
+  },
+  {
+    "name": "e5 oracle run 13",
+    "pass": true
+  },
+  {
+    "name": "e5 decoded instructions vs original C++ 13",
+    "pass": true,
+    "output_sha256": "6c79ec11fbbe5720e33bcca97f85cbfc7dee5d362e90b6a7daa264acba0ca064"
+  },
+  {
+    "name": "e6 native GPU emission",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e6 all arithmetic words match canonical encoder",
+    "pass": true,
+    "instructions": 5
+  },
+  {
+    "name": "e6 capsule/prefix qualified",
+    "pass": true,
+    "instructions": 32,
+    "gprs": 21
+  },
+  {
+    "name": "e6 oracle run 0",
+    "pass": true
+  },
+  {
+    "name": "e6 decoded instructions vs original C++ 0",
+    "pass": true,
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e6 oracle run 1",
+    "pass": true
+  },
+  {
+    "name": "e6 decoded instructions vs original C++ 1",
+    "pass": true,
+    "output_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+  },
+  {
+    "name": "e6 oracle run 2",
+    "pass": true
+  },
+  {
+    "name": "e6 decoded instructions vs original C++ 2",
+    "pass": true,
+    "output_sha256": "a065edca04e9411671f661deb81630d0dbf36fe16040c051b3f9e890b0cbb279"
+  },
+  {
+    "name": "e6 oracle run 3",
+    "pass": true
+  },
+  {
+    "name": "e6 decoded instructions vs original C++ 3",
+    "pass": true,
+    "output_sha256": "8f175422d159f6bfd4181fafe67ad1e1219a0d121275db1f64112d4b011c26f1"
+  },
+  {
+    "name": "e6 oracle run 4",
+    "pass": true
+  },
+  {
+    "name": "e6 decoded instructions vs original C++ 4",
+    "pass": true,
+    "output_sha256": "51e6f9a933eb52cd82e83c814a05a2b1348b307f6f1c7ee938ca7b6fd55553e0"
+  },
+  {
+    "name": "e6 oracle run 5",
+    "pass": true
+  },
+  {
+    "name": "e6 decoded instructions vs original C++ 5",
+    "pass": true,
+    "output_sha256": "480431a4e906a8ad8dfbf8c38036648bdf440ec6b207981148bfa4b8ed38829c"
+  },
+  {
+    "name": "e6 oracle run 6",
+    "pass": true
+  },
+  {
+    "name": "e6 decoded instructions vs original C++ 6",
+    "pass": true,
+    "output_sha256": "e87ead98c6f20b9a7e81b474a02350ce57e308fed584f81e8cd35d35aad1b3b4"
+  },
+  {
+    "name": "e6 oracle run 7",
+    "pass": true
+  },
+  {
+    "name": "e6 decoded instructions vs original C++ 7",
+    "pass": true,
+    "output_sha256": "a016145fc2d1c036ba8d89b917e35caa3b56a3989acd1f67bc31a2517f4f061c"
+  },
+  {
+    "name": "e6 oracle run 8",
+    "pass": true
+  },
+  {
+    "name": "e6 decoded instructions vs original C++ 8",
+    "pass": true,
+    "output_sha256": "76f2eb8cb3a3a9a6e14983d7e1b4a714811afddae1f6d6492d2b072eec42601f"
+  },
+  {
+    "name": "e6 oracle run 9",
+    "pass": true
+  },
+  {
+    "name": "e6 decoded instructions vs original C++ 9",
+    "pass": true,
+    "output_sha256": "cc70b906beccccbcb2a1e32a498a297e27cb993c40ce882e19814b2bcf680f82"
+  },
+  {
+    "name": "e6 oracle run 10",
+    "pass": true
+  },
+  {
+    "name": "e6 decoded instructions vs original C++ 10",
+    "pass": true,
+    "output_sha256": "cce5d3b6dfa91c19c9efd82f26b9b79dd24d2eb6a9c60a4855df70c5719823df"
+  },
+  {
+    "name": "e6 oracle run 11",
+    "pass": true
+  },
+  {
+    "name": "e6 decoded instructions vs original C++ 11",
+    "pass": true,
+    "output_sha256": "2035eb5803c7a9b1dada102ff3ae39e22548bd36c145adf08e758e30ca155856"
+  },
+  {
+    "name": "e6 oracle run 12",
+    "pass": true
+  },
+  {
+    "name": "e6 decoded instructions vs original C++ 12",
+    "pass": true,
+    "output_sha256": "dc381fa26eea72d0b22617f9e3983003eb941b29b5752d38c2863ef916774bf9"
+  },
+  {
+    "name": "e6 oracle run 13",
+    "pass": true
+  },
+  {
+    "name": "e6 decoded instructions vs original C++ 13",
+    "pass": true,
+    "output_sha256": "39f4eef3d60eb7b29b6571e2f26c34faef522616e7fa1cbb13161093c997f5bb"
+  },
+  {
+    "name": "e7 native GPU emission",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e7 all arithmetic words match canonical encoder",
+    "pass": true,
+    "instructions": 5
+  },
+  {
+    "name": "e7 capsule/prefix qualified",
+    "pass": true,
+    "instructions": 32,
+    "gprs": 21
+  },
+  {
+    "name": "e7 oracle run 0",
+    "pass": true
+  },
+  {
+    "name": "e7 decoded instructions vs original C++ 0",
+    "pass": true,
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e7 oracle run 1",
+    "pass": true
+  },
+  {
+    "name": "e7 decoded instructions vs original C++ 1",
+    "pass": true,
+    "output_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+  },
+  {
+    "name": "e7 oracle run 2",
+    "pass": true
+  },
+  {
+    "name": "e7 decoded instructions vs original C++ 2",
+    "pass": true,
+    "output_sha256": "b58e8929e069d879261c30c4691947fd2a668e4b3c6936778c9128283671e493"
+  },
+  {
+    "name": "e7 oracle run 3",
+    "pass": true
+  },
+  {
+    "name": "e7 decoded instructions vs original C++ 3",
+    "pass": true,
+    "output_sha256": "c885c14fd4f1e6ce98f8e90dab4c08ce6f8372cece7c7be1a5315ebc21c7a01d"
+  },
+  {
+    "name": "e7 oracle run 4",
+    "pass": true
+  },
+  {
+    "name": "e7 decoded instructions vs original C++ 4",
+    "pass": true,
+    "output_sha256": "9b86fd82037ec04677948546e02768c0e934b2553a330acee8ae4c3e7efac1ef"
+  },
+  {
+    "name": "e7 oracle run 5",
+    "pass": true
+  },
+  {
+    "name": "e7 decoded instructions vs original C++ 5",
+    "pass": true,
+    "output_sha256": "f2591b05d60d268ec96038b78d4b080d27701d902b2318f9272774b630217f90"
+  },
+  {
+    "name": "e7 oracle run 6",
+    "pass": true
+  },
+  {
+    "name": "e7 decoded instructions vs original C++ 6",
+    "pass": true,
+    "output_sha256": "6428a2d8fb3da7a23e6f026f8b3d0939059c7ade423e8815da952447946e337e"
+  },
+  {
+    "name": "e7 oracle run 7",
+    "pass": true
+  },
+  {
+    "name": "e7 decoded instructions vs original C++ 7",
+    "pass": true,
+    "output_sha256": "e460ae49cb3b62120d00d44a356bfb06d5599eb94f76e2bea189e9e8db93ba92"
+  },
+  {
+    "name": "e7 oracle run 8",
+    "pass": true
+  },
+  {
+    "name": "e7 decoded instructions vs original C++ 8",
+    "pass": true,
+    "output_sha256": "838225e8682fbbd17d305e901c53cd1e0f0b272027208a3f3d4679d74663c68a"
+  },
+  {
+    "name": "e7 oracle run 9",
+    "pass": true
+  },
+  {
+    "name": "e7 decoded instructions vs original C++ 9",
+    "pass": true,
+    "output_sha256": "3be62d226479aa134c8028cecc251d532fed93e91f6a91f95880a61556e4a2e0"
+  },
+  {
+    "name": "e7 oracle run 10",
+    "pass": true
+  },
+  {
+    "name": "e7 decoded instructions vs original C++ 10",
+    "pass": true,
+    "output_sha256": "46cd815d31e7ecb66e21147e9cb37bd16011273de03ee4cbab22fc4d8c81013a"
+  },
+  {
+    "name": "e7 oracle run 11",
+    "pass": true
+  },
+  {
+    "name": "e7 decoded instructions vs original C++ 11",
+    "pass": true,
+    "output_sha256": "1ab4ccb298fd97f2641a11bd93c487be44d933f847c5f9fdec335e2bc4e535c9"
+  },
+  {
+    "name": "e7 oracle run 12",
+    "pass": true
+  },
+  {
+    "name": "e7 decoded instructions vs original C++ 12",
+    "pass": true,
+    "output_sha256": "39598c35542556c5643288ef9fd6eaec5b7125c39104d6e442d56298ac73eb08"
+  },
+  {
+    "name": "e7 oracle run 13",
+    "pass": true
+  },
+  {
+    "name": "e7 decoded instructions vs original C++ 13",
+    "pass": true,
+    "output_sha256": "9059acea992f01181fceeb5531c01b4ca2c705c680a5aa853d1b0a31193e3c14"
+  },
+  {
+    "name": "e8 native GPU emission",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e8 all arithmetic words match canonical encoder",
+    "pass": true,
+    "instructions": 7
+  },
+  {
+    "name": "e8 capsule/prefix qualified",
+    "pass": true,
+    "instructions": 32,
+    "gprs": 21
+  },
+  {
+    "name": "e8 oracle run 0",
+    "pass": true
+  },
+  {
+    "name": "e8 decoded instructions vs original C++ 0",
+    "pass": true,
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e8 oracle run 1",
+    "pass": true
+  },
+  {
+    "name": "e8 decoded instructions vs original C++ 1",
+    "pass": true,
+    "output_sha256": "ad95131bc0b799c0b1af477fb14fcf26a6a9f76079e48bf090acb7e8367bfd0e"
+  },
+  {
+    "name": "e8 oracle run 2",
+    "pass": true
+  },
+  {
+    "name": "e8 decoded instructions vs original C++ 2",
+    "pass": true,
+    "output_sha256": "9a1e645d699a5a72a7041e7d661f6b036295639a2c55ad0d71e166e4004db5d4"
+  },
+  {
+    "name": "e8 oracle run 3",
+    "pass": true
+  },
+  {
+    "name": "e8 decoded instructions vs original C++ 3",
+    "pass": true,
+    "output_sha256": "04cae5d3e0bf341093408c080a3e313b7e7279fdd8baac5a971a8b61c255c234"
+  },
+  {
+    "name": "e8 oracle run 4",
+    "pass": true
+  },
+  {
+    "name": "e8 decoded instructions vs original C++ 4",
+    "pass": true,
+    "output_sha256": "317ab355636a73507f0c9157e95b26425405c66e0e7e9a183068a18a3979227b"
+  },
+  {
+    "name": "e8 oracle run 5",
+    "pass": true
+  },
+  {
+    "name": "e8 decoded instructions vs original C++ 5",
+    "pass": true,
+    "output_sha256": "5761ad8023f2f7ffebd7f48c1008eb143fb7282e8599febdeab863bfc0004746"
+  },
+  {
+    "name": "e8 oracle run 6",
+    "pass": true
+  },
+  {
+    "name": "e8 decoded instructions vs original C++ 6",
+    "pass": true,
+    "output_sha256": "3eb5c952b012ebf8deb9e18d5a75156b029cf59179b6e5b88577c610631f5a14"
+  },
+  {
+    "name": "e8 oracle run 7",
+    "pass": true
+  },
+  {
+    "name": "e8 decoded instructions vs original C++ 7",
+    "pass": true,
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e8 oracle run 8",
+    "pass": true
+  },
+  {
+    "name": "e8 decoded instructions vs original C++ 8",
+    "pass": true,
+    "output_sha256": "d6a7ed0227e96971b3ca4afffb84e6041419a7b7bd2f601497c717814fe980cc"
+  },
+  {
+    "name": "e8 oracle run 9",
+    "pass": true
+  },
+  {
+    "name": "e8 decoded instructions vs original C++ 9",
+    "pass": true,
+    "output_sha256": "d9b650c8460a96a4d2b9f80d747e6de250e64bbf1ffe223c3e2ab5804ed8afe3"
+  },
+  {
+    "name": "e8 oracle run 10",
+    "pass": true
+  },
+  {
+    "name": "e8 decoded instructions vs original C++ 10",
+    "pass": true,
+    "output_sha256": "3edc50f99ae790fd5172d397dd88f88f4901d34baf7448fb0200b04b7d35c473"
+  },
+  {
+    "name": "e8 oracle run 11",
+    "pass": true
+  },
+  {
+    "name": "e8 decoded instructions vs original C++ 11",
+    "pass": true,
+    "output_sha256": "90874aa6fa99ccc43152b0d57e5c8b5015e65641040a46e7cb8e276543c0bc46"
+  },
+  {
+    "name": "e8 oracle run 12",
+    "pass": true
+  },
+  {
+    "name": "e8 decoded instructions vs original C++ 12",
+    "pass": true,
+    "output_sha256": "7a758a5d004a8949930ad76a08dd287af3908b5b176bec3f0c0e752004fb55e0"
+  },
+  {
+    "name": "e8 oracle run 13",
+    "pass": true
+  },
+  {
+    "name": "e8 decoded instructions vs original C++ 13",
+    "pass": true,
+    "output_sha256": "12a3ae445661ce5dee78d0650d33362dec29c4f82af05e7e57fb595bbbacf0ca"
+  },
+  {
+    "name": "e9 native GPU emission",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e9 all arithmetic words match canonical encoder",
+    "pass": true,
+    "instructions": 7
+  },
+  {
+    "name": "e9 capsule/prefix qualified",
+    "pass": true,
+    "instructions": 32,
+    "gprs": 23
+  },
+  {
+    "name": "e9 oracle run 0",
+    "pass": true
+  },
+  {
+    "name": "e9 decoded instructions vs original C++ 0",
+    "pass": true,
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e9 oracle run 1",
+    "pass": true
+  },
+  {
+    "name": "e9 decoded instructions vs original C++ 1",
+    "pass": true,
+    "output_sha256": "67abdd721024f0ff4e0b3f4c2fc13bc5bad42d0b7851d456d88d203d15aaa450"
+  },
+  {
+    "name": "e9 oracle run 2",
+    "pass": true
+  },
+  {
+    "name": "e9 decoded instructions vs original C++ 2",
+    "pass": true,
+    "output_sha256": "2aa405ec50e6cdb6648a36aa6a3c45453c29314ba20e04458c7b845efd5ad020"
+  },
+  {
+    "name": "e9 oracle run 3",
+    "pass": true
+  },
+  {
+    "name": "e9 decoded instructions vs original C++ 3",
+    "pass": true,
+    "output_sha256": "3201fa3ac52688bd64f3d64c525fa3aa59f31672916867394041deae4bc9ac37"
+  },
+  {
+    "name": "e9 oracle run 4",
+    "pass": true
+  },
+  {
+    "name": "e9 decoded instructions vs original C++ 4",
+    "pass": true,
+    "output_sha256": "efea0a54e5aa42c4ffff988fbda93c1cabfd956f27067b62c03181747257183d"
+  },
+  {
+    "name": "e9 oracle run 5",
+    "pass": true
+  },
+  {
+    "name": "e9 decoded instructions vs original C++ 5",
+    "pass": true,
+    "output_sha256": "c2cdcf7fc67fd320ebfffdf4af5bcbc2d79a9761508a36a33140a8e4a12e96c2"
+  },
+  {
+    "name": "e9 oracle run 6",
+    "pass": true
+  },
+  {
+    "name": "e9 decoded instructions vs original C++ 6",
+    "pass": true,
+    "output_sha256": "a81f5be5279f09afee3fbb07cbc8b714a0ff37cdcd47b870444efafa2ac8d4e3"
+  },
+  {
+    "name": "e9 oracle run 7",
+    "pass": true
+  },
+  {
+    "name": "e9 decoded instructions vs original C++ 7",
+    "pass": true,
+    "output_sha256": "14f8d26104e9428711ce4d5fa0419099fc5b9e8300206af010da97f6e7a88901"
+  },
+  {
+    "name": "e9 oracle run 8",
+    "pass": true
+  },
+  {
+    "name": "e9 decoded instructions vs original C++ 8",
+    "pass": true,
+    "output_sha256": "54683cb5fd7f99944337b620e5f460cc349c448e9e56ef97ce29992f9a3f6e62"
+  },
+  {
+    "name": "e9 oracle run 9",
+    "pass": true
+  },
+  {
+    "name": "e9 decoded instructions vs original C++ 9",
+    "pass": true,
+    "output_sha256": "7ed4c442d8b416437810e6d4656758de5074077993a45908a43d21743e367efd"
+  },
+  {
+    "name": "e9 oracle run 10",
+    "pass": true
+  },
+  {
+    "name": "e9 decoded instructions vs original C++ 10",
+    "pass": true,
+    "output_sha256": "9464dcd6ed1384e750a32a460c03af2f56727bff9a1d00fe3f31f2db75fbfb43"
+  },
+  {
+    "name": "e9 oracle run 11",
+    "pass": true
+  },
+  {
+    "name": "e9 decoded instructions vs original C++ 11",
+    "pass": true,
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e9 oracle run 12",
+    "pass": true
+  },
+  {
+    "name": "e9 decoded instructions vs original C++ 12",
+    "pass": true,
+    "output_sha256": "29105f496f4fedca99fbbbb29b652a5c32e88635eb61c02b7baa680dc5e9d1a3"
+  },
+  {
+    "name": "e9 oracle run 13",
+    "pass": true
+  },
+  {
+    "name": "e9 decoded instructions vs original C++ 13",
+    "pass": true,
+    "output_sha256": "3359737584c9d50ea46e600bd50de836860c87949038aded4651e628b73614f1"
+  },
+  {
+    "name": "e10 native GPU emission",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e10 all arithmetic words match canonical encoder",
+    "pass": true,
+    "instructions": 3
+  },
+  {
+    "name": "e10 capsule/prefix qualified",
+    "pass": true,
+    "instructions": 32,
+    "gprs": 19
+  },
+  {
+    "name": "e10 oracle run 0",
+    "pass": true
+  },
+  {
+    "name": "e10 decoded instructions vs original C++ 0",
+    "pass": true,
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e10 oracle run 1",
+    "pass": true
+  },
+  {
+    "name": "e10 decoded instructions vs original C++ 1",
+    "pass": true,
+    "output_sha256": "ad95131bc0b799c0b1af477fb14fcf26a6a9f76079e48bf090acb7e8367bfd0e"
+  },
+  {
+    "name": "e10 oracle run 2",
+    "pass": true
+  },
+  {
+    "name": "e10 decoded instructions vs original C++ 2",
+    "pass": true,
+    "output_sha256": "20f7baa6f2fcbe0bbf163c5f661638f6dea9a97a1e2da21ffed7c31483ceab26"
+  },
+  {
+    "name": "e10 oracle run 3",
+    "pass": true
+  },
+  {
+    "name": "e10 decoded instructions vs original C++ 3",
+    "pass": true,
+    "output_sha256": "38eda283aa611046880bf3bd81ba3086edeacaecad3bed116c5d715ef5481f5b"
+  },
+  {
+    "name": "e10 oracle run 4",
+    "pass": true
+  },
+  {
+    "name": "e10 decoded instructions vs original C++ 4",
+    "pass": true,
+    "output_sha256": "71097b890e9a135db4dbfb89c6e9e124593b0819eb4d2c3ad5a7906a4621e48b"
+  },
+  {
+    "name": "e10 oracle run 5",
+    "pass": true
+  },
+  {
+    "name": "e10 decoded instructions vs original C++ 5",
+    "pass": true,
+    "output_sha256": "78cbbc1c651c00f49becfcfcd71713604a0a9509ffe37f572593837b59551959"
+  },
+  {
+    "name": "e10 oracle run 6",
+    "pass": true
+  },
+  {
+    "name": "e10 decoded instructions vs original C++ 6",
+    "pass": true,
+    "output_sha256": "f9a178ef153fd208de2246262628641d731bf546ed9730767fa6e29881a62213"
+  },
+  {
+    "name": "e10 oracle run 7",
+    "pass": true
+  },
+  {
+    "name": "e10 decoded instructions vs original C++ 7",
+    "pass": true,
+    "output_sha256": "8c50a9e752b6e938ef784a857cba8a29714b3b35325420905c62613bb0290ddf"
+  },
+  {
+    "name": "e10 oracle run 8",
+    "pass": true
+  },
+  {
+    "name": "e10 decoded instructions vs original C++ 8",
+    "pass": true,
+    "output_sha256": "7cfce2fe1736802c519272ad3e8f66de48ecdcd5dc2115aacbc761f48e63aba2"
+  },
+  {
+    "name": "e10 oracle run 9",
+    "pass": true
+  },
+  {
+    "name": "e10 decoded instructions vs original C++ 9",
+    "pass": true,
+    "output_sha256": "6f634b2823d272ae77171788fc600fad0789ec19886ce358112caf67f0dbae4a"
+  },
+  {
+    "name": "e10 oracle run 10",
+    "pass": true
+  },
+  {
+    "name": "e10 decoded instructions vs original C++ 10",
+    "pass": true,
+    "output_sha256": "d3603729fedbeb4a6dd225576fa4923d9a397dca7e2ec5b0e5a745cdf85bb471"
+  },
+  {
+    "name": "e10 oracle run 11",
+    "pass": true
+  },
+  {
+    "name": "e10 decoded instructions vs original C++ 11",
+    "pass": true,
+    "output_sha256": "e3c2139d59a8779052b195c3f6612bfd450e7f7ddb96779ba567b8be840414c1"
+  },
+  {
+    "name": "e10 oracle run 12",
+    "pass": true
+  },
+  {
+    "name": "e10 decoded instructions vs original C++ 12",
+    "pass": true,
+    "output_sha256": "efbd7d545795e4d6a614e86aea98c1a27878be15f0a916b563a2f3cd159cd706"
+  },
+  {
+    "name": "e10 oracle run 13",
+    "pass": true
+  },
+  {
+    "name": "e10 decoded instructions vs original C++ 13",
+    "pass": true,
+    "output_sha256": "72a4fa3544e43a836ffcb268ce06ccdbc55d44d5e6b1b1c19216a53ea98301fd"
+  },
+  {
+    "name": "e11 native GPU emission",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e11 all arithmetic words match canonical encoder",
+    "pass": true,
+    "instructions": 4
+  },
+  {
+    "name": "e11 capsule/prefix qualified",
+    "pass": true,
+    "instructions": 32,
+    "gprs": 19
+  },
+  {
+    "name": "e11 oracle run 0",
+    "pass": true
+  },
+  {
+    "name": "e11 decoded instructions vs original C++ 0",
+    "pass": true,
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e11 oracle run 1",
+    "pass": true
+  },
+  {
+    "name": "e11 decoded instructions vs original C++ 1",
+    "pass": true,
+    "output_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+  },
+  {
+    "name": "e11 oracle run 2",
+    "pass": true
+  },
+  {
+    "name": "e11 decoded instructions vs original C++ 2",
+    "pass": true,
+    "output_sha256": "d983eca63ad2fa236545aff851312698fc200310502ac7de56571eefcefbbb47"
+  },
+  {
+    "name": "e11 oracle run 3",
+    "pass": true
+  },
+  {
+    "name": "e11 decoded instructions vs original C++ 3",
+    "pass": true,
+    "output_sha256": "3ad64ae344e2dad1de3169e59c417e255d734913097ade0c9a77a1170d1c2ace"
+  },
+  {
+    "name": "e11 oracle run 4",
+    "pass": true
+  },
+  {
+    "name": "e11 decoded instructions vs original C++ 4",
+    "pass": true,
+    "output_sha256": "617e0415c7b1afca163e73140ddad47abb7f0c5d01597a07a1dc625dd1f5d0e9"
+  },
+  {
+    "name": "e11 oracle run 5",
+    "pass": true
+  },
+  {
+    "name": "e11 decoded instructions vs original C++ 5",
+    "pass": true,
+    "output_sha256": "05374bfdb4b7c3fd03419aa200d13a6cb6d989d0765e304c407dfc43f583c590"
+  },
+  {
+    "name": "e11 oracle run 6",
+    "pass": true
+  },
+  {
+    "name": "e11 decoded instructions vs original C++ 6",
+    "pass": true,
+    "output_sha256": "a1c4db651865ff2624c0bfcc7ba2d0b51b77b55611cedb2d8e7d60060125b204"
+  },
+  {
+    "name": "e11 oracle run 7",
+    "pass": true
+  },
+  {
+    "name": "e11 decoded instructions vs original C++ 7",
+    "pass": true,
+    "output_sha256": "8300e46c2ccf20cd7d4097f082d3616dd9bdb7ba1e22805dbf1fabb38b84cdc3"
+  },
+  {
+    "name": "e11 oracle run 8",
+    "pass": true
+  },
+  {
+    "name": "e11 decoded instructions vs original C++ 8",
+    "pass": true,
+    "output_sha256": "dd272b7e6029db287c44ea7ffffbd7b0e59a3032c3594312f934cef82082bf6d"
+  },
+  {
+    "name": "e11 oracle run 9",
+    "pass": true
+  },
+  {
+    "name": "e11 decoded instructions vs original C++ 9",
+    "pass": true,
+    "output_sha256": "81c725ae0affadc164f778d958f2428e816786c5bf5e00cc4832ccd242f8ee76"
+  },
+  {
+    "name": "e11 oracle run 10",
+    "pass": true
+  },
+  {
+    "name": "e11 decoded instructions vs original C++ 10",
+    "pass": true,
+    "output_sha256": "348b891a161245695bba5692a80c49b1a0b508143d266f66e8886d219477995a"
+  },
+  {
+    "name": "e11 oracle run 11",
+    "pass": true
+  },
+  {
+    "name": "e11 decoded instructions vs original C++ 11",
+    "pass": true,
+    "output_sha256": "1eaf4dc54971be862104fe27a7e013a81996c603ec928d8c913c384b8d5a634d"
+  },
+  {
+    "name": "e11 oracle run 12",
+    "pass": true
+  },
+  {
+    "name": "e11 decoded instructions vs original C++ 12",
+    "pass": true,
+    "output_sha256": "aad8a876d367b4346a0f70d3aec3e1115666232a3ba5ad8034212ff94167fdf1"
+  },
+  {
+    "name": "e11 oracle run 13",
+    "pass": true
+  },
+  {
+    "name": "e11 decoded instructions vs original C++ 13",
+    "pass": true,
+    "output_sha256": "03e8d57a7f45116391e1ccea76d6e21648e8654cebda214c19ff1218dd44ea93"
+  },
+  {
+    "name": "e12 native GPU emission",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e12 all arithmetic words match canonical encoder",
+    "pass": true,
+    "instructions": 1
+  },
+  {
+    "name": "e12 capsule/prefix qualified",
+    "pass": true,
+    "instructions": 32,
+    "gprs": 17
+  },
+  {
+    "name": "e12 oracle run 0",
+    "pass": true
+  },
+  {
+    "name": "e12 decoded instructions vs original C++ 0",
+    "pass": true,
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e12 oracle run 1",
+    "pass": true
+  },
+  {
+    "name": "e12 decoded instructions vs original C++ 1",
+    "pass": true,
+    "output_sha256": "67abdd721024f0ff4e0b3f4c2fc13bc5bad42d0b7851d456d88d203d15aaa450"
+  },
+  {
+    "name": "e12 oracle run 2",
+    "pass": true
+  },
+  {
+    "name": "e12 decoded instructions vs original C++ 2",
+    "pass": true,
+    "output_sha256": "0959f586d41562cba8842eab5dfc477047d96d70862e3825e17acfd5ddac4254"
+  },
+  {
+    "name": "e12 oracle run 3",
+    "pass": true
+  },
+  {
+    "name": "e12 decoded instructions vs original C++ 3",
+    "pass": true,
+    "output_sha256": "cba87c6093b295246245ce0b1d97ffa2e633284a6520f12caedf273a02815df6"
+  },
+  {
+    "name": "e12 oracle run 4",
+    "pass": true
+  },
+  {
+    "name": "e12 decoded instructions vs original C++ 4",
+    "pass": true,
+    "output_sha256": "491f6b2c225088be1165f2b2aef8c54aa887a04601d09d44f8a7c1ccf14ccc60"
+  },
+  {
+    "name": "e12 oracle run 5",
+    "pass": true
+  },
+  {
+    "name": "e12 decoded instructions vs original C++ 5",
+    "pass": true,
+    "output_sha256": "78c8f1d0cac1cd273cd930c566bd3a53842a2956e6281c4a2208195e0dd0ad3a"
+  },
+  {
+    "name": "e12 oracle run 6",
+    "pass": true
+  },
+  {
+    "name": "e12 decoded instructions vs original C++ 6",
+    "pass": true,
+    "output_sha256": "934fd5bab7ce858b94597a6b8ceb8f43029af87d86543627dc6c4c0519c8345f"
+  },
+  {
+    "name": "e12 oracle run 7",
+    "pass": true
+  },
+  {
+    "name": "e12 decoded instructions vs original C++ 7",
+    "pass": true,
+    "output_sha256": "7a3b5c29185a3d81303ffc901c83de77fa225f19a7ea921b56c0205c7a2ae72a"
+  },
+  {
+    "name": "e12 oracle run 8",
+    "pass": true
+  },
+  {
+    "name": "e12 decoded instructions vs original C++ 8",
+    "pass": true,
+    "output_sha256": "0160d2c02a11c660686057750e231a77e4893aa507411e75a06fdb3bdb28b647"
+  },
+  {
+    "name": "e12 oracle run 9",
+    "pass": true
+  },
+  {
+    "name": "e12 decoded instructions vs original C++ 9",
+    "pass": true,
+    "output_sha256": "539b19f618340d182cd2411456620a9e3789175cfa82906a21723fd61f04b3c5"
+  },
+  {
+    "name": "e12 oracle run 10",
+    "pass": true
+  },
+  {
+    "name": "e12 decoded instructions vs original C++ 10",
+    "pass": true,
+    "output_sha256": "02433989dc22cf3b439520872116a54cd7d45a171ac418fb24bc2594d82fd250"
+  },
+  {
+    "name": "e12 oracle run 11",
+    "pass": true
+  },
+  {
+    "name": "e12 decoded instructions vs original C++ 11",
+    "pass": true,
+    "output_sha256": "0b9aaba4a69598d8ce63a18f4ed1927b14fcbbef27c5e7f173b2e0dba5ca65e3"
+  },
+  {
+    "name": "e12 oracle run 12",
+    "pass": true
+  },
+  {
+    "name": "e12 decoded instructions vs original C++ 12",
+    "pass": true,
+    "output_sha256": "90ed1bbf1e98a16965c451d6a254e1b2e5121aeb210c876311f63bd4a8da54f1"
+  },
+  {
+    "name": "e12 oracle run 13",
+    "pass": true
+  },
+  {
+    "name": "e12 decoded instructions vs original C++ 13",
+    "pass": true,
+    "output_sha256": "72d098b2e6dcef02f4943de9f1c25967dedb5e31f2f035db5b209873089635e8"
+  },
+  {
+    "name": "e13 native GPU emission",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e13 all arithmetic words match canonical encoder",
+    "pass": true,
+    "instructions": 1
+  },
+  {
+    "name": "e13 capsule/prefix qualified",
+    "pass": true,
+    "instructions": 32,
+    "gprs": 17
+  },
+  {
+    "name": "e13 oracle run 0",
+    "pass": true
+  },
+  {
+    "name": "e13 decoded instructions vs original C++ 0",
+    "pass": true,
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e13 oracle run 1",
+    "pass": true
+  },
+  {
+    "name": "e13 decoded instructions vs original C++ 1",
+    "pass": true,
+    "output_sha256": "e8a4b2ee7ede79a3afb332b5b6cc3d952a65fd8cffb897f5d18016577c33d7cc"
+  },
+  {
+    "name": "e13 oracle run 2",
+    "pass": true
+  },
+  {
+    "name": "e13 decoded instructions vs original C++ 2",
+    "pass": true,
+    "output_sha256": "7f27bab80e7164ecc180ac1279bb371122c9a0932bc6df914a1d567c00880c31"
+  },
+  {
+    "name": "e13 oracle run 3",
+    "pass": true
+  },
+  {
+    "name": "e13 decoded instructions vs original C++ 3",
+    "pass": true,
+    "output_sha256": "b076f741d81ad5ee60cc0da4045b7ce08b7ac767619b46ed6fdf6d1d567e159d"
+  },
+  {
+    "name": "e13 oracle run 4",
+    "pass": true
+  },
+  {
+    "name": "e13 decoded instructions vs original C++ 4",
+    "pass": true,
+    "output_sha256": "3d15f98bbc7ceebca7f4b9a760558c457934a5691ade96781350d5a82eed383e"
+  },
+  {
+    "name": "e13 oracle run 5",
+    "pass": true
+  },
+  {
+    "name": "e13 decoded instructions vs original C++ 5",
+    "pass": true,
+    "output_sha256": "b830d8761bf9e6d56e308ae9a45f341b036a62cb9b342a9878ed1943390f5561"
+  },
+  {
+    "name": "e13 oracle run 6",
+    "pass": true
+  },
+  {
+    "name": "e13 decoded instructions vs original C++ 6",
+    "pass": true,
+    "output_sha256": "97cc7a5b8795e09f457c2736e030e9e18db3f97235f4a39d66e1f5b7cb103ee7"
+  },
+  {
+    "name": "e13 oracle run 7",
+    "pass": true
+  },
+  {
+    "name": "e13 decoded instructions vs original C++ 7",
+    "pass": true,
+    "output_sha256": "a317ffeea807262fc5f7b4f214b3f578147972529ab540dd635814fbeb35fa14"
+  },
+  {
+    "name": "e13 oracle run 8",
+    "pass": true
+  },
+  {
+    "name": "e13 decoded instructions vs original C++ 8",
+    "pass": true,
+    "output_sha256": "612a1e3ae3d596a99b546a37df2dca2ddeada5c0524613d854db314987953088"
+  },
+  {
+    "name": "e13 oracle run 9",
+    "pass": true
+  },
+  {
+    "name": "e13 decoded instructions vs original C++ 9",
+    "pass": true,
+    "output_sha256": "f590f1746a4d2434a2ea9ee76b226220c669538dd2fe1a3cb989527c71cb7683"
+  },
+  {
+    "name": "e13 oracle run 10",
+    "pass": true
+  },
+  {
+    "name": "e13 decoded instructions vs original C++ 10",
+    "pass": true,
+    "output_sha256": "ef54040e11bf8ee6c4c9f64b44fb3d2598ff82021831cb4fd56e39f384d8b263"
+  },
+  {
+    "name": "e13 oracle run 11",
+    "pass": true
+  },
+  {
+    "name": "e13 decoded instructions vs original C++ 11",
+    "pass": true,
+    "output_sha256": "ed879595df25a836f9f9f735af88cc6f9a74d4e58160d9ddef316dd51df8b3c0"
+  },
+  {
+    "name": "e13 oracle run 12",
+    "pass": true
+  },
+  {
+    "name": "e13 decoded instructions vs original C++ 12",
+    "pass": true,
+    "output_sha256": "3854fc4ceb1d8d395958073454f4b6ee44a0cac6dc47d669cda918f1f5c37c26"
+  },
+  {
+    "name": "e13 oracle run 13",
+    "pass": true
+  },
+  {
+    "name": "e13 decoded instructions vs original C++ 13",
+    "pass": true,
+    "output_sha256": "d1ef64c5de88a19bd7c73dbfdaa48e99ab187b8bce61877c6772cb6a8acd6a4a"
+  },
+  {
+    "name": "e14 native GPU emission",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e14 all arithmetic words match canonical encoder",
+    "pass": true,
+    "instructions": 127
+  },
+  {
+    "name": "e14 capsule/prefix qualified",
+    "pass": true,
+    "instructions": 152,
+    "gprs": 143
+  },
+  {
+    "name": "e14 oracle run 0",
+    "pass": true
+  },
+  {
+    "name": "e14 decoded instructions vs original C++ 0",
+    "pass": true,
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e14 oracle run 1",
+    "pass": true
+  },
+  {
+    "name": "e14 decoded instructions vs original C++ 1",
+    "pass": true,
+    "output_sha256": "c31425b44a7ed682a3356bf6820141e1584a15c43b6d6793f552e5d4621586f7"
+  },
+  {
+    "name": "e14 oracle run 2",
+    "pass": true
+  },
+  {
+    "name": "e14 decoded instructions vs original C++ 2",
+    "pass": true,
+    "output_sha256": "223f9474ea30da6552b0ad25e4c58f2e9b5d7954c752a9cabc7b4b71234fae2d"
+  },
+  {
+    "name": "e14 oracle run 3",
+    "pass": true
+  },
+  {
+    "name": "e14 decoded instructions vs original C++ 3",
+    "pass": true,
+    "output_sha256": "7749d22cb17ceb2423215594dfe68c3335e27c073855da466079fc4e44645cda"
+  },
+  {
+    "name": "e14 oracle run 4",
+    "pass": true
+  },
+  {
+    "name": "e14 decoded instructions vs original C++ 4",
+    "pass": true,
+    "output_sha256": "0c0272fba629352c18526126f7624f68a8786a8bdce29ba38d852c5c63cb4afa"
+  },
+  {
+    "name": "e14 oracle run 5",
+    "pass": true
+  },
+  {
+    "name": "e14 decoded instructions vs original C++ 5",
+    "pass": true,
+    "output_sha256": "11c080187f2e486b3eb32d4d4969aa17229a5c7be08f3424b4e0a42b81eade68"
+  },
+  {
+    "name": "e14 oracle run 6",
+    "pass": true
+  },
+  {
+    "name": "e14 decoded instructions vs original C++ 6",
+    "pass": true,
+    "output_sha256": "19f86e9cb1051f6a5941835676e4d11cb07bc720ff1ed503812fb6cdaae703f7"
+  },
+  {
+    "name": "e14 oracle run 7",
+    "pass": true
+  },
+  {
+    "name": "e14 decoded instructions vs original C++ 7",
+    "pass": true,
+    "output_sha256": "baffd8c51182756cdee239b04f6193797cf27d18da7ea624f9008b72edfb07d5"
+  },
+  {
+    "name": "e14 oracle run 8",
+    "pass": true
+  },
+  {
+    "name": "e14 decoded instructions vs original C++ 8",
+    "pass": true,
+    "output_sha256": "b76b30338f08c1f17055531b393031cd7679e2118184d49caad3f31553a7534e"
+  },
+  {
+    "name": "e14 oracle run 9",
+    "pass": true
+  },
+  {
+    "name": "e14 decoded instructions vs original C++ 9",
+    "pass": true,
+    "output_sha256": "62b6d0b4bb33e64691a29fec90d7e5fca26c07ce4eb76f34dc3965b0663c284c"
+  },
+  {
+    "name": "e14 oracle run 10",
+    "pass": true
+  },
+  {
+    "name": "e14 decoded instructions vs original C++ 10",
+    "pass": true,
+    "output_sha256": "d915545b009b0d29d24d0c1f36b5fe1f03df3e5837f1dd9887653bba407829da"
+  },
+  {
+    "name": "e14 oracle run 11",
+    "pass": true
+  },
+  {
+    "name": "e14 decoded instructions vs original C++ 11",
+    "pass": true,
+    "output_sha256": "6c8a7f328a2abd4fad41262fe3a3a06b146a1bd23c5ce62763cf8497f7857e83"
+  },
+  {
+    "name": "e14 oracle run 12",
+    "pass": true
+  },
+  {
+    "name": "e14 decoded instructions vs original C++ 12",
+    "pass": true,
+    "output_sha256": "65e5e1eaa63c8262f8d08c0cae75b7a7f59429ebbf1101c72801bfcbd10293a8"
+  },
+  {
+    "name": "e14 oracle run 13",
+    "pass": true
+  },
+  {
+    "name": "e14 decoded instructions vs original C++ 13",
+    "pass": true,
+    "output_sha256": "214c1b797ceba3b9f54d2d0270d8d823d924f197af6c476152b02d91f773396c"
+  },
+  {
+    "name": "e15 native GPU emission",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e15 all arithmetic words match canonical encoder",
+    "pass": true,
+    "instructions": 1
+  },
+  {
+    "name": "e15 capsule/prefix qualified",
+    "pass": true,
+    "instructions": 32,
+    "gprs": 17
+  },
+  {
+    "name": "e15 oracle run 0",
+    "pass": true
+  },
+  {
+    "name": "e15 decoded instructions vs original C++ 0",
+    "pass": true,
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e15 oracle run 1",
+    "pass": true
+  },
+  {
+    "name": "e15 decoded instructions vs original C++ 1",
+    "pass": true,
+    "output_sha256": "67abdd721024f0ff4e0b3f4c2fc13bc5bad42d0b7851d456d88d203d15aaa450"
+  },
+  {
+    "name": "e15 oracle run 2",
+    "pass": true
+  },
+  {
+    "name": "e15 decoded instructions vs original C++ 2",
+    "pass": true,
+    "output_sha256": "0a0492da204a0dd54c6e6c1b3a131251f31cd7b724c2a3d583da43a235d6a918"
+  },
+  {
+    "name": "e15 oracle run 3",
+    "pass": true
+  },
+  {
+    "name": "e15 decoded instructions vs original C++ 3",
+    "pass": true,
+    "output_sha256": "39e03e59defc446ff06a40e5a0acd2d7380c63400f70984e6389e4b1cc178829"
+  },
+  {
+    "name": "e15 oracle run 4",
+    "pass": true
+  },
+  {
+    "name": "e15 decoded instructions vs original C++ 4",
+    "pass": true,
+    "output_sha256": "f91db59bf0e1e12ed43b683cacbc590310a5b88e2d31b3d7ee24b8634776a9e5"
+  },
+  {
+    "name": "e15 oracle run 5",
+    "pass": true
+  },
+  {
+    "name": "e15 decoded instructions vs original C++ 5",
+    "pass": true,
+    "output_sha256": "11261466a43a7bfa4a168e33212611c82ce38178ba35722678ff9dee36105add"
+  },
+  {
+    "name": "e15 oracle run 6",
+    "pass": true
+  },
+  {
+    "name": "e15 decoded instructions vs original C++ 6",
+    "pass": true,
+    "output_sha256": "f0d72cc192082a567909310f3b3d37815b7470164bbd7ea262790642398665ba"
+  },
+  {
+    "name": "e15 oracle run 7",
+    "pass": true
+  },
+  {
+    "name": "e15 decoded instructions vs original C++ 7",
+    "pass": true,
+    "output_sha256": "ae7bf4c4ae14708842eb2535c577ab01eee0b5a22214c5240e70e10d9e292d3d"
+  },
+  {
+    "name": "e15 oracle run 8",
+    "pass": true
+  },
+  {
+    "name": "e15 decoded instructions vs original C++ 8",
+    "pass": true,
+    "output_sha256": "5633bd17ed59f000445b9ec61b8147dc7807f47b60ad633d4466df8c58fb6b6f"
+  },
+  {
+    "name": "e15 oracle run 9",
+    "pass": true
+  },
+  {
+    "name": "e15 decoded instructions vs original C++ 9",
+    "pass": true,
+    "output_sha256": "53173006a978c69ef0d40dfcd0d01659425b3d493d6dd656a27c99717de6ff63"
+  },
+  {
+    "name": "e15 oracle run 10",
+    "pass": true
+  },
+  {
+    "name": "e15 decoded instructions vs original C++ 10",
+    "pass": true,
+    "output_sha256": "8989198e1adc023eaefe2a4a77f2d12385b05951667c3b1b46826202b86b4a2d"
+  },
+  {
+    "name": "e15 oracle run 11",
+    "pass": true
+  },
+  {
+    "name": "e15 decoded instructions vs original C++ 11",
+    "pass": true,
+    "output_sha256": "258dfb382f5e124123f5f88caf6ca3764a0c7987f53a944d3df2f4b4de6d03ff"
+  },
+  {
+    "name": "e15 oracle run 12",
+    "pass": true
+  },
+  {
+    "name": "e15 decoded instructions vs original C++ 12",
+    "pass": true,
+    "output_sha256": "db1bbbcc5934a66bc2aea12cbe720031933d2ba06a11430e26bdf7888aad7c3c"
+  },
+  {
+    "name": "e15 oracle run 13",
+    "pass": true
+  },
+  {
+    "name": "e15 decoded instructions vs original C++ 13",
+    "pass": true,
+    "output_sha256": "0bdc7cff1a66ed4894e75b69455fb5f39635f2b9b1f6b2aad0899a8111f14012"
+  },
+  {
+    "name": "decoder refuses bad magic",
+    "pass": true
+  },
+  {
+    "name": "decoder refuses truncated",
+    "pass": true
+  },
+  {
+    "name": "decoder refuses extra",
+    "pass": true
+  },
+  {
+    "name": "unsupported ABI arity1 refuses transactionally",
+    "pass": true
+  },
+  {
+    "name": "unsupported ABI arity4 refuses transactionally",
+    "pass": true
+  },
+  {
+    "name": "and-or unique mutation",
+    "pass": true
+  },
+  {
+    "name": "and-or mutant compiles",
+    "pass": true
+  },
+  {
+    "name": "and-or mutant executable ELF",
+    "pass": true
+  },
+  {
+    "name": "and-or mutant emits",
+    "pass": true
+  },
+  {
+    "name": "and-or semantic mutant caught",
+    "pass": true
+  },
+  {
+    "name": "mul-add unique mutation",
+    "pass": true
+  },
+  {
+    "name": "mul-add mutant compiles",
+    "pass": true
+  },
+  {
+    "name": "mul-add mutant executable ELF",
+    "pass": true
+  },
+  {
+    "name": "mul-add mutant emits",
+    "pass": true
+  },
+  {
+    "name": "mul-add semantic mutant caught",
+    "pass": true
+  },
+  {
+    "name": "sub-add unique mutation",
+    "pass": true
+  },
+  {
+    "name": "sub-add mutant compiles",
+    "pass": true
+  },
+  {
+    "name": "sub-add mutant executable ELF",
+    "pass": true
+  },
+  {
+    "name": "sub-add mutant emits",
+    "pass": true
+  },
+  {
+    "name": "sub-add semantic mutant caught",
+    "pass": true
+  }
+]
