@@ -1,0 +1,75 @@
+test_bad_arguments_do_not_download_or_install (__main__.DownloadTests.test_bad_arguments_do_not_download_or_install) ... 127.0.0.1 - - [22/Oct/2026 17:28:41] "GET /install.sh HTTP/1.1" 200 -
+/home/drakestapleton/handoffs/omega-developer-L584/test-download.py:82: ResourceWarning: unclosed file <_io.BufferedReader name=6>
+  result=self.bootstrap('--unknown')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+FAIL
+test_existing_omega_command_is_not_overwritten (__main__.DownloadTests.test_existing_omega_command_is_not_overwritten) ... 127.0.0.1 - - [22/Oct/2026 17:28:41] "GET /install.sh HTTP/1.1" 200 -
+/home/drakestapleton/handoffs/omega-developer-L584/test-download.py:74: ResourceWarning: unclosed file <_io.BufferedReader name=6>
+  result=self.bootstrap('--prefix',str(self.prefix))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+FAIL
+test_missing_download_fails_without_installation (__main__.DownloadTests.test_missing_download_fails_without_installation) ... 127.0.0.1 - - [22/Oct/2026 17:28:42] "GET /install.sh HTTP/1.1" 200 -
+/home/drakestapleton/handoffs/omega-developer-L584/test-download.py:67: ResourceWarning: unclosed file <_io.BufferedReader name=6>
+  result=self.bootstrap('--prefix',str(self.prefix))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+FAIL
+test_real_curl_pipe_installs_omega_and_runs_project (__main__.DownloadTests.test_real_curl_pipe_installs_omega_and_runs_project) ... 127.0.0.1 - - [22/Oct/2026 17:28:42] "GET /install.sh HTTP/1.1" 200 -
+/home/drakestapleton/handoffs/omega-developer-L584/test-download.py:45: ResourceWarning: unclosed file <_io.BufferedReader name=6>
+  result=self.bootstrap('--prefix',str(self.prefix))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+FAIL
+test_tampered_download_is_rejected_before_installation (__main__.DownloadTests.test_tampered_download_is_rejected_before_installation) ... 127.0.0.1 - - [22/Oct/2026 17:28:43] "GET /install.sh HTTP/1.1" 200 -
+/home/drakestapleton/handoffs/omega-developer-L584/test-download.py:61: ResourceWarning: unclosed file <_io.BufferedReader name=6>
+  result=self.bootstrap('--prefix',str(self.prefix))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+FAIL
+
+======================================================================
+FAIL: test_bad_arguments_do_not_download_or_install (__main__.DownloadTests.test_bad_arguments_do_not_download_or_install)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/drakestapleton/handoffs/omega-developer-L584/test-download.py", line 83, in test_bad_arguments_do_not_download_or_install
+    self.assertEqual(result.returncode,64,result.stderr)
+AssertionError: 69 != 64 : omega: download bootstrap not implemented
+
+
+======================================================================
+FAIL: test_existing_omega_command_is_not_overwritten (__main__.DownloadTests.test_existing_omega_command_is_not_overwritten)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/drakestapleton/handoffs/omega-developer-L584/test-download.py", line 75, in test_existing_omega_command_is_not_overwritten
+    self.assertEqual(result.returncode,73,result.stderr)
+AssertionError: 69 != 73 : omega: download bootstrap not implemented
+
+
+======================================================================
+FAIL: test_missing_download_fails_without_installation (__main__.DownloadTests.test_missing_download_fails_without_installation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/drakestapleton/handoffs/omega-developer-L584/test-download.py", line 68, in test_missing_download_fails_without_installation
+    self.assertEqual(result.returncode,74,result.stderr)
+AssertionError: 69 != 74 : omega: download bootstrap not implemented
+
+
+======================================================================
+FAIL: test_real_curl_pipe_installs_omega_and_runs_project (__main__.DownloadTests.test_real_curl_pipe_installs_omega_and_runs_project)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/drakestapleton/handoffs/omega-developer-L584/test-download.py", line 46, in test_real_curl_pipe_installs_omega_and_runs_project
+    self.assertEqual(result.returncode,0,result.stderr)
+AssertionError: 69 != 0 : omega: download bootstrap not implemented
+
+
+======================================================================
+FAIL: test_tampered_download_is_rejected_before_installation (__main__.DownloadTests.test_tampered_download_is_rejected_before_installation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/drakestapleton/handoffs/omega-developer-L584/test-download.py", line 62, in test_tampered_download_is_rejected_before_installation
+    self.assertEqual(result.returncode,65,result.stderr)
+AssertionError: 69 != 65 : omega: download bootstrap not implemented
+
+
+----------------------------------------------------------------------
+Ran 5 tests in 2.544s
+
+FAILED (failures=5)

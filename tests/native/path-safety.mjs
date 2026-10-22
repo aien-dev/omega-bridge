@@ -55,12 +55,12 @@ for(const [script,output] of [['bootstrap.sh','bootstrap/seed0'],['build.sh','br
 const baseline=scratch+'/payload-template';fs.cpSync(template+'/lib/omega-native',baseline,{recursive:true,preserveTimestamps:true});
 function cloneInstallation(prefix){
  fs.mkdirSync(prefix+'/lib',{recursive:true});fs.mkdirSync(prefix+'/bin');fs.cpSync(baseline,prefix+'/lib/omega-native',{recursive:true});
- for(const n of ['om','omg'])fs.symlinkSync('../lib/omega-native/om',prefix+'/bin/'+n);
+ for(const n of ['omega','om','omg'])fs.symlinkSync('../lib/omega-native/om',prefix+'/bin/'+n);
 }
-for(const parent of ['lib','bin','prefix','ancestor'])for(const entry of ['script','payload-script','om','omg'])check(entry+' uninstall with linked '+parent,row=>{
+for(const parent of ['lib','bin','prefix','ancestor'])for(const entry of ['script','payload-script','omega','om','omg'])check(entry+' uninstall with linked '+parent,row=>{
  const root=home+'/case space '+parent+' '+entry,prefix=root+'/prefix',outside=scratch+'/moved '+parent+' '+entry;fs.mkdirSync(prefix+'/lib',{recursive:true});fs.mkdirSync(prefix+'/bin');
  fs.cpSync(baseline,prefix+'/lib/omega-native',{recursive:true});
- for(const n of ['om','omg'])fs.symlinkSync('../lib/omega-native/om',prefix+'/bin/'+n);
+ for(const n of ['omega','om','omg'])fs.symlinkSync('../lib/omega-native/om',prefix+'/bin/'+n);
  if(parent==='prefix'){fs.renameSync(prefix,outside);fs.symlinkSync(outside,prefix);}
  else if(parent==='ancestor'){fs.renameSync(root,outside);fs.symlinkSync(outside,root);}
  else if(parent==='bin'){
@@ -68,7 +68,7 @@ for(const parent of ['lib','bin','prefix','ancestor'])for(const entry of ['scrip
  } else {fs.renameSync(prefix+'/'+parent,outside);fs.symlinkSync(outside,prefix+'/'+parent);}
  const victim=prefix+'/lib/omega-native/math';row.before=hash(victim);
  row.command=entry==='script'?run(copy+'/tools/uninstall.sh',['--prefix',prefix+'///']):entry==='payload-script'?run(prefix+'/lib/omega-native/uninstall.sh',['--prefix',prefix+'///']):run(prefix+'/bin/'+entry,['uninstall']);
- row.after=hash(victim);row.aliases=['om','omg'].map(n=>exists(prefix+'/bin/'+n));
+ row.after=hash(victim);row.aliases=['omega','om','omg'].map(n=>exists(prefix+'/bin/'+n));
  const safe=row.before===row.after&&row.aliases.every(Boolean);
  // Remove only this test's synthetic trees, avoiding traversing symlinks.
  fs.rmSync(root,{recursive:true,force:true});fs.rmSync(outside,{recursive:true,force:true});
@@ -88,7 +88,7 @@ check('parent changed while acquiring lock refuses before deletion',row=>{
  fs.writeFileSync(bin+'/mkdir','#!/bin/sh\n/usr/bin/mkdir "$@" || exit $?\ncase $1 in */.omega-install-lock) /usr/bin/mv "$L529_PREFIX/lib" "$L529_OUTSIDE"; /usr/bin/ln -s "$L529_OUTSIDE" "$L529_PREFIX/lib";; esac\n',{mode:0o700});
  const victim=prefix+'/lib/omega-native/math';row.before=hash(victim);
  const r=spawnSync(copy+'/tools/uninstall.sh',['--prefix',prefix],{cwd,env:{...env,PATH:bin+':'+env.PATH,L529_PREFIX:prefix,L529_OUTSIDE:outside},encoding:'utf8',timeout:180000});assert.ifError(r.error);
- row.command={status:r.status,stdout:r.stdout,stderr:r.stderr};row.after=hash(victim);row.aliases=['om','omg'].map(n=>exists(prefix+'/bin/'+n));
+ row.command={status:r.status,stdout:r.stdout,stderr:r.stderr};row.after=hash(victim);row.aliases=['omega','om','omg'].map(n=>exists(prefix+'/bin/'+n));
  fs.unlinkSync(prefix+'/lib');fs.renameSync(outside,prefix+'/lib');
  assert.equal(row.before,row.after);assert.ok(row.aliases.every(Boolean));assert.equal(row.command.status,73);
 });

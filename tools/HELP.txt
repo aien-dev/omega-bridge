@@ -1,4 +1,7 @@
-Omega native commands: om and omg share one implementation and installation.
+Omega native command: omega. om and omg are compatibility aliases to the same installation.
+
+  omega check|build|run            Use the native project commands below
+  omega help                      Show the identical command reference
 
   om help                         Show this help
   om version                      Exact upstream source pins and seed hash

@@ -1,0 +1,2327 @@
+4038820 execve("tools/install.sh", ["tools/install.sh", "--offline", "--prefix", "/tmp/omega-provenance-OLraSN/hom"...], 0xffffcc042120 /* 18 vars */) = 0
+4038821 execve("/usr/bin/dirname", ["dirname", "tools/install.sh"], 0xc5dd093c1888 /* 18 vars */) = 0
+4038821 +++ exited with 0 +++
+4038820 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038821, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038822 execve("/usr/bin/realpath", ["realpath", "-m", "--", "/tmp/omega-provenance-OLraSN/hom"...], 0xc5dd093c1ad8 /* 18 vars */) = 0
+4038822 +++ exited with 0 +++
+4038820 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038822, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038823 execve("/usr/bin/dirname", ["dirname", "/tmp/omega-provenance-OLraSN/hom"...], 0xc5dd093c1b98 /* 18 vars */) = 0
+4038823 +++ exited with 0 +++
+4038820 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038823, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038824 execve("tools/bootstrap.sh", ["tools/bootstrap.sh", "--offline"], 0xc5dcd1df0660 /* 18 vars */) = 0
+4038825 execve("/usr/bin/dirname", ["dirname", "tools/bootstrap.sh"], 0xb06cbaea9858 /* 18 vars */) = 0
+4038825 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038825, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038826 execve("tools/check-build-paths.sh", ["tools/check-build-paths.sh"], 0xb06c7c040618 /* 18 vars */) = 0
+4038827 execve("/usr/bin/dirname", ["dirname", "tools/check-build-paths.sh"], 0xc9b36cf01858 /* 18 vars */) = 0
+4038827 +++ exited with 0 +++
+4038826 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038827, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038828 execve("/usr/bin/find", ["find", "build", "(", "-type", "l", "-o", "-type", "f", "-links", "+1", "-o", "!", "-type", "d", "!", "-type", "f", ")", "-print"], 0xc9b36cf01f20 /* 18 vars */) = 0
+4038828 +++ exited with 0 +++
+4038826 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038828, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038826 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038826, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038829 execve("/usr/bin/uname", ["uname", "-s"], 0xb06cbaea9aa8 /* 18 vars */) = 0
+4038829 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038829, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038830 execve("/usr/bin/uname", ["uname", "-m"], 0xb06cbaea9aa8 /* 18 vars */) = 0
+4038830 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038830, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038831 execve("tools/verify-sources.sh", ["tools/verify-sources.sh"], 0xb06c7c040608 /* 18 vars */) = 0
+4038832 execve("/usr/bin/dirname", ["dirname", "tools/verify-sources.sh"], 0xc1f51548d858 /* 18 vars */) = 0
+4038832 +++ exited with 0 +++
+4038831 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038832, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038834 execve("/usr/bin/sha256sum", ["sha256sum", "provenance/lock.sha256"], 0xc1f51548dc98 /* 18 vars */ <unfinished ...>
+4038835 execve("/usr/bin/cut", ["cut", "-d", " ", "-f1"], 0xc1f51548dcc8 /* 18 vars */ <unfinished ...>
+4038834 <... execve resumed>)           = 0
+4038835 <... execve resumed>)           = 0
+4038835 +++ exited with 0 +++
+4038833 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038835, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038834 +++ exited with 0 +++
+4038833 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038834, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038833 +++ exited with 0 +++
+4038831 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038833, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038836 execve("/usr/bin/sha256sum", ["sha256sum", "--status", "-c", "provenance/lock.sha256"], 0xc1f51548d9f8 /* 18 vars */) = 0
+4038836 +++ exited with 0 +++
+4038831 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038836, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038837 execve("/usr/bin/sha256sum", ["sha256sum", "--status", "-c", "provenance/sources.sha256"], 0xc1f51548da28 /* 18 vars */) = 0
+4038837 +++ exited with 0 +++
+4038831 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038837, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038839 execve("/usr/bin/cat", ["cat", "provenance/seed.files", "provenance/math.files"], 0xc1f51548daf8 /* 18 vars */) = 0
+4038840 execve("/usr/bin/grep", ["grep", "^seed/"], 0xc1f51548dac0 /* 18 vars */) = 0
+4038841 execve("/usr/bin/sort", ["sort"], 0xc1f51548dab8 /* 19 vars */) = 0
+4038839 +++ exited with 0 +++
+4038838 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038839, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038840 +++ exited with 0 +++
+4038838 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038840, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038841 +++ exited with 0 +++
+4038838 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038841, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038838 +++ exited with 0 +++
+4038831 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038838, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038843 execve("/usr/bin/find", ["find", "seed", "-type", "f"], 0xc1f51548da90 /* 18 vars */ <unfinished ...>
+4038844 execve("/usr/bin/sort", ["sort"], 0xc1f51548da50 /* 19 vars */ <unfinished ...>
+4038843 <... execve resumed>)           = 0
+4038844 <... execve resumed>)           = 0
+4038843 +++ exited with 0 +++
+4038842 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038843, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038844 +++ exited with 0 +++
+4038842 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038844, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038842 +++ exited with 0 +++
+4038831 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038842, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038845 execve("/usr/bin/find", ["find", "seed", "-type", "l", "-print"], 0xc1f51548db18 /* 18 vars */) = 0
+4038845 +++ exited with 0 +++
+4038831 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038845, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038831 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038831, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038846 execve("/usr/bin/mkdir", ["mkdir", "-p", "build/bootstrap"], 0xb06c7c040688 /* 18 vars */) = 0
+4038846 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038846, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038847 execve("/usr/bin/sh", ["sh", "seed/rung0/load0.sh", "seed/rung0/seed0.hex", "build/bootstrap/seed0"], 0xb06cbaea9898 /* 18 vars */) = 0
+4038849 +++ exited with 0 +++
+4038848 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038849, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038850 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4038850 +++ exited with 0 +++
+4038848 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038850, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038848 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038848, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038852 +++ exited with 0 +++
+4038851 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038852, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038853 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4038853 +++ exited with 0 +++
+4038851 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038853, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038851 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038851, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038856 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4038855 +++ exited with 0 +++
+4038854 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038855, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038856 +++ exited with 0 +++
+4038854 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038856, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038854 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038854, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038858 +++ exited with 0 +++
+4038857 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038858, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038859 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4038859 +++ exited with 0 +++
+4038857 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038859, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038857 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038857, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038861 +++ exited with 0 +++
+4038860 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038861, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038862 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4038862 +++ exited with 0 +++
+4038860 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038862, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038860 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038860, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038864 +++ exited with 0 +++
+4038863 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038864, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038865 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4038865 +++ exited with 0 +++
+4038863 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038865, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038863 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038863, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038867 +++ exited with 0 +++
+4038866 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038867, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038868 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4038868 +++ exited with 0 +++
+4038866 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038868, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038866 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038866, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038870 +++ exited with 0 +++
+4038869 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038870, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038871 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4038871 +++ exited with 0 +++
+4038869 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038871, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038869 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038869, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038873 +++ exited with 0 +++
+4038872 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038873, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038874 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4038874 +++ exited with 0 +++
+4038872 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038874, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038872 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038872, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038876 +++ exited with 0 +++
+4038875 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038876, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038877 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4038877 +++ exited with 0 +++
+4038875 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038877, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038875 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038875, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038878 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038878, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038879 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038879, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038880 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038880, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038881 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038881, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038883 +++ exited with 0 +++
+4038882 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038883, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038884 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4038884 +++ exited with 0 +++
+4038882 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038884, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038882 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038882, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038885 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038885, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038886 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038886, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038887 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038887, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038888 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038888, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038890 +++ exited with 0 +++
+4038889 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038890, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038891 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4038891 +++ exited with 0 +++
+4038889 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038891, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038889 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038889, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038892 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038892, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038893 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038893, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038894 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038894, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038895 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038895, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038897 +++ exited with 0 +++
+4038896 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038897, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038898 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4038898 +++ exited with 0 +++
+4038896 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038898, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038896 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038896, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038899 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038899, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038900 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038900, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038901 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038901, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038902 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038902, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038904 +++ exited with 0 +++
+4038903 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038904, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038905 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4038905 +++ exited with 0 +++
+4038903 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038905, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038903 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038903, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038906 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038906, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038907 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038907, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038908 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038908, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038909 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038909, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038911 +++ exited with 0 +++
+4038910 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038911, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038912 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4038912 +++ exited with 0 +++
+4038910 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038912, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038910 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038910, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038913 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038913, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038914 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038914, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038915 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038915, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038916 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038916, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038918 +++ exited with 0 +++
+4038917 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038918, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038919 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4038919 +++ exited with 0 +++
+4038917 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038919, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038917 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038917, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038920 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038920, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038921 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038921, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038922 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038922, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038923 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038923, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038925 +++ exited with 0 +++
+4038924 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038925, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038926 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4038926 +++ exited with 0 +++
+4038924 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038926, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038924 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038924, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038927 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038927, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038928 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038928, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038929 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038929, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038930 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038930, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038932 +++ exited with 0 +++
+4038931 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038932, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038933 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4038933 +++ exited with 0 +++
+4038931 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038933, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038931 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038931, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038934 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038934, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038935 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038935, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038936 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038936, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038937 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038937, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038939 +++ exited with 0 +++
+4038938 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038939, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038940 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4038940 +++ exited with 0 +++
+4038938 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038940, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038938 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038938, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038941 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038941, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038942 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038942, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038943 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038943, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038944 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038944, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038946 +++ exited with 0 +++
+4038945 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038946, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038947 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4038947 +++ exited with 0 +++
+4038945 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038947, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038945 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038945, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038948 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038948, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038949 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038949, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038950 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038950, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038951 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038951, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038953 +++ exited with 0 +++
+4038952 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038953, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038954 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4038954 +++ exited with 0 +++
+4038952 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038954, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038952 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038952, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038955 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038955, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038956 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038956, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038957 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038957, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038958 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038958, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038960 +++ exited with 0 +++
+4038959 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038960, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038961 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4038961 +++ exited with 0 +++
+4038959 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038961, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038959 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038959, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038962 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038962, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038963 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038963, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038964 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038964, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038965 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038965, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038967 +++ exited with 0 +++
+4038966 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038967, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038968 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4038968 +++ exited with 0 +++
+4038966 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038968, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038966 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038966, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038969 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038969, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038970 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038970, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038971 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038971, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038972 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038972, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038974 +++ exited with 0 +++
+4038973 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038974, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038975 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4038975 +++ exited with 0 +++
+4038973 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038975, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038973 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038973, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038976 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038976, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038977 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038977, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038978 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038978, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038979 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038979, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038981 +++ exited with 0 +++
+4038980 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038981, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038982 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4038982 +++ exited with 0 +++
+4038980 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038982, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038980 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038980, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038983 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038983, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038984 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038984, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038985 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038985, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038986 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038986, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038988 +++ exited with 0 +++
+4038987 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038988, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038990 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4038990 +++ exited with 0 +++
+4038987 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038990, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038987 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038987, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038992 +++ exited with 0 +++
+4038991 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038992, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038993 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4038993 +++ exited with 0 +++
+4038991 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038993, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038991 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038991, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038994 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038994, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038995 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038995, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038996 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038996, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038997 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038997, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038999 +++ exited with 0 +++
+4038998 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038999, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039000 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039000 +++ exited with 0 +++
+4038998 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039000, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038998 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038998, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039001 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039001, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039002 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039002, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039003 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039003, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039004 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039004, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039006 +++ exited with 0 +++
+4039005 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039006, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039007 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039007 +++ exited with 0 +++
+4039005 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039007, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039005 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039005, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039008 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039008, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039009 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039009, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039010 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039010, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039011 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039011, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039013 +++ exited with 0 +++
+4039012 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039013, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039014 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039014 +++ exited with 0 +++
+4039012 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039014, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039012 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039012, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039015 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039015, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039016 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039016, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039017 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039017, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039018 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039018, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039020 +++ exited with 0 +++
+4039019 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039020, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039021 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039021 +++ exited with 0 +++
+4039019 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039021, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039019 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039019, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039022 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039022, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039023 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039023, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039024 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039024, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039025 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039025, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039027 +++ exited with 0 +++
+4039026 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039027, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039028 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039028 +++ exited with 0 +++
+4039026 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039028, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039026 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039026, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039029 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039029, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039030 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039030, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039031 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039031, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039032 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039032, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039034 +++ exited with 0 +++
+4039033 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039034, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039035 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039035 +++ exited with 0 +++
+4039033 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039035, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039033 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039033, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039036 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039036, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039037 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039037, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039038 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039038, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039039 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039039, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039041 +++ exited with 0 +++
+4039040 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039041, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039042 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039042 +++ exited with 0 +++
+4039040 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039042, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039040 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039040, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039043 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039043, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039044 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039044, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039045 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039045, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039046 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039046, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039048 +++ exited with 0 +++
+4039047 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039048, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039049 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039049 +++ exited with 0 +++
+4039047 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039049, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039047 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039047, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039050 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039050, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039051 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039051, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039052 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039052, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039053 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039053, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039055 +++ exited with 0 +++
+4039054 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039055, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039056 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039056 +++ exited with 0 +++
+4039054 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039056, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039054 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039054, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039057 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039057, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039058 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039058, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039059 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039059, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039060 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039060, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039062 +++ exited with 0 +++
+4039061 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039062, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039063 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039063 +++ exited with 0 +++
+4039061 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039063, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039061 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039061, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039064 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039064, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039065 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039065, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039066 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039066, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039067 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039067, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039069 +++ exited with 0 +++
+4039068 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039069, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039070 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039070 +++ exited with 0 +++
+4039068 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039070, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039068 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039068, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039071 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039071, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039072 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039072, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039073 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039073, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039074 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039074, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039076 +++ exited with 0 +++
+4039075 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039076, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039077 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039077 +++ exited with 0 +++
+4039075 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039077, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039075 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039075, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039078 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039078, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039079 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039079, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039080 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039080, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039082 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039082, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039084 +++ exited with 0 +++
+4039083 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039084, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039085 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039085 +++ exited with 0 +++
+4039083 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039085, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039083 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039083, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039086 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039086, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039087 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039087, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039088 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039088, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039089 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039089, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039091 +++ exited with 0 +++
+4039090 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039091, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039092 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039092 +++ exited with 0 +++
+4039090 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039092, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039090 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039090, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039094 +++ exited with 0 +++
+4039093 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039094, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039095 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039095 +++ exited with 0 +++
+4039093 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039095, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039093 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039093, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039098 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039097 +++ exited with 0 +++
+4039096 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039097, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039098 +++ exited with 0 +++
+4039096 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039098, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039096 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039096, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039100 +++ exited with 0 +++
+4039099 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039100, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039101 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039101 +++ exited with 0 +++
+4039099 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039101, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039099 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039099, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039102 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039102, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039103 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039103, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039104 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039104, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039105 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039105, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039107 +++ exited with 0 +++
+4039106 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039107, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039108 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039108 +++ exited with 0 +++
+4039106 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039108, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039106 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039106, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039109 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039109, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039110 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039110, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039111 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039111, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039112 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039112, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039114 +++ exited with 0 +++
+4039113 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039114, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039115 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039115 +++ exited with 0 +++
+4039113 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039115, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039113 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039113, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039116 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039116, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039117 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039117, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039118 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039118, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039119 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039119, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039121 +++ exited with 0 +++
+4039122 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */ <unfinished ...>
+4039120 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039121, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039122 <... execve resumed>)           = 0
+4039122 +++ exited with 0 +++
+4039120 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039122, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039120 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039120, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039123 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039123, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039124 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039124, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039125 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039125, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039126 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039126, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039129 +++ exited with 0 +++
+4039128 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039129, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039130 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039130 +++ exited with 0 +++
+4039128 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039130, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039128 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039128, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039132 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039132, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039134 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039134, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039135 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039135, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039136 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039136, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039138 +++ exited with 0 +++
+4039137 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039138, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039139 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039139 +++ exited with 0 +++
+4039137 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039139, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039137 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039137, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039140 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039140, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039141 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039141, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039142 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039142, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039143 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039143, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039145 +++ exited with 0 +++
+4039144 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039145, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039146 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039146 +++ exited with 0 +++
+4039144 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039146, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039144 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039144, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039147 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039147, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039148 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039148, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039149 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039149, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039150 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039150, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039153 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039152 +++ exited with 0 +++
+4039151 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039152, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039153 +++ exited with 0 +++
+4039151 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039153, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039151 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039151, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039154 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039154, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039155 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039155, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039156 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039156, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039157 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039157, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039159 +++ exited with 0 +++
+4039158 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039159, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039160 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039160 +++ exited with 0 +++
+4039158 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039160, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039158 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039158, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039162 +++ exited with 0 +++
+4039161 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039162, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039163 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039163 +++ exited with 0 +++
+4039161 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039163, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039161 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039161, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039164 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039164, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039165 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039165, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039166 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039166, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039167 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039167, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039169 +++ exited with 0 +++
+4039168 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039169, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039170 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039170 +++ exited with 0 +++
+4039168 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039170, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039168 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039168, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039171 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039171, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039172 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039172, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039173 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039173, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039174 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039174, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039176 +++ exited with 0 +++
+4039175 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039176, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039177 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039177 +++ exited with 0 +++
+4039175 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039177, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039175 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039175, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039178 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039178, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039179 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039179, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039180 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039180, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039181 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039181, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039183 +++ exited with 0 +++
+4039182 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039183, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039184 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039184 +++ exited with 0 +++
+4039182 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039184, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039182 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039182, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039185 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039185, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039186 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039186, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039187 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039187, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039188 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039188, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039190 +++ exited with 0 +++
+4039189 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039190, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039191 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039191 +++ exited with 0 +++
+4039189 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039191, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039189 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039189, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039192 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039192, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039193 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039193, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039194 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039194, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039195 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039195, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039197 +++ exited with 0 +++
+4039196 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039197, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039198 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039198 +++ exited with 0 +++
+4039196 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039198, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039196 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039196, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039199 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039199, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039200 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039200, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039201 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039201, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039202 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039202, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039204 +++ exited with 0 +++
+4039203 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039204, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039205 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039205 +++ exited with 0 +++
+4039203 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039205, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039203 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039203, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039206 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039206, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039207 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039207, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039208 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039208, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039209 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039209, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039211 +++ exited with 0 +++
+4039210 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039211, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039212 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039212 +++ exited with 0 +++
+4039210 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039212, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039210 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039210, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039213 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039213, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039215 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039215, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039216 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039216, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039217 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039217, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039220 +++ exited with 0 +++
+4039219 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039220, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039222 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039222 +++ exited with 0 +++
+4039219 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039222, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039219 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039219, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039223 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039223, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039224 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039224, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039225 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039225, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039226 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039226, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039228 +++ exited with 0 +++
+4039227 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039228, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039229 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039229 +++ exited with 0 +++
+4039227 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039229, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039227 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039227, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039230 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039230, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039231 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039231, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039232 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039232, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039233 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039233, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039235 +++ exited with 0 +++
+4039234 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039235, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039236 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039236 +++ exited with 0 +++
+4039234 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039236, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039234 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039234, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039238 +++ exited with 0 +++
+4039237 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039238, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039239 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039239 +++ exited with 0 +++
+4039237 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039239, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039237 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039237, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039240 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039240, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039241 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039241, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039242 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039242, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039243 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039243, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039245 +++ exited with 0 +++
+4039244 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039245, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039246 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039246 +++ exited with 0 +++
+4039244 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039246, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039244 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039244, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039247 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039247, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039248 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039248, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039249 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039249, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039250 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039250, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039252 +++ exited with 0 +++
+4039251 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039252, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039253 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039253 +++ exited with 0 +++
+4039251 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039253, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039251 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039251, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039254 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039254, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039255 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039255, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039256 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039256, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039257 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039257, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039260 +++ exited with 0 +++
+4039259 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039260, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039261 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039261 +++ exited with 0 +++
+4039259 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039261, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039259 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039259, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039263 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039263, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039264 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039264, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039265 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039265, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039266 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039266, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039268 +++ exited with 0 +++
+4039267 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039268, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039269 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039269 +++ exited with 0 +++
+4039267 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039269, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039267 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039267, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039271 +++ exited with 0 +++
+4039270 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039271, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039272 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039272 +++ exited with 0 +++
+4039270 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039272, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039270 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039270, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039273 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039273, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039274 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039274, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039275 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039275, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039276 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039276, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039278 +++ exited with 0 +++
+4039277 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039278, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039279 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039279 +++ exited with 0 +++
+4039277 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039279, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039277 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039277, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039280 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039280, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039281 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039281, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039282 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039282, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039283 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039283, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039287 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039286 +++ exited with 0 +++
+4039285 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039286, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039287 +++ exited with 0 +++
+4039285 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039287, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039285 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039285, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039289 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039289, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039290 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039290, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039291 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039291, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039292 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039292, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039294 +++ exited with 0 +++
+4039293 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039294, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039295 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039295 +++ exited with 0 +++
+4039293 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039295, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039293 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039293, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039296 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039296, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039297 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039297, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039298 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039298, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039299 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039299, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039301 +++ exited with 0 +++
+4039300 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039301, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039302 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039302 +++ exited with 0 +++
+4039300 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039302, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039300 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039300, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039323 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039323, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039324 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039324, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039325 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039325, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039327 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039327, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039330 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */ <unfinished ...>
+4039329 +++ exited with 0 +++
+4039328 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039329, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039330 <... execve resumed>)           = 0
+4039330 +++ exited with 0 +++
+4039328 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039330, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039328 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039328, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039331 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039331, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039332 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039332, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039333 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039333, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039334 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039334, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039336 +++ exited with 0 +++
+4039335 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039336, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039337 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039337 +++ exited with 0 +++
+4039335 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039337, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039335 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039335, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039338 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039338, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039339 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039339, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039340 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039340, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039341 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039341, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039343 +++ exited with 0 +++
+4039342 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039343, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039344 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039344 +++ exited with 0 +++
+4039342 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039344, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039342 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039342, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039345 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039345, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039346 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039346, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039347 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039347, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039348 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039348, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039350 +++ exited with 0 +++
+4039349 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039350, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039351 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039351 +++ exited with 0 +++
+4039349 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039351, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039349 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039349, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039352 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039352, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039353 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039353, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039354 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039354, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039355 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039355, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039357 +++ exited with 0 +++
+4039356 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039357, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039358 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039358 +++ exited with 0 +++
+4039356 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039358, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039356 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039356, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039359 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039359, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039360 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039360, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039361 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039361, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039362 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039362, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039364 +++ exited with 0 +++
+4039363 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039364, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039365 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039365 +++ exited with 0 +++
+4039363 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039365, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039363 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039363, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039366 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039366, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039367 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039367, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039368 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039368, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039369 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039369, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039372 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */ <unfinished ...>
+4039371 +++ exited with 0 +++
+4039370 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039371, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039372 <... execve resumed>)           = 0
+4039372 +++ exited with 0 +++
+4039370 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039372, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039370 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039370, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039373 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039373, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039374 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039374, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039375 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039375, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039376 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039376, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039378 +++ exited with 0 +++
+4039377 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039378, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039379 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039379 +++ exited with 0 +++
+4039377 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039379, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039377 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039377, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039380 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039380, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039381 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039381, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039382 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039382, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039383 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039383, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039385 +++ exited with 0 +++
+4039384 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039385, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039386 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039386 +++ exited with 0 +++
+4039384 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039386, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039384 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039384, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039387 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039387, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039388 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039388, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039389 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039389, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039390 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039390, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039392 +++ exited with 0 +++
+4039391 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039392, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039393 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039393 +++ exited with 0 +++
+4039391 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039393, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039391 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039391, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039394 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039394, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039395 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039395, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039396 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039396, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039397 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039397, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039399 +++ exited with 0 +++
+4039398 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039399, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039400 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039400 +++ exited with 0 +++
+4039398 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039400, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039398 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039398, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039401 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039401, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039402 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039402, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039403 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039403, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039404 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039404, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039406 +++ exited with 0 +++
+4039405 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039406, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039407 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039407 +++ exited with 0 +++
+4039405 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039407, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039405 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039405, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039408 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039408, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039409 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039409, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039410 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039410, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039411 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039411, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039413 +++ exited with 0 +++
+4039412 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039413, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039414 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039414 +++ exited with 0 +++
+4039412 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039414, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039412 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039412, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039415 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039415, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039416 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039416, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039417 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039417, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039418 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039418, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039420 +++ exited with 0 +++
+4039419 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039420, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039421 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039421 +++ exited with 0 +++
+4039419 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039421, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039419 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039419, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039422 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039422, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039423 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039423, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039424 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039424, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039425 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039425, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039427 +++ exited with 0 +++
+4039426 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039427, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039428 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039428 +++ exited with 0 +++
+4039426 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039428, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039426 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039426, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039429 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039429, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039430 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039430, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039431 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039431, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039432 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039432, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039434 +++ exited with 0 +++
+4039433 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039434, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039435 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039435 +++ exited with 0 +++
+4039433 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039435, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039433 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039433, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039436 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039436, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039437 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039437, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039438 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039438, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039439 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039439, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039441 +++ exited with 0 +++
+4039440 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039441, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039442 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039442 +++ exited with 0 +++
+4039440 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039442, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039440 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039440, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039444 +++ exited with 0 +++
+4039443 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039444, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039445 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039445 +++ exited with 0 +++
+4039443 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039445, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039443 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039443, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039446 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039446, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039447 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039447, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039448 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039448, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039449 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039449, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039451 +++ exited with 0 +++
+4039450 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039451, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039452 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039452 +++ exited with 0 +++
+4039450 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039452, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039450 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039450, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039453 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039453, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039454 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039454, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039455 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039455, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039456 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039456, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039458 +++ exited with 0 +++
+4039457 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039458, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039459 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039459 +++ exited with 0 +++
+4039457 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039459, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039457 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039457, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039460 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039460, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039461 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039461, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039462 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039462, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039463 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039463, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039465 +++ exited with 0 +++
+4039464 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039465, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039466 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039466 +++ exited with 0 +++
+4039464 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039466, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039464 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039464, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039467 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039467, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039468 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039468, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039469 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039469, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039470 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039470, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039472 +++ exited with 0 +++
+4039471 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039472, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039473 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039473 +++ exited with 0 +++
+4039471 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039473, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039471 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039471, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039474 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039474, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039475 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039475, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039476 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039476, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039477 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039477, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039479 +++ exited with 0 +++
+4039478 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039479, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039480 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039480 +++ exited with 0 +++
+4039478 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039480, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039478 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039478, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039481 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039481, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039482 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039482, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039483 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039483, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039484 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039484, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039486 +++ exited with 0 +++
+4039485 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039486, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039487 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039487 +++ exited with 0 +++
+4039485 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039487, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039485 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039485, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039488 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039488, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039489 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039489, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039490 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039490, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039491 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039491, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039493 +++ exited with 0 +++
+4039492 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039493, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039494 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039494 +++ exited with 0 +++
+4039492 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039494, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039492 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039492, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039495 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039495, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039496 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039496, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039497 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039497, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039498 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039498, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039500 +++ exited with 0 +++
+4039499 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039500, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039501 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039501 +++ exited with 0 +++
+4039499 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039501, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039499 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039499, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039502 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039502, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039503 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039503, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039504 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039504, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039505 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039505, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039507 +++ exited with 0 +++
+4039506 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039507, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039508 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039508 +++ exited with 0 +++
+4039506 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039508, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039506 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039506, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039510 +++ exited with 0 +++
+4039509 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039510, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039511 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039511 +++ exited with 0 +++
+4039509 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039511, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039509 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039509, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039512 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039512, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039513 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039513, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039514 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039514, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039515 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039515, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039518 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039517 +++ exited with 0 +++
+4039516 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039517, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039518 +++ exited with 0 +++
+4039516 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039518, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039516 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039516, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039519 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039519, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039520 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039520, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039521 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039521, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039522 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039522, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039524 +++ exited with 0 +++
+4039523 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039524, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039525 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039525 +++ exited with 0 +++
+4039523 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039525, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039523 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039523, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039526 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039526, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039527 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039527, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039528 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039528, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039529 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039529, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039531 +++ exited with 0 +++
+4039530 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039531, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039532 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039532 +++ exited with 0 +++
+4039530 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039532, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039530 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039530, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039533 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039533, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039534 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039534, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039535 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039535, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039536 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039536, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039538 +++ exited with 0 +++
+4039537 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039538, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039539 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039539 +++ exited with 0 +++
+4039537 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039539, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039537 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039537, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039540 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039540, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039541 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039541, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039542 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039542, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039543 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039543, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039545 +++ exited with 0 +++
+4039544 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039545, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039546 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039546 +++ exited with 0 +++
+4039544 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039546, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039544 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039544, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039547 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039547, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039548 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039548, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039549 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039549, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039550 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039550, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039552 +++ exited with 0 +++
+4039551 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039552, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039553 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039553 +++ exited with 0 +++
+4039551 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039553, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039551 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039551, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039554 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039554, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039555 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039555, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039556 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039556, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039557 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039557, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039559 +++ exited with 0 +++
+4039558 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039559, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039560 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039560 +++ exited with 0 +++
+4039558 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039560, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039558 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039558, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039561 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039561, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039562 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039562, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039563 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039563, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039564 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039564, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039566 +++ exited with 0 +++
+4039565 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039566, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039567 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039567 +++ exited with 0 +++
+4039565 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039567, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039565 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039565, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039568 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039568, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039569 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039569, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039570 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039570, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039571 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039571, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039573 +++ exited with 0 +++
+4039572 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039573, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039574 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039574 +++ exited with 0 +++
+4039572 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039574, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039572 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039572, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039575 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039575, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039576 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039576, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039577 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039577, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039578 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039578, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039580 +++ exited with 0 +++
+4039579 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039580, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039581 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039581 +++ exited with 0 +++
+4039579 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039581, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039579 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039579, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039582 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039582, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039583 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039583, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039584 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039584, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039585 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039585, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039587 +++ exited with 0 +++
+4039586 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039587, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039588 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039588 +++ exited with 0 +++
+4039586 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039588, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039586 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039586, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039590 +++ exited with 0 +++
+4039589 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039590, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039591 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039591 +++ exited with 0 +++
+4039589 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039591, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039589 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039589, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039592 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039592, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039593 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039593, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039594 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039594, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039595 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039595, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039597 +++ exited with 0 +++
+4039596 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039597, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039598 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039598 +++ exited with 0 +++
+4039596 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039598, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039596 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039596, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039599 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039599, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039600 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039600, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039601 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039601, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039602 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039602, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039604 +++ exited with 0 +++
+4039603 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039604, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039605 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039605 +++ exited with 0 +++
+4039603 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039605, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039603 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039603, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039606 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039606, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039607 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039607, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039608 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039608, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039609 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039609, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039611 +++ exited with 0 +++
+4039610 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039611, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039612 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039612 +++ exited with 0 +++
+4039610 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039612, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039610 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039610, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039613 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039613, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039614 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039614, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039615 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039615, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039616 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039616, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039618 +++ exited with 0 +++
+4039617 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039618, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039619 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039619 +++ exited with 0 +++
+4039617 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039619, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039617 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039617, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039620 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039620, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039621 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039621, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039622 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039622, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039623 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039623, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039625 +++ exited with 0 +++
+4039624 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039625, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039626 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039626 +++ exited with 0 +++
+4039624 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039626, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039624 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039624, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039627 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039627, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039628 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039628, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039629 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039629, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039630 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039630, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039632 +++ exited with 0 +++
+4039631 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039632, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039633 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039633 +++ exited with 0 +++
+4039631 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039633, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039631 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039631, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039634 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039634, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039635 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039635, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039636 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039636, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039637 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039637, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039639 +++ exited with 0 +++
+4039638 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039639, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039640 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039640 +++ exited with 0 +++
+4039638 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039640, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039638 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039638, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039641 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039641, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039642 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039642, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039643 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039643, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039644 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039644, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039646 +++ exited with 0 +++
+4039645 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039646, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039647 execve("/usr/bin/tr", ["tr", "-d", " \\t\\r"], 0xb2ded7f5c358 /* 18 vars */) = 0
+4039647 +++ exited with 0 +++
+4039645 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039647, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039645 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039645, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039648 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039648, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039649 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039649, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039650 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039650, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039651 +++ exited with 0 +++
+4038847 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039651, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038847 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038847, si_uid=1000, si_status=0, si_utime=0, si_stime=12 /* 0.12 s */} ---
+4039652 execve("tools/verify-elf.sh", ["tools/verify-elf.sh", "build/bootstrap/seed0"], 0xb06c7c0406c8 /* 18 vars */) = 0
+4039653 execve("/usr/bin/readelf", ["readelf", "-h", "-l", "-d", "--", "build/bootstrap/seed0"], 0xaea78c986798 /* 18 vars */) = 0
+4039653 +++ exited with 0 +++
+4039652 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039653, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039654 +++ exited with 0 +++
+4039652 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039654, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039655 execve("/usr/bin/grep", ["grep", "-q", "Machine:.*AArch64"], 0xaea78c986730 /* 18 vars */) = 0
+4039655 +++ exited with 0 +++
+4039652 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039655, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039656 +++ exited with 0 +++
+4039657 execve("/usr/bin/grep", ["grep", "-q", "Type:.*EXEC"], 0xaea78c986710 /* 18 vars */ <unfinished ...>
+4039652 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039656, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039657 <... execve resumed>)           = 0
+4039657 +++ exited with 0 +++
+4039652 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039657, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039658 +++ exited with 0 +++
+4039652 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039658, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039659 execve("/usr/bin/grep", ["grep", "-Eq", "INTERP|DYNAMIC|NEEDED"], 0xaea78c986ac8 /* 18 vars */) = 0
+4039659 +++ exited with 1 +++
+4039652 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039659, si_uid=1000, si_status=1, si_utime=0, si_stime=0} ---
+4039652 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039652, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039660 execve("/usr/bin/chmod", ["chmod", "+x", "build/bootstrap/seed0"], 0xb06cbaea9898 /* 18 vars */) = 0
+4039660 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039660, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039661 execve("build/bootstrap/seed0", ["build/bootstrap/seed0"], 0xb06cbaea9898 /* 18 vars */) = 0
+4039661 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039661, si_uid=1000, si_status=0, si_utime=0, si_stime=3 /* 0.03 s */} ---
+4039662 execve("/usr/bin/cmp", ["cmp", "build/bootstrap/seed0", "build/bootstrap/seed0.self"], 0xb06c7c0406c0 /* 18 vars */) = 0
+4039662 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039662, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039663 execve("build/bootstrap/seed0", ["build/bootstrap/seed0"], 0xb06cbaea9898 /* 18 vars */) = 0
+4039663 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039663, si_uid=1000, si_status=0, si_utime=0, si_stime=7 /* 0.07 s */} ---
+4039687 execve("tools/verify-elf.sh", ["tools/verify-elf.sh", "build/bootstrap/hex1"], 0xb06c7c0406c8 /* 18 vars */) = 0
+4039688 execve("/usr/bin/readelf", ["readelf", "-h", "-l", "-d", "--", "build/bootstrap/hex1"], 0xbc0a1d976798 /* 18 vars */) = 0
+4039688 +++ exited with 0 +++
+4039687 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039688, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039690 execve("/usr/bin/grep", ["grep", "-q", "Machine:.*AArch64"], 0xbc0a1d976730 /* 18 vars */) = 0
+4039689 +++ exited with 0 +++
+4039687 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039689, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039690 +++ exited with 0 +++
+4039687 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039690, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039691 +++ exited with 0 +++
+4039687 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039691, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039692 execve("/usr/bin/grep", ["grep", "-q", "Type:.*EXEC"], 0xbc0a1d976710 /* 18 vars */) = 0
+4039692 +++ exited with 0 +++
+4039687 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039692, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039694 execve("/usr/bin/grep", ["grep", "-Eq", "INTERP|DYNAMIC|NEEDED"], 0xbc0a1d976ac8 /* 18 vars */) = 0
+4039693 +++ exited with 0 +++
+4039687 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039693, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039694 +++ exited with 1 +++
+4039687 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039694, si_uid=1000, si_status=1, si_utime=0, si_stime=0} ---
+4039687 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039687, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039695 execve("/usr/bin/chmod", ["chmod", "+x", "build/bootstrap/hex1"], 0xb06cbaea9898 /* 18 vars */) = 0
+4039695 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039695, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039696 execve("build/bootstrap/hex1", ["build/bootstrap/hex1"], 0xb06cbaea9898 /* 18 vars */) = 0
+4039696 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039696, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039697 execve("tools/verify-elf.sh", ["tools/verify-elf.sh", "build/bootstrap/asm2"], 0xb06c7c0406c8 /* 18 vars */) = 0
+4039698 execve("/usr/bin/readelf", ["readelf", "-h", "-l", "-d", "--", "build/bootstrap/asm2"], 0xc68e797c8798 /* 18 vars */) = 0
+4039698 +++ exited with 0 +++
+4039697 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039698, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039700 execve("/usr/bin/grep", ["grep", "-q", "Machine:.*AArch64"], 0xc68e797c8730 /* 18 vars */ <unfinished ...>
+4039699 +++ exited with 0 +++
+4039697 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039699, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039700 <... execve resumed>)           = 0
+4039700 +++ exited with 0 +++
+4039697 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039700, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039702 execve("/usr/bin/grep", ["grep", "-q", "Type:.*EXEC"], 0xc68e797c8710 /* 18 vars */ <unfinished ...>
+4039701 +++ exited with 0 +++
+4039697 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039701, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039702 <... execve resumed>)           = 0
+4039702 +++ exited with 0 +++
+4039697 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039702, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039704 execve("/usr/bin/grep", ["grep", "-Eq", "INTERP|DYNAMIC|NEEDED"], 0xc68e797c8ac8 /* 18 vars */ <unfinished ...>
+4039703 +++ exited with 0 +++
+4039697 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039703, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039704 <... execve resumed>)           = 0
+4039704 +++ exited with 1 +++
+4039697 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039704, si_uid=1000, si_status=1, si_utime=0, si_stime=0} ---
+4039697 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039697, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039705 execve("/usr/bin/chmod", ["chmod", "+x", "build/bootstrap/asm2"], 0xb06cbaea9898 /* 18 vars */) = 0
+4039705 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039705, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039706 execve("/usr/bin/cat", ["cat", "seed/rung2/table.s2", "seed/rung3/table3.s2", "seed/rung4/table4.s2", "seed/rung4/om4.s"], 0xb06cbaea9950 /* 18 vars */) = 0
+4039706 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039706, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039707 execve("build/bootstrap/asm2", ["build/bootstrap/asm2"], 0xb06cbaea9898 /* 18 vars */) = 0
+4039707 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039707, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039708 execve("tools/verify-elf.sh", ["tools/verify-elf.sh", "build/bootstrap/om4"], 0xb06c7c0406b8 /* 18 vars */) = 0
+4039709 execve("/usr/bin/readelf", ["readelf", "-h", "-l", "-d", "--", "build/bootstrap/om4"], 0xbf4e49f35790 /* 18 vars */) = 0
+4039709 +++ exited with 0 +++
+4039708 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039709, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039710 +++ exited with 0 +++
+4039708 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039710, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039711 execve("/usr/bin/grep", ["grep", "-q", "Machine:.*AArch64"], 0xbf4e49f35730 /* 18 vars */) = 0
+4039711 +++ exited with 0 +++
+4039708 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039711, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039713 execve("/usr/bin/grep", ["grep", "-q", "Type:.*EXEC"], 0xbf4e49f35710 /* 18 vars */) = 0
+4039712 +++ exited with 0 +++
+4039708 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039712, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039713 +++ exited with 0 +++
+4039708 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039713, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039715 execve("/usr/bin/grep", ["grep", "-Eq", "INTERP|DYNAMIC|NEEDED"], 0xbf4e49f35ac8 /* 18 vars */ <unfinished ...>
+4039714 +++ exited with 0 +++
+4039708 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039714, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039715 <... execve resumed>)           = 0
+4039715 +++ exited with 1 +++
+4039708 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039715, si_uid=1000, si_status=1, si_utime=0, si_stime=0} ---
+4039708 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039708, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039716 execve("/usr/bin/chmod", ["chmod", "+x", "build/bootstrap/om4"], 0xb06c7c0406c8 /* 18 vars */) = 0
+4039716 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039716, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039717 execve("/usr/bin/stat", ["stat", "-c", "%s", "build/bootstrap/om4"], 0xb06cbaea9b40 /* 18 vars */) = 0
+4039717 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039717, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039720 execve("/usr/bin/tr", ["tr", "-d", " "], 0xb06cbaea9b48 /* 18 vars */ <unfinished ...>
+4039719 execve("/usr/bin/od", ["od", "-An", "-tu4", "-j96", "-N4", "build/bootstrap/om4"], 0xb06cbaea9bb8 /* 18 vars */ <unfinished ...>
+4039720 <... execve resumed>)           = 0
+4039719 <... execve resumed>)           = 0
+4039719 +++ exited with 0 +++
+4039718 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039719, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039720 +++ exited with 0 +++
+4039718 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039720, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039718 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039718, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039721 execve("build/bootstrap/om4", ["build/bootstrap/om4"], 0xb06cbaea9898 /* 18 vars */) = 0
+4039721 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039721, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039722 execve("tools/verify-elf.sh", ["tools/verify-elf.sh", "build/bootstrap/stage1"], 0xb06c7c0406c8 /* 18 vars */) = 0
+4039723 execve("/usr/bin/readelf", ["readelf", "-h", "-l", "-d", "--", "build/bootstrap/stage1"], 0xba7c3fe41798 /* 18 vars */) = 0
+4039723 +++ exited with 0 +++
+4039722 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039723, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039724 +++ exited with 0 +++
+4039722 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039724, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039725 execve("/usr/bin/grep", ["grep", "-q", "Machine:.*AArch64"], 0xba7c3fe41730 /* 18 vars */) = 0
+4039725 +++ exited with 0 +++
+4039722 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039725, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039727 execve("/usr/bin/grep", ["grep", "-q", "Type:.*EXEC"], 0xba7c3fe41710 /* 18 vars */) = 0
+4039726 +++ exited with 0 +++
+4039722 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039726, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039727 +++ exited with 0 +++
+4039722 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039727, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039729 execve("/usr/bin/grep", ["grep", "-Eq", "INTERP|DYNAMIC|NEEDED"], 0xba7c3fe41ac8 /* 18 vars */ <unfinished ...>
+4039728 +++ exited with 0 +++
+4039722 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039728, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039729 <... execve resumed>)           = 0
+4039729 +++ exited with 1 +++
+4039722 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039729, si_uid=1000, si_status=1, si_utime=0, si_stime=0} ---
+4039722 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039722, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039730 execve("/usr/bin/chmod", ["chmod", "+x", "build/bootstrap/stage1"], 0xb06cbaea9898 /* 18 vars */) = 0
+4039730 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039730, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039731 execve("build/bootstrap/stage1", ["build/bootstrap/stage1"], 0xb06cbaea9898 /* 18 vars */) = 0
+4039731 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039731, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039732 execve("tools/verify-elf.sh", ["tools/verify-elf.sh", "build/bootstrap/stage2"], 0xb06c7c0406c8 /* 18 vars */) = 0
+4039733 execve("/usr/bin/readelf", ["readelf", "-h", "-l", "-d", "--", "build/bootstrap/stage2"], 0xc3e272206798 /* 18 vars */) = 0
+4039733 +++ exited with 0 +++
+4039732 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039733, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039734 +++ exited with 0 +++
+4039732 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039734, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039735 execve("/usr/bin/grep", ["grep", "-q", "Machine:.*AArch64"], 0xc3e272206730 /* 18 vars */) = 0
+4039735 +++ exited with 0 +++
+4039732 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039735, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039737 execve("/usr/bin/grep", ["grep", "-q", "Type:.*EXEC"], 0xc3e272206710 /* 18 vars */) = 0
+4039736 +++ exited with 0 +++
+4039732 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039736, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039737 +++ exited with 0 +++
+4039732 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039737, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039739 execve("/usr/bin/grep", ["grep", "-Eq", "INTERP|DYNAMIC|NEEDED"], 0xc3e272206ac8 /* 18 vars */ <unfinished ...>
+4039738 +++ exited with 0 +++
+4039732 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039738, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039739 <... execve resumed>)           = 0
+4039739 +++ exited with 1 +++
+4039732 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039739, si_uid=1000, si_status=1, si_utime=0, si_stime=0} ---
+4039732 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039732, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039740 execve("/usr/bin/chmod", ["chmod", "+x", "build/bootstrap/stage2"], 0xb06cbaea9898 /* 18 vars */) = 0
+4039740 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039740, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039741 execve("/usr/bin/cmp", ["cmp", "build/bootstrap/stage1", "build/bootstrap/stage2"], 0xb06c7c0406b8 /* 18 vars */) = 0
+4039741 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039741, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039743 execve("/usr/bin/sha256sum", ["sha256sum", "build/bootstrap/stage2"], 0xb06cbaea99d8 /* 18 vars */) = 0
+4039744 execve("/usr/bin/cut", ["cut", "-d ", "-f1"], 0xb06cbaea99d8 /* 18 vars */) = 0
+4039743 +++ exited with 0 +++
+4039742 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039743, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039744 +++ exited with 0 +++
+4039742 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039744, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039742 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039742, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039745 execve("/usr/bin/cp", ["cp", "build/bootstrap/stage2", "build/bootstrap/omc"], 0xb06c7c0406b0 /* 18 vars */) = 0
+4039745 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039745, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039746 execve("/usr/bin/sha256sum", ["sha256sum", "build/bootstrap/seed0", "build/bootstrap/hex1", "build/bootstrap/asm2", "build/bootstrap/om4", "build/bootstrap/omc"], 0xb06cbaea99b8 /* 18 vars */) = 0
+4039746 +++ exited with 0 +++
+4038824 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039746, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038824 +++ exited with 0 +++
+4038820 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4038824, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039747 execve("tools/build-native.sh", ["tools/build-native.sh"], 0xc5dcd1df0608 /* 18 vars */) = 0
+4039748 execve("/usr/bin/dirname", ["dirname", "tools/build-native.sh"], 0xb1e2d08e2858 /* 18 vars */) = 0
+4039748 +++ exited with 0 +++
+4039747 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039748, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039749 execve("tools/check-build-paths.sh", ["tools/check-build-paths.sh"], 0xb1e2c4ff0618 /* 18 vars */) = 0
+4039750 execve("/usr/bin/dirname", ["dirname", "tools/check-build-paths.sh"], 0xbfdb793b1858 /* 18 vars */) = 0
+4039750 +++ exited with 0 +++
+4039749 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039750, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039751 execve("/usr/bin/find", ["find", "build", "(", "-type", "l", "-o", "-type", "f", "-links", "+1", "-o", "!", "-type", "d", "!", "-type", "f", ")", "-print"], 0xbfdb793b1f20 /* 18 vars */) = 0
+4039751 +++ exited with 0 +++
+4039749 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039751, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039749 +++ exited with 0 +++
+4039747 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039749, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039752 execve("tools/verify-sources.sh", ["tools/verify-sources.sh"], 0xb1e2c4ff0608 /* 18 vars */) = 0
+4039753 execve("/usr/bin/dirname", ["dirname", "tools/verify-sources.sh"], 0xb7f16d507858 /* 18 vars */) = 0
+4039753 +++ exited with 0 +++
+4039752 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039753, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039756 execve("/usr/bin/cut", ["cut", "-d", " ", "-f1"], 0xb7f16d507cc8 /* 18 vars */ <unfinished ...>
+4039755 execve("/usr/bin/sha256sum", ["sha256sum", "provenance/lock.sha256"], 0xb7f16d507c98 /* 18 vars */ <unfinished ...>
+4039756 <... execve resumed>)           = 0
+4039755 <... execve resumed>)           = 0
+4039755 +++ exited with 0 +++
+4039754 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039755, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039756 +++ exited with 0 +++
+4039754 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039756, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039754 +++ exited with 0 +++
+4039752 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039754, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039757 execve("/usr/bin/sha256sum", ["sha256sum", "--status", "-c", "provenance/lock.sha256"], 0xb7f16d5079f8 /* 18 vars */) = 0
+4039757 +++ exited with 0 +++
+4039752 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039757, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039758 execve("/usr/bin/sha256sum", ["sha256sum", "--status", "-c", "provenance/sources.sha256"], 0xb7f16d507a28 /* 18 vars */) = 0
+4039758 +++ exited with 0 +++
+4039752 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039758, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039760 execve("/usr/bin/cat", ["cat", "provenance/seed.files", "provenance/math.files"], 0xb7f16d507af8 /* 18 vars */) = 0
+4039761 execve("/usr/bin/grep", ["grep", "^seed/"], 0xb7f16d507ac0 /* 18 vars */) = 0
+4039762 execve("/usr/bin/sort", ["sort"], 0xb7f16d507ab8 /* 19 vars */) = 0
+4039760 +++ exited with 0 +++
+4039759 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039760, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039761 +++ exited with 0 +++
+4039759 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039761, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039762 +++ exited with 0 +++
+4039759 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039762, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039759 +++ exited with 0 +++
+4039752 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039759, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039765 execve("/usr/bin/sort", ["sort"], 0xb7f16d507a50 /* 19 vars */) = 0
+4039764 execve("/usr/bin/find", ["find", "seed", "-type", "f"], 0xb7f16d507a90 /* 18 vars */) = 0
+4039764 +++ exited with 0 +++
+4039763 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039764, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039765 +++ exited with 0 +++
+4039763 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039765, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039763 +++ exited with 0 +++
+4039752 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039763, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039766 execve("/usr/bin/find", ["find", "seed", "-type", "l", "-print"], 0xb7f16d507b18 /* 18 vars */) = 0
+4039766 +++ exited with 0 +++
+4039752 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039766, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039752 +++ exited with 0 +++
+4039747 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039752, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039767 execve("tools/build.sh", ["tools/build.sh"], 0xb1e2c4ff05f8 /* 18 vars */) = 0
+4039768 execve("/usr/bin/dirname", ["dirname", "tools/build.sh"], 0xb83a1421d858 /* 18 vars */) = 0
+4039768 +++ exited with 0 +++
+4039767 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039768, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039769 execve("tools/check-build-paths.sh", ["tools/check-build-paths.sh"], 0xb83a0d1d0618 /* 18 vars */) = 0
+4039770 execve("/usr/bin/dirname", ["dirname", "tools/check-build-paths.sh"], 0xca8881745858 /* 18 vars */) = 0
+4039770 +++ exited with 0 +++
+4039769 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039770, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039771 execve("/usr/bin/find", ["find", "build", "(", "-type", "l", "-o", "-type", "f", "-links", "+1", "-o", "!", "-type", "d", "!", "-type", "f", ")", "-print"], 0xca8881745f20 /* 18 vars */) = 0
+4039771 +++ exited with 0 +++
+4039769 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039771, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039769 +++ exited with 0 +++
+4039767 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039769, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039773 execve("/usr/bin/sha256sum", ["sha256sum", "build/bootstrap/omc"], 0xb83a1421dc28 /* 18 vars */) = 0
+4039774 execve("/usr/bin/cut", ["cut", "-d ", "-f1"], 0xb83a1421dc30 /* 18 vars */) = 0
+4039773 +++ exited with 0 +++
+4039772 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039773, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039774 +++ exited with 0 +++
+4039772 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039774, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039772 +++ exited with 0 +++
+4039767 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039772, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039775 execve("/usr/bin/file", ["file", "build/bootstrap/omc"], 0xb83a1421d9b0 /* 18 vars */ <unfinished ...>
+4039776 execve("/usr/bin/grep", ["grep", "-q", "ELF 64-bit.*ARM aarch64"], 0xb83a1421d9d8 /* 18 vars */ <unfinished ...>
+4039775 <... execve resumed>)           = 0
+4039776 <... execve resumed>)           = 0
+4039775 +++ exited with 0 +++
+4039767 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039775, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039776 +++ exited with 0 +++
+4039767 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039776, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039777 execve("/usr/bin/mkdir", ["mkdir", "-p", "build"], 0xb83a0d1d0678 /* 18 vars */) = 0
+4039777 +++ exited with 0 +++
+4039767 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039777, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039778 execve("build/bootstrap/omc", ["build/bootstrap/omc"], 0xb83a1421d948 /* 18 vars */) = 0
+4039778 +++ exited with 0 +++
+4039767 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039778, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039779 execve("/usr/bin/file", ["file", "build/bridge.tmp"], 0xb83a1421d948 /* 18 vars */ <unfinished ...>
+4039780 execve("/usr/bin/grep", ["grep", "-q", "ELF 64-bit.*ARM aarch64"], 0xb83a1421d948 /* 18 vars */ <unfinished ...>
+4039779 <... execve resumed>)           = 0
+4039780 <... execve resumed>)           = 0
+4039779 +++ exited with 0 +++
+4039767 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039779, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039780 +++ exited with 0 +++
+4039767 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039780, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039781 execve("/usr/bin/chmod", ["chmod", "+x", "build/bridge.tmp"], 0xb83a0d1d0698 /* 18 vars */) = 0
+4039781 +++ exited with 0 +++
+4039767 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039781, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039782 execve("/usr/bin/mv", ["mv", "build/bridge.tmp", "build/bridge"], 0xb83a0d1d06a8 /* 18 vars */) = 0
+4039782 +++ exited with 0 +++
+4039767 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039782, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039783 execve("/usr/bin/sha256sum", ["sha256sum", "src/toc.om", "build/bridge"], 0xb83a1421d948 /* 18 vars */) = 0
+4039783 +++ exited with 0 +++
+4039767 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039783, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039767 +++ exited with 0 +++
+4039747 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039767, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039784 execve("/usr/bin/mkdir", ["mkdir", "-p", "build/math-native", "build/native"], 0xb1e2d08e2918 /* 18 vars */) = 0
+4039784 +++ exited with 0 +++
+4039747 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039784, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039785 execve("/usr/bin/cp", ["cp", "build/bootstrap/omc", "build/math-native/omc1"], 0xb1e2c4ff06b8 /* 18 vars */) = 0
+4039785 +++ exited with 0 +++
+4039747 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039785, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039786 execve("/usr/bin/cat", ["cat", "seed/math/core.om", "seed/math/cli.om"], 0xb1e2d08e2918 /* 18 vars */) = 0
+4039786 +++ exited with 0 +++
+4039747 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039786, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039787 execve("build/bootstrap/omc", ["build/bootstrap/omc"], 0xb1e2d08e2918 /* 18 vars */) = 0
+4039787 +++ exited with 0 +++
+4039747 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039787, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039788 execve("tools/verify-elf.sh", ["tools/verify-elf.sh", "build/bootstrap/omc"], 0xb1e2d08e2988 /* 18 vars */) = 0
+4039789 execve("/usr/bin/readelf", ["readelf", "-h", "-l", "-d", "--", "build/bootstrap/omc"], 0xbb7294a73790 /* 18 vars */) = 0
+4039789 +++ exited with 0 +++
+4039788 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039789, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039790 +++ exited with 0 +++
+4039788 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039790, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039791 execve("/usr/bin/grep", ["grep", "-q", "Machine:.*AArch64"], 0xbb7294a73730 /* 18 vars */) = 0
+4039791 +++ exited with 0 +++
+4039788 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039791, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039792 +++ exited with 0 +++
+4039788 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039792, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039793 execve("/usr/bin/grep", ["grep", "-q", "Type:.*EXEC"], 0xbb7294a73710 /* 18 vars */) = 0
+4039793 +++ exited with 0 +++
+4039788 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039793, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039795 execve("/usr/bin/grep", ["grep", "-Eq", "INTERP|DYNAMIC|NEEDED"], 0xbb7294a73ac8 /* 18 vars */ <unfinished ...>
+4039794 +++ exited with 0 +++
+4039788 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039794, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039795 <... execve resumed>)           = 0
+4039795 +++ exited with 1 +++
+4039788 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039795, si_uid=1000, si_status=1, si_utime=0, si_stime=0} ---
+4039788 +++ exited with 0 +++
+4039747 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039788, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039796 execve("tools/verify-elf.sh", ["tools/verify-elf.sh", "build/bridge"], 0xb1e2d08e2980 /* 18 vars */) = 0
+4039797 execve("/usr/bin/readelf", ["readelf", "-h", "-l", "-d", "--", "build/bridge"], 0xb35b568de788 /* 18 vars */) = 0
+4039797 +++ exited with 0 +++
+4039796 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039797, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039799 execve("/usr/bin/grep", ["grep", "-q", "Machine:.*AArch64"], 0xb35b568de730 /* 18 vars */) = 0
+4039798 +++ exited with 0 +++
+4039796 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039798, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039799 +++ exited with 0 +++
+4039796 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039799, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039801 execve("/usr/bin/grep", ["grep", "-q", "Type:.*EXEC"], 0xb35b568de710 /* 18 vars */ <unfinished ...>
+4039800 +++ exited with 0 +++
+4039796 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039800, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039801 <... execve resumed>)           = 0
+4039801 +++ exited with 0 +++
+4039796 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039801, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039803 execve("/usr/bin/grep", ["grep", "-Eq", "INTERP|DYNAMIC|NEEDED"], 0xb35b568deac8 /* 18 vars */ <unfinished ...>
+4039802 +++ exited with 0 +++
+4039796 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039802, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039803 <... execve resumed>)           = 0
+4039803 +++ exited with 1 +++
+4039796 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039803, si_uid=1000, si_status=1, si_utime=0, si_stime=0} ---
+4039796 +++ exited with 0 +++
+4039747 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039796, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039804 execve("tools/verify-elf.sh", ["tools/verify-elf.sh", "build/math-native/omega-math.tmp"], 0xb1e2d08e2998 /* 18 vars */) = 0
+4039805 execve("/usr/bin/readelf", ["readelf", "-h", "-l", "-d", "--", "build/math-native/omega-math.tmp"], 0xbec3b4e437a0 /* 18 vars */) = 0
+4039805 +++ exited with 0 +++
+4039804 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039805, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039806 +++ exited with 0 +++
+4039804 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039806, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039807 execve("/usr/bin/grep", ["grep", "-q", "Machine:.*AArch64"], 0xbec3b4e43730 /* 18 vars */) = 0
+4039807 +++ exited with 0 +++
+4039804 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039807, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039809 execve("/usr/bin/grep", ["grep", "-q", "Type:.*EXEC"], 0xbec3b4e43710 /* 18 vars */ <unfinished ...>
+4039808 +++ exited with 0 +++
+4039804 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039808, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039809 <... execve resumed>)           = 0
+4039809 +++ exited with 0 +++
+4039804 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039809, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039810 +++ exited with 0 +++
+4039804 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039810, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039811 execve("/usr/bin/grep", ["grep", "-Eq", "INTERP|DYNAMIC|NEEDED"], 0xbec3b4e43ac8 /* 18 vars */) = 0
+4039811 +++ exited with 1 +++
+4039804 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039811, si_uid=1000, si_status=1, si_utime=0, si_stime=0} ---
+4039804 +++ exited with 0 +++
+4039747 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039804, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039812 execve("/usr/bin/chmod", ["chmod", "+x", "build/math-native/omega-math.tmp"], 0xb1e2c4ff06a8 /* 18 vars */) = 0
+4039812 +++ exited with 0 +++
+4039747 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039812, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039814 execve("/usr/bin/mv", ["mv", "build/math-native/omega-math.tmp", "build/math-native/omega-math"], 0xb1e2d08e2918 /* 18 vars */) = 0
+4039814 +++ exited with 0 +++
+4039747 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039814, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039815 execve("/usr/bin/cp", ["cp", "build/bootstrap/omc", "build/native/omc"], 0xb1e2c4ff06b8 /* 18 vars */) = 0
+4039815 +++ exited with 0 +++
+4039747 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039815, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039816 execve("/usr/bin/cp", ["cp", "build/bridge", "build/native/bridge"], 0xb1e2c4ff06a8 /* 18 vars */) = 0
+4039816 +++ exited with 0 +++
+4039747 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039816, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039817 execve("/usr/bin/cp", ["cp", "build/math-native/omega-math", "build/native/math"], 0xb1e2c4ff06c8 /* 18 vars */) = 0
+4039817 +++ exited with 0 +++
+4039747 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039817, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039818 execve("/usr/bin/sha256sum", ["sha256sum", "build/native/omc", "build/native/bridge", "build/native/math"], 0xb1e2d08e2970 /* 18 vars */) = 0
+4039818 +++ exited with 0 +++
+4039747 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039818, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039747 +++ exited with 0 +++
+4038820 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039747, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039819 execve("/usr/bin/mkdir", ["mkdir", "/tmp/omega-provenance-OLraSN/hom"...], 0xc5dd093c3258 /* 18 vars */) = 0
+4039819 +++ exited with 0 +++
+4038820 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039819, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039820 execve("/usr/bin/mkdir", ["mkdir", "/tmp/omega-provenance-OLraSN/hom"...], 0xc5dd093c31b8 /* 18 vars */) = 0
+4039820 +++ exited with 0 +++
+4038820 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039820, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039821 execve("/usr/bin/mkdir", ["mkdir", "/tmp/omega-provenance-OLraSN/hom"...], 0xc5dd093c3258 /* 18 vars */) = 0
+4039821 +++ exited with 0 +++
+4038820 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039821, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039822 execve("/usr/bin/mkdir", ["mkdir", "/tmp/omega-provenance-OLraSN/hom"...], 0xc5dd093c3258 /* 18 vars */) = 0
+4039822 +++ exited with 0 +++
+4038820 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039822, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039823 execve("/usr/bin/mktemp", ["mktemp", "-d", "/tmp/omega-provenance-OLraSN/hom"...], 0xc5dd093c31b8 /* 18 vars */) = 0
+4039823 +++ exited with 0 +++
+4038820 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039823, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039825 execve("/usr/bin/cp", ["cp", "build/native/omc", "build/native/bridge", "build/native/math", "tools/om", "tools/uninstall.sh", "tools/verify-elf.sh", "tools/HELP.txt", "/tmp/omega-provenance-OLraSN/hom"...], 0xc5dd093c33c8 /* 18 vars */) = 0
+4039825 +++ exited with 0 +++
+4038820 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039825, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039830 execve("/usr/bin/cp", ["cp", "provenance/pins", "/tmp/omega-provenance-OLraSN/hom"...], 0xc5dd093c31b8 /* 18 vars */) = 0
+4039830 +++ exited with 0 +++
+4038820 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039830, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039832 execve("/usr/bin/cp", ["cp", "provenance/OMEGA-LICENSE", "/tmp/omega-provenance-OLraSN/hom"...], 0xc5dd093c31b8 /* 18 vars */) = 0
+4039832 +++ exited with 0 +++
+4038820 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039832, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039833 execve("/usr/bin/cp", ["cp", "seed/math/CONTRACT.md", "/tmp/omega-provenance-OLraSN/hom"...], 0xc5dd093c31b8 /* 18 vars */) = 0
+4039833 +++ exited with 0 +++
+4038820 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039833, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039834 execve("/usr/bin/cp", ["cp", "docs/CAPABILITIES.md", "/tmp/omega-provenance-OLraSN/hom"...], 0xc5dd093c31b8 /* 18 vars */) = 0
+4039834 +++ exited with 0 +++
+4038820 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039834, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039835 execve("/usr/bin/sha256sum", ["sha256sum", "omc", "bridge", "math", "om", "uninstall.sh", "verify-elf.sh", "HELP.txt", "pins", "LICENSE", "MATH-CONTRACT.md", "CAPABILITIES.md", "created-directories"], 0xc5dd093c35d8 /* 18 vars */) = 0
+4039835 +++ exited with 0 +++
+4038820 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039835, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039836 execve("/usr/bin/chmod", ["chmod", "600", "/tmp/omega-provenance-OLraSN/hom"..., "/tmp/omega-provenance-OLraSN/hom"..., "/tmp/omega-provenance-OLraSN/hom"..., "/tmp/omega-provenance-OLraSN/hom"..., "/tmp/omega-provenance-OLraSN/hom"..., "/tmp/omega-provenance-OLraSN/hom"..., "/tmp/omega-provenance-OLraSN/hom"..., "/tmp/omega-provenance-OLraSN/hom"..., "/tmp/omega-provenance-OLraSN/hom"..., "/tmp/omega-provenance-OLraSN/hom"..., "/tmp/omega-provenance-OLraSN/hom"..., "/tmp/omega-provenance-OLraSN/hom"..., "/tmp/omega-provenance-OLraSN/hom"...], 0xc5dd093c36a8 /* 18 vars */) = 0
+4039836 +++ exited with 0 +++
+4038820 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039836, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039837 execve("/usr/bin/chmod", ["chmod", "700", "/tmp/omega-provenance-OLraSN/hom"..., "/tmp/omega-provenance-OLraSN/hom"..., "/tmp/omega-provenance-OLraSN/hom"..., "/tmp/omega-provenance-OLraSN/hom"..., "/tmp/omega-provenance-OLraSN/hom"..., "/tmp/omega-provenance-OLraSN/hom"...], 0xc5dd093c34f0 /* 18 vars */) = 0
+4039837 +++ exited with 0 +++
+4038820 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039837, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039838 execve("/usr/bin/mv", ["mv", "-T", "--", "/tmp/omega-provenance-OLraSN/hom"..., "/tmp/omega-provenance-OLraSN/hom"...], 0xc5dd093c3248 /* 18 vars */) = 0
+4039838 +++ exited with 0 +++
+4038820 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039838, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039839 execve("/usr/bin/ln", ["ln", "-s", "../lib/omega-native/om", "/tmp/omega-provenance-OLraSN/hom"...], 0xc5dd093c31b8 /* 18 vars */) = 0
+4039839 +++ exited with 0 +++
+4038820 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039839, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039840 execve("/usr/bin/ln", ["ln", "-s", "../lib/omega-native/om", "/tmp/omega-provenance-OLraSN/hom"...], 0xc5dd093c31b8 /* 18 vars */) = 0
+4039840 +++ exited with 0 +++
+4038820 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039840, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039841 execve("/usr/bin/ln", ["ln", "-s", "../lib/omega-native/om", "/tmp/omega-provenance-OLraSN/hom"...], 0xc5dd093c31b8 /* 18 vars */) = 0
+4039841 +++ exited with 0 +++
+4038820 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039841, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039842 execve("/tmp/omega-provenance-OLraSN/home/traced/bin/omega", ["/tmp/omega-provenance-OLraSN/hom"..., "math", "eval 1/3+1/6"], 0xc5dd093c33c8 /* 18 vars */) = 0
+4039844 execve("/usr/bin/realpath", ["realpath", "--", "/tmp/omega-provenance-OLraSN/hom"...], 0xc29fa2084a70 /* 19 vars */) = 0
+4039844 +++ exited with 0 +++
+4039843 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039844, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039843 execve("/usr/bin/dirname", ["dirname", "/tmp/omega-provenance-OLraSN/hom"...], 0xc29fa2084a78 /* 19 vars */) = 0
+4039843 +++ exited with 0 +++
+4039842 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039843, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039845 execve("/usr/bin/sha256sum", ["sha256sum", "--status", "-c", "files.sha256"], 0xc29fa2084db8 /* 19 vars */) = 0
+4039845 +++ exited with 0 +++
+4039842 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039845, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039846 execve("/usr/bin/uname", ["uname", "-s"], 0xc29fa2084b28 /* 19 vars */) = 0
+4039846 +++ exited with 0 +++
+4039842 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039846, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039847 execve("/usr/bin/uname", ["uname", "-m"], 0xc29fa2084b28 /* 19 vars */) = 0
+4039847 +++ exited with 0 +++
+4039842 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039847, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039848 execve("/usr/bin/mktemp", ["mktemp", "-d", "/tmp/omega-command.XXXXXXXX"], 0xc29fa2084f80 /* 19 vars */) = 0
+4039848 +++ exited with 0 +++
+4039842 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039848, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039849 execve("/tmp/omega-provenance-OLraSN/home/traced/lib/omega-native/math", ["/tmp/omega-provenance-OLraSN/hom"...], 0xc29fa2085a20 /* 19 vars */) = 0
+4039849 +++ exited with 0 +++
+4039842 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039849, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039850 execve("/usr/bin/cat", ["cat", "/tmp/omega-command.ZDkxKMwY/outp"...], 0xc29fa20859b0 /* 19 vars */) = 0
+4039850 +++ exited with 0 +++
+4039842 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039850, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039851 execve("/usr/bin/grep", ["grep", "-q", "^REFUSED ", "/tmp/omega-command.ZDkxKMwY/outp"...], 0xc29fa20859f8 /* 19 vars */) = 0
+4039851 +++ exited with 1 +++
+4039842 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039851, si_uid=1000, si_status=1, si_utime=0, si_stime=0} ---
+4039852 execve("/usr/bin/rm", ["rm", "-f", "--", "/tmp/omega-command.ZDkxKMwY/inpu"..., "/tmp/omega-command.ZDkxKMwY/nati"..., "/tmp/omega-command.ZDkxKMwY/outp"..., "/tmp/omega-command.ZDkxKMwY/erro"...], 0xc29fa2085bc8 /* 19 vars */) = 0
+4039852 +++ exited with 0 +++
+4039842 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039852, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039853 execve("/usr/bin/rmdir", ["rmdir", "/tmp/omega-command.ZDkxKMwY"], 0xc29fa2085a78 /* 19 vars */) = 0
+4039853 +++ exited with 0 +++
+4039842 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039853, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039842 +++ exited with 0 +++
+4038820 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039842, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039854 execve("/tmp/omega-provenance-OLraSN/home/traced/bin/om", ["/tmp/omega-provenance-OLraSN/hom"..., "math", "eval 1/3+1/6"], 0xc5dd093c33c8 /* 18 vars */) = 0
+4039856 execve("/usr/bin/realpath", ["realpath", "--", "/tmp/omega-provenance-OLraSN/hom"...], 0xb7796d3a2a70 /* 19 vars */) = 0
+4039856 +++ exited with 0 +++
+4039855 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039856, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039855 execve("/usr/bin/dirname", ["dirname", "/tmp/omega-provenance-OLraSN/hom"...], 0xb7796d3a2a78 /* 19 vars */) = 0
+4039855 +++ exited with 0 +++
+4039854 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039855, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039857 execve("/usr/bin/sha256sum", ["sha256sum", "--status", "-c", "files.sha256"], 0xb7796d3a2db8 /* 19 vars */) = 0
+4039857 +++ exited with 0 +++
+4039854 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039857, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039858 execve("/usr/bin/uname", ["uname", "-s"], 0xb7796d3a2b28 /* 19 vars */) = 0
+4039858 +++ exited with 0 +++
+4039854 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039858, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039859 execve("/usr/bin/uname", ["uname", "-m"], 0xb7796d3a2b28 /* 19 vars */) = 0
+4039859 +++ exited with 0 +++
+4039854 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039859, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039860 execve("/usr/bin/mktemp", ["mktemp", "-d", "/tmp/omega-command.XXXXXXXX"], 0xb7796d3a2f80 /* 19 vars */) = 0
+4039860 +++ exited with 0 +++
+4039854 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039860, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039861 execve("/tmp/omega-provenance-OLraSN/home/traced/lib/omega-native/math", ["/tmp/omega-provenance-OLraSN/hom"...], 0xb7796d3a3a20 /* 19 vars */) = 0
+4039861 +++ exited with 0 +++
+4039854 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039861, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039862 execve("/usr/bin/cat", ["cat", "/tmp/omega-command.Q3MNKGl3/outp"...], 0xb7796d3a39b0 /* 19 vars */) = 0
+4039862 +++ exited with 0 +++
+4039854 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039862, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039863 execve("/usr/bin/grep", ["grep", "-q", "^REFUSED ", "/tmp/omega-command.Q3MNKGl3/outp"...], 0xb7796d3a39f8 /* 19 vars */) = 0
+4039863 +++ exited with 1 +++
+4039854 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039863, si_uid=1000, si_status=1, si_utime=0, si_stime=0} ---
+4039864 execve("/usr/bin/rm", ["rm", "-f", "--", "/tmp/omega-command.Q3MNKGl3/inpu"..., "/tmp/omega-command.Q3MNKGl3/nati"..., "/tmp/omega-command.Q3MNKGl3/outp"..., "/tmp/omega-command.Q3MNKGl3/erro"...], 0xb7796d3a3bc8 /* 19 vars */) = 0
+4039864 +++ exited with 0 +++
+4039854 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039864, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039865 execve("/usr/bin/rmdir", ["rmdir", "/tmp/omega-command.Q3MNKGl3"], 0xb7796d3a3a78 /* 19 vars */) = 0
+4039865 +++ exited with 0 +++
+4039854 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039865, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039854 +++ exited with 0 +++
+4038820 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039854, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039866 execve("/tmp/omega-provenance-OLraSN/home/traced/bin/omg", ["/tmp/omega-provenance-OLraSN/hom"..., "math", "diff x^2"], 0xc5dd093c33c8 /* 18 vars */) = 0
+4039868 execve("/usr/bin/realpath", ["realpath", "--", "/tmp/omega-provenance-OLraSN/hom"...], 0xbf07108f5a70 /* 19 vars */) = 0
+4039868 +++ exited with 0 +++
+4039867 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039868, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039867 execve("/usr/bin/dirname", ["dirname", "/tmp/omega-provenance-OLraSN/hom"...], 0xbf07108f5a78 /* 19 vars */) = 0
+4039867 +++ exited with 0 +++
+4039866 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039867, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039869 execve("/usr/bin/sha256sum", ["sha256sum", "--status", "-c", "files.sha256"], 0xbf07108f5db8 /* 19 vars */) = 0
+4039869 +++ exited with 0 +++
+4039866 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039869, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039870 execve("/usr/bin/uname", ["uname", "-s"], 0xbf07108f5b28 /* 19 vars */) = 0
+4039870 +++ exited with 0 +++
+4039866 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039870, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039871 execve("/usr/bin/uname", ["uname", "-m"], 0xbf07108f5b28 /* 19 vars */) = 0
+4039871 +++ exited with 0 +++
+4039866 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039871, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039872 execve("/usr/bin/mktemp", ["mktemp", "-d", "/tmp/omega-command.XXXXXXXX"], 0xbf07108f5f80 /* 19 vars */) = 0
+4039872 +++ exited with 0 +++
+4039866 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039872, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039873 execve("/tmp/omega-provenance-OLraSN/home/traced/lib/omega-native/math", ["/tmp/omega-provenance-OLraSN/hom"...], 0xbf07108f6a20 /* 19 vars */) = 0
+4039873 +++ exited with 0 +++
+4039866 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039873, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039874 execve("/usr/bin/cat", ["cat", "/tmp/omega-command.tlfbxa7X/outp"...], 0xbf07108f69b0 /* 19 vars */) = 0
+4039874 +++ exited with 0 +++
+4039866 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039874, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039875 execve("/usr/bin/grep", ["grep", "-q", "^REFUSED ", "/tmp/omega-command.tlfbxa7X/outp"...], 0xbf07108f69f8 /* 19 vars */) = 0
+4039875 +++ exited with 1 +++
+4039866 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039875, si_uid=1000, si_status=1, si_utime=0, si_stime=0} ---
+4039876 execve("/usr/bin/rm", ["rm", "-f", "--", "/tmp/omega-command.tlfbxa7X/inpu"..., "/tmp/omega-command.tlfbxa7X/nati"..., "/tmp/omega-command.tlfbxa7X/outp"..., "/tmp/omega-command.tlfbxa7X/erro"...], 0xbf07108f6bc8 /* 19 vars */) = 0
+4039876 +++ exited with 0 +++
+4039866 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039876, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039877 execve("/usr/bin/rmdir", ["rmdir", "/tmp/omega-command.tlfbxa7X"], 0xbf07108f6a78 /* 19 vars */) = 0
+4039877 +++ exited with 0 +++
+4039866 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039877, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039866 +++ exited with 0 +++
+4038820 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039866, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4039878 execve("/usr/bin/rmdir", ["rmdir", "/tmp/omega-provenance-OLraSN/hom"...], 0xc5dcd1df0680 /* 18 vars */) = 0
+4039878 +++ exited with 0 +++
+4038820 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=4039878, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+4038820 +++ exited with 0 +++

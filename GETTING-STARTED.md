@@ -1,7 +1,8 @@
 # Get Omega and build your first project
 
-This source distribution contains the reviewed native developer candidate
-`0fc7d8662cb799e7c206b17c18ea4c3ec2b8fea9` from `aien-dev/omega-bridge`.
+This source distribution extends the reviewed native developer candidate
+`0fc7d8662cb799e7c206b17c18ea4c3ec2b8fea9` from `aien-dev/omega-bridge`
+with the `omega` public command; `om` and `omg` remain compatibility aliases.
 It builds its compiler from the machine-code seed, offline. It does not need
 another Omega checkout, GPU, GCC, Rust, Python, Node, model weights or an API key.
 
@@ -48,10 +49,10 @@ Leave the downloaded source directory. Omega works on your own project files:
 mkdir -p "$HOME/omega-hello"
 cd "$HOME/omega-hello"
 printf 'text msg "Hello from Omega\\n"\nfn main to int\nw = write 1 msg 0 len msg\nret 0\nend\n' > hello.om
-"$HOME/.local/bin/om" check hello.om
-"$HOME/.local/bin/om" build hello.om -o hello
+"$HOME/.local/bin/omega" check hello.om
+"$HOME/.local/bin/omega" build hello.om -o hello
 ./hello
-"$HOME/.local/bin/om" run hello.om
+"$HOME/.local/bin/omega" run hello.om
 ```
 
 Both execution commands print:
@@ -70,15 +71,15 @@ yet; use the documented fixed-buffer stdin/stdout facilities where appropriate.
 
 ```sh
 "$HOME/.local/bin/omg" run hello.om
-"$HOME/.local/bin/om" version
-"$HOME/.local/bin/om" help
+"$HOME/.local/bin/omega" version
+"$HOME/.local/bin/omega" help
 ```
 
 ## 3. Explore the supported tools
 
 ```sh
-"$HOME/.local/bin/om" math 'eval 1/3+1/6'
-"$HOME/.local/bin/om" math 'diff x^2'
+"$HOME/.local/bin/omega" math 'eval 1/3+1/6'
+"$HOME/.local/bin/omega" math 'diff x^2'
 ```
 
 These print `OK 1/2` and `OK 2*x`. Exact math is bounded, not a universal CAS.
@@ -92,7 +93,7 @@ Automatic runtime attachment is not implemented in this candidate.
 ## 4. Remove the installed commands
 
 ```sh
-"$HOME/.local/bin/om" uninstall
+"$HOME/.local/bin/omega" uninstall
 ```
 
 Removal checks the owned installed files and preserves unrelated files.

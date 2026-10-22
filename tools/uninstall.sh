@@ -26,7 +26,7 @@ check_parents "$2"
 check_parents "$prefix/bin"
 check_parents "$payload"
 [ -d "$payload" ] && [ ! -L "$payload" ] || fail 73 'installation missing'
-for name in om omg; do
+for name in omega om omg; do
     [ -L "$prefix/bin/$name" ] && [ "$(readlink -- "$prefix/bin/$name")" = ../lib/omega-native/om ] || fail 73 'alias changed; preserving installation'
 done
 (cd "$payload" && sha256sum --status -c files.sha256) 2>/dev/null || fail 65 'installed files changed; preserving installation'
@@ -47,7 +47,7 @@ trap 'rmdir "$prefix/.omega-install-lock" 2>/dev/null || :' EXIT
 # Recheck both the named parents and owned files after taking the lifecycle lock.
 preflight --prefix "$2"
 # Preflight completed; only fixed, owned files are removed.
-rm -- "$prefix/bin/om" "$prefix/bin/omg"
+rm -- "$prefix/bin/omega" "$prefix/bin/om" "$prefix/bin/omg"
 for f in omc bridge math om uninstall.sh verify-elf.sh HELP.txt pins LICENSE MATH-CONTRACT.md CAPABILITIES.md created-directories files.sha256; do
     rm -- "$payload/$f"
 done

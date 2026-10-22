@@ -5,7 +5,10 @@ The source package runs offline on Linux ARM64. Its developer path was replayed
 on both a DGX Spark and a Raspberry Pi 5; see [distribution evidence](evidence/developer-distribution/README.md).
 Public release publication is still pending; private source access is not a public download.
 
-I provide `om` as the primary command and `omg` as its alias. My source-only
+I provide `omega` as the public command, with `om` and `omg` as compatibility
+aliases to the same implementation. The public curl bootstrap is being prepared;
+its URL is not live until the release and website publication are verified.
+My source-only
 build starts with the audited hex seed, reproduces the pinned Omega compiler,
 and uses that compiler to build the converter and exact math executable.
 All source checking, conversion and calculation run in native Omega. I use a

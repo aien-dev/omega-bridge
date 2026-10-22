@@ -16,4 +16,5 @@ mkdir -p evidence/native-path-safety
 L529_REPORT="$PWD/evidence/native-path-safety/full-gate-paths.json" node tests/native/path-safety.mjs > evidence/native-path-safety/full-gate-paths.log 2>&1
 mkdir -p evidence/native-developer-commands
 node tests/native/developer-commands.mjs > evidence/native-developer-commands/full-gate.log 2>&1
+node tests/native/omega-alias.mjs > evidence/native-developer-commands/omega-alias.log 2>&1
 printf 'PASS converter, native math, installed commands, source provenance, path safety and native development\n'
