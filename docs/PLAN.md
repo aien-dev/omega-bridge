@@ -1,0 +1,10 @@
+# L483 execution plan
+
+1. Verify recovered source and pinned seed. Add isolated build and differential harness. Capture failures before changes.
+2. Retain recovered token/name machinery in src/toc.om. Replace unchecked expression emission with typed nodes and ordered target emitters. Gate C against native seed output, exit and traps.
+3. Add Python emitter in the same Omega compiler using the same checked nodes and capability limits. Run the same cases under actual Python.
+4. Add C and Python callers, explicit ABI/ownership limits, mutation controls, repeatability, tool/source hashes and timing receipts. Push working milestones.
+
+Commands: tools/build.sh, tools/test.sh, tools/bootstrap.sh. Build products stay in build/. Fixture origins are recorded in docs/PROVENANCE.md. Tests and shell build glue are infrastructure; compiler decisions and both target writers live in Omega.
+
+Tests first: all inherited program fixtures, each width and overflow, conversions, div/rem, ordered calls and traps, length/ownership refusals, malformed and unsupported syntax, empty/truncated input, output mutants and caller failures. Newly added cases are run against the preceding implementation before their fix and kept in evidence/.
