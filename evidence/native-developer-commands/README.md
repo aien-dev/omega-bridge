@@ -41,7 +41,11 @@ directory with isolated HOME/prefix, including raw program input, actual native
 execution/status, alias behavior, file safety and uninstall. `replay/` contains
 those logs, the machine-readable37/37/0 result and exit0 receipt.
 
-Independent whole-feature review L548 remains pending at this checkpoint; test
-success is not merge approval. Host shell/GNU readelf orchestration is disclosed,
+Independent whole-feature review L548 returned no Critical, Important or Minor
+source defect on exact51bb72a against795009f. Its scope and limits are recorded
+in `independent-review.md`; the parent source-only replay is separate runtime
+evidence. This implementation/test qualification is accepted; authorized desk
+publication and actual main/release readback remain separate. Host shell/GNU
+readelf orchestration is disclosed,
 run is not a sandbox, no program argv/process-control extension is claimed, and
 production retirement remains0.
