@@ -1,0 +1,9 @@
+{
+  "origin_base": "29b12760f4c962606411d6bf25032aedef063301",
+  "origin_uncommitted_path": "omega-toc/seed/toc/toc.om",
+  "source_sha256": "27a2de2d50f356a68f4ece650af88fb950ed1a2781f4641f7517e793a62ae11f",
+  "seed_sha256": "191b776ef98821597c3e30655da6d680a9b66edbc9ceaca3c39c61ea6df098e9",
+  "original_preserved": true,
+  "license": "AGPL-3.0, preserved from source; no relicensing",
+  "status": "unqualified recovered source, not a working release"
+}
