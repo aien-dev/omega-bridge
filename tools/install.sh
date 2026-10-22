@@ -68,15 +68,15 @@ check
 if [ ! -d "$prefix/bin" ]; then mkdir "$prefix/bin"; created_bin=1; fi
 if [ ! -d "$prefix/lib" ]; then mkdir "$prefix/lib"; created_lib=1; fi
 stage=$(mktemp -d "$prefix/.omega-stage.XXXXXXXX")
-cp build/native/omc build/native/bridge build/native/math tools/om tools/uninstall.sh tools/verify-elf.sh tools/HELP.txt "$stage/"
+cp build/native/omc build/native/bridge build/native/math build/native/cuda-cpp tools/om tools/uninstall.sh tools/verify-elf.sh tools/HELP.txt "$stage/"
 cp provenance/pins "$stage/pins"
 cp provenance/OMEGA-LICENSE "$stage/LICENSE"
 cp seed/math/CONTRACT.md "$stage/MATH-CONTRACT.md"
 cp docs/CAPABILITIES.md "$stage/CAPABILITIES.md"
 printf '%s %s %s\n' "$created_prefix" "$created_bin" "$created_lib" > "$stage/created-directories"
-(cd "$stage" && sha256sum omc bridge math om uninstall.sh verify-elf.sh HELP.txt pins LICENSE MATH-CONTRACT.md CAPABILITIES.md created-directories > files.sha256)
+(cd "$stage" && sha256sum omc bridge math cuda-cpp om uninstall.sh verify-elf.sh HELP.txt pins LICENSE MATH-CONTRACT.md CAPABILITIES.md created-directories > files.sha256)
 chmod 600 "$stage"/*
-chmod 700 "$stage/omc" "$stage/bridge" "$stage/math" "$stage/om" "$stage/uninstall.sh" "$stage/verify-elf.sh"
+chmod 700 "$stage/omc" "$stage/bridge" "$stage/math" "$stage/cuda-cpp" "$stage/om" "$stage/uninstall.sh" "$stage/verify-elf.sh"
 # Same-filesystem rename, followed by no-clobber links. Trap reverses any failure.
 mv -T -- "$stage" "$payload"
 stage=; published=1

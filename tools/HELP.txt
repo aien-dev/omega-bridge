@@ -8,6 +8,9 @@ Omega native commands: om and omg share one implementation and installation.
   om math 'diff (x+1)^5'           One request; REFUSED returns exit 65
   om math                         Stream stdin, one request per line
   om convert --to c|python [--] input.om [-o output]
+  om check --from cuda-cpp source.cu
+  om build --from cuda-cpp --target cpu-sim source.cu -o executable
+  om run --from cuda-cpp --target cpu-sim source.cu
   om uninstall                    Remove unchanged owned files and aliases
   om attach|discover|status       UNSUPPORTED (exit 69); no runtime hooks
 
@@ -19,6 +22,13 @@ qualification uses the owned hash-checked verify-elf.sh and host GNU readelf.
 build -o atomically replaces a regular output with mode 700; failed builds
 preserve existing output. Output symlinks and nonregular files are refused.
 Use -- for a leading-dash filename; a literal - names a file, not stdin.
+
+CUDA C++ is an experimental bounded unsigned-int elementwise kernel frontend.
+It is NOT full C++ or GPU code. Native Omega parses source and generates a CPU
+simulator executable. No nvcc/Clang parser or CUDA runtime constructs the result.
+The explicit cpu-sim target is required for build/run; check never executes it.
+See docs/CUDA-CPP.md in the source checkout for syntax and binary stdin framing.
+Frontend limits return 67; simulator input errors return 77 with no stdout.
 
 Math: eval, expand, collect, diff, integ, subst E ; R, solve L ; R,
 gcd A ; B, linear a;b;c;d;e;f. Exact Q[x], variable x, explicit *, degree <=16,

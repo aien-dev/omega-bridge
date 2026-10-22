@@ -1,0 +1,610 @@
+note SPDX-License-Identifier: AGPL-3.0-or-later
+note Handwritten bounded CUDA C++ elementwise frontend. Explicit CPU simulator only.
+global Src uchar 16384
+global Extra uchar 1
+global Size ulong 1
+global Pos ulong 1
+global Kind ulong 1
+global Start ulong 1
+global Stop ulong 1
+global Value ulong 1
+global Names ulong 8
+global Lens ulong 8
+global Count ulong 1
+global Nodes ulong 1
+global Op ulong 128
+global Left ulong 128
+global Right ulong 128
+global Val ulong 128
+global Depth ulong 1
+global Out uchar 32768
+global Used ulong 1
+global Dig uchar 20
+text Err "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+text Limit "CUDA_CPP_LIMIT\n"
+text IOErr "CUDA_CPP_IO\n"
+text Words "__global__ void unsigned int const if blockIdx blockDim threadIdx x alignas alignof and and_eq asm auto bitand bitor bool break case catch char char16_t char32_t class compl concept consteval constexpr constinit const_cast continue co_await co_return co_yield decltype default delete do double dynamic_cast else enum explicit export extern false float for friend goto inline long mutable namespace new noexcept not not_eq nullptr operator or or_eq private protected public register reinterpret_cast requires return short signed sizeof static static_assert static_cast struct switch template this thread_local throw true try typedef typeid typename union unsigned using virtual volatile wchar_t while xor xor_eq __host__ __device__ __shared__ __constant__ __managed__ __restrict__"
+text H0 "note CUDA C++ CPU simulator, not GPU code or a CUDA ABI\nglobal A0 uint 4096\nglobal A1 uint 4096\nglobal A2 uint 4096\nglobal A3 uint 4096\nglobal A4 uint 4096\nglobal Num uint 1\nglobal Temps uint 128\nglobal Wire uchar 4\nglobal Bytes uchar 16384\ntext Error \"CUDA_SIM_INPUT_REFUSED\\n\"\nfn bad to void\nw = write 2 Error 0 len Error\nexit 77\nend\nfn word to ulong\noff = ulong 0\nwhile lt off 4\nr = read 0 Wire off sub 4 off\nif le r 0\nbad\nend\noff = add off ulong r\nend\nv = ulong 0\nfor j ulong 4\nv = or v shl ulong get Wire j mul j 8\nend\nret v\nend\nfn calc ix ulong to uint\n"
+text H1 "\nend\nfn main to int\nblocks = word\nthreads = word\nn = word\nif or eq blocks 0 gt blocks 4096\nbad\nend\nif or eq threads 0 gt threads 4096\nbad\nend\ncover = mul blocks threads\nif or gt cover 4096 gt n 4096\nbad\nend\nput Num 0 uint n\n"
+text H2 "for ix ulong n\nput A"
+text H3 " ix uint word\nend\n"
+text H4 "r = read 0 Wire 0 1\nif ne r 0\nbad\nend\nret execute cover n\nend\nfn execute cover ulong n ulong to int\nfor ix ulong n\nif lt ix cover\nput A0 ix calc ix\nend\npack ix ulong get A0 ix\nend\noff = ulong 0\nwhile lt off mul n 4\nr = write 1 Bytes off sub mul n 4 off\nif le r 0\nbad\nend\noff = add off ulong r\nend\nret 0\nend\n"
+text Ops "add sub mul and xor or"
+text Pack "fn pack ix ulong v ulong to void\nfor j ulong 4\np = add mul ix 4 j\nb = uchar and shr v mul j 8 255\nput Bytes p b\nend\nend\n"
+
+fn die code ulong to void
+if eq code 67
+w = write 2 Limit 0 len Limit
+else
+if eq code 77
+w = write 2 IOErr 0 len IOErr
+else
+w = write 2 Err 0 len Err
+end
+end
+exit int code
+end
+
+fn alpha c uchar to bool
+ret or or and ge c 65 le c 90 and ge c 97 le c 122 eq c 95
+end
+fn digit c uchar to bool
+ret and ge c 48 le c 57
+end
+fn ident c uchar to bool
+ret or alpha c digit c
+end
+fn available p ulong to bool
+ret lt p get Size 0
+end
+fn linecom to void
+p = add get Pos 0 2
+go = true
+while and go available p
+if eq get Src p 10
+go = false
+else
+p = add p 1
+end
+end
+put Pos 0 p
+end
+fn blockcom to void
+p = add get Pos 0 2
+while available add p 1
+if and eq get Src p 42 eq get Src add p 1 47
+put Pos 0 add p 2
+ret
+end
+p = add p 1
+end
+die 65
+end
+fn spaces to void
+go = true
+while and go available get Pos 0
+p = get Pos 0
+c = get Src p
+if or or eq c 32 eq c 9 or eq c 10 eq c 13
+put Pos 0 add p 1
+else
+if and eq c 47 available add p 1
+d = get Src add p 1
+if eq d 47
+linecom
+else
+if eq d 42
+blockcom
+else
+go = false
+end
+end
+else
+go = false
+end
+end
+end
+end
+fn next to void
+spaces
+p = get Pos 0
+put Start 0 p
+if not available p
+put Kind 0 0
+put Stop 0 p
+ret
+end
+c = get Src p
+if alpha c
+p = add p 1
+go = true
+while and go available p
+if ident get Src p
+p = add p 1
+else
+go = false
+end
+end
+if gt sub p get Start 0 63
+die 67
+end
+put Kind 0 1
+else
+if digit c
+v = ulong 0
+if and eq c 48 available add p 1
+if digit get Src add p 1
+die 65
+end
+end
+go = true
+while and go available p
+c = get Src p
+if digit c
+v = add mul v 10 sub ulong c 48
+if gt v 4294967295
+die 65
+end
+p = add p 1
+else
+go = false
+end
+end
+if not available p
+die 65
+end
+c = get Src p
+if not or eq c 85 eq c 117
+die 65
+end
+p = add p 1
+put Value 0 v
+put Kind 0 2
+else
+put Kind 0 ulong c
+p = add p 1
+end
+end
+put Stop 0 p
+put Pos 0 p
+end
+fn symbol c ulong to void
+if ne get Kind 0 c
+die 65
+end
+next
+end
+fn matches a ulong n ulong to bool
+if ne get Kind 0 1
+ret false
+end
+if ne sub get Stop 0 get Start 0 n
+ret false
+end
+for j ulong n
+if ne get Src add a j get Src add get Start 0 j
+ret false
+end
+end
+ret true
+end
+fn keyeq p ulong n ulong to bool
+if ne get Kind 0 1
+ret false
+end
+a = get Start 0
+if ne sub get Stop 0 a n
+ret false
+end
+for j ulong n
+x = get Src add a j
+y = get Words add p j
+if ne x y
+ret false
+end
+end
+ret true
+end
+fn wordend p ulong to ulong
+while lt p len Words
+if eq get Words p 32
+ret p
+end
+p = add p 1
+end
+ret p
+end
+fn key k ulong to bool
+p = ulong 0
+for j ulong k
+p = add wordend p 1
+end
+e = wordend p
+ret keyeq p sub e p
+end
+fn need k ulong to void
+if not key k
+die 65
+end
+next
+end
+fn typ to void
+need 2
+need 3
+end
+fn name slot ulong to void
+if ne get Kind 0 1
+die 65
+end
+for j ulong 103
+if key j
+die 65
+end
+end
+for j ulong slot
+if matches get Names j get Lens j
+die 65
+end
+end
+put Names slot get Start 0
+put Lens slot sub get Stop 0 get Start 0
+next
+end
+fn same slot ulong to void
+if not matches get Names slot get Lens slot
+die 65
+end
+next
+end
+fn pointer slot ulong ro bool to void
+if ro
+need 4
+end
+typ
+symbol 42
+name slot
+end
+fn signature to void
+need 0
+need 1
+name 0
+symbol 40
+pointer 1 false
+symbol 44
+n = ulong 0
+while key 4
+if ge n 4
+die 67
+end
+pointer add n 2 true
+n = add n 1
+symbol 44
+end
+if eq n 0
+die 65
+end
+put Count 0 n
+typ
+name add n 2
+symbol 41
+symbol 123
+end
+fn index to void
+typ
+name add get Count 0 3
+symbol 61
+need 6
+symbol 46
+need 9
+symbol 42
+need 7
+symbol 46
+need 9
+symbol 43
+need 8
+symbol 46
+need 9
+symbol 59
+need 5
+symbol 40
+same add get Count 0 3
+symbol 60
+same add get Count 0 2
+symbol 41
+symbol 123
+same 1
+symbol 91
+same add get Count 0 3
+symbol 93
+symbol 61
+end
+fn node kind ulong a ulong b ulong v ulong to ulong
+n = get Nodes 0
+if ge n 128
+die 67
+end
+put Op n kind
+put Left n a
+put Right n b
+put Val n v
+put Nodes 0 add n 1
+ret n
+end
+fn primary to ulong
+if eq get Kind 0 40
+next
+x = expr 1
+symbol 41
+ret x
+end
+if eq get Kind 0 2
+v = get Value 0
+next
+ret node 0 0 0 v
+end
+for j ulong get Count 0
+s = add j 2
+if matches get Names s get Lens s
+next
+symbol 91
+same add get Count 0 3
+symbol 93
+ret node 1 0 0 add j 1
+end
+end
+s = add get Count 0 2
+if matches get Names s get Lens s
+next
+ret node 2 0 0 0
+end
+die 65
+ret 0
+end
+fn prec c ulong to ulong
+if eq c 124
+ret 1
+end
+if eq c 94
+ret 2
+end
+if eq c 38
+ret 3
+end
+if or eq c 43 eq c 45
+ret 4
+end
+if eq c 42
+ret 5
+end
+ret 0
+end
+fn opcode c ulong to ulong
+if eq c 43
+ret 3
+end
+if eq c 45
+ret 4
+end
+if eq c 42
+ret 5
+end
+if eq c 38
+ret 6
+end
+if eq c 94
+ret 7
+end
+ret 8
+end
+fn expr min ulong to ulong
+d = get Depth 0
+if ge d 16
+die 67
+end
+put Depth 0 add d 1
+x = primary
+go = true
+while go
+c = get Kind 0
+p = prec c
+if lt p min
+go = false
+else
+next
+y = expr add p 1
+x = node opcode c x y 0
+end
+end
+put Depth 0 d
+ret x
+end
+fn emitb c uchar to void
+p = get Used 0
+if ge p len Out
+die 67
+end
+put Out p c
+put Used 0 add p 1
+end
+fn number v ulong to void
+n = ulong 0
+while or ne v 0 eq n 0
+put Dig n uchar add rem v 10 48
+n = add n 1
+v = div v 10
+end
+while gt n 0
+n = sub n 1
+emitb get Dig n
+end
+end
+fn emit k ulong to void
+if eq k 0
+for j ulong len H0
+emitb get H0 j
+end
+end
+if eq k 1
+for j ulong len H1
+emitb get H1 j
+end
+end
+if eq k 2
+for j ulong len H2
+emitb get H2 j
+end
+end
+if eq k 3
+for j ulong len H3
+emitb get H3 j
+end
+end
+if eq k 4
+for j ulong len H4
+emitb get H4 j
+end
+end
+end
+text C0 "uint "
+text C1 "get A"
+text C2 " ix"
+text C3 "get Num 0"
+text C4 "get Temps "
+text C5 "put Temps "
+text C6 "ret get Temps "
+fn leaf k ulong v ulong to void
+if eq k 0
+for j ulong len C0
+emitb get C0 j
+end
+number v
+end
+if eq k 1
+for j ulong len C1
+emitb get C1 j
+end
+number v
+for j ulong len C2
+emitb get C2 j
+end
+end
+if eq k 2
+for j ulong len C3
+emitb get C3 j
+end
+end
+end
+fn opword k ulong to void
+p = ulong 0
+q = ulong 3
+for j ulong len Ops
+if eq q k
+if ne get Ops j 32
+emitb get Ops j
+end
+end
+if eq get Ops j 32
+q = add q 1
+end
+end
+emitb 32
+end
+fn tempref n ulong to void
+for j ulong len C4
+emitb get C4 j
+end
+number n
+end
+fn expression n ulong to void
+k = get Op n
+if lt k 3
+leaf k get Val n
+else
+opword k
+tempref get Left n
+emitb 32
+tempref get Right n
+end
+end
+fn phase to void
+for j ulong get Size 0
+c = get Src j
+if or eq c 0 eq c 92
+die 65
+end
+if and eq c 63 lt add j 2 get Size 0
+if eq get Src add j 1 63
+die 65
+end
+end
+end
+end
+fn main to int
+n = ulong 0
+go = true
+while and go lt n len Src
+r = read 0 Src n sub len Src n
+if lt r 0
+die 77
+end
+if eq r 0
+go = false
+else
+n = add n ulong r
+end
+end
+if eq n len Src
+r = read 0 Extra 0 1
+if lt r 0
+die 77
+end
+if gt r 0
+die 67
+end
+end
+put Size 0 n
+phase
+next
+signature
+index
+root = expr 1
+symbol 59
+symbol 125
+symbol 125
+if ne get Kind 0 0
+die 65
+end
+emit 0
+for j ulong get Nodes 0
+for k ulong len C5
+emitb get C5 k
+end
+number j
+emitb 32
+expression j
+emitb 10
+end
+for j ulong len C6
+emitb get C6 j
+end
+number root
+emit 1
+for j ulong add get Count 0 1
+emit 2
+number j
+emit 3
+end
+emit 4
+for j ulong len Pack
+emitb get Pack j
+end
+sent = ulong 0
+while lt sent get Used 0
+r = write 1 Out sent sub get Used 0 sent
+if le r 0
+die 77
+end
+sent = add sent ulong r
+end
+ret 0
+end

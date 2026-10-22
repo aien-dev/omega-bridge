@@ -21,5 +21,9 @@ mv "$B/omega-math.tmp" "$B/omega-math"
 cp build/bootstrap/omc build/native/omc
 cp build/bridge build/native/bridge
 cp "$B/omega-math" build/native/math
-sha256sum build/native/omc build/native/bridge build/native/math > build/native.sha256
+build/bootstrap/omc < src/cuda-cpp.om > build/native/cuda-cpp.tmp
+tools/verify-elf.sh build/native/cuda-cpp.tmp
+chmod 700 build/native/cuda-cpp.tmp
+mv build/native/cuda-cpp.tmp build/native/cuda-cpp
+sha256sum build/native/omc build/native/bridge build/native/math build/native/cuda-cpp > build/native.sha256
 printf 'PASS native converter and math, shared source-born compiler\n'

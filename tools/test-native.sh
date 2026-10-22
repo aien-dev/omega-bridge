@@ -16,4 +16,7 @@ mkdir -p evidence/native-path-safety
 L529_REPORT="$PWD/evidence/native-path-safety/full-gate-paths.json" node tests/native/path-safety.mjs > evidence/native-path-safety/full-gate-paths.log 2>&1
 mkdir -p evidence/native-developer-commands
 node tests/native/developer-commands.mjs > evidence/native-developer-commands/full-gate.log 2>&1
-printf 'PASS converter, native math, installed commands, source provenance, path safety and native development\n'
+mkdir -p evidence/cuda-cpp
+CUDA_CPP_TEST_OUT="$PWD/build/cuda-cpp-tests" python3 tests/cuda-cpp/gate.py > evidence/cuda-cpp/native-gate.log 2>&1
+CUDA_CPP_COMMAND_OUT="$PWD/build/cuda-cpp-command-tests" python3 tests/cuda-cpp/commands.py > evidence/cuda-cpp/commands.log 2>&1
+printf 'PASS converter, native math, installed commands, source provenance, path safety, native development and bounded CUDA C++ CPU simulation\n'

@@ -32,7 +32,7 @@ tmp=$(mktemp -d "${TMPDIR:-/tmp}/omega-command.XXXXXXXX") || fail 74 'cannot cre
 outtmp=
 cleanup() {
     [ -z "$outtmp" ] || rm -f -- "$outtmp"
-    rm -f -- "$tmp/input" "$tmp/native" "$tmp/output" "$tmp/error"
+    rm -f -- "$tmp/input" "$tmp/native" "$tmp/output" "$tmp/error" "$tmp/lowered"
     rmdir "$tmp"
 }
 trap cleanup EXIT
@@ -52,6 +52,23 @@ if [ "$command" = math ]; then
     exit 0
 fi
 if [ "$command" = check ] || [ "$command" = build ] || [ "$command" = run ]; then
+    language=omega
+    target=
+    if [ "${1-}" = --from ]; then
+        [ "$#" -ge 2 ] || fail 64 'missing source language'
+        [ "$2" = cuda-cpp ] || fail 69 'unsupported source language'
+        language=cuda-cpp
+        shift 2
+        if [ "${1-}" = --target ]; then
+            [ "$#" -ge 2 ] || fail 64 'missing target'
+            target=$2
+            shift 2
+            [ "$target" = cpu-sim ] || fail 69 'CUDA C++ GPU lowering is not qualified; only explicit cpu-sim is available'
+        fi
+        if [ "$command" != check ] && [ "$target" != cpu-sim ]; then
+            fail 69 'CUDA C++ build/run require --target cpu-sim; no implicit CPU fallback'
+        fi
+    fi
     if [ "${1-}" = -- ]; then shift; fi
     if [ "$command" = build ]; then
         [ "$#" = 3 ] && [ "$2" = -o ] || fail 64 'usage: om build [--] input.om -o output'
@@ -65,7 +82,18 @@ if [ "$command" = check ] || [ "$command" = build ] || [ "$command" = run ]; the
     case $input in /*) ;; *) input=./$input;; esac
     [ -f "$input" ] && [ -r "$input" ] || fail 66 'input is not a readable regular file'
     cat -- "$input" > "$tmp/input" || fail 74 'cannot snapshot input'
-    if ! "$root/omc" < "$tmp/input" > "$tmp/native" 2> "$tmp/error"; then
+    source=$tmp/input
+    if [ "$language" = cuda-cpp ]; then
+        rc=0
+        "$root/cuda-cpp" < "$tmp/input" > "$tmp/lowered" 2> "$tmp/error" || rc=$?
+        if [ "$rc" != 0 ]; then
+            cat "$tmp/error" >&2
+            exit "$rc"
+        fi
+        [ -s "$tmp/lowered" ] || fail 65 'CUDA C++ lowering produced no source'
+        source=$tmp/lowered
+    fi
+    if ! "$root/omc" < "$source" > "$tmp/native" 2> "$tmp/error"; then
         cat "$tmp/error" >&2
         fail 65 'native source check refused'
     fi

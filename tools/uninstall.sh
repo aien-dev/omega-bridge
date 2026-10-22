@@ -30,8 +30,8 @@ for name in om omg; do
     [ -L "$prefix/bin/$name" ] && [ "$(readlink -- "$prefix/bin/$name")" = ../lib/omega-native/om ] || fail 73 'alias changed; preserving installation'
 done
 (cd "$payload" && sha256sum --status -c files.sha256) 2>/dev/null || fail 65 'installed files changed; preserving installation'
-for f in omc bridge math om uninstall.sh verify-elf.sh HELP.txt pins LICENSE MATH-CONTRACT.md CAPABILITIES.md created-directories files.sha256; do
-    case $f in omc|bridge|math|om|uninstall.sh|verify-elf.sh) mode=700;; *) mode=600;; esac
+for f in omc bridge math cuda-cpp om uninstall.sh verify-elf.sh HELP.txt pins LICENSE MATH-CONTRACT.md CAPABILITIES.md created-directories files.sha256; do
+    case $f in omc|bridge|math|cuda-cpp|om|uninstall.sh|verify-elf.sh) mode=700;; *) mode=600;; esac
     [ -f "$payload/$f" ] && [ ! -L "$payload/$f" ] && [ "$(stat -c %a "$payload/$f")" = "$mode" ] || fail 65 'installed file type or mode changed; preserving installation'
 done
 # Fixed deletion list; never use paths supplied by a mutable manifest for removal.
@@ -48,7 +48,7 @@ trap 'rmdir "$prefix/.omega-install-lock" 2>/dev/null || :' EXIT
 preflight --prefix "$2"
 # Preflight completed; only fixed, owned files are removed.
 rm -- "$prefix/bin/om" "$prefix/bin/omg"
-for f in omc bridge math om uninstall.sh verify-elf.sh HELP.txt pins LICENSE MATH-CONTRACT.md CAPABILITIES.md created-directories files.sha256; do
+for f in omc bridge math cuda-cpp om uninstall.sh verify-elf.sh HELP.txt pins LICENSE MATH-CONTRACT.md CAPABILITIES.md created-directories files.sha256; do
     rm -- "$payload/$f"
 done
 rmdir "$payload" 2>/dev/null || :
