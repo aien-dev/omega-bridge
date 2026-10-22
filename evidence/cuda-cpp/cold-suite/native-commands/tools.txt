@@ -1,0 +1,9 @@
+Linux 7.0.0-1019-nvidia aarch64
+git version 2.43.0
+v24.21.0
+Python 3.12.3
+gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+GNU readelf (GNU Binutils for Ubuntu) 2.42
+/usr/bin/dash
+c883d9c27228339580994a1d0ea960645368c7d1b960a712bd0c655860c2d0d7  /bin/sh
+6bca2bbd23b072db9e9a19ae0e65cf7b7c15c08a3c2cf01dd56453e1ac9340b1  /usr/bin/readelf

@@ -1,0 +1,168 @@
+{
+  "source": "795009f",
+  "executed": 33,
+  "passed": 5,
+  "failed": 28,
+  "rows": [
+    {
+      "name": "one implementation for both names",
+      "ok": true
+    },
+    {
+      "name": "om checks without execution",
+      "ok": false,
+      "error": "omega: unknown command; use om help\n\n\n64 !== 0\n"
+    },
+    {
+      "name": "om rejects invalid source",
+      "ok": false,
+      "error": "omega: unknown command; use om help\n\n\n64 !== 65\n"
+    },
+    {
+      "name": "om refuses missing input",
+      "ok": false,
+      "error": "omega: unknown command; use om help\n\n\n64 !== 66\n"
+    },
+    {
+      "name": "om rejects extra arguments",
+      "ok": true
+    },
+    {
+      "name": "om runs native stdout and status",
+      "ok": false,
+      "error": "omega: unknown command; use om help\n\n\n64 !== 23\n"
+    },
+    {
+      "name": "om preserves raw program stdin",
+      "ok": false,
+      "error": "omega: unknown command; use om help\n\n\n64 !== 0\n"
+    },
+    {
+      "name": "om builds silent executable output",
+      "ok": false,
+      "error": "omega: unknown command; use om help\n\n\n64 !== 0\n"
+    },
+    {
+      "name": "omg checks without execution",
+      "ok": false,
+      "error": "omega: unknown command; use om help\n\n\n64 !== 0\n"
+    },
+    {
+      "name": "omg rejects invalid source",
+      "ok": false,
+      "error": "omega: unknown command; use om help\n\n\n64 !== 65\n"
+    },
+    {
+      "name": "omg refuses missing input",
+      "ok": false,
+      "error": "omega: unknown command; use om help\n\n\n64 !== 66\n"
+    },
+    {
+      "name": "omg rejects extra arguments",
+      "ok": true
+    },
+    {
+      "name": "omg runs native stdout and status",
+      "ok": false,
+      "error": "omega: unknown command; use om help\n\n\n64 !== 23\n"
+    },
+    {
+      "name": "omg preserves raw program stdin",
+      "ok": false,
+      "error": "omega: unknown command; use om help\n\n\n64 !== 0\n"
+    },
+    {
+      "name": "omg builds silent executable output",
+      "ok": false,
+      "error": "omega: unknown command; use om help\n\n\n64 !== 0\n"
+    },
+    {
+      "name": "leading-dash source is literal after --",
+      "ok": false,
+      "error": "omega: unknown command; use om help\n\n\n64 !== 0\n"
+    },
+    {
+      "name": "shell metacharacters are literal filenames",
+      "ok": false,
+      "error": "omega: unknown command; use om help\n\n\n64 !== 23\n"
+    },
+    {
+      "name": "check accepts a source symlink snapshot",
+      "ok": false,
+      "error": "omega: unknown command; use om help\n\n\n64 !== 0\n"
+    },
+    {
+      "name": "directory is not an input file",
+      "ok": false,
+      "error": "omega: unknown command; use om help\n\n\n64 !== 66\n"
+    },
+    {
+      "name": "build needs explicit destination",
+      "ok": true
+    },
+    {
+      "name": "failed compilation preserves existing output and mode",
+      "ok": false,
+      "error": "omega: unknown command; use om help\n\n\n64 !== 65\n"
+    },
+    {
+      "name": "failed compilation creates no output",
+      "ok": false,
+      "error": "omega: unknown command; use om help\n\n\n64 !== 65\n"
+    },
+    {
+      "name": "successful explicit build atomically replaces regular file",
+      "ok": false,
+      "error": "omega: unknown command; use om help\n\n\n64 !== 0\n"
+    },
+    {
+      "name": "build never follows an output symlink",
+      "ok": false,
+      "error": "omega: unknown command; use om help\n\n\n64 !== 73\n"
+    },
+    {
+      "name": "build rename preserves a hardlink peer",
+      "ok": false,
+      "error": "omega: unknown command; use om help\n\n\n64 !== 0\n"
+    },
+    {
+      "name": "unavailable destination refuses without residue",
+      "ok": false,
+      "error": "omega: unknown command; use om help\n\n\n64 !== 73\n"
+    },
+    {
+      "name": "nonregular destination is preserved",
+      "ok": false,
+      "error": "omega: unknown command; use om help\n\n\n64 !== 73\n"
+    },
+    {
+      "name": "ELF verifier is owned and hash-checked",
+      "ok": false,
+      "error": "installed ELF helper missing"
+    },
+    {
+      "name": "wrong native compiler cannot publish or run non-ELF",
+      "ok": false,
+      "error": "omega: unknown command; use om help\n\n\n64 !== 65\n"
+    },
+    {
+      "name": "actual run uses no foreign compiler/interpreter fallback",
+      "ok": false,
+      "error": "omega: unknown command; use om help\n\n\n64 !== 23\n"
+    },
+    {
+      "name": "invalid run never prints program output",
+      "ok": false,
+      "error": "omega: unknown command; use om help\n\n\n64 !== 65\n"
+    },
+    {
+      "name": "help documents native developer commands",
+      "ok": false,
+      "error": "om check"
+    },
+    {
+      "name": "uninstall removes all new owned files and both aliases",
+      "ok": true
+    }
+  ]
+}

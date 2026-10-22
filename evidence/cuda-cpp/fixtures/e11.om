@@ -1,0 +1,90 @@
+note CUDA C++ CPU simulator, not GPU code or a CUDA ABI
+global A0 uint 4096
+global A1 uint 4096
+global A2 uint 4096
+global A3 uint 4096
+global A4 uint 4096
+global Num uint 1
+global Temps uint 128
+global Wire uchar 4
+global Bytes uchar 16384
+text Error "CUDA_SIM_INPUT_REFUSED\n"
+fn bad to void
+w = write 2 Error 0 len Error
+exit 77
+end
+fn word to ulong
+off = ulong 0
+while lt off 4
+r = read 0 Wire off sub 4 off
+if le r 0
+bad
+end
+off = add off ulong r
+end
+v = ulong 0
+for j ulong 4
+v = or v shl ulong get Wire j mul j 8
+end
+ret v
+end
+fn calc ix ulong to uint
+put Temps 0 uint 0
+put Temps 1 get A1 ix
+put Temps 2 sub get Temps 0 get Temps 1
+ret get Temps 2
+end
+fn main to int
+blocks = word
+threads = word
+n = word
+if or eq blocks 0 gt blocks 4096
+bad
+end
+if or eq threads 0 gt threads 4096
+bad
+end
+cover = mul blocks threads
+if or gt cover 4096 gt n 4096
+bad
+end
+put Num 0 uint n
+for ix ulong n
+put A0 ix uint word
+end
+for ix ulong n
+put A1 ix uint word
+end
+for ix ulong n
+put A2 ix uint word
+end
+r = read 0 Wire 0 1
+if ne r 0
+bad
+end
+ret execute cover n
+end
+fn execute cover ulong n ulong to int
+for ix ulong n
+if lt ix cover
+put A0 ix calc ix
+end
+pack ix ulong get A0 ix
+end
+off = ulong 0
+while lt off mul n 4
+r = write 1 Bytes off sub mul n 4 off
+if le r 0
+bad
+end
+off = add off ulong r
+end
+ret 0
+end
+fn pack ix ulong v ulong to void
+for j ulong 4
+p = add mul ix 4 j
+b = uchar and shr v mul j 8 255
+put Bytes p b
+end
+end

@@ -1,0 +1,214 @@
+note CUDA C++ CPU simulator, not GPU code or a CUDA ABI
+global A0 uint 4096
+global A1 uint 4096
+global A2 uint 4096
+global A3 uint 4096
+global A4 uint 4096
+global Num uint 1
+global Temps uint 128
+global Wire uchar 4
+global Bytes uchar 16384
+text Error "CUDA_SIM_INPUT_REFUSED\n"
+fn bad to void
+w = write 2 Error 0 len Error
+exit 77
+end
+fn word to ulong
+off = ulong 0
+while lt off 4
+r = read 0 Wire off sub 4 off
+if le r 0
+bad
+end
+off = add off ulong r
+end
+v = ulong 0
+for j ulong 4
+v = or v shl ulong get Wire j mul j 8
+end
+ret v
+end
+fn calc ix ulong to uint
+put Temps 0 uint 1
+put Temps 1 uint 1
+put Temps 2 add get Temps 0 get Temps 1
+put Temps 3 uint 1
+put Temps 4 add get Temps 2 get Temps 3
+put Temps 5 uint 1
+put Temps 6 add get Temps 4 get Temps 5
+put Temps 7 uint 1
+put Temps 8 add get Temps 6 get Temps 7
+put Temps 9 uint 1
+put Temps 10 add get Temps 8 get Temps 9
+put Temps 11 uint 1
+put Temps 12 add get Temps 10 get Temps 11
+put Temps 13 uint 1
+put Temps 14 add get Temps 12 get Temps 13
+put Temps 15 uint 1
+put Temps 16 add get Temps 14 get Temps 15
+put Temps 17 uint 1
+put Temps 18 add get Temps 16 get Temps 17
+put Temps 19 uint 1
+put Temps 20 add get Temps 18 get Temps 19
+put Temps 21 uint 1
+put Temps 22 add get Temps 20 get Temps 21
+put Temps 23 uint 1
+put Temps 24 add get Temps 22 get Temps 23
+put Temps 25 uint 1
+put Temps 26 add get Temps 24 get Temps 25
+put Temps 27 uint 1
+put Temps 28 add get Temps 26 get Temps 27
+put Temps 29 uint 1
+put Temps 30 add get Temps 28 get Temps 29
+put Temps 31 uint 1
+put Temps 32 add get Temps 30 get Temps 31
+put Temps 33 uint 1
+put Temps 34 add get Temps 32 get Temps 33
+put Temps 35 uint 1
+put Temps 36 add get Temps 34 get Temps 35
+put Temps 37 uint 1
+put Temps 38 add get Temps 36 get Temps 37
+put Temps 39 uint 1
+put Temps 40 add get Temps 38 get Temps 39
+put Temps 41 uint 1
+put Temps 42 add get Temps 40 get Temps 41
+put Temps 43 uint 1
+put Temps 44 add get Temps 42 get Temps 43
+put Temps 45 uint 1
+put Temps 46 add get Temps 44 get Temps 45
+put Temps 47 uint 1
+put Temps 48 add get Temps 46 get Temps 47
+put Temps 49 uint 1
+put Temps 50 add get Temps 48 get Temps 49
+put Temps 51 uint 1
+put Temps 52 add get Temps 50 get Temps 51
+put Temps 53 uint 1
+put Temps 54 add get Temps 52 get Temps 53
+put Temps 55 uint 1
+put Temps 56 add get Temps 54 get Temps 55
+put Temps 57 uint 1
+put Temps 58 add get Temps 56 get Temps 57
+put Temps 59 uint 1
+put Temps 60 add get Temps 58 get Temps 59
+put Temps 61 uint 1
+put Temps 62 add get Temps 60 get Temps 61
+put Temps 63 uint 1
+put Temps 64 add get Temps 62 get Temps 63
+put Temps 65 uint 1
+put Temps 66 add get Temps 64 get Temps 65
+put Temps 67 uint 1
+put Temps 68 add get Temps 66 get Temps 67
+put Temps 69 uint 1
+put Temps 70 add get Temps 68 get Temps 69
+put Temps 71 uint 1
+put Temps 72 add get Temps 70 get Temps 71
+put Temps 73 uint 1
+put Temps 74 add get Temps 72 get Temps 73
+put Temps 75 uint 1
+put Temps 76 add get Temps 74 get Temps 75
+put Temps 77 uint 1
+put Temps 78 add get Temps 76 get Temps 77
+put Temps 79 uint 1
+put Temps 80 add get Temps 78 get Temps 79
+put Temps 81 uint 1
+put Temps 82 add get Temps 80 get Temps 81
+put Temps 83 uint 1
+put Temps 84 add get Temps 82 get Temps 83
+put Temps 85 uint 1
+put Temps 86 add get Temps 84 get Temps 85
+put Temps 87 uint 1
+put Temps 88 add get Temps 86 get Temps 87
+put Temps 89 uint 1
+put Temps 90 add get Temps 88 get Temps 89
+put Temps 91 uint 1
+put Temps 92 add get Temps 90 get Temps 91
+put Temps 93 uint 1
+put Temps 94 add get Temps 92 get Temps 93
+put Temps 95 uint 1
+put Temps 96 add get Temps 94 get Temps 95
+put Temps 97 uint 1
+put Temps 98 add get Temps 96 get Temps 97
+put Temps 99 uint 1
+put Temps 100 add get Temps 98 get Temps 99
+put Temps 101 uint 1
+put Temps 102 add get Temps 100 get Temps 101
+put Temps 103 uint 1
+put Temps 104 add get Temps 102 get Temps 103
+put Temps 105 uint 1
+put Temps 106 add get Temps 104 get Temps 105
+put Temps 107 uint 1
+put Temps 108 add get Temps 106 get Temps 107
+put Temps 109 uint 1
+put Temps 110 add get Temps 108 get Temps 109
+put Temps 111 uint 1
+put Temps 112 add get Temps 110 get Temps 111
+put Temps 113 uint 1
+put Temps 114 add get Temps 112 get Temps 113
+put Temps 115 uint 1
+put Temps 116 add get Temps 114 get Temps 115
+put Temps 117 uint 1
+put Temps 118 add get Temps 116 get Temps 117
+put Temps 119 uint 1
+put Temps 120 add get Temps 118 get Temps 119
+put Temps 121 uint 1
+put Temps 122 add get Temps 120 get Temps 121
+put Temps 123 uint 1
+put Temps 124 add get Temps 122 get Temps 123
+put Temps 125 uint 1
+put Temps 126 add get Temps 124 get Temps 125
+ret get Temps 126
+end
+fn main to int
+blocks = word
+threads = word
+n = word
+if or eq blocks 0 gt blocks 4096
+bad
+end
+if or eq threads 0 gt threads 4096
+bad
+end
+cover = mul blocks threads
+if or gt cover 4096 gt n 4096
+bad
+end
+put Num 0 uint n
+for ix ulong n
+put A0 ix uint word
+end
+for ix ulong n
+put A1 ix uint word
+end
+for ix ulong n
+put A2 ix uint word
+end
+r = read 0 Wire 0 1
+if ne r 0
+bad
+end
+ret execute cover n
+end
+fn execute cover ulong n ulong to int
+for ix ulong n
+if lt ix cover
+put A0 ix calc ix
+end
+pack ix ulong get A0 ix
+end
+off = ulong 0
+while lt off mul n 4
+r = write 1 Bytes off sub mul n 4 off
+if le r 0
+bad
+end
+off = add off ulong r
+end
+ret 0
+end
+fn pack ix ulong v ulong to void
+for j ulong 4
+p = add mul ix 4 j
+b = uchar and shr v mul j 8 255
+put Bytes p b
+end
+end

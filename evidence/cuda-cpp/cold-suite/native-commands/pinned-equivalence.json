@@ -1,0 +1,10 @@
+{
+  "sourcePin": "78477217b6803ad5d2b14caee40b65c7509aa40c",
+  "originalBinary": "/home/drakestapleton/workspace/omega-symbolic-native/build/math-native/omega-math",
+  "originalSHA256": "4e4a218d2c8bf8582f0e4ff8062ec53622c20e77b9ee1a0632318020898d0d8c",
+  "integratedSHA256": "4e4a218d2c8bf8582f0e4ff8062ec53622c20e77b9ee1a0632318020898d0d8c",
+  "equalBytes": true,
+  "comparedRequests": 42,
+  "status": 0,
+  "stdoutSHA256": "1ddad9458e09234bb8737c66a74a386ab1d4eb995cfd507cb0127cd0159a2b2b"
+}

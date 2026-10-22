@@ -1,0 +1,41 @@
+{
+  "sourceCommit": "e461b7a69db9c7f8634f4969209bc3e3310c033a",
+  "cloneMethod": "git clone --no-local --single-branch",
+  "freshHome": true,
+  "unrelatedCwd": true,
+  "offline": true,
+  "sourceOnly": true,
+  "noSiblingSources": true,
+  "sourceAndBinaryOverridesAbsent": true,
+  "commands": 69,
+  "provenance": 18,
+  "combinedGate": "PASS converter, native math, installed commands and source provenance",
+  "PATHAliasesVerified": 2,
+  "rows": [
+    {
+      "name": "omc",
+      "incrementalSHA256": "191b776ef98821597c3e30655da6d680a9b66edbc9ceaca3c39c61ea6df098e9",
+      "freshSHA256": "191b776ef98821597c3e30655da6d680a9b66edbc9ceaca3c39c61ea6df098e9"
+    },
+    {
+      "name": "bridge",
+      "incrementalSHA256": "db0847423bec99ba66fdd99e75e5e3b795e2a5386e81ca3ed7b4c9c530a5bd4e",
+      "freshSHA256": "db0847423bec99ba66fdd99e75e5e3b795e2a5386e81ca3ed7b4c9c530a5bd4e"
+    },
+    {
+      "name": "math",
+      "incrementalSHA256": "4e4a218d2c8bf8582f0e4ff8062ec53622c20e77b9ee1a0632318020898d0d8c",
+      "freshSHA256": "4e4a218d2c8bf8582f0e4ff8062ec53622c20e77b9ee1a0632318020898d0d8c"
+    },
+    {
+      "target": "c",
+      "outputSHA256": "630da09779c39aa9a06c046bf88434da42a40d8e21f9ee0d8e486593c9356b0a",
+      "equal": true
+    },
+    {
+      "target": "python",
+      "outputSHA256": "16a3513b269962d4ddc80eefdfee72a2a1b6ef8be7f4d35158e71c2dcdd0bcca",
+      "equal": true
+    }
+  ]
+}

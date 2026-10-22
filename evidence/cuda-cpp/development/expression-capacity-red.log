@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/home/drakestapleton/workspace/omega-cuda-cpp-frontend/tests/cuda-cpp/gate.py", line 55, in <module>
+    native=compile_native(source,f'e{j}')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/drakestapleton/workspace/omega-cuda-cpp-frontend/tests/cuda-cpp/gate.py", line 23, in compile_native
+    check(q.returncode==0 and q.stdout,name+' native compile',rc=q.returncode,stderr=q.stderr.decode(errors='replace'))
+  File "/home/drakestapleton/workspace/omega-cuda-cpp-frontend/tests/cuda-cpp/gate.py", line 17, in check
+    raise AssertionError((label,info))
+AssertionError: ('e14 native compile', {'rc': 12, 'stderr': 'omc: line 31: error 12\n'})

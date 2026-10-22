@@ -1,0 +1,38 @@
+{
+  "schema": "omega.cuda-cpp.cpu-sim.v1",
+  "source_commit": "9ac729a73bd036633ffccc0c23783fc104866132",
+  "base_commit": "d2010ab927b608931800c20d73a4c2b25f00a9fa",
+  "source_closure": {
+    "src/cuda-cpp.om": "d12a2b070ba938ce5b88bdc23dfee118362e2b3d313059c8810107ff7181ace7",
+    "tools/om": "76da02ea5616c4fe356a49f51d2e0363380d0f902630223d31d36dd86e71c23f",
+    "tools/build-native.sh": "056e4ed66ef0a0ebcaca78b499c28f4935531eda1beba94af37cf6948684f312",
+    "tools/install.sh": "c19cfa1c71e2430bbb6698a99085876f271de2ae9d8ce20a1927c4e792fc8b45",
+    "tools/uninstall.sh": "3e59ee2257404f93f8022eaef9e6f8e8d94907e5ad739dd8b14da08c500de3e4",
+    "tools/HELP.txt": "75a415571af395d6b38227529d1cbfa4d2af298f600dd01ddfea5b9bf7f13b84",
+    "tools/test-native.sh": "2aacaf8e0d43e60aacc3d4b9b6ff6605155e35ae50aa6b1381d1faa79a4f6a31",
+    "tests/cuda-cpp/gate.py": "cc3faf659cf51720e6952afd8575bd3e21cb595d57a275d275d725988cba6a36",
+    "tests/cuda-cpp/commands.py": "33fe6b272ac72d637f5f8addf795f33a40e82604a24dd38d1d8ba7b1292e9bd5",
+    "tests/cuda-cpp/vector.cu": "ce5e27f9b8f452c072f2efef96efe73ce850121677daf0250c8e545ba9f055f9"
+  },
+  "results": {
+    "native": {
+      "checks": 549,
+      "passed": 549
+    },
+    "commands": {
+      "checks": 33,
+      "passed": 33
+    }
+  },
+  "full_inherited_suite_exit": 0,
+  "cold_committed_source_replay_exit": 0,
+  "compiler_sha256": "191b776ef98821597c3e30655da6d680a9b66edbc9ceaca3c39c61ea6df098e9",
+  "frontend_sha256": "6b6668ed164bc0edb122811f5d3e5f93f928248b53e3bdb88db68f5340d57b3e",
+  "compiled_behavioral_mutants_caught": 3,
+  "independent_review": "PENDING L610",
+  "gpu": "NOT_RUN; native GPU lowering remains L408 dependency",
+  "full_cuda_cpp": "NOT_IMPLEMENTED; bounded unsigned-int elementwise profile only",
+  "candidate_prefix": "/home/drakestapleton/handoffs/cuda-cpp-L605/candidate",
+  "production_service_changes": false,
+  "timing_claim": false
+}

@@ -1,0 +1,3517 @@
+[
+  {
+    "name": "e0 frontend",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e0 native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e0 static ELF",
+    "pass": true
+  },
+  {
+    "name": "e0 C++ original oracle compile",
+    "pass": true,
+    "stderr": ""
+  },
+  {
+    "name": "e0 case0",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7d450465ceb49083708a6970827f0e0b116ed285072a95b451e55f583f56da8d",
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e0 case1",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7ceee0fded46cc97352513679bcce94c310e55f4f496f6b5c0a3b27f93307895",
+    "output_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+  },
+  {
+    "name": "e0 case2",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "1e23aef61b4b24ddfa1edbc890a2cd422297154ff9a25b0a31f82f76122cd71c",
+    "output_sha256": "8e7114071523d368cd473fda8cd6dca11c4e5742179a7c8d3c9893e4322d11e3"
+  },
+  {
+    "name": "e0 case3",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "ce3f4db38fe258d333d9f69e6406dd3e9c035744fa60dd92c3094ea5eb615415",
+    "output_sha256": "d0d297f4db4cf3a0c8e405e7d736a59f4612622731c8efe2f4b94f9510d5a437"
+  },
+  {
+    "name": "e0 case4",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "616d294d912ce96a729ae7b132d683d3e0b5fdac008c134cdc2963087d0e0efb",
+    "output_sha256": "b44cf3c5e773a731177bea6ee18b1da8bda815342fd73711b2fd467a6aa2f3b3"
+  },
+  {
+    "name": "e0 case5",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "212389f929cdb0bd4dbd183f411e331023da585f1884c4d50a4b63efcf90c7e3",
+    "output_sha256": "ea8eafeb331eae765534597c9d9f4e3543e9e81b56c5eaad17beb7d57d93f323"
+  },
+  {
+    "name": "e0 case6",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "c86e9195cf97c721b37596e8a8a27ba799d7659a0cb93b0c4945622262240f77",
+    "output_sha256": "8261b337b7a64a1dd43fdb6b46dc38814c589ff99f5cb88092bd9bbc2e05ec58"
+  },
+  {
+    "name": "e0 case7",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "3a03475b80963bcee1fb050d603e60ca451cdbae63d3d0ae4d873cbc92ae3f08",
+    "output_sha256": "adddea6ecb80b4a8264801ae3599973f62a837d25f322f0fd3aabc82006ee776"
+  },
+  {
+    "name": "e0 case8",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "40345dfd98c4c91c0b9f4ae51d301a9db158626f699613b28b2e7e399c266ab9",
+    "output_sha256": "67884f15861bfae8c2c95ed7411eba93df51a9d3f4882500ebcec9c41ed1213f"
+  },
+  {
+    "name": "e0 case9",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "a6abd704e61206b68405b6fd672c834ba4e244dd8e4f94fbff74abf551277a21",
+    "output_sha256": "c21e8b86e215592f9a6bf665f45c8832da7ed888a01869e4c26df4da1924bdf9"
+  },
+  {
+    "name": "e0 case10",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "4de257264ef98919d214c6dd7bdbda82c5abf3021f3b32e3358154edd03739d9",
+    "output_sha256": "7c52612fdf0b5be5fac72fb779f28e36f257dd64bc6e90f03f58d5142e2c4ca5"
+  },
+  {
+    "name": "e0 case11",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "55b6b8a40c3009b01f66f01dde4fda89c0284cd397dc0641efbb080d194433b3",
+    "output_sha256": "124b93f9dde55aceaeaf246430f35871540166e741befe244cb3b3cca2cfa5d9"
+  },
+  {
+    "name": "e0 case12",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "5198a19f0c3ab5aab4f1ab35c004bba58382c556966329baa8e353b3d188ce47",
+    "output_sha256": "4f5e5b9262a0467f3589a63b1755a06b16f209f95ea21a484f88f43459db7a69"
+  },
+  {
+    "name": "e0 case13",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "3c042174cad0c11eecdb1e378f92f33be8ee7d28a22829c382a300b53cfde2d2",
+    "output_sha256": "80b158ed5372dd03867704659fc418439ca9de68ad7f06b209012bc24bf501ae"
+  },
+  {
+    "name": "e0 case14",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "b681a8f1fb3910e1f4dcad05decaeeb11b77dea30438abf53b1ed6102c57c695",
+    "output_sha256": "cccc05ea1467c638aa2645eea6ae9526a7b925098b92930995660effd386a3d1"
+  },
+  {
+    "name": "e0 case15",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "aca1ec29b4f24bf2f5db53b039ee9c44df5cdad65a59a1c8b513ecff400c79ef",
+    "output_sha256": "8e0b5f1c17be37397b92f0af3fa2a6a20423f9b08d3613cdecf8a6b376a45204"
+  },
+  {
+    "name": "e0 case16",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "d271e3bc0c77abb73083bfcfc7b230bb00c4c52b902a7e8d6b1ec852adf95289",
+    "output_sha256": "7fbc3342f83d473f5f44b0eb2331dcaa5a6617d4b21e4ee92721ac3af7bf95d9"
+  },
+  {
+    "name": "e0 case17",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "3e2aa25e9af750dd6a8ed1a78e16d92b83854a1f5751dc784595725a9ce60912",
+    "output_sha256": "3c328d73730a1302091e45023e8611deb0b365b43b3bef1e27af9ad8700573e0"
+  },
+  {
+    "name": "e1 frontend",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e1 native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e1 static ELF",
+    "pass": true
+  },
+  {
+    "name": "e1 C++ original oracle compile",
+    "pass": true,
+    "stderr": ""
+  },
+  {
+    "name": "e1 case0",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7d450465ceb49083708a6970827f0e0b116ed285072a95b451e55f583f56da8d",
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e1 case1",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7ceee0fded46cc97352513679bcce94c310e55f4f496f6b5c0a3b27f93307895",
+    "output_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+  },
+  {
+    "name": "e1 case2",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "1e23aef61b4b24ddfa1edbc890a2cd422297154ff9a25b0a31f82f76122cd71c",
+    "output_sha256": "8e7114071523d368cd473fda8cd6dca11c4e5742179a7c8d3c9893e4322d11e3"
+  },
+  {
+    "name": "e1 case3",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "3e1f588133f2b4de18c3ae6c17c79b35789e74b90a635d1cf85930a24dffecb9",
+    "output_sha256": "c110682eb32a00126326f3f4ff9aa871c5ae0ecd13774e4e057b73e758629afd"
+  },
+  {
+    "name": "e1 case4",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "37e7149ceb7dae4aae213ecc6faf984db0ab18b47694c2cae4b4fd3f99810960",
+    "output_sha256": "90a6a7a2074372111d711c8f8606de6e8b1f8b10d0e783aff3134b08a6085c91"
+  },
+  {
+    "name": "e1 case5",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "271fdafdf3515297e0f45e40f77f36c94c667cc546862c748852143704c5eaa7",
+    "output_sha256": "72d539683a4d33cf5e4ed7e2b340eab02bcba1c3670f965cbc3ef08624e778dd"
+  },
+  {
+    "name": "e1 case6",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "f741fb5a8f2f93e64e205182fee25f5a9b355462b6620bcc109aa1a12a56b6af",
+    "output_sha256": "41da22e4c5a6936d7e263f5906601a4359b16c2478cd8e077828b6f1d41e79c9"
+  },
+  {
+    "name": "e1 case7",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "2f6769e271b5a5729f66232dba6119f2ad0cf32add8942149d8c0e2225ab933c",
+    "output_sha256": "d86de1cd040335d70cea5fc8f2acd60924f4c72bd391ab9c6dbfde57b4f77237"
+  },
+  {
+    "name": "e1 case8",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "6eb004e5b4fe48df70d29c0a7f2767779a2a7602327341f7133696d3950480d9",
+    "output_sha256": "8b788399b1298c5ad8e3a1a4fd3a076076a8d8328df0f12c2f21c2741b6e00f1"
+  },
+  {
+    "name": "e1 case9",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "80b12c7d9e9d7e503e5f57ca1fd5caccc88d475f2d6a22fbae84d2a381bbc4cb",
+    "output_sha256": "dcc01214d5e046ad1e7f62cd12324c0fe84c19d8a66979058e5d905fb04d939d"
+  },
+  {
+    "name": "e1 case10",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "ba05e49521069609beca51a3320c9acf775a9cbdd43217cfd8f32e6c1f54ab0f",
+    "output_sha256": "a883d5cbf5bb0c8f5a09f2284b7ba0dab50115009292b873867e6e9ddd60084e"
+  },
+  {
+    "name": "e1 case11",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "e470448dc5df983d4d30c0cdb75bf58072f523208706e88976b92b0c8fcc8b7a",
+    "output_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+  },
+  {
+    "name": "e1 case12",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "1a965d3a202fd392828fff040176f806308ee3e96e58fa2836f7dd3dd0f3d109",
+    "output_sha256": "384f6a518ee3c4102acf7088ef1507356ebbabfabf98ae0fd537a0ccb5202c06"
+  },
+  {
+    "name": "e1 case13",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "c5856d01b3285deb57ef45c3d125883da72567192da0abd8aa962e0f6973798f",
+    "output_sha256": "c95a3c03f1773c13994f13fd2d0661437412044341987e633540f4f6d133e0ec"
+  },
+  {
+    "name": "e1 case14",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "3a4780a72910e6b2ad740c1e20ab7a5f6809780f10478e98f84c7e5268b29356",
+    "output_sha256": "f077d0b5d66bd99974aeeadb684a940a0fd8764829a18d8e163d1c27fe71c005"
+  },
+  {
+    "name": "e1 case15",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "5312bf9f8d1fd876d6ae0ae4f70392506995d47e708b58e936cec3a0634f69b1",
+    "output_sha256": "908ab71bbf06a0645da07ede73092c53a68cf9e472f5c26d5c8d84db17b2c076"
+  },
+  {
+    "name": "e1 case16",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "09f25dd77922ec86fdff67db68f53cebe01c2f124e050888141f27b4b606c3ed",
+    "output_sha256": "c8eec77eb6d7cf68f998934dd9ef6d755924035a6e2dda7524e74bdef1053bdf"
+  },
+  {
+    "name": "e1 case17",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "901a3f0c05cfbf47a41625c4df01232a7d2e7a9b0e395f5d94275ec77abd816e",
+    "output_sha256": "e103eecdd7168fae4aaf8d8787da664e8f1f90af49bc4beecfde0f3b3056657f"
+  },
+  {
+    "name": "e2 frontend",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e2 native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e2 static ELF",
+    "pass": true
+  },
+  {
+    "name": "e2 C++ original oracle compile",
+    "pass": true,
+    "stderr": ""
+  },
+  {
+    "name": "e2 case0",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7d450465ceb49083708a6970827f0e0b116ed285072a95b451e55f583f56da8d",
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e2 case1",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7ceee0fded46cc97352513679bcce94c310e55f4f496f6b5c0a3b27f93307895",
+    "output_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+  },
+  {
+    "name": "e2 case2",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "1e23aef61b4b24ddfa1edbc890a2cd422297154ff9a25b0a31f82f76122cd71c",
+    "output_sha256": "8e7114071523d368cd473fda8cd6dca11c4e5742179a7c8d3c9893e4322d11e3"
+  },
+  {
+    "name": "e2 case3",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "0551c894107052f28f4a48653310fdd01802ae458feb2b45a87bd1d6e378cdc2",
+    "output_sha256": "844e6b10418b21fa2c0de6dfd51992090f90a652ac47fb4fe823d29ec91dff2c"
+  },
+  {
+    "name": "e2 case4",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "f6ab038b97fda87d9af4cfc940a4095d658fe7aec48fe02dafb1745ba0e5bd65",
+    "output_sha256": "d9db02dfd83112259cd44f9b4ed867b4c62a38ebdda289ebb1f270ddd13746e4"
+  },
+  {
+    "name": "e2 case5",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "13673d70cc3878af003ef4b59a9e8172fb0473d9f71789974c1910b9fe88e2ae",
+    "output_sha256": "b2fbd62117f611ae840781a94aa5fd933afd9057a0d017c25874fef4b3cafede"
+  },
+  {
+    "name": "e2 case6",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "f5a55e66923aac82dc4bcbc950a8889bced2b4f2956d48b5e892d5f7dbac1b1b",
+    "output_sha256": "e3fedd0c47d9578df51934da133d5c38484269bb7e719ceb1749d24e8827fb70"
+  },
+  {
+    "name": "e2 case7",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "005fc72dad69eccd98f29e6e3ee09e98b6495914ce3a2e77aaf41937594ce6fe",
+    "output_sha256": "fd3e0d7b7428ee16fe1d8d88c980c2267ec2fae7c5ba143d0bc6da569b031802"
+  },
+  {
+    "name": "e2 case8",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "2fdb1a7fc31699c131ef458af3f196a192800885e04ad79636300e3448c00284",
+    "output_sha256": "9078b5c07382c8fd217c7771b916a17785140c8d3fc3bae4c003b98b1b785631"
+  },
+  {
+    "name": "e2 case9",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "0750e0846fb98c15cc1f7062fcbd468c2fe3ecf74e915bb13219406a904584a7",
+    "output_sha256": "5f2a4cdb6813c701061e6c5601280767a5381c1e56ef27d18aca708b4c154817"
+  },
+  {
+    "name": "e2 case10",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "e86cf55e4e2201c8297c8bf6163ddaec37eb2691bb644b75a56b41e7d8e46b87",
+    "output_sha256": "5e2024a965de458e9684ba6b400a58a7471d89c78d9d127b4d99cbbcc261c665"
+  },
+  {
+    "name": "e2 case11",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "3032f0b612afa0f02b9c466ae1a3fd3219e0ecbfb29b330c133472a40ef7d5c6",
+    "output_sha256": "0124ced22af4ead19a1b7ad14ead1c9ec0596ba035354565dc481cf8a3a3951e"
+  },
+  {
+    "name": "e2 case12",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "bdc869f4882fec5dca0ae8010c3a75aeb54720772f71030a0b9b9bbb9c5ca8c3",
+    "output_sha256": "1a4dbd662bfa1d2ba9cbf4d03c1b67fe6412b60ff337e38f116046d5fa0626eb"
+  },
+  {
+    "name": "e2 case13",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "0e7615cd9aaa28cbe75feaa56fe0565e10152882dcfca8b9d8ca3a60fac24666",
+    "output_sha256": "b0be288c20c4449204502ea6178102b30b139894707c9a7551d9a611b85c8eaa"
+  },
+  {
+    "name": "e2 case14",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7820670ae457108b3382d196b79cccf2a017e3e7f978609c9ac15993daf699d7",
+    "output_sha256": "869ffb545a2953dc3811b6dfd062c9abd2ff53c8c1422925447e9e1433cb5b70"
+  },
+  {
+    "name": "e2 case15",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "3533ea142e0a8edbe6cd944a34310244847c9beac8d042a04f5ae2fb2ee6e057",
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e2 case16",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "51337c13e8f5154721ab0e1eb57442798a07d75450c70255b791ca1c9f94563d",
+    "output_sha256": "1f9abe16fcb84d12afd88b58fec1da4549595b91feee9ed80e809815cef3ed97"
+  },
+  {
+    "name": "e2 case17",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "3d6e05a9183db30e0da8a2b795ab06db7e621cde0608df75cd27e56161a91739",
+    "output_sha256": "a824ebe98a1371e3dfc2f3507054b23c23e3acdf2b7d813e74c1e0af728788af"
+  },
+  {
+    "name": "e3 frontend",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e3 native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e3 static ELF",
+    "pass": true
+  },
+  {
+    "name": "e3 C++ original oracle compile",
+    "pass": true,
+    "stderr": ""
+  },
+  {
+    "name": "e3 case0",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7d450465ceb49083708a6970827f0e0b116ed285072a95b451e55f583f56da8d",
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e3 case1",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7ceee0fded46cc97352513679bcce94c310e55f4f496f6b5c0a3b27f93307895",
+    "output_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+  },
+  {
+    "name": "e3 case2",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "1e23aef61b4b24ddfa1edbc890a2cd422297154ff9a25b0a31f82f76122cd71c",
+    "output_sha256": "8e7114071523d368cd473fda8cd6dca11c4e5742179a7c8d3c9893e4322d11e3"
+  },
+  {
+    "name": "e3 case3",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "eeb75a7686c67dee0df50caa5a84daaabcf9436590ca8deb66f3762933766eaa",
+    "output_sha256": "943b037c79d9e795f856f2282926cdab3378d39b08651b829ccb2a66d9cd345b"
+  },
+  {
+    "name": "e3 case4",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "0ca5a8aa261b59242adf905f8621fd24bb8fa7910b553f4843af6328a38f5b00",
+    "output_sha256": "b1eb41772a5e3636937d3a5e4678d304d1d13f74b55cf3a939db8a1ddd5a172e"
+  },
+  {
+    "name": "e3 case5",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "d122f478940a03221bd4e70e16ffa996b5632a43380aed96d13692f703ae764f",
+    "output_sha256": "8c6b33caa3e39d419256373424b7567642f20d36988c23d845fd255c2e0b29e7"
+  },
+  {
+    "name": "e3 case6",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "ffb971bfbca1dfb161a97219863448edee97d7bd6b6ff3170a33825cdbae3132",
+    "output_sha256": "8fe4ac6b3d384103048c480688c14264102b9538554f2b0de156d0ced67a2285"
+  },
+  {
+    "name": "e3 case7",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "ecd077db5f9ee2f2a22620618916b5ce40ebb32b084529c6ba5c944d60bec107",
+    "output_sha256": "fd95ca9bfe3fcd5f17ab979766ffd4d9c316c05cd01102780c0028c594904864"
+  },
+  {
+    "name": "e3 case8",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "32e86eabb1cc4484c2938dcf4cf2366f4192b53a19cda836079b4f183a7eaa01",
+    "output_sha256": "ebee4e51e8bfddd4a767235dfd67b26d71fb3b57c2894eadab4c0e1c14ffe8f6"
+  },
+  {
+    "name": "e3 case9",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "dac29f47e8aa57d8fcef1f3cc45caf17956787481ca839c4dbcec5ca60fc2bbb",
+    "output_sha256": "a32d070cb2adf4df9219425956d387cb124184a4fa4b9eff6582eddeb2ff3a13"
+  },
+  {
+    "name": "e3 case10",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "199328065c541c0bef626f59695e3b768232fe8adb2e3152bc1d268b4b7f4d2d",
+    "output_sha256": "ef4ef0306eabf6e87d83cbf788b31fa2d4b1cfc6b10d6563e3f28e26bc1fe641"
+  },
+  {
+    "name": "e3 case11",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "4609eb02facae4c06f8ad6609885eaa593c78e031e0da41d6f9eef9f8cea7ea9",
+    "output_sha256": "08133d4a4191fffb6d1d0555ddecc56f471b72ea8f66f140a5e9fa9ff162d2a9"
+  },
+  {
+    "name": "e3 case12",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "462d733770cd2efb35cbce3af7eaed58d121f626acffa547487b02a9c69290f9",
+    "output_sha256": "158e6a1a3b1d53d453fe43d4de8af3f18b38e5135f6bf340be925c6237eb0e84"
+  },
+  {
+    "name": "e3 case13",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "976eefe1177867e10ad9e6d31c7bf661b8dd2626c80ddc1df90997a6150c1bc0",
+    "output_sha256": "208a395112dbe6afa2cb85ec4764d3e4b13d122b99c7267259d090936c1f57c8"
+  },
+  {
+    "name": "e3 case14",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "b0581eb1a8d5fdb3dcf809580ef1e1eb9444321c6931bd34d2d737e629cc3410",
+    "output_sha256": "8e7114071523d368cd473fda8cd6dca11c4e5742179a7c8d3c9893e4322d11e3"
+  },
+  {
+    "name": "e3 case15",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "388df5a45e3c68bc7872e68f67f1b8048348d53a82d8577616c3671f0d022bed",
+    "output_sha256": "8f0f4865b873973d1c0a1c052c8245c36c33d62a2484b37d5b4a36b587713916"
+  },
+  {
+    "name": "e3 case16",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "da9ed9a7290ba401fb2dbee3a68bb8151b346e0eb1b112c2ebea707ad4e0dac3",
+    "output_sha256": "a43fd9442256ee644f51dab939f312ff706782b5793d2ece1c23e18e70f64a02"
+  },
+  {
+    "name": "e3 case17",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "bcbe70c711c6cc5f618b9b4aac6f820d91aa9bec73ccebc22462cd571f6547cd",
+    "output_sha256": "d1bc0c254514d96af494b7be1519cf6271094566580b7a737f743d5c70dae36c"
+  },
+  {
+    "name": "e4 frontend",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e4 native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e4 static ELF",
+    "pass": true
+  },
+  {
+    "name": "e4 C++ original oracle compile",
+    "pass": true,
+    "stderr": ""
+  },
+  {
+    "name": "e4 case0",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7d450465ceb49083708a6970827f0e0b116ed285072a95b451e55f583f56da8d",
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e4 case1",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7ceee0fded46cc97352513679bcce94c310e55f4f496f6b5c0a3b27f93307895",
+    "output_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+  },
+  {
+    "name": "e4 case2",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "1e23aef61b4b24ddfa1edbc890a2cd422297154ff9a25b0a31f82f76122cd71c",
+    "output_sha256": "8e7114071523d368cd473fda8cd6dca11c4e5742179a7c8d3c9893e4322d11e3"
+  },
+  {
+    "name": "e4 case3",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "f17222a92bbe370ca5e2b998406658d1a04a151a47574ada8bfe1ccf28acd6e4",
+    "output_sha256": "67d7f4a3d9f06c8f75830fcbd459d458bb6de92fb7cf9c441f31561e61486175"
+  },
+  {
+    "name": "e4 case4",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "a36984de22378e9e08d367ef07cd84d63ea327731eb4711352304472b42cd60a",
+    "output_sha256": "82bdc6acf1759ab05c26b60c66e7fc9817d47dcf5fdd3ef059d9c3c3ebbb97fd"
+  },
+  {
+    "name": "e4 case5",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "9d2d14bc2e895aeca94805f8c058da90de7f63136f393127407267b1555266c4",
+    "output_sha256": "ca524be2f55e650fb62789d3246b042fbc96a545a7366e9007f575a1de528cef"
+  },
+  {
+    "name": "e4 case6",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "9f931c6ac1b4741d992ae86340820a21dcb1833b0bb74a2305b947ed745289ba",
+    "output_sha256": "9b403e0af92bc7aa72e2bfdb2018ff22c04bd67443126cf8a90852e5719ddcd7"
+  },
+  {
+    "name": "e4 case7",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "2835b6546e23a9cf450233b9df42ae0d6d63b6f15264aa71dd0d3a65a254f7b8",
+    "output_sha256": "e4aa2b0ba3fa2bc83f838b9e8567828847954a4eea3096fc9157d8392bca79e4"
+  },
+  {
+    "name": "e4 case8",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "90c786954fe265ae0e2c4a652965bae786a50b642422e0e561b31a94cdfc32be",
+    "output_sha256": "bcbaa015113bbbcd225ad7e93f486d8efa154fc852085d2ada761bd5bdd80c4f"
+  },
+  {
+    "name": "e4 case9",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "1dc5762ec51f056e395520d03286f4cdb6b222aa90510b1b28ae96c3dbcbf469",
+    "output_sha256": "19b23221af33ce2613c241f686aa42657160a751ff985863d827f8996a8d6af6"
+  },
+  {
+    "name": "e4 case10",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "b81ab22a7be8297833d5ec6fe51f8a3b40a0c53060f66dba9e1f4db095e845a1",
+    "output_sha256": "a6c15b06f7f6504d8f30cc7cf30ba545427214e19f8f2861a535f05d8909084b"
+  },
+  {
+    "name": "e4 case11",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "81cb6801e7883e3de2e8d074a95a9cca7761e509bfa561e6b7ff8f7f0191ba3d",
+    "output_sha256": "236d9d66146aeff51a2cd6246a74be0c5fc6db2e8d9806f37d0ed99ad29f70ec"
+  },
+  {
+    "name": "e4 case12",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "3032f2642bb817d05ef91e746e4f2389e2ffffb0c82b624084bc3f8bc58216fb",
+    "output_sha256": "171e59951a375df81232589689ca78ff3fac95e911e5d560e518d3fbdeec99fd"
+  },
+  {
+    "name": "e4 case13",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "e432364c5a22ed34cdcffeff11436bca3e1c47e8fe6932d4a006f7588575d902",
+    "output_sha256": "b060f5778ab983ea1ef8b8efb0da20dea9f9d68b81fc1a4b3ae693f28d9f55da"
+  },
+  {
+    "name": "e4 case14",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "ba99a5d0db7f9be1370b383deda4e2e8618ffc14608be20db704a0ccb8e03e46",
+    "output_sha256": "299bc278f5bd384a8499d3599061e6b6c1c58a062c90ffa4ff4f56d4dbf53d62"
+  },
+  {
+    "name": "e4 case15",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "32b1bb406ec02148d4be4571d002945ae95a5365eaeb538cbe542c188414ea56",
+    "output_sha256": "fac1760fd5f70b70fe4ec96ce2cb4ef6427b449597724e736356f48348ac7f86"
+  },
+  {
+    "name": "e4 case16",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "0b0e5863bfbd3217d7f89cba7bce0cf2b5c4aeffe805294d8cfdae4b6b72b3e1",
+    "output_sha256": "e16a19eedca13d3a3d12d645f095f87b2f99c16c014ad0c67b740f73366327f5"
+  },
+  {
+    "name": "e4 case17",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "8ffe9d30d5fd16df68f92d8acf6f7b1736b8e282fd9946743cf408bc4d0e233c",
+    "output_sha256": "e9d4dea2fd3647df61bbd30a71de16f365958c8fd0205e8680ef58ad9066b465"
+  },
+  {
+    "name": "e5 frontend",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e5 native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e5 static ELF",
+    "pass": true
+  },
+  {
+    "name": "e5 C++ original oracle compile",
+    "pass": true,
+    "stderr": ""
+  },
+  {
+    "name": "e5 case0",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7d450465ceb49083708a6970827f0e0b116ed285072a95b451e55f583f56da8d",
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e5 case1",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7ceee0fded46cc97352513679bcce94c310e55f4f496f6b5c0a3b27f93307895",
+    "output_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+  },
+  {
+    "name": "e5 case2",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "1e23aef61b4b24ddfa1edbc890a2cd422297154ff9a25b0a31f82f76122cd71c",
+    "output_sha256": "8e7114071523d368cd473fda8cd6dca11c4e5742179a7c8d3c9893e4322d11e3"
+  },
+  {
+    "name": "e5 case3",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "da39c878ca987cb3b49cab89a32a569130818f90f00139046c4e3dfb236b8637",
+    "output_sha256": "13e5d9781eea53cf69a457b8df4d1ae35b216a984c5d2bf9ccacf362048ade0d"
+  },
+  {
+    "name": "e5 case4",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "bea87e6d5e9ff84591dff79491e60eaad53567ae85422159a7688bbe438148a1",
+    "output_sha256": "6ba8d2621620790ba9b949c455c81656018eb58c8211ce1b997897cc60d1641b"
+  },
+  {
+    "name": "e5 case5",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "11521eff7371954eeaf18bae257b41532da084f8ed5134c82689b65290aeac46",
+    "output_sha256": "0d62861fbf5faac9a5f4c8f6357553c0b819b43932586daa7c9b010c61df8b10"
+  },
+  {
+    "name": "e5 case6",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "2224892eac5d6f9fca88697f13c8135cbade18440e4e5af0de036011266f17af",
+    "output_sha256": "0a7750d3399361047366e797e824b02b9bf36b5ffd667f62165116fe18bc40c3"
+  },
+  {
+    "name": "e5 case7",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "f83f17befc93dc50555db37b32472e692e1b8e077511e257b746f70844f5aae0",
+    "output_sha256": "1c4015e9ef2edd35bd963d059bb1f40e3e2355d2beb9882798e858199feb0223"
+  },
+  {
+    "name": "e5 case8",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "3985061043522c5e7d43713d9025f2822c04d26afac02f74142bbdfa738278fe",
+    "output_sha256": "463165654f0ba75e7b3a7265a730826023566e2fc89c6ed308b2e6abb5c4ec91"
+  },
+  {
+    "name": "e5 case9",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "ac6d727d2fe7cfbeb1b0e0b1547667673fcdd42cc91cce919d61e49be9c7def9",
+    "output_sha256": "57ae4873ebd49063ed30f8ac1865c00ed7d32f5cde11a5ba7648cfe3545cae6b"
+  },
+  {
+    "name": "e5 case10",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "5e1161401e4f325702fa38f8bdf7711bd1ea23099d28f4a99008a3a96738ad1c",
+    "output_sha256": "f2e86168e1733e4f6f62c46aab243155b489e44c411b4527f1c5cbe04b004b53"
+  },
+  {
+    "name": "e5 case11",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "0766bd515bf581f84156b0d212252c053d251f898703e9c53f9c2f351fc8e169",
+    "output_sha256": "de25d19943926b201c1693709bc5eca70ecf04229c1668e2f276249f9bebe043"
+  },
+  {
+    "name": "e5 case12",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "9f0a5f9e1bbc8abd912487ea4d02235e54b4a467ffe17ab2c6f99fcf8a109302",
+    "output_sha256": "b3995a837b1eccfa400aad7b516ce092583ed7aec015dce5ac27340572d0119c"
+  },
+  {
+    "name": "e5 case13",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "b8fb7dd4702a67713f0f9069b6f928f95244e58724d9f2cdc69a24ea0d5350c4",
+    "output_sha256": "73cde359614ac8044c8ba1f99d425c88f13dfb1d8cf0898e1ea23871e3071e5f"
+  },
+  {
+    "name": "e5 case14",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "a06c7f06ba0df331cceec622e9dabd1e4f47dfb95ccf01e8071e084cd3464870",
+    "output_sha256": "8aa4e6dba5c3f07aad1a92fb767f7ad4245000ef1184ccee40233e1db0802dd7"
+  },
+  {
+    "name": "e5 case15",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "31423b50febebd12fdef1e461cad3bac29854560cc4d5955b0c1d5e619863392",
+    "output_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+  },
+  {
+    "name": "e5 case16",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "9e7a9b51724f242fa3471409d8a45edb444ce0f338b5ffa8299b8a1df5062502",
+    "output_sha256": "1e6f1b3525967b802308be5727c3090ae3fabe1bdb9a980c039ba170a6309c3e"
+  },
+  {
+    "name": "e5 case17",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "c4352df0d33b72ccd191fa2e1c8f56e7ff53676fc6fbecd7239285a2c231a1a8",
+    "output_sha256": "d82e7eadf34f71de0e15dfccdebfeef70cab928ce8479e6338b77acaf284a978"
+  },
+  {
+    "name": "e6 frontend",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e6 native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e6 static ELF",
+    "pass": true
+  },
+  {
+    "name": "e6 C++ original oracle compile",
+    "pass": true,
+    "stderr": ""
+  },
+  {
+    "name": "e6 case0",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7d450465ceb49083708a6970827f0e0b116ed285072a95b451e55f583f56da8d",
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e6 case1",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7ceee0fded46cc97352513679bcce94c310e55f4f496f6b5c0a3b27f93307895",
+    "output_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+  },
+  {
+    "name": "e6 case2",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "1e23aef61b4b24ddfa1edbc890a2cd422297154ff9a25b0a31f82f76122cd71c",
+    "output_sha256": "8e7114071523d368cd473fda8cd6dca11c4e5742179a7c8d3c9893e4322d11e3"
+  },
+  {
+    "name": "e6 case3",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "3476dfa0ce0858b3b1d3a33b5ee84529b84b33e84a4c3fed75e31af404ca8ef3",
+    "output_sha256": "f274b1f2121ad2ded798d7d3d5fa305aa8a49875e8d87e7110c4dbdfbb10530a"
+  },
+  {
+    "name": "e6 case4",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "f05774dfda46cd47f86240fbaff4e1a6809ee682a3500af3e8acc241d3de6a5a",
+    "output_sha256": "44fc109673ff46f851f1cfd849522ba5ef716e0dea6d47ff5414053cbf172fb0"
+  },
+  {
+    "name": "e6 case5",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "3e39f3c866a0b2772b3a737d00155bf326bd17408bd437fc6edb7792580fd109",
+    "output_sha256": "fe381ea1485b52297933bdd88d363409f529da83217056feec86ae840416beb7"
+  },
+  {
+    "name": "e6 case6",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "f5a258e6c674c0b2c240466dc5b9c5043a60995b405ae916115ba0b66893bcac",
+    "output_sha256": "0dc399f5847eddf90004bc036e31b533bc5f6b8f1ea017a7d631d61943a35bcf"
+  },
+  {
+    "name": "e6 case7",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "bd42aa791f2b9674caac3c1e764c3b128bfc7a6ad0e0d830fedccd4b62567865",
+    "output_sha256": "027ee92c16ddc44da84bff98e87686c24c97a5031c17a9f07b6979d305402262"
+  },
+  {
+    "name": "e6 case8",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "77558056c1afb8d5d1e2591bc7ea0c3de3df4f8334af908af557d1da1018e832",
+    "output_sha256": "34489f610343dde40d88767bc227f546a175c9e81b2b0467faf1f8a92fff75aa"
+  },
+  {
+    "name": "e6 case9",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "ee2ccc45d5561f3e199fddda93884bcc2e9606bb23ef5dac1a6301c082b26913",
+    "output_sha256": "5e5194be75ad3e50214e346386f0f650a33d9f15ee92860faff5895d0e683e53"
+  },
+  {
+    "name": "e6 case10",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "6ece9b53a802b7e8969ed61bcd2b493211ffd1e9d088acddc5cf27a99150380f",
+    "output_sha256": "c518d63dbbb6ba2bdb0c8836f60cd104c38c032a8cb81f311345976d023130e0"
+  },
+  {
+    "name": "e6 case11",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "25247c0a3801e1b111b9702fac805fcbd23dab9fdba3f67aa9102ad6056b3ece",
+    "output_sha256": "4eeb2aa1545065f8b21b2a065d27ea05b0c5e8c96d47fec221ae5bf4ae49489a"
+  },
+  {
+    "name": "e6 case12",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "a9ef577e4abe9be0f0e88bbbbdf88e66c1b44aed1593642c5c788965a4cf54e2",
+    "output_sha256": "c430cd2869ce70effd1a2d7785a26025b3143b0cb68b8d0d030f70a02abf07da"
+  },
+  {
+    "name": "e6 case13",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "3f885c2e976ce300d6cd9edb9821a1ddbbf95e155b526568345c6ccdabc0dc84",
+    "output_sha256": "62b33e6923403e61febd8b22ad3924153299d64c55706ab665c679eee49d25e0"
+  },
+  {
+    "name": "e6 case14",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "662f68d091649595ca7616a5de92c2ec66136d61024d9cc59398b3a5b1bae571",
+    "output_sha256": "2885d52059326edac8ff08877c558744ce0f23c594e2d5cc9333331d015ee5d3"
+  },
+  {
+    "name": "e6 case15",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "39f25100d0ce727caf4a15695d8618a69c5890e95fb13e2f90a568dfcac3fb4e",
+    "output_sha256": "9bed65e15e446458fd7568250ae450f2bd1f70a77c278c6b99f48af839da9efd"
+  },
+  {
+    "name": "e6 case16",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "af342fa4b9ac874d38e8a2f9ee9a6ef357b709915a04c8bc45f48287b11df8bd",
+    "output_sha256": "0841c9ff6cc81aa09fad04175faf1b0e1eb9a2c497b15eef21c52459c60195a4"
+  },
+  {
+    "name": "e6 case17",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "13eca930a74289a3224d0cbe78206882058d524b523207ff6e74cfcb4487cb7e",
+    "output_sha256": "7f09f661173902c46c1b06a0ed3f8f104003176fb987f5b6c5d64baa032e1555"
+  },
+  {
+    "name": "e7 frontend",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e7 native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e7 static ELF",
+    "pass": true
+  },
+  {
+    "name": "e7 C++ original oracle compile",
+    "pass": true,
+    "stderr": ""
+  },
+  {
+    "name": "e7 case0",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7d450465ceb49083708a6970827f0e0b116ed285072a95b451e55f583f56da8d",
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e7 case1",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7ceee0fded46cc97352513679bcce94c310e55f4f496f6b5c0a3b27f93307895",
+    "output_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+  },
+  {
+    "name": "e7 case2",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "1e23aef61b4b24ddfa1edbc890a2cd422297154ff9a25b0a31f82f76122cd71c",
+    "output_sha256": "8e7114071523d368cd473fda8cd6dca11c4e5742179a7c8d3c9893e4322d11e3"
+  },
+  {
+    "name": "e7 case3",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "eb25e517f283d98c341bf69978a1b3b40a0f4ce8c725878a663b089d6fb13d37",
+    "output_sha256": "618ed29d5015a4fe5de5a8c350c22d51ddb3ac8342864b2bd6b34be762f2b393"
+  },
+  {
+    "name": "e7 case4",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "4682ac081bff9807c30d802ace72018fff87e1fa605b0e831827c7b0e92427eb",
+    "output_sha256": "fee22d3b482d542ae8f0eba152766ac99c9aad00bef851a00237ae1d54e409ad"
+  },
+  {
+    "name": "e7 case5",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "3c17eeba6224503ffd32fca872c9b87c891d823a2a4786467b2c0bc469ab9603",
+    "output_sha256": "e17fc05e9d563019f29c1b8a209fe8ebffac045c1a2c455b3cb1c297d465a756"
+  },
+  {
+    "name": "e7 case6",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "86e5a7cbd9926ae9b5dd790d7b2ecb7033e063a7f128e4cba37334de85d7edb7",
+    "output_sha256": "f69495d6025866546bde7d8bdf476d357f9af2e486a198e1f3633e8ff8c46c7b"
+  },
+  {
+    "name": "e7 case7",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "05aae01038a5249e273869ffb241f9e223b9886002c46eeacc71dea84146f9bb",
+    "output_sha256": "b2683d5dedb9e2e2782db2fd4ef7432807fb2477a3fd773dd9e16dcb94ee6dff"
+  },
+  {
+    "name": "e7 case8",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "1dff283341fb1e251a5bfe25702da1e3b89c02165e4e20300b39dfb8c4e7e1b5",
+    "output_sha256": "b285376c9c1ea6ea1a603e571ba8052435162ad37b10283fe55d274b686723e8"
+  },
+  {
+    "name": "e7 case9",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "b7352cca1c35627988f9ef0c514afc8057d8c6cbad57baebaf17312149090625",
+    "output_sha256": "74c4839a893ecdb7d38a9a40af7d47ae946b3aeb49c3edd0fb11a30930e06be7"
+  },
+  {
+    "name": "e7 case10",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "3e1755c98aa07e0077eb888250c196bd71cdd583680f3b4a8691f2f15e906e4c",
+    "output_sha256": "a70f0c2863cdff98dd75ab069107eb2f27500f338d4a8f3a3e24025a6f3a10e3"
+  },
+  {
+    "name": "e7 case11",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "756a35ea4c3f80f5616f5b6af6d7abf26df153371e8bb4ae670d1e2f6a608997",
+    "output_sha256": "65337f71e1e940be794a69842427d8915d569cc82462e4d74afd3ed481dc8a7a"
+  },
+  {
+    "name": "e7 case12",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "1187780bc8eca063363e7194c76e4c4f9d8da4d50515302857b6db510332be0c",
+    "output_sha256": "5ab560e66517362f406a47523b535b45886aea19d8511e2c961842057c412601"
+  },
+  {
+    "name": "e7 case13",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "174d7558dbb7ee45c9f0a4fe40ba4a023f457b28607a5903acb6ccf5b1b5f8aa",
+    "output_sha256": "26ab868bf1a8bf4d6fb5b9cc70ef65f7278f948be83da98ec2021a486f60545e"
+  },
+  {
+    "name": "e7 case14",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "d5b458202f71c73b5d32e6485ae2a9bea84e48206632855d0445969c3b7eefa2",
+    "output_sha256": "82a93795d3bd965ca83475e23a889bc48e0b3eb19b31f35dd36de9683de8fd95"
+  },
+  {
+    "name": "e7 case15",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "33848b4f9b16f69e7af85ab9c3e7e44297a8eadb4697864378015e022ce38fc2",
+    "output_sha256": "2575588df65de0c302e5f1426bf39d67c8855097af04aea32e5a43b26823b916"
+  },
+  {
+    "name": "e7 case16",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "a34d23cd815c49242a30857930af334f5b3fbeb55909ee55d50070d6bc90f8e2",
+    "output_sha256": "7a38b92d9992b91daf73b3c2dd9ccf962e9b6215bbefa959b32dbb59266e2309"
+  },
+  {
+    "name": "e7 case17",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "dd497a26db4f2c78c62e18cf2376138d810e577c7283e6d026797b17bc58872b",
+    "output_sha256": "01684e2b2ae6d139a13bbec1349999b3e14b2e7d762757c63ac4dca280089c19"
+  },
+  {
+    "name": "e8 frontend",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e8 native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e8 static ELF",
+    "pass": true
+  },
+  {
+    "name": "e8 C++ original oracle compile",
+    "pass": true,
+    "stderr": ""
+  },
+  {
+    "name": "e8 case0",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7d450465ceb49083708a6970827f0e0b116ed285072a95b451e55f583f56da8d",
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e8 case1",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7ceee0fded46cc97352513679bcce94c310e55f4f496f6b5c0a3b27f93307895",
+    "output_sha256": "ad95131bc0b799c0b1af477fb14fcf26a6a9f76079e48bf090acb7e8367bfd0e"
+  },
+  {
+    "name": "e8 case2",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "1e23aef61b4b24ddfa1edbc890a2cd422297154ff9a25b0a31f82f76122cd71c",
+    "output_sha256": "d18d840ccec8a04c90a9b68c1cff0c16ce80eb903890ce7191732c5d35ede494"
+  },
+  {
+    "name": "e8 case3",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "d52709d696ca8e306674510e67c6451d908f27921ff990622d75b8b6ad8056c2",
+    "output_sha256": "b2348404282cce605281a813b62665de5d8e9ab21a9afa708d7d84887d743ec3"
+  },
+  {
+    "name": "e8 case4",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "2692f7981bf9e72691dba5580848aedd29e340286b757c87a92de199b883806d",
+    "output_sha256": "03484dfeffb3690b3048579077a819b2fd5b57a7919122c2e8bb192b9ffa8297"
+  },
+  {
+    "name": "e8 case5",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "ce7a2cd2088b84659f1c17fd382320d801ea6f6be04926191db6ef0f1ed91ef2",
+    "output_sha256": "080ae81ac21a7d6f026873e102a6270b145e3fe9cb5f308988a61882adf59eb9"
+  },
+  {
+    "name": "e8 case6",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "eb6e8a664653893d31947a21227b13221710f97b301c458b447feb241bc11640",
+    "output_sha256": "0f5a567f370a265ea820f8b4dee80496b88cffcc3ce3d001562a5b0d1a685c8f"
+  },
+  {
+    "name": "e8 case7",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "cdfb108bb854f02366458c0179e838dd4dfa86d6f20c6c242b847172fa31d93f",
+    "output_sha256": "a91cddd152831ac7f83d14e166856ede08da65e157c57bd512ed6bb1d34fc7f4"
+  },
+  {
+    "name": "e8 case8",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "5f4041292ed87de5d3219d0cf87a72c82d00af71b26451d2840f357c754b8104",
+    "output_sha256": "17ce3a5bbcee21378b29af07b0aa67b0ba1a11024d792f3cf297474808706174"
+  },
+  {
+    "name": "e8 case9",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "1b678eb8f17293811af256cd9db0e46847c1709f066d729804e7572eb4e98c65",
+    "output_sha256": "12a3ae445661ce5dee78d0650d33362dec29c4f82af05e7e57fb595bbbacf0ca"
+  },
+  {
+    "name": "e8 case10",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "d071b3740837417f7f3fd20c02ef2dc1f9ed8034b922529a1c4c5e6040403419",
+    "output_sha256": "9a8dcd3f9ff7aa3114e141f03c12989d363ea81fd74c02eea63c5f41489cb17a"
+  },
+  {
+    "name": "e8 case11",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "f718eb70875a7579954ee94b89960e77f13e41505396cbc07b7d02c1fdde02d9",
+    "output_sha256": "e5ab19dd46d5866d6690fbbfd71de988b26fec4b7043f2dc788a407488b41128"
+  },
+  {
+    "name": "e8 case12",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "ca9d0e14166edcd3ebd1ae61ba23c5b5789f6c49523774d9b33574851e64b959",
+    "output_sha256": "ec89cb632230a290d56460e0dc4b6764da9cf1f4b2e0e5cfa2b0b89336cd01b3"
+  },
+  {
+    "name": "e8 case13",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "1077a9308904b3919b2489cd733bc58dd297402af6d1dddfd950c496d609fdab",
+    "output_sha256": "b775dec4fb552b0d0fc237d8370912a7f8fd393eca415e779bec528365efe0ce"
+  },
+  {
+    "name": "e8 case14",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "9f29e655f6a72b06c4461ce09ac9fd74465491fb8df64ea74f300571d2ff708e",
+    "output_sha256": "4516448e8697897258b4a6e55b078770e21c51d9d7f1275d2c2765f46e9e1682"
+  },
+  {
+    "name": "e8 case15",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "592b8bbcc55f65e724bd21e7d772679a0a025a454935194fc7b70ce8a4168ae6",
+    "output_sha256": "55ef08ab7f7ec52881fce1f74bac5cd7582453d8fc338a4dbc7c5798de2cea80"
+  },
+  {
+    "name": "e8 case16",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "1dfd0699e151b818dffad9880c39a75759e3970900dfcdd9f159d7ace3039dc9",
+    "output_sha256": "17a73938c02aaf62e6f62396868eb56123fe3b43f71807841c85f3f3bec1628d"
+  },
+  {
+    "name": "e8 case17",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "5cea33338075100ec3f3f43531e64bd827dae0ab67fedbc3dcf8d4da02a91ad3",
+    "output_sha256": "cbb3c5a3c9a1f97b99dabf8dc554995f970995390e259f762c633dd6d5fc7e08"
+  },
+  {
+    "name": "e9 frontend",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e9 native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e9 static ELF",
+    "pass": true
+  },
+  {
+    "name": "e9 C++ original oracle compile",
+    "pass": true,
+    "stderr": "/home/drakestapleton/handoffs/cuda-cpp-L605/cold-source/build/cuda-cpp-tests/e9.cpp: In function \u2018void vector_add(unsigned int*, const unsigned int*, const unsigned int*, unsigned int)\u2019:\n/home/drakestapleton/handoffs/cuda-cpp-L605/cold-source/build/cuda-cpp-tests/e9.cpp:13:57: warning: suggest parentheses around arithmetic in operand of \u2018^\u2019 [-Wparentheses]\n   13 |         out[index] = left[index] | right[index] ^ count & 17U;\n      |                                                   ~~~~~~^~~~~\n/home/drakestapleton/handoffs/cuda-cpp-L605/cold-source/build/cuda-cpp-tests/e9.cpp:13:49: warning: suggest parentheses around arithmetic in operand of \u2018|\u2019 [-Wparentheses]\n   13 |         out[index] = left[index] | right[index] ^ count & 17U;\n      |                                    ~~~~~~~~~~~~~^~~~~~~~~~~~~\n"
+  },
+  {
+    "name": "e9 case0",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7d450465ceb49083708a6970827f0e0b116ed285072a95b451e55f583f56da8d",
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e9 case1",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7ceee0fded46cc97352513679bcce94c310e55f4f496f6b5c0a3b27f93307895",
+    "output_sha256": "67abdd721024f0ff4e0b3f4c2fc13bc5bad42d0b7851d456d88d203d15aaa450"
+  },
+  {
+    "name": "e9 case2",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "1e23aef61b4b24ddfa1edbc890a2cd422297154ff9a25b0a31f82f76122cd71c",
+    "output_sha256": "9a41e428bcbcb4f5e86c120d482aabeeef1dfc03dcb862f24045e92eea9b7499"
+  },
+  {
+    "name": "e9 case3",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "2732560f8382f437a42b8df003f3afffab8f6f3b5f95ecee409961a72f506e96",
+    "output_sha256": "73dbaa8dba4ecd727635ca60e0dc672c897ac51b0fbe0301a11c3dc57d6a9619"
+  },
+  {
+    "name": "e9 case4",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "ab5cd7784afab6e395e46d6292f2fb748813ca466772f580714e0e81cb6b1502",
+    "output_sha256": "0854af496e8fecb5943f594d54d9a156684113e06b9efb1adbb605ff89b0727d"
+  },
+  {
+    "name": "e9 case5",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "a3cf6f6a3962c43e1fda1fad9ce6c9060e5049af1c78c0086a1e57f57868a1af",
+    "output_sha256": "5a35a5938c1a039fde67b6541fe4b66612bbcedc51ee98129baec0902b005fe5"
+  },
+  {
+    "name": "e9 case6",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "e608682ff763973a30a8ee847125a3fd9f7129feffd8f2c7a6871541964d1470",
+    "output_sha256": "f4d772014279dcbd62cb95e4020a4deec28e45228d39c6853fc2807c51614650"
+  },
+  {
+    "name": "e9 case7",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "43b9267ea509b64fbca9ecafd5ec86dc396a853034f19270cc0a2b37963c3855",
+    "output_sha256": "2cf9acccad738f061fd5cba4a4050b6e84b73b1779337839a97ad01479992a68"
+  },
+  {
+    "name": "e9 case8",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "5897b46a457af4aef9bf058c6d08af5800d7fddbf8ac8c3295eee378637ff866",
+    "output_sha256": "dcf4add82f1f682a922c3779d806a8deb8d3d6a13003b401e1b4c184bb0a0000"
+  },
+  {
+    "name": "e9 case9",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "34162904d154fb6dc7eda48638126f6c84285821ddd6474463e745b20030abe3",
+    "output_sha256": "6a171be7bd0d616b1bea47b06e11002b37fb68c8053a37c701e9b7be8f9e8aea"
+  },
+  {
+    "name": "e9 case10",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "0ce6800a4b4ff22a201b8d7c94be10f1a7bb078373b822213dcd87b0e7a82ff0",
+    "output_sha256": "d19623b62770cfeabb3e8a743dd8f2257f8817ba98a7418d71c7c66eda66c68e"
+  },
+  {
+    "name": "e9 case11",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "8fe172c2f1c961d4211a1ec7df0c7828415ab7b8b38af3a3e81aac017cd01d51",
+    "output_sha256": "468b72e2668b26c16d4300da4e6211c8f8ee0f82c0e7b533b2af6d91e7edef34"
+  },
+  {
+    "name": "e9 case12",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "f086dcf5a8e9c0ef005419ffc2c25a26cdcba86b3175530b94252afaecf38c4f",
+    "output_sha256": "6382ef56a2b89bdb9c2c3caa44a883101ca54d9730edaaf95e8427a25658f043"
+  },
+  {
+    "name": "e9 case13",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "1b0ea0dbdb5fc0180680cd64e4934f5434d1ba3de7b2f5988501ac8008cebe6c",
+    "output_sha256": "ec496e41c3479a811308835b1ee9bc8956caa9937f79e080b359222ffc9702fb"
+  },
+  {
+    "name": "e9 case14",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "f4dd5fae3d1502779552fd9d2deba7129b27b79c490ec88f806fcb1ed1806085",
+    "output_sha256": "73b0e6f0941a03009a328590191aaf084d3a9d698d2b9e12d6c427d046a77ab4"
+  },
+  {
+    "name": "e9 case15",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "ed20c91243344c558f865d08f54b662cb0e1217fac60d040ba31f5d3b18d99ac",
+    "output_sha256": "dce601073f01d5234773c948a81820ed7181f576b38727b78ddf240f8216c431"
+  },
+  {
+    "name": "e9 case16",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "2c15b9a1cdcbe1455e07bd46d235372ac341fd473929ee113704d215540ae673",
+    "output_sha256": "3a5281982b0e8156bd4c6d27b5ba80ac54e84b10802a9f74b4ef326fd151e67a"
+  },
+  {
+    "name": "e9 case17",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "8acb4bfc609d638a11490ff5bb82ac03af8ce1eca342a6cf53b7268743bce3e1",
+    "output_sha256": "c9ffcfafcc3dadc57823e9d2a92933fec240b2c2e1920a94166e42f2418efee8"
+  },
+  {
+    "name": "e10 frontend",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e10 native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e10 static ELF",
+    "pass": true
+  },
+  {
+    "name": "e10 C++ original oracle compile",
+    "pass": true,
+    "stderr": "/home/drakestapleton/handoffs/cuda-cpp-L605/cold-source/build/cuda-cpp-tests/e10.cpp: In function \u2018void vector_add(unsigned int*, const unsigned int*, const unsigned int*, unsigned int)\u2019:\n/home/drakestapleton/handoffs/cuda-cpp-L605/cold-source/build/cuda-cpp-tests/e10.cpp:10:47: warning: unused parameter \u2018right\u2019 [-Wunused-parameter]\n   10 |                           const unsigned int *right, unsigned int count) {\n      |                           ~~~~~~~~~~~~~~~~~~~~^~~~~\n"
+  },
+  {
+    "name": "e10 case0",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7d450465ceb49083708a6970827f0e0b116ed285072a95b451e55f583f56da8d",
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e10 case1",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7ceee0fded46cc97352513679bcce94c310e55f4f496f6b5c0a3b27f93307895",
+    "output_sha256": "ad95131bc0b799c0b1af477fb14fcf26a6a9f76079e48bf090acb7e8367bfd0e"
+  },
+  {
+    "name": "e10 case2",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "1e23aef61b4b24ddfa1edbc890a2cd422297154ff9a25b0a31f82f76122cd71c",
+    "output_sha256": "d18d840ccec8a04c90a9b68c1cff0c16ce80eb903890ce7191732c5d35ede494"
+  },
+  {
+    "name": "e10 case3",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "2f4f9df9fa292583da6e5957f1c62f57fbde20bacabbc3e7218b81c187a774f6",
+    "output_sha256": "0da94df5897775c42491f46214aa5714c8e2607685513c183700290eb2b2e840"
+  },
+  {
+    "name": "e10 case4",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "5d59318ffed384e8f30588f45e578fa16476ab639a386987d684b1b293024147",
+    "output_sha256": "e9de68dafdb00ac6bc8989aa39c0c320c1d263e45ea7c448e70a5ea933299067"
+  },
+  {
+    "name": "e10 case5",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "a76cb4e0fd3b9e9fa2c034a87746babc6212912a66758ea2902d8fe4d387cd12",
+    "output_sha256": "0daa5a353ccc73aa0917b7c18cb7fa4fa8dea451a5ef390002546326161018a3"
+  },
+  {
+    "name": "e10 case6",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "e5e036c5a1727c13e242c24c6714c6dee3ef18c14476c3ab0e85e86f530e36ed",
+    "output_sha256": "2cf2237b4b07854d6c0a193d36ef5cb2a5067efc16a14b12c17327523fb8b5c1"
+  },
+  {
+    "name": "e10 case7",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "751f9aae7b18ca99fe8bdcf0bddb2e0350fbb75960ae69601ae1709cb5b05f71",
+    "output_sha256": "48ad1ff1607ea76650c95e5ea45e05c5f2b5c49792f1845a26418df8330cdfd3"
+  },
+  {
+    "name": "e10 case8",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "c5c131545f58208a0c81e8f5e43ef251a5369d1e993a59d888243ddaf654022a",
+    "output_sha256": "738ee78927cfb6493764b03a354175d5d373de64bc7625e39700d0bc44d9bd46"
+  },
+  {
+    "name": "e10 case9",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "d044e9963845bb5faa818c8a8af3c9294df3b9cec0d25e64daa3dad881d443b4",
+    "output_sha256": "9672a2b3992dedf314f1a12b55c0c568e788386080df2c443e72a7a42ad5b846"
+  },
+  {
+    "name": "e10 case10",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "affe9908f9290ea26b48905b602d24b49f5614cde637b744fd19f1dc0a35acce",
+    "output_sha256": "0a8f4b76d49e06bc4229f84663a25d9dcaf0b067671428cccbe05e81552c731c"
+  },
+  {
+    "name": "e10 case11",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "cb84da881b38cb1272ea1c2c42812a181f8072ca5f10da88fd785a4caae7a206",
+    "output_sha256": "2a4745180d135d24982dcf9adbb2b9c63cc4ed54cd072923662fc3b86ef1d233"
+  },
+  {
+    "name": "e10 case12",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "98cf61b5d21923ef3d51dfe1b67ba83f0bf6367f597bc8442e54aeaf8b56700f",
+    "output_sha256": "e14148f032985d2325cb99d01a1c259cc5a3f24b39380f07b00646f2dabd818d"
+  },
+  {
+    "name": "e10 case13",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "67d867d2eab182be8a5d7208eb1e82c74e07e65267b8686ef22b2ee8d0fe2b1c",
+    "output_sha256": "0efefe9a8bd9bd326344ea6cf775f67e3e05c8df46956396a4425372f598af02"
+  },
+  {
+    "name": "e10 case14",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "5564c7afbc80aef6f4e1976a84ec3622032597acdcbff8e56d266da0e63ed149",
+    "output_sha256": "5284c24e9a48825d2e08ed8fac0dadb120c33c21e6699a624b5feed2751dbd16"
+  },
+  {
+    "name": "e10 case15",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "b6b3d064a0fdb9d476e5914b395780b928cf40034d5e305dd44ca2d9bb26837b",
+    "output_sha256": "2d634f8948762215139229e50c45d5167267fc9443c2620cde5ae0765498f34b"
+  },
+  {
+    "name": "e10 case16",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "6c22b77f418a491398305414c364f86558a305e66eb7be2c304a6cd3ad107cfc",
+    "output_sha256": "f4c6d2caab851ff18512dc27b1fce3bd48f0d751dcfa1aa0b4a0df6a469bd767"
+  },
+  {
+    "name": "e10 case17",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "25551d53590b491829fb861b8a3e7f3e36ccb3226c6616330645ae349dcbb760",
+    "output_sha256": "428c1da5f660031c4d21a0689accea828da7990fb97cd0512ccddef2a93ea397"
+  },
+  {
+    "name": "e11 frontend",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e11 native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e11 static ELF",
+    "pass": true
+  },
+  {
+    "name": "e11 C++ original oracle compile",
+    "pass": true,
+    "stderr": "/home/drakestapleton/handoffs/cuda-cpp-L605/cold-source/build/cuda-cpp-tests/e11.cpp: In function \u2018void vector_add(unsigned int*, const unsigned int*, const unsigned int*, unsigned int)\u2019:\n/home/drakestapleton/handoffs/cuda-cpp-L605/cold-source/build/cuda-cpp-tests/e11.cpp:10:47: warning: unused parameter \u2018right\u2019 [-Wunused-parameter]\n   10 |                           const unsigned int *right, unsigned int count) {\n      |                           ~~~~~~~~~~~~~~~~~~~~^~~~~\n"
+  },
+  {
+    "name": "e11 case0",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7d450465ceb49083708a6970827f0e0b116ed285072a95b451e55f583f56da8d",
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e11 case1",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7ceee0fded46cc97352513679bcce94c310e55f4f496f6b5c0a3b27f93307895",
+    "output_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+  },
+  {
+    "name": "e11 case2",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "1e23aef61b4b24ddfa1edbc890a2cd422297154ff9a25b0a31f82f76122cd71c",
+    "output_sha256": "8e7114071523d368cd473fda8cd6dca11c4e5742179a7c8d3c9893e4322d11e3"
+  },
+  {
+    "name": "e11 case3",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "dadf3234318d2ba4a6c4581b75f5867cd57f3444ebcf27f5dabd30a767c41d50",
+    "output_sha256": "c62b422e29b311d53eb0cb6caed89b5d24736c6f5c193efed8f0efd4947baa50"
+  },
+  {
+    "name": "e11 case4",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "b170ce06afa036644a5d81d71c93177689603b132dba124123aa796987aa4895",
+    "output_sha256": "777f817c6ab08e315de03f50177d1669361a6e92bd897d2d123cab245591ca25"
+  },
+  {
+    "name": "e11 case5",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "5af3c3870ae5265b0abd027e27f7324a55d1863888f124f7fc48f37a1018dc5c",
+    "output_sha256": "f03c9fab4e864a74988bde2fe69398e5daac32e942e0d8d1bba75bcc3f7ae5d9"
+  },
+  {
+    "name": "e11 case6",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "b6a65a54240a820a856829d0c5f3d680a2178bf2ad52b58dc894ac31e5c59a8e",
+    "output_sha256": "1069bfb732b697c3f95d48c81abaddad2877ac91ffeb79195740e252b7f1d87e"
+  },
+  {
+    "name": "e11 case7",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "77d08bcc94e1528cc35c73ff23672e2bf21a38c10e4fa61e9b71d67ba6c1ab54",
+    "output_sha256": "55b49918fb68a937706306c424da5ba88d858522daba207647934b847e0aa56f"
+  },
+  {
+    "name": "e11 case8",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "d13d7f4accac9cce8ee33732a76d9e316c67c2df32848c01390c209721cf3013",
+    "output_sha256": "d3fecce048ad9326a14683b98107a470b4fba7f3a1e7260532f9e81d9b9f96df"
+  },
+  {
+    "name": "e11 case9",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "196ab959e259b187b7fa725d0d6db4716911923713137c31ffc8ac140adefc9b",
+    "output_sha256": "01f16b4319ed78b93904c7daec726cbc74eba0840969332a16584ddea773d4f7"
+  },
+  {
+    "name": "e11 case10",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "dc069116556b5c52e08c9dfc0d81c230e024f52912006b07a1bb4ac4762c915e",
+    "output_sha256": "d15a882e849168ddc3e7872b947bff46aa38f1e38f892de6a1a9f1d8b8b2ad8d"
+  },
+  {
+    "name": "e11 case11",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "0d0584390300fdee552f0ab830efb97f993b2fab2df80dd0342b9254d8b8fe74",
+    "output_sha256": "7e50eefc9cabe1ae23daf404c2c5aaa1d3a8fb1d64eed5da2b48a4af4f6292b8"
+  },
+  {
+    "name": "e11 case12",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "09d4525a1137f563ee5cc59c25a4262c9e639d6feb08525a5cdd9a668f64f773",
+    "output_sha256": "15af8174d4996e4f364d37dbd014118617bdaefddb2a30ffff3caaf18731df94"
+  },
+  {
+    "name": "e11 case13",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "2d491323d363293fef9faa0226540e2619df56337cfd3a170d9fc954974ad00b",
+    "output_sha256": "4b7b19701016c69ae1f2ed28fa7ff6bcaeda5caa21741c3904ab54ae89491a01"
+  },
+  {
+    "name": "e11 case14",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "5135d4b274a7f13ea1c7f906c8baa1c5ab271014689ee639aef7b6c13e8ab5eb",
+    "output_sha256": "8c9d74b4f0051d0e90752088e0cdc5a66770179ce95ffb8332c3c9e6b701a01b"
+  },
+  {
+    "name": "e11 case15",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "2353806e7c9d75c497326a6ef859ac30e30418c561a54ed26aca41974d834e01",
+    "output_sha256": "5faf150979448505a37a149362787dbb4cd69c78363d83590415b7962d01fa5f"
+  },
+  {
+    "name": "e11 case16",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7866ddc2edaaf7c9563bd4ea551e33e2f30a2cdf476112bba693507ecf56ea6c",
+    "output_sha256": "ca6fa528c7d53353a0b90da3d046e4b7476574454fe071efcf78beb8a36368a6"
+  },
+  {
+    "name": "e11 case17",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "75a930415c1a6ed3ae4aa0da4c5ff15f3623df5a312f75faac7904578e8af995",
+    "output_sha256": "65f92b9adc530f0b7a980eadaee006775dc8a9d5511c4ec5100a52689e36245a"
+  },
+  {
+    "name": "e12 frontend",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e12 native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e12 static ELF",
+    "pass": true
+  },
+  {
+    "name": "e12 C++ original oracle compile",
+    "pass": true,
+    "stderr": "/home/drakestapleton/handoffs/cuda-cpp-L605/cold-source/build/cuda-cpp-tests/e12.cpp: In function \u2018void vector_add(unsigned int*, const unsigned int*, const unsigned int*, unsigned int)\u2019:\n/home/drakestapleton/handoffs/cuda-cpp-L605/cold-source/build/cuda-cpp-tests/e12.cpp:9:67: warning: unused parameter \u2018left\u2019 [-Wunused-parameter]\n    9 | __global__ void vector_add(unsigned int *out, const unsigned int *left,\n      |                                               ~~~~~~~~~~~~~~~~~~~~^~~~\n/home/drakestapleton/handoffs/cuda-cpp-L605/cold-source/build/cuda-cpp-tests/e12.cpp:10:47: warning: unused parameter \u2018right\u2019 [-Wunused-parameter]\n   10 |                           const unsigned int *right, unsigned int count) {\n      |                           ~~~~~~~~~~~~~~~~~~~~^~~~~\n"
+  },
+  {
+    "name": "e12 case0",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7d450465ceb49083708a6970827f0e0b116ed285072a95b451e55f583f56da8d",
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e12 case1",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7ceee0fded46cc97352513679bcce94c310e55f4f496f6b5c0a3b27f93307895",
+    "output_sha256": "67abdd721024f0ff4e0b3f4c2fc13bc5bad42d0b7851d456d88d203d15aaa450"
+  },
+  {
+    "name": "e12 case2",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "1e23aef61b4b24ddfa1edbc890a2cd422297154ff9a25b0a31f82f76122cd71c",
+    "output_sha256": "4c03698c62ee643c93264ae530404b2361fd13095b879df0ae42b82712c2b256"
+  },
+  {
+    "name": "e12 case3",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "443037d869bde7604784137fe6f51b6b13e51a2e9cde72252b762c0dc304953f",
+    "output_sha256": "4f0ba58861f1f0b3f4dc322875b66364dabdd0fd263840c43228729aa1882bda"
+  },
+  {
+    "name": "e12 case4",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "6037131325dd991a4467114b0a4e640cae01d833bcad67dd341df14c34d43f59",
+    "output_sha256": "5f048b0ba4f99f4f5a3e67aa1649e678d5f82d09b9dece4d37c7a62f7b19fb00"
+  },
+  {
+    "name": "e12 case5",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "be9400296af56159b046de42f279fc2187b57318e13d6d55222c5f018a40cf0f",
+    "output_sha256": "8fccf3dbfc9638efdf18b7bafb0fe98f29da368043db47eeb50c73beeed4aa73"
+  },
+  {
+    "name": "e12 case6",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "423f35edca96766a7ae8254829b408e9f38b6001ad67c0cc8bb230b450435107",
+    "output_sha256": "49b09671602e65a5c14521d022ad9bc7df2fea34e5164d97ae240ca7484da96a"
+  },
+  {
+    "name": "e12 case7",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "e3aac28d74acc5ac52f7e60a0482701301bd4d80d72a0da8477e21415163e0e2",
+    "output_sha256": "53a72d660e5600e7a25ebf51d97a7bc8e26f982407e0dd54877404fd688c8595"
+  },
+  {
+    "name": "e12 case8",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "c0194ff0c5dc50082dba3f0cf106409ff614c9d7321e7481b8f2b8b55ab6e69d",
+    "output_sha256": "89575a0ad5a29835d07d27998dde72af7f58d657cebe7bf64fee79d1eb033b69"
+  },
+  {
+    "name": "e12 case9",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "5815e851d729ba114b83d632711e4ea286b8914ef1b4878d501c8b02836a93e6",
+    "output_sha256": "50ac3afe60279cbb99271c7c6b2d8759ceaab4f6190956aac0b36cd7d0247cd3"
+  },
+  {
+    "name": "e12 case10",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "6a5858ded8705ad006876f59b97d26ffe586e790c5fc3378f64f1e6532584119",
+    "output_sha256": "17c9e5f03fcf5a883d99c1f679b051173b4a3f40f8727367f87f50df034988ad"
+  },
+  {
+    "name": "e12 case11",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "b9b3769200cb655e8c7e01ad84a8120cef92ef13f95fae9bb32d9f35f1ff0bf9",
+    "output_sha256": "e11ba098c404dadcc7f6c2b30eb15f810bd67df38cae8f13506bb2eebbbe3072"
+  },
+  {
+    "name": "e12 case12",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "e8814367b20182dbfc2d044288f311d25293d79218853bfc61346eeb6aeceb75",
+    "output_sha256": "7631c01ebcac41ed8995c6ff7c6c1c1e14f9a9977556738d67a855ebf49084e4"
+  },
+  {
+    "name": "e12 case13",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "60eb752bbf4e4793c88871ed52288a8d27d78ffe7f7753211f90edced5c068b4",
+    "output_sha256": "7057b8e52151d2a3f854ed18993b5aee4a0789ac592cb5c4eda0f5fc500c74e2"
+  },
+  {
+    "name": "e12 case14",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "6b2fc7c485afd7acd5e365c69281d7ff2abad264efb8d362d5feff9e95ad28c2",
+    "output_sha256": "491335213208c97418d6c9ef7f274c329923ff0296dc7f72b700d00f4742016a"
+  },
+  {
+    "name": "e12 case15",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "73a264df14988ce04580e69c25ab16fd66fb589b0b6d5007836ad12a798e1bfa",
+    "output_sha256": "6ee0c5a66e86b37bafce79db9fa506ae4aa042b50b82bd25ab934ea7826d90e3"
+  },
+  {
+    "name": "e12 case16",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "ed5819a0b20b00c678b8ad040cf5bf878543fc29f1841e499975b897ad5d762a",
+    "output_sha256": "3d77a749bba8a73c37a63b7769d3dac394f51a1bfde3b9e938795e8454ee5f14"
+  },
+  {
+    "name": "e12 case17",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "bbc96cff6127ffbee59182cb73791559e57d69f0a4b0e58e472e46335fababca",
+    "output_sha256": "434c1671f1f301ddd5f240a7fc768439d2616de25bf062412be2f287593b51cf"
+  },
+  {
+    "name": "e13 frontend",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e13 native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e13 static ELF",
+    "pass": true
+  },
+  {
+    "name": "e13 C++ original oracle compile",
+    "pass": true,
+    "stderr": "/home/drakestapleton/handoffs/cuda-cpp-L605/cold-source/build/cuda-cpp-tests/e13.cpp: In function \u2018void vector_add(unsigned int*, const unsigned int*, const unsigned int*, unsigned int)\u2019:\n/home/drakestapleton/handoffs/cuda-cpp-L605/cold-source/build/cuda-cpp-tests/e13.cpp:9:67: warning: unused parameter \u2018left\u2019 [-Wunused-parameter]\n    9 | __global__ void vector_add(unsigned int *out, const unsigned int *left,\n      |                                               ~~~~~~~~~~~~~~~~~~~~^~~~\n/home/drakestapleton/handoffs/cuda-cpp-L605/cold-source/build/cuda-cpp-tests/e13.cpp:10:47: warning: unused parameter \u2018right\u2019 [-Wunused-parameter]\n   10 |                           const unsigned int *right, unsigned int count) {\n      |                           ~~~~~~~~~~~~~~~~~~~~^~~~~\n"
+  },
+  {
+    "name": "e13 case0",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7d450465ceb49083708a6970827f0e0b116ed285072a95b451e55f583f56da8d",
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e13 case1",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7ceee0fded46cc97352513679bcce94c310e55f4f496f6b5c0a3b27f93307895",
+    "output_sha256": "e8a4b2ee7ede79a3afb332b5b6cc3d952a65fd8cffb897f5d18016577c33d7cc"
+  },
+  {
+    "name": "e13 case2",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "1e23aef61b4b24ddfa1edbc890a2cd422297154ff9a25b0a31f82f76122cd71c",
+    "output_sha256": "839bccff5b5b309dad121064bb1116ea99407bb2e1a0c4cd98ed9c6b4bce35e1"
+  },
+  {
+    "name": "e13 case3",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "9ea9ba0839edb7a71916234bfadf8a61e5edadd5bbd5e40e6c90181f5b164dcb",
+    "output_sha256": "f23c07c449ca072b9f494eb9a975baae52643fd09d7543aeaaefca1385a46380"
+  },
+  {
+    "name": "e13 case4",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "766fd1bb622b9fb8bea1091b34356809f667afc71c8d3a02ec45e84924ab8cfd",
+    "output_sha256": "b3d62058b8661ecfb71e3ca8715f2b011cf466537f9ffb23b97a7d7ecc51e8ec"
+  },
+  {
+    "name": "e13 case5",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "f81d8d0b4b676228a27fd752dcf2aa9086e992c68eb823738ef5a69a108680ec",
+    "output_sha256": "b8117e8d5cca04952758982613cf5230f153db90104f9ba086fcc031102bf378"
+  },
+  {
+    "name": "e13 case6",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "544b4c55ac31a861abca28bd547e55ee054d44ec4295e232ac7c6615ec009aba",
+    "output_sha256": "5a26c2b956613ca114be355d1f7f2d1fdfa967525f0ae25447678a00af303b09"
+  },
+  {
+    "name": "e13 case7",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "47b828741368504094c5c7e3b25a808a11c7e92738903db28548c18a5dbb16a6",
+    "output_sha256": "f5ed7dc7fd38a7132d509bff4e4963fdc79d468211d778400a47c395a4890dc7"
+  },
+  {
+    "name": "e13 case8",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "966f2cf1adfc3b7c748a657e0e9f2aaddbb7908f72448cff1e508f30cb9fe1ab",
+    "output_sha256": "4dd3d772116078b255b83a353cb6cf41fa5920f6856eeb42bd6c152439b7e6f3"
+  },
+  {
+    "name": "e13 case9",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "c967db18735fe365ea4b4ecd1fbc43154f079237a20b2b29029ca994addd5a64",
+    "output_sha256": "ee221fd5264182b8b66d61071cca9506380ef04b0d76a4c0d5e638ec04415483"
+  },
+  {
+    "name": "e13 case10",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "012fe1f40a6ba1fa2a308b2418831a07648358dbcd2155f91d60791c8fb08916",
+    "output_sha256": "29d15aaa82f07a34b05e888988be0867505eec8cfdb78ac77b0c34b8d07a05ba"
+  },
+  {
+    "name": "e13 case11",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "47980ad2079535e808ba9137b985838c7557d4e501af3f623bc98c8566d2b462",
+    "output_sha256": "19902fd4c3e14526fb215bbbc8b1fac5a4968ece1782aadbc9c32989fc8483ce"
+  },
+  {
+    "name": "e13 case12",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "525f6db9fb4b60e223e55222e9a1b075ec158e3d1d36d96b89ce56ce3e6949cf",
+    "output_sha256": "8505a4cfe6c8cf7f1393ebe91f9b81e7e906c67c748af1fd8e90bd9f665e4d83"
+  },
+  {
+    "name": "e13 case13",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "13fae7ee6db32e339dd8e51eee060c08bf5581fb4e4dcf40f95904c2231f29c6",
+    "output_sha256": "a7c578abbe373f011e7db4a773615bc47262c99990f88246d139c65489c4599d"
+  },
+  {
+    "name": "e13 case14",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "0d33398f75ddb71a05d216b6677c2a1d234fe3d43a91560cee9cfb06b0c81b62",
+    "output_sha256": "5f5f87f38634cfddf03c595a4450cd98edc52d11aeeef5129464ad451b2c1ae2"
+  },
+  {
+    "name": "e13 case15",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "e23805b86435b3179afaa4a3ebf422edcc66b637c55723a5aeffbca8c345a019",
+    "output_sha256": "3a17a650a374e9b8f8c4ecca6939f34dab3183c0476ba677d05897ed935bfa36"
+  },
+  {
+    "name": "e13 case16",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "2cad2cfb1ce6a0389849b201ef758fe672cecfa697b2701b342db2719b5adb0e",
+    "output_sha256": "315509232b144961c3a8766e784f4c2ca55a2224a2eff9839c3c180d4eb0b211"
+  },
+  {
+    "name": "e13 case17",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7c5c8c76502e7f31d71cde8926c7278affa71f5c085d0a1bd53d575725f7fc13",
+    "output_sha256": "e979d1eb1a184edfe07411e763870a7ad73e61db7022648f0c90a59545238987"
+  },
+  {
+    "name": "e14 frontend",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e14 native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e14 static ELF",
+    "pass": true
+  },
+  {
+    "name": "e14 C++ original oracle compile",
+    "pass": true,
+    "stderr": "/home/drakestapleton/handoffs/cuda-cpp-L605/cold-source/build/cuda-cpp-tests/e14.cpp: In function \u2018void vector_add(unsigned int*, const unsigned int*, const unsigned int*, unsigned int)\u2019:\n/home/drakestapleton/handoffs/cuda-cpp-L605/cold-source/build/cuda-cpp-tests/e14.cpp:9:67: warning: unused parameter \u2018left\u2019 [-Wunused-parameter]\n    9 | __global__ void vector_add(unsigned int *out, const unsigned int *left,\n      |                                               ~~~~~~~~~~~~~~~~~~~~^~~~\n/home/drakestapleton/handoffs/cuda-cpp-L605/cold-source/build/cuda-cpp-tests/e14.cpp:10:47: warning: unused parameter \u2018right\u2019 [-Wunused-parameter]\n   10 |                           const unsigned int *right, unsigned int count) {\n      |                           ~~~~~~~~~~~~~~~~~~~~^~~~~\n"
+  },
+  {
+    "name": "e14 case0",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7d450465ceb49083708a6970827f0e0b116ed285072a95b451e55f583f56da8d",
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e14 case1",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7ceee0fded46cc97352513679bcce94c310e55f4f496f6b5c0a3b27f93307895",
+    "output_sha256": "c31425b44a7ed682a3356bf6820141e1584a15c43b6d6793f552e5d4621586f7"
+  },
+  {
+    "name": "e14 case2",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "1e23aef61b4b24ddfa1edbc890a2cd422297154ff9a25b0a31f82f76122cd71c",
+    "output_sha256": "0667f56767a9c21a17953454f9a50a0d1318aafc0c1ba5bda5ff945411cf54fd"
+  },
+  {
+    "name": "e14 case3",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "fad42d013459812636dcded8516d04fd7ca529b3e5a2df8aabd019c95a973bb3",
+    "output_sha256": "c31f3a3eae286d07ab14520c99738ac3dbf0d3eb483be6ed73da22144aa0f760"
+  },
+  {
+    "name": "e14 case4",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "30bbbd3b47a111940dcdd907ccf8186c136a31c8410369f8d1290be081431a3c",
+    "output_sha256": "cc5d5bb5a0f4144f4dae8102b666fd1e1f0a3d412490dc834f0732eb59ba1ba4"
+  },
+  {
+    "name": "e14 case5",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "1931a094ec0c766edea699750f12b65de609a331417bc3b1c4f618a3ba8efe34",
+    "output_sha256": "729f438709d972b2fe843bfa602a379895e9917c9482ef1f4e1696e36117c726"
+  },
+  {
+    "name": "e14 case6",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "8fe8873bc14333905bd52baae2f17def7d25abc6db2bf026d2b9b1461f299323",
+    "output_sha256": "a69650fd7bfd89cc2dbceac7db6923608601635bec528201d5aa52633d36150f"
+  },
+  {
+    "name": "e14 case7",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "36860f4440e6807060b15820b5b66f41cf06a2bb55194027bd49e89519ee35b3",
+    "output_sha256": "38ea44ab9106963e94044506b4d6d0080970a45acc47c1d0c9986123d36e7630"
+  },
+  {
+    "name": "e14 case8",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "c0cd6ad392cccdccca64a3a6e6f09efbfc51550cca729b1f0681e2838501ac9e",
+    "output_sha256": "fe45fa569e74cd08a0362fd1a9066c0deef874be861879a582bf2e04860aa872"
+  },
+  {
+    "name": "e14 case9",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "af4f29f9eb96b78bb27ba12154b781b3202461535a213fbdc52802e70e27ec89",
+    "output_sha256": "59edad67452e1bc9db55817efb2f82cbe1c36dcb2225598b4f1c8db85b5fe876"
+  },
+  {
+    "name": "e14 case10",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "334545390e89da5eaf1a4be81100907ddbd8f19218867038ae7c8a15896b9962",
+    "output_sha256": "38ea44ab9106963e94044506b4d6d0080970a45acc47c1d0c9986123d36e7630"
+  },
+  {
+    "name": "e14 case11",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "c27aa90150081de4d3427e984303038b0e6a03d4ff37547e0f2479c9604d5bff",
+    "output_sha256": "0d3528209993054c3c107c37cfaf769927eaa6145235037b49a46c194b949fc2"
+  },
+  {
+    "name": "e14 case12",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "08b490a900a26395833ccbb62f90be473a3c5f8f3d8b7928a7da1f8e720401dc",
+    "output_sha256": "98207a69be7028bb36254104947c3a03106ba42652360a780b81be526516532c"
+  },
+  {
+    "name": "e14 case13",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "1cad1cd1f08eee4735ac7a47fb508c367df9b0c2e4afc08cb701fe188b61d1e5",
+    "output_sha256": "c05aabcb503f372b93dcb41a13c5b0d5a56f2385d43d1342b2f8ec444af5f20d"
+  },
+  {
+    "name": "e14 case14",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "6eb5577f394fc3f988a4f9eef2910871493ae8649a8f85e7cb796b5560a7935d",
+    "output_sha256": "9bd38d8cd7ad235270f047c9193eea4ee3642c3c991b4f1c8bed108a0c127083"
+  },
+  {
+    "name": "e14 case15",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "41f384922b7bcbe276055e0ec00aaa92687d4399552cd23e06772c53163a1ca5",
+    "output_sha256": "b397933423be341ecf976e61d428c110256530b2dd2cc98420f886003fa3c227"
+  },
+  {
+    "name": "e14 case16",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "bc9ad97aa359cbcc3b2bf20d77ab69ff8b02d95dd85cbff9d35f8990090d553e",
+    "output_sha256": "f1267cbb2a9bf41560726cec8bbe38c956218c72bc0b7410ffe12df08e5a089c"
+  },
+  {
+    "name": "e14 case17",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "728970023b3cce86a04bcf3e1981a79c61cf7876ce37df5c1a3c3405bf2d2728",
+    "output_sha256": "8be691981c57d4d0c3f37d93a3c8000bff77f0d3a025a7d7a911c511f294e2f4"
+  },
+  {
+    "name": "e15 frontend",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e15 native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "e15 static ELF",
+    "pass": true
+  },
+  {
+    "name": "e15 C++ original oracle compile",
+    "pass": true,
+    "stderr": "/home/drakestapleton/handoffs/cuda-cpp-L605/cold-source/build/cuda-cpp-tests/e15.cpp: In function \u2018void vector_add(unsigned int*, const unsigned int*, const unsigned int*, unsigned int)\u2019:\n/home/drakestapleton/handoffs/cuda-cpp-L605/cold-source/build/cuda-cpp-tests/e15.cpp:9:67: warning: unused parameter \u2018left\u2019 [-Wunused-parameter]\n    9 | __global__ void vector_add(unsigned int *out, const unsigned int *left,\n      |                                               ~~~~~~~~~~~~~~~~~~~~^~~~\n/home/drakestapleton/handoffs/cuda-cpp-L605/cold-source/build/cuda-cpp-tests/e15.cpp:10:47: warning: unused parameter \u2018right\u2019 [-Wunused-parameter]\n   10 |                           const unsigned int *right, unsigned int count) {\n      |                           ~~~~~~~~~~~~~~~~~~~~^~~~~\n"
+  },
+  {
+    "name": "e15 case0",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7d450465ceb49083708a6970827f0e0b116ed285072a95b451e55f583f56da8d",
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "e15 case1",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "7ceee0fded46cc97352513679bcce94c310e55f4f496f6b5c0a3b27f93307895",
+    "output_sha256": "67abdd721024f0ff4e0b3f4c2fc13bc5bad42d0b7851d456d88d203d15aaa450"
+  },
+  {
+    "name": "e15 case2",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "1e23aef61b4b24ddfa1edbc890a2cd422297154ff9a25b0a31f82f76122cd71c",
+    "output_sha256": "9a41e428bcbcb4f5e86c120d482aabeeef1dfc03dcb862f24045e92eea9b7499"
+  },
+  {
+    "name": "e15 case3",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "582c7bd89e888a4bc83b556f9b07cf59c5ece32cb9fb6be4eff79c4ad4feb180",
+    "output_sha256": "20255ff62971758877da7bbf4503b80f2672ca671861eb4a0b7bafb34cdb4034"
+  },
+  {
+    "name": "e15 case4",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "a8f3dde8cb8c5300f18d52a878e5fe04a7a02e270597ba88f55c6aae3bdcb1b8",
+    "output_sha256": "9ea62e1647b8620fb22d0cbd4a111fd67f003fe439bcfa833fbd2fc809359a67"
+  },
+  {
+    "name": "e15 case5",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "1d0a3d010a23e5b8024e9cbce018e1f66b4718f8fd95d4eb5fb651b6e056c24b",
+    "output_sha256": "d585e10d1e2240e9af79fc1cf8d11e11420b5306480b469b587e85630fcb0c9f"
+  },
+  {
+    "name": "e15 case6",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "84b11fbfa64d74fe78cf4007f210d60d97611625893622deacc6d7b7f47a1080",
+    "output_sha256": "ea6bed229e52e1b8a6b4529a458abc8ad644c1502bd2389b2b99278bf1b22134"
+  },
+  {
+    "name": "e15 case7",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "38129dca1682bf4c30f586cd1ab0897df71394011ffb0ff41f9b76046e53af4d",
+    "output_sha256": "0ca6f9ca079d37b73ee05785845e5b41dbfb69dcfa71bf17152c52641918b5ac"
+  },
+  {
+    "name": "e15 case8",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "6dffc720cdbb006c3390d4e75dacc456dadac34c76f6ecdc506dd2c256cbac95",
+    "output_sha256": "aca0a0c7b72582b17a022940751572c1bcfa722eb6a04a418eff5b1f7f90da75"
+  },
+  {
+    "name": "e15 case9",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "ab071b4ef35a78908cc3d46ffb18ccb99a7ca5cd2e16365bdf4a3c5cbe2789a6",
+    "output_sha256": "11047585fe102fbb5cadb42446612a578d88c6ef5ed076bb7ac360c4f9e4373d"
+  },
+  {
+    "name": "e15 case10",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "6a0d806d691066b9592feec827069026d2b935e468545261fc2c57d8d8bcd071",
+    "output_sha256": "6143def83d0bdc799dc3db445d33c4bc5cb03e16197a9d0038ca10e2a78c4a14"
+  },
+  {
+    "name": "e15 case11",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "57a4671996fd32e3969fd65f918701d61f078039dee14128994ed8ed93e63711",
+    "output_sha256": "b3aba27ad0eb22e76c466a9b2449a99da3a767bb93b20d22b5cebd2520b949f4"
+  },
+  {
+    "name": "e15 case12",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "6ddba4d232df736edcc86bda610f37c33cc0bd47586e034fc07daf1ccd586f3f",
+    "output_sha256": "a7d3fa431bba41f5f08de65a6082f4134535d42a12cb68499cf0147a37560d61"
+  },
+  {
+    "name": "e15 case13",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "b9b2a807d7abe8e5c05fbe14836249a851504fa917fcfc148486da87ce6a0e5c",
+    "output_sha256": "8e52ade9394c150a45bde3128e7b8945c29738d904c5ffdc3847877cc83338e5"
+  },
+  {
+    "name": "e15 case14",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "9595e8e6612382a48f2f93340893dfaed4792905d1636bc7a314b7d01ebfb8d7",
+    "output_sha256": "19cb5bcdf3a8ccfe7b06f5c05835897a584946c60ae790fcfabc893ce5a777ba"
+  },
+  {
+    "name": "e15 case15",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "367a39d7ef851635940170273019234c158d949297395a4b7a7b524603369193",
+    "output_sha256": "38f301e4e18f5bff458ffdd59df861c0927c31d4eb9e7ec79f6ec2a818a385a7"
+  },
+  {
+    "name": "e15 case16",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "aa7a18634de2c6e8a3355ce3577b05f8dd2a9157554512a3e8e148cb478597a2",
+    "output_sha256": "ed1a0651cd194595b61a7dba77b8a9830fa96fd71ab318cb27df27df816fc2f0"
+  },
+  {
+    "name": "e15 case17",
+    "pass": true,
+    "native_rc": 0,
+    "oracle_rc": 0,
+    "input_sha256": "22156d79647c21303b1b31b47e309b1218220d611a223891df5ab7274bd1add3",
+    "output_sha256": "e92cafc1c8c0b6b9e904c0ad4bf43ae4b371295bc603b3fbd97ec73c6e3fe388"
+  },
+  {
+    "name": "renamed frontend",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "renamed native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "renamed static ELF",
+    "pass": true
+  },
+  {
+    "name": "renamed C++ original oracle compile",
+    "pass": true,
+    "stderr": ""
+  },
+  {
+    "name": "renamed identifiers",
+    "pass": true
+  },
+  {
+    "name": "arity1 frontend",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "arity1 native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "arity1 static ELF",
+    "pass": true
+  },
+  {
+    "name": "arity1 C++ original oracle compile",
+    "pass": true,
+    "stderr": ""
+  },
+  {
+    "name": "arity1 n0",
+    "pass": true
+  },
+  {
+    "name": "arity1 n1",
+    "pass": true
+  },
+  {
+    "name": "arity1 n31",
+    "pass": true
+  },
+  {
+    "name": "arity1 n4096",
+    "pass": true
+  },
+  {
+    "name": "arity4 frontend",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "arity4 native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "arity4 static ELF",
+    "pass": true
+  },
+  {
+    "name": "arity4 C++ original oracle compile",
+    "pass": true,
+    "stderr": ""
+  },
+  {
+    "name": "arity4 n0",
+    "pass": true
+  },
+  {
+    "name": "arity4 n1",
+    "pass": true
+  },
+  {
+    "name": "arity4 n31",
+    "pass": true
+  },
+  {
+    "name": "arity4 n4096",
+    "pass": true
+  },
+  {
+    "name": "source-exact frontend",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "source-exact native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "source-exact static ELF",
+    "pass": true
+  },
+  {
+    "name": "source-exact C++ original oracle compile",
+    "pass": true,
+    "stderr": ""
+  },
+  {
+    "name": "source-exact parity",
+    "pass": true
+  },
+  {
+    "name": "crlf frontend",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "crlf native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "crlf static ELF",
+    "pass": true
+  },
+  {
+    "name": "crlf C++ original oracle compile",
+    "pass": true,
+    "stderr": ""
+  },
+  {
+    "name": "crlf parity",
+    "pass": true
+  },
+  {
+    "name": "comments frontend",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "comments native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "comments static ELF",
+    "pass": true
+  },
+  {
+    "name": "comments C++ original oracle compile",
+    "pass": true,
+    "stderr": ""
+  },
+  {
+    "name": "comments parity",
+    "pass": true
+  },
+  {
+    "name": "refuse host function",
+    "pass": true,
+    "rc": 65
+  },
+  {
+    "name": "refuse float",
+    "pass": true,
+    "rc": 65
+  },
+  {
+    "name": "refuse unknown buffer",
+    "pass": true,
+    "rc": 65
+  },
+  {
+    "name": "refuse output read",
+    "pass": true,
+    "rc": 65
+  },
+  {
+    "name": "refuse const write",
+    "pass": true,
+    "rc": 65
+  },
+  {
+    "name": "refuse duplicate names",
+    "pass": true,
+    "rc": 65
+  },
+  {
+    "name": "refuse unknown index",
+    "pass": true,
+    "rc": 65
+  },
+  {
+    "name": "refuse index wrap",
+    "pass": true,
+    "rc": 65
+  },
+  {
+    "name": "refuse bad bound",
+    "pass": true,
+    "rc": 65
+  },
+  {
+    "name": "refuse unguarded",
+    "pass": true,
+    "rc": 65
+  },
+  {
+    "name": "refuse include",
+    "pass": true,
+    "rc": 65
+  },
+  {
+    "name": "refuse macro",
+    "pass": true,
+    "rc": 65
+  },
+  {
+    "name": "refuse line splice",
+    "pass": true,
+    "rc": 65
+  },
+  {
+    "name": "refuse NUL",
+    "pass": true,
+    "rc": 65
+  },
+  {
+    "name": "refuse extra function",
+    "pass": true,
+    "rc": 65
+  },
+  {
+    "name": "refuse signed literal",
+    "pass": true,
+    "rc": 65
+  },
+  {
+    "name": "refuse octal",
+    "pass": true,
+    "rc": 65
+  },
+  {
+    "name": "refuse hex",
+    "pass": true,
+    "rc": 65
+  },
+  {
+    "name": "refuse overflow literal",
+    "pass": true,
+    "rc": 65
+  },
+  {
+    "name": "refuse shift",
+    "pass": true,
+    "rc": 65
+  },
+  {
+    "name": "refuse divide",
+    "pass": true,
+    "rc": 65
+  },
+  {
+    "name": "refuse call",
+    "pass": true,
+    "rc": 65
+  },
+  {
+    "name": "refuse logical",
+    "pass": true,
+    "rc": 65
+  },
+  {
+    "name": "refuse comment EOF",
+    "pass": true,
+    "rc": 65
+  },
+  {
+    "name": "refuse preprocessor trigraph",
+    "pass": true,
+    "rc": 65
+  },
+  {
+    "name": "refuse deep",
+    "pass": true,
+    "rc": 67
+  },
+  {
+    "name": "refuse long identifier",
+    "pass": true,
+    "rc": 67
+  },
+  {
+    "name": "refuse over source",
+    "pass": true,
+    "rc": 67
+  },
+  {
+    "name": "refuse over nodes",
+    "pass": true,
+    "rc": 67
+  },
+  {
+    "name": "refuse keyword identifier",
+    "pass": true,
+    "rc": 65
+  },
+  {
+    "name": "refuse namespace",
+    "pass": true,
+    "rc": 65
+  },
+  {
+    "name": "input frontend",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "input native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "input static ELF",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 0",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 1",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 2",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 3",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 4",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 5",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 6",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 7",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 8",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 9",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 10",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 11",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 12",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 13",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 14",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 15",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 16",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 17",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 18",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 19",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 20",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 21",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 22",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 23",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 24",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 25",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 26",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 27",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 28",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 29",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 30",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 31",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 32",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 33",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 34",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 35",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 36",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 37",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 38",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 39",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 40",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 41",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 42",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 43",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 44",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 45",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 46",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 47",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 48",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 49",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 50",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 51",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 52",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 53",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 54",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 55",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 56",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 57",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 58",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 59",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 60",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 61",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 62",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 63",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 64",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 65",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 66",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 67",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 68",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 69",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 70",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 71",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 72",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 73",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 74",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 75",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 76",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 77",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 78",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 79",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 80",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 81",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 82",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 83",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 84",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 85",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 86",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 87",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 88",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 89",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 90",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 91",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 92",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 93",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 94",
+    "pass": true
+  },
+  {
+    "name": "truncated frame 95",
+    "pass": true
+  },
+  {
+    "name": "input refusal extra",
+    "pass": true,
+    "rc": 77
+  },
+  {
+    "name": "input refusal zero blocks",
+    "pass": true,
+    "rc": 77
+  },
+  {
+    "name": "input refusal zero threads",
+    "pass": true,
+    "rc": 77
+  },
+  {
+    "name": "input refusal many blocks",
+    "pass": true,
+    "rc": 77
+  },
+  {
+    "name": "input refusal many threads",
+    "pass": true,
+    "rc": 77
+  },
+  {
+    "name": "input refusal product",
+    "pass": true,
+    "rc": 77
+  },
+  {
+    "name": "input refusal length",
+    "pass": true,
+    "rc": 77
+  },
+  {
+    "name": "mutant unique add-sub",
+    "pass": true
+  },
+  {
+    "name": "mutant compiles add-sub",
+    "pass": true
+  },
+  {
+    "name": "mutant ELF add-sub",
+    "pass": true
+  },
+  {
+    "name": "m-add-sub frontend",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "m-add-sub native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "m-add-sub static ELF",
+    "pass": true
+  },
+  {
+    "name": "m-add-sub C++ original oracle compile",
+    "pass": true,
+    "stderr": ""
+  },
+  {
+    "name": "mutant caught add-sub",
+    "pass": true
+  },
+  {
+    "name": "mutant unique buffer-map",
+    "pass": true
+  },
+  {
+    "name": "mutant compiles buffer-map",
+    "pass": true
+  },
+  {
+    "name": "mutant ELF buffer-map",
+    "pass": true
+  },
+  {
+    "name": "m-buffer-map frontend",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "m-buffer-map native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "m-buffer-map static ELF",
+    "pass": true
+  },
+  {
+    "name": "m-buffer-map C++ original oracle compile",
+    "pass": true,
+    "stderr": ""
+  },
+  {
+    "name": "mutant caught buffer-map",
+    "pass": true
+  },
+  {
+    "name": "mutant unique literal",
+    "pass": true
+  },
+  {
+    "name": "mutant compiles literal",
+    "pass": true
+  },
+  {
+    "name": "mutant ELF literal",
+    "pass": true
+  },
+  {
+    "name": "m-literal frontend",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "m-literal native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "m-literal static ELF",
+    "pass": true
+  },
+  {
+    "name": "m-literal C++ original oracle compile",
+    "pass": true,
+    "stderr": ""
+  },
+  {
+    "name": "mutant caught literal",
+    "pass": true
+  }
+]

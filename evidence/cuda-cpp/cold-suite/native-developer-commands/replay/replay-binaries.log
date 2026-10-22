@@ -1,0 +1,3 @@
+build/native/omc: OK
+build/native/bridge: OK
+build/native/math: OK

@@ -1,0 +1,41 @@
+800934 execve("/tmp/omega-commands-test-jsRZuE/home/my prefix's/bin/om", ["/tmp/omega-commands-test-jsRZuE/"..., "convert", "--to", "c", "/tmp/omega-commands-test-jsRZuE/"...], 0xfffffa76da18 /* 19 vars */) = 0
+800936 execve("/usr/bin/realpath", ["realpath", "--", "/tmp/omega-commands-test-jsRZuE/"...], 0xba613bb65a98 /* 19 vars */) = 0
+800936 +++ exited with 0 +++
+800935 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=800936, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+800935 execve("/usr/bin/dirname", ["dirname", "/tmp/omega-commands-test-jsRZuE/"...], 0xba613bb65aa0 /* 19 vars */) = 0
+800935 +++ exited with 0 +++
+800934 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=800935, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+800937 execve("/usr/bin/sha256sum", ["sha256sum", "--status", "-c", "files.sha256"], 0xba613bb65cf8 /* 19 vars */) = 0
+800937 +++ exited with 0 +++
+800934 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=800937, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+800938 execve("/usr/bin/uname", ["uname", "-s"], 0xba613bb65b48 /* 19 vars */) = 0
+800938 +++ exited with 0 +++
+800934 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=800938, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+800939 execve("/usr/bin/uname", ["uname", "-m"], 0xba613bb65b48 /* 19 vars */) = 0
+800939 +++ exited with 0 +++
+800934 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=800939, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+800940 execve("/usr/bin/mktemp", ["mktemp", "-d", "/tmp/omega-command.XXXXXXXX"], 0xba613bb65fa0 /* 19 vars */) = 0
+800940 +++ exited with 0 +++
+800934 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=800940, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+800941 execve("/usr/bin/cat", ["cat", "--", "/tmp/omega-commands-test-jsRZuE/"...], 0xba613bb69db8 /* 19 vars */) = 0
+800941 +++ exited with 0 +++
+800934 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=800941, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+800942 execve("/tmp/omega-commands-test-jsRZuE/home/my prefix's/lib/omega-native/omc", ["/tmp/omega-commands-test-jsRZuE/"...], 0xba613bb69f78 /* 19 vars */) = 0
+800942 +++ exited with 0 +++
+800934 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=800942, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+800943 execve("/usr/bin/cat", ["cat", "/tmp/omega-command.pqXIMCdJ/inpu"...], 0xba613bb69cf8 /* 19 vars */) = 0
+800943 +++ exited with 0 +++
+800934 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=800943, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+800944 execve("/tmp/omega-commands-test-jsRZuE/home/my prefix's/lib/omega-native/bridge", ["/tmp/omega-commands-test-jsRZuE/"...], 0xba613bb69f78 /* 19 vars */) = 0
+800944 +++ exited with 0 +++
+800934 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=800944, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+800945 execve("/usr/bin/cat", ["cat", "/tmp/omega-command.pqXIMCdJ/outp"...], 0xba613bb69d90 /* 19 vars */) = 0
+800945 +++ exited with 0 +++
+800934 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=800945, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+800946 execve("/usr/bin/rm", ["rm", "-f", "--", "/tmp/omega-command.pqXIMCdJ/inpu"..., "/tmp/omega-command.pqXIMCdJ/nati"..., "/tmp/omega-command.pqXIMCdJ/outp"..., "/tmp/omega-command.pqXIMCdJ/erro"..., "/tmp/omega-command.pqXIMCdJ/lowe"...], 0xba613bb69fd0 /* 19 vars */) = 0
+800946 +++ exited with 0 +++
+800934 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=800946, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+800947 execve("/usr/bin/rmdir", ["rmdir", "/tmp/omega-command.pqXIMCdJ"], 0xba613bb69f08 /* 19 vars */) = 0
+800947 +++ exited with 0 +++
+800934 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=800947, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+800934 +++ exited with 0 +++
