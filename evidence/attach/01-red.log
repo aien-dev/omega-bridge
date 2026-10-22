@@ -1,0 +1,391 @@
+✖ arbitrary cwd, read-only discovery, aliases and hardlinks deduplicated (3.30474ms)
+✖ empty and relative PATH components are skipped, never cwd executables (1.327368ms)
+✖ manager inventories, venv identity, spaces and manager symlinks (2.061852ms)
+✖ all registry families discovered; unrelated commands never executed (1.500777ms)
+✖ broken, hanging, oversized and versionless probes are ERROR, never attached (1.419225ms)
+✖ no privileges, no network, unsupported enrollment changes no foreign config (1.469464ms)
+✖ watcher detects added and removed installations without rerunning attach (1.520777ms)
+✖ watcher notices a newly created manager tree and invalidates executable version cache (1.34788ms)
+✖ repeated enrollment, disable, enable and uninstall are reversible and idempotent (1.169959ms)
+✖ fixture handshake gates SUPPORTED and actual reversible fixture integration (1.826811ms)
+✖ new supported fixture installs attach automatically after enrollment (1.08767ms)
+✖ incompatible fixture ABI is refused without any hooks (1.527113ms)
+✔ attachment write failure rolls back enrollment and owned hook completely (2.013324ms)
+✔ preexisting desktop entry refuses enrollment and is never overwritten (1.364504ms)
+✔ symlinked writable state parent refuses without touching external destination (1.561274ms)
+✖ bootstrap and uninstall restore exact prior filesystem, even from spaces (1.218103ms)
+✔ existing omega anywhere on PATH blocks bootstrap without overwrites (1.371304ms)
+✔ bootstrap rollback restores exact filesystem (1.31012ms)
+✖ modified owned desktop entry is preserved and uninstall refuses (1.452889ms)
+✖ production build excludes fixture integration entirely (1.090358ms)
+✖ missing native Omega policy fails closed without any enrollment (0.165857ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 5
+ℹ fail 16
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 101.698645
+
+✖ failing tests:
+
+test at tests/attach/attach.test.cjs:42:1
+✖ arbitrary cwd, read-only discovery, aliases and hardlinks deduplicated (3.30474ms)
+  AssertionError [ERR_ASSERTION]: spawnSync /home/drakestapleton/workspace/omega-bridge-attach/build/attach-test/omega ENOENT
+  
+  null !== 0
+  
+      at run (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:22:5)
+      at json (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:24:59)
+      at TestContext.<anonymous> (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:44:30)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/attach/attach.test.cjs:46:1
+✖ empty and relative PATH components are skipped, never cwd executables (1.327368ms)
+  AssertionError [ERR_ASSERTION]: spawnSync /home/drakestapleton/workspace/omega-bridge-attach/build/attach-test/omega ENOENT
+  
+  null !== 0
+  
+      at run (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:22:5)
+      at json (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:24:59)
+      at TestContext.<anonymous> (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:46:161)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/attach/attach.test.cjs:47:1
+✖ manager inventories, venv identity, spaces and manager symlinks (2.061852ms)
+  AssertionError [ERR_ASSERTION]: spawnSync /home/drakestapleton/workspace/omega-bridge-attach/build/attach-test/omega ENOENT
+  
+  null !== 0
+  
+      at run (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:22:5)
+      at json (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:24:59)
+      at TestContext.<anonymous> (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:51:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/attach/attach.test.cjs:53:1
+✖ all registry families discovered; unrelated commands never executed (1.500777ms)
+  AssertionError [ERR_ASSERTION]: spawnSync /home/drakestapleton/workspace/omega-bridge-attach/build/attach-test/omega ENOENT
+  
+  null !== 0
+  
+      at run (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:22:5)
+      at json (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:24:59)
+      at TestContext.<anonymous> (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:54:279)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/attach/attach.test.cjs:56:1
+✖ broken, hanging, oversized and versionless probes are ERROR, never attached (1.419225ms)
+  AssertionError [ERR_ASSERTION]: spawnSync /home/drakestapleton/workspace/omega-bridge-attach/build/attach-test/omega ENOENT
+  
+  null !== 0
+  
+      at run (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:22:5)
+      at json (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:24:59)
+      at TestContext.<anonymous> (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:58:23)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/attach/attach.test.cjs:60:1
+✖ no privileges, no network, unsupported enrollment changes no foreign config (1.469464ms)
+  AssertionError [ERR_ASSERTION]: spawnSync /home/drakestapleton/workspace/omega-bridge-attach/build/attach-test/omega ENOENT
+  
+  null !== 0
+  
+      at run (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:22:5)
+      at json (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:24:59)
+      at TestContext.<anonymous> (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:62:36)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/attach/attach.test.cjs:64:1
+✖ watcher detects added and removed installations without rerunning attach (1.520777ms)
+  AssertionError [ERR_ASSERTION]: spawnSync /home/drakestapleton/workspace/omega-bridge-attach/build/attach-test/omega ENOENT
+  
+  null !== 0
+  
+      at run (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:22:5)
+      at json (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:24:59)
+      at TestContext.<anonymous> (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:65:20)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/attach/attach.test.cjs:67:1
+✖ watcher notices a newly created manager tree and invalidates executable version cache (1.34788ms)
+  AssertionError [ERR_ASSERTION]: spawnSync /home/drakestapleton/workspace/omega-bridge-attach/build/attach-test/omega ENOENT
+  
+  null !== 0
+  
+      at run (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:22:5)
+      at json (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:24:59)
+      at TestContext.<anonymous> (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:68:20)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/attach/attach.test.cjs:70:1
+✖ repeated enrollment, disable, enable and uninstall are reversible and idempotent (1.169959ms)
+  AssertionError [ERR_ASSERTION]: spawnSync /home/drakestapleton/workspace/omega-bridge-attach/build/attach-test/omega ENOENT
+  
+  null !== 0
+  
+      at run (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:22:5)
+      at json (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:24:59)
+      at TestContext.<anonymous> (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:71:60)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/attach/attach.test.cjs:73:1
+✖ fixture handshake gates SUPPORTED and actual reversible fixture integration (1.826811ms)
+  AssertionError [ERR_ASSERTION]: spawnSync /home/drakestapleton/workspace/omega-bridge-attach/build/attach-test/omega ENOENT
+  
+  null !== 0
+  
+      at run (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:22:5)
+      at json (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:24:59)
+      at TestContext.<anonymous> (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:74:52)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/attach/attach.test.cjs:76:1
+✖ new supported fixture installs attach automatically after enrollment (1.08767ms)
+  AssertionError [ERR_ASSERTION]: spawnSync /home/drakestapleton/workspace/omega-bridge-attach/build/attach-test/omega ENOENT
+  
+  null !== 0
+  
+      at run (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:22:5)
+      at json (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:24:59)
+      at TestContext.<anonymous> (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:77:20)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/attach/attach.test.cjs:79:1
+✖ incompatible fixture ABI is refused without any hooks (1.527113ms)
+  AssertionError [ERR_ASSERTION]: spawnSync /home/drakestapleton/workspace/omega-bridge-attach/build/attach-test/omega ENOENT
+  
+  null !== 0
+  
+      at run (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:22:5)
+      at json (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:24:59)
+      at TestContext.<anonymous> (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:79:217)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/attach/attach.test.cjs:85:1
+✖ bootstrap and uninstall restore exact prior filesystem, even from spaces (1.218103ms)
+  AssertionError [ERR_ASSERTION]: spawnSync /home/drakestapleton/workspace/omega-bridge-attach/build/attach-test/omega ENOENT
+  
+  null !== 0
+  
+      at run (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:22:5)
+      at TestContext.<anonymous> (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:85:130)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/attach/attach.test.cjs:88:1
+✖ modified owned desktop entry is preserved and uninstall refuses (1.452889ms)
+  AssertionError [ERR_ASSERTION]: spawnSync /home/drakestapleton/workspace/omega-bridge-attach/build/attach-test/omega ENOENT
+  
+  null !== 0
+  
+      at run (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:22:5)
+      at json (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:24:59)
+      at TestContext.<anonymous> (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:88:95)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/attach/attach.test.cjs:89:1
+✖ production build excludes fixture integration entirely (1.090358ms)
+  AssertionError [ERR_ASSERTION]: spawnSync /home/drakestapleton/workspace/omega-bridge-attach/build/attach/omega ENOENT
+  
+  null !== 0
+  
+      at run (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:22:5)
+      at json (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:24:59)
+      at TestContext.<anonymous> (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:89:116)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/attach/attach.test.cjs:90:1
+✖ missing native Omega policy fails closed without any enrollment (0.165857ms)
+  Error: ENOENT: no such file or directory, copyfile '/home/drakestapleton/workspace/omega-bridge-attach/build/attach-test/omega' -> '/tmp/omega attach tNlLBJ/omega'
+      at Object.copyFileSync (node:fs:3200:11)
+      at TestContext.<anonymous> (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:90:139)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'copyfile',
+    path: '/home/drakestapleton/workspace/omega-bridge-attach/build/attach-test/omega',
+    dest: '/tmp/omega attach tNlLBJ/omega'
+  }

@@ -1,0 +1,9 @@
+# Local pre-alpha installation
+
+No downloadable release endpoint exists. The installer is local and offline. A shipping launcher needs Linux, libc and a seed-built policy; neither Python nor Node is needed to run it. Node is used only for the test harness. Building needs a C compiler and the qualified AArch64 Omega seed.
+
+Build with `sh cli/build.sh /absolute/path/to/seed/out/omc`. Run `build/attach/omega discover` to inspect installed language tools without changing files. After reviewing this pre-alpha build, `sh install/bootstrap.sh build/attach/omega` installs the launcher and policy under the conventional user `.local` directories. It refuses an existing omega command, including one elsewhere on PATH. If `.local/bin` is absent from the user's PATH, the installer reports that limitation and does not edit shell configuration. No one-command network bootstrap is currently published.
+
+Once installed and reachable, `omega attach` enrolls from any folder, inventories tools, installs only qualified user hooks and starts discovery in the background. `omega status` shows inventory, enrollment and watcher health. `omega disable` stops discovery and removes active hooks; `omega enable` resumes; `omega notify` requests a rescan after manager activity; `omega uninstall` stops discovery and removes unchanged Omega-owned files, preserving preexisting content. Unexpected user edits cause refusal instead of deletion.
+
+Production adapters currently report UNSUPPORTED because verified runtime hooks are missing. Discovery works independently of the unfinished converter. Desktop-login persistence is bounded Linux support; headless reboot persistence and real language attachment remain unqualified. No actual user service installation is performed by the test suite: all enrollment, bootstrap, watcher and autostart tests use isolated temporary homes.
