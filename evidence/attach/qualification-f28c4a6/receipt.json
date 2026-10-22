@@ -1,0 +1,19 @@
+{
+  "source_sha": "f28c4a6134ae0ff6f5f87bdd7c24009739f9e622",
+  "seed": "/home/drakestapleton/workspace/omega-toc/seed/out/omc",
+  "platform": "Linux aarch64",
+  "result": "PASS",
+  "tests": 39,
+  "sanitizer_tests": 39,
+  "negative_policy": "CAUGHT",
+  "real_path_discovery": "PASS",
+  "isolated_home_restoration": "PASS",
+  "macos": "NOT_RUN",
+  "windows": "NOT_RUN",
+  "graphical_login": "NOT_RUN",
+  "headless_restart": "MISSING_IMPLEMENTATION",
+  "production_runtime_attachments": "UNSUPPORTED",
+  "converter": "NOT_AVAILABLE",
+  "actual_account_enrollment": false,
+  "parent_L481_acceptance": "OPEN"
+}

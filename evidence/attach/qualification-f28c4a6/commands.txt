@@ -1,0 +1,8 @@
+quiet-build sh cli/build.sh QUALIFIED_SEED
+quiet-build node --test --test-reporter=tap tests/attach/attach.test.cjs
+quiet-build sh tests/attach/negative-controls.sh QUALIFIED_SEED NEGATIVE_LOG
+QUALIFIED_SEED < cli/attachment-policy.om > build/attach/policy-repeat
+cmp build/attach/attachment-policy build/attach/policy-repeat
+env -i HOME=ISOLATED_EMPTY_HOME PATH=/usr/bin:/bin build/attach/om discover
+quiet-build cc -std=c11 -D_GNU_SOURCE -DOMEGA_ATTACH_TESTING -O1 -g -Wall -Wextra -Werror -Wformat=2 -Wshadow -fsanitize=address,undefined -fno-omit-frame-pointer -o build/attach-sanitize/om cli/omega.c cli/discover.c cli/host.c cli/sandbox.c
+quiet-build env ATTACH_BINARY=build/attach-sanitize/om ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 node --test --test-reporter=tap tests/attach/attach.test.cjs

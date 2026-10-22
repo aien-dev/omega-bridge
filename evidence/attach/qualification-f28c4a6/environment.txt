@@ -1,0 +1,10 @@
+2026-10-22T18:18:38Z
+source_sha=f28c4a6134ae0ff6f5f87bdd7c24009739f9e622
+Linux 7.0.0-1019-nvidia aarch64
+1000
+cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+v24.21.0

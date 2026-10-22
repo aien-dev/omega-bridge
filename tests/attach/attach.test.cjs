@@ -13,7 +13,7 @@ const homes = [];
 function fixture() {
   const home = fs.mkdtempSync(path.join(os.tmpdir(), 'omega attach ')); homes.push(home);
   const tools = path.join(home, 'tools with spaces'); fs.mkdirSync(tools);
-  const env = {HOME:home, PATH:tools, OMEGA_ATTACH_INTERVAL_MS:'150', OMEGA_ATTACH_DEBOUNCE_MS:'50'};
+  const env = {HOME:home, PATH:tools, OMEGA_ATTACH_INTERVAL_MS:'150', OMEGA_ATTACH_DEBOUNCE_MS:'50', OMEGA_ATTACH_MIN_SCAN_MS:'100'};
   return {home, tools, env, state:path.join(home,'.local/state/omega-attach')};
 }
 function run(f, args, opt={}) {
@@ -160,3 +160,7 @@ test('concurrent enrollment leaves one healthy watcher and reversible state',asy
 });
 
 test('multiline version banners retain their version-bearing line',()=>{const f=fixture();tool(f,'perl','printf "\\nThis is perl 5.38.2\\nCopyright 2026\\n"');a.equal(inv(json(f))[0].version,'This is perl 5.38.2');});
+
+test('watcher rate limit coalesces notification bursts before rescanning',async()=>{
+ const f=fixture();f.env.OMEGA_ATTACH_MIN_SCAN_MS='600';f.env.OMEGA_ATTACH_INTERVAL_MS='60000';json(f,['attach']);const started=Date.now();tool(f,'node');for(let n=0;n<20;n++)fs.writeFileSync(path.join(f.tools,'noise-'+n),'event');await new Promise(r=>setTimeout(r,180));a.equal(inv(json(f,['status'])).length,0);await until(()=>inv(json(f,['status'])).some(x=>x.language==='node'));a.ok(Date.now()-started>=500);run(f,['uninstall']);
+});

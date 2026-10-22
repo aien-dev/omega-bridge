@@ -201,6 +201,7 @@ static void watcher(int readyfd, int initial_scan) {
   int fd = notification_fd();
   int interval = test_delay("OMEGA_ATTACH_INTERVAL_MS", 60000, 100),
       debounce = test_delay("OMEGA_ATTACH_DEBOUNCE_MS", 300, 30);
+  int minimum_scan_gap = test_delay("OMEGA_ATTACH_MIN_SCAN_MS", 5000, 100);
   int poll_ms = debounce < 1000 ? debounce : 1000;
   char notice_path[PATH_MAX];
   state_path(notice_path, "notify");
@@ -213,6 +214,8 @@ static void watcher(int readyfd, int initial_scan) {
       exit(1);
   }
   long long next = monotonic_ms() + interval, dirty = 0;
+  long long earliest = monotonic_ms() + minimum_scan_gap;
+  int force_refresh = 0;
   while (!stop_requested && enabled()) {
     struct pollfd poller = {fd, POLLIN, 0};
     (void)poll(&poller, fd < 0 ? 0 : 1, poll_ms);
@@ -223,6 +226,7 @@ static void watcher(int readyfd, int initial_scan) {
          notice.st_mtim.tv_sec != last_notice.st_mtim.tv_sec ||
          notice.st_mtim.tv_nsec != last_notice.st_mtim.tv_nsec)) {
       last_notice = notice;
+      force_refresh = 1;
       if (!dirty)
         dirty = now;
     }
@@ -242,11 +246,12 @@ static void watcher(int readyfd, int initial_scan) {
       if (changed && !dirty)
         dirty = now;
     }
-    if ((dirty && now - dirty >= debounce) || now >= next) {
+    if (((dirty && now - dirty >= debounce) || now >= next) &&
+        now >= earliest) {
       if (!enabled())
         break;
       load_config();
-      if (dirty)
+      if (force_refresh)
         invalidate_cache();
       scan(1);
       write_inventory();
@@ -254,7 +259,9 @@ static void watcher(int readyfd, int initial_scan) {
         close(fd);
       fd = notification_fd();
       next = monotonic_ms() + interval;
+      earliest = monotonic_ms() + minimum_scan_gap;
       dirty = 0;
+      force_refresh = 0;
     }
   }
   if (fd >= 0)
