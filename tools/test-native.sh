@@ -12,4 +12,6 @@ done
 node tests/native/commands.mjs > evidence/native-commands/commands.log 2>&1
 node tests/native/review-regression.mjs > evidence/native-commands/review-regression.log 2>&1
 node tests/native/provenance.mjs > evidence/native-commands/provenance.log 2>&1
-printf 'PASS converter, native math, installed commands and source provenance\n'
+mkdir -p evidence/native-path-safety
+L529_REPORT="$PWD/evidence/native-path-safety/full-gate-paths.json" node tests/native/path-safety.mjs > evidence/native-path-safety/full-gate-paths.log 2>&1
+printf 'PASS converter, native math, installed commands, source provenance and path safety\n'

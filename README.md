@@ -24,6 +24,10 @@ builds the seed chain once and shares the qualified compiler between components.
 All pinned source is committed, so installation needs no network, sibling checkout,
 prebuilt executable or source override. `--offline` makes this intent explicit;
 installation is always offline. I leave PATH and shell startup files unchanged.
+Before writing build outputs, the default builders refuse any symbolic link,
+hardlinked file or special file anywhere in `build/`, including the build root.
+Ordinary regular-file rebuilds remain supported. Preserve an unsafe output tree
+and build from a fresh checkout rather than deleting files you do not own.
 Use the absolute command path if the prefix's `bin` directory is not already on PATH.
 
 ```sh
@@ -64,7 +68,9 @@ quiet-build tools/test-native.sh
 ```
 
 Removal checks both aliases, file contents, types and modes before deleting owned
-files. Changed installation files cause refusal; unrelated files and user data
+files. It also refuses symbolic links in the named prefix and its parent folders,
+including `bin` and `lib`, before and after taking the installation lock.
+Changed installation files cause refusal; unrelated files and user data
 remain. Installation rolls back synchronous failures. Crash/power-loss recovery,
 concurrent hostile filesystem changes and multi-file atomic visibility are not
 qualified. I install no watchers, runtime hooks, services, PATH rewrites or global

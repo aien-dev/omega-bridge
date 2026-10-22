@@ -2,6 +2,7 @@
 # Source-only replay on Linux AArch64, using committed, hashed source imports.
 set -eu
 cd "$(dirname "$0")/.."
+tools/check-build-paths.sh
 [ "$(uname -s)/$(uname -m)" = Linux/aarch64 ] || { echo 'omega: requires Linux AArch64' >&2; exit 69; }
 [ "$#" = 0 ] || { [ "$#" = 1 ] && [ "$1" = --offline ]; } || exit 64
 tools/verify-sources.sh

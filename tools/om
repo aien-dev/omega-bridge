@@ -12,7 +12,16 @@ case ${1:-help} in
     attach|discover|status)
         printf 'UNSUPPORTED: native host discovery and runtime hooks are not qualified; no runtimes attached.\n'
         exit 69;;
-    uninstall) [ "$#" = 1 ] || fail 64 'usage: om uninstall'; exec "$root/uninstall.sh" --prefix "$(dirname "$(dirname "$root")")";;
+    uninstall)
+        [ "$#" = 1 ] || fail 64 'usage: om uninstall'
+        # realpath above locates the implementation. Preserve the invocation's
+        # named parents too, so a relocated bin/prefix cannot hide behind it.
+        named=$(dirname -- "$0")
+        while [ "$named" != / ] && [ "$named" != . ]; do
+            [ ! -L "$named" ] || fail 73 'installation parent changed; preserving installation'
+            named=$(dirname -- "$named")
+        done
+        exec "$root/uninstall.sh" --prefix "$(dirname "$(dirname "$root")")";;
     math|convert) command=$1; shift;;
     *) fail 64 'unknown command; use om help';;
 esac

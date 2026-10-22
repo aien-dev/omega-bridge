@@ -39,6 +39,21 @@ directories; preexisting directories and files remain. The installer requires th
 prefix parent to exist and rejects a newline in its path. Tests use isolated HOME
 and prefix only. No actual account has been enrolled by qualification.
 
+The bootstrap, converter builder and unified builder check the entire existing
+`build/` tree before output writes. Symbolic links (including directory/root and
+dangling links), multiply linked regular files and special files cause exit 73.
+The scan never follows links. This deliberately also refuses linked files that
+are not current outputs. Ordinary single-link files may be rebuilt. No imported
+seed/compiler/math source is changed by this shell host preflight.
+
+Uninstall checks the supplied prefix's named ancestors before normalization,
+then checks the prefix, `bin`, `lib` and payload parents for symbolic links.
+The command adapter also checks its invocation's named parents before uninstall.
+Trailing slashes do not hide linked directories. Uninstall repeats all preflight
+checks after acquiring the lifecycle lock. These checks cover preexisting links
+and cooperative lifecycle changes, without claiming protection against malicious
+concurrent filesystem mutations.
+
 Uninstall preflights alias targets, owned hashes, regular-file types and recorded
 fixed permissions, then removes only a fixed owned file list. Unknown files inside
 the package are retained. Empty directories are removed only when this installation

@@ -1,6 +1,7 @@
 #!/bin/sh
 set -eu
 cd "$(dirname "$0")/.."
+tools/check-build-paths.sh
 tools/verify-sources.sh
 # Shared compiler is always rebuilt from source by the installation entry point.
 # This incremental builder consumes only that qualified artifact.

@@ -1,6 +1,7 @@
 #!/bin/sh
 set -eu
 cd "$(dirname "$0")/.."
+tools/check-build-paths.sh
 seed=${OMEGA_SEED:-build/bootstrap/omc}
 want=191b776ef98821597c3e30655da6d680a9b66edbc9ceaca3c39c61ea6df098e9
 [ "$(sha256sum "$seed" | cut -d' ' -f1)" = "$want" ] || { echo 'seed fingerprint mismatch' >&2; exit 1; }
