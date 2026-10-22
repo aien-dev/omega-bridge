@@ -1,0 +1,17 @@
+HOST Linux aarch64
+SOURCE fc8e1080198ee54c7554d0f818924c94db29a7f52a21ba591996e3534d7e3234  /home/drakestapleton/.cache/omega-developer-L584.0S08iO9j/package.tar.gz
+PASS source-only seed bootstrap and compiler fixpoint
+PASS native converter and math, shared source-born compiler
+Installed om and omg in /home/drakestapleton/.cache/omega-developer-L584.0S08iO9j/home/prefix/bin (PATH unchanged)
+seed 29b12760f4c962606411d6bf25032aedef063301
+math 508ddd7e02c303d0e2182721f9501c7a540c758f
+converter 77376b1941a020dba441a14fce8eaadea692a5b7
+omc-sha256 191b776ef98821597c3e30655da6d680a9b66edbc9ceaca3c39c61ea6df098e9
+658d1a970a8283335948ee80ab670aef4155cc3525db0ebbff4a49c59a4d80ff  built.stdout
+658d1a970a8283335948ee80ab670aef4155cc3525db0ebbff4a49c59a4d80ff  run.stdout
+658d1a970a8283335948ee80ab670aef4155cc3525db0ebbff4a49c59a4d80ff  alias.stdout
+191b776ef98821597c3e30655da6d680a9b66edbc9ceaca3c39c61ea6df098e9  /home/drakestapleton/.cache/omega-developer-L584.0S08iO9j/home/prefix/lib/omega-native/omc
+db0847423bec99ba66fdd99e75e5e3b795e2a5386e81ca3ed7b4c9c530a5bd4e  /home/drakestapleton/.cache/omega-developer-L584.0S08iO9j/home/prefix/lib/omega-native/bridge
+aa7906f534ffb63575f5b59be15e3ed93a02fe56d103aa35298beed5a35d7ac6  /home/drakestapleton/.cache/omega-developer-L584.0S08iO9j/home/prefix/lib/omega-native/math
+Removed unchanged Omega commands; unrelated files and user data preserved.
+PASS isolated source install, project check/build/run, alias, math, status, invalid-source refusal and uninstall
