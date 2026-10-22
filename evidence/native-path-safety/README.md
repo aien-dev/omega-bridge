@@ -11,7 +11,11 @@ SHA-256 before/after for every case. Baseline: 5 pass, 40 fail. The primary seed
 case and other redirections overwrite the victim. Rename-published final outputs
 can preserve victim bytes yet still fail the new conservative refusal policy.
 Directory-link tests also inspect outside directory contents. No fake compiler
-failure is used. `green.json` and `green.log`: the same 45 checks pass after fixes.
+failure is used. `green.json` and `green.log`: the expanded 57 checks pass after fixes.
+`red-expanded.json`/`.log` record the same 57 checks against a fresh 53708d4
+source export (5 pass, 52 fail, exit 1). The expansion covers direct builders,
+the installed uninstaller entry point, link/.. normalization and a deterministic
+parent change at the lock-acquisition seam. No fixture setup errors occurred.
 
 Ranked resolutions:
 1. Important: complete shared build tree preflight at every default builder entry
