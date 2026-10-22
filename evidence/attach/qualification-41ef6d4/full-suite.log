@@ -1,0 +1,250 @@
+TAP version 13
+# Subtest: arbitrary cwd, read-only discovery, aliases and hardlinks deduplicated
+ok 1 - arbitrary cwd, read-only discovery, aliases and hardlinks deduplicated
+  ---
+  duration_ms: 12.328502
+  type: 'test'
+  ...
+# Subtest: empty and relative PATH components are skipped, never cwd executables
+ok 2 - empty and relative PATH components are skipped, never cwd executables
+  ---
+  duration_ms: 10.297864
+  type: 'test'
+  ...
+# Subtest: manager inventories, venv identity, spaces and manager symlinks
+ok 3 - manager inventories, venv identity, spaces and manager symlinks
+  ---
+  duration_ms: 30.154883
+  type: 'test'
+  ...
+# Subtest: all registry families discovered; unrelated commands never executed
+ok 4 - all registry families discovered; unrelated commands never executed
+  ---
+  duration_ms: 56.345691
+  type: 'test'
+  ...
+# Subtest: broken, hanging, oversized and versionless probes are ERROR, never attached
+ok 5 - broken, hanging, oversized and versionless probes are ERROR, never attached
+  ---
+  duration_ms: 274.492772
+  type: 'test'
+  ...
+# Subtest: no privileges, no network, unsupported enrollment changes no foreign config
+ok 6 - no privileges, no network, unsupported enrollment changes no foreign config
+  ---
+  duration_ms: 139.270288
+  type: 'test'
+  ...
+# Subtest: watcher detects added and removed installations without rerunning attach
+ok 7 - watcher detects added and removed installations without rerunning attach
+  ---
+  duration_ms: 395.090752
+  type: 'test'
+  ...
+# Subtest: watcher notices a newly created manager tree and invalidates executable version cache
+ok 8 - watcher notices a newly created manager tree and invalidates executable version cache
+  ---
+  duration_ms: 391.748649
+  type: 'test'
+  ...
+# Subtest: repeated enrollment, disable, enable and uninstall are reversible and idempotent
+ok 9 - repeated enrollment, disable, enable and uninstall are reversible and idempotent
+  ---
+  duration_ms: 225.962079
+  type: 'test'
+  ...
+# Subtest: fixture handshake gates SUPPORTED and actual reversible fixture integration
+ok 10 - fixture handshake gates SUPPORTED and actual reversible fixture integration
+  ---
+  duration_ms: 344.128315
+  type: 'test'
+  ...
+# Subtest: new supported fixture installs attach automatically after enrollment
+ok 11 - new supported fixture installs attach automatically after enrollment
+  ---
+  duration_ms: 250.957966
+  type: 'test'
+  ...
+# Subtest: incompatible fixture ABI is refused without any hooks
+ok 12 - incompatible fixture ABI is refused without any hooks
+  ---
+  duration_ms: 147.258488
+  type: 'test'
+  ...
+# Subtest: attachment write failure rolls back enrollment and owned hook completely
+ok 13 - attachment write failure rolls back enrollment and owned hook completely
+  ---
+  duration_ms: 63.424748
+  type: 'test'
+  ...
+# Subtest: preexisting desktop entry refuses enrollment and is never overwritten
+ok 14 - preexisting desktop entry refuses enrollment and is never overwritten
+  ---
+  duration_ms: 20.50368
+  type: 'test'
+  ...
+# Subtest: symlinked writable state parent refuses without touching external destination
+ok 15 - symlinked writable state parent refuses without touching external destination
+  ---
+  duration_ms: 4.388079
+  type: 'test'
+  ...
+# Subtest: bootstrap and uninstall restore exact prior filesystem, even from spaces
+ok 16 - bootstrap and uninstall restore exact prior filesystem, even from spaces
+  ---
+  duration_ms: 164.014461
+  type: 'test'
+  ...
+# Subtest: existing om anywhere on PATH blocks bootstrap without overwrites
+ok 17 - existing om anywhere on PATH blocks bootstrap without overwrites
+  ---
+  duration_ms: 3.9835
+  type: 'test'
+  ...
+# Subtest: bootstrap rollback restores exact filesystem
+ok 18 - bootstrap rollback restores exact filesystem
+  ---
+  duration_ms: 27.532817
+  type: 'test'
+  ...
+# Subtest: modified owned desktop entry is preserved and uninstall refuses
+ok 19 - modified owned desktop entry is preserved and uninstall refuses
+  ---
+  duration_ms: 138.868317
+  type: 'test'
+  ...
+# Subtest: production build excludes fixture integration entirely
+ok 20 - production build excludes fixture integration entirely
+  ---
+  duration_ms: 8.643629
+  type: 'test'
+  ...
+# Subtest: missing native Omega policy fails closed without any enrollment
+ok 21 - missing native Omega policy fails closed without any enrollment
+  ---
+  duration_ms: 5.163492
+  type: 'test'
+  ...
+# Subtest: Omega policy checks every capability combination and malformed records
+ok 22 - Omega policy checks every capability combination and malformed records
+  ---
+  duration_ms: 17.323065
+  type: 'test'
+  ...
+# Subtest: probes cannot write a user file, change its mode, or use a network socket
+ok 23 - probes cannot write a user file, change its mode, or use a network socket
+  ---
+  duration_ms: 28.125141
+  type: 'test'
+  ...
+# Subtest: PATH and manager aliases deduplicate while separate venvs remain distinct
+ok 24 - PATH and manager aliases deduplicate while separate venvs remain distinct
+  ---
+  duration_ms: 10.789196
+  type: 'test'
+  ...
+# Subtest: unrecognized existing enrollment is preserved byte for byte
+ok 25 - unrecognized existing enrollment is preserved byte for byte
+  ---
+  duration_ms: 4.766514
+  type: 'test'
+  ...
+# Subtest: watcher startup failure rolls back all files and directories
+ok 26 - watcher startup failure rolls back all files and directories
+  ---
+  duration_ms: 64.612884
+  type: 'test'
+  ...
+# Subtest: inotify observes changes with long fallback, and polling works without inotify
+ok 27 - inotify observes changes with long fallback, and polling works without inotify
+  ---
+  duration_ms: 541.498785
+  type: 'test'
+  ...
+# Subtest: uninstall refuses a modified installed binary and preserves it
+ok 28 - uninstall refuses a modified installed binary and preserves it
+  ---
+  duration_ms: 35.726043
+  type: 'test'
+  ...
+# Subtest: removed native policy still permits disable and uninstall
+ok 29 - removed native policy still permits disable and uninstall
+  ---
+  duration_ms: 148.905027
+  type: 'test'
+  ...
+# Subtest: desktop autostart entry validates and restarts an isolated watcher
+ok 30 - desktop autostart entry validates and restarts an isolated watcher
+  ---
+  duration_ms: 147.459721
+  type: 'test'
+  ...
+# Subtest: om and omg install as equivalent aliases with one state and watcher
+ok 31 - om and omg install as equivalent aliases with one state and watcher
+  ---
+  duration_ms: 238.029027
+  type: 'test'
+  ...
+# Subtest: either preexisting om or omg blocks both aliases without changing files
+ok 32 - either preexisting om or omg blocks both aliases without changing files
+  ---
+  duration_ms: 7.77311
+  type: 'test'
+  ...
+# Subtest: an unrelated omega executable is preserved while om and omg coexist
+ok 33 - an unrelated omega executable is preserved while om and omg coexist
+  ---
+  duration_ms: 37.764649
+  type: 'test'
+  ...
+# Subtest: cached versions survive cheap fallback and notify invalidates the cache
+ok 34 - cached versions survive cheap fallback and notify invalidates the cache
+  ---
+  duration_ms: 516.278352
+  type: 'test'
+  ...
+# Subtest: detached watcher closes inherited caller file descriptors
+ok 35 - detached watcher closes inherited caller file descriptors
+  ---
+  duration_ms: 129.71094
+  type: 'test'
+  ...
+# Subtest: damaged policy and saved configuration cannot prevent revocation
+ok 36 - damaged policy and saved configuration cannot prevent revocation
+  ---
+  duration_ms: 145.505179
+  type: 'test'
+  ...
+# Subtest: inventory and alias bounds report partial discovery instead of silent completeness
+ok 37 - inventory and alias bounds report partial discovery instead of silent completeness
+  ---
+  duration_ms: 272.74855
+  type: 'test'
+  ...
+# Subtest: concurrent enrollment leaves one healthy watcher and reversible state
+ok 38 - concurrent enrollment leaves one healthy watcher and reversible state
+  ---
+  duration_ms: 132.015532
+  type: 'test'
+  ...
+# Subtest: multiline version banners retain their version-bearing line
+ok 39 - multiline version banners retain their version-bearing line
+  ---
+  duration_ms: 8.51534
+  type: 'test'
+  ...
+# Subtest: watcher rate limit coalesces notification bursts before rescanning
+ok 40 - watcher rate limit coalesces notification bursts before rescanning
+  ---
+  duration_ms: 744.81112
+  type: 'test'
+  ...
+1..40
+# tests 40
+# suites 0
+# pass 40
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 6123.50576

@@ -1,0 +1,5 @@
+Working directory: /home/drakestapleton/workspace/omega-bridge-attach
+Exact qualification invocation:
+sh tests/attach/verify.sh /home/drakestapleton/workspace/omega-toc/seed/out/omc evidence/attach/qualification-41ef6d4
+Expanded operation definitions: tests/attach/verify.sh at source SHA 41ef6d4626c2ba6a93a55168945fb97129fce6d5.
+All runtime bootstrap, enrollment, watcher and desktop entry executions occurred in temporary HOME fixtures. The real-tool discovery HOME was a separate empty mktemp directory, checked empty after discovery and removed with rmdir.

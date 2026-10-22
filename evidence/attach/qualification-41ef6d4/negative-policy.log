@@ -1,0 +1,36 @@
+TAP version 13
+# Subtest: fixture handshake gates SUPPORTED and actual reversible fixture integration
+not ok 1 - fixture handshake gates SUPPORTED and actual reversible fixture integration
+  ---
+  duration_ms: 13.987922
+  type: 'test'
+  location: '/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:73:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'ATTACHED'
+    - 'SUPPORTED'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'SUPPORTED'
+  actual: 'ATTACHED'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/home/drakestapleton/workspace/omega-bridge-attach/tests/attach/attach.test.cjs:74:42)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.start (node:internal/test_runner/test:1262:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 0
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 63.220346
