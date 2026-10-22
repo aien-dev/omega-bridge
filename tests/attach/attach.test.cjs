@@ -7,8 +7,8 @@ const os = require('node:os');
 const path = require('node:path');
 const cp = require('node:child_process');
 const root = path.resolve(__dirname, '../..');
-const bin = process.env.ATTACH_BINARY || path.join(root, 'build/attach-test/omega');
-const prod = path.join(root, 'build/attach/omega');
+const bin = process.env.ATTACH_BINARY || path.join(root, 'build/attach-test/om');
+const prod = path.join(root, 'build/attach/om');
 const homes = [];
 function fixture() {
   const home = fs.mkdtempSync(path.join(os.tmpdir(), 'omega attach ')); homes.push(home);
@@ -82,9 +82,81 @@ test('attachment write failure rolls back enrollment and owned hook completely',
 });
 test('preexisting desktop entry refuses enrollment and is never overwritten',()=>{const f=fixture();const p=path.join(f.home,'.config/autostart/omega-attach.desktop');fs.mkdirSync(path.dirname(p),{recursive:true});fs.writeFileSync(p,'foreign');const before=snap(f.home);run(f,['attach'],{fail:true});a.deepEqual(snap(f.home),before);});
 test('symlinked writable state parent refuses without touching external destination',()=>{const f=fixture(),other=fs.mkdtempSync(path.join(os.tmpdir(),'omega outside '));homes.push(other);fs.mkdirSync(path.join(f.home,'.local'));fs.symlinkSync(other,path.join(f.home,'.local/state'));const before=snap(f.home);run(f,['attach'],{fail:true});a.deepEqual(snap(other),{});a.deepEqual(snap(f.home),before);});
-test('bootstrap and uninstall restore exact prior filesystem, even from spaces',()=>{const f=fixture();const before=snap(f.home);run(f,['bootstrap']);const installed=path.join(f.home,'.local/bin/omega');a.ok(fs.lstatSync(installed).isSymbolicLink());json(f,['attach'],{bin:installed});run(f,['uninstall'],{bin:installed});a.deepEqual(snap(f.home),before);});
-test('existing omega anywhere on PATH blocks bootstrap without overwrites',()=>{const f=fixture();tool(f,'omega','echo original');const before=snap(f.home);run(f,['bootstrap'],{fail:true});a.deepEqual(snap(f.home),before);});
+test('bootstrap and uninstall restore exact prior filesystem, even from spaces',()=>{const f=fixture();const before=snap(f.home);run(f,['bootstrap']);const installed=path.join(f.home,'.local/bin/om');a.ok(fs.lstatSync(installed).isSymbolicLink());json(f,['attach'],{bin:installed});run(f,['uninstall'],{bin:installed});a.deepEqual(snap(f.home),before);});
+test('existing om anywhere on PATH blocks bootstrap without overwrites',()=>{const f=fixture();tool(f,'om','echo original');const before=snap(f.home);run(f,['bootstrap'],{fail:true});a.deepEqual(snap(f.home),before);});
 test('bootstrap rollback restores exact filesystem',()=>{const f=fixture();const before=snap(f.home);f.env.OMEGA_ATTACH_FAIL='bootstrap';run(f,['bootstrap'],{fail:true});a.deepEqual(snap(f.home),before);});
 test('modified owned desktop entry is preserved and uninstall refuses',()=>{const f=fixture();json(f,['attach']);run(f,['disable']);const p=path.join(f.home,'.config/autostart/omega-attach.desktop');fs.writeFileSync(p,'user changed');run(f,['uninstall'],{fail:true});a.equal(fs.readFileSync(p,'utf8'),'user changed');});
 test('production build excludes fixture integration entirely',()=>{const f=fixture();fixtureRuntime(f);a.equal(inv(json(f,['discover'],{bin:prod})).length,0);});
-test('missing native Omega policy fails closed without any enrollment',()=>{const f=fixture();const isolated=path.join(f.home,'omega');fs.copyFileSync(bin,isolated);fs.chmodSync(isolated,0o755);tool(f,'gcc');const before=snap(f.home);run(f,['attach'],{bin:isolated,fail:true});a.deepEqual(snap(f.home),before);});
+test('missing native Omega policy fails closed without any enrollment',()=>{const f=fixture();const isolated=path.join(f.home,'om');fs.copyFileSync(bin,isolated);fs.chmodSync(isolated,0o755);tool(f,'gcc');const before=snap(f.home);run(f,['attach'],{bin:isolated,fail:true});a.deepEqual(snap(f.home),before);});
+
+test('Omega policy checks every capability combination and malformed records',()=>{
+ const policy=path.join(root,'build/attach/attachment-policy'),records=[],expected=[];
+ for(let bits=0;bits<64;bits++){const f=Array.from({length:6},(_,i)=>(bits>>i)&1);records.push(...f);expected.push(!f[0]?'0':!f[1]?'4':!(f[2]&&f[3])?'3':f[4]&&f[5]?'2':'1');}
+ const r=cp.spawnSync(policy,{input:Buffer.from(records),timeout:3000});a.equal(r.status,0);a.equal(r.stdout.toString(),expected.join(''));
+ for(let i=0;i<6;i++){const f=Buffer.from([1,1,1,1,1,1]);f[i]=255;const bad=cp.spawnSync(policy,{input:f});a.equal(bad.status,0);a.equal(bad.stdout.toString(),'4');}
+ for(let n=1;n<6;n++){const bad=cp.spawnSync(policy,{input:Buffer.alloc(n)});a.equal(bad.status,4);a.equal(bad.stdout.length,0);}
+});
+test('probes cannot write a user file, change its mode, or use a network socket',()=>{
+ const f=fixture();fs.writeFileSync(path.join(f.home,'.profile'),'untouched\n',{mode:0o640});
+ tool(f,'node',`/usr/bin/node -e 'const fs=require("fs"),net=require("net");try{fs.writeFileSync(process.env.HOME+"/.profile","bad");process.exit(98)}catch(e){if(e.code!=="EACCES")process.exit(97)}try{fs.chmodSync(process.env.HOME+"/.profile",511);process.exit(96)}catch(e){if(e.code!=="EACCES")process.exit(95)}const s=net.connect({host:"127.0.0.1",port:9});s.on("connect",()=>process.exit(94));s.on("error",e=>{if(e.code!=="EACCES")process.exit(93);console.log("node v22.0.0")});'`);
+ const before=snap(f.home),j=json(f);a.equal(inv(j).length,1);a.equal(inv(j)[0].version,'node v22.0.0');a.equal(inv(j)[0].state,'UNSUPPORTED');a.deepEqual(snap(f.home),before);
+});
+test('PATH and manager aliases deduplicate while separate venvs remain distinct',()=>{
+ const f=fixture(),p=path.join(f.home,'.pyenv/versions/3.12/bin/python3');script(p,'echo "Python 3.12.1"');fs.symlinkSync(p,path.join(f.tools,'python3'));
+ const n=path.join(f.home,'.nvm/versions/node/v22/bin/node');script(n,'echo "node 22.0"');fs.symlinkSync(n,path.join(f.tools,'node'));
+ const v1=path.join(f.home,'venv one'),v2=path.join(f.home,'venv two');for(const v of [v1,v2]){fs.mkdirSync(path.join(v,'bin'),{recursive:true});fs.writeFileSync(path.join(v,'pyvenv.cfg'),'home = fixture');fs.symlinkSync(p,path.join(v,'bin/python3'));}
+ f.env.PATH=[f.tools,path.join(v1,'bin'),path.join(v2,'bin')].join(':');f.env.VIRTUAL_ENV=v1;
+ const j=json(f);a.equal(inv(j).filter(x=>x.language==='node').length,1);a.equal(inv(j).filter(x=>x.language==='python').length,3);
+});
+test('unrecognized existing enrollment is preserved byte for byte',()=>{const f=fixture();fs.mkdirSync(f.state,{recursive:true});fs.writeFileSync(path.join(f.state,'config'),'foreign config');const before=snap(f.home);run(f,['attach'],{fail:true});run(f,['uninstall'],{fail:true});a.deepEqual(snap(f.home),before);});
+test('watcher startup failure rolls back all files and directories',()=>{const f=fixture();fixtureRuntime(f);const before=snap(f.home);f.env.OMEGA_ATTACH_FAIL='watcher';run(f,['attach'],{fail:true});a.deepEqual(snap(f.home),before);});
+test('inotify observes changes with long fallback, and polling works without inotify',async()=>{
+ for(const polling of [false,true]){const f=fixture();f.env.OMEGA_ATTACH_INTERVAL_MS=polling?'150':'60000';if(polling)f.env.OMEGA_ATTACH_NO_INOTIFY='1';json(f,['attach']);tool(f,'node');await until(()=>inv(json(f,['status'])).some(x=>x.language==='node'));run(f,['uninstall']);}
+});
+test('uninstall refuses a modified installed binary and preserves it',()=>{const f=fixture();run(f,['bootstrap']);const p=path.join(f.home,'.local/lib/omega-attach/om');fs.appendFileSync(p,'modified');run(f,['uninstall'],{fail:true});a.ok(fs.readFileSync(p).subarray(-8).equals(Buffer.from('modified')));});
+test('removed native policy still permits disable and uninstall',()=>{
+ const f=fixture();run(f,['bootstrap']);const installed=path.join(f.home,'.local/bin/om');json(f,['attach'],{bin:installed});fs.unlinkSync(path.join(f.home,'.local/lib/omega-attach/attachment-policy'));run(f,['disable'],{bin:installed});a.equal(json(f,['status'],{bin:installed}).watcher,'STOPPED');
+ // Missing install artifacts are preserved as a conflict rather than guessed ownership.
+ run(f,['uninstall'],{bin:installed,fail:true});a.ok(fs.existsSync(installed));
+});
+test('desktop autostart entry validates and restarts an isolated watcher',async()=>{
+ const f=fixture();run(f,['bootstrap']);const installed=path.join(f.home,'.local/bin/om');json(f,['attach'],{bin:installed});const entry=path.join(f.home,'.config/autostart/omega-attach.desktop');const validation=cp.spawnSync('/usr/bin/desktop-file-validate',[entry],{encoding:'utf8'});a.equal(validation.status,0,validation.stdout+validation.stderr);
+ // Kill only the isolated fixture watcher. Enabled enrollment should restart via its exact Exec.
+ const pid=json(f,['status'],{bin:installed}).watcher_pid;process.kill(pid,'SIGTERM');await until(()=>json(f,['status'],{bin:installed}).watcher==='STOPPED');
+ const text=fs.readFileSync(entry,'utf8'),line=text.split('\n').find(x=>x.startsWith('Exec='));a.equal(line,`Exec="${path.join(f.home,'.local/lib/omega-attach/om')}" watch`);
+ const child=cp.spawn(installed,['watch'],{env:f.env,cwd:'/',stdio:'ignore'});await until(()=>json(f,['status'],{bin:installed}).watcher==='RUNNING');run(f,['uninstall'],{bin:installed});await new Promise(r=>child.once('exit',r));
+});
+
+test('om and omg install as equivalent aliases with one state and watcher',()=>{
+ const f=fixture(),before=snap(f.home);run(f,['bootstrap']);const om=path.join(f.home,'.local/bin/om'),omg=path.join(f.home,'.local/bin/omg');
+ a.equal(fs.realpathSync(om),fs.realpathSync(omg));json(f,['attach'],{bin:om});a.deepEqual(json(f,['status'],{bin:om}),json(f,['status'],{bin:omg}));run(f,['bootstrap'],{bin:omg});run(f,['disable'],{bin:omg});a.equal(json(f,['status'],{bin:om}).enabled,false);run(f,['enable'],{bin:omg});a.equal(json(f,['status'],{bin:om}).watcher,'RUNNING');run(f,['uninstall'],{bin:omg});a.deepEqual(snap(f.home),before);
+});
+test('either preexisting om or omg blocks both aliases without changing files',()=>{
+ for(const name of ['om','omg']){const f=fixture();tool(f,name,'echo original');const before=snap(f.home);run(f,['bootstrap'],{fail:true});a.deepEqual(snap(f.home),before);}
+});
+test('an unrelated omega executable is preserved while om and omg coexist',()=>{
+ const f=fixture();tool(f,'omega','echo original');const before=snap(f.home);run(f,['bootstrap']);a.equal(fs.readFileSync(path.join(f.tools,'omega'),'utf8'),'#!/bin/sh\necho original\n');run(f,['uninstall']);a.deepEqual(snap(f.home),before);
+});
+
+test('cached versions survive cheap fallback and notify invalidates the cache',async()=>{
+ const f=fixture();f.env.OMEGA_ATTACH_NO_INOTIFY='1';const data=path.join(f.home,'.cache/version');fs.mkdirSync(path.dirname(data));fs.writeFileSync(data,'node 22.0\n');tool(f,'node','/bin/cat "$HOME/.cache/version"');json(f,['attach']);fs.writeFileSync(data,'node 22.1\n');await new Promise(r=>setTimeout(r,350));a.equal(inv(json(f,['status']))[0].version,'node 22.0');
+ // A notification is also observed by polling when inotify is unavailable.
+ run(f,['notify']);await until(()=>inv(json(f,['status']))[0]?.version==='node 22.1');run(f,['uninstall']);
+});
+test('detached watcher closes inherited caller file descriptors',()=>{
+ const f=fixture(),p=path.join(f.home,'caller-lock');fs.writeFileSync(p,'owned by caller');const fd=fs.openSync(p,'r');const r=cp.spawnSync(bin,['attach'],{env:f.env,encoding:'utf8',stdio:['ignore','pipe','pipe',fd],timeout:15000});fs.closeSync(fd);a.equal(r.status,0,r.stderr);const pid=JSON.parse(r.stdout).watcher_pid;const targets=fs.readdirSync(`/proc/${pid}/fd`).map(n=>{try{return fs.readlinkSync(`/proc/${pid}/fd/${n}`)}catch{return ''}});a.ok(!targets.includes(p));run(f,['uninstall']);
+});
+test('damaged policy and saved configuration cannot prevent revocation',()=>{
+ const f=fixture();json(f,['attach']);fs.writeFileSync(path.join(f.state,'config'),'corrupt');run(f,['disable']);a.equal(json(f,['status']).watcher,'STOPPED');run(f,['uninstall']);
+});
+
+test('inventory and alias bounds report partial discovery instead of silent completeness',()=>{
+ const f=fixture(),p=tool(f,'python3');for(let n=0;n<20;n++)fs.symlinkSync(p,path.join(f.tools,`python3.${n}`));let j=json(f);a.equal(inv(j)[0].aliases.length,16);a.ok(j.warnings.some(x=>/alias limit/.test(x)));
+ for(let n=0;n<140;n++)script(path.join(f.home,`.pyenv/versions/v${n}/bin/python3`),'echo "Python 3.12.1"');j=json(f);a.equal(inv(j).length,128);a.ok(j.warnings.some(x=>/inventory limit/.test(x)));
+});
+test('concurrent enrollment leaves one healthy watcher and reversible state',async()=>{
+ const f=fixture(),before=snap(f.home);function launch(){return new Promise(resolve=>{const c=cp.spawn(bin,['attach'],{env:f.env,stdio:'ignore'});c.once('exit',code=>resolve(code));});}
+ const codes=await Promise.all([launch(),launch()]);a.ok(codes.includes(0));a.ok(codes.every(c=>c===0||c===1));a.equal(json(f,['status']).watcher,'RUNNING');run(f,['uninstall']);a.deepEqual(snap(f.home),before);
+});
+
+test('multiline version banners retain their version-bearing line',()=>{const f=fixture();tool(f,'perl','printf "\\nThis is perl 5.38.2\\nCopyright 2026\\n"');a.equal(inv(json(f))[0].version,'This is perl 5.38.2');});

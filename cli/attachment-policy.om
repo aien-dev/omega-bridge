@@ -1,0 +1,53 @@
+note SPDX-License-Identifier: AGPL-3.0-only
+note Six capability flags per record. Native seed-built eligibility policy.
+note 0 detected, 1 supported, 2 attached, 3 unsupported, 4 error.
+global rec uchar 6
+global out uchar 1
+fn main to int
+n = ulong 0
+while true
+r = read 0 rec n sub 6 n
+if lt r 0
+ret 4
+end
+if eq r 0
+if ne n 0
+ret 4
+end
+ret 0
+end
+n = add n ulong r
+if eq n 6
+s = uchar 48
+i = ulong 0
+while lt i 6
+if gt get rec i 1
+s = uchar 52
+end
+i = add i 1
+end
+if ne s 52
+if eq get rec 0 1
+s = uchar 51
+if eq get rec 1 0
+s = uchar 52
+else
+if and eq get rec 2 1 eq get rec 3 1
+s = uchar 49
+if and eq get rec 4 1 eq get rec 5 1
+s = uchar 50
+end
+end
+end
+end
+end
+put out 0 s
+w = write 1 out 0 1
+if ne w 1
+ret 4
+end
+n = ulong 0
+end
+end
+ret 0
+end
