@@ -21,7 +21,7 @@
     "native_exit": 103,
     "mutant_exit": 1,
     "mutant_sha256": "af30b1480214b2ea370b3464ba4ab9c9acffbfaf455d56c6bbd5f00f7489a1bc",
-    "stderr": "<repo>/build/controls/mut.c:27:102: runtime error: load of address 0xb441aaef0407 with insufficient space for an object of type 'uint8_t'\n0xb441aaef0407: note: pointer points here\n 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00\n             ^ \n"
+    "stderr": "<repo>/build/controls/mut.c:27:102: runtime error: load of address 0xbcb31ced0407 with insufficient space for an object of type 'uint8_t'\n0xbcb31ced0407: note: pointer points here\n 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00\n             ^ \n"
   },
   {
     "target": "python",

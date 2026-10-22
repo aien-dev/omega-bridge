@@ -1,0 +1,51 @@
+PASS seed_1 3
+FAIL seed_2 ('c', 7, 0, b'')
+FAIL seed_3 ('c', 7, 0, b'')
+PASS seed_4 16
+PASS seed_5 16
+FAIL seed_6 ('c', 19, 16, b'toc: line 6: error 16\n')
+FAIL seed_7 ('c', 19, 0, b'')
+FAIL seed_8 ('c', 20, 0, b'')
+FAIL seed_9 ('c', 20, 3, b'toc: line 3: error 3\n')
+FAIL seed_10 ('c', 20, 103, b'')
+FAIL seed_11 ('c', 20, 0, b'')
+FAIL seed_12 ('c', 21, 0, b'')
+FAIL seed_13 ('c', 7, 0, b'')
+FAIL seed_14 ('c', 22, 0, b'')
+FAIL seed_15 ('c', 22, 0, b'')
+FAIL seed_16 ('c', 23, 0, b'')
+FAIL seed_17 ('c', 23, 0, b'')
+FAIL seed_18 ('c', 17, 0, b'')
+FAIL seed_19 ('c', 18, 0, b'')
+FAIL seed_20 ('c', 9, 0, b'')
+FAIL seed_21 ('c', 9, 0, b'')
+FAIL seed_22 ('c', 9, 0, b'')
+FAIL seed_23 ('c', 9, 0, b'')
+FAIL seed_24 ('c', 20, 103, b'')
+FAIL seed_25 ('c', 8, 0, b'')
+FAIL seed_26 ('c', 8, 0, b'')
+FAIL seed_27 ('c', 8, 0, b'')
+FAIL seed_28 ('c', 8, 0, b'')
+FAIL seed_29 ('c', 6, 0, b'')
+FAIL seed_30 ('c', 23, 0, b'')
+FAIL seed_31 ('c', 9, 16, b'toc: line 3: error 16\n')
+FAIL seed_32 ('c', 9, 3, b'toc: line 5: error 3\n')
+FAIL seed_33 ('c', 10, 4, b'toc: line 6: error 4\n')
+FAIL seed_34 ('c', 13, 0, b'')
+PASS seed_35 15
+PASS seed_36 16
+PASS seed_37 16
+FAIL seed_38 ('c', 6, 0, b'')
+FAIL seed_39 ('c', 7, 0, b'')
+FAIL seed_40 ('c', 7, 0, b'')
+PASS empty 16
+FAIL text_target ('c', 24, 0, b'')
+FAIL five_params ('c', 24, 0, b'')
+PASS long_name 13
+FAIL library_io ('c', 24, 0, b'')
+FAIL library_array_width ('c', 24, 0, b'')
+FAIL local_storage_limit ('c', 23, 0, b'')
+FAIL inherited_text_program ('c', 24, 103, b'')
+FAIL r5b_assign ('c', 7, 16, b'toc: line 2: error 16\n')
+FAIL r5b_cycle ('c', 9, 0, b'')
+refusal cases=50 failures=42 RC=1

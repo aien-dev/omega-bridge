@@ -5,13 +5,13 @@ Final command: `quiet-build tools/test.sh`, exit 0. Raw output: `20-final-suite.
 | Gate | Cases | Failures |
 |---|---:|---:|
 | native seed versus generated C (GCC UBSan) versus actual Python | 113 | 0 |
-| shared frontend and target capability refusals | 49 | 0 |
+| shared frontend and target capability refusals | 50 | 0 |
 | real C and Python application callers | 2 | 0 |
 | six damaged-output controls plus nonempty repeatability | 7 | 0 |
 | byte-prefix truncations and hostile/capacity source inputs | 225 | 0 |
-| Total | 396 | 0 |
+| Total | 397 | 0 |
 
-The 113 programs include all 20 inherited accepted program-mode fixtures and 93 added numeric/order/array/loop/I/O probes. The three other inherited files are two refusals and a function-mode fixture; they are not silently counted as executable programs. The original forward function-mode fixture is retained for provenance, not claimed as an executable native program gate. Library forward calls share the names pass; callable library behavior is exercised separately.
+The 113 programs include all 20 inherited accepted rung4 program-mode fixtures and 93 added numeric/order/array/loop/I/O probes. The additional seed/omc text program is preserved and tested as a native-accepted, bridge-refused capability case. The three other inherited rung4 files are two refusals and a function-mode fixture; they are not silently counted as executable programs. The original forward function-mode fixture is retained for provenance, not claimed as an executable native program gate. Library forward calls share the names pass; callable library behavior is exercised separately.
 
 `differential-results.json` binds every executed program to its source/input digests, generated C/Python digests, and native/C/Python exit status and raw stdout/stderr encoded as hex. Known answers additionally check echo, reverse bytecopy, Fibonacci, observable operand order, and trap precedence. C builds use `gcc -std=gnu11 -O1 -fsanitize=undefined -fno-sanitize-recover=all`. Bounds mutants additionally use AddressSanitizer. `control-results.json` records intentionally broken artifact hashes and observed failures. These are damaged test outputs, not failures of the final compiler.
 

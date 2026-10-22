@@ -1,7 +1,7 @@
 {
   "cases": 113,
   "failures": 0,
-  "seconds": 11.605788883985952,
+  "seconds": 11.693615227006376,
   "results": [
     {
       "case": "bytecopy",

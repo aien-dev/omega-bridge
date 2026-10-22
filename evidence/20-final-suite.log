@@ -159,9 +159,10 @@ PASS long_name 13
 PASS library_io 24
 PASS library_array_width 24
 PASS local_storage_limit 23
+PASS inherited_text_program 24
 PASS r5b_assign 7
 PASS r5b_cycle 9
-refusal cases=49 failures=0 RC=0
+refusal cases=50 failures=0 RC=0
 C caller: values, mutation, traps, invalid lengths and recovery OK
 Python caller: values, mutation, traps, invalid lengths and recovery OK
 attachment cases=2 failures=0 RC=0
