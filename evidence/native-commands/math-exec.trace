@@ -1,35 +1,35 @@
-3729730 execve("/tmp/omega-commands-test-vE192O/home/my prefix's/bin/om", ["/tmp/omega-commands-test-vE192O/"..., "math", "eval 1/2"], 0xfffff0a60558 /* 34 vars */) = 0
-3729732 execve("/usr/bin/realpath", ["realpath", "--", "/tmp/omega-commands-test-vE192O/"...], 0xaf5f30669d68 /* 34 vars */) = 0
-3729732 +++ exited with 0 +++
-3729731 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3729732, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
-3729731 execve("/usr/bin/dirname", ["dirname", "/tmp/omega-commands-test-vE192O/"...], 0xaf5f30669d70 /* 34 vars */) = 0
-3729731 +++ exited with 0 +++
-3729730 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3729731, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
-3729733 execve("/usr/bin/sha256sum", ["sha256sum", "--status", "-c", "files.sha256"], 0xaf5f30669fc8 /* 34 vars */) = 0
-3729733 +++ exited with 0 +++
-3729730 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3729733, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
-3729734 execve("/usr/bin/uname", ["uname", "-s"], 0xaf5f30669ff8 /* 34 vars */) = 0
-3729734 +++ exited with 0 +++
-3729730 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3729734, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
-3729735 execve("/usr/bin/uname", ["uname", "-m"], 0xaf5f30669ff8 /* 34 vars */) = 0
-3729735 +++ exited with 0 +++
-3729730 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3729735, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
-3729736 execve("/usr/bin/mktemp", ["mktemp", "-d", "/tmp/omega-command.XXXXXXXX"], 0xaf5f30669d80 /* 34 vars */) = 0
-3729736 +++ exited with 0 +++
-3729730 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3729736, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
-3729737 execve("/tmp/omega-commands-test-vE192O/home/my prefix's/lib/omega-native/math", ["/tmp/omega-commands-test-vE192O/"...], 0xaf5f3066d2a8 /* 34 vars */) = 0
-3729737 +++ exited with 0 +++
-3729730 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3729737, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
-3729738 execve("/usr/bin/cat", ["cat", "/tmp/omega-command.PbolmroR/outp"...], 0xaf5f3066ae10 /* 34 vars */) = 0
-3729738 +++ exited with 0 +++
-3729730 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3729738, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
-3729739 execve("/usr/bin/grep", ["grep", "-q", "^REFUSED ", "/tmp/omega-command.PbolmroR/outp"...], 0xaf5f3066ae58 /* 34 vars */) = 0
-3729739 +++ exited with 1 +++
-3729730 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3729739, si_uid=1000, si_status=1, si_utime=0, si_stime=0} ---
-3729740 execve("/usr/bin/rm", ["rm", "-f", "--", "/tmp/omega-command.PbolmroR/inpu"..., "/tmp/omega-command.PbolmroR/nati"..., "/tmp/omega-command.PbolmroR/outp"..., "/tmp/omega-command.PbolmroR/erro"...], 0xaf5f3066b0b8 /* 34 vars */) = 0
-3729740 +++ exited with 0 +++
-3729730 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3729740, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
-3729741 execve("/usr/bin/rmdir", ["rmdir", "/tmp/omega-command.PbolmroR"], 0xaf5f3066b038 /* 34 vars */) = 0
-3729741 +++ exited with 0 +++
-3729730 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3729741, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
-3729730 +++ exited with 0 +++
+356380 execve("/tmp/omega-commands-test-uuYXOk/home/my prefix's/bin/om", ["/tmp/omega-commands-test-uuYXOk/"..., "math", "eval 1/2"], 0xffffd2af20b8 /* 19 vars */) = 0
+356383 execve("/usr/bin/realpath", ["realpath", "--", "/tmp/omega-commands-test-uuYXOk/"...], 0xc6879fc0fa98 /* 19 vars */) = 0
+356383 +++ exited with 0 +++
+356382 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=356383, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+356382 execve("/usr/bin/dirname", ["dirname", "/tmp/omega-commands-test-uuYXOk/"...], 0xc6879fc0faa0 /* 19 vars */) = 0
+356382 +++ exited with 0 +++
+356380 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=356382, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+356387 execve("/usr/bin/sha256sum", ["sha256sum", "--status", "-c", "files.sha256"], 0xc6879fc0fcf8 /* 19 vars */) = 0
+356387 +++ exited with 0 +++
+356380 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=356387, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+356390 execve("/usr/bin/uname", ["uname", "-s"], 0xc6879fc0fb48 /* 19 vars */) = 0
+356390 +++ exited with 0 +++
+356380 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=356390, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+356391 execve("/usr/bin/uname", ["uname", "-m"], 0xc6879fc0fb48 /* 19 vars */) = 0
+356391 +++ exited with 0 +++
+356380 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=356391, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+356392 execve("/usr/bin/mktemp", ["mktemp", "-d", "/tmp/omega-command.XXXXXXXX"], 0xc6879fc0fab0 /* 19 vars */) = 0
+356392 +++ exited with 0 +++
+356380 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=356392, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+356394 execve("/tmp/omega-commands-test-uuYXOk/home/my prefix's/lib/omega-native/math", ["/tmp/omega-commands-test-uuYXOk/"...], 0xc6879fc10bb8 /* 19 vars */) = 0
+356394 +++ exited with 0 +++
+356380 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=356394, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+356395 execve("/usr/bin/cat", ["cat", "/tmp/omega-command.psR2CQcO/outp"...], 0xc6879fc10b40 /* 19 vars */) = 0
+356395 +++ exited with 0 +++
+356380 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=356395, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+356396 execve("/usr/bin/grep", ["grep", "-q", "^REFUSED ", "/tmp/omega-command.psR2CQcO/outp"...], 0xc6879fc10b88 /* 19 vars */) = 0
+356396 +++ exited with 1 +++
+356380 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=356396, si_uid=1000, si_status=1, si_utime=0, si_stime=0} ---
+356399 execve("/usr/bin/rm", ["rm", "-f", "--", "/tmp/omega-command.psR2CQcO/inpu"..., "/tmp/omega-command.psR2CQcO/nati"..., "/tmp/omega-command.psR2CQcO/outp"..., "/tmp/omega-command.psR2CQcO/erro"...], 0xc6879fc10de8 /* 19 vars */) = 0
+356399 +++ exited with 0 +++
+356380 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=356399, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+356402 execve("/usr/bin/rmdir", ["rmdir", "/tmp/omega-command.psR2CQcO"], 0xc6879fc10c08 /* 19 vars */) = 0
+356402 +++ exited with 0 +++
+356380 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=356402, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+356380 +++ exited with 0 +++

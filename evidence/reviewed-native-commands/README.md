@@ -34,11 +34,25 @@ only temporary test fixtures, never evidence of a real cutover.
 
 ## Qualification status
 
-Parent acceptance is pending until a new full test log and exit receipt are
-recorded here. The parent runner waits for the corrected upstream full math gate
-to return zero before running the integrated build, converter, math, installed
-command, negative-control and provenance suites. The old milestone's logs remain
-historical evidence, not evidence that this changed source has passed.
+Parent test qualification completed at source commit
+`73872d83af405e0888468ee39e27a7225ab72d03`, after the corrected upstream full math
+gate returned zero. `parent-full.log` and `parent-full.exit` record the integrated
+suite returning zero. The converter suites returned RC=0; the math reference
+suite executed 1,048/1,048 passing cases including nine Wolfram fixtures. Its
+400 rational cases exercised each sign pair 100 times. All 57 explicit sign
+fixtures, 28 whitespace probes, 69 installed command checks, seven new installed
+regressions and 18 provenance checks passed. Compiled-mutant and malformed/recovery
+suites are retained in the full component logs under `../native-commands/`.
+
+A second source-only export of the exact committed tree, without build artifacts,
+rebuilt the compiler, converter and math to byte-identical hashes. The seven
+installed regressions passed again from an unrelated working directory with
+isolated HOME/prefix, followed by uninstall. `replay/` contains those build and
+installed-test logs. `binaries.sha256` identifies all three native executables.
+
+Independent whole-command code review L528 remains pending; green tests are not
+merge approval. The earlier milestone's logs remain historical evidence, not
+substitutes for these new qualification logs.
 
 This is AArch64 Linux software. Disclosed POSIX shell/Linux utilities orchestrate
 the seed-born native computation; no first-party C/Rust launcher is substituted.
