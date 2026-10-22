@@ -31,9 +31,13 @@ Some rename-published outputs preserved bytes in the baseline but are now
 conservatively refused if linked; those are not falsely counted as baseline
 clobbers. Direct uninstall and alias entry points remain distinguished.
 
-Review status: L534's narrow independent corrective-source review is pending.
-L528/L521 remain held until that review returns and any important finding is
-resolved. No PR/merge/release is implied by these test results. `om` is primary;
+Review status: the independent corrective-source review of exact `e4e7ed4`
+confirmed both original findings resolved for the documented single-user scope,
+with no new important destructive-path defect found. Its source-level findings
+are saved in `corrective-review.md`; the parent runs above provide runtime proof.
+The implementation and test qualification are accepted. Desk publication is a
+separate step: no main merge, release or global account installation is claimed.
+`om` is primary;
 `omg` is its alias, not another command implementation. No real account enrollment,
 runtime attachment, production service replacement or performance claim is made.
 The disclosed shell/Linux host boundary remains; native computation is seed-born
