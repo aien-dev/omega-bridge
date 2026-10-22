@@ -1,0 +1,446 @@
+[
+  {
+    "name": "CR-only independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "CR-only frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "mixed-CR independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "mixed-CR frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "concept-vector_add independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "concept-vector_add frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "concept-out independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "concept-out frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "concept-left independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "concept-left frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "concept-count independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "concept-count frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "concept-index independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "concept-index frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "requires-vector_add independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "requires-vector_add frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "requires-out independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "requires-out frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "requires-left independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "requires-left frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "requires-count independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "requires-count frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "requires-index independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "requires-index frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "consteval-vector_add independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "consteval-vector_add frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "consteval-out independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "consteval-out frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "consteval-left independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "consteval-left frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "consteval-count independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "consteval-count frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "consteval-index independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "consteval-index frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "constinit-vector_add independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "constinit-vector_add frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "constinit-out independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "constinit-out frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "constinit-left independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "constinit-left frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "constinit-count independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "constinit-count frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "constinit-index independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "constinit-index frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "co_await-vector_add independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_await-vector_add frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "co_await-out independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_await-out frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "co_await-left independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_await-left frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "co_await-count independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_await-count frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "co_await-index independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_await-index frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "co_return-vector_add independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_return-vector_add frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "co_return-out independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_return-out frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "co_return-left independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_return-left frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "co_return-count independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_return-count frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "co_return-index independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_return-index frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "co_yield-vector_add independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_yield-vector_add frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "co_yield-out independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_yield-out frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "co_yield-left independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_yield-left frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "co_yield-count independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_yield-count frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "co_yield-index independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_yield-index frontend accepts",
+    "pass": false,
+    "rc": 65,
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  }
+]

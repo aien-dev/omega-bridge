@@ -1,0 +1,1001 @@
+[
+  {
+    "name": "CR-only independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "CR-only frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "CR-only native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "CR-only qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "CR-only expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "mixed-CR independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "mixed-CR frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "mixed-CR native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "mixed-CR qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "mixed-CR expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "concept-vector_add independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "concept-vector_add frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "concept-vector_add native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "concept-vector_add qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "concept-vector_add expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "concept-out independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "concept-out frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "concept-out native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "concept-out qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "concept-out expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "concept-left independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "concept-left frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "concept-left native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "concept-left qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "concept-left expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "concept-count independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "concept-count frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "concept-count native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "concept-count qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "concept-count expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "concept-index independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "concept-index frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "concept-index native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "concept-index qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "concept-index expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "requires-vector_add independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "requires-vector_add frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "requires-vector_add native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "requires-vector_add qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "requires-vector_add expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "requires-out independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "requires-out frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "requires-out native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "requires-out qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "requires-out expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "requires-left independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "requires-left frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "requires-left native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "requires-left qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "requires-left expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "requires-count independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "requires-count frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "requires-count native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "requires-count qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "requires-count expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "requires-index independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "requires-index frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "requires-index native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "requires-index qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "requires-index expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "consteval-vector_add independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "consteval-vector_add frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "consteval-vector_add native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "consteval-vector_add qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "consteval-vector_add expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "consteval-out independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "consteval-out frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "consteval-out native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "consteval-out qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "consteval-out expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "consteval-left independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "consteval-left frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "consteval-left native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "consteval-left qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "consteval-left expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "consteval-count independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "consteval-count frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "consteval-count native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "consteval-count qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "consteval-count expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "consteval-index independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "consteval-index frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "consteval-index native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "consteval-index qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "consteval-index expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "constinit-vector_add independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "constinit-vector_add frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "constinit-vector_add native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "constinit-vector_add qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "constinit-vector_add expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "constinit-out independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "constinit-out frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "constinit-out native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "constinit-out qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "constinit-out expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "constinit-left independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "constinit-left frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "constinit-left native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "constinit-left qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "constinit-left expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "constinit-count independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "constinit-count frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "constinit-count native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "constinit-count qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "constinit-count expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "constinit-index independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "constinit-index frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "constinit-index native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "constinit-index qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "constinit-index expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "co_await-vector_add independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_await-vector_add frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_await-vector_add native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_await-vector_add qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "co_await-vector_add expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "co_await-out independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_await-out frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_await-out native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_await-out qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "co_await-out expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "co_await-left independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_await-left frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_await-left native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_await-left qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "co_await-left expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "co_await-count independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_await-count frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_await-count native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_await-count qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "co_await-count expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "co_await-index independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_await-index frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_await-index native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_await-index qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "co_await-index expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "co_return-vector_add independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_return-vector_add frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_return-vector_add native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_return-vector_add qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "co_return-vector_add expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "co_return-out independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_return-out frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_return-out native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_return-out qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "co_return-out expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "co_return-left independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_return-left frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_return-left native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_return-left qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "co_return-left expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "co_return-count independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_return-count frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_return-count native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_return-count qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "co_return-count expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "co_return-index independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_return-index frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_return-index native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_return-index qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "co_return-index expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "co_yield-vector_add independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_yield-vector_add frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_yield-vector_add native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_yield-vector_add qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "co_yield-vector_add expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "co_yield-out independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_yield-out frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_yield-out native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_yield-out qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "co_yield-out expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "co_yield-left independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_yield-left frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_yield-left native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_yield-left qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "co_yield-left expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "co_yield-count independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_yield-count frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_yield-count native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_yield-count qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "co_yield-count expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  },
+  {
+    "name": "co_yield-index independently valid C++17",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_yield-index frontend accepts",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_yield-index native compile",
+    "pass": true,
+    "rc": 0,
+    "stderr": ""
+  },
+  {
+    "name": "co_yield-index qualified ELF",
+    "pass": true
+  },
+  {
+    "name": "co_yield-index expected unsigned32 output",
+    "pass": true,
+    "rc": 0
+  }
+]

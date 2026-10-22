@@ -1,0 +1,32 @@
+{
+  "command": [
+    "/home/drakestapleton/handoffs/cuda-cpp-L605/final-candidate/bin/om",
+    "run",
+    "--from",
+    "cuda-cpp",
+    "--target",
+    "cpu-sim",
+    "/home/drakestapleton/handoffs/cuda-cpp-L605/final-source/tests/cuda-cpp/vector.cu"
+  ],
+  "input_le32": [
+    2,
+    2,
+    3,
+    100,
+    101,
+    102,
+    1,
+    4294967295,
+    3,
+    4,
+    2,
+    5
+  ],
+  "stdout_le32": [
+    5,
+    1,
+    8
+  ],
+  "status": 0,
+  "stderr": ""
+}

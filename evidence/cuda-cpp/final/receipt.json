@@ -1,0 +1,48 @@
+{
+  "schema": "omega.cuda-cpp.cpu-sim.v1",
+  "source_commit": "d36abe7e94bafce9a20d1be00f9405b23e3f05e2",
+  "reviewed_source_commit": "9ac729a73bd036633ffccc0c23783fc104866132",
+  "review_findings": {
+    "important_after_parent_regrade": 2,
+    "fixed": 2,
+    "remaining": 0,
+    "verification": "37 independent-GCC-valid source variants: RED37 frontend refusals; GREEN185 assertions; final full suite/replayRC0. No second independent review of the fixes."
+  },
+  "source_closure": {
+    "src/cuda-cpp.om": "4e5639f0bc1d827d92f4243ae9503bbbbedd677572195d85d3b0cb1a2bfe835b",
+    "tools/om": "76da02ea5616c4fe356a49f51d2e0363380d0f902630223d31d36dd86e71c23f",
+    "tools/build-native.sh": "056e4ed66ef0a0ebcaca78b499c28f4935531eda1beba94af37cf6948684f312",
+    "tools/install.sh": "c19cfa1c71e2430bbb6698a99085876f271de2ae9d8ce20a1927c4e792fc8b45",
+    "tools/uninstall.sh": "3e59ee2257404f93f8022eaef9e6f8e8d94907e5ad739dd8b14da08c500de3e4",
+    "tools/HELP.txt": "75a415571af395d6b38227529d1cbfa4d2af298f600dd01ddfea5b9bf7f13b84",
+    "tools/test-native.sh": "10b741ad7a1c995b7203a78c2486d4626f3c5ec699d2640052225f039ca55181",
+    "tests/cuda-cpp/gate.py": "cc3faf659cf51720e6952afd8575bd3e21cb595d57a275d275d725988cba6a36",
+    "tests/cuda-cpp/commands.py": "33fe6b272ac72d637f5f8addf795f33a40e82604a24dd38d1d8ba7b1292e9bd5",
+    "tests/cuda-cpp/review-regressions.py": "4b0c9520b237e862f14a72998dc15f2022b483d1694ed76bd966652aa3cacf35",
+    "tests/cuda-cpp/vector.cu": "ce5e27f9b8f452c072f2efef96efe73ce850121677daf0250c8e545ba9f055f9"
+  },
+  "results": {
+    "native": {
+      "checks": 549,
+      "passed": 549
+    },
+    "commands": {
+      "checks": 33,
+      "passed": 33
+    },
+    "review_regressions": {
+      "checks": 185,
+      "passed": 185
+    }
+  },
+  "full_suite_exit": 0,
+  "clean_committed_source_replay_exit": 0,
+  "compiler_sha256": "191b776ef98821597c3e30655da6d680a9b66edbc9ceaca3c39c61ea6df098e9",
+  "frontend_sha256": "f0dde05a5dbac087ebb8fc4319bf196eae2a4239ade1705d4db1913b52746c78",
+  "compiled_behavioral_mutants_caught": 3,
+  "gpu": "NOT_IMPLEMENTED/NOT_RUN; seed-native lowering dependencyL408",
+  "full_cuda_cpp": "NOT_IMPLEMENTED; only documented bounded unsigned-int32 1D elementwise profile",
+  "candidate_prefix": "/home/drakestapleton/handoffs/cuda-cpp-L605/final-candidate",
+  "services_or_drivers_changed": false,
+  "timestamp_utc": "2026-10-22T23:29:48.760980+00:00"
+}
