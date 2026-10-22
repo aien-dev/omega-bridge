@@ -31,3 +31,22 @@ The guards address preexisting paths on a single-user host, not malicious
 concurrent mutations, crash recovery or tamper-proof manifests. No ownership
 claims or permission changes to unrelated files. Full native gate and committed
 source-export replay receipts will be added before READY.
+
+Final source qualification: 31c5b9b49bc863c4805a2571d4be8b22e9c4cb65.
+`qualification.json` records exact commands, all gate summaries and log hashes.
+`quiet-build tools/test-native.sh`: exit 0, all original converter/math gates,
+69 command checks, 7 parent regressions, 18 provenance checks, 57 path checks.
+`quiet-build node tests/native/replay-path-safety.mjs`: exit 0, a fresh committed
+source export rebuilt all three byte-identical binaries, installed from an
+unrelated cwd, passed 57 path controls and uninstalled with no isolated HOME state.
+`replay-build.trace` plus the original gate's runtime traces show no first-party
+C/Rust build/runtime fallback. readelf checks find no INTERP/NEEDED closure.
+`tools/verify-sources.sh`: exit 0; diff of seed/, src/ and provenance/ from baseline
+is empty. Final binary hashes are in binaries.sha256 and replay.json.
+
+The inherited evidence/native-commands/binaries.sha256 had a stale pre-review
+math hash although the source pins and built math were correct. It is refreshed
+from the qualified binaries here; no math implementation was changed.
+
+L529 is READY for parent verification. L528 stays OPEN and L521 acceptance stays
+HOLD until the parent independently verifies this branch. No PR or merge made.
