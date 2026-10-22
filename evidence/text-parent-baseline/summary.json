@@ -1,0 +1,8 @@
+{
+  "executed": 17,
+  "source_cases_unique": 17,
+  "native_accepted": 11,
+  "native_refused": 6,
+  "baseline_target_refusal_pairs": 12,
+  "scope": "qualified-native reference and old-target refusal baseline, not new-text implementation acceptance"
+}
