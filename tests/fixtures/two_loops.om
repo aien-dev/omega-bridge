@@ -1,0 +1,10 @@
+fn main to int
+s = ulong 0
+for i ulong 3
+s = add s i
+end
+for j ulong 4
+s = add s j
+end
+ret int s
+end

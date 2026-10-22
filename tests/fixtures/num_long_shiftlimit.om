@@ -1,0 +1,6 @@
+fn main to int
+x = long 1
+s = ulong 64
+y = shl x s
+ret int y
+end

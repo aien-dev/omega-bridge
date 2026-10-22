@@ -1,0 +1,5 @@
+fn main to int
+x = uchar 255
+y = shr x uchar 7
+ret int and y uchar 127
+end

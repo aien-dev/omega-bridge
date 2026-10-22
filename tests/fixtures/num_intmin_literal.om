@@ -1,0 +1,4 @@
+fn main to int
+x = long -9223372036854775808
+ret int shr x 63
+end

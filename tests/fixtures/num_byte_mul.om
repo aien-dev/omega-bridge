@@ -1,0 +1,5 @@
+fn main to int
+x = byte 127
+y = mul x byte 2
+ret int and y byte 127
+end

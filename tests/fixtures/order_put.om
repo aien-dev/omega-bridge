@@ -1,0 +1,14 @@
+global out uchar 1
+fn mark x ulong to ulong
+put out 0 uchar x
+w = write 1 out 0 1
+ret x
+end
+fn pick a ulong b ulong to ulong
+ret sub b a
+end
+fn main to int
+a = new ulong 100 0
+put a mark 65 mark 66
+ret int get a 65
+end

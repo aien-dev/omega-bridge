@@ -1,0 +1,5 @@
+fn main to int
+x = uint 1
+y = neg x
+ret int and y uint 127
+end

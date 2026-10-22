@@ -1,0 +1,5 @@
+fn main to int
+x = byte 1
+y = not x
+ret int add y 10
+end

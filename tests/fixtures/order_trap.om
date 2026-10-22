@@ -1,0 +1,17 @@
+global out uchar 1
+fn mark x ulong to ulong
+put out 0 uchar x
+w = write 1 out 0 1
+ret x
+end
+fn pick a ulong b ulong to ulong
+ret sub b a
+end
+fn boom to ulong
+x = ulong 0
+ret div x x
+end
+fn main to int
+x = add boom mark 65
+ret int x
+end

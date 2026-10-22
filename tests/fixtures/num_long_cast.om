@@ -1,0 +1,5 @@
+fn main to int
+x = ulong 9223372036854775808
+y = long x
+ret int and y long 127
+end

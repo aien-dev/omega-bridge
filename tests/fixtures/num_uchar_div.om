@@ -1,0 +1,5 @@
+fn main to int
+x = uchar 0
+y = div x uchar 0
+ret int and y uchar 127
+end

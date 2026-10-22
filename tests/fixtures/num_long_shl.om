@@ -1,0 +1,5 @@
+fn main to int
+x = long 9223372036854775807
+y = shl x long 1
+ret int and y long 127
+end

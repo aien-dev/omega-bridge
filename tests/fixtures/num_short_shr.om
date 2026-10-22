@@ -1,0 +1,5 @@
+fn main to int
+x = short -3
+y = shr x short 15
+ret int and y short 127
+end

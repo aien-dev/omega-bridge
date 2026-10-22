@@ -1,0 +1,5 @@
+fn main to int
+x = int -2147483648
+y = div x int -1
+ret int and y int 127
+end
