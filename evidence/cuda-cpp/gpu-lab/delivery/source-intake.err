@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/home/drakestapleton/.local/lib/renda/releases/L593-53fee8c8d1b992f2/site_policy.py", line 56, in repository_identity
+    return REPOSITORY_IDENTITIES[value]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+KeyError: 'omega-bridge'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/drakestapleton/.local/bin/renda-harness", line 1055, in <module>
+    main()
+  File "/home/drakestapleton/.local/bin/renda-harness", line 1021, in main
+    full = repository_identity(repo)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/drakestapleton/.local/lib/renda/releases/L593-53fee8c8d1b992f2/site_policy.py", line 58, in repository_identity
+    raise ValueError(f'unregistered repository identity: {value!r}')
+ValueError: unregistered repository identity: 'omega-bridge'

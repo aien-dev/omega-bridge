@@ -1,0 +1,8 @@
+[
+  {
+    "repository": "aien-dev/omega-bridge",
+    "ref": "feat/cuda-cpp-frontend",
+    "sha": "ae06c5a87893f9a20899d378f96198dd8e12e9bc",
+    "base": "d2010ab927b608931800c20d73a4c2b25f00a9fa"
+  }
+]

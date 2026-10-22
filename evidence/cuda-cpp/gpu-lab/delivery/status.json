@@ -1,0 +1,15 @@
+{
+  "state": "REFUSED_UNREGISTERED_REPOSITORY",
+  "repository": "aien-dev/omega-bridge",
+  "raw_attempt": "renda-harness --lanes omega-bridge --seed-ready ~/handoffs/cuda-cpp-L605/source-intake.json",
+  "observed_exit_status": 1,
+  "local_queue_acknowledged": false,
+  "remote_pr_created": false,
+  "registration_bypass": false,
+  "functional_source": "0e0b486c300c78ed335b26e86b1fed29d858adad",
+  "existing_publication_owners": [
+    "L590",
+    "L522"
+  ],
+  "note": "A READY desk line is not acknowledged intake. Existing L590 already owns this exact private-staging identity refusal; no duplicate publisher or visibility/service change."
+}
