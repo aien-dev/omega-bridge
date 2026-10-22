@@ -1,61 +1,60 @@
-1936531 execve("/tmp/omega-developer-AcP8Mj/home/prefix space/bin/om", ["/tmp/omega-developer-AcP8Mj/home"..., "run", "/tmp/omega-developer-AcP8Mj/unre"...], 0xffffeeee0c48 /* 20 vars */) = 0
-1936533 execve("/usr/bin/realpath", ["realpath", "--", "/tmp/omega-developer-AcP8Mj/home"...], 0xc85f6e407ab0 /* 20 vars */) = 0
-1936533 +++ exited with 0 +++
-1936532 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1936533, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
-1936532 execve("/usr/bin/dirname", ["dirname", "/tmp/omega-developer-AcP8Mj/home"...], 0xc85f6e407ab8 /* 20 vars */) = 0
-1936532 +++ exited with 0 +++
-1936531 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1936532, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
-1936539 execve("/usr/bin/sha256sum", ["sha256sum", "--status", "-c", "files.sha256"], 0xc85f6e407d18 /* 20 vars */) = 0
-1936539 +++ exited with 0 +++
-1936531 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1936539, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
-1936545 execve("/usr/bin/uname", ["uname", "-s"], 0xc85f6e407b68 /* 20 vars */) = 0
-1936545 +++ exited with 0 +++
-1936531 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1936545, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
-1936547 execve("/usr/bin/uname", ["uname", "-m"], 0xc85f6e407b68 /* 20 vars */) = 0
-1936547 +++ exited with 0 +++
-1936531 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1936547, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
-1936552 execve("/usr/bin/mktemp", ["mktemp", "-d", "/tmp/omega-developer-AcP8Mj/tmp/"...], 0xc85f6e407fd8 /* 20 vars */) = 0
-1936552 +++ exited with 0 +++
-1936531 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1936552, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
-1936557 execve("/usr/bin/cat", ["cat", "--", "/tmp/omega-developer-AcP8Mj/unre"...], 0xc85f6e40b1c8 /* 20 vars */) = 0
-1936557 +++ exited with 0 +++
-1936531 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1936557, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
-1936559 execve("/tmp/omega-developer-AcP8Mj/home/prefix space/lib/omega-native/omc", ["/tmp/omega-developer-AcP8Mj/home"...], 0xc85f6e40b358 /* 20 vars */) = 0
-1936559 +++ exited with 0 +++
-1936531 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1936559, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
-1936563 execve("/tmp/omega-developer-AcP8Mj/home/prefix space/lib/omega-native/verify-elf.sh", ["/tmp/omega-developer-AcP8Mj/home"..., "/tmp/omega-developer-AcP8Mj/tmp/"...], 0xc85f6e40b1b0 /* 20 vars */) = 0
-1936566 execve("/usr/bin/readelf", ["readelf", "-h", "-l", "-d", "--", "/tmp/omega-developer-AcP8Mj/tmp/"...], 0xaf6d70fbf830 /* 20 vars */) = 0
-1936566 +++ exited with 0 +++
-1936563 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1936566, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
-1936571 +++ exited with 0 +++
-1936563 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1936571, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
-1936573 execve("/usr/bin/grep", ["grep", "-q", "Machine:.*AArch64"], 0xaf6d70fbf7a0 /* 20 vars */) = 0
-1936573 +++ exited with 0 +++
-1936563 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1936573, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
-1936580 execve("/usr/bin/grep", ["grep", "-q", "Type:.*EXEC"], 0xaf6d70fbf780 /* 20 vars */ <unfinished ...>
-1936579 +++ exited with 0 +++
-1936563 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1936579, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
-1936580 <... execve resumed>)           = 0
-1936580 +++ exited with 0 +++
-1936563 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1936580, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
-1936584 execve("/usr/bin/grep", ["grep", "-Eq", "INTERP|DYNAMIC|NEEDED"], 0xaf6d70fbfb38 /* 20 vars */ <unfinished ...>
-1936583 +++ exited with 0 +++
-1936563 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1936583, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
-1936584 <... execve resumed>)           = 0
-1936584 +++ exited with 1 +++
-1936563 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1936584, si_uid=1000, si_status=1, si_utime=0, si_stime=0} ---
-1936563 +++ exited with 0 +++
-1936531 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1936563, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
-1936588 execve("/usr/bin/chmod", ["chmod", "700", "/tmp/omega-developer-AcP8Mj/tmp/"...], 0xc85f6e40b178 /* 20 vars */) = 0
-1936588 +++ exited with 0 +++
-1936531 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1936588, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
-1936591 execve("/tmp/omega-developer-AcP8Mj/tmp/omega-command.DuafFmbs/native", ["/tmp/omega-developer-AcP8Mj/tmp/"...], 0xc85f6e40b138 /* 20 vars */) = 0
-1936591 +++ exited with 23 +++
-1936531 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1936591, si_uid=1000, si_status=23, si_utime=0, si_stime=0} ---
-1936592 execve("/usr/bin/rm", ["rm", "-f", "--", "/tmp/omega-developer-AcP8Mj/tmp/"..., "/tmp/omega-developer-AcP8Mj/tmp/"..., "/tmp/omega-developer-AcP8Mj/tmp/"..., "/tmp/omega-developer-AcP8Mj/tmp/"...], 0xc85f6e40b4a8 /* 20 vars */) = 0
-1936592 +++ exited with 0 +++
-1936531 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1936592, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
-1936593 execve("/usr/bin/rmdir", ["rmdir", "/tmp/omega-developer-AcP8Mj/tmp/"...], 0xc85f6e40b358 /* 20 vars */) = 0
-1936593 +++ exited with 0 +++
-1936531 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1936593, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
-1936531 +++ exited with 23 +++
+2524123 execve("/tmp/omega-developer-DgzWao/home/prefix space/bin/om", ["/tmp/omega-developer-DgzWao/home"..., "run", "/tmp/omega-developer-DgzWao/unre"...], 0xffffea49bd28 /* 20 vars */) = 0
+2524125 execve("/usr/bin/realpath", ["realpath", "--", "/tmp/omega-developer-DgzWao/home"...], 0xaee32ceb4ab0 /* 20 vars */) = 0
+2524125 +++ exited with 0 +++
+2524124 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2524125, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2524124 execve("/usr/bin/dirname", ["dirname", "/tmp/omega-developer-DgzWao/home"...], 0xaee32ceb4ab8 /* 20 vars */) = 0
+2524124 +++ exited with 0 +++
+2524123 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2524124, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2524126 execve("/usr/bin/sha256sum", ["sha256sum", "--status", "-c", "files.sha256"], 0xaee32ceb4d18 /* 20 vars */) = 0
+2524126 +++ exited with 0 +++
+2524123 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2524126, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2524127 execve("/usr/bin/uname", ["uname", "-s"], 0xaee32ceb4b68 /* 20 vars */) = 0
+2524127 +++ exited with 0 +++
+2524123 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2524127, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2524128 execve("/usr/bin/uname", ["uname", "-m"], 0xaee32ceb4b68 /* 20 vars */) = 0
+2524128 +++ exited with 0 +++
+2524123 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2524128, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2524129 execve("/usr/bin/mktemp", ["mktemp", "-d", "/tmp/omega-developer-DgzWao/tmp/"...], 0xaee32ceb4fd8 /* 20 vars */) = 0
+2524129 +++ exited with 0 +++
+2524123 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2524129, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2524130 execve("/usr/bin/cat", ["cat", "--", "/tmp/omega-developer-DgzWao/unre"...], 0xaee32ceb81c8 /* 20 vars */) = 0
+2524130 +++ exited with 0 +++
+2524123 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2524130, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2524133 execve("/tmp/omega-developer-DgzWao/home/prefix space/lib/omega-native/omc", ["/tmp/omega-developer-DgzWao/home"...], 0xaee32ceb8358 /* 20 vars */) = 0
+2524133 +++ exited with 0 +++
+2524123 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2524133, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2524137 execve("/tmp/omega-developer-DgzWao/home/prefix space/lib/omega-native/verify-elf.sh", ["/tmp/omega-developer-DgzWao/home"..., "/tmp/omega-developer-DgzWao/tmp/"...], 0xaee32ceb81b0 /* 20 vars */) = 0
+2524138 execve("/usr/bin/readelf", ["readelf", "-h", "-l", "-d", "--", "/tmp/omega-developer-DgzWao/tmp/"...], 0xc7c1e5925830 /* 20 vars */) = 0
+2524138 +++ exited with 0 +++
+2524137 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2524138, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2524139 +++ exited with 0 +++
+2524137 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2524139, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2524140 execve("/usr/bin/grep", ["grep", "-q", "Machine:.*AArch64"], 0xc7c1e59257a0 /* 20 vars */) = 0
+2524140 +++ exited with 0 +++
+2524137 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2524140, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2524142 execve("/usr/bin/grep", ["grep", "-q", "Type:.*EXEC"], 0xc7c1e5925780 /* 20 vars */) = 0
+2524141 +++ exited with 0 +++
+2524137 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2524141, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2524142 +++ exited with 0 +++
+2524137 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2524142, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2524144 execve("/usr/bin/grep", ["grep", "-Eq", "INTERP|DYNAMIC|NEEDED"], 0xc7c1e5925b38 /* 20 vars */ <unfinished ...>
+2524143 +++ exited with 0 +++
+2524137 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2524143, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2524144 <... execve resumed>)           = 0
+2524144 +++ exited with 1 +++
+2524137 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2524144, si_uid=1000, si_status=1, si_utime=0, si_stime=0} ---
+2524137 +++ exited with 0 +++
+2524123 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2524137, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2524145 execve("/usr/bin/chmod", ["chmod", "700", "/tmp/omega-developer-DgzWao/tmp/"...], 0xaee32ceb8178 /* 20 vars */) = 0
+2524145 +++ exited with 0 +++
+2524123 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2524145, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2524146 execve("/tmp/omega-developer-DgzWao/tmp/omega-command.vADZXem1/native", ["/tmp/omega-developer-DgzWao/tmp/"...], 0xaee32ceb8138 /* 20 vars */) = 0
+2524146 +++ exited with 23 +++
+2524123 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2524146, si_uid=1000, si_status=23, si_utime=0, si_stime=0} ---
+2524147 execve("/usr/bin/rm", ["rm", "-f", "--", "/tmp/omega-developer-DgzWao/tmp/"..., "/tmp/omega-developer-DgzWao/tmp/"..., "/tmp/omega-developer-DgzWao/tmp/"..., "/tmp/omega-developer-DgzWao/tmp/"...], 0xaee32ceb84a8 /* 20 vars */) = 0
+2524147 +++ exited with 0 +++
+2524123 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2524147, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2524148 execve("/usr/bin/rmdir", ["rmdir", "/tmp/omega-developer-DgzWao/tmp/"...], 0xaee32ceb8358 /* 20 vars */) = 0
+2524148 +++ exited with 0 +++
+2524123 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2524148, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2524123 +++ exited with 23 +++

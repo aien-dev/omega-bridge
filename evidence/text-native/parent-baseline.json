@@ -1,0 +1,162 @@
+{
+  "source_commit": "0fc7d8662cb799e7c206b17c18ea4c3ec2b8fea9",
+  "seed_sha256": "191b776ef98821597c3e30655da6d680a9b66edbc9ceaca3c39c61ea6df098e9",
+  "cases": [
+    {
+      "name": "empty",
+      "source": "text t \"\"\nfn main to int\nw = write 1 t 0 len t\nret 0\nend\n",
+      "source_sha256": "92deed8f5d7e443561837b9eeee267ec4fb0f6d72cc5d7792dd5d1bc6e522c5e",
+      "native_compile_rc": 0,
+      "native_stderr": "",
+      "native_rc": 0,
+      "native_stdout_hex": "",
+      "expected_stdout_hex": "",
+      "old_bridge": {
+        "C": {
+          "rc": 24,
+          "stdout_bytes": 0,
+          "stderr": "toc: line 1: error 24\nunsupported bridge capability\n"
+        },
+        "P": {
+          "rc": 24,
+          "stdout_bytes": 0,
+          "stderr": "toc: line 1: error 24\nunsupported bridge capability\n"
+        }
+      }
+    },
+    {
+      "name": "hello",
+      "source": "text t \"hello\"\nfn main to int\nw = write 1 t 0 len t\nret 0\nend\n",
+      "source_sha256": "ed059f147fb961406f265b015fe2cfc15c3604af90d0739bd72809987977a39c",
+      "native_compile_rc": 0,
+      "native_stderr": "",
+      "native_rc": 0,
+      "native_stdout_hex": "68656c6c6f",
+      "expected_stdout_hex": "68656c6c6f",
+      "old_bridge": {
+        "C": {
+          "rc": 24,
+          "stdout_bytes": 0,
+          "stderr": "toc: line 1: error 24\nunsupported bridge capability\n"
+        },
+        "P": {
+          "rc": 24,
+          "stdout_bytes": 0,
+          "stderr": "toc: line 1: error 24\nunsupported bridge capability\n"
+        }
+      }
+    },
+    {
+      "name": "escapes",
+      "source": "text t \"A\\tB\\\\C\\\"D\\nZ\"\nfn main to int\nw = write 1 t 0 len t\nret 0\nend\n",
+      "source_sha256": "8900ff1bdad69c0e550a3bac1098ab2ddaf989d1ffd4a98c9ce697f1f8577eb3",
+      "native_compile_rc": 0,
+      "native_stderr": "",
+      "native_rc": 0,
+      "native_stdout_hex": "4109425c4322440a5a",
+      "expected_stdout_hex": "4109425c4322440a5a",
+      "old_bridge": {
+        "C": {
+          "rc": 24,
+          "stdout_bytes": 0,
+          "stderr": "toc: line 1: error 24\nunsupported bridge capability\n"
+        },
+        "P": {
+          "rc": 24,
+          "stdout_bytes": 0,
+          "stderr": "toc: line 1: error 24\nunsupported bridge capability\n"
+        }
+      }
+    },
+    {
+      "name": "raw-nul",
+      "source": "text t \"A\u0000B\"\nfn main to int\nw = write 1 t 0 len t\nret 0\nend\n",
+      "source_sha256": "9fb399c9eafd458779452939c436910869cf089b87659448274c19a62e75c9b6",
+      "native_compile_rc": 0,
+      "native_stderr": "",
+      "native_rc": 0,
+      "native_stdout_hex": "410042",
+      "expected_stdout_hex": "410042",
+      "old_bridge": {
+        "C": {
+          "rc": 16,
+          "stdout_bytes": 0,
+          "stderr": "toc: line 1: error 16\n"
+        },
+        "P": {
+          "rc": 16,
+          "stdout_bytes": 0,
+          "stderr": "toc: line 1: error 16\n"
+        }
+      }
+    },
+    {
+      "name": "utf8",
+      "source": "text t \"caf\u00e9 \u03a9\"\nfn main to int\nw = write 1 t 0 len t\nret 0\nend\n",
+      "source_sha256": "0c25ff9e4b18f845f967d5d630b10ec7e2b2307e1c8c0dbbd0a52c4729256cb1",
+      "native_compile_rc": 0,
+      "native_stderr": "",
+      "native_rc": 0,
+      "native_stdout_hex": "636166c3a920cea9",
+      "expected_stdout_hex": "636166c3a920cea9",
+      "old_bridge": {
+        "C": {
+          "rc": 24,
+          "stdout_bytes": 0,
+          "stderr": "toc: line 1: error 24\nunsupported bridge capability\n"
+        },
+        "P": {
+          "rc": 24,
+          "stdout_bytes": 0,
+          "stderr": "toc: line 1: error 24\nunsupported bridge capability\n"
+        }
+      }
+    },
+    {
+      "name": "unused",
+      "source": "text t \"abc\"\nfn main to int\nret 0\nend\n",
+      "source_sha256": "ff3721b7d8591f71af5cf9a33adef3ee18d138ffde8709451d30c21ccfe24057",
+      "native_compile_rc": 0,
+      "native_stderr": "",
+      "native_rc": 0,
+      "native_stdout_hex": "",
+      "expected_stdout_hex": "",
+      "old_bridge": {
+        "C": {
+          "rc": 24,
+          "stdout_bytes": 0,
+          "stderr": "toc: line 1: error 24\nunsupported bridge capability\n"
+        },
+        "P": {
+          "rc": 24,
+          "stdout_bytes": 0,
+          "stderr": "toc: line 1: error 24\nunsupported bridge capability\n"
+        }
+      }
+    },
+    {
+      "name": "bad-escape",
+      "source": "text t \"a\\qb\"\nfn main to int\nw = write 1 t 0 len t\nret 0\nend\n",
+      "source_sha256": "ee782401899b3d948bd1b7dcd131278b0cf90ed9c91a32a5a084a5b41a61a8ce",
+      "native_compile_rc": 22,
+      "native_stderr": "omc: line 1: error 22\n"
+    },
+    {
+      "name": "unterminated",
+      "source": "text t \"abc\nfn main to int\nw = write 1 t 0 len t\nret 0\nend\n",
+      "source_sha256": "26bd373ee3094ad5843dfba2e496eb172156fd07451b93e513989adb41414eef",
+      "native_compile_rc": 22,
+      "native_stderr": "omc: line 1: error 22\n"
+    },
+    {
+      "name": "inline-literal",
+      "source": "fn main to int\nw = write 1 \"abc\" 0 3\nret 0\nend\n",
+      "source_sha256": "54fa26a4af04e6288d16f4a873b5937549891bd2fc5ad08fd5e8f4be6adf18a3",
+      "native_compile_rc": 16,
+      "native_stderr": "omc: line 2: error 16\n"
+    }
+  ],
+  "executed": 9,
+  "native_accepts": 6,
+  "native_refusals": 3
+}

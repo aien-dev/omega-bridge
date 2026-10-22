@@ -3,8 +3,11 @@
 `provenance/pins` fixes the Omega seed at
 29b12760f4c962606411d6bf25032aedef063301, math at
 508ddd7e02c303d0e2182721f9501c7a540c758f (the reviewed correction to
-78477217b6803ad5d2b14caee40b65c7509aa40c), and the unchanged converter source at
-77376b1941a020dba441a14fce8eaadea692a5b7. `seed.files` and `math.files` name every
+78477217b6803ad5d2b14caee40b65c7509aa40c), and the converter ancestry in `converter-parent` at
+77376b1941a020dba441a14fce8eaadea692a5b7. L551 changes the owned converter;
+`converter-source-sha256` binds its actual bytes without a self-referential Git
+pin. The parent commit is historical ancestry, never an assertion of current
+source equality. `seed.files` and `math.files` name every
 consumed upstream file. The Omega licence is copied byte-for-byte from the math
 commit into OMEGA-LICENSE. Each file, plus src/toc.om, has an exact SHA-256 in
 sources.sha256. No first-party math/compiler source is translated or hand-ported.

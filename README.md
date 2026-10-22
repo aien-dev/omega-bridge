@@ -47,6 +47,12 @@ qualified native program with the caller's input/output and program exit status.
 It is not a sandbox. Program arguments are not implemented yet. Build publishes
 a private executable atomically and refuses to overwrite its own source.
 
+Top-level text declarations now convert to C and Python with exact byte lengths,
+including embedded zero and UTF-8 bytes. Text remains read-only. The seeded
+four-escape grammar and capacity limits are recorded in the
+[text conversion design](docs/TEXT-CONVERSION.md). Inline quoted expressions
+retain their native refusal.
+
 For a real input available in this checkout, `tests/fixtures/fib.om` can be used
 with either conversion target. C output targets GNU C11/POSIX; Python output targets
 Python 3. Target compilers/interpreters are needed only when you choose to run that

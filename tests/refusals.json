@@ -245,11 +245,6 @@
     "error": null
   },
   {
-    "name": "text_target",
-    "source": "text t \"abc\"\nfn main to int\nret 0\nend\n",
-    "backend_error": 24
-  },
-  {
     "name": "five_params",
     "source": "fn f a ulong b ulong c ulong d ulong e ulong to ulong\nret a\nend\nfn main to int\nret int f 1 2 3 4 5\nend\n",
     "backend_error": 24
@@ -273,10 +268,5 @@
     "name": "local_storage_limit",
     "source": "fn main to int\na = new ushort 20000 0\nret 0\nend\n",
     "backend_error": 23
-  },
-  {
-    "name": "inherited_text_program",
-    "source": "note text bytes with every escape are written to stdout and read back with get and len\ntext t \"a\\tb\\\\c\\\"d\\ne\"\nglobal g uchar 16\nfn main to int\nn = write int 1 t ulong 0 len t\nput g 0 get t 2\nret add int get t 0 int add len t ulong get g 0\nend\n",
-    "backend_error": 24
   }
 ]

@@ -1,0 +1,6 @@
+fn f a ulong b ulong c ulong d ulong e ulong to ulong
+ret a
+end
+fn main to int
+ret int f 1 2 3 4 5
+end

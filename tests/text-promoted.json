@@ -1,0 +1,10 @@
+[
+  {
+    "name": "text_target",
+    "source": "text t \"abc\"\nfn main to int\nret 0\nend\n"
+  },
+  {
+    "name": "inherited_text_program",
+    "source": "note text bytes with every escape are written to stdout and read back with get and len\ntext t \"a\\tb\\\\c\\\"d\\ne\"\nglobal g uchar 16\nfn main to int\nn = write int 1 t ulong 0 len t\nput g 0 get t 2\nret add int get t 0 int add len t ulong get g 0\nend\n"
+  }
+]

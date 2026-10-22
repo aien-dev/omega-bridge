@@ -1,3 +1,6 @@
+Current text conversion qualification: [L551](text-native/README.md).
+The following L483 record is historical and retains its original limits/counts.
+
 # L483 local qualification
 
 Final command: `quiet-build tools/test.sh`, exit 0. Raw output: `20-final-suite.log`.

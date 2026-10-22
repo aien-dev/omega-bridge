@@ -1,0 +1,3409 @@
+FAIL parent-empty c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL parent-empty python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL parent-hello c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL parent-hello python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL parent-escapes c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL parent-escapes python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL parent-raw-nul c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL parent-raw-nul python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL parent-utf8 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL parent-utf8 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL parent-unused c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL parent-unused python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL all-256-bytes c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL all-256-bytes python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-0 c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-0 python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-1 c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-1 python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-2 c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-2 python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-3 c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-3 python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-4 c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-4 python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-5 c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-5 python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-6 c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-6 python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-7 c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-7 python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-8 c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-8 python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-9 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-9 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-10 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-10 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-11 c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-11 python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-12 c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-12 python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-13 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-13 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-14 c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-14 python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-15 c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-15 python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-16 c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-16 python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-17 c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-17 python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-18 c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-18 python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-19 c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-19 python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-20 c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-20 python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-21 c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-21 python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-22 c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-22 python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-23 c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-23 python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-24 c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-24 python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-25 c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-25 python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-26 c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-26 python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-27 c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-27 python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-28 c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-28 python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-29 c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-29 python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-30 c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-30 python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-31 c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-31 python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL byte-32 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-32 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-33 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-33 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-34 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-34 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-35 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-35 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-36 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-36 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-37 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-37 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-38 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-38 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-39 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-39 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-40 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-40 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-41 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-41 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-42 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-42 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-43 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-43 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-44 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-44 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-45 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-45 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-46 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-46 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-47 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-47 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-48 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-48 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-49 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-49 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-50 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-50 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-51 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-51 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-52 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-52 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-53 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-53 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-54 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-54 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-55 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-55 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-56 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-56 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-57 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-57 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-58 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-58 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-59 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-59 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-60 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-60 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-61 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-61 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-62 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-62 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-63 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-63 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-64 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-64 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-65 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-65 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-66 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-66 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-67 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-67 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-68 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-68 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-69 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-69 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-70 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-70 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-71 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-71 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-72 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-72 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-73 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-73 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-74 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-74 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-75 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-75 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-76 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-76 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-77 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-77 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-78 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-78 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-79 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-79 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-80 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-80 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-81 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-81 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-82 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-82 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-83 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-83 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-84 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-84 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-85 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-85 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-86 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-86 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-87 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-87 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-88 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-88 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-89 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-89 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-90 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-90 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-91 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-91 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-92 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-92 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-93 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-93 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-94 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-94 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-95 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-95 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-96 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-96 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-97 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-97 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-98 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-98 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-99 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-99 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-100 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-100 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-101 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-101 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-102 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-102 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-103 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-103 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-104 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-104 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-105 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-105 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-106 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-106 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-107 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-107 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-108 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-108 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-109 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-109 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-110 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-110 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-111 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-111 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-112 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-112 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-113 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-113 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-114 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-114 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-115 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-115 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-116 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-116 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-117 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-117 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-118 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-118 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-119 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-119 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-120 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-120 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-121 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-121 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-122 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-122 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-123 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-123 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-124 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-124 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-125 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-125 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-126 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-126 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-127 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-127 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-128 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-128 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-129 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-129 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-130 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-130 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-131 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-131 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-132 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-132 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-133 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-133 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-134 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-134 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-135 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-135 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-136 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-136 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-137 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-137 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-138 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-138 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-139 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-139 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-140 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-140 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-141 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-141 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-142 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-142 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-143 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-143 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-144 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-144 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-145 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-145 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-146 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-146 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-147 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-147 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-148 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-148 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-149 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-149 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-150 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-150 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-151 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-151 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-152 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-152 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-153 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-153 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-154 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-154 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-155 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-155 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-156 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-156 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-157 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-157 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-158 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-158 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-159 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-159 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-160 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-160 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-161 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-161 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-162 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-162 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-163 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-163 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-164 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-164 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-165 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-165 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-166 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-166 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-167 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-167 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-168 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-168 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-169 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-169 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-170 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-170 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-171 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-171 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-172 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-172 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-173 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-173 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-174 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-174 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-175 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-175 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-176 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-176 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-177 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-177 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-178 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-178 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-179 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-179 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-180 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-180 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-181 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-181 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-182 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-182 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-183 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-183 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-184 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-184 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-185 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-185 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-186 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-186 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-187 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-187 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-188 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-188 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-189 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-189 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-190 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-190 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-191 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-191 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-192 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-192 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-193 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-193 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-194 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-194 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-195 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-195 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-196 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-196 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-197 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-197 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-198 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-198 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-199 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-199 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-200 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-200 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-201 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-201 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-202 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-202 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-203 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-203 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-204 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-204 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-205 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-205 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-206 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-206 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-207 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-207 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-208 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-208 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-209 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-209 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-210 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-210 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-211 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-211 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-212 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-212 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-213 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-213 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-214 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-214 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-215 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-215 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-216 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-216 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-217 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-217 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-218 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-218 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-219 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-219 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-220 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-220 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-221 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-221 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-222 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-222 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-223 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-223 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-224 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-224 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-225 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-225 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-226 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-226 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-227 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-227 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-228 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-228 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-229 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-229 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-230 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-230 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-231 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-231 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-232 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-232 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-233 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-233 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-234 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-234 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-235 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-235 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-236 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-236 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-237 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-237 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-238 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-238 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-239 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-239 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-240 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-240 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-241 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-241 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-242 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-242 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-243 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-243 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-244 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-244 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-245 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-245 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-246 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-246 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-247 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-247 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-248 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-248 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-249 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-249 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-250 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-250 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-251 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-251 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-252 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-252 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-253 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-253 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-254 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-254 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-255 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL byte-255 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL raw-cr-tab c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL raw-cr-tab python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL target-injection c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL target-injection python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL read-only-view c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL read-only-view python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL view-forward c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL view-forward python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL empty-view c omc: line 2: error 8
+
+
+8 !== 0
+
+FAIL empty-view python omc: line 2: error 8
+
+
+8 !== 0
+
+FAIL prefix-names c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL prefix-names python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL texts-after-function c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL texts-after-function python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL texts-and-globals c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL texts-and-globals python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL combined-table-8 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL combined-table-8 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL combined-table-9 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 14
+
+FAIL combined-table-9 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 14
+
+FAIL pool-32768 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL pool-32768 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL pool-32769 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 14
+
+FAIL pool-32769 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 14
+
+FAIL shared-pool-limit c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 14
+
+FAIL shared-pool-limit python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 14
+
+FAIL dynamic-last c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL dynamic-last python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL dynamic-bounds c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL dynamic-bounds python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL empty-bounds c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL empty-bounds python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL write-slice c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL write-slice python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL empty-write-at-end c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL empty-write-at-end python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL write-bounds c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL write-bounds python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL write-overflow c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL write-overflow python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL stderr-bytes c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL stderr-bytes python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL bad-fd c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL bad-fd python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL text_target c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL text_target python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL inherited_text_program c toc: line 2: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL inherited_text_program python toc: line 2: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL NATIVE-developer-fixture c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL NATIVE-developer-fixture python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL prefix-65 c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL prefix-65 python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL prefix-66 c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL prefix-66 python toc: line 1: error 16
+
+
+16 !== 0
+
+{"requested":756,"executed":756,"passed":176,"failed":580,"source_cases":378}

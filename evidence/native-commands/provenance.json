@@ -1,5 +1,5 @@
 {
-  "passed": 18,
+  "passed": 20,
   "results": [
     {
       "name": "dynamic host ELF refused by build qualification gate",
@@ -27,6 +27,14 @@
     },
     {
       "name": "malformed pin fails before build/publication",
+      "ok": true
+    },
+    {
+      "name": "different converter parent fails before build/publication",
+      "ok": true
+    },
+    {
+      "name": "different converter digest fails before build/publication",
       "ok": true
     },
     {

@@ -5,6 +5,8 @@ PASS dirty native math fails before build/publication
 PASS dirty converter fails before build/publication
 PASS dirty seed compiler fails before build/publication
 PASS malformed pin fails before build/publication
+PASS different converter parent fails before build/publication
+PASS different converter digest fails before build/publication
 PASS different pin fails before build/publication
 PASS unsafe import path fails before build/publication
 PASS forged source manifest fails before build/publication
@@ -16,4 +18,4 @@ PASS offline missing upstream pin refused
 PASS dirty upstream cache refused before import
 PASS unsupported host rejected before writes
 PASS source build trace contains no first-party C/Rust toolchain
-PASS 18 source provenance checks
+PASS 20 source provenance checks

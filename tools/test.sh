@@ -8,4 +8,6 @@ python3 tests/refusals.py
 python3 tests/attachments.py
 python3 tests/controls.py
 python3 tests/robustness.py
+node tests/text-native.mjs
+node tests/text-controls.mjs
 printf 'ALL SUITES RC=0\n'

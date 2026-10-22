@@ -1,7 +1,7 @@
 Omega native commands: om and omg share one implementation and installation.
 
   om help                         Show this help
-  om version                      Exact upstream source pins and seed hash
+  om version                      Exact source pins, owned converter digest and seed hash
   om check [--] input.om           Compile/check silently; never execute
   om build [--] input.om -o output Build a native executable atomically
   om run [--] input.om             Compile and run native code with caller stdin
@@ -35,6 +35,8 @@ The session limit is 65536 requests; a line transport limit is 65536 bytes.
 One-shot input must be exactly one quoted line, without a newline.
 
 Conversion accepts only the checked Omega subset documented in CAPABILITIES.md.
+Top-level quoted text carries exact byte lengths, including embedded zero.
+Text is read-only; its four escapes are newline, tab, backslash and quote.
 C output targets GNU C11/POSIX; Python output targets Python 3. Conversion never
 executes the source or emitted program. No Python/C input conversion. Both source
 checking and conversion finish before output is published. -o uses atomic rename

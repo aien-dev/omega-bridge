@@ -60,7 +60,7 @@ for(const target of ['c','python']){
  });
 }
 check('source and destination may be the same file',()=>{const p=cwd+'/same.om';fs.copyFileSync(input,p);eq(invoke(['convert','--to','c',p,'-o',p]),0);assert.match(fs.readFileSync(p,'utf8'),/Emitted by Omega Bridge/);});
-for(const [name,src] of [['syntax','fn main to int\nret bogus\nend\n'],['unsupported',fs.readFileSync(repo+'/tests/unsupported/text.om')],['include','include /etc/passwd\n'],['nul',Buffer.from([0,255])]])check('failed '+name+' conversion preserves existing output',()=>{
+for(const [name,src] of [['syntax','fn main to int\nret bogus\nend\n'],['unsupported',fs.readFileSync(repo+'/tests/unsupported/five-params.om')],['include','include /etc/passwd\n'],['nul',Buffer.from([0,255])]])check('failed '+name+' conversion preserves existing output',()=>{
  const p=cwd+'/bad.om',o=cwd+'/preserved';fs.writeFileSync(p,src);fs.writeFileSync(o,'KEEP');fs.chmodSync(o,0o640);
  const before=fs.statSync(o);const r=eq(invoke(['convert','--to','c',p,'-o',o]),65,'');assert.ok(r.stderr);assert.equal(fs.readFileSync(o,'utf8'),'KEEP');assert.equal(fs.statSync(o).ino,before.ino);assert.equal(fs.statSync(o).mode,before.mode);
 });

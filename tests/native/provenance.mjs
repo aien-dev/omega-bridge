@@ -17,6 +17,8 @@ for(const [name,p,change] of [
  ['dirty converter','src/toc.om',s=>s+'\nnote changed\n'],
  ['dirty seed compiler','seed/omc/omc.om',s=>s+'\nnote changed\n'],
  ['malformed pin','provenance/pins',s=>s.replace(/^math [0-9a-f]{40}$/m,'math $(touch PWNED)')],
+ ['different converter parent','provenance/pins',s=>s.replace(/^converter-parent [0-9a-f]{40}$/m,'converter-parent '+'0'.repeat(40))],
+ ['different converter digest','provenance/pins',s=>s.replace(/^converter-source-sha256 [0-9a-f]{64}$/m,'converter-source-sha256 '+'0'.repeat(64))],
  ['different pin','provenance/pins',s=>s.replace(/^math [0-9a-f]{40}$/m,'math '+'0'.repeat(40))],
  ['unsafe import path','provenance/seed.files',s=>s+'../../outside\n'],
  ['forged source manifest','provenance/sources.sha256',s=>s.replace(/^[0-9a-f]/,'z')],

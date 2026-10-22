@@ -110,8 +110,9 @@ PASS t_u63
 PASS t_u64max
 PASS t_void
 PASS t_write_wrap
+PASS text_program
 PASS two_loops
-cases=113 failures=0 RC=0
+cases=114 failures=0 RC=0
 PASS seed_1 3
 PASS seed_2 7
 PASS seed_3 7
@@ -153,16 +154,14 @@ PASS seed_38 6
 PASS seed_39 7
 PASS seed_40 7
 PASS empty 16
-PASS text_target 24
 PASS five_params 24
 PASS long_name 13
 PASS library_io 24
 PASS library_array_width 24
 PASS local_storage_limit 23
-PASS inherited_text_program 24
 PASS r5b_assign 7
 PASS r5b_cycle 9
-refusal cases=50 failures=0 RC=0
+refusal cases=48 failures=0 RC=0
 C caller: values, mutation, traps, invalid lengths and recovery OK
 Python caller: values, mutation, traps, invalid lengths and recovery OK
 attachment cases=2 failures=0 RC=0
@@ -175,4 +174,6 @@ PASS detected python order_calls native_exit 1 mutant_exit 105
 PASS deterministic nonempty output
 control cases=7 failures=0 RC=0
 robustness cases=225 target_accepts=4 target_refusals=446 failures=0 RC=0
+{"requested":760,"executed":760,"passed":760,"failed":0,"source_cases":380}
+{"requested":10,"executed":10,"valid_compiled_mutants":8,"library_callers":2,"failed":0}
 ALL SUITES RC=0
