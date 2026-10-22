@@ -375,7 +375,7 @@
       "name": "ordinary clean installation and rebuild",
       "install": {
         "status": 0,
-        "stdout": "PASS source-only seed bootstrap and compiler fixpoint\nPASS native converter and math, shared source-born compiler\nInstalled om and omg in /tmp/omega-path-safety-6EB2bB/home/template/bin (PATH unchanged)\n",
+        "stdout": "PASS source-only seed bootstrap and compiler fixpoint\nPASS native converter and math, shared source-born compiler\nInstalled om and omg in /tmp/omega-path-safety-Dwenpk/home/template/bin (PATH unchanged)\n",
         "stderr": ""
       },
       "rebuild": {

@@ -1,5 +1,5 @@
 {
-  "source": "31c5b9b49bc863c4805a2571d4be8b22e9c4cb65",
+  "source": "e4e7ed4534aece6bd3ab944094b7eed2a5d05532",
   "passed": 57,
   "failed": 0,
   "rows": [
@@ -375,7 +375,7 @@
       "name": "ordinary clean installation and rebuild",
       "install": {
         "status": 0,
-        "stdout": "PASS source-only seed bootstrap and compiler fixpoint\nPASS native converter and math, shared source-born compiler\nInstalled om and omg in /tmp/omega-l529-replay-XbM3Ui/tmp/omega-path-safety-VEphJl/home/template/bin (PATH unchanged)\n",
+        "stdout": "PASS source-only seed bootstrap and compiler fixpoint\nPASS native converter and math, shared source-born compiler\nInstalled om and omg in /tmp/omega-l529-replay-SzlhDc/tmp/omega-path-safety-mErLzE/home/template/bin (PATH unchanged)\n",
         "stderr": ""
       },
       "rebuild": {
