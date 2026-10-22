@@ -30,7 +30,7 @@ universal support inferred from a small vector kernel.
 |---|---|---|---|
 | 0 | Qualified native compiler and existing command installation | seed reconstruction, full semantic suite, safe install/uninstall | existing seed lineage; public command delivery owner retained |
 | 1 | CUDA C++ frontend with explicit CPU reference execution | original-source differential, refusal, mutation and clean install/replay | L605 source d36abe7; unsigned32 elementwise profile only |
-| 2 | Native sm121 target from source, not a templated C launcher | independently decoded actual instruction bytes, canonical encoder differential, original-C++ semantic cases, source/binary closure | L605 implementing now; offline lab capsule, not hardware-ready |
+| 2 | Native sm121 target from source, not a templated C launcher | independently decoded actual instruction bytes, canonical encoder differential, original-C++ semantic cases, source/binary closure | L605 offline source/encoding review PASS; lab capsule only, not hardware-ready |
 | 3 | Typed/checked GPU integration and native launch boundary | use qualified native IR/checker path, exact ABI, allocation/launch/error/repeated-call tests, device proof | existing L408 native IR/GPU and L419 runtime migration; immutable prerequisite required |
 | 4 | First complete real GPU source-to-result path | vector operations through installed command on GB10, independent expected values, broken kernel/refusal, repeated launch/recovery and no CUDA dependencies | same owners; use one admitted correctness window, no live motor/driver disruption |
 | 5 | Complete source-language capability corpus | signed/unsigned widths, f32/f64 and conversions, functions/overloads, control flow, arrays/structs/templates, shared memory, barriers/atomics, warp operations, 1D/2D/3D launch, separate compilation; each feature gets original-source positive/negative and mutant coverage | L605 frontend/backend, L408 language/checker owner; no declaration of full C++ support from current subset |
@@ -41,14 +41,16 @@ Rungs 5/6 extend from real workloads while rung4 is available. A failing prerequ
 is fixed, not bypassed with legacy C or a test simulator. Offline code emission is
 valuable development evidence but does not qualify execution or scheduler safety.
 
-## Current next experiment
+## Current GPU backend and next attachment
 
-Extend the qualified frontend with a seeded-Omega native sm121 backend and explicit
+The qualified frontend now has a seeded-Omega native sm121 backend and explicit
 `sm_121-lab` output. It emits an O M G P capsule containing actual 128-bit GPU
 instructions and a fixed VECTOR_1D ABI declaration. Reuse the chip-proven vector
 prologue and canonical instruction encodings; support the existing expression
 operators using actual register instructions. The first launcher ABI has two
 const inputs; other arities refuse on this target while retaining CPU support.
+
+The next real dependency is the qualified native IR/checker and device/launch boundary, not another CPU-only substitute. The existing owner received an exact-state priority continuation request. No new runtime worker is claimed running from that request.
 
 The capsule is lab-only data, not a cubin or host executable. Installed `run` must
 refuse it until native runtime, checking and hardware gates pass. Source parsing

@@ -1,0 +1,21 @@
+{
+  "reviewed_source": "0e0b486c300c78ed335b26e86b1fed29d858adad",
+  "original_review_sha256": "920c372924d13dee7209b956ca6e1f8389461cb3780dacf5581d25f44ab2fe76",
+  "review_source_sha256": "76a8791bdd4b575e41e311b4d88e18c6bf9ebdd96e41f118ca4d2448bc840c4e",
+  "review_binary_sha256": "91747e50c88519b21364b6598f6f4c9bfa78a33e682ff16eca235fedaac9102d",
+  "review_capsule_sha256": "9dd21493c81bae7724570d390c05bf4b6a22e607bfb8e476208bc87515377b30",
+  "consumed_source_files_verified": 16,
+  "reference_export_files_verified": 122,
+  "parent_controls": 7,
+  "parent_controls_passed": 7,
+  "canonical_arithmetic_instructions": 3,
+  "external_encoder_pin": "232332422bfdc31c8918085b50f13c1e18ab702e",
+  "external_encoder_sha256": "836b0574d2fb51c90905f2dfe54e3932cc8855b9c8d00ac906906f5974bca269",
+  "findings": 0,
+  "scope": "native frontend/backend source and offline host command integration only",
+  "hardware": "NOT_RUN",
+  "scheduler": "NOT_QUALIFIED",
+  "native_runtime": "NOT_IMPLEMENTED",
+  "full_CUDA_Cpp": "NOT_IMPLEMENTED",
+  "timestamp_utc": "2026-10-22T23:52:30.430233+00:00"
+}

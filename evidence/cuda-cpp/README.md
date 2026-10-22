@@ -1,6 +1,6 @@
 # CUDA C++ frontend qualification
 
-**Latest GPU lab candidate:** source `0e0b486c300c78ed335b26e86b1fed29d858adad`, with [offline GPU receipts](gpu-lab/receipt.json) and the [whole-replacement programme](../../docs/PROGRAM.md). It emits real sm121 code but does not launch it; scheduling, hardware, native runtime and full CUDA C++ remain unqualified. Independent review L612 is pending.
+**Latest GPU lab candidate:** source `0e0b486c300c78ed335b26e86b1fed29d858adad`, with [offline GPU receipts](gpu-lab/receipt.json) and the [whole-replacement programme](../../docs/PROGRAM.md). It emits real sm121 code but does not launch it; scheduling, hardware, native runtime and full CUDA C++ remain unqualified. [Independent review and parent verification](gpu-lab/review/disposition.md) passed for the offline source/command scope; no hardware or full replacement qualification is implied.
 
 **Earlier CPU-only candidate:** source [`d36abe7`](https://github.com/aien-dev/omega-bridge/commit/d36abe7e94bafce9a20d1be00f9405b23e3f05e2), with its evidence in [`final/receipt.json`](final/receipt.json).
 

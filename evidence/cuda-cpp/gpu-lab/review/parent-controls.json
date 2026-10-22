@@ -1,0 +1,58 @@
+[
+  {
+    "name": "gpu",
+    "status": 0,
+    "expected_status": 0,
+    "stdout_bytes": 544,
+    "stdout_sha256": "9dd21493c81bae7724570d390c05bf4b6a22e607bfb8e476208bc87515377b30",
+    "stderr": ""
+  },
+  {
+    "name": "cpu",
+    "status": 0,
+    "expected_status": 0,
+    "stdout_bytes": 1426,
+    "stdout_sha256": "5dc79d356c264e2174a701e5df0b8515689ac106fb8fa5d798d383ed73f30fea",
+    "stderr": ""
+  },
+  {
+    "name": "no selector",
+    "status": 65,
+    "expected_status": 65,
+    "stdout_bytes": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "bad selector",
+    "status": 65,
+    "expected_status": 65,
+    "stdout_bytes": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr": "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
+  },
+  {
+    "name": "empty transport",
+    "status": 77,
+    "expected_status": 77,
+    "stdout_bytes": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr": "CUDA_CPP_IO\n"
+  },
+  {
+    "name": "exact source limit",
+    "status": 0,
+    "expected_status": 0,
+    "stdout_bytes": 544,
+    "stdout_sha256": "9dd21493c81bae7724570d390c05bf4b6a22e607bfb8e476208bc87515377b30",
+    "stderr": ""
+  },
+  {
+    "name": "over source limit",
+    "status": 67,
+    "expected_status": 67,
+    "stdout_bytes": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr": "CUDA_CPP_LIMIT\n"
+  }
+]
