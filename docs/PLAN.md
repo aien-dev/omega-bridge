@@ -15,5 +15,9 @@ Tests first: all inherited program fixtures, each width and overflow, conversion
 2. [x] Freeze TEXT-CONVERSION.md and preserve the parent baseline unchanged.
 3. [x] Record failing tests, implement bounded Omega text pool/tokenizer and both writers.
 4. [x] Run text parity, valid compiled mutants, view callers and full converter suite.
-5. [ ] Full native/math/command/path/provenance gate; committed-only replay.
-6. [ ] Push source/evidence and hand off awaiting independent core review.
+5. [x] Full native/math/command/path/provenance gate; committed-only replay.
+6. [x] Prepare source/evidence and review handoff; push is recorded in the final external handoff.
+
+All gates pass on source freeze 6876f4d79883592bd19ba229a664cede99fe35ca.
+Whole-converter independent core review remains a parent follow-on. This is
+ready for that review, with no merge approval or system retirement claim.

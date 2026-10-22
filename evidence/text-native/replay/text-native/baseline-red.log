@@ -1,0 +1,71 @@
+FAIL parent-empty c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL parent-empty python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL parent-hello c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL parent-hello python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL parent-escapes c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL parent-escapes python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL parent-raw-nul c toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL parent-raw-nul python toc: line 1: error 16
+
+
+16 !== 0
+
+FAIL parent-utf8 c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL parent-utf8 python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL parent-unused c toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+FAIL parent-unused python toc: line 1: error 24
+unsupported bridge capability
+
+
+24 !== 0
+
+{"requested":18,"executed":18,"passed":6,"failed":12,"source_cases":9}

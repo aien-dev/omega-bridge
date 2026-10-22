@@ -1,0 +1,61 @@
+2627011 execve("/tmp/omega-l551-replay-KQGLzy/tmp/omega-developer-L5p2xv/home/prefix space/bin/om", ["/tmp/omega-l551-replay-KQGLzy/tm"..., "run", "/tmp/omega-l551-replay-KQGLzy/tm"...], 0xffffc2793c58 /* 20 vars */) = 0
+2627013 execve("/usr/bin/realpath", ["realpath", "--", "/tmp/omega-l551-replay-KQGLzy/tm"...], 0xb66cff3a9b08 /* 20 vars */) = 0
+2627013 +++ exited with 0 +++
+2627012 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2627013, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2627012 execve("/usr/bin/dirname", ["dirname", "/tmp/omega-l551-replay-KQGLzy/tm"...], 0xb66cff3a9b08 /* 20 vars */) = 0
+2627012 +++ exited with 0 +++
+2627011 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2627012, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2627014 execve("/usr/bin/sha256sum", ["sha256sum", "--status", "-c", "files.sha256"], 0xb66cff3a9d68 /* 20 vars */) = 0
+2627014 +++ exited with 0 +++
+2627011 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2627014, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2627015 execve("/usr/bin/uname", ["uname", "-s"], 0xb66cff3a9b98 /* 20 vars */) = 0
+2627015 +++ exited with 0 +++
+2627011 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2627015, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2627016 execve("/usr/bin/uname", ["uname", "-m"], 0xb66cff3a9b98 /* 20 vars */) = 0
+2627016 +++ exited with 0 +++
+2627011 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2627016, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2627017 execve("/usr/bin/mktemp", ["mktemp", "-d", "/tmp/omega-l551-replay-KQGLzy/tm"...], 0xb66cff3aa050 /* 20 vars */) = 0
+2627017 +++ exited with 0 +++
+2627011 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2627017, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2627018 execve("/usr/bin/cat", ["cat", "--", "/tmp/omega-l551-replay-KQGLzy/tm"...], 0xb66cff3ad3c8 /* 20 vars */) = 0
+2627018 +++ exited with 0 +++
+2627011 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2627018, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2627019 execve("/tmp/omega-l551-replay-KQGLzy/tmp/omega-developer-L5p2xv/home/prefix space/lib/omega-native/omc", ["/tmp/omega-l551-replay-KQGLzy/tm"...], 0xb66cff3ad438 /* 20 vars */) = 0
+2627019 +++ exited with 0 +++
+2627011 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2627019, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2627020 execve("/tmp/omega-l551-replay-KQGLzy/tmp/omega-developer-L5p2xv/home/prefix space/lib/omega-native/verify-elf.sh", ["/tmp/omega-l551-replay-KQGLzy/tm"..., "/tmp/omega-l551-replay-KQGLzy/tm"...], 0xb66cff3ad3c8 /* 20 vars */) = 0
+2627021 execve("/usr/bin/readelf", ["readelf", "-h", "-l", "-d", "--", "/tmp/omega-l551-replay-KQGLzy/tm"...], 0xc24676924888 /* 20 vars */) = 0
+2627021 +++ exited with 0 +++
+2627020 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2627021, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2627022 +++ exited with 0 +++
+2627020 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2627022, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2627023 execve("/usr/bin/grep", ["grep", "-q", "Machine:.*AArch64"], 0xc246769247d0 /* 20 vars */) = 0
+2627023 +++ exited with 0 +++
+2627020 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2627023, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2627025 execve("/usr/bin/grep", ["grep", "-q", "Type:.*EXEC"], 0xc246769247b0 /* 20 vars */ <unfinished ...>
+2627024 +++ exited with 0 +++
+2627020 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2627024, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2627025 <... execve resumed>)           = 0
+2627025 +++ exited with 0 +++
+2627020 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2627025, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2627027 execve("/usr/bin/grep", ["grep", "-Eq", "INTERP|DYNAMIC|NEEDED"], 0xc24676924b68 /* 20 vars */ <unfinished ...>
+2627026 +++ exited with 0 +++
+2627020 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2627026, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2627027 <... execve resumed>)           = 0
+2627027 +++ exited with 1 +++
+2627020 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2627027, si_uid=1000, si_status=1, si_utime=0, si_stime=0} ---
+2627020 +++ exited with 0 +++
+2627011 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2627020, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2627028 execve("/usr/bin/chmod", ["chmod", "700", "/tmp/omega-l551-replay-KQGLzy/tm"...], 0xb66cff3ad1f0 /* 20 vars */) = 0
+2627028 +++ exited with 0 +++
+2627011 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2627028, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2627029 execve("/tmp/omega-l551-replay-KQGLzy/tmp/omega-developer-L5p2xv/tmp/omega-command.O9fIwI97/native", ["/tmp/omega-l551-replay-KQGLzy/tm"...], 0xb66cff3ad1b0 /* 20 vars */) = 0
+2627029 +++ exited with 23 +++
+2627011 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2627029, si_uid=1000, si_status=23, si_utime=0, si_stime=0} ---
+2627030 execve("/usr/bin/rm", ["rm", "-f", "--", "/tmp/omega-l551-replay-KQGLzy/tm"..., "/tmp/omega-l551-replay-KQGLzy/tm"..., "/tmp/omega-l551-replay-KQGLzy/tm"..., "/tmp/omega-l551-replay-KQGLzy/tm"...], 0xb66cff3ad770 /* 20 vars */) = 0
+2627030 +++ exited with 0 +++
+2627011 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2627030, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2627031 execve("/usr/bin/rmdir", ["rmdir", "/tmp/omega-l551-replay-KQGLzy/tm"...], 0xb66cff3ad3c8 /* 20 vars */) = 0
+2627031 +++ exited with 0 +++
+2627011 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=2627031, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+2627011 +++ exited with 23 +++

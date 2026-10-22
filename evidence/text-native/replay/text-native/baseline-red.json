@@ -1,0 +1,237 @@
+{
+  "requested": 18,
+  "executed": 18,
+  "passed": 6,
+  "failed": 12,
+  "source_cases": 9,
+  "rows": [
+    {
+      "case": "parent-empty",
+      "target": "c",
+      "source_sha256": "92deed8f5d7e443561837b9eeee267ec4fb0f6d72cc5d7792dd5d1bc6e522c5e",
+      "native_compile": 0,
+      "convert": {
+        "status": 24,
+        "stdout_hex": "",
+        "stderr_hex": "746f633a206c696e6520313a206572726f722032340a756e737570706f7274656420627269646765206361706162696c6974790a"
+      },
+      "ok": false,
+      "error": "toc: line 1: error 24\nunsupported bridge capability\n\n\n24 !== 0\n"
+    },
+    {
+      "case": "parent-empty",
+      "target": "python",
+      "source_sha256": "92deed8f5d7e443561837b9eeee267ec4fb0f6d72cc5d7792dd5d1bc6e522c5e",
+      "native_compile": 0,
+      "convert": {
+        "status": 24,
+        "stdout_hex": "",
+        "stderr_hex": "746f633a206c696e6520313a206572726f722032340a756e737570706f7274656420627269646765206361706162696c6974790a"
+      },
+      "ok": false,
+      "error": "toc: line 1: error 24\nunsupported bridge capability\n\n\n24 !== 0\n"
+    },
+    {
+      "case": "parent-hello",
+      "target": "c",
+      "source_sha256": "ed059f147fb961406f265b015fe2cfc15c3604af90d0739bd72809987977a39c",
+      "native_compile": 0,
+      "convert": {
+        "status": 24,
+        "stdout_hex": "",
+        "stderr_hex": "746f633a206c696e6520313a206572726f722032340a756e737570706f7274656420627269646765206361706162696c6974790a"
+      },
+      "ok": false,
+      "error": "toc: line 1: error 24\nunsupported bridge capability\n\n\n24 !== 0\n"
+    },
+    {
+      "case": "parent-hello",
+      "target": "python",
+      "source_sha256": "ed059f147fb961406f265b015fe2cfc15c3604af90d0739bd72809987977a39c",
+      "native_compile": 0,
+      "convert": {
+        "status": 24,
+        "stdout_hex": "",
+        "stderr_hex": "746f633a206c696e6520313a206572726f722032340a756e737570706f7274656420627269646765206361706162696c6974790a"
+      },
+      "ok": false,
+      "error": "toc: line 1: error 24\nunsupported bridge capability\n\n\n24 !== 0\n"
+    },
+    {
+      "case": "parent-escapes",
+      "target": "c",
+      "source_sha256": "8900ff1bdad69c0e550a3bac1098ab2ddaf989d1ffd4a98c9ce697f1f8577eb3",
+      "native_compile": 0,
+      "convert": {
+        "status": 24,
+        "stdout_hex": "",
+        "stderr_hex": "746f633a206c696e6520313a206572726f722032340a756e737570706f7274656420627269646765206361706162696c6974790a"
+      },
+      "ok": false,
+      "error": "toc: line 1: error 24\nunsupported bridge capability\n\n\n24 !== 0\n"
+    },
+    {
+      "case": "parent-escapes",
+      "target": "python",
+      "source_sha256": "8900ff1bdad69c0e550a3bac1098ab2ddaf989d1ffd4a98c9ce697f1f8577eb3",
+      "native_compile": 0,
+      "convert": {
+        "status": 24,
+        "stdout_hex": "",
+        "stderr_hex": "746f633a206c696e6520313a206572726f722032340a756e737570706f7274656420627269646765206361706162696c6974790a"
+      },
+      "ok": false,
+      "error": "toc: line 1: error 24\nunsupported bridge capability\n\n\n24 !== 0\n"
+    },
+    {
+      "case": "parent-raw-nul",
+      "target": "c",
+      "source_sha256": "9fb399c9eafd458779452939c436910869cf089b87659448274c19a62e75c9b6",
+      "native_compile": 0,
+      "convert": {
+        "status": 16,
+        "stdout_hex": "",
+        "stderr_hex": "746f633a206c696e6520313a206572726f722031360a"
+      },
+      "ok": false,
+      "error": "toc: line 1: error 16\n\n\n16 !== 0\n"
+    },
+    {
+      "case": "parent-raw-nul",
+      "target": "python",
+      "source_sha256": "9fb399c9eafd458779452939c436910869cf089b87659448274c19a62e75c9b6",
+      "native_compile": 0,
+      "convert": {
+        "status": 16,
+        "stdout_hex": "",
+        "stderr_hex": "746f633a206c696e6520313a206572726f722031360a"
+      },
+      "ok": false,
+      "error": "toc: line 1: error 16\n\n\n16 !== 0\n"
+    },
+    {
+      "case": "parent-utf8",
+      "target": "c",
+      "source_sha256": "0c25ff9e4b18f845f967d5d630b10ec7e2b2307e1c8c0dbbd0a52c4729256cb1",
+      "native_compile": 0,
+      "convert": {
+        "status": 24,
+        "stdout_hex": "",
+        "stderr_hex": "746f633a206c696e6520313a206572726f722032340a756e737570706f7274656420627269646765206361706162696c6974790a"
+      },
+      "ok": false,
+      "error": "toc: line 1: error 24\nunsupported bridge capability\n\n\n24 !== 0\n"
+    },
+    {
+      "case": "parent-utf8",
+      "target": "python",
+      "source_sha256": "0c25ff9e4b18f845f967d5d630b10ec7e2b2307e1c8c0dbbd0a52c4729256cb1",
+      "native_compile": 0,
+      "convert": {
+        "status": 24,
+        "stdout_hex": "",
+        "stderr_hex": "746f633a206c696e6520313a206572726f722032340a756e737570706f7274656420627269646765206361706162696c6974790a"
+      },
+      "ok": false,
+      "error": "toc: line 1: error 24\nunsupported bridge capability\n\n\n24 !== 0\n"
+    },
+    {
+      "case": "parent-unused",
+      "target": "c",
+      "source_sha256": "ff3721b7d8591f71af5cf9a33adef3ee18d138ffde8709451d30c21ccfe24057",
+      "native_compile": 0,
+      "convert": {
+        "status": 24,
+        "stdout_hex": "",
+        "stderr_hex": "746f633a206c696e6520313a206572726f722032340a756e737570706f7274656420627269646765206361706162696c6974790a"
+      },
+      "ok": false,
+      "error": "toc: line 1: error 24\nunsupported bridge capability\n\n\n24 !== 0\n"
+    },
+    {
+      "case": "parent-unused",
+      "target": "python",
+      "source_sha256": "ff3721b7d8591f71af5cf9a33adef3ee18d138ffde8709451d30c21ccfe24057",
+      "native_compile": 0,
+      "convert": {
+        "status": 24,
+        "stdout_hex": "",
+        "stderr_hex": "746f633a206c696e6520313a206572726f722032340a756e737570706f7274656420627269646765206361706162696c6974790a"
+      },
+      "ok": false,
+      "error": "toc: line 1: error 24\nunsupported bridge capability\n\n\n24 !== 0\n"
+    },
+    {
+      "case": "parent-bad-escape",
+      "target": "c",
+      "source_sha256": "ee782401899b3d948bd1b7dcd131278b0cf90ed9c91a32a5a084a5b41a61a8ce",
+      "native_compile": 22,
+      "convert": {
+        "status": 22,
+        "stdout_hex": "",
+        "stderr_hex": "6f6d633a206c696e6520313a206572726f722032320a"
+      },
+      "ok": true
+    },
+    {
+      "case": "parent-bad-escape",
+      "target": "python",
+      "source_sha256": "ee782401899b3d948bd1b7dcd131278b0cf90ed9c91a32a5a084a5b41a61a8ce",
+      "native_compile": 22,
+      "convert": {
+        "status": 22,
+        "stdout_hex": "",
+        "stderr_hex": "6f6d633a206c696e6520313a206572726f722032320a"
+      },
+      "ok": true
+    },
+    {
+      "case": "parent-unterminated",
+      "target": "c",
+      "source_sha256": "26bd373ee3094ad5843dfba2e496eb172156fd07451b93e513989adb41414eef",
+      "native_compile": 22,
+      "convert": {
+        "status": 22,
+        "stdout_hex": "",
+        "stderr_hex": "6f6d633a206c696e6520313a206572726f722032320a"
+      },
+      "ok": true
+    },
+    {
+      "case": "parent-unterminated",
+      "target": "python",
+      "source_sha256": "26bd373ee3094ad5843dfba2e496eb172156fd07451b93e513989adb41414eef",
+      "native_compile": 22,
+      "convert": {
+        "status": 22,
+        "stdout_hex": "",
+        "stderr_hex": "6f6d633a206c696e6520313a206572726f722032320a"
+      },
+      "ok": true
+    },
+    {
+      "case": "parent-inline-literal",
+      "target": "c",
+      "source_sha256": "54fa26a4af04e6288d16f4a873b5937549891bd2fc5ad08fd5e8f4be6adf18a3",
+      "native_compile": 16,
+      "convert": {
+        "status": 16,
+        "stdout_hex": "",
+        "stderr_hex": "6f6d633a206c696e6520323a206572726f722031360a"
+      },
+      "ok": true
+    },
+    {
+      "case": "parent-inline-literal",
+      "target": "python",
+      "source_sha256": "54fa26a4af04e6288d16f4a873b5937549891bd2fc5ad08fd5e8f4be6adf18a3",
+      "native_compile": 16,
+      "convert": {
+        "status": 16,
+        "stdout_hex": "",
+        "stderr_hex": "6f6d633a206c696e6520323a206572726f722031360a"
+      },
+      "ok": true
+    }
+  ]
+}

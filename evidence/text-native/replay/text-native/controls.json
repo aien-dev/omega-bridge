@@ -1,0 +1,197 @@
+{
+  "requested": 10,
+  "executed": 10,
+  "valid_compiled_mutants": 8,
+  "library_callers": 2,
+  "failed": 0,
+  "rows": [
+    {
+      "name": "decoded-byte",
+      "target": "c",
+      "mutant_source_sha256": "fa68143875df74f18239534af183d8abeb087556ae65b6711b3d3ba156b5dc19",
+      "mutant_emitter_sha256": "2c97af23228c176140d68efc92f2bad3f79e48a88e08fd746facc45180296493",
+      "emitter_compile_status": 0,
+      "expected": {
+        "status": 6,
+        "stdout_hex": "410a225c0942",
+        "stderr_hex": ""
+      },
+      "compile_status": 0,
+      "executed": true,
+      "actual": {
+        "status": 6,
+        "stdout_hex": "400b235d0843",
+        "stderr_hex": ""
+      },
+      "sha256": "b7d034b436795e7149a098dea70eb8502440d21d9c914d56125300fb3a0c1fad",
+      "caught": true
+    },
+    {
+      "name": "decoded-byte",
+      "target": "python",
+      "mutant_source_sha256": "fa68143875df74f18239534af183d8abeb087556ae65b6711b3d3ba156b5dc19",
+      "mutant_emitter_sha256": "2c97af23228c176140d68efc92f2bad3f79e48a88e08fd746facc45180296493",
+      "emitter_compile_status": 0,
+      "expected": {
+        "status": 6,
+        "stdout_hex": "410a225c0942",
+        "stderr_hex": ""
+      },
+      "compile_status": 0,
+      "executed": true,
+      "actual": {
+        "status": 6,
+        "stdout_hex": "400b235d0843",
+        "stderr_hex": ""
+      },
+      "sha256": "98591868d93677b86f6e5773ba35208eb1852389dfebb6a0bbd4437913ca5b90",
+      "caught": true
+    },
+    {
+      "name": "decoded-length",
+      "target": "c",
+      "mutant_source_sha256": "9430923c03c1a7e9a2b5592bcbba8061d11efca3c3da1f891a566049a42232b5",
+      "mutant_emitter_sha256": "85e2ebe131e1570954ebe273acdddb26719a75b75ac77c2d65c7d779c420be79",
+      "emitter_compile_status": 0,
+      "expected": {
+        "status": 6,
+        "stdout_hex": "410a225c0942",
+        "stderr_hex": ""
+      },
+      "compile_status": 0,
+      "executed": true,
+      "actual": {
+        "status": 5,
+        "stdout_hex": "410a225c09",
+        "stderr_hex": ""
+      },
+      "sha256": "20aa40bcf4fbd1eaf7f21176641d6177fd476e46dc6d0685e3994642bb3e07c4",
+      "caught": true
+    },
+    {
+      "name": "decoded-length",
+      "target": "python",
+      "mutant_source_sha256": "9430923c03c1a7e9a2b5592bcbba8061d11efca3c3da1f891a566049a42232b5",
+      "mutant_emitter_sha256": "85e2ebe131e1570954ebe273acdddb26719a75b75ac77c2d65c7d779c420be79",
+      "emitter_compile_status": 0,
+      "expected": {
+        "status": 6,
+        "stdout_hex": "410a225c0942",
+        "stderr_hex": ""
+      },
+      "compile_status": 0,
+      "executed": true,
+      "actual": {
+        "status": 5,
+        "stdout_hex": "410a225c09",
+        "stderr_hex": ""
+      },
+      "sha256": "449c820735a2fd5c1ab15e4aa23195fc5585be7de6b4d16d95615fc1b6725e11",
+      "caught": true
+    },
+    {
+      "name": "escape-decoding",
+      "target": "c",
+      "mutant_source_sha256": "855fe71d780fb1c146de5fdf06c7e2cd07f81bc64a7b8d0ef0c62fcf5196facf",
+      "mutant_emitter_sha256": "f284e17edda23dcf4daef5b8f97071bf72691c99e5a5612ca770b7e369ac6085",
+      "emitter_compile_status": 0,
+      "expected": {
+        "status": 6,
+        "stdout_hex": "410a225c0942",
+        "stderr_hex": ""
+      },
+      "compile_status": 0,
+      "executed": true,
+      "actual": {
+        "status": 6,
+        "stdout_hex": "410d225c0942",
+        "stderr_hex": ""
+      },
+      "sha256": "4d22e9fbfe0d49ba27435123281f92e7e35eea505e542c240db651c77c925761",
+      "caught": true
+    },
+    {
+      "name": "escape-decoding",
+      "target": "python",
+      "mutant_source_sha256": "855fe71d780fb1c146de5fdf06c7e2cd07f81bc64a7b8d0ef0c62fcf5196facf",
+      "mutant_emitter_sha256": "f284e17edda23dcf4daef5b8f97071bf72691c99e5a5612ca770b7e369ac6085",
+      "emitter_compile_status": 0,
+      "expected": {
+        "status": 6,
+        "stdout_hex": "410a225c0942",
+        "stderr_hex": ""
+      },
+      "compile_status": 0,
+      "executed": true,
+      "actual": {
+        "status": 6,
+        "stdout_hex": "410d225c0942",
+        "stderr_hex": ""
+      },
+      "sha256": "af80308171dd505fed2ac8954b7238fcdfc064ece86ff1d3d45428bd540fddcb",
+      "caught": true
+    },
+    {
+      "name": "immutable-storage",
+      "target": "c",
+      "expected": {
+        "status": 0,
+        "stdout_hex": "",
+        "stderr_hex": ""
+      },
+      "compile_status": 0,
+      "executed": true,
+      "actual": {
+        "status": 77,
+        "stdout_hex": "",
+        "stderr_hex": ""
+      },
+      "sha256": "ea49e33192987f30f4e93fb24e1b4dcab49c41c41c35af244ae6852e4d645b5a",
+      "caught": true
+    },
+    {
+      "name": "immutable-storage",
+      "target": "python",
+      "expected": {
+        "status": 0,
+        "stdout_hex": "",
+        "stderr_hex": ""
+      },
+      "compile_status": 0,
+      "executed": true,
+      "actual": {
+        "status": 77,
+        "stdout_hex": "",
+        "stderr_hex": ""
+      },
+      "sha256": "6a333155e519be9d0f80a758b372c41470e707d834e7d21af3953ccb6dd3b9ea",
+      "caught": true
+    },
+    {
+      "name": "readonly-library-caller",
+      "target": "c",
+      "compile_status": 0,
+      "executed": true,
+      "actual": {
+        "status": 0,
+        "stdout_hex": "",
+        "stderr_hex": ""
+      },
+      "sha256": "7055a3f278feb602b625988c6ed8b1f45809278b40583767d05c5e1125094b68",
+      "ok": true
+    },
+    {
+      "name": "readonly-library-caller",
+      "target": "python",
+      "compile_status": 0,
+      "executed": true,
+      "actual": {
+        "status": 0,
+        "stdout_hex": "",
+        "stderr_hex": ""
+      },
+      "sha256": "df628fa5c8aa8a0ee0c9e26f73ec56e212209a82e0fb0611b10e89b4867a1c86",
+      "ok": true
+    }
+  ]
+}

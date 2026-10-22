@@ -99,5 +99,49 @@
     "evidence/text-native/parent-baseline.json": "7a1520980e09f81c0793d59a0f435af7143501b0889d469efd3353c10297142d",
     "evidence/text-native/full-native.log": "4087f60e396992892e8961c51e740a9243cc5fdfb10ee2e8e0b664ea1f2052d1",
     "evidence/native-commands/converter.log": "43090a0c8f7333dd71c4e06e3ffc5aaa2b92b012e5600e8e614e5872a9f36350"
+  },
+  "replay": {
+    "commit": "6876f4d79883592bd19ba229a664cede99fe35ca",
+    "source_only": true,
+    "commands": [
+      {
+        "command": "source/tools/test-native.sh",
+        "status": 0
+      },
+      {
+        "command": "strace source/tools/install.sh --offline --prefix isolated-HOME/prefix-space",
+        "status": 0
+      },
+      {
+        "command": "om/omg convert --to c raw-byte-text.om; actual target execution",
+        "status": 0,
+        "program_status": 23,
+        "stdout_hex": "4100ff0a"
+      },
+      {
+        "command": "om/omg convert --to python raw-byte-text.om; actual target execution",
+        "status": 0,
+        "program_status": 23,
+        "stdout_hex": "4100ff0a"
+      }
+    ],
+    "hashes": {
+      "omc": {
+        "expected": "191b776ef98821597c3e30655da6d680a9b66edbc9ceaca3c39c61ea6df098e9",
+        "actual": "191b776ef98821597c3e30655da6d680a9b66edbc9ceaca3c39c61ea6df098e9",
+        "installed": "191b776ef98821597c3e30655da6d680a9b66edbc9ceaca3c39c61ea6df098e9"
+      },
+      "bridge": {
+        "expected": "a45e11608c79cd834ab06149106798c45562daeebba2f28210606009323bdc78",
+        "actual": "a45e11608c79cd834ab06149106798c45562daeebba2f28210606009323bdc78",
+        "installed": "a45e11608c79cd834ab06149106798c45562daeebba2f28210606009323bdc78"
+      },
+      "math": {
+        "expected": "aa7906f534ffb63575f5b59be15e3ed93a02fe56d103aa35298beed5a35d7ac6",
+        "actual": "aa7906f534ffb63575f5b59be15e3ed93a02fe56d103aa35298beed5a35d7ac6",
+        "installed": "aa7906f534ffb63575f5b59be15e3ed93a02fe56d103aa35298beed5a35d7ac6"
+      }
+    },
+    "ok": true
   }
 }

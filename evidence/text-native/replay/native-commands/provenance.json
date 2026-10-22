@@ -1,0 +1,85 @@
+{
+  "passed": 20,
+  "results": [
+    {
+      "name": "dynamic host ELF refused by build qualification gate",
+      "ok": true
+    },
+    {
+      "name": "empty executable refused",
+      "ok": true
+    },
+    {
+      "name": "copied source has valid immutable provenance",
+      "ok": true
+    },
+    {
+      "name": "dirty native math fails before build/publication",
+      "ok": true
+    },
+    {
+      "name": "dirty converter fails before build/publication",
+      "ok": true
+    },
+    {
+      "name": "dirty seed compiler fails before build/publication",
+      "ok": true
+    },
+    {
+      "name": "malformed pin fails before build/publication",
+      "ok": true
+    },
+    {
+      "name": "different converter parent fails before build/publication",
+      "ok": true
+    },
+    {
+      "name": "different converter digest fails before build/publication",
+      "ok": true
+    },
+    {
+      "name": "different pin fails before build/publication",
+      "ok": true
+    },
+    {
+      "name": "unsafe import path fails before build/publication",
+      "ok": true
+    },
+    {
+      "name": "forged source manifest fails before build/publication",
+      "ok": true
+    },
+    {
+      "name": "forged lock fails before build/publication",
+      "ok": true
+    },
+    {
+      "name": "unlisted source include overlay refused",
+      "ok": true
+    },
+    {
+      "name": "same-byte source symlink refused",
+      "ok": true
+    },
+    {
+      "name": "no installed compiler override or fallback",
+      "ok": true
+    },
+    {
+      "name": "offline missing upstream pin refused",
+      "ok": true
+    },
+    {
+      "name": "dirty upstream cache refused before import",
+      "ok": true
+    },
+    {
+      "name": "unsupported host rejected before writes",
+      "ok": true
+    },
+    {
+      "name": "source build trace contains no first-party C/Rust toolchain",
+      "ok": true
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+Linux aarch64
+v24.21.0
+Python 3.12.3
+gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+git version 2.43.0

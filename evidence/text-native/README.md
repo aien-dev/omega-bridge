@@ -29,6 +29,8 @@ the initial expanded pre-production run, including two incorrect empty-view test
 expectations. The seed actually refuses zero-length view shapes with 8; final
 tests assert 8. Those two rows are not feature-red evidence. Empty text remains
 valid. An intermediate missing Python I/O helper was fixed before green gates.
+intermediate-empty-view.log preserves the later two-failure development result;
+green.log is the actual final 760/760 row from the full gate.
 
 Only text_target and inherited_text_program change negative classification.
 Their source bytes are preserved in tests/text-promoted.json; the inherited text
@@ -54,12 +56,18 @@ are unchanged. The converter pin now distinguishes historical converter-parent
 from the exact owned converter-source-sha256; manifest and anchored lock change
 legitimately and every negative control runs without a bypass.
 
-The source-only replay is pending the source freeze commit. Its harness is
-`quiet-build node tests/text-replay.mjs`; final evidence will name the exact
-exported commit and all three matching native executable hashes. It exports
+The source-only replay **passed** for source freeze commit
+`6876f4d79883592bd19ba229a664cede99fe35ca`. Command:
+`quiet-build node tests/text-replay.mjs`, exit 0. replay/result.json names all
+three matching built and installed native executable hashes. The replay exports
 committed files into /tmp, rebuilds the seed from hex, runs the complete native
 gate again, installs under isolated HOME/prefix, executes both text targets,
 compares aliases, traces native build lineage and uninstalls.
+
+Model/effort verified from the actual worker transcript: gpt-6.1-sol, high
+(model-metadata.txt). During editing, disposable Node scripts under build/ applied
+source edits; no such script participates in compilation or runtime. Parent
+reconstruction uses git show plus the qualified seeded compiler.
 
 Host: Spark Linux AArch64, accessed by SSH loopback because the configured
 Tailnet address timed out. quiet-build was used for correctness only. Node and

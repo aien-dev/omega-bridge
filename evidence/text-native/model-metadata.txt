@@ -1,0 +1,12 @@
+OpenAI Codex v0.163.0
+--------
+workdir: /home/drakestapleton/workspace/omega-bridge-text-native
+model: gpt-6.1-sol
+provider: openai
+approval: never
+sandbox: danger-full-access
+reasoning effort: high
+reasoning summaries: none
+session id: 01a1657a-be9c-77f2-97f9-9adf82856c62
+--------
+user

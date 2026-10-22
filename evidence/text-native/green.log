@@ -1,11 +1,1 @@
-FAIL empty-view c omc: line 2: error 8
-
-
-8 !== 0
-
-FAIL empty-view python omc: line 2: error 8
-
-
-8 !== 0
-
-{"requested":756,"executed":756,"passed":754,"failed":2,"source_cases":378}
+{"requested":760,"executed":760,"passed":760,"failed":0,"source_cases":380}
