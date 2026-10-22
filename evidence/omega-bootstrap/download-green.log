@@ -1,0 +1,20 @@
+test_bad_arguments_do_not_download_or_install (__main__.DownloadTests.test_bad_arguments_do_not_download_or_install) ... 127.0.0.1 - - [22/Oct/2026 17:32:00] "GET /install.sh HTTP/1.1" 200 -
+ok
+test_existing_omega_command_is_not_overwritten (__main__.DownloadTests.test_existing_omega_command_is_not_overwritten) ... 127.0.0.1 - - [22/Oct/2026 17:32:01] "GET /install.sh HTTP/1.1" 200 -
+127.0.0.1 - - [22/Oct/2026 17:32:01] "GET /package.tar.gz HTTP/1.1" 200 -
+ok
+test_missing_download_fails_without_installation (__main__.DownloadTests.test_missing_download_fails_without_installation) ... 127.0.0.1 - - [22/Oct/2026 17:32:01] "GET /install.sh HTTP/1.1" 200 -
+127.0.0.1 - - [22/Oct/2026 17:32:01] code 404, message File not found
+127.0.0.1 - - [22/Oct/2026 17:32:01] "GET /missing.tar.gz HTTP/1.1" 404 -
+ok
+test_real_curl_pipe_installs_omega_and_runs_project (__main__.DownloadTests.test_real_curl_pipe_installs_omega_and_runs_project) ... 127.0.0.1 - - [22/Oct/2026 17:32:02] "GET /install.sh HTTP/1.1" 200 -
+127.0.0.1 - - [22/Oct/2026 17:32:02] "GET /package.tar.gz HTTP/1.1" 200 -
+ok
+test_tampered_download_is_rejected_before_installation (__main__.DownloadTests.test_tampered_download_is_rejected_before_installation) ... 127.0.0.1 - - [22/Oct/2026 17:32:03] "GET /install.sh HTTP/1.1" 200 -
+127.0.0.1 - - [22/Oct/2026 17:32:03] "GET /package.tar.gz HTTP/1.1" 200 -
+ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 3.073s
+
+OK
