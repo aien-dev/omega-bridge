@@ -29,6 +29,17 @@ with tempfile.TemporaryDirectory(prefix='cuda-cpp-install-') as d:
     ck(p.returncode==0 and not p.stdout and exe.exists(),'build',rc=p.returncode)
     ck(call([exe],data).stdout==expected,'built executable')
     ck(exe.stat().st_mode&0o777==0o700,'executable private mode')
+    # Lab GPU code is explicit non-executable data, never silently launched.
+    capsule=work/'kernel.omgpu'
+    p=call([om,'build','--from','cuda-cpp','--target','sm_121-lab',src,'-o',capsule],cwd=work)
+    ck(p.returncode==0 and capsule.is_file(),'offline native GPU capsule build',rc=p.returncode)
+    body=capsule.read_bytes()
+    ck(body[:4]==b'OMGP' and struct.unpack_from('<III',body,4)==(1,121,1),'GPU capsule identity and lab-only flag')
+    ck(capsule.stat().st_mode&0o777==0o600,'GPU capsule is non-executable private data')
+    p=call([om,'check','--from','cuda-cpp','--target','sm_121-lab',src],cwd=work)
+    ck(p.returncode==0 and not p.stdout,'lab GPU check emits no public output')
+    p=call([om,'run','--from','cuda-cpp','--target','sm_121-lab',src],data,work)
+    ck(p.returncode==69 and not p.stdout,'unqualified lab GPU launch refused')
     # Never silently pretend CPU simulation is GPU compilation.
     for command in ('run','build'):
         for target in ([],['--target','sm_121'],['--target','cuda'],['--target','gpu']):

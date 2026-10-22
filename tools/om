@@ -32,7 +32,7 @@ tmp=$(mktemp -d "${TMPDIR:-/tmp}/omega-command.XXXXXXXX") || fail 74 'cannot cre
 outtmp=
 cleanup() {
     [ -z "$outtmp" ] || rm -f -- "$outtmp"
-    rm -f -- "$tmp/input" "$tmp/native" "$tmp/output" "$tmp/error" "$tmp/lowered"
+    rm -f -- "$tmp/input" "$tmp/native" "$tmp/output" "$tmp/error" "$tmp/lowered" "$tmp/framed"
     rmdir "$tmp"
 }
 trap cleanup EXIT
@@ -63,11 +63,17 @@ if [ "$command" = check ] || [ "$command" = build ] || [ "$command" = run ]; the
             [ "$#" -ge 2 ] || fail 64 'missing target'
             target=$2
             shift 2
-            [ "$target" = cpu-sim ] || fail 69 'CUDA C++ GPU lowering is not qualified; only explicit cpu-sim is available'
+            case $target in
+                cpu-sim|sm_121-lab) ;;
+                *) fail 69 'supported targets: cpu-sim or offline sm_121-lab; production GPU launch is not qualified';;
+            esac
         fi
-        if [ "$command" != check ] && [ "$target" != cpu-sim ]; then
-            fail 69 'CUDA C++ build/run require --target cpu-sim; no implicit CPU fallback'
+        if [ "$command" != check ] && [ -z "$target" ]; then
+            fail 69 'CUDA C++ build/run require an explicit target; no implicit CPU fallback'
         fi
+    fi
+    if [ "$command" = run ] && [ "$target" = sm_121-lab ]; then
+        fail 69 'sm_121-lab is offline GPU code data, not a qualified launcher; run is refused'
     fi
     if [ "${1-}" = -- ]; then shift; fi
     if [ "$command" = build ]; then
@@ -85,7 +91,11 @@ if [ "$command" = check ] || [ "$command" = build ] || [ "$command" = run ]; the
     source=$tmp/input
     if [ "$language" = cuda-cpp ]; then
         rc=0
-        "$root/cuda-cpp" < "$tmp/input" > "$tmp/lowered" 2> "$tmp/error" || rc=$?
+        selector=C
+        [ "$target" != sm_121-lab ] || selector=G
+        printf '%s' "$selector" > "$tmp/framed"
+        cat "$tmp/input" >> "$tmp/framed" || fail 74 'cannot frame source'
+        "$root/cuda-cpp" < "$tmp/framed" > "$tmp/lowered" 2> "$tmp/error" || rc=$?
         if [ "$rc" != 0 ]; then
             cat "$tmp/error" >&2
             exit "$rc"
@@ -93,13 +103,20 @@ if [ "$command" = check ] || [ "$command" = build ] || [ "$command" = run ]; the
         [ -s "$tmp/lowered" ] || fail 65 'CUDA C++ lowering produced no source'
         source=$tmp/lowered
     fi
+    if [ "$target" = sm_121-lab ]; then
+        cat "$tmp/lowered" > "$tmp/native" || fail 74 'cannot stage GPU capsule'
+    else
     if ! "$root/omc" < "$source" > "$tmp/native" 2> "$tmp/error"; then
         cat "$tmp/error" >&2
         fail 65 'native source check refused'
     fi
     "$root/verify-elf.sh" "$tmp/native" || fail 65 'native executable qualification refused'
+    fi
     [ "$command" != check ] || exit 0
-    chmod 700 "$tmp/native" || fail 74 'cannot prepare native executable'
+    mode=700
+    [ "$target" != sm_121-lab ] || mode=600
+    chmod "$mode" "$tmp/native" || fail 74 'cannot prepare output artifact'
+
     if [ "$command" = run ]; then
         # Compilation reads the snapshot; the child inherits the caller's stdin.
         # This is explicit native execution, not a sandbox or interpreter.
@@ -115,7 +132,7 @@ if [ "$command" = check ] || [ "$command" = build ] || [ "$command" = run ]; the
     outdir=$(dirname -- "$output")
     outtmp=$(mktemp "$outdir/.omega-output.XXXXXXXX") || fail 73 'cannot stage output'
     cat "$tmp/native" > "$outtmp" || fail 74 'cannot write output'
-    chmod 700 "$outtmp" || fail 74 'cannot prepare output permissions'
+    chmod "$mode" "$outtmp" || fail 74 'cannot prepare output permissions'
     mv -fT -- "$outtmp" "$output" || fail 73 'cannot publish output'
     outtmp=
     exit 0

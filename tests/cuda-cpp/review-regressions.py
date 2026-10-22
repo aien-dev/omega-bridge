@@ -19,7 +19,7 @@ expected=struct.pack('<III',5,1,8)
 for j,(label,source) in enumerate(variants):
     p=run(['g++','-std=c++17','-x','c++','-fsyntax-only','-'],shim+source)
     record(label+' independently valid C++17',p.returncode==0,rc=p.returncode,stderr=p.stderr.decode())
-    p=run([R/'build/native/cuda-cpp'],source)
+    p=run([R/'build/native/cuda-cpp'],b'C'+source)
     record(label+' frontend accepts',p.returncode==0 and p.stdout,rc=p.returncode,stderr=p.stderr.decode())
     if p.returncode!=0:continue
     q=run([R/'build/bootstrap/omc'],p.stdout)

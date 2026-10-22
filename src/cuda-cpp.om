@@ -2,6 +2,7 @@ note SPDX-License-Identifier: AGPL-3.0-or-later
 note Handwritten bounded CUDA C++ elementwise frontend. Explicit CPU simulator only.
 global Src uchar 16384
 global Extra uchar 1
+global Mode uchar 1
 global Size ulong 1
 global Pos ulong 1
 global Kind ulong 1
@@ -539,7 +540,40 @@ end
 end
 end
 end
+fn cpu root ulong to void
+emit 0
+for j ulong get Nodes 0
+for k ulong len C5
+emitb get C5 k
+end
+number j
+emitb 32
+expression j
+emitb 10
+end
+for j ulong len C6
+emitb get C6 j
+end
+number root
+emit 1
+for j ulong add get Count 0 1
+emit 2
+number j
+emit 3
+end
+emit 4
+for j ulong len Pack
+emitb get Pack j
+end
+end
 fn main to int
+r = read 0 Mode 0 1
+if ne r 1
+die 77
+end
+if not or eq get Mode 0 67 eq get Mode 0 71
+die 65
+end
 n = ulong 0
 go = true
 while and go lt n len Src
@@ -574,29 +608,10 @@ symbol 125
 if ne get Kind 0 0
 die 65
 end
-emit 0
-for j ulong get Nodes 0
-for k ulong len C5
-emitb get C5 k
-end
-number j
-emitb 32
-expression j
-emitb 10
-end
-for j ulong len C6
-emitb get C6 j
-end
-number root
-emit 1
-for j ulong add get Count 0 1
-emit 2
-number j
-emit 3
-end
-emit 4
-for j ulong len Pack
-emitb get Pack j
+if eq get Mode 0 71
+gpu root
+else
+cpu root
 end
 sent = ulong 0
 while lt sent get Used 0

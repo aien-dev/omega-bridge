@@ -16,7 +16,7 @@ def check(ok,label,**info):
         (OUT/'results.json').write_text(json.dumps(records,indent=2))
         raise AssertionError((label,info))
 def compile_native(source,name,front=FRONT):
-    p=run([front],source)
+    p=run([front],b'C'+source)
     check(p.returncode==0 and p.stdout, name+' frontend',rc=p.returncode,stderr=p.stderr.decode(errors='replace'))
     (OUT/(name+'.om')).write_bytes(p.stdout)
     q=run([OMC],p.stdout)
@@ -111,7 +111,7 @@ neg={
 'namespace':base.replace(b'vector_add',b'ns::kernel'),
 }
 for label,source in neg.items():
-    p=run([FRONT],source)
+    p=run([FRONT],b'C'+source)
     check(p.returncode in (65,67) and not p.stdout and p.stderr,'refuse '+label,rc=p.returncode)
 # Input errors must be transactional before any stdout.
 native=compile_native(base,'input')
@@ -127,7 +127,7 @@ mutations=[('add-sub','text Ops "add sub mul and xor or"','text Ops "sub sub mul
            ('literal','put Value 0 v','put Value 0 add v 1')]
 for label,old,new in mutations:
     check(original.count(old)==1,'mutant unique '+label)
-    p=run([OMC],original.replace(old,new).encode());check(p.returncode==0 and p.stdout,'mutant compiles '+label)
+    p=run([OMC],original.replace(old,new).encode()+(ROOT/'src/cuda-sm121.om').read_bytes());check(p.returncode==0 and p.stdout,'mutant compiles '+label)
     mutant=OUT/('mutant-'+label);mutant.write_bytes(p.stdout);mutant.chmod(0o700)
     check(run([ROOT/'tools/verify-elf.sh',mutant]).returncode==0,'mutant ELF '+label)
     source=base.replace(b'left[index] + right[index]',b'left[index] + right[index] + 3U')
@@ -135,4 +135,5 @@ for label,old,new in mutations:
     data=frame(1,32,27);p=run([exe],data);q=run([ref],data)
     check(p.returncode==q.returncode==0 and p.stdout!=q.stdout,'mutant caught '+label)
 (OUT/'results.json').write_text(json.dumps(records,indent=2))
+(OUT/'inputs.json').write_text(json.dumps({str(path.relative_to(ROOT)):hashlib.sha256(path.read_bytes()).hexdigest() for path in [ROOT/'src/cuda-cpp.om',ROOT/'src/cuda-sm121.om',ROOT/'tests/cuda-cpp/gate.py',FRONT,OMC]},indent=2)+'\n')
 print(json.dumps({'checks':len(records),'passed':sum(r['pass'] for r in records),'source_sha256':hashlib.sha256(original.encode()).hexdigest(),'compiler_sha256':hashlib.sha256(OMC.read_bytes()).hexdigest()}))

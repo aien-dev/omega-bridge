@@ -1,0 +1,140 @@
+note SPDX-License-Identifier: AGPL-3.0-or-later
+note Handwritten sm121 integer backend. Encodings read from pinned CUDApp2323324
+note src/omega_blackwell_encoder.c and codegen.c; reference only, never linked.
+note LAB ARTIFACT ONLY: no hardware scheduling or native launch qualification.
+note Fixed VECTOR_1D ABI: descriptor0x358, block0x360, a0x380,b0x388,out0x390,n0x398.
+note Capsule is data, not ELF/cubin; flags1 means lab-only and launch prohibited.
+fn gword v ulong to void
+for j ulong 4
+emitb uchar and shr v mul j 8 255
+end
+end
+fn gi a ulong b ulong c ulong d ulong to void
+gword a
+gword b
+gword c
+gword d
+end
+fn ghead to void
+emitb 79
+emitb 77
+emitb 71
+emitb 80
+gword 1
+gword 121
+gword 1
+gword 0
+gword add get Nodes 0 16
+gword 28
+gword 2
+end
+fn greg n ulong to ulong
+ret add n 16
+end
+fn gadd d ulong a ulong b ulong to void
+w = or or 29200 shl d 16 shl a 24
+gi w b 134209791 17811968
+end
+fn gmul d ulong a ulong b ulong to void
+w = or or 29220 shl d 16 shl a 24
+gi w b 126747391 2083328
+end
+fn gneg d ulong a ulong to void
+w = or or 30756 shl d 16 shl a 24
+gi w 4294967295 126747391 2083328
+end
+fn glop d ulong a ulong b ulong lut ulong to void
+w = or or 29202 shl d 16 shl a 24
+gi w b or 126746879 shl lut 8 2083328
+end
+fn gnode n ulong to void
+k = get Op n
+d = greg n
+if eq k 0
+gi or 30722 shl d 16 get Val n 3840 1040896
+ret
+end
+if eq k 1
+s = ulong 2
+if eq get Val n 2
+s = 5
+end
+gadd d s 255
+ret
+end
+if eq k 2
+gadd d 8 255
+ret
+end
+a = greg get Left n
+b = greg get Right n
+if eq k 3
+gadd d a b
+ret
+end
+if eq k 4
+gneg d b
+gadd d a d
+ret
+end
+if eq k 5
+gmul d a b
+ret
+end
+if eq k 6
+glop d a b 192
+ret
+end
+if eq k 7
+glop d a b 60
+ret
+end
+if eq k 8
+glop d a b 252
+ret
+end
+die 65
+end
+fn gprefix to void
+gi 4278287234 57088 2048 1040896
+note Length snapshot in R8 before descriptor UR4:5 replaces UR5.
+gi 4278745986 58880 2048 1040896
+gi 620825 0 9472 926208
+gi 4278482860 27648 134219776 926208
+gi 31001 0 8448 926208
+gi 4278548396 29440 134219776 942592
+gi 151616548 4 260964864 2083328
+gi 151026700 5 200302704 3136000
+gi 2381 0 58720256 1042944
+gi 4278352770 57344 2560 926208
+gi 4278482860 27392 134220288 945664
+gi 4278483842 57856 2560 962560
+gi 4278614914 58368 2560 975360
+gi 151156773 4 126746626 2083840
+gi 33716609 4 203299072 3088896
+gi 151287845 4 126746628 5229568
+gi 67467649 4 203299072 991744
+gi 151418917 4 126746630 9429504
+note Retain the proven final load consumer before arbitrary expression instructions.
+gi 34173456 5 134209791 17811968
+end
+fn gpu root ulong to void
+if ne get Count 0 2
+die 69
+end
+ghead
+gprefix
+for j ulong get Nodes 0
+gnode j
+end
+gi 100694406 greg root 202381572 1040896
+gi 31053 0 58720256 1042944
+gi 16546119 4294967292 58982399 1032192
+while or lt get Used 0 544 ne rem sub get Used 0 32 128 0
+gi 31000 0 0 1032192
+end
+n = sub get Used 0 32
+for j ulong 4
+put Out add 16 j uchar and shr n mul j 8 255
+end
+end

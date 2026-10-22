@@ -1,9 +1,9 @@
 # Experimental CUDA C++ input for om
 
 This candidate adds a **bounded CUDA C++17 kernel frontend**, handwritten in
-seeded Omega. It does not finish CUDA C++ support. It currently targets an
+seeded Omega. It does not finish CUDA C++ support. Its execution target is an
 explicit CPU simulator, **not the GPU**, PTX, cubin, or the CUDA host/runtime ABI.
-There is no nvcc, Clang, C++ parser, C library, or CUDA runtime in its construction
+An additional [offline sm121 lab backend](CUDA-CPP-GPU.md) emits actual GPU code data but is not qualified for launch. There is no nvcc, Clang, C++ parser, C library, or CUDA runtime in its construction
 or execution path. The existing POSIX shell dispatcher handles arguments, source
 snapshots, process launch and atomic output publication; it is not native Omega.
 
@@ -23,7 +23,7 @@ OM="$HOME/cuda-cpp-candidate/bin/om"
 The prefix's parent must already exist. This is a source-build candidate, not a
 published release or a globally installed update. `omg` is the same implementation.
 `check` compiles through both frontend and omc but never runs the result. Build and
-run require `--target cpu-sim`; omission, `sm_121`, `cuda` and `gpu` refuse rather
+run require an explicit target. Execution currently requires `--target cpu-sim`; an offline build may select `sm_121-lab`. Omission, `sm_121`, `cuda` and `gpu` refuse rather
 than silently falling back to CPU execution. Ordinary Omega commands are unchanged.
 A `.cu` extension alone does not select this frontend: `--from cuda-cpp` is explicit.
 

@@ -11,6 +11,7 @@ Omega native commands: om and omg share one implementation and installation.
   om check --from cuda-cpp source.cu
   om build --from cuda-cpp --target cpu-sim source.cu -o executable
   om run --from cuda-cpp --target cpu-sim source.cu
+  om build --from cuda-cpp --target sm_121-lab source.cu -o kernel.omgpu
   om uninstall                    Remove unchanged owned files and aliases
   om attach|discover|status       UNSUPPORTED (exit 69); no runtime hooks
 
@@ -26,7 +27,9 @@ Use -- for a leading-dash filename; a literal - names a file, not stdin.
 CUDA C++ is an experimental bounded unsigned-int elementwise kernel frontend.
 It is NOT full C++ or GPU code. Native Omega parses source and generates a CPU
 simulator executable. No nvcc/Clang parser or CUDA runtime constructs the result.
-The explicit cpu-sim target is required for build/run; check never executes it.
+Explicit targets are required: cpu-sim for execution, or sm_121-lab for offline
+GPU instruction data only. Lab capsules are non-executable and run refuses them.
+check never executes source. GPU scheduling/runtime/hardware are not qualified.
 See docs/CUDA-CPP.md in the source checkout for syntax and binary stdin framing.
 Frontend limits return 67; simulator input errors return 77 with no stdout.
 
