@@ -1,0 +1,24 @@
+2026-10-22 parent coordination replay
+Repository: aien-dev/omega-bridge
+Exact executable source: 614f4ba56487ad420f43980b12e48b66768d6d21
+Observed exit: 0; expected by the documented bounded recipe: 0
+Scope: Recovered source digest PASS; conversion NOT_RUN
+
+This is a separate fresh temporary checkout, not reuse of the author build directory. Git objects may be shared as immutable source storage; compiled outputs were not copied. The original author receipt is preserved. This replay is not a fresh-context source review, full repository suite, protected-branch admission, live service check, security audit or physical-hardware qualification. The website's nonzero baseline is a retained FAIL, not a passing product build. Missing implementation inspections remain absence checks, not executed features.
+Host: macOS26.6.2 arm64; Git2.50.1, Python3.9.6, Node22.18.0, AppleClang17.0.0, jq1.7.1, uv0.7.3; only tools used by this recipe matter. OpenSSL signature recipe explicitly selected OpenSSL3.6.3 rather than system LibreSSL3.3.6. The browser route used Playwright1.60.0 / Chrome155.0.8059.85.
+
+RAW OBSERVED OUTPUT:
+REPO aien-dev/omega-bridge
+SOURCE 614f4ba56487ad420f43980b12e48b66768d6d21
+COMMAND
+python3 - <<'PYCODE'
+import hashlib,json
+from pathlib import Path
+r=json.loads(Path('docs/RECOVERY.json').read_text())
+s=Path('src/toc.om').read_bytes()
+assert hashlib.sha256(s).hexdigest()==r['source_sha256']
+assert b'fn fail code ulong' in s and b'fn emit_all to void' in s
+print('recovered source digest: PASS; conversion NOT_RUN')
+PYCODE
+RAW OUTPUT
+recovered source digest: PASS; conversion NOT_RUN
