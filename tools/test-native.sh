@@ -19,4 +19,5 @@ node tests/native/developer-commands.mjs > evidence/native-developer-commands/fu
 mkdir -p evidence/cuda-cpp
 CUDA_CPP_TEST_OUT="$PWD/build/cuda-cpp-tests" python3 tests/cuda-cpp/gate.py > evidence/cuda-cpp/native-gate.log 2>&1
 CUDA_CPP_COMMAND_OUT="$PWD/build/cuda-cpp-command-tests" python3 tests/cuda-cpp/commands.py > evidence/cuda-cpp/commands.log 2>&1
+CUDA_CPP_REVIEW_OUT="$PWD/build/cuda-cpp-review-tests" python3 tests/cuda-cpp/review-regressions.py > evidence/cuda-cpp/review-regressions.log 2>&1
 printf 'PASS converter, native math, installed commands, source provenance, path safety, native development and bounded CUDA C++ CPU simulation\n'

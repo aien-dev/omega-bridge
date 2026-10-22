@@ -23,7 +23,7 @@ global Dig uchar 20
 text Err "CUDA_CPP_REFUSED: unsupported syntax, type or construct\n"
 text Limit "CUDA_CPP_LIMIT\n"
 text IOErr "CUDA_CPP_IO\n"
-text Words "__global__ void unsigned int const if blockIdx blockDim threadIdx x alignas alignof and and_eq asm auto bitand bitor bool break case catch char char16_t char32_t class compl concept consteval constexpr constinit const_cast continue co_await co_return co_yield decltype default delete do double dynamic_cast else enum explicit export extern false float for friend goto inline long mutable namespace new noexcept not not_eq nullptr operator or or_eq private protected public register reinterpret_cast requires return short signed sizeof static static_assert static_cast struct switch template this thread_local throw true try typedef typeid typename union unsigned using virtual volatile wchar_t while xor xor_eq __host__ __device__ __shared__ __constant__ __managed__ __restrict__"
+text Words "__global__ void unsigned int const if blockIdx blockDim threadIdx x alignas alignof and and_eq asm auto bitand bitor bool break case catch char char16_t char32_t class compl constexpr const_cast continue decltype default delete do double dynamic_cast else enum explicit export extern false float for friend goto inline long mutable namespace new noexcept not not_eq nullptr operator or or_eq private protected public register reinterpret_cast return short signed sizeof static static_assert static_cast struct switch template this thread_local throw true try typedef typeid typename union unsigned using virtual volatile wchar_t while xor xor_eq __host__ __device__ __shared__ __constant__ __managed__ __restrict__"
 text H0 "note CUDA C++ CPU simulator, not GPU code or a CUDA ABI\nglobal A0 uint 4096\nglobal A1 uint 4096\nglobal A2 uint 4096\nglobal A3 uint 4096\nglobal A4 uint 4096\nglobal Num uint 1\nglobal Temps uint 128\nglobal Wire uchar 4\nglobal Bytes uchar 16384\ntext Error \"CUDA_SIM_INPUT_REFUSED\\n\"\nfn bad to void\nw = write 2 Error 0 len Error\nexit 77\nend\nfn word to ulong\noff = ulong 0\nwhile lt off 4\nr = read 0 Wire off sub 4 off\nif le r 0\nbad\nend\noff = add off ulong r\nend\nv = ulong 0\nfor j ulong 4\nv = or v shl ulong get Wire j mul j 8\nend\nret v\nend\nfn calc ix ulong to uint\n"
 text H1 "\nend\nfn main to int\nblocks = word\nthreads = word\nn = word\nif or eq blocks 0 gt blocks 4096\nbad\nend\nif or eq threads 0 gt threads 4096\nbad\nend\ncover = mul blocks threads\nif or gt cover 4096 gt n 4096\nbad\nend\nput Num 0 uint n\n"
 text H2 "for ix ulong n\nput A"
@@ -61,7 +61,7 @@ fn linecom to void
 p = add get Pos 0 2
 go = true
 while and go available p
-if eq get Src p 10
+if or eq get Src p 10 eq get Src p 13
 go = false
 else
 p = add p 1
@@ -236,7 +236,7 @@ fn name slot ulong to void
 if ne get Kind 0 1
 die 65
 end
-for j ulong 103
+for j ulong 96
 if key j
 die 65
 end
