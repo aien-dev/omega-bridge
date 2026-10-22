@@ -9,3 +9,5 @@ seed/math/checks.mjs
 seed/math/robustness.mjs
 seed/math/calc-oracle.mjs
 evidence/math-native/wolfram-oracle.json
+seed/math/sign-fixtures.mjs
+seed/math/whitespace.mjs

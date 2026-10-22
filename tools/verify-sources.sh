@@ -3,7 +3,7 @@
 set -eu
 cd "$(dirname "$0")/.."
 fail() { echo 'omega: source provenance mismatch' >&2; exit 65; }
-[ "$(sha256sum provenance/lock.sha256 | cut -d ' ' -f1)" = b69aef921b8602697cc1c5ffbcc9082aea97b72d41d9984533bf480ee1757e25 ] || fail
+[ "$(sha256sum provenance/lock.sha256 | cut -d ' ' -f1)" = bdbaa59860847d5c842af705ddc9230b98c70a1a3c8babe25be339af284e7ad7 ] || fail
 sha256sum --status -c provenance/lock.sha256 || fail
 [ "${1-}" = --lock-only ] && exit 0
 sha256sum --status -c provenance/sources.sha256 || fail

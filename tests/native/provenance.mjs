@@ -16,13 +16,13 @@ for(const [name,p,change] of [
  ['dirty native math','seed/math/core.om',s=>s+'\nnote changed\n'],
  ['dirty converter','src/toc.om',s=>s+'\nnote changed\n'],
  ['dirty seed compiler','seed/omc/omc.om',s=>s+'\nnote changed\n'],
- ['malformed pin','provenance/pins',s=>s.replace('78477217','$(touch PWNED)')],
- ['different pin','provenance/pins',s=>s.replace('78477217','00000000')],
+ ['malformed pin','provenance/pins',s=>s.replace(/^math [0-9a-f]{40}$/m,'math $(touch PWNED)')],
+ ['different pin','provenance/pins',s=>s.replace(/^math [0-9a-f]{40}$/m,'math '+'0'.repeat(40))],
  ['unsafe import path','provenance/seed.files',s=>s+'../../outside\n'],
  ['forged source manifest','provenance/sources.sha256',s=>s.replace(/^[0-9a-f]/,'z')],
  ['forged lock','provenance/lock.sha256',s=>s+'garbage\n']
 ])check(name+' fails before build/publication',()=>{
- const file=copy+'/'+p,original=fs.readFileSync(file,'utf8');fs.writeFileSync(file,change(original));
+ const file=copy+'/'+p,original=fs.readFileSync(file,'utf8'),changed=change(original);assert.notEqual(changed,original,'negative control must actually mutate '+p);fs.writeFileSync(file,changed);
  const r=run('tools/install.sh',['--offline','--prefix',tmp+'/home/blocked']);eq(r,65);assert.ok(!fs.existsSync(tmp+'/home/blocked'));assert.ok(!fs.existsSync(copy+'/PWNED'));fs.writeFileSync(file,original);eq(run('tools/verify-sources.sh'),0);
 });
 check('unlisted source include overlay refused',()=>{fs.writeFileSync(copy+'/seed/math/overlay.om','note overlay\n');eq(run('tools/verify-sources.sh'),65);fs.unlinkSync(copy+'/seed/math/overlay.om');});
