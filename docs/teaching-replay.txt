@@ -1,0 +1,16 @@
+REPOSITORY: omega-bridge
+BASE_SHA: 614f4ba56487ad420f43980b12e48b66768d6d21
+ENVIRONMENT: macOS-26.6.2-arm64-arm-64bit-Mach-O
+COMMAND:
+python3 - <<'PYCODE'
+import hashlib,json
+from pathlib import Path
+r=json.loads(Path('docs/RECOVERY.json').read_text())
+s=Path('src/toc.om').read_bytes()
+assert hashlib.sha256(s).hexdigest()==r['source_sha256']
+assert b'fn fail code ulong' in s and b'fn emit_all to void' in s
+print('recovered source digest: PASS; conversion NOT_RUN')
+PYCODE
+EXIT: 0
+RAW OUTPUT:
+recovered source digest: PASS; conversion NOT_RUN
