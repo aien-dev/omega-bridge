@@ -1,0 +1,12 @@
+{
+  "source": "3efd096dede5cad8ca16a791f989ac4d44d7b845",
+  "mismatches": [
+    {
+      "path": "native/live35b/tests/invalid.om",
+      "declared": "a8159e1b310cadc3f51d37dc36e049e9e1e2aaab733402f0ca77b972af26e5c4",
+      "committed": "06c185aef97722f91074017215fd96fed96cf99a2b3d614ec23d48ee3d48d8c3"
+    }
+  ],
+  "publication": "HOLD",
+  "replay_exit": 1
+}

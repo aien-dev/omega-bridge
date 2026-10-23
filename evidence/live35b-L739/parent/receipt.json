@@ -1,0 +1,82 @@
+{
+  "source": "46b10c8ba82b2c5cf81fbfcc49c249a9fea4bd67",
+  "compiler_sha256": "191b776ef98821597c3e30655da6d680a9b66edbc9ceaca3c39c61ea6df098e9",
+  "verified_committed_source_files": 18,
+  "results": [
+    {
+      "build": "integrator",
+      "exit": 0,
+      "sha256": "fe97f74a02bc8c7fad3efb1a15800809c79813006ecbbb562ae0323d0a35ad13"
+    },
+    {
+      "build": "select-test",
+      "exit": 0,
+      "sha256": "34883bda420be889f60436e5d4c6c2a9fcc71a5ae02bb8ead0da5e0cf9b1edf8"
+    },
+    {
+      "test": "select-test",
+      "exit": 0
+    },
+    {
+      "build": "schedule-test",
+      "exit": 0,
+      "sha256": "51d6e23d1932049b46f8595b5377c1a5e8db7f367b2317f000ed8246acb4dd35"
+    },
+    {
+      "test": "schedule-test",
+      "exit": 0
+    },
+    {
+      "build": "producer",
+      "exit": 0,
+      "sha256": "07af2dbdb5562ceab2ca28fc22722779f22ee37db37c90319d7f00747bc1d116"
+    },
+    {
+      "build": "golden",
+      "exit": 0,
+      "sha256": "8d3a90954f62159b0ce289b539830ad31648076d383c250a44e0d75576336f6d"
+    },
+    {
+      "protocol": "mixed",
+      "input_bytes": 328000,
+      "output_bytes": 240000,
+      "byte_equal": true,
+      "exit": 0
+    },
+    {
+      "build": "full-producer",
+      "exit": 0,
+      "sha256": "65fb4c3e9d3a6af6c97f742ca43842698f25ef94f53a5c42c52c5a5385338923"
+    },
+    {
+      "build": "full-golden",
+      "exit": 0,
+      "sha256": "ffd508c4e9e8fc1706393809d8329af739ae4a5b897128b43b1f26778fd11df3"
+    },
+    {
+      "protocol": "full-",
+      "input_bytes": 993312,
+      "output_bytes": 993312,
+      "byte_equal": true,
+      "exit": 0
+    },
+    {
+      "build": "plan-producer",
+      "exit": 0,
+      "sha256": "ce43c46314803365a4057a2d52794b5c91b184740f61fe029c5c6aeaecb87f42"
+    },
+    {
+      "build": "plan-golden",
+      "exit": 0,
+      "sha256": "f35953d3ddfd1360e42b06ae6a01ef99d0ff48293362d61f0ad74f2797410726"
+    },
+    {
+      "protocol": "plan-",
+      "input_bytes": 4128,
+      "output_bytes": 12452,
+      "byte_equal": true,
+      "exit": 0
+    }
+  ],
+  "scope": "native host consumer only; GPU/model/HTTP/deployment NOT_RUN"
+}
