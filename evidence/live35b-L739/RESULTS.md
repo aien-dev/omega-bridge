@@ -43,3 +43,13 @@ pipes, cuts, comparisons and logs; no new shell/Python/C/Rust program is added.
 No foreign inference runtime, GPU driver, model payload or private prompt is
 included. Artifact/source hashes and final committed-source replay are recorded
 at freeze. Native .om host behavior is not GPU execution proof or a serving win.
+
+Final current-source controls (45): seven compiled mutants build successfully
+and fail unchanged native gates: tie10,pressure6,row22,chunk40,segment45,
+shared-row50,padding52. Real mixed/full-vocabulary/full-prefill pipes all compare
+exactly to independent expected bytes (46). The329 truncations additionally
+verify exact previously-committed response prefixes and no partial output for
+an invalid frame. All nine current invalid fixture cases still refuse65/0bytes.
+The preseal manifest deliberately remained checked and exposed one changed
+invalid-fixture hash (47); the final source/artifact manifest was regenerated
+and passes fully (48). No stale manifest is called current.

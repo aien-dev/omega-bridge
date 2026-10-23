@@ -21,8 +21,8 @@ First native consumer slice in native/live35b:
    that the heap is faster until measured. NaNs refuse before publication: the
    old comparator is nontransitive and its library-sort output is not a portable
    numeric contract. Native NaN compatibility remains a recorded integration gap.
-2. Current35B route grouping: at most8 rows, each8 distinct expert IDs in0..255;
-   stable group by expert while preserving row/rank identity. This is host-side
+2. Current35B route grouping: at most128 prefill rows (8 decode rows), each8 distinct expert IDs in0..255;
+   stable counting placement by expert while preserving row/rank identity. This is host-side
    schedule construction, not GPU expert execution. All validation precedes work.
 3. Reuse L689's immutable scheduling policy semantics, with fixed limits and
    strict integer thresholds, independent of expert identities and weight bytes.
