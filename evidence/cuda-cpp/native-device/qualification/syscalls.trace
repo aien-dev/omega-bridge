@@ -1,0 +1,4 @@
+execve("/home/drakestapleton/handoffs/cuda-cpp-L605/device-cold/qualification/normal/open-close", ["/home/drakestapleton/handoffs/cu"...], 0xfffff20e6a10 /* 18 vars */) = 0
+openat(AT_FDCWD, "/dev/null", O_RDWR|O_CLOEXEC) = 3
+close(3)                                = 0
++++ exited with 0 +++

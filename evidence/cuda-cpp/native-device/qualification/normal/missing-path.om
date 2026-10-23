@@ -1,0 +1,12 @@
+text path "/dev/omega-L605-no-such-device"
+fn main to int
+p = new uchar 31 0
+for i ulong 30
+put p i get path i
+end
+f = devopen p 0 31
+if ne f -2
+ret int 1
+end
+ret int 0
+end

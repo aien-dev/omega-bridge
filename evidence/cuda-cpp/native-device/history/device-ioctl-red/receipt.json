@@ -1,0 +1,94 @@
+{
+  "compiler_sha256": "1b3f23c5d535e5323afc5ad86295051999f3bb3e6f76b25c1f25c8ae23af0979",
+  "cases": [
+    {
+      "name": "open-close",
+      "compile_rc": 0,
+      "expected_rc": 0,
+      "run_rc": 0,
+      "stdout": "",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "name": "close-negative",
+      "compile_rc": 0,
+      "expected_rc": 0,
+      "run_rc": 0,
+      "stdout": "",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "name": "path-unterminated",
+      "compile_rc": 0,
+      "expected_rc": 103,
+      "run_rc": 103,
+      "stdout": "",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "name": "path-oob",
+      "compile_rc": 0,
+      "expected_rc": 103,
+      "run_rc": 103,
+      "stdout": "",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "name": "path-empty",
+      "compile_rc": 0,
+      "expected_rc": 103,
+      "run_rc": 103,
+      "stdout": "",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "name": "missing-path",
+      "compile_rc": 0,
+      "expected_rc": 0,
+      "run_rc": 0,
+      "stdout": "",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "name": "ioctl-pipe",
+      "compile_rc": 3,
+      "expected_rc": 0,
+      "passed": false
+    },
+    {
+      "name": "ioctl-short",
+      "compile_rc": 3,
+      "expected_rc": 103,
+      "passed": false
+    },
+    {
+      "name": "ioctl-oob",
+      "compile_rc": 3,
+      "expected_rc": 103,
+      "passed": false
+    },
+    {
+      "name": "ioctl-invalid-fd",
+      "compile_rc": 3,
+      "expected_rc": 0,
+      "passed": false
+    },
+    {
+      "name": "path-embedded-nul",
+      "compile_rc": 0,
+      "expected_rc": 103,
+      "run_rc": 103,
+      "stdout": "",
+      "stderr": "",
+      "passed": true
+    }
+  ],
+  "passed": 7,
+  "total": 11
+}

@@ -1,0 +1,261 @@
+{
+  "source_commit": "0dee6994ed10b51dc30b4ab1ff7665202ecaec56",
+  "consumed_source_sha256": {
+    "seed/omc/omc.om": "8608fa11f6a2cf1c50db22d871eef16b00d5bc719bc1a222cc3e456984ac5ebf",
+    "src/device/omc.om": "1a42b6220f57f60dad21161ed0a4a003eee7ba3fb58501e0584b0bd0de355565",
+    "tools/build-device.sh": "d79ab0a7474cab08b942c9b902225ae50f51fa269a0a7060c806baa951abae8e",
+    "tests/device/gate.py": "aa70d6494882b2bf2107d79f90a6d8930a8c72e4fef1254a7c4a3194f30ca033",
+    "tests/device/qualify.py": "984653adf9ccd39014f3a22e692b0d1e6fadc8a0f67e11517bb78c939ede49e0"
+  },
+  "whole_inherited_suite_rc": 0,
+  "device_qualification": {
+    "source_sha256": "1a42b6220f57f60dad21161ed0a4a003eee7ba3fb58501e0584b0bd0de355565",
+    "parent_sha256": "191b776ef98821597c3e30655da6d680a9b66edbc9ceaca3c39c61ea6df098e9",
+    "candidate_sha256": "e60af9f70edf2c2c50b3160902faff1eb7eba104463bb29a15217f71dce3c77f",
+    "inherited_fixtures": 116,
+    "native_device": {
+      "compiler_sha256": "e60af9f70edf2c2c50b3160902faff1eb7eba104463bb29a15217f71dce3c77f",
+      "cases": [
+        {
+          "name": "open-close",
+          "compile_rc": 0,
+          "expected_rc": 0,
+          "run_rc": 0,
+          "stdout": "",
+          "stderr": "",
+          "passed": true
+        },
+        {
+          "name": "close-negative",
+          "compile_rc": 0,
+          "expected_rc": 0,
+          "run_rc": 0,
+          "stdout": "",
+          "stderr": "",
+          "passed": true
+        },
+        {
+          "name": "path-unterminated",
+          "compile_rc": 0,
+          "expected_rc": 103,
+          "run_rc": 103,
+          "stdout": "",
+          "stderr": "",
+          "passed": true
+        },
+        {
+          "name": "path-oob",
+          "compile_rc": 0,
+          "expected_rc": 103,
+          "run_rc": 103,
+          "stdout": "",
+          "stderr": "",
+          "passed": true
+        },
+        {
+          "name": "path-empty",
+          "compile_rc": 0,
+          "expected_rc": 103,
+          "run_rc": 103,
+          "stdout": "",
+          "stderr": "",
+          "passed": true
+        },
+        {
+          "name": "missing-path",
+          "compile_rc": 0,
+          "expected_rc": 0,
+          "run_rc": 0,
+          "stdout": "",
+          "stderr": "",
+          "passed": true
+        },
+        {
+          "name": "ioctl-pipe",
+          "compile_rc": 0,
+          "expected_rc": 0,
+          "run_rc": 0,
+          "stdout": "",
+          "stderr": "",
+          "passed": true
+        },
+        {
+          "name": "ioctl-short",
+          "compile_rc": 0,
+          "expected_rc": 103,
+          "run_rc": 103,
+          "stdout": "",
+          "stderr": "",
+          "passed": true
+        },
+        {
+          "name": "ioctl-oob",
+          "compile_rc": 0,
+          "expected_rc": 103,
+          "run_rc": 103,
+          "stdout": "",
+          "stderr": "",
+          "passed": true
+        },
+        {
+          "name": "ioctl-invalid-fd",
+          "compile_rc": 0,
+          "expected_rc": 0,
+          "run_rc": 0,
+          "stdout": "",
+          "stderr": "",
+          "passed": true
+        },
+        {
+          "name": "path-embedded-nul",
+          "compile_rc": 0,
+          "expected_rc": 103,
+          "run_rc": 103,
+          "stdout": "",
+          "stderr": "",
+          "passed": true
+        },
+        {
+          "name": "nested-preserve",
+          "compile_rc": 0,
+          "expected_rc": 0,
+          "run_rc": 0,
+          "stdout": "",
+          "stderr": "",
+          "passed": true
+        },
+        {
+          "name": "repeat-descriptors",
+          "compile_rc": 0,
+          "expected_rc": 0,
+          "run_rc": 0,
+          "stdout": "",
+          "stderr": "",
+          "passed": true
+        },
+        {
+          "name": "view-open",
+          "compile_rc": 0,
+          "expected_rc": 0,
+          "run_rc": 0,
+          "stdout": "",
+          "stderr": "",
+          "passed": true
+        },
+        {
+          "name": "global-open",
+          "compile_rc": 0,
+          "expected_rc": 0,
+          "run_rc": 0,
+          "stdout": "",
+          "stderr": "",
+          "passed": true
+        },
+        {
+          "name": "offset-wrap",
+          "compile_rc": 0,
+          "expected_rc": 103,
+          "run_rc": 103,
+          "stdout": "",
+          "stderr": "",
+          "passed": true
+        },
+        {
+          "name": "count-wrap",
+          "compile_rc": 0,
+          "expected_rc": 103,
+          "run_rc": 103,
+          "stdout": "",
+          "stderr": "",
+          "passed": true
+        },
+        {
+          "name": "open-wrong-element",
+          "compile_rc": 7,
+          "expected_compile_rc": 7,
+          "passed": true
+        },
+        {
+          "name": "ioctl-readonly",
+          "compile_rc": 20,
+          "expected_compile_rc": 20,
+          "passed": true
+        },
+        {
+          "name": "ioctl-request-variable",
+          "compile_rc": 9,
+          "expected_compile_rc": 9,
+          "passed": true
+        },
+        {
+          "name": "ioctl-unknown-request",
+          "compile_rc": 9,
+          "expected_compile_rc": 9,
+          "passed": true
+        },
+        {
+          "name": "close-wrong-width",
+          "compile_rc": 7,
+          "expected_compile_rc": 7,
+          "passed": true
+        },
+        {
+          "name": "function-mode",
+          "compile_rc": 9,
+          "expected_compile_rc": 9,
+          "passed": true
+        }
+      ],
+      "passed": 23,
+      "total": 23
+    },
+    "mutants": [
+      {
+        "name": "close-syscall",
+        "catch": {
+          "name": "open-close",
+          "compile_rc": 0,
+          "expected_rc": 0,
+          "run_rc": 2,
+          "stdout": "",
+          "stderr": "",
+          "passed": false
+        },
+        "sha256": "b76023524e21ec33f8ddb0dbb4f50508e27c62a61ca66009672be06a8bd132a5"
+      },
+      {
+        "name": "path-terminator",
+        "catch": {
+          "name": "path-unterminated",
+          "compile_rc": 0,
+          "expected_rc": 103,
+          "run_rc": 0,
+          "stdout": "",
+          "stderr": "",
+          "passed": false
+        },
+        "sha256": "811df0e752d3d3ed75fd92e9b94380347b063dc584160b71175af6a7d7e70a0b"
+      },
+      {
+        "name": "ioctl-size",
+        "catch": {
+          "name": "ioctl-short",
+          "compile_rc": 0,
+          "expected_rc": 103,
+          "run_rc": 0,
+          "stdout": "",
+          "stderr": "",
+          "passed": false
+        },
+        "sha256": "f4cd59bb6471644880cf4aab39a52a047635c9a81be00075644f7fc0d9470a03"
+      }
+    ],
+    "syscall_trace": "syscalls.trace",
+    "gpu_executed": false
+  },
+  "source_export": "git archive of exact source_commit",
+  "construction": "source-born Omega parent -> native Omega device compiler -> static AArch64 executables; shell host glue, Python test harness only",
+  "gpu_executed": false,
+  "public_command_changed": false,
+  "independent_review": "L622 pending"
+}

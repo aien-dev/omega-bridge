@@ -1,0 +1,196 @@
+{
+  "compiler_sha256": "f4cd59bb6471644880cf4aab39a52a047635c9a81be00075644f7fc0d9470a03",
+  "cases": [
+    {
+      "name": "open-close",
+      "compile_rc": 0,
+      "expected_rc": 0,
+      "run_rc": 0,
+      "stdout": "",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "name": "close-negative",
+      "compile_rc": 0,
+      "expected_rc": 0,
+      "run_rc": 0,
+      "stdout": "",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "name": "path-unterminated",
+      "compile_rc": 0,
+      "expected_rc": 103,
+      "run_rc": 103,
+      "stdout": "",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "name": "path-oob",
+      "compile_rc": 0,
+      "expected_rc": 103,
+      "run_rc": 103,
+      "stdout": "",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "name": "path-empty",
+      "compile_rc": 0,
+      "expected_rc": 103,
+      "run_rc": 103,
+      "stdout": "",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "name": "missing-path",
+      "compile_rc": 0,
+      "expected_rc": 0,
+      "run_rc": 0,
+      "stdout": "",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "name": "ioctl-pipe",
+      "compile_rc": 0,
+      "expected_rc": 0,
+      "run_rc": 0,
+      "stdout": "",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "name": "ioctl-short",
+      "compile_rc": 0,
+      "expected_rc": 103,
+      "run_rc": 0,
+      "stdout": "",
+      "stderr": "",
+      "passed": false
+    },
+    {
+      "name": "ioctl-oob",
+      "compile_rc": 0,
+      "expected_rc": 103,
+      "run_rc": 103,
+      "stdout": "",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "name": "ioctl-invalid-fd",
+      "compile_rc": 0,
+      "expected_rc": 0,
+      "run_rc": 0,
+      "stdout": "",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "name": "path-embedded-nul",
+      "compile_rc": 0,
+      "expected_rc": 103,
+      "run_rc": 103,
+      "stdout": "",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "name": "nested-preserve",
+      "compile_rc": 0,
+      "expected_rc": 0,
+      "run_rc": 0,
+      "stdout": "",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "name": "repeat-descriptors",
+      "compile_rc": 0,
+      "expected_rc": 0,
+      "run_rc": 0,
+      "stdout": "",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "name": "view-open",
+      "compile_rc": 0,
+      "expected_rc": 0,
+      "run_rc": 0,
+      "stdout": "",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "name": "global-open",
+      "compile_rc": 0,
+      "expected_rc": 0,
+      "run_rc": 0,
+      "stdout": "",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "name": "offset-wrap",
+      "compile_rc": 0,
+      "expected_rc": 103,
+      "run_rc": 103,
+      "stdout": "",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "name": "count-wrap",
+      "compile_rc": 0,
+      "expected_rc": 103,
+      "run_rc": 103,
+      "stdout": "",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "name": "open-wrong-element",
+      "compile_rc": 7,
+      "expected_compile_rc": 7,
+      "passed": true
+    },
+    {
+      "name": "ioctl-readonly",
+      "compile_rc": 20,
+      "expected_compile_rc": 20,
+      "passed": true
+    },
+    {
+      "name": "ioctl-request-variable",
+      "compile_rc": 9,
+      "expected_compile_rc": 9,
+      "passed": true
+    },
+    {
+      "name": "ioctl-unknown-request",
+      "compile_rc": 9,
+      "expected_compile_rc": 9,
+      "passed": true
+    },
+    {
+      "name": "close-wrong-width",
+      "compile_rc": 7,
+      "expected_compile_rc": 7,
+      "passed": true
+    },
+    {
+      "name": "function-mode",
+      "compile_rc": 9,
+      "expected_compile_rc": 9,
+      "passed": true
+    }
+  ],
+  "passed": 22,
+  "total": 23
+}

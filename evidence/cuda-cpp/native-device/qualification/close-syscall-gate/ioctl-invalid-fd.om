@@ -1,0 +1,8 @@
+fn main to int
+b = new uchar 4 0
+r = devctl -1 21531 b 0 4
+if ne r -9
+ret 1
+end
+ret 0
+end

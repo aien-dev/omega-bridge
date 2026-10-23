@@ -1,0 +1,6 @@
+fn main to int
+p = new uchar 4 0
+x = uint 21531
+r = devctl 0 x p 0 4
+ret 0
+end

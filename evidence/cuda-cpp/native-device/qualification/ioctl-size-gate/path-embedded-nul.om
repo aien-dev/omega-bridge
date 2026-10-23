@@ -1,0 +1,7 @@
+fn main to int
+p = new uchar 4 0
+put p 0 65
+put p 2 65
+f = devopen p 0 4
+ret 0
+end

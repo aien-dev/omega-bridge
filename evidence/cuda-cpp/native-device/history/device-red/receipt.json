@@ -1,0 +1,43 @@
+{
+  "compiler_sha256": "191b776ef98821597c3e30655da6d680a9b66edbc9ceaca3c39c61ea6df098e9",
+  "cases": [
+    {
+      "name": "open-close",
+      "compile_rc": 16,
+      "expected_rc": 0,
+      "passed": false
+    },
+    {
+      "name": "close-negative",
+      "compile_rc": 16,
+      "expected_rc": 0,
+      "passed": false
+    },
+    {
+      "name": "path-unterminated",
+      "compile_rc": 16,
+      "expected_rc": 131,
+      "passed": false
+    },
+    {
+      "name": "path-oob",
+      "compile_rc": 16,
+      "expected_rc": 131,
+      "passed": false
+    },
+    {
+      "name": "path-empty",
+      "compile_rc": 16,
+      "expected_rc": 131,
+      "passed": false
+    },
+    {
+      "name": "missing-path",
+      "compile_rc": 16,
+      "expected_rc": 0,
+      "passed": false
+    }
+  ],
+  "passed": 0,
+  "total": 6
+}

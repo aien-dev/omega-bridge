@@ -1,0 +1,5 @@
+text p "abc"
+fn main to int
+r = devctl 0 21531 p 0 4
+ret 0
+end

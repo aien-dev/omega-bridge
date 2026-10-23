@@ -1,0 +1,16 @@
+text path "/dev/null"
+fn main to int
+buf = new uchar 10 0
+for i ulong 9
+put buf i get path i
+end
+f = devopen buf 0 10
+if lt f 0
+ret int 1
+end
+r = devshut int f
+if ne r 0
+ret int 2
+end
+ret int 0
+end

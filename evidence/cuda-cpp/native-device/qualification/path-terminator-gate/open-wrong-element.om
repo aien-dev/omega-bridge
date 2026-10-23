@@ -1,0 +1,5 @@
+fn main to int
+p = new uint 4 0
+r = devopen p 0 4
+ret 0
+end

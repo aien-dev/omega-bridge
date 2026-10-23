@@ -1,0 +1,5 @@
+fn main to int
+b = new uchar 4 0
+r = devctl 0 21531 b 0 3
+ret 0
+end

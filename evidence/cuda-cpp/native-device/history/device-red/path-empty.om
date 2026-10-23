@@ -1,0 +1,6 @@
+program
+fn main to int
+p = new uchar 1 0
+f = devopen p 0 0
+ret int 0
+end

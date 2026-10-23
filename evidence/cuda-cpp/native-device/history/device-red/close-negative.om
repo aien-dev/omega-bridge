@@ -1,0 +1,8 @@
+program
+fn main to int
+r = devshut int -1
+if ne r -9
+ret int 1
+end
+ret int 0
+end
