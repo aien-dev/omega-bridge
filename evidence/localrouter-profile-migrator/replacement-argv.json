@@ -1,0 +1,1 @@
+["/opt/omega/bin/omega-chat-server","serve","qwen3.8-27b","--host","127.0.0.1","--port","{port}","--name","{id}"]

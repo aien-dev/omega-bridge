@@ -1,0 +1,76 @@
+note Native Omega LocalRouter foundation argv splice adapter.
+note Frame: decimal source-byte-count LF, source JSON bytes, decimal argv-byte-count LF, compact JSON string array.
+note One bounded frame only; emits nothing on any refusal.
+fn main to int
+ total = ulong 0
+ done = ulong 0
+ while eq done 0
+ nread = read 0 expect total sub len expect total
+ if lt nread 0
+ ret 10
+ end
+ if eq nread 0
+ done = 1
+ else
+ total = add total ulong nread
+ if ge total len expect
+ done = 1
+ end
+ end
+ end
+ if ge total len expect
+ ret 11
+ end
+ put fsize 0 total
+ put fpos 0 0
+ if eq header 0
+ ret 12
+ end
+ srcn = get parsed 0
+ if or eq srcn 0 gt srcn len source
+ ret 13
+ end
+ if gt add get fpos 0 srcn total
+ ret 14
+ end
+ i = ulong 0
+ while lt i srcn
+ put source i get expect add get fpos 0 i
+ i = add i 1
+ end
+ put slen 0 srcn
+ put fpos 0 add get fpos 0 srcn
+ if eq header 0
+ ret 15
+ end
+ argn = get parsed 0
+ if or lt argn 3 gt argn len repl
+ ret 16
+ end
+ if ne add get fpos 0 argn total
+ ret 17
+ end
+ i = ulong 0
+ while lt i argn
+ put repl i get expect add get fpos 0 i
+ i = add i 1
+ end
+ put rlen 0 argn
+ rc = migrate
+ if ne rc 0
+ ret add 20 rc
+ end
+ written = ulong 0
+ totalout = get olen 0
+ while lt written totalout
+ nwrite = write 1 outbuf written sub totalout written
+ if lt nwrite 0
+ ret 40
+ end
+ if eq nwrite 0
+ ret 40
+ end
+ written = add written ulong nwrite
+ end
+ ret 0
+end

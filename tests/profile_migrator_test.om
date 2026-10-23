@@ -1,0 +1,104 @@
+note Native direct-core acceptance: exact replacement, untouched fields, refusal transaction.
+text expected "{\"tools\":[{\"id\":\"qwen3.8-27b\",\"options\":{\"server\":[\"/opt/omega-server\",\"serve\",\"qwen3.8-27b\"]},\"voice\":true}]}"
+text argv "[\"/opt/omega-server\",\"serve\",\"qwen3.8-27b\"]"
+text dupdata "{\"server\":[\"a\"],\"extra\":true,\"server\":[\"b\"]}"
+text badsrc "{\"server\":[\"x\"]"
+text tiny "{\"server\":[\"x\"]}"
+text badargv "[\"ok\",]"
+
+fn fillargv to void
+for i ulong len argv
+put repl i get argv i
+end
+put rlen 0 len argv
+end
+
+fn unchanged to int
+if ne get olen 0 73
+ret 0
+end
+if ne get outbuf 0 91
+ret 0
+end
+ret 1
+end
+
+fn main to int
+n = read 0 source 0 len source
+put slen 0 ulong n
+if lt n 0
+ret 90
+end
+fillargv
+rc = migrate
+if ne rc 0
+ret add rc 10
+end
+if ne get olen 0 len expected
+ret 2
+end
+for j ulong len expected
+if ne get outbuf j get expected j
+ret 3
+end
+end
+
+for i ulong len dupdata
+put source i get dupdata i
+end
+put slen 0 len dupdata
+put olen 0 73
+put outbuf 0 91
+rc = migrate
+if ne rc 5
+ret 4
+end
+if eq unchanged 0
+ret 5
+end
+
+for i ulong len badsrc
+put source i get badsrc i
+end
+put slen 0 len badsrc
+rc = migrate
+if ne rc 3
+ret 6
+end
+if eq unchanged 0
+ret 7
+end
+
+for i ulong len tiny
+put source i get tiny i
+end
+put slen 0 len tiny
+for i ulong len badargv
+put repl i get badargv i
+end
+put rlen 0 len badargv
+rc = migrate
+if ne rc 2
+ret 8
+end
+if eq unchanged 0
+ret 9
+end
+
+fillargv
+for i ulong 4090
+put source i 32
+end
+for i ulong len tiny
+put source i get tiny i
+end
+put slen 0 4090
+rc = migrate
+if ne rc 6
+ret 10
+end
+if eq unchanged 0
+ret 11
+end
+ret 0
+end

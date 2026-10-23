@@ -1,0 +1,329 @@
+note L749 minimal byte-preserving JSON argv-array splice core; no runtime claim
+ global source uchar 4096
+ global repl uchar 256
+ global outbuf uchar 4096
+ global slen ulong 1
+ global rlen ulong 1
+ global olen ulong 1
+ global expect uchar 8192
+ global elen ulong 1
+ global target ulong 1
+ global finish ulong 1
+ global nfound ulong 1
+ global fpos ulong 1
+ global fsize ulong 1
+ global parsed ulong 1
+
+ fn ws i ulong to ulong
+ b = get source i
+ if or eq b 32 eq b 9
+ ret 1
+ end
+ if or eq b 10 eq b 13
+ ret 1
+ end
+ ret 0
+ end
+
+
+ fn skipws pos ulong lim ulong to ulong
+ i = pos
+ while lt i lim
+ if eq ws i 0
+ ret i
+ end
+ i = add i 1
+ end
+ ret i
+ end
+
+ fn strend start ulong lim ulong to ulong
+ i = add start 1
+ esc = ulong 0
+ while lt i lim
+ b = get source i
+ if eq esc 1
+ esc = 0
+ else
+ if eq b 92
+ esc = 1
+ else
+ if eq b 34
+ ret i
+ end
+ if lt b 32
+ ret 0
+ end
+ end
+ end
+ i = add i 1
+ end
+ ret 0
+ end
+
+ fn arrend start ulong lim ulong to ulong
+ i = start
+ depth = ulong 0
+ quote = ulong 0
+ esc = ulong 0
+ while lt i lim
+ b = get source i
+ if eq quote 1
+ if eq esc 1
+ esc = 0
+ else
+ if eq b 92
+ esc = 1
+ else
+ if eq b 34
+ quote = 0
+ end
+ end
+ end
+ else
+ if eq b 34
+ quote = 1
+ else
+ if eq b 91
+ depth = add depth 1
+ else
+ if eq b 93
+ depth = sub depth 1
+ if eq depth 0
+ ret i
+ end
+ end
+ end
+ end
+ end
+ i = add i 1
+ end
+ ret 0
+ end
+
+ fn valid_repl to ulong
+ n = get rlen 0
+ if or lt n 3 gt n 256
+ ret 0
+ end
+ if ne get repl 0 91
+ ret 0
+ end
+ i = ulong 1
+ count = ulong 0
+ while lt i n
+ if ne get repl i 34
+ ret 0
+ end
+ i = add i 1
+ esc = ulong 0
+ closed = ulong 0
+ while and lt i n eq closed 0
+ b = get repl i
+ if eq esc 1
+ esc = 0
+ else
+ if eq b 92
+ esc = 1
+ else
+ if eq b 34
+ closed = 1
+ else
+ if lt b 32
+ ret 0
+ end
+ end
+ end
+ end
+ i = add i 1
+ end
+ if eq closed 0
+ ret 0
+ end
+ count = add count 1
+ if eq i n
+ ret 0
+ end
+ if eq get repl i 44
+ i = add i 1
+ else
+ if eq get repl i 93
+ i = add i 1
+ if and eq i n gt count 0
+ ret 1
+ end
+ ret 0
+ else
+ ret 0
+ end
+ end
+ end
+ ret 0
+ end
+
+ fn isserver pos ulong ep ulong to ulong
+ if ne sub sub ep pos 1 6
+ ret 0
+ end
+ if ne get source add pos 1 115
+ ret 0
+ end
+ if ne get source add pos 2 101
+ ret 0
+ end
+ if ne get source add pos 3 114
+ ret 0
+ end
+ if ne get source add pos 4 118
+ ret 0
+ end
+ if ne get source add pos 5 101
+ ret 0
+ end
+ if ne get source add pos 6 114
+ ret 0
+ end
+ ret 1
+ end
+
+ fn locate n ulong to int
+ i = ulong 0
+ brace = ulong 0
+ bracket = ulong 0
+ put nfound 0 0
+ put target 0 0
+ put finish 0 0
+ while lt i n
+ b = get source i
+ if eq b 34
+ e = strend i n
+ if eq e 0
+ ret 3
+ end
+ if eq isserver i e 1
+ j = skipws add e 1 n
+ if lt j n
+ if eq get source j 58
+ j = skipws add j 1 n
+ if lt j n
+ if eq get source j 91
+ put nfound 0 add get nfound 0 1
+ put target 0 j
+ z = arrend j n
+ if eq z 0
+ ret 4
+ end
+ put finish 0 add z 1
+ end
+ end
+ end
+ end
+ end
+ i = add e 1
+ else
+ if eq b 123
+ brace = add brace 1
+ else
+ if eq b 125
+ brace = sub brace 1
+ if lt brace 0
+ ret 3
+ end
+ else
+ if eq b 91
+ bracket = add bracket 1
+ else
+ if eq b 93
+ bracket = sub bracket 1
+ if lt bracket 0
+ ret 3
+ end
+ end
+ end
+ end
+ end
+ i = add i 1
+ end
+ end
+ if ne brace 0
+ ret 3
+ end
+ if ne bracket 0
+ ret 3
+ end
+ if ne get nfound 0 1
+ ret 5
+ end
+ ret 0
+ end
+
+ fn compose n ulong rn ulong to int
+ start = get target 0
+ stop = get finish 0
+ newlen = add start rn
+ tail = sub n stop
+ newlen = add newlen tail
+ if gt newlen len outbuf
+ ret 6
+ end
+ k = ulong 0
+ while lt k start
+ put outbuf k get source k
+ k = add k 1
+ end
+ j = ulong 0
+ while lt j rn
+ dest = add start j
+ put outbuf dest get repl j
+ j = add j 1
+ end
+ k = stop
+ dest = add start rn
+ while lt k n
+ put outbuf dest get source k
+ k = add k 1
+ dest = add dest 1
+ end
+ put olen 0 newlen
+ ret 0
+ end
+
+ fn migrate to int
+ n = get slen 0
+ rn = get rlen 0
+ if or or eq n 0 gt n 4096 lt rn 3
+ ret 1
+ end
+ if eq valid_repl 0
+ ret 2
+ end
+ rc = locate n
+ if ne rc 0
+ ret rc
+ end
+ ret compose n rn
+ end
+
+ fn header to ulong
+ value = ulong 0
+ digit = ulong 0
+ while lt get fpos 0 get fsize 0
+ b = ulong get expect get fpos 0
+ if eq b 10
+ put parsed 0 value
+ put fpos 0 add get fpos 0 1
+ ret 1
+ end
+ if or lt b 48 gt b 57
+ ret 0
+ end
+ digit = sub b 48
+ value = mul value 10
+ value = add value digit
+ if gt value 8192
+ ret 0
+ end
+ put fpos 0 add get fpos 0 1
+ end
+ ret 0
+ end
