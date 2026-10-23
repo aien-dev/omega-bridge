@@ -1,0 +1,10 @@
+{
+  "review": "L622",
+  "source": "0dee6994ed10b51dc30b4ab1ff7665202ecaec56",
+  "original_report_sha256": "4dabded25db2958ba34d74126430b00a941dcd4ae6f9828c826442429157d877",
+  "candidate_sha256": "e60af9f70edf2c2c50b3160902faff1eb7eba104463bb29a15217f71dce3c77f",
+  "fixture_source_closure": 116,
+  "parent_replay_cases": 23,
+  "disposition": "No reproducible source defect reported; exact source, binary identity, fixture closure and raw outcomes verified. Parent replay passed.",
+  "limits": "Reviewer independently rebuilt and reran the authored gate; no separately authored adversarial probe corpus is evidenced. Report phrase no device node accessed means no GPU device: /dev/null was accessed. Mapping, launcher and real GPU execution not reviewed."
+}
