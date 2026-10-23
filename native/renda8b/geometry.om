@@ -1,0 +1,80 @@
+note SPDX-License-Identifier: AGPL-3.0-only
+note Exact 8B geometry only:36layers,32Q/8KV heads,head128,blocks128.
+note Invalid index returns ulong max; no modulo wrap to a valid address.
+global logits ulong 151936
+fn kvhead q ulong to ulong
+if ge q 32
+ret 18446744073709551615
+end
+ret div q 4
+end
+fn kvoffset layer ulong pos ulong h ulong d ulong cap ulong to ulong
+if or eq cap 0 gt cap 40960
+ret 18446744073709551615
+end
+if or ge layer 36 ge pos cap
+ret 18446744073709551615
+end
+if or ge h 8 ge d 128
+ret 18446744073709551615
+end
+v = add mul layer cap pos
+ret add mul add mul v 8 h 128 d
+end
+fn scaleidx row ulong col ulong rows ulong cols ulong to ulong
+if or eq rows 0 eq cols 0
+ret 18446744073709551615
+end
+if or gt rows 151936 gt cols 12288
+ret 18446744073709551615
+end
+if or ne rem rows 128 0 ne rem cols 128 0
+ret 18446744073709551615
+end
+if or ge row rows ge col cols
+ret 18446744073709551615
+end
+ret add mul div row 128 div cols 128 div col 128
+end
+fn ropepair d ulong to ulong
+if ge d 128
+ret 18446744073709551615
+end
+if lt d 64
+ret add d 64
+end
+ret sub d 64
+end
+fn fgreater a ulong b ulong to bool
+if and eq and a 2147483647 0 eq and b 2147483647 0
+ret false
+end
+sa = shr a 31
+sb = shr b 31
+if ne sa sb
+ret eq sa 0
+end
+if eq sa 1
+ret lt a b
+end
+ret gt a b
+end
+fn argmax n ulong to ulong
+if or eq n 0 gt n len logits
+ret 18446744073709551615
+end
+best = ulong 0
+for i ulong n
+x = get logits i
+if gt x 4294967295
+ret 18446744073709551615
+end
+if eq and x 2139095040 2139095040
+ret 18446744073709551615
+end
+if fgreater x get logits best
+best = i
+end
+end
+ret best
+end

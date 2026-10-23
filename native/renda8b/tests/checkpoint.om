@@ -1,0 +1,75 @@
+text good "{\"model.norm.weight\":{\"dtype\":\"BF16\",\"shape\":[4096],\"data_offsets\":[0,8192]}}"
+text badshape "{\"model.norm.weight\":{\"dtype\":\"BF16\",\"shape\":[4095],\"data_offsets\":[0,8192]}}"
+text baddtype "{\"model.norm.weight\":{\"dtype\":\"F8_E4M3\",\"shape\":[4096],\"data_offsets\":[0,8192]}}"
+text dupfield "{\"model.norm.weight\":{\"dtype\":\"BF16\",\"dtype\":\"BF16\",\"shape\":[4096],\"data_offsets\":[0,8192]}}"
+text badname "{\"model.layers.36.self_attn.q_norm.weight\":{\"dtype\":\"BF16\",\"shape\":[128],\"data_offsets\":[0,256]}}"
+text goodq "{\"model.layers.35.self_attn.q_norm.weight\":{\"dtype\":\"BF16\",\"shape\":[128],\"data_offsets\":[0,256]}}"
+text gap "{\"model.norm.weight\":{\"dtype\":\"BF16\",\"shape\":[4096],\"data_offsets\":[1,8193]}}"
+text scale "{\"model.layers.0.mlp.down_proj.weight_scale_inv\":{\"shape\":[32,96],\"data_offsets\":[0,6144],\"dtype\":\"BF16\"}}"
+text trans "{\"model.layers.0.mlp.down_proj.weight_scale_inv\":{\"shape\":[96,32],\"data_offsets\":[0,6144],\"dtype\":\"BF16\"}}"
+text overflow "{\"model.norm.weight\":{\"dtype\":\"BF16\",\"shape\":[18446744073709555712],\"data_offsets\":[0,8192]}}"
+fn main to int
+sreset
+for i ulong len good
+put jin i get good i
+end
+report eq sheader len good 8192 1 0
+report eq get seen 650 1
+report ne sfinish 0
+report eq get admit 0 0
+report ne sheader len good 8192 1 0
+sreset
+report ne sheader len good 8191 1 0
+sreset
+for i ulong len badshape
+put jin i get badshape i
+end
+report ne sheader len badshape 8192 1 0
+for i ulong len baddtype
+put jin i get baddtype i
+end
+report ne sheader len baddtype 8192 1 0
+for i ulong len dupfield
+put jin i get dupfield i
+end
+report ne sheader len dupfield 8192 1 0
+for i ulong len badname
+put jin i get badname i
+end
+report ne sheader len badname 256 1 0
+for i ulong len goodq
+put jin i get goodq i
+end
+report eq sheader len goodq 256 2 0
+report eq get seen 632 1
+for i ulong len gap
+put jin i get gap i
+end
+report ne sheader len gap 8193 1 0
+for i ulong len scale
+put jin i get scale i
+end
+report eq sheader len scale 6144 1 0
+sreset
+for i ulong len trans
+put jin i get trans i
+end
+report ne sheader len trans 6144 1 0
+for i ulong len overflow
+put jin i get overflow i
+end
+report ne sheader len overflow 8192 1 0
+report ne sheader 65537 0 1 0
+report ne sheader 0 0 1 0
+report eq get admit 0 0
+note Even complete seen bits cannot admit after a parsing error in this session.
+for i ulong len seen
+put seen i 1
+end
+report ne sfinish 0
+report eq get admit 0 0
+if ne get failed 0 0
+ret 1
+end
+ret 0
+end

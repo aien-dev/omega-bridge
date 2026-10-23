@@ -1,0 +1,12 @@
+qwen3-8b-fp8/config.json: OK
+qwen3-8b-fp8/generation_config.json: OK
+qwen3-8b-fp8/.gitattributes: OK
+qwen3-8b-fp8/LICENSE: OK
+qwen3-8b-fp8/merges.txt: OK
+qwen3-8b-fp8/model-00001-of-00002.safetensors: OK
+qwen3-8b-fp8/model-00002-of-00002.safetensors: OK
+qwen3-8b-fp8/model.safetensors.index.json: OK
+qwen3-8b-fp8/README.md: OK
+qwen3-8b-fp8/tokenizer_config.json: OK
+qwen3-8b-fp8/tokenizer.json: OK
+qwen3-8b-fp8/vocab.json: OK
