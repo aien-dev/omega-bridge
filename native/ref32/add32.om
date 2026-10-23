@@ -1,0 +1,103 @@
+note SPDX-License-Identifier: AGPL-3.0-only
+note Native IEEE binary32 addition over bit patterns, RNE and gradual underflow.
+note Canonical positive quiet NaN; no foreign floating runtime or compiler f32 type.
+fn ajam x ulong n ulong to ulong
+if eq n 0
+ret x
+end
+if ge n 64
+if ne x 0
+ret 1
+end
+ret 0
+end
+q = shr x n
+mask = sub shl 1 n 1
+if ne and x mask 0
+q = or q 1
+end
+ret q
+end
+fn add32 aa ulong bb ulong to ulong
+a = and aa 4294967295
+b = and bb 4294967295
+if or gt and a 2147483647 2139095040 gt and b 2147483647 2139095040
+ret 2143289344
+end
+if lt and a 2147483647 and b 2147483647
+t = a
+a = b
+b = t
+end
+if eq and a 2147483647 2139095040
+if and eq and b 2147483647 2139095040 ne and xor a b 2147483648 0
+ret 2143289344
+end
+ret a
+end
+if eq and b 2147483647 0
+if eq and a 2147483647 0
+ret and and a b 2147483648
+end
+ret a
+end
+sign = and a 2147483648
+ea = and shr a 23 255
+eb = and shr b 23 255
+ma = and a 8388607
+mb = and b 8388607
+if eq ea 0
+ea = 1
+else
+ma = or ma 8388608
+end
+if eq eb 0
+eb = 1
+else
+mb = or mb 8388608
+end
+ma = shl ma 3
+mb = shl mb 3
+mb = ajam mb sub ea eb
+if eq and xor a b 2147483648 0
+ma = add ma mb
+if ge ma 134217728
+ma = ajam ma 1
+ea = add ea 1
+end
+else
+ma = sub ma mb
+if eq ma 0
+ret 0
+end
+while and lt ma 67108864 gt ea 1
+ma = shl ma 1
+ea = sub ea 1
+end
+end
+q = shr ma 3
+r = and ma 7
+if gt r 4
+q = add q 1
+else
+if eq r 4
+if ne and q 1 0
+q = add q 1
+end
+end
+end
+if ge q 16777216
+q = shr q 1
+ea = add ea 1
+end
+if ge ea 255
+ret or sign 2139095040
+end
+if lt q 8388608
+ea = 0
+end
+q = and q 8388607
+ea = shl ea 23
+q = or q ea
+ret or sign q
+end

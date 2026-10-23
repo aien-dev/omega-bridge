@@ -1,0 +1,39 @@
+note Native addition corpus runner; each record a,b,expected binary32 LE bits.
+global record uchar 12
+fn aword p ulong to ulong
+v = ulong 0
+for i ulong 4
+v = or v shl ulong get record add p i mul i 8
+end
+ret v
+end
+fn main to int
+while true
+p = ulong 0
+while lt p 12
+n = read 0 record p sub 12 p
+if eq n 0
+if ne p 0
+ret 74
+end
+if ne get failed 0 0
+ret 1
+end
+ret 0
+end
+if eq n -4
+n = 0
+else
+if lt n 0
+ret 74
+end
+end
+p = add p ulong n
+end
+a = aword 0
+b = aword 4
+wanted = aword 8
+report eq add32 a b wanted
+end
+ret 0
+end

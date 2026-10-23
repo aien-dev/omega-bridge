@@ -1,0 +1,4 @@
+note Missing addition behavior baseline.
+fn add32 a ulong b ulong to ulong
+ret 0
+end
