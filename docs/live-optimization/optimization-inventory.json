@@ -956,7 +956,9 @@
       "current_model_applicability": "source ownership authority; not .om closure",
       "integration_action": "request immutable native consumer seam; preserve owner",
       "disposition": "pending",
-      "hardware_L739": "NOT_RUN"
+      "hardware_L739": "NOT_RUN",
+      "independent_review": "L458-canonical-review-result.md, frozen canonical source",
+      "review_disposition": "Important source-validation/contract gaps reported; resolution not verified by L739; owner retains implementation"
     },
     {
       "id": "rotation-int4-identity",

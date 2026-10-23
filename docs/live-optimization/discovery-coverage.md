@@ -86,3 +86,9 @@ Original Git metadata, shared ledgers and gh guard state are read-only. Private
 commit/bundle relay preserves work without changing the existing worktree or
 other owners. aien-calc tool calls were refused by approval policy; no arithmetic
 receipt or derived speed was invented. All new implementation/tests are .om.
+
+The existing L458 independent canonical-motor review report was also found.
+It reports important dependency-validation and contract gaps at that frozen
+source. L739 has not verified an owner resolution and does not claim that
+canonical motor is independently release-qualified. This is routed to its
+existing owner; no source-map/checker changes are made here.

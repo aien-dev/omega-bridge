@@ -53,3 +53,9 @@ an invalid frame. All nine current invalid fixture cases still refuse65/0bytes.
 The preseal manifest deliberately remained checked and exposed one changed
 invalid-fixture hash (47); the final source/artifact manifest was regenerated
 and passes fully (48). No stale manifest is called current.
+
+Frozen committed M2 replay: exact46b10c8 export,13 native executable builds,
+all source/artifact SHA checks,selection/schedule tests,mixed/full/plan real-pipe
+comparisons and original-policy differential pass (49). Parent's independent
+M1 manifest rejection is preserved verbatim (50); M1 remains unqualified.
+Author source review is separate from the still-required independent review.
