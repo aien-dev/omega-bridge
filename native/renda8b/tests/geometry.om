@@ -1,0 +1,51 @@
+fn main to int
+for i ulong 32
+report eq kvhead i div i 4
+end
+report eq kvhead 32 18446744073709551615
+report eq kvoffset 0 0 0 0 40960 0
+report eq kvoffset 0 1 0 0 40960 1024
+report eq kvoffset 1 0 0 0 40960 41943040
+report eq kvoffset 35 40959 7 127 40960 1509949439
+report eq kvoffset 36 0 0 0 40960 18446744073709551615
+report eq kvoffset 0 40960 0 0 40960 18446744073709551615
+report eq kvoffset 0 0 8 0 40960 18446744073709551615
+report eq kvoffset 0 0 0 128 40960 18446744073709551615
+report eq kvoffset 0 0 0 0 0 18446744073709551615
+report eq kvoffset 0 0 0 0 18446744073709551615 18446744073709551615
+report eq scaleidx 127 127 4096 12288 0
+report eq scaleidx 128 0 4096 12288 96
+report eq scaleidx 0 128 4096 12288 1
+report eq scaleidx 4095 12287 4096 12288 3071
+report eq scaleidx 4096 0 4096 12288 18446744073709551615
+report eq scaleidx 0 12288 4096 12288 18446744073709551615
+report eq scaleidx 0 0 4095 12288 18446744073709551615
+report eq scaleidx 0 0 4096 0 18446744073709551615
+for i ulong 64
+report eq ropepair i add i 64
+report eq ropepair add i 64 i
+end
+report eq ropepair 128 18446744073709551615
+put logits 0 3212836864
+put logits 1 3221225472
+put logits 2 1065353216
+put logits 3 1065353216
+report eq argmax 4 2
+report eq argmax 2 0
+put logits 0 2147483648
+put logits 1 0
+report eq argmax 2 0
+put logits 0 0
+put logits 1 2147483648
+report eq argmax 2 0
+put logits 2 2143289344
+report eq argmax 3 18446744073709551615
+put logits 2 2139095040
+report eq argmax 3 18446744073709551615
+report eq argmax 0 18446744073709551615
+report eq argmax 151937 18446744073709551615
+if ne get failed 0 0
+ret 1
+end
+ret 0
+end

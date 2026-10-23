@@ -1,0 +1,47 @@
+note Structural/encoding tests only. No chip execution or numerical gate claim.
+global frozen uchar 512
+fn kw at ulong to ulong
+v = ulong 0
+for i ulong 4
+v = or v shl ulong get kbytes add at i mul i 8
+end
+ret v
+end
+fn main to int
+n = read 3 frozen 0 512
+if ne n 512
+ret 74
+end
+for mode ulong 2
+report eq kernel mode 0
+report eq get ksize 0 544
+report eq kw 0 1346841935
+report eq kw 4 1
+report eq kw 8 121
+report eq kw 12 1
+report eq kw 16 512
+report eq kw 20 10
+report eq kw 24 28
+report eq kw 28 2
+for i ulong 512
+if or lt i 272 ge i 288
+report eq get frozen i get kbytes add i 32
+end
+end
+if eq mode 0
+report eq kw 304 34173473
+report eq kw 312 0
+else
+report eq kw 304 34173472
+report eq kw 312 4194304
+end
+report eq kw 308 5
+report eq kw 316 17812480
+end
+report eq kernel 2 69
+report eq get ksize 0 0
+if ne get failed 0 0
+ret 1
+end
+ret 0
+end

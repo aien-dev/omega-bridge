@@ -1,0 +1,23 @@
+note SPDX-License-Identifier: AGPL-3.0-only
+global failed ulong 1
+global tested ulong 1
+global line uchar 48
+fn report ok bool to void
+id = add get tested 0 1
+put tested 0 id
+put line 0 uchar add 48 rem div id 1000 10
+put line 1 uchar add 48 rem div id 100 10
+put line 2 uchar add 48 rem div id 10 10
+put line 3 uchar add 48 rem id 10
+put line 4 32
+put line 5 48
+if not ok
+put line 5 49
+put failed 0 add get failed 0 1
+end
+put line 6 10
+w = write 1 line 0 7
+if ne w 7
+exit 74
+end
+end

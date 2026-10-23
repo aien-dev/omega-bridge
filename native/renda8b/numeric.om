@@ -1,0 +1,78 @@
+note SPDX-License-Identifier: AGPL-3.0-only
+note E4M3FN and BF16 codecs over IEEE binary32 bits. No host float runtime.
+note Saturating E4M3 round-to-nearest-even; signed zeros; canonical quiet NaNs.
+fn roundshr x ulong n ulong to ulong
+if eq n 0
+ret x
+end
+if gt n 63
+ret 0
+end
+q = shr x n
+mask = sub shl 1 n 1
+r = and x mask
+h = shl 1 sub n 1
+if or gt r h and eq r h ne and q 1 0
+q = add q 1
+end
+ret q
+end
+fn fdecode x ulong to ulong
+s = shl and x 128 24
+e = and shr x 3 15
+m = and x 7
+if eq and x 127 127
+ret or s 2143289344
+end
+if eq e 0
+if eq m 0
+ret s
+end
+k = ulong 0
+v = m
+while gt v 1
+v = shr v 1
+k = add k 1
+end
+e = add k 118
+m = sub shl m sub 23 k 8388608
+ret or s or shl e 23 m
+end
+ret or s or shl add e 120 23 shl m 20
+end
+fn fencode x ulong to ulong
+s = shr and x 2147483648 24
+e = and shr x 23 255
+m = and x 8388607
+if eq e 255
+if ne m 0
+ret or s 127
+end
+ret or s 126
+end
+if lt e 117
+ret s
+end
+if gt e 135
+ret or s 126
+end
+m = or m 8388608
+if lt e 121
+v = roundshr m sub 141 e
+ret or s v
+end
+v = roundshr m 20
+v = add mul sub e 121 8 v
+if gt v 126
+v = 126
+end
+ret or s v
+end
+fn bround x ulong to ulong
+e = and x 2139095040
+if and eq e 2139095040 ne and x 8388607 0
+ret or shr and x 2147483648 16 32704
+end
+v = add x add 32767 and shr x 16 1
+ret and shr v 16 65535
+end

@@ -1,0 +1,5 @@
+note Minimal L408 FR16 consumer reproducer, no fallback or fabricated transport.
+fn main to int
+fd = socket 2 1 0
+ret int fd
+end

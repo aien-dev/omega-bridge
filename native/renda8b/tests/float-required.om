@@ -1,0 +1,5 @@
+note Minimal L408 FR4 consumer reproducer, expected to be refused by pinned seed.
+fn main to int
+x = f32 1
+ret int x
+end

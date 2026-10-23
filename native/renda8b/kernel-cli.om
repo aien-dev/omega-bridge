@@ -1,0 +1,21 @@
+note Stdin single byte0=add or1=product. Outputs a LAB-ONLY capsule, never launches.
+global choice uchar 2
+fn main to int
+n = read 0 choice 0 2
+if ne n 1
+ret 64
+end
+r = kernel ulong get choice 0
+if ne r 0
+ret int r
+end
+p = ulong 0
+while lt p get ksize 0
+n = write 1 kbytes p sub get ksize 0 p
+if le n 0
+ret 74
+end
+p = add p ulong n
+end
+ret 0
+end

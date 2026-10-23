@@ -1,0 +1,62 @@
+note Descriptor reader only. Shell supplies immutable shard files on fd3/fd4.
+global hdr uchar 8
+fn sread fd int to ulong
+p = ulong 0
+while lt p 8
+n = read fd hdr p sub 8 p
+if eq n -4
+n = 0
+else
+if le n 0
+ret 0
+end
+end
+p = add p ulong n
+end
+v = ulong 0
+for i ulong 8
+v = or v shl ulong get hdr i mul i 8
+end
+if or eq v 0 gt v len jin
+ret 0
+end
+p = 0
+while lt p v
+n = read fd jin p sub v p
+if eq n -4
+n = 0
+else
+if le n 0
+ret 0
+end
+end
+p = add p ulong n
+end
+ret v
+end
+text success "PASS 651 tensor descriptors; payload hashing is external; no model execution\n"
+fn main to int
+sreset
+n = sread 3
+if ne n 42024
+ret 65
+end
+if ne sheader n 4953198592 1 0
+ret 66
+end
+n = sread 4
+if ne n 35576
+ret 67
+end
+if ne sheader n 4483352576 2 0
+ret 68
+end
+if ne sfinish 0
+ret 69
+end
+w = write 1 success 0 len success
+if ne w long len success
+ret 74
+end
+ret 0
+end

@@ -1,0 +1,346 @@
+note SPDX-License-Identifier: AGPL-3.0-only
+note Exact Qwen3-8B-FP8 descriptor admission. Compose with pinned L690 JSON.
+note Header-only; does not claim payload integrity, allocation, tokenizer or inference.
+global seen ulong 651
+global want ulong 3
+global shards ulong 651
+global offsets ulong 651
+global nbytes ulong 651
+global admit ulong 1
+global fault ulong 1
+text prefix "model.layers."
+text swords "input_layernorm.weight\npost_attention_layernorm.weight\nself_attn.q_norm.weight\nself_attn.k_norm.weight\nself_attn.q_proj.weight\nself_attn.q_proj.weight_scale_inv\nself_attn.k_proj.weight\nself_attn.k_proj.weight_scale_inv\nself_attn.v_proj.weight\nself_attn.v_proj.weight_scale_inv\nself_attn.o_proj.weight\nself_attn.o_proj.weight_scale_inv\nmlp.gate_proj.weight\nmlp.gate_proj.weight_scale_inv\nmlp.up_proj.weight\nmlp.up_proj.weight_scale_inv\nmlp.down_proj.weight\nmlp.down_proj.weight_scale_inv\nmodel.embed_tokens.weight\nlm_head.weight\nmodel.norm.weight\n__metadata__\ndtype\nshape\ndata_offsets\nBF16\nF8_E4M3\nformat\npt\n"
+fn slookup t ulong skip ulong to ulong
+if ne get jtyp t 3
+ret 0
+end
+lo = add add get jbeg t 1 skip
+hi = sub get jend t 1
+if gt lo hi
+ret 0
+end
+slot = ulong 1
+p = lo
+same = true
+for i ulong len swords
+c = get swords i
+if eq c 10
+if and same eq p hi
+ret slot
+end
+slot = add slot 1
+p = lo
+same = true
+else
+if ge p hi
+same = false
+else
+same = and same eq c get jin p
+end
+p = add p 1
+end
+end
+ret 0
+end
+fn sname to ulong
+k = slookup 0 0
+if and ge k 19 le k 22
+ret add 648 sub k 19
+end
+b = add get jbeg 0 1
+e = sub get jend 0 1
+if lt sub e b add len prefix 3
+ret 652
+end
+for i ulong len prefix
+if ne get jin add b i get prefix i
+ret 652
+end
+end
+p = add b len prefix
+c = ulong get jin p
+if not jdigit c
+ret 652
+end
+layer = sub c 48
+p = add p 1
+c = ulong get jin p
+if jdigit c
+if eq layer 0
+ret 652
+end
+layer = add mul layer 10 sub c 48
+p = add p 1
+end
+if or ge layer 36 ne get jin p 46
+ret 652
+end
+k = slookup 0 sub add p 1 b
+if or eq k 0 gt k 18
+ret 652
+end
+ret add mul layer 18 sub k 1
+end
+fn snum t ulong to ulong
+if or ge t get jcnt 0 ne get jtyp t 4
+jfail
+ret 0
+end
+v = ulong 0
+p = get jbeg t
+while lt p get jend t
+c = ulong get jin p
+if not jdigit c
+jfail
+ret 0
+end
+d = sub c 48
+if gt v div sub 18446744073709551615 d 10
+jfail
+ret 0
+end
+v = add mul v 10 d
+p = add p 1
+end
+ret v
+end
+fn snext t ulong to ulong
+q = add t 1
+while lt q get jcnt 0
+if ge get jbeg q get jend t
+ret q
+end
+q = add q 1
+end
+ret q
+end
+fn sfield key ulong to ulong
+found = ulong 4096
+t = ulong 1
+while lt t get jcnt 0
+k = slookup t 0
+if or lt k 23 gt k 25
+jfail
+ret 4096
+end
+v = add t 1
+if eq k key
+if ne found 4096
+jfail
+ret 4096
+end
+found = v
+end
+t = snext v
+end
+if eq found 4096
+jfail
+end
+ret found
+end
+fn sshape id ulong to void
+put want 0 4096
+put want 1 0
+put want 2 26
+if ge id 648
+if lt id 650
+put want 0 151936
+put want 1 4096
+end
+ret
+end
+r = rem id 18
+if lt r 4
+if ge r 2
+put want 0 128
+end
+ret
+end
+put want 1 4096
+put want 2 27
+if and ge r 6 lt r 10
+put want 0 1024
+end
+if and ge r 12 lt r 16
+put want 0 12288
+end
+if ge r 16
+put want 1 12288
+end
+if ne rem r 2 0
+put want 0 div get want 0 128
+put want 1 div get want 1 128
+put want 2 26
+end
+end
+fn sarray t ulong a ulong b ulong to bool
+if eq t 4096
+ret false
+end
+if ne get jtyp t 2
+ret false
+end
+n = ulong 2
+if ne b 0
+n = 3
+end
+if ne sub snext t t n
+ret false
+end
+if ne snum add t 1 a
+ret false
+end
+if ne b 0
+if ne snum add t 2 b
+ret false
+end
+end
+ret eq get jerr 0 0
+end
+fn sdesc id ulong at ulong shard ulong to ulong
+if ne get jtyp 0 1
+jfail
+ret at
+end
+if ne get seen id 0
+jfail
+ret at
+end
+sshape id
+d = sfield 23
+s = sfield 24
+o = sfield 25
+if ne get jerr 0 0
+ret at
+end
+if ne slookup d 0 get want 2
+jfail
+ret at
+end
+if not sarray s get want 0 get want 1
+jfail
+ret at
+end
+bytes = get want 0
+if ne get want 1 0
+bytes = mul bytes get want 1
+end
+if eq get want 2 26
+bytes = mul bytes 2
+end
+endoff = add at bytes
+if lt endoff at
+jfail
+ret at
+end
+if not sarray o at endoff
+jfail
+ret at
+end
+put seen id 1
+put shards id shard
+put offsets id at
+put nbytes id bytes
+ret endoff
+end
+fn sreset to void
+put admit 0 0
+put fault 0 0
+for i ulong len seen
+put seen i 0
+put shards i 0
+put offsets i 0
+put nbytes i 0
+end
+end
+fn smeta to bool
+if ne get jcnt 0 3
+ret false
+end
+if ne get jtyp 0 1
+ret false
+end
+if ne slookup 1 0 28
+ret false
+end
+ret eq slookup 2 0 29
+end
+fn sbody n ulong bytes ulong shard ulong to ulong
+put admit 0 0
+put jerr 0 0
+put jpos 0 0
+put jlen 0 n
+if or eq n 0 gt n len jin
+ret 1
+end
+jspace
+jexpect 123
+jspace
+at = ulong 0
+meta = false
+more = ne jpeek 125
+while and more eq get jerr 0 0
+put jcnt 0 0
+jvalue 4096 0
+if or ne get jerr 0 0 ne get jtyp 0 3
+ret 1
+end
+id = sname
+if gt id 651
+ret 2
+end
+jspace
+jexpect 58
+put jcnt 0 0
+jvalue 4096 0
+if ne get jerr 0 0
+ret 1
+end
+if eq id 651
+if meta
+ret 3
+end
+meta = true
+if not smeta
+ret 3
+end
+else
+at = sdesc id at shard
+end
+jspace
+if eq jpeek 44
+c = jtake
+else
+more = false
+end
+end
+jexpect 125
+jspace
+if or ne get jerr 0 0 ne get jpos 0 n
+ret 1
+end
+if ne at bytes
+ret 4
+end
+ret 0
+end
+fn sheader n ulong bytes ulong shard ulong to ulong
+s = sbody n bytes shard
+if ne s 0
+put fault 0 1
+end
+ret s
+end
+fn sfinish to ulong
+put admit 0 0
+if ne get fault 0 0
+ret 1
+end
+for i ulong len seen
+if ne get seen i 1
+ret 1
+end
+end
+put admit 0 1
+ret 0
+end

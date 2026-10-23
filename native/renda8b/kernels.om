@@ -1,0 +1,59 @@
+note SPDX-License-Identifier: AGPL-3.0-only
+note Two handwritten fixed sm121 kernels: f32 residual add and elementwise product.
+note Offline LAB capsules only. No launcher, compiler frontend or CPU fallback.
+note VECTOR_1D ABI from immutable seed57f5f425, reads two f32 vectors, writes one.
+global kbytes uchar 544
+global ksize ulong 1
+fn kword w ulong to void
+for i ulong 4
+put kbytes get ksize 0 uchar and shr w mul i 8 255
+put ksize 0 add get ksize 0 1
+end
+end
+fn kins a ulong b ulong c ulong d ulong to void
+kword a
+kword b
+kword c
+kword d
+end
+fn kernel op ulong to ulong
+put ksize 0 0
+if gt op 1
+ret 69
+end
+note OMGP schema1 arch121 LAB flag1 code512 regs10 params28 inputs2.
+kins 1346841935 1 121 1
+kins 512 10 28 2
+note Prologue and address/load schedule retained from pinned seed vector addition.
+kins 4278287234 57088 2048 1040896
+kins 620825 0 9472 926208
+kins 4278482860 27648 134219776 926208
+kins 31001 0 8448 926208
+kins 4278548396 29440 134219776 942592
+kins 151616548 4 260964864 2083328
+kins 151026700 5 200302704 3136000
+kins 2381 0 58720256 1042944
+kins 4278352770 57344 2560 926208
+kins 4278482860 27392 134220288 945664
+kins 4278483842 57856 2560 962560
+kins 4278614914 58368 2560 975360
+kins 151156773 4 126746626 2083840
+kins 33716609 4 203299072 3088896
+kins 151287845 4 126746628 5229568
+kins 67467649 4 203299072 991744
+kins 151418917 4 126746630 9429504
+note R9 = f32(R2) op f32(R5); wait scoreboard4; fixed result stall6.
+if eq op 0
+kins 34173473 5 0 17812480
+else
+kins 34173472 5 4194304 17812480
+end
+note Store, EXIT, guard, padding. Original vector ABI and bounds predicate.
+kins 100694406 9 202381572 1040896
+kins 31053 0 58720256 1042944
+kins 16546119 4294967292 58982399 1032192
+for i ulong 11
+kins 31000 0 0 1032192
+end
+ret 0
+end

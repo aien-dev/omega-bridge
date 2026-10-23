@@ -1,0 +1,47 @@
+note Independent hand-calculated IEEE bit patterns, no floating host runtime.
+fn main to int
+report eq fdecode 0 0
+report eq fdecode 128 2147483648
+report eq fdecode 1 989855744
+report eq fdecode 7 1012924416
+report eq fdecode 8 1015021568
+report eq fdecode 56 1065353216
+report eq fdecode 60 1069547520
+report eq fdecode 64 1073741824
+report eq fdecode 120 1132462080
+report eq fdecode 126 1138753536
+report eq fdecode 254 3286237184
+report eq fdecode 127 2143289344
+report eq fdecode 255 4290772992
+report eq fencode 0 0
+report eq fencode 2147483648 128
+report eq fencode 981467136 0
+report eq fencode 981467137 1
+report eq fencode 985661440 1
+report eq fencode 994050048 2
+report eq fencode 1065877504 56
+report eq fencode 1065877505 57
+report eq fencode 1066926080 58
+report eq fencode 1138753536 126
+report eq fencode 2139095040 126
+report eq fencode 4286578688 254
+report eq fencode 2143289345 127
+report eq bround 1065385984 16256
+report eq bround 1065385985 16257
+report eq bround 1065451520 16258
+report eq bround 2147483648 32768
+report eq bround 2139095040 32640
+report eq bround 2139095041 32704
+report eq bround 32768 0
+report eq bround 32769 1
+report eq bround 98304 2
+for i ulong 256
+if ne and i 127 127
+report eq fencode fdecode i i
+end
+end
+if ne get failed 0 0
+ret 1
+end
+ret 0
+end

@@ -1,0 +1,5 @@
+00400000-00404000 r-xp 00000000 103:02 20885664                          /home/drakestapleton/handoffs/renda8b-L720/build/inspect
+10000000-10836000 rw-p 00000000 00:00 0 
+fcbf1d127000-fcbf1d12b000 r--p 00000000 00:00 0                          [vvar]
+fcbf1d12b000-fcbf1d12d000 r-xp 00000000 00:00 0                          [vdso]
+ffffe6373000-ffffe6394000 rw-p 00000000 00:00 0                          [stack]

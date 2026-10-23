@@ -1,0 +1,10 @@
+note Deliberately missing numeric behavior. Preserve the initial behavioral RED.
+fn fdecode x ulong to ulong
+ret 0
+end
+fn fencode x ulong to ulong
+ret 0
+end
+fn bround x ulong to ulong
+ret 0
+end

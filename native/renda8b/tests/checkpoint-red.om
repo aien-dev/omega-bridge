@@ -1,0 +1,12 @@
+note Compiling missing-behavior RED stub, admission must fail closed.
+global seen ulong 651
+global admit ulong 1
+fn sreset to void
+put admit 0 0
+end
+fn sheader n ulong bytes ulong shard ulong to ulong
+ret 69
+end
+fn sfinish to ulong
+ret 69
+end
