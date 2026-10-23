@@ -1,0 +1,120 @@
+note SPDX-License-Identifier: AGPL-3.0-or-later
+note Stored bit-pattern goldens and independent pairwise rank-count oracle.
+fn check n ulong k ulong to int
+s = select n k
+if ne s 0
+ret 1
+end
+for i ulong n
+rank = ulong 0
+for j ulong n
+a = get logits j
+b = get logits i
+az = eq and a 2147483647 0
+bz = eq and b 2147483647 0
+eqval = or eq a b and az bz
+better = false
+if eqval
+better = lt j i
+else
+sa = shr a 31
+sb = shr b 31
+if ne sa sb
+better = eq sa 0
+else
+if eq sa 0
+better = gt a b
+else
+better = lt a b
+end
+end
+end
+if better
+rank = add rank 1
+end
+end
+want = lt rank k
+if ne ne get chosen i 0 want
+ret 2
+end
+end
+ret 0
+end
+fn main to int
+note Mixed order: +inf,-inf,negative,positive,both zeros,subnormal,ties.
+put logits 0 uint 3212836864
+put logits 1 uint 1065353216
+put logits 2 uint 2147483648
+put logits 3 uint 0
+put logits 4 uint 2139095040
+put logits 5 uint 4286578688
+put logits 6 uint 1
+put logits 7 uint 2147483649
+put logits 8 uint 1065353216
+for k ulong 10
+if ne check 9 k 0
+ret 10
+end
+end
+note All equal values must keep lower IDs.
+for i ulong 257
+put logits i uint 1065353216
+end
+if ne check 257 20 0
+ret 11
+end
+note Exercise replacement, heap child choice and partial final level.
+for t ulong 17
+for i ulong 127
+put logits i uint add 1056964608 rem add mul i 193 mul t 29 61
+end
+for k ulong 33
+if ne check 127 k 0
+ret 12
+end
+end
+end
+note Full current35B vocabulary; increasing finite bits have known exact rank.
+for i ulong 248320
+put logits i add uint 1056964608 uint i
+end
+for t ulong 4
+k = ulong 1
+if eq t 1
+k = ulong 20
+end
+if eq t 2
+k = ulong 100
+end
+if eq t 3
+k = ulong 248320
+end
+if ne select 248320 k 0
+ret 13
+end
+for i ulong 248320
+if ne ne get chosen i 0 ge i sub 248320 k
+ret 14
+end
+end
+end
+note NaN and shape refusals cannot leave any publication to the consumer.
+put logits 0 uint 2143289344
+if ne select 1 1 65
+ret 15
+end
+put logits 0 uint 4286578689
+if ne select 1 1 65
+ret 16
+end
+if ne select 0 0 65
+ret 17
+end
+if ne select 248321 20 65
+ret 18
+end
+if ne select 20 21 65
+ret 19
+end
+ret 0
+end

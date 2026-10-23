@@ -1,0 +1,38 @@
+note SPDX-License-Identifier: AGPL-3.0-or-later
+note Closed-form expected plan. No product grouping function is called.
+fn main to int
+head 4 3105 128
+emit 4 256
+for e ulong 256
+emit 4 e
+emit 4 mul e 4
+emit 4 4
+end
+for p ulong 1024
+j = add div p 4 mul rem p 4 256
+emit 4 div j 8
+end
+for p ulong 8
+emit 4 0
+end
+for p ulong 1024
+j = add div p 4 mul rem p 4 256
+emit 4 add mul div j 8 9 rem j 8
+end
+for p ulong 8
+emit 4 0
+end
+for p ulong 128
+emit 4 p
+end
+for p ulong 8
+emit 4 0
+end
+for p ulong 128
+emit 4 add mul p 9 8
+end
+for p ulong 8
+emit 4 0
+end
+ret 0
+end

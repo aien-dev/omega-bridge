@@ -1,0 +1,16 @@
+note SPDX-License-Identifier: AGPL-3.0-or-later
+fn main to int
+if ne header 0 248320 20 0
+ret 74
+end
+for i ulong 248320
+v = ulong 4286578688
+if ge i 248300
+v = add 1056964608 i
+end
+if ne sendnum 4 v 0
+ret 74
+end
+end
+ret 0
+end

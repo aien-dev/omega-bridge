@@ -1,0 +1,97 @@
+note SPDX-License-Identifier: AGPL-3.0-or-later
+note Current35B binary32 top-K. No floating instructions or foreign runtime.
+note Input logits are original IEEE bits. Signed zero compares equal.
+note NaNs are refused. Root of the bounded heap is the worst retained token.
+global logits uint 248320
+global chosen uchar 248320
+global heap uint 248320
+fn key bits uint to uint
+if eq and bits 2147483647 0
+ret uint 2147483648
+end
+if ne and bits 2147483648 0
+ret xor bits 4294967295
+end
+ret xor bits 2147483648
+end
+fn ahead a ulong b ulong to bool
+ka = key get logits a
+kb = key get logits b
+if ne ka kb
+ret gt ka kb
+end
+ret lt a b
+end
+fn down size ulong to void
+p = ulong 0
+for level ulong 19
+c = add mul p 2 1
+if ge c size
+ret
+end
+r = add c 1
+if lt r size
+if ahead ulong get heap c ulong get heap r
+c = r
+end
+end
+if not ahead ulong get heap p ulong get heap c
+ret
+end
+v = get heap p
+put heap p get heap c
+put heap c v
+p = c
+end
+end
+fn up start ulong to void
+p = start
+for level ulong 19
+if eq p 0
+ret
+end
+par = div sub p 1 2
+if not ahead ulong get heap par ulong get heap p
+ret
+end
+v = get heap par
+put heap par get heap p
+put heap p v
+p = par
+end
+end
+fn select n ulong k ulong to int
+if or eq n 0 gt n 248320
+ret 65
+end
+if gt k n
+ret 65
+end
+for i ulong n
+bits = get logits i
+if and eq and bits 2139095040 2139095040 ne and bits 8388607 0
+ret 65
+end
+end
+for i ulong n
+put chosen i uchar 0
+end
+if eq k 0
+ret 0
+end
+for i ulong k
+put heap i uint i
+up i
+end
+for off ulong sub n k
+i = add off k
+if ahead i ulong get heap 0
+put heap 0 uint i
+down k
+end
+end
+for i ulong k
+put chosen ulong get heap i uchar 1
+end
+ret 0
+end

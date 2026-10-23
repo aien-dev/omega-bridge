@@ -1,0 +1,56 @@
+note SPDX-License-Identifier: AGPL-3.0-or-later
+fn main to int
+mode = readnum 1
+if ne get ioerr 0 0
+ret 65
+end
+if eq mode 49
+emit 8 2
+emit 8 0
+emit 8 1
+emit 8 1
+emit 4 0
+ret 0
+end
+if eq mode 50
+head 5 0 0
+ret 0
+end
+if eq mode 51
+head 0 248321 1
+ret 0
+end
+if eq mode 52
+head 0 2 3
+ret 0
+end
+if eq mode 53
+head 0 1 1
+emit 4 2143289344
+ret 0
+end
+if eq mode 54
+head 2 1 0
+for i ulong 8
+emit 4 7
+end
+ret 0
+end
+if eq mode 55
+head 1 10 1
+ret 0
+end
+if eq mode 56
+head 3 4 0
+emit 8 128
+emit 8 129
+emit 8 127
+emit 8 49152
+ret 0
+end
+if eq mode 57
+head 0 0 0
+ret 0
+end
+ret 65
+end

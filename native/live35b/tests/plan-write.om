@@ -1,0 +1,8 @@
+note SPDX-License-Identifier: AGPL-3.0-or-later
+fn main to int
+head 4 128 0
+for i ulong 1024
+emit 4 rem i 256
+end
+ret 0
+end

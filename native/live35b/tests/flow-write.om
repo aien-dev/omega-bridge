@@ -1,0 +1,31 @@
+note SPDX-License-Identifier: AGPL-3.0-or-later
+fn main to int
+for cap ulong 32
+for mode ulong 3
+for tick ulong 12
+emit 8 1
+emit 8 mode
+emit 8 add cap 1
+emit 8 add div cap 2 1
+wait = ulong 0
+if eq rem tick 3 1
+wait = ulong 100
+end
+if eq rem tick 3 2
+wait = ulong 101
+end
+emit 8 wait
+compute = ulong 800
+if ge tick 6
+compute = ulong 1001
+end
+emit 8 compute
+emit 8 800
+emit 8 rem tick 4
+emit 8 rem div tick 3 2
+emit 8 0
+end
+end
+end
+ret 0
+end
