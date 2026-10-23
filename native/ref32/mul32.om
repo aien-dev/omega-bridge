@@ -1,0 +1,88 @@
+note SPDX-License-Identifier: AGPL-3.0-only
+note Native IEEE binary32 multiplication represented as bits; no host floating runtime.
+note Round-to-nearest ties-to-even, gradual underflow, signed zeros and infinities.
+note Canonical positive quiet NaN for every NaN result. Inputs are low32 bits.
+fn mround x ulong shift ulong to ulong
+if eq shift 0
+ret x
+end
+if gt shift 63
+ret 0
+end
+q = shr x shift
+mask = sub shl 1 shift 1
+r = and x mask
+half = shl 1 sub shift 1
+if or gt r half and eq r half ne and q 1 0
+q = add q 1
+end
+ret q
+end
+fn mul32 aa ulong bb ulong to ulong
+a = and aa 4294967295
+b = and bb 4294967295
+sign = and xor a b 2147483648
+ea = long and shr a 23 255
+eb = long and shr b 23 255
+ma = and a 8388607
+mb = and b 8388607
+if or and eq ea 255 ne ma 0 and eq eb 255 ne mb 0
+ret 2143289344
+end
+if or eq ea 255 eq eb 255
+if or eq and a 2147483647 0 eq and b 2147483647 0
+ret 2143289344
+end
+ret or sign 2139095040
+end
+if or eq and a 2147483647 0 eq and b 2147483647 0
+ret sign
+end
+if eq ea 0
+ea = 1
+while lt ma 8388608
+ma = shl ma 1
+ea = sub ea 1
+end
+else
+ma = or ma 8388608
+end
+if eq eb 0
+eb = 1
+while lt mb 8388608
+mb = shl mb 1
+eb = sub eb 1
+end
+else
+mb = or mb 8388608
+end
+product = mul ma mb
+e = sub add ea eb 127
+shift = long 23
+if ge product 140737488355328
+shift = 24
+e = add e 1
+end
+if lt e 1
+shift = add shift sub 1 e
+e = 0
+end
+q = mround product ulong shift
+if eq e 0
+if ge q 8388608
+e = 1
+end
+else
+if ge q 16777216
+q = shr q 1
+e = add e 1
+end
+end
+if ge e 255
+ret or sign 2139095040
+end
+q = and q 8388607
+e = shl e 23
+q = or q ulong e
+ret or sign q
+end

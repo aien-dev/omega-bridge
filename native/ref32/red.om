@@ -1,0 +1,4 @@
+note Missing multiply behavior, baseline must fail runtime assertions.
+fn mul32 a ulong b ulong to ulong
+ret 0
+end

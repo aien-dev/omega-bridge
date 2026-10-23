@@ -1,0 +1,23 @@
+note Binary32 multiply RNE. Expected bits independently checked with IEEE host oracle.
+note All NaNs canonicalized to positive quiet NaN; gradual underflow; signed zero.
+fn main to int
+report eq mul32 1065353216 1073741824 1073741824
+report eq mul32 3212836864 1073741824 3221225472
+report eq mul32 0 3212836864 2147483648
+report eq mul32 2147483648 3212836864 0
+report eq mul32 2139095040 0 2143289344
+report eq mul32 2139095040 3212836864 4286578688
+report eq mul32 2143289345 1065353216 2143289344
+report eq mul32 1 1065353216 1
+report eq mul32 8388608 1056964608 4194304
+report eq mul32 8388607 1073741824 16777214
+report eq mul32 2139095039 1073741824 2139095040
+report eq mul32 1069547520 1069547520 1074790400
+report eq mul32 1065353217 1065353217 1065353218
+report eq mul32 1 1056964608 0
+report eq mul32 3 1056964608 2
+if ne get failed 0 0
+ret 1
+end
+ret 0
+end
