@@ -1,0 +1,212 @@
+note SPDX-License-Identifier: AGPL-3.0-or-later
+fn main to int
+note Stored policy goldens: mode,cap,depth,wait,compute,previous,calm,pressure.
+put control 0 ulong 1
+put control 1 ulong 2
+put control 2 ulong 8
+put control 3 ulong 4
+put control 4 ulong 101
+put control 5 ulong 800
+put control 6 ulong 800
+put control 7 ulong 0
+put control 8 ulong 0
+put control 9 ulong 0
+if ne flow 0
+ret 1
+end
+if ne get decision 0 5
+ret 2
+end
+put control 4 ulong 100
+if ne flow 0
+ret 3
+end
+if ne get decision 0 4
+ret 4
+end
+put control 8 ulong 1
+if ne flow 0
+ret 5
+end
+if ne get decision 0 2
+ret 6
+end
+put control 8 ulong 0
+put control 5 ulong 1001
+if ne flow 0
+ret 7
+end
+if ne get decision 0 2
+ret 8
+end
+put control 5 ulong 1000
+if ne flow 0
+ret 9
+end
+if ne get decision 0 4
+ret 10
+end
+put control 4 ulong 0
+put control 5 ulong 800
+put control 7 ulong 3
+if ne flow 0
+ret 11
+end
+if or ne get decision 0 3 ne get decision 1 0
+ret 12
+end
+put control 1 ulong 0
+if ne flow 0
+ret 13
+end
+if ne get decision 0 1
+ret 14
+end
+put control 1 ulong 1
+put control 2 ulong 1
+put control 3 ulong 1
+if ne flow 0
+ret 15
+end
+if or ne get decision 0 1 ne get decision 1 0
+ret 16
+end
+put control 9 ulong 1
+if ne flow 65
+ret 17
+end
+put control 9 ulong 0
+put control 4 ulong 9223372036854775808
+if ne flow 65
+ret 18
+end
+note Route fixture with shared experts across rows and deliberately different picks.
+for i ulong 64
+put routes i uint rem add mul rem i 8 31 div i 8 256
+end
+if ne group 8 0
+ret 20
+end
+for out ulong 64
+j = ulong get mapping out
+if ge j 64
+ret 21
+end
+for p ulong out
+if eq get mapping p uint j
+ret 22
+end
+end
+note Independent rank count including ties to original row/rank.
+rank = ulong 0
+for p ulong 64
+a = get routes p
+b = get routes j
+if or lt a b and eq a b lt p j
+rank = add rank 1
+end
+end
+if ne rank out
+ret 23
+end
+end
+note Duplicate within a row is invalid; duplicate across rows is intentional.
+put routes 1 get routes 0
+if ne group 8 65
+ret 24
+end
+put routes 1 uint 256
+if ne group 8 65
+ret 25
+end
+if ne group 0 65
+ret 26
+end
+if ne group 129 65
+ret 27
+end
+note Actual full128-token prefill grouping,256 expert segments,shared row and padding.
+for i ulong 1024
+put routes i uint rem i 256
+end
+if ne group 128 0
+ret 41
+end
+if ne get segnum 0 256
+ret 42
+end
+for e ulong 256
+if ne get segments mul e 3 uint e
+ret 43
+end
+if ne get segments add mul e 3 1 uint mul e 4
+ret 44
+end
+if ne get segments add mul e 3 2 uint 4
+ret 45
+end
+end
+for p ulong 1024
+j = add div p 4 mul rem p 4 256
+if ne get mapping p uint j
+ret 46
+end
+if ne get xmap p uint div j 8
+ret 47
+end
+if ne get ymap p uint add mul div j 8 9 rem j 8
+ret 48
+end
+end
+for t ulong 128
+if ne get sxmap t uint t
+ret 49
+end
+if ne get symap t uint add mul t 9 8
+ret 50
+end
+end
+for p ulong 8
+if or ne get xmap add 1024 p 0 ne get ymap add 1024 p 0
+ret 51
+end
+if or ne get sxmap add 128 p 0 ne get symap add 128 p 0
+ret 52
+end
+end
+note Prefix/tool marks, final logit boundary, long context and exact endpoints.
+if ne chunk 0 129 128 49152 128
+ret 30
+end
+if ne chunk 0 129 129 49152 128
+ret 40
+end
+if ne chunk 127 129 128 49152 1
+ret 31
+end
+if ne chunk 128 129 129 49152 1
+ret 32
+end
+if ne chunk 129 257 256 49152 127
+ret 33
+end
+if ne chunk 256 257 257 49152 1
+ret 34
+end
+if ne chunk 49151 49152 49152 49152 1
+ret 35
+end
+if ne chunk 49152 49152 49152 49152 0
+ret 36
+end
+if ne chunk 128 129 127 49152 18446744073709551615
+ret 37
+end
+if ne chunk 0 49153 128 49152 18446744073709551615
+ret 38
+end
+if ne chunk 0 129 128 0 18446744073709551615
+ret 39
+end
+ret 0
+end

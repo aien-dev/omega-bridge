@@ -1,0 +1,28 @@
+note SPDX-License-Identifier: AGPL-3.0-or-later
+fn word index ulong value uint to void
+for b ulong 4
+octet = uchar and shr value uint mul b 8 255
+put payload add mul index 4 b octet
+end
+end
+fn main to int
+if ne header 0 248320 20 0
+ret 74
+end
+base = ulong 0
+while lt base 248320
+count = sub 248320 base
+if gt count 1024
+count = ulong 1024
+end
+for i ulong count
+v = add uint 1056964608 uint add base i
+word i v
+end
+if ne sendbuf mul count 4 0
+ret 74
+end
+base = add base count
+end
+ret 0
+end

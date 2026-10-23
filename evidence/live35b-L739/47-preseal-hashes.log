@@ -1,0 +1,22 @@
+build/live35b/input/omc: OK
+build/live35b/integrator: OK
+native/live35b/consumer.om: OK
+native/live35b/main.om: OK
+native/live35b/schedule.om: OK
+native/live35b/select.om: OK
+native/live35b/wire.om: OK
+native/live35b/tests/flow-raw.om: OK
+native/live35b/tests/flow-write.om: OK
+native/live35b/tests/frames.om: OK
+native/live35b/tests/full-golden.om: OK
+native/live35b/tests/full-write.om: OK
+native/live35b/tests/golden.om: OK
+native/live35b/tests/invalid.om: FAILED
+native/live35b/tests/plan-golden.om: OK
+native/live35b/tests/plan-write.om: OK
+native/live35b/tests/schedule.om: OK
+native/live35b/tests/select.om: OK
+native/live35b/tests/write.om: OK
+native/live35b/vendor/weight-flow-v1.om: OK
+sha256sum: WARNING: 1 computed checksum did NOT match
+PRESEAL_HASH_RC=1

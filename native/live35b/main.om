@@ -1,0 +1,31 @@
+fn main to int
+for frame ulong 1000000000
+version = readnum 8
+if eq get ioerr 0 1
+ret 0
+end
+if ne get ioerr 0 0
+ret get ioerr 0
+end
+if ne version 1
+ret 65
+end
+op = required 8
+if ne get ioerr 0 0
+ret get ioerr 0
+end
+count = required 8
+if ne get ioerr 0 0
+ret get ioerr 0
+end
+arg = required 8
+if ne get ioerr 0 0
+ret get ioerr 0
+end
+s = dispatch op count arg
+if ne s 0
+ret s
+end
+end
+ret 65
+end

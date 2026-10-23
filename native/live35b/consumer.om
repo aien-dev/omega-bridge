@@ -1,0 +1,215 @@
+fn unpack index ulong to uint
+v = uint 0
+for b ulong 4
+octet = uint get payload add mul index 4 b
+v = or v shl octet uint mul b 8
+end
+ret v
+end
+fn pack index ulong v uint to void
+for b ulong 4
+octet = uchar and shr v uint mul b 8 255
+put payload add mul index 4 b octet
+end
+end
+fn loadvals n ulong to int
+base = ulong 0
+while lt base n
+count = sub n base
+if gt count 1024
+count = ulong 1024
+end
+s = readbuf mul count 4
+if ne s 0
+ret s
+end
+for i ulong count
+put logits add base i unpack i
+end
+base = add base count
+end
+ret 0
+end
+fn sendvals n ulong to int
+base = ulong 0
+while lt base n
+count = sub n base
+if gt count 1024
+count = ulong 1024
+end
+for i ulong count
+index = add base i
+v = uint 4286578688
+if ne get chosen index 0
+v = get logits index
+end
+pack i v
+end
+s = sendbuf mul count 4
+if ne s 0
+ret s
+end
+base = add base count
+end
+ret 0
+end
+fn doselect n ulong k ulong to int
+if or or eq n 0 gt n 248320 gt k n
+ret 65
+end
+s = loadvals n
+if ne s 0
+ret s
+end
+s = select n k
+if ne s 0
+ret s
+end
+if ne header 0 n k 0
+ret 74
+end
+ret sendvals n
+end
+fn doflow to int
+for i ulong 10
+v = required 8
+if ne get ioerr 0 0
+ret get ioerr 0
+end
+put control i v
+end
+s = flow
+if ne s 0
+ret s
+end
+if ne header 1 2 0 0
+ret 74
+end
+for i ulong 2
+if ne sendnum 8 get decision i 0
+ret 74
+end
+end
+ret 0
+end
+fn dogroup rows ulong to int
+if or eq rows 0 gt rows 8
+ret 65
+end
+for i ulong mul rows 8
+v = required 4
+if ne get ioerr 0 0
+ret get ioerr 0
+end
+put routes i uint v
+end
+s = group rows
+if ne s 0
+ret s
+end
+if ne header 2 mul rows 8 0 0
+ret 74
+end
+for i ulong mul rows 8
+if ne sendnum 4 ulong get mapping i 0
+ret 74
+end
+end
+ret 0
+end
+fn dochunk to int
+for i ulong 4
+v = required 8
+if ne get ioerr 0 0
+ret get ioerr 0
+end
+put fields i v
+end
+n = chunk get fields 0 get fields 1 get fields 2 get fields 3
+if eq n 18446744073709551615
+ret 65
+end
+if ne header 3 1 0 0
+ret 74
+end
+ret sendnum 8 n
+end
+fn doplan rows ulong to int
+if or eq rows 0 gt rows 128
+ret 65
+end
+for i ulong mul rows 8
+v = required 4
+if ne get ioerr 0 0
+ret get ioerr 0
+end
+put routes i uint v
+end
+s = group rows
+if ne s 0
+ret s
+end
+segs = get segnum 0
+words = add 1 mul segs 3
+words = add words mul add mul rows 8 8 2
+words = add words mul add rows 8 2
+if ne header 4 words rows 0
+ret 74
+end
+if ne sendnum 4 segs 0
+ret 74
+end
+for i ulong mul segs 3
+if ne sendnum 4 ulong get segments i 0
+ret 74
+end
+end
+for i ulong add mul rows 8 8
+if ne sendnum 4 ulong get xmap i 0
+ret 74
+end
+end
+for i ulong add mul rows 8 8
+if ne sendnum 4 ulong get ymap i 0
+ret 74
+end
+end
+for i ulong add rows 8
+if ne sendnum 4 ulong get sxmap i 0
+ret 74
+end
+end
+for i ulong add rows 8
+if ne sendnum 4 ulong get symap i 0
+ret 74
+end
+end
+ret 0
+end
+fn dispatch op ulong count ulong arg ulong to int
+if eq op 0
+ret doselect count arg
+end
+if ne arg 0
+ret 65
+end
+if eq op 1
+if ne count 10
+ret 65
+end
+ret doflow
+end
+if eq op 2
+ret dogroup count
+end
+if eq op 3
+if ne count 4
+ret 65
+end
+ret dochunk
+end
+if eq op 4
+ret doplan count
+end
+ret 65
+end

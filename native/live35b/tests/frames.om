@@ -1,0 +1,62 @@
+note SPDX-License-Identifier: AGPL-3.0-or-later
+note Independent stored protocol values. Helpers fail immediately on short I/O.
+fn emit width ulong value ulong to void
+if ne sendnum width value 0
+exit 74
+end
+end
+fn head op ulong count ulong arg ulong to void
+if ne header op count arg 0
+exit 74
+end
+end
+fn request to void
+head 0 6 3
+emit 4 2147483648
+emit 4 1065353216
+emit 4 1065353216
+emit 4 2139095040
+emit 4 0
+emit 4 3212836864
+head 1 10 0
+emit 8 1
+emit 8 2
+emit 8 8
+emit 8 4
+emit 8 101
+emit 8 800
+emit 8 800
+emit 8 0
+emit 8 0
+emit 8 0
+head 2 2 0
+for i ulong 8
+emit 4 sub 15 i
+end
+for i ulong 8
+emit 4 sub 7 i
+end
+head 3 4 0
+emit 8 127
+emit 8 129
+emit 8 128
+emit 8 49152
+end
+fn golden to void
+head 0 6 3
+emit 4 4286578688
+emit 4 1065353216
+emit 4 1065353216
+emit 4 2139095040
+emit 4 4286578688
+emit 4 4286578688
+head 1 2 0
+emit 8 5
+emit 8 0
+head 2 16 0
+for i ulong 16
+emit 4 sub 15 i
+end
+head 3 1 0
+emit 8 1
+end

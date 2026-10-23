@@ -1,0 +1,179 @@
+note SPDX-License-Identifier: AGPL-3.0-or-later
+note L689 policy adapted as an in-process native consumer; same version1 fields.
+note Source pin a1ef6c04243ad007ac6d6ecc90eb158e38cb13c4, policy semantics preserved.
+global control ulong 10
+global decision ulong 2
+global routes uint 1024
+global mapping uint 1024
+global counts uint 256
+global starts uint 256
+global cursor uint 256
+global segments uint 768
+global segnum ulong 1
+global xmap uint 1032
+global ymap uint 1032
+global sxmap uint 136
+global symap uint 136
+fn ctl index ulong to ulong
+ret get control index
+end
+fn pressure to bool
+previous = ctl 6
+ret or eq ctl 8 1 and gt previous 0 gt ctl 5 add previous div previous 4
+end
+fn flow to int
+if or ne get control 0 1 gt get control 1 2
+ret 65
+end
+if or eq get control 2 0 gt get control 2 32
+ret 65
+end
+if or eq get control 3 0 gt get control 3 get control 2
+ret 65
+end
+for i ulong 3
+if gt get control add 4 i 9223372036854775807
+ret 65
+end
+end
+if or gt get control 7 3 gt get control 8 1
+ret 65
+end
+if ne get control 9 0
+ret 65
+end
+mode = get control 1
+cap = get control 2
+depth = get control 3
+wait = get control 4
+compute = get control 5
+calm = ulong 0
+if eq mode 0
+depth = ulong 1
+else
+if eq mode 1
+depth = ulong 2
+else
+if pressure
+depth = div depth 2
+else
+if gt wait div compute 8
+depth = add depth 1
+else
+if eq wait 0
+calm = add get control 7 1
+if eq calm 4
+if gt depth 2
+depth = sub depth 1
+end
+calm = ulong 0
+end
+end
+end
+end
+if lt depth 2
+depth = ulong 2
+end
+end
+end
+if gt depth cap
+depth = cap
+end
+if eq cap 1
+calm = ulong 0
+end
+put decision 0 depth
+put decision 1 calm
+ret 0
+end
+fn mapslot p ulong i ulong to void
+put mapping p uint i
+put xmap p uint div i 8
+dest = add mul div i 8 9 rem i 8
+put ymap p uint dest
+end
+fn group rows ulong to int
+if or eq rows 0 gt rows 128
+ret 65
+end
+for row ulong rows
+for pick ulong 8
+index = add mul row 8 pick
+expert = get routes index
+if gt expert 255
+ret 65
+end
+for earlier ulong pick
+if eq expert get routes add mul row 8 earlier
+ret 65
+end
+end
+end
+end
+note Counting placement matches ship/motor-l387 pf_group order exactly.
+for e ulong 256
+put counts e uint 0
+end
+for i ulong mul rows 8
+e = ulong get routes i
+put counts e add get counts e 1
+end
+row = uint 0
+segs = ulong 0
+for e ulong 256
+c = get counts e
+put starts e row
+put cursor e row
+if ne c 0
+put segments mul segs 3 uint e
+put segments add mul segs 3 1 row
+put segments add mul segs 3 2 c
+row = add row c
+segs = add segs 1
+end
+end
+for i ulong mul rows 8
+e = ulong get routes i
+p = ulong get cursor e
+mapslot p i
+put cursor e add get cursor e 1
+end
+for pad ulong 8
+put xmap add mul rows 8 pad uint 0
+put ymap add mul rows 8 pad uint 0
+end
+for t ulong rows
+put sxmap t uint t
+put symap t uint add mul t 9 8
+end
+for pad ulong 8
+put sxmap add rows pad uint 0
+put symap add rows pad uint 0
+end
+put segnum 0 segs
+ret 0
+end
+fn chunk pos ulong total ulong mark ulong cap ulong to ulong
+if or eq cap 0 gt cap 49152
+ret ulong 18446744073709551615
+end
+if or gt pos total gt total cap
+ret ulong 18446744073709551615
+end
+if or le mark pos gt mark total
+if eq pos total
+if eq mark total
+ret ulong 0
+end
+end
+ret ulong 18446744073709551615
+end
+n = sub total pos
+if gt n 128
+n = ulong 128
+end
+if gt n sub mark pos
+n = sub mark pos
+end
+ret n
+end

@@ -1,0 +1,102 @@
+note SPDX-License-Identifier: AGPL-3.0-or-later
+note One native framed consumer; portable host kernels only, no HTTP claim.
+note LE u64 header version=1 op=0..3 count arg. See README for exact payload.
+global wire uchar 8
+global ioerr int 1
+global fields ulong 4
+global payload uchar 4096
+fn readbuf size ulong to int
+p = ulong 0
+for attempt ulong 4097
+if eq p size
+ret 0
+end
+n = read 0 payload p sub size p
+if lt n 0
+ret 74
+end
+if eq n 0
+ret 65
+end
+p = add p ulong n
+end
+ret 74
+end
+fn sendbuf size ulong to int
+p = ulong 0
+for attempt ulong 4097
+if eq p size
+ret 0
+end
+n = write 1 payload p sub size p
+if le n 0
+ret 74
+end
+p = add p ulong n
+end
+ret 74
+end
+fn readnum width ulong to ulong
+p = ulong 0
+put ioerr 0 int 0
+for attempt ulong 9
+if eq p width
+v = ulong 0
+for i ulong width
+v = or v shl ulong get wire i mul i 8
+end
+ret v
+end
+n = read 0 wire p sub width p
+if lt n 0
+put ioerr 0 int 74
+ret ulong 0
+end
+if eq n 0
+put ioerr 0 int 65
+if eq p 0
+put ioerr 0 int 1
+end
+ret ulong 0
+end
+p = add p ulong n
+end
+put ioerr 0 int 74
+ret ulong 0
+end
+fn required width ulong to ulong
+v = readnum width
+if eq get ioerr 0 1
+put ioerr 0 int 65
+end
+ret v
+end
+fn sendnum width ulong value ulong to int
+for i ulong width
+put wire i uchar and shr value mul i 8 255
+end
+p = ulong 0
+for attempt ulong 9
+if eq p width
+ret 0
+end
+n = write 1 wire p sub width p
+if le n 0
+ret 74
+end
+p = add p ulong n
+end
+ret 74
+end
+fn header op ulong count ulong arg ulong to int
+if ne sendnum 8 1 0
+ret 74
+end
+if ne sendnum 8 op 0
+ret 74
+end
+if ne sendnum 8 count 0
+ret 74
+end
+ret sendnum 8 arg
+end

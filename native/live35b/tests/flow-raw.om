@@ -1,0 +1,31 @@
+note SPDX-License-Identifier: AGPL-3.0-or-later
+note Bare WFL1 interface for differential reuse against original pinned policy.
+fn main to int
+for frame ulong 1000000000
+version = readnum 8
+if eq get ioerr 0 1
+ret 0
+end
+if ne get ioerr 0 0
+ret get ioerr 0
+end
+put control 0 version
+for i ulong 9
+v = required 8
+if ne get ioerr 0 0
+ret get ioerr 0
+end
+put control add i 1 v
+end
+s = flow
+if ne s 0
+ret s
+end
+for i ulong 2
+if ne sendnum 8 get decision i 0
+ret 74
+end
+end
+end
+ret 65
+end

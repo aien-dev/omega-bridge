@@ -1,0 +1,15 @@
+build/live35b/integrator: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), statically linked, no section header
+
+Elf file type is EXEC (Executable file)
+Entry point 0x4000b0
+There are 2 program headers, starting at offset 64
+
+Program Headers:
+  Type           Offset             VirtAddr           PhysAddr
+                 FileSiz            MemSiz              Flags  Align
+  LOAD           0x0000000000000000 0x0000000000400000 0x0000000000400000
+                 0x0000000000002f78 0x0000000000002f78  R E    0x1000
+  LOAD           0x0000000000000000 0x0000000010000000 0x0000000010000000
+                 0x0000000000000000 0x0000000000a28730  RW     0x1000
+
+There is no dynamic section in this file.
