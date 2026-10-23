@@ -1,0 +1,157 @@
+note L760 regressions. A nonzero result is a failed assertion, never a case index.
+text wrong "{\"unrelated\":{\"server\":[\"OLD\"]},\"tools\":[{\"options\":{}}]}"
+text good "{\"tools\":[{\"kind\":\"chat\",\"options\":{\"server\":[\"OLD\"]}}]}"
+text changed "{\"tools\":[{\"kind\":\"chat\",\"options\":{\"server\":[\"NEW\"]}}]}"
+text mixed "{\"server\":[\"ROOT\"],\"tools\":[{\"kind\":\"speech\",\"options\":{\"server\":[\"SPEECH\"]}},{\"kind\":\"chat\",\"options\":{\"server\":[\"OLD\"]}}]}"
+text mixedout "{\"server\":[\"ROOT\"],\"tools\":[{\"kind\":\"speech\",\"options\":{\"server\":[\"SPEECH\"]}},{\"kind\":\"chat\",\"options\":{\"server\":[\"NEW\"]}}]}"
+text arg "[\"NEW\"]"
+text invalid "[\"x\\q\"]"
+text uni "[\"x\\u0041\"]"
+text baduni "[\"x\\u00G1\"]"
+text pair "[\"x\\uD83D\\uDE00\"]"
+text lone "[\"x\\uD83D\"]"
+text escchat "{\"tools\":[{\"kind\":\"\\u0063hat\",\"options\":{\"server\":[\"A\"]}},{\"kind\":\"chat\",\"options\":{\"server\":[\"B\"]}}]}"
+text dupcase "{\"tools\":[{\"kind\":\"chat\",\"options\":{\"server\":[\"A\"]}},{\"kind\":\"chat\",\"options\":{\"server\":[\"B\"]}}]}"
+fn sentinel to void
+put olen 0 73
+for i ulong 4096
+put outbuf i 91
+end
+end
+fn kept to int
+if ne get olen 0 73
+ret 0
+end
+for i ulong 4096
+if ne get outbuf i 91
+ret 0
+end
+end
+ret 1
+end
+fn main to int
+for i ulong len arg
+put repl i get arg i
+end
+put rlen 0 len arg
+for i ulong len wrong
+put source i get wrong i
+end
+put slen 0 len wrong
+sentinel
+if eq migrate 0
+ret 1
+end
+if eq kept 0
+ret 1
+end
+for i ulong len good
+put source i get good i
+end
+put slen 0 len good
+for i ulong len invalid
+put repl i get invalid i
+end
+put rlen 0 len invalid
+if eq migrate 0
+ret 1
+end
+if eq kept 0
+ret 1
+end
+for i ulong len arg
+put repl i get arg i
+end
+put rlen 0 len arg
+if ne migrate 0
+ret 1
+end
+if ne get olen 0 len changed
+ret 1
+end
+for i ulong len changed
+if ne get outbuf i get changed i
+ret 1
+end
+end
+for i ulong len mixed
+put source i get mixed i
+end
+put slen 0 len mixed
+if ne migrate 0
+ret 1
+end
+if ne get olen 0 len mixedout
+ret 1
+end
+for i ulong len mixedout
+if ne get outbuf i get mixedout i
+ret 1
+end
+end
+for i ulong len dupcase
+put source i get dupcase i
+end
+put slen 0 len dupcase
+sentinel
+if eq migrate 0
+ret 1
+end
+if eq kept 0
+ret 1
+end
+for i ulong len good
+put source i get good i
+end
+put slen 0 len good
+for i ulong len uni
+put repl i get uni i
+end
+put rlen 0 len uni
+if ne migrate 0
+ret 1
+end
+for i ulong len pair
+put repl i get pair i
+end
+put rlen 0 len pair
+if ne migrate 0
+ret 1
+end
+sentinel
+for i ulong len lone
+put repl i get lone i
+end
+put rlen 0 len lone
+if eq migrate 0
+ret 1
+end
+if eq kept 0
+ret 1
+end
+for i ulong len baduni
+put repl i get baduni i
+end
+put rlen 0 len baduni
+if eq migrate 0
+ret 1
+end
+if eq kept 0
+ret 1
+end
+for i ulong len escchat
+put source i get escchat i
+end
+put slen 0 len escchat
+for i ulong len arg
+put repl i get arg i
+end
+put rlen 0 len arg
+if eq migrate 0
+ret 1
+end
+if eq kept 0
+ret 1
+end
+ret 0
+end

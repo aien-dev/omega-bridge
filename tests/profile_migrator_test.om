@@ -1,9 +1,9 @@
 note Native direct-core acceptance: exact replacement, untouched fields, refusal transaction.
-text expected "{\"tools\":[{\"id\":\"qwen3.8-27b\",\"options\":{\"server\":[\"/opt/omega-server\",\"serve\",\"qwen3.8-27b\"]},\"voice\":true}]}"
+text expected "{\"tools\":[{\"kind\":\"chat\",\"id\":\"qwen3.8-27b\",\"options\":{\"server\":[\"/opt/omega-server\",\"serve\",\"qwen3.8-27b\"]},\"voice\":true}]}"
 text argv "[\"/opt/omega-server\",\"serve\",\"qwen3.8-27b\"]"
-text dupdata "{\"server\":[\"a\"],\"extra\":true,\"server\":[\"b\"]}"
+text dupdata "{\"tools\":[{\"kind\":\"chat\",\"options\":{\"server\":[\"a\"],\"extra\":true,\"server\":[\"b\"]}}]}"
 text badsrc "{\"server\":[\"x\"]"
-text tiny "{\"server\":[\"x\"]}"
+text tiny "{\"tools\":[{\"kind\":\"chat\",\"options\":{\"server\":[\"x\"]}}]}"
 text badargv "[\"ok\",]"
 
 fn fillargv to void
@@ -50,7 +50,7 @@ put slen 0 len dupdata
 put olen 0 73
 put outbuf 0 91
 rc = migrate
-if ne rc 5
+if ne rc 7
 ret 4
 end
 if eq unchanged 0

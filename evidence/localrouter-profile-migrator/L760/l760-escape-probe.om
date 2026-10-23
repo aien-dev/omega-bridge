@@ -1,0 +1,26 @@
+text src "{\"tools\":[{\"options\":{\"server\":[\"OLD\"]}}]}"
+text arg "[\"x\\q\"]"
+text expected "{\"tools\":[{\"options\":{\"server\":[\"x\\q\"]}}]}"
+fn main to int
+for i ulong len src
+put source i get src i
+end
+put slen 0 len src
+for i ulong len arg
+put repl i get arg i
+end
+put rlen 0 len arg
+rc = migrate
+if ne rc 0
+ret 80
+end
+if ne get olen 0 len expected
+ret 81
+end
+for i ulong len expected
+if ne get outbuf i get expected i
+ret 82
+end
+end
+ret 0
+end

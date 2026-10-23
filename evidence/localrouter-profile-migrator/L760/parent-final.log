@@ -1,0 +1,16 @@
+regression_compile=0
+regression_runtime=0
+legacy_compile=0
+legacy_runtime=0
+upstream_runtime=0
+upstream_exact=0
+wrong_scope=25
+invalid_escape=22
+0 /home/drakestapleton/handoffs/localrouter-L749/parent-replay/final-wrong.out
+0 /home/drakestapleton/handoffs/localrouter-L749/parent-replay/final-escape.out
+0 total
+4b8ab84ae8d066a265646eab161f69539c0e3051edf14d1560b206388049aa2c  src/profile_migrator_core.om
+6f6d366cfd1483c0d9592d01f062e5f73d86baa45cda32efcded698b948cd406  src/profile_migrator.om
+36ab7eb333218809af8bccbb6401fa16fb25cb09db9c58f5792b37a9f8e8c399  tests/profile_migrator_test.om
+a3462dc8476036fd0bd5f5c184ea474f8e92ca1de1c859b219ca3adbe4e22e8d  tests/profile_migrator_l760.om
+9fc6436841494e05af9330c1209022a1985b571bf3c34041112171054de4c44b  /home/drakestapleton/handoffs/localrouter-L749/parent-replay/final-cli

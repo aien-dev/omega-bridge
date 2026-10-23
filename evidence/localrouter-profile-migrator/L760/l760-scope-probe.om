@@ -1,0 +1,26 @@
+text src "{\"unrelated\":{\"server\":[\"OLD\"]},\"tools\":[{\"options\":{}}]}"
+text arg "[\"NEW\"]"
+text expected "{\"unrelated\":{\"server\":[\"NEW\"]},\"tools\":[{\"options\":{}}]}"
+fn main to int
+for i ulong len src
+put source i get src i
+end
+put slen 0 len src
+for i ulong len arg
+put repl i get arg i
+end
+put rlen 0 len arg
+rc = migrate
+if ne rc 0
+ret 70
+end
+if ne get olen 0 len expected
+ret 71
+end
+for i ulong len expected
+if ne get outbuf i get expected i
+ret 72
+end
+end
+ret 0
+end

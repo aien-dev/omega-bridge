@@ -101,65 +101,192 @@ note L749 minimal byte-preserving JSON argv-array splice core; no runtime claim
  ret 0
  end
 
- fn valid_repl to ulong
- n = get rlen 0
- if or lt n 3 gt n 256
- ret 0
- end
- if ne get repl 0 91
- ret 0
- end
- i = ulong 1
- count = ulong 0
- while lt i n
- if ne get repl i 34
- ret 0
- end
- i = add i 1
- esc = ulong 0
- closed = ulong 0
- while and lt i n eq closed 0
- b = get repl i
- if eq esc 1
- esc = 0
- else
- if eq b 92
- esc = 1
- else
- if eq b 34
- closed = 1
- else
- if lt b 32
- ret 0
- end
- end
- end
- end
- i = add i 1
- end
- if eq closed 0
- ret 0
- end
- count = add count 1
- if eq i n
- ret 0
- end
- if eq get repl i 44
- i = add i 1
- else
- if eq get repl i 93
- i = add i 1
- if and eq i n gt count 0
- ret 1
- end
- ret 0
- else
- ret 0
- end
- end
- end
- ret 0
- end
+note JSON argv validator: compact array, scalar Unicode escapes, valid UTF8, no NUL.
+fn hexd b ulong to ulong
+if and ge b 48 le b 57
+ret sub b 48
+end
+if and ge b 65 le b 70
+ret sub b 55
+end
+if and ge b 97 le b 102
+ret sub b 87
+end
+ret 16
+end
+fn hexword pos ulong n ulong to ulong
+if gt add pos 4 n
+ret 65536
+end
+v = ulong 0
+for k ulong 4
+d = hexd ulong get repl add pos k
+if eq d 16
+ret 65536
+end
+v = add mul v 16 d
+end
+ret v
+end
+fn utfend i ulong n ulong to ulong
+b = ulong get repl i
+width = ulong 0
+low = ulong 128
+high = ulong 191
+if and ge b 194 le b 223
+width = 2
+end
+if and ge b 224 le b 239
+width = 3
+if eq b 224
+low = 160
+end
+if eq b 237
+high = 159
+end
+end
+if and ge b 240 le b 244
+width = 4
+if eq b 240
+low = 144
+end
+if eq b 244
+high = 143
+end
+end
+if eq width 0
+ret 0
+end
+if gt add i width n
+ret 0
+end
+next = ulong get repl add i 1
+if or lt next low gt next high
+ret 0
+end
+k = ulong 2
+while lt k width
+next = ulong get repl add i k
+if or lt next 128 gt next 191
+ret 0
+end
+k = add k 1
+end
+ret add i width
+end
+fn escend pos ulong n ulong to ulong
+i = add pos 1
+if ge i n
+ret 0
+end
+b = ulong get repl i
+if eq b 117
+v = hexword add i 1 n
+if or eq v 0 eq v 65536
+ret 0
+end
+i = add i 5
+if and ge v 56320 le v 57343
+ret 0
+end
+if and ge v 55296 le v 56319
+if gt add i 6 n
+ret 0
+end
+if ne get repl i 92
+ret 0
+end
+if ne get repl add i 1 117
+ret 0
+end
+lo = hexword add i 2 n
+if or lt lo 56320 gt lo 57343
+ret 0
+end
+i = add i 6
+end
+ret i
+end
+if or or eq b 34 eq b 92 eq b 47
+ret add i 1
+end
+if or or eq b 98 eq b 102 eq b 110
+ret add i 1
+end
+if or eq b 114 eq b 116
+ret add i 1
+end
+ret 0
+end
+fn valid_repl to ulong
+n = get rlen 0
+if or lt n 4 gt n 256
+ret 0
+end
+if ne get repl 0 91
+ret 0
+end
+i = ulong 1
+count = ulong 0
+while lt i n
+if ne get repl i 34
+ret 0
+end
+i = add i 1
+start = i
+closed = ulong 0
+iend = ulong 0
+while lt i n
+b = ulong get repl i
+if eq b 34
+if and eq count 0 eq i start
+ret 0
+end
+iend = add i 1
+closed = 1
+i = n
+else
+if lt b 32
+ret 0
+end
+if eq b 92
+i = escend i n
+if eq i 0
+ret 0
+end
+else
+if lt b 128
+i = add i 1
+else
+i = utfend i n
+if eq i 0
+ret 0
+end
+end
+end
+end
+end
+if eq closed 0
+ret 0
+end
+i = iend
+count = add count 1
+if ge i n
+ret 0
+end
+if eq get repl i 93
+if eq add i 1 n
+ret 1
+end
+ret 0
+end
+if ne get repl i 44
+ret 0
+end
+i = add i 1
+end
+ret 0
+end
 
  fn isserver pos ulong ep ulong to ulong
  if ne sub sub ep pos 1 6
@@ -186,76 +313,299 @@ note L749 minimal byte-preserving JSON argv-array splice core; no runtime claim
  ret 1
  end
 
- fn locate n ulong to int
- i = ulong 0
- brace = ulong 0
- bracket = ulong 0
- put nfound 0 0
- put target 0 0
- put finish 0 0
- while lt i n
- b = get source i
- if eq b 34
- e = strend i n
- if eq e 0
- ret 3
- end
- if eq isserver i e 1
- j = skipws add e 1 n
- if lt j n
- if eq get source j 58
- j = skipws add j 1 n
- if lt j n
- if eq get source j 91
- put nfound 0 add get nfound 0 1
- put target 0 j
- z = arrend j n
- if eq z 0
- ret 4
- end
- put finish 0 add z 1
- end
- end
- end
- end
- end
- i = add e 1
- else
- if eq b 123
- brace = add brace 1
- else
- if eq b 125
- brace = sub brace 1
- if lt brace 0
- ret 3
- end
- else
- if eq b 91
- bracket = add bracket 1
- else
- if eq b 93
- bracket = sub bracket 1
- if lt bracket 0
- ret 3
- end
- end
- end
- end
- end
- i = add i 1
- end
- end
- if ne brace 0
- ret 3
- end
- if ne bracket 0
- ret 3
- end
- if ne get nfound 0 1
- ret 5
- end
- ret 0
- end
+note Scoped selector for one explicit kind=chat tools entry. Valid rendered JSON required.
+global fs ulong 1
+global fe ulong 1
+global nest uchar 128
+text ktools "tools"
+text kkind "kind"
+text kopts "options"
+text kserver "server"
+text vchat "chat"
+fn keyeq code ulong pos ulong ep ulong to ulong
+size = sub sub ep pos 1
+for i ulong size
+if eq get source add add pos 1 i 92
+ret 2
+end
+end
+if eq code 1
+if ne size len ktools
+ret 0
+end
+for i ulong size
+if ne get source add add pos 1 i get ktools i
+ret 0
+end
+end
+ret 1
+end
+if eq code 2
+if ne size len kkind
+ret 0
+end
+for i ulong size
+if ne get source add add pos 1 i get kkind i
+ret 0
+end
+end
+ret 1
+end
+if eq code 3
+if ne size len kopts
+ret 0
+end
+for i ulong size
+if ne get source add add pos 1 i get kopts i
+ret 0
+end
+end
+ret 1
+end
+if ne size len kserver
+ret 0
+end
+for i ulong size
+if ne get source add add pos 1 i get kserver i
+ret 0
+end
+end
+ret 1
+end
+fn valend pos ulong lim ulong to ulong
+if ge pos lim
+ret 0
+end
+b = get source pos
+if eq b 34
+ep = strend pos lim
+if eq ep 0
+ret 0
+end
+ret add ep 1
+end
+if or eq b 123 eq b 91
+depth = ulong 1
+put nest 0 b
+i = add pos 1
+while lt i lim
+b = get source i
+if eq b 34
+ep = strend i lim
+if eq ep 0
+ret 0
+end
+i = add ep 1
+else
+if or eq b 123 eq b 91
+if ge depth len nest
+ret 0
+end
+put nest depth b
+depth = add depth 1
+end
+if or eq b 125 eq b 93
+if eq depth 0
+ret 0
+end
+want = ulong 123
+if eq b 93
+want = 91
+end
+if ne ulong get nest sub depth 1 want
+ret 0
+end
+depth = sub depth 1
+if eq depth 0
+ret add i 1
+end
+end
+i = add i 1
+end
+end
+ret 0
+end
+i = pos
+while lt i lim
+b = get source i
+if or or eq b 44 eq b 93 eq b 125
+ret i
+end
+i = add i 1
+end
+ret i
+end
+fn field obj ulong lim ulong code ulong to int
+put fs 0 0
+put fe 0 0
+if ge obj lim
+ret 3
+end
+if ne get source obj 123
+ret 3
+end
+i = skipws add obj 1 lim
+while lt i lim
+if eq get source i 125
+ret 0
+end
+if ne get source i 34
+ret 3
+end
+ep = strend i lim
+if eq ep 0
+ret 3
+end
+match = keyeq code i ep
+if eq match 2
+ret 7
+end
+j = skipws add ep 1 lim
+if ge j lim
+ret 3
+end
+if ne get source j 58
+ret 3
+end
+vp = skipws add j 1 lim
+ve = valend vp lim
+if eq ve 0
+ret 3
+end
+if eq match 1
+if ne get fs 0 0
+ret 7
+end
+put fs 0 vp
+put fe 0 ve
+end
+i = skipws ve lim
+if ge i lim
+ret 3
+end
+if eq get source i 44
+i = skipws add i 1 lim
+else
+if ne get source i 125
+ret 3
+end
+end
+end
+ret 3
+end
+fn toolscan pos ulong lim ulong to int
+rc = field pos lim 2
+if ne rc 0
+ret add rc 10
+end
+kp = get fs 0
+ke = get fe 0
+if eq kp 0
+ret 0
+end
+if ne get source kp 34
+ret 17
+end
+ki = add kp 1
+while lt ki sub ke 1
+if eq get source ki 92
+ret 17
+end
+ki = add ki 1
+end
+if ne sub ke kp 6
+ret 0
+end
+for k ulong 4
+if ne get source add add kp 1 k get vchat k
+ret 0
+end
+end
+rc = field pos lim 3
+if ne rc 0
+ret add rc 10
+end
+op = get fs 0
+oe = get fe 0
+if eq op 0
+ret 15
+end
+rc = field op oe 4
+if ne rc 0
+ret add rc 10
+end
+vp = get fs 0
+if eq vp 0
+ret 15
+end
+if ne get source vp 91
+ret 15
+end
+put target 0 vp
+put finish 0 get fe 0
+ret 1
+end
+fn locate n ulong to int
+root = skipws 0 n
+endroot = valend root n
+if eq endroot 0
+ret 3
+end
+if ne skipws endroot n n
+ret 3
+end
+rc = field root endroot 1
+if ne rc 0
+ret rc
+end
+arr = get fs 0
+lim = get fe 0
+if eq arr 0
+ret 5
+end
+if ne get source arr 91
+ret 5
+end
+i = skipws add arr 1 lim
+hits = ulong 0
+while lt i lim
+if eq get source i 93
+if ne hits 1
+ret 5
+end
+ret 0
+end
+te = valend i lim
+if eq te 0
+ret 3
+end
+if ne get source i 123
+ret 3
+end
+rc = toolscan i te
+if gt rc 1
+ret sub rc 10
+end
+if eq rc 1
+hits = add hits 1
+if gt hits 1
+ret 5
+end
+end
+i = skipws te lim
+if ge i lim
+ret 3
+end
+if eq get source i 44
+i = skipws add i 1 lim
+else
+if ne get source i 93
+ret 3
+end
+end
+end
+ret 3
+end
 
  fn compose n ulong rn ulong to int
  start = get target 0
