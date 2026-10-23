@@ -1,6 +1,11 @@
 # L720: Qwen3-8B native consumer
 
 Work in progress. No native 8B endpoint or Renda cutover is qualified.
+Implemented codecs, descriptor admission, geometry/greedy helpers and two
+handwritten offline sm121 kernels. Committed-source replay passes289 numeric,
+21 descriptor,188 geometry and1022 encoding checks; all651 real tensor
+descriptors and12 external file hashes pass; six compiled mutants are rejected.
+See ../../evidence/renda8b-L720/RESULTS.md for limits and preserved failures.
 
 1. Verify the immutable seeded compiler, checkpoint and existing owner interfaces.
 2. Implement portable consumer components and handwritten kernel work in Omega.
@@ -23,6 +28,8 @@ Its sm121 capsule explicitly forbids launch. L690 provides bounded JSON and
 WebSocket codecs, not a qualified transport. Those owners' trees remain untouched.
 
 Sandbox currently refuses shared-ledger locking, GitHub DNS and loopback access.
+Normal Git metadata is read-only. Local commits use private Git metadata with
+the same worktree; no second checkout or worker was created. Push failed DNS.
 Shared 35B health and candidate port availability cannot be established here.
 Profile readback: renda1, renda2 and work-control all still use the 35B model on
 18091. renda-harness separately hardcodes that endpoint and discovers model ID.
