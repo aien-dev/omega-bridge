@@ -22,7 +22,7 @@ Private replay root: `/home/drakestapleton/handoffs/renda8b-L720/replay-4534a7b`
 | Immutable replay capsules | Byte-identical to the disassembled artifacts |
 | ELF inspection | Seven principal executables static AArch64 EXEC, no INTERP/NEEDED |
 | Inspector runtime maps | Executable, anonymous data, vvar/vdso/stack only; exact replay binary match |
-| Source whitespace | git diff --check PASS |
+| Source whitespace | Native source diff --check PASS; raw readelf evidence retains7 trailing-space lines |
 | GPU execution / full forward / model-quality goldens | NOT_RUN; not implemented/qualified |
 | HTTP, real answer, tools, streaming, Hermes/caller cutover | NOT_RUN; no server launched |
 | Shared35B health and candidate18128 availability | UNKNOWN in sandbox, no service changed |
@@ -35,6 +35,11 @@ Mutant selector0 changes FP8 tie parity (2 failures);1 biases BF16 rounding
 encoding failures). The first five are host behavioral failures; the last is
 an offline instruction-contract failure, not a GPU behavioral negative control.
 No failed compiler output counts as a successful mutant test.
+
+The full staged whitespace check reported the7 raw `readelf` Magic lines with
+trailing spaces. Raw command output is retained. This formatting finding does
+not affect native source or executable checks and is not reported as a full
+repository lint pass.
 
 Logs retain initial compile failures: checkpoint register pressure/error12,
 inspector fd/value type mismatches/error7, mutation harness unsupported break/
