@@ -1,0 +1,1 @@
+tools/native: 6 unit(s) -> /home/drakestapleton/workspace/bridge-native-call/build/native/libomega_native.so + omega_native.{c,h,py,rs,zig,go}
