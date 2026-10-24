@@ -8,8 +8,7 @@ PASS generator accepts the same unit once (control)
 PASS cpp caller (10 lines)
 PASS python caller (10 lines)
 PASS rust caller (11 lines)
+PASS zig caller (10 lines)
+PASS go caller (10 lines)
 PASS mutant madd (add -> sub) caught (7 failing checks)
-NOT_RUN zig caller: toolchain not installed
-NOT_RUN go caller: toolchain not installed
-NATIVE-CALL PASS (not run: zig go)
-rc=0
+NATIVE-CALL PASS (not run: none)
