@@ -1,0 +1,57 @@
+error[E0308]: mismatched types
+  --> /home/drakestapleton/workspace/bridge-native-call/build/native/mut/rust/caller.rs:17:52
+   |
+17 |         check("madd wraps = 3", omega_madd(&mut r, u64::MAX, 2, 5) == 0 && r == 3);
+   |                                 ----------         ^^^^^^^^ expected `u32`, found `u64`
+   |                                 |
+   |                                 arguments to this function are incorrect
+   |
+note: function defined here
+  --> /home/drakestapleton/workspace/bridge-native-call/build/native/mut/rust/omega_native.rs:20:12
+   |
+20 |     pub fn omega_madd(result: *mut u64, o_a: u32, o_b: u32, o_c: u32) -> u32;
+   |            ^^^^^^^^^^                   ---
+help: you can convert a `u64` to a `u32` and panic if the converted value doesn't fit
+   |
+17 |         check("madd wraps = 3", omega_madd(&mut r, u64::MAX.try_into().unwrap(), 2, 5) == 0 && r == 3);
+   |                                                            ++++++++++++++++++++
+
+error[E0308]: mismatched types
+  --> /home/drakestapleton/workspace/bridge-native-call/build/native/mut/rust/caller.rs:20:60
+   |
+20 |         check("madd signed bits = -13", omega_madd(&mut r, (-3i64) as u64, 5, 2) == 0 && r as i64 == -13);
+   |                                         ----------         ^^^^^^^^^^^^^^ expected `u32`, found `u64`
+   |                                         |
+   |                                         arguments to this function are incorrect
+   |
+note: function defined here
+  --> /home/drakestapleton/workspace/bridge-native-call/build/native/mut/rust/omega_native.rs:20:12
+   |
+20 |     pub fn omega_madd(result: *mut u64, o_a: u32, o_b: u32, o_c: u32) -> u32;
+   |            ^^^^^^^^^^                   ---
+help: you can convert a `u64` to a `u32` and panic if the converted value doesn't fit
+   |
+20 |         check("madd signed bits = -13", omega_madd(&mut r, ((-3i64) as u64).try_into().unwrap(), 5, 2) == 0 && r as i64 == -13);
+   |                                                            +              +++++++++++++++++++++
+
+error[E0308]: mismatched types
+  --> /home/drakestapleton/workspace/bridge-native-call/build/native/mut/rust/caller.rs:22:79
+   |
+22 |         check("smadd overflow traps 1, result unchanged", omega_smadd(&mut r, 1u64 << 62, 4, 0) == 1 && r == SENTINEL);
+   |                                                           -----------         ^^^^^^^^^^ expected `u32`, found `u64`
+   |                                                           |
+   |                                                           arguments to this function are incorrect
+   |
+note: function defined here
+  --> /home/drakestapleton/workspace/bridge-native-call/build/native/mut/rust/omega_native.rs:22:12
+   |
+22 |     pub fn omega_smadd(result: *mut u64, o_a: u32, o_b: u32, o_c: u32) -> u32;
+   |            ^^^^^^^^^^^                   ---
+help: you can convert a `u64` to a `u32` and panic if the converted value doesn't fit
+   |
+22 |         check("smadd overflow traps 1, result unchanged", omega_smadd(&mut r, (1u64 << 62).try_into().unwrap(), 4, 0) == 1 && r == SENTINEL);
+   |                                                                               +          +++++++++++++++++++++
+
+error: aborting due to 3 previous errors
+
+For more information about this error, try `rustc --explain E0308`.

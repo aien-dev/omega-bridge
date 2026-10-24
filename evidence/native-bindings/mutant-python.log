@@ -1,0 +1,10 @@
+PASS madd 3*5+7 = 22
+FAIL madd wraps = 3
+FAIL madd large
+FAIL madd signed bits = -13
+FAIL smadd overflow traps 1, result unchanged
+FAIL fill k=1 traps 3, result unchanged
+PASS writes before the trap stay visible
+PASS fill k=0 = 3
+PASS null result refused 32
+FAIL 5 failure(s)
