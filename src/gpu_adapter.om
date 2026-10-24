@@ -1,0 +1,756 @@
+note Omega Bridge GPU adapter, protocol omega-bridge-gpu-adapter/1.
+note Pure boundary: no device, no driver, no encoder, no launch. It decides
+note whether a declared consumer may attach to a declared adapter, and it
+note refuses every request it cannot prove from the fields below. A refusal
+note never falls back to CPU or to another backend.
+note Handwritten native Omega (seed omc); SHA-256 adapted from the AGPL-3.0
+note Omega implementation in benchmarks-mv/build/base/om-sha256.om.
+
+global src uchar 32768
+global slen ulong 1
+global lstart ulong 64
+global llen ulong 64
+global nlines ulong 1
+global koff ulong 1
+global klen ulong 1
+global voff ulong 1
+global vlen ulong 1
+global coff ulong 1
+global code ulong 1
+global mode ulong 1
+global adap ulong 1
+global cons ulong 1
+global pp ulong 1
+global bad ulong 1
+global wr ulong 1
+
+note ---- protocol dictionaries ----
+text keys "mode\nadapter\nconsumer\nbackend\nisa\ndriver\nabi\ndtypes\ncapabilities\nrights\nsync\ntelemetry\ncontract_id\nartifact_id\nkernel_format\nqmd_template\nreceipt\nownership\nalias\n"
+global ko ulong 19
+global kl ulong 19
+text vals "omega-bridge-gpu-adapter/1\nnegotiate\nadmit\nfake-gpu\ngb10-native-cubin\nomega\nmax\nnvidia\nfake\nsm_121\nfake-1\nomega-gpu-platform/1.2\nbf16,f32\ncubin-load,launch-template,memory-handoff\nread,execute\nexplicit\noff\n580.173.02\nnvidia-cubin-elf64\nzero-va-v1\nvalid\nstale\nmissing\nproducer\nconsumer\nnone\nalias\n"
+global vo ulong 27
+global vl ulong 27
+text codes "E_VERSION\nE_ORDER\nE_MODE\nE_ADAPTER\nE_BACKEND\nE_ISA\nE_DRIVER\nE_ABI\nE_DTYPES\nE_CAPABILITY\nE_RIGHTS\nE_SYNC\nE_TELEMETRY\nE_CONTRACT\nE_ARTIFACT\nE_FORMAT\nE_RELOC\nE_RECEIPT\nE_OWNERSHIP\nE_ALIAS\nE_LIMIT\nE_IO\n"
+global co ulong 22
+global cl ulong 22
+
+text lver "verdict="
+text lcode "code="
+text lada "adapter="
+text lcon "consumer="
+text lisa "isa="
+text lcid "contract_id="
+text lsha "request_sha256="
+text lacc "ACCEPT"
+text lref "REFUSE"
+text lf "\n"
+
+note ---- SHA-256 state (AGPL, adapted) ----
+global hk uint 64
+global hs uint 8
+global hm uint 64
+global hb uchar 64
+global hd uchar 64
+global hmeta ulong 3
+text hconst "428a2f9871374491b5c0fbcfe9b5dba53956c25b59f111f1923f82a4ab1c5ed5d807aa9812835b01243185be550c7dc372be5d7480deb1fe9bdc06a7c19bf174e49b69c1efbe47860fc19dc6240ca1cc2de92c6f4a7484aa5cb0a9dc76f988da983e5152a831c66db00327c8bf597fc7c6e00bf3d5a7914706ca63511429296727b70a852e1b21384d2c6dfc53380d13650a7354766a0abb81c2c92e92722c85a2bfe8a1a81a664bc24b8b70c76c51a3d192e819d6990624f40e3585106aa07019a4c1161e376c082748774c34b0bcb5391c0cb34ed8aa4a5b9cca4f682e6ff3748f82ee78a5636f84c878148cc7020890befffaa4506cebbef9a3f7c67178f2"
+text hseed "6a09e667bb67ae853c6ef372a54ff53a510e527f9b05688c1f83d9ab5be0cd19"
+text hhex "0123456789abcdef"
+
+fn hnib c uchar to uint
+if le c 57
+ret uint sub c 48
+end
+ret uint sub c 87
+end
+
+fn hreset to void
+for i ulong 64
+v = uint 0
+for j ulong 8
+v = or shl v 4 hnib get hconst add mul i 8 j
+end
+put hk i v
+end
+for i ulong 8
+v = uint 0
+for j ulong 8
+v = or shl v 4 hnib get hseed add mul i 8 j
+end
+put hs i v
+end
+for i ulong 3
+put hmeta i 0
+end
+end
+
+fn hrot x uint n uint to uint
+ret or shr x n shl x sub 32 n
+end
+
+fn hsmall0 x uint to uint
+ret xor xor hrot x 7 hrot x 18 shr x 3
+end
+
+fn hsmall1 x uint to uint
+ret xor xor hrot x 17 hrot x 19 shr x 10
+end
+
+fn hbig0 x uint to uint
+ret xor xor hrot x 2 hrot x 13 hrot x 22
+end
+
+fn hbig1 x uint to uint
+ret xor xor hrot x 6 hrot x 11 hrot x 25
+end
+
+fn hblock to void
+for i ulong 16
+v = uint 0
+for j ulong 4
+v = or shl v 8 uint get hb add mul i 4 j
+end
+put hm i v
+end
+for j ulong 48
+i = add j 16
+v = add hsmall1 get hm sub i 2 get hm sub i 7
+v = add v hsmall0 get hm sub i 15
+put hm i add v get hm sub i 16
+end
+a = get hs 0
+b = get hs 1
+c = get hs 2
+d = get hs 3
+e = get hs 4
+f = get hs 5
+g = get hs 6
+h = get hs 7
+for i ulong 64
+t1 = add h hbig1 e
+t1 = add t1 xor and e f and not e g
+t1 = add t1 get hk i
+t1 = add t1 get hm i
+t2 = hbig0 a
+t2 = add t2 xor xor and a b and a c and b c
+h = g
+g = f
+f = e
+e = add d t1
+d = c
+c = b
+b = a
+a = add t1 t2
+end
+put hs 0 add get hs 0 a
+put hs 1 add get hs 1 b
+put hs 2 add get hs 2 c
+put hs 3 add get hs 3 d
+put hs 4 add get hs 4 e
+put hs 5 add get hs 5 f
+put hs 6 add get hs 6 g
+put hs 7 add get hs 7 h
+end
+
+fn hraw c uchar to void
+n = get hmeta 0
+put hb n c
+n = add n 1
+if eq n 64
+hblock
+n = ulong 0
+end
+put hmeta 0 n
+end
+
+fn hpush c uchar to bool
+if ne get hmeta 2 0
+ret false
+end
+if eq get hmeta 1 2305843009213693951
+put hmeta 2 2
+ret false
+end
+hraw c
+put hmeta 1 add get hmeta 1 1
+ret true
+end
+
+fn hfinal to bool
+if ne get hmeta 2 0
+ret false
+end
+bits = mul get hmeta 1 8
+hraw 128
+while ne get hmeta 0 56
+hraw 0
+end
+for i ulong 8
+shift = mul sub 7 i 8
+hraw uchar and shr bits shift 255
+end
+for i ulong 8
+v = get hs i
+for j ulong 8
+shift = uint mul sub 7 j 4
+digit = ulong and shr v shift 15
+put hd add mul i 8 j get hhex digit
+end
+end
+put hmeta 2 1
+ret true
+end
+
+note ---- static tables ----
+fn init to void
+put co 0 0
+put cl 0 9
+put co 1 10
+put cl 1 7
+put co 2 18
+put cl 2 6
+put co 3 25
+put cl 3 9
+put co 4 35
+put cl 4 9
+put co 5 45
+put cl 5 5
+put co 6 51
+put cl 6 8
+put co 7 60
+put cl 7 5
+put co 8 66
+put cl 8 8
+put co 9 75
+put cl 9 12
+put co 10 88
+put cl 10 8
+put co 11 97
+put cl 11 6
+put co 12 104
+put cl 12 11
+put co 13 116
+put cl 13 10
+put co 14 127
+put cl 14 10
+put co 15 138
+put cl 15 8
+put co 16 147
+put cl 16 7
+put co 17 155
+put cl 17 9
+put co 18 165
+put cl 18 11
+put co 19 177
+put cl 19 7
+put co 20 185
+put cl 20 7
+put co 21 193
+put cl 21 4
+put ko 0 0
+put kl 0 4
+put ko 1 5
+put kl 1 7
+put ko 2 13
+put kl 2 8
+put ko 3 22
+put kl 3 7
+put ko 4 30
+put kl 4 3
+put ko 5 34
+put kl 5 6
+put ko 6 41
+put kl 6 3
+put ko 7 45
+put kl 7 6
+put ko 8 52
+put kl 8 12
+put ko 9 65
+put kl 9 6
+put ko 10 72
+put kl 10 4
+put ko 11 77
+put kl 11 9
+put ko 12 87
+put kl 12 11
+put ko 13 99
+put kl 13 11
+put ko 14 111
+put kl 14 13
+put ko 15 125
+put kl 15 12
+put ko 16 138
+put kl 16 7
+put ko 17 146
+put kl 17 9
+put ko 18 156
+put kl 18 5
+put vo 0 0
+put vl 0 26
+put vo 1 27
+put vl 1 9
+put vo 2 37
+put vl 2 5
+put vo 3 43
+put vl 3 8
+put vo 4 52
+put vl 4 17
+put vo 5 70
+put vl 5 5
+put vo 6 76
+put vl 6 3
+put vo 7 80
+put vl 7 6
+put vo 8 87
+put vl 8 4
+put vo 9 92
+put vl 9 6
+put vo 10 99
+put vl 10 6
+put vo 11 106
+put vl 11 22
+put vo 12 129
+put vl 12 8
+put vo 13 138
+put vl 13 41
+put vo 14 180
+put vl 14 12
+put vo 15 193
+put vl 15 8
+put vo 16 202
+put vl 16 3
+put vo 17 206
+put vl 17 10
+put vo 18 217
+put vl 18 18
+put vo 19 236
+put vl 19 10
+put vo 20 247
+put vl 20 5
+put vo 21 253
+put vl 21 5
+put vo 22 259
+put vl 22 7
+put vo 23 267
+put vl 23 8
+put vo 24 276
+put vl 24 8
+put vo 25 285
+put vl 25 4
+put vo 26 290
+put vl 26 5
+end
+
+note ---- parsing ----
+fn eqkey off ulong ln2 ulong id ulong to bool
+if ne ln2 get kl id
+ret false
+end
+for i ulong ln2
+if ne get src add off i get keys add get ko id i
+ret false
+end
+end
+ret true
+end
+
+fn eqval off ulong ln2 ulong id ulong to bool
+if ne ln2 get vl id
+ret false
+end
+for i ulong ln2
+if ne get src add off i get vals add get vo id i
+ret false
+end
+end
+ret true
+end
+
+fn lineis id ulong to bool
+ret eqval get lstart 0 get llen 0 id
+end
+
+fn keyis id ulong to bool
+ret eqkey get koff 0 get klen 0 id
+end
+
+fn valis id ulong to bool
+ret eqval get voff 0 get vlen 0 id
+end
+
+fn kv i ulong to void
+ln = get lstart i
+ll = get llen i
+j = ln
+stop = add ln ll
+while and lt j stop ne get src j 61
+j = add j 1
+end
+put koff 0 ln
+put klen 0 sub j ln
+if eq j stop
+put voff 0 stop
+put vlen 0 0
+else
+put voff 0 add j 1
+put vlen 0 sub stop add j 1
+end
+end
+
+fn vline i ulong kid ulong vid ulong to bool
+kv i
+if not keyis kid
+ret false
+end
+if not valis vid
+ret false
+end
+ret true
+end
+
+fn split to void
+n = ulong 0
+p = ulong 0
+total = get slen 0
+while lt p total
+q = p
+while and lt q total ne get src q 10
+q = add q 1
+end
+put lstart n p
+put llen n sub q p
+n = add n 1
+p = add q 1
+end
+put nlines 0 n
+end
+
+fn hex64 off ulong ln2 ulong to bool
+if ne ln2 64
+ret false
+end
+for i ulong 64
+c = get src add off i
+if or lt c 48 gt c 102
+ret false
+end
+if and gt c 57 lt c 97
+ret false
+end
+end
+ret true
+end
+
+fn pnum to ulong
+v = ulong 0
+n = ulong 0
+going = true
+while and going lt get pp 0 get vlen 0
+c = get src add get voff 0 get pp 0
+if or lt c 48 gt c 57
+going = false
+else
+v = add mul v 10 ulong sub c 48
+n = add n 1
+put pp 0 add get pp 0 1
+end
+end
+if eq n 0
+put bad 0 1
+end
+if lt get pp 0 get vlen 0
+c = get src add get voff 0 get pp 0
+if eq c 46
+put pp 0 add get pp 0 1
+else
+put bad 0 1
+end
+end
+ret v
+end
+
+fn drvok to bool
+put pp 0 0
+put bad 0 0
+a = pnum
+b = pnum
+c = pnum
+if ne get pp 0 get vlen 0
+put bad 0 1
+end
+if ne get bad 0 0
+ret false
+end
+if gt a 580
+ret true
+end
+if lt a 580
+ret false
+end
+if gt b 173
+ret true
+end
+if lt b 173
+ret false
+end
+ret ge c 2
+end
+
+fn hashreq to bool
+hreset
+for i ulong get slen 0
+if not hpush get src i
+ret false
+end
+end
+ret hfinal
+end
+
+fn readin to int
+put slen 0 0
+more = true
+while more
+room = sub 32768 get slen 0
+if eq room 0
+ret 65
+end
+n = read 0 src get slen 0 room
+if eq n 0
+more = false
+else
+if lt n 0
+ret 74
+end
+put slen 0 add get slen 0 ulong n
+end
+end
+ret 0
+end
+
+note ---- output ----
+fn putstr id ulong to void
+put wr 0 ulong write 1 vals add get vo id 0 get vl id
+end
+
+fn putc id ulong to void
+put wr 0 ulong write 1 codes add get co id 0 get cl id
+end
+
+fn emit acc ulong to void
+put wr 0 ulong write 1 vals 0 26
+put wr 0 ulong write 1 lf 0 1
+put wr 0 ulong write 1 lver 0 len lver
+if eq acc 1
+put wr 0 ulong write 1 lacc 0 len lacc
+else
+put wr 0 ulong write 1 lref 0 len lref
+end
+put wr 0 ulong write 1 lf 0 1
+if eq acc 1
+put wr 0 ulong write 1 lada 0 len lada
+putstr get adap 0
+put wr 0 ulong write 1 lf 0 1
+put wr 0 ulong write 1 lcon 0 len lcon
+putstr get cons 0
+put wr 0 ulong write 1 lf 0 1
+put wr 0 ulong write 1 lisa 0 len lisa
+if eq get adap 0 3
+putstr 10
+else
+putstr 9
+end
+put wr 0 ulong write 1 lf 0 1
+put wr 0 ulong write 1 lcid 0 len lcid
+put wr 0 ulong write 1 src get coff 0 64
+put wr 0 ulong write 1 lf 0 1
+else
+put wr 0 ulong write 1 lcode 0 len lcode
+putc get code 0
+put wr 0 ulong write 1 lf 0 1
+end
+put wr 0 ulong write 1 lsha 0 len lsha
+put wr 0 ulong write 1 hd 0 64
+put wr 0 ulong write 1 lf 0 1
+end
+
+fn fail c ulong to int
+put code 0 c
+ok = hashreq
+if not ok
+put code 0 21
+end
+emit 0
+ret 3
+end
+
+note ---- policy ----
+fn common to int
+if vline 3 2 5
+put cons 0 5
+else
+if vline 3 2 6
+put cons 0 6
+else
+ret fail 9
+end
+end
+if not vline 7 6 11
+ret fail 7
+end
+if not vline 8 7 12
+ret fail 8
+end
+if not vline 9 8 13
+ret fail 9
+end
+if not vline 10 9 14
+ret fail 10
+end
+if not vline 11 10 15
+ret fail 11
+end
+if not vline 12 11 16
+ret fail 12
+end
+kv 13
+if not keyis 12
+ret fail 1
+end
+if not hex64 get voff 0 get vlen 0
+ret fail 13
+end
+put coff 0 get voff 0
+ret 0
+end
+
+fn main to int
+init
+rc = readin
+if ne rc 0
+ret fail 21
+end
+split
+if lt get nlines 0 1
+ret fail 1
+end
+if not lineis 0
+ret fail 1
+end
+kv 1
+if not keyis 0
+ret fail 1
+end
+if valis 1
+put mode 0 1
+else
+if valis 2
+put mode 0 2
+else
+ret fail 2
+end
+end
+if eq get mode 0 1
+if ne get nlines 0 14
+ret fail 1
+end
+kv 2
+if not keyis 1
+ret fail 1
+end
+if valis 3
+put adap 0 3
+if not vline 4 3 8
+ret fail 4
+end
+if not vline 5 4 10
+ret fail 5
+end
+kv 6
+if not keyis 5
+ret fail 1
+end
+else
+if valis 4
+put adap 0 4
+if not vline 4 3 7
+ret fail 4
+end
+if not vline 5 4 9
+ret fail 5
+end
+kv 6
+if not keyis 5
+ret fail 1
+end
+if not drvok
+ret fail 6
+end
+else
+ret fail 3
+end
+end
+else
+if ne get nlines 0 20
+ret fail 1
+end
+kv 2
+if not keyis 1
+ret fail 1
+end
+if not valis 4
+ret fail 3
+end
+put adap 0 4
+if not vline 4 3 7
+ret fail 4
+end
+if not vline 5 4 9
+ret fail 5
+end
+kv 6
+if not keyis 5
+ret fail 1
+end
+if not drvok
+ret fail 6
+end
+end
+c = common
+if ne c 0
+ret c
+end
+if eq get mode 0 2
+kv 14
+if not keyis 13
+ret fail 1
+end
+if not hex64 get voff 0 get vlen 0
+ret fail 14
+end
+if not vline 15 14 18
+ret fail 15
+end
+if not vline 16 15 19
+ret fail 16
+end
+kv 17
+if not keyis 16
+ret fail 1
+end
+if not valis 20
+ret fail 17
+end
+if not vline 18 17 23
+ret fail 18
+end
+if not vline 19 18 25
+ret fail 19
+end
+end
+ok = hashreq
+if not ok
+ret fail 21
+end
+emit 1
+ret 0
+end

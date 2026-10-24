@@ -1,0 +1,14 @@
+omega-bridge-gpu-adapter/1
+mode=negotiate
+adapter=gb10-native-cubin
+consumer=max
+backend=nvidia
+isa=sm_121
+driver=580.173.02
+abi=omega-gpu-platform/1.2
+dtypes=bf16,f32
+capabilities=cubin-load,launch-template,memory-handoff
+rights=read,execute
+sync=explicit
+telemetry=off
+contract_id=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
