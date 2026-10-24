@@ -8,9 +8,9 @@ named `evidence/` directory; every unexecuted device test is `NOT_RUN`.
 
 | Repo | Branch | Review base | Latest commit |
 |---|---|---|---|
-| omega-mv | `feat/max-interop-contracts` | `cd5897e3` | `0dbc2067` |
-| CUDApp | `feat/max-artifact-export` | `80f3a24` | `fcd7d24` |
-| omega-bridge | `feat/gpu-interop` | `77376b1` (`feat/c-python-bridge`) | branch tip |
+| omega-mv | `feat/max-interop-contracts` | `cd5897e3` | `7d13fa0b` |
+| CUDApp | `feat/max-artifact-export` | `80f3a24` | `9ebdc6b` |
+| omega-bridge | `feat/gpu-interop` | `77376b1` (`feat/c-python-bridge`) | `8479910` |
 
 Pinned external software: Modular MAX `max/v26.7.0` =
 `527d069ee11a41ac5320af1f9402db0a66b2b868` (`mojo/v1.2.0`), installed as
