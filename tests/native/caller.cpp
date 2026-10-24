@@ -29,6 +29,22 @@ int main()
     check("writes before the trap stay visible", buf[0] == 11 && buf[1] == 22 && buf[2] == 0);
     check("fill k=0 = 3", omega_fill(&r, buf.data(), buf.size(), 0) == 0 && r == 3 && buf[2] == 33);
     check("wrong length refused 32", omega_fill(&r, buf.data(), 3, 0) == 32);
+    // mix: six parameters (ulong, long, view uchar 3, edit uchar 2, view ulong 2, ulong), no result.
+    // 5 + 20 + 7 = 32 (calc:08302bc4); 5 + 20 + 300 is 70 over 255 (calc:a6a8bb76), so the conversion traps 5.
+    const unsigned char cb[3] = {1, 2, 3};
+    unsigned char db[2] = {0, 0};
+    const std::uint64_t eb[2] = {10, 20};
+    r = sentinel;
+    check("mix six parameters, void result writes 0",
+          omega_mix(&r, 5, 1, cb, 3, db, 2, eb, 2, 7) == 0 && r == 0 && db[0] == 3 && db[1] == 32);
+    db[0] = db[1] = 0;
+    r = sentinel;
+    check("mix negative long traps 9 after both writes, result unchanged",
+          omega_mix(&r, 5, static_cast<std::uint64_t>(std::int64_t{-1}), cb, 3, db, 2, eb, 2, 7) == 9 && r == sentinel &&
+              db[0] == 3 && db[1] == 32);
+    db[0] = db[1] = 0;
+    check("mix uchar conversion 325 traps 5, first write visible",
+          omega_mix(&r, 5, 1, cb, 3, db, 2, eb, 2, 300) == 5 && r == sentinel && db[0] == 3 && db[1] == 0);
     std::printf("%s %d failure(s)\n", fails ? "FAIL" : "PASS", fails);
     return fails != 0;
 }
