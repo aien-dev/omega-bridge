@@ -1,0 +1,5 @@
+note signed (a * b + c): traps 1 when a step leaves long
+fn smadd a long b long c long to long
+p = mul a b
+ret add p c
+end

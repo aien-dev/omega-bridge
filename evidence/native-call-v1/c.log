@@ -1,0 +1,17 @@
+PASS madd 3*5+7 = 22
+PASS madd wraps: (2^64-1)*2+5 = 3
+PASS madd large = 3637949782307626511
+PASS madd signed bits: -3*5+2 = -13
+PASS smadd -3*5+2 = -13
+PASS smadd 2^62*4 traps 1, result unchanged
+PASS fill k=1 traps 3, result unchanged
+PASS fill k=1 writes before the trap stay visible
+PASS fill k=0 returns 3, writes 11 22 33
+PASS null result refused 32
+PASS null buffer refused 32, result unchanged
+PASS buffer length 3 refused 32
+PASS misaligned buffer refused 32
+PASS result inside buffer refused 32, buffer untouched
+PASS call after traps still works
+PASS reentry from a signal handler during a call refused 33
+PASS 0 failure(s)

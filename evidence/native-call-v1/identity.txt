@@ -1,0 +1,11 @@
+date 2026-10-24T21:47:41Z
+omega-bridge base 2a5615b1e0fc0649be03085521963a8a30f8ca69
+omc d0603ff8fc276774ac7b438c27d146123b9a4513547fe9671e36d8e02d183e83 from omega-mv seed/omc-unified 9329e7fca
+native.om e4ee71ad335e1e3a6f72a818f8db72d2519f7ee3cb6da8ea0f52e5317672983b
+code d7f5348af06cf56a6a533a11920d2115760b0c1e0a5f8b25bad0862c89aff04e
+libomega_native.so 1c3beccaf4aab0a00502d477527ebbbeaee7603638423558011c28c46fccc28a
+gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+Python 3.12.3
+rustc 1.98.1 (48a229cea 2026-09-01)
+Linux 7.0.0-1019-nvidia aarch64

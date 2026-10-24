@@ -1,0 +1,10 @@
+PASS embedded code == omc output (d7f5348af06cf56a)
+PASS c caller (17 lines)
+PASS cpp caller (10 lines)
+PASS python caller (10 lines)
+PASS rust caller (10 lines)
+PASS mutant madd (add -> sub) caught (6 failing checks)
+NOT_RUN zig caller: toolchain not installed
+NOT_RUN go caller: toolchain not installed
+NATIVE-CALL PASS (not run: zig go)
+rc=0
