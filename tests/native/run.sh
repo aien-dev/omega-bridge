@@ -3,13 +3,13 @@
 # (a*b+c) modulo 2^64, called from C, C++, Python, Rust, Zig and Go. tools/native builds the library
 # and writes every language's declarations from the Omega signatures (one generator, src/native.om);
 # no caller declares an Omega function by hand. OMEGA_NATIVE_OMC names the seeded compiler; its sha256
-# must be the pinned one below. A missing language toolchain is reported NOT_RUN, never PASS.
+# must be the one tools/native pins. A missing language toolchain is reported NOT_RUN, never PASS.
 # Exit 0 only when every run check passed.
 set -eu
-PIN=734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61
 ROOT=$(cd "$(dirname "$0")/../.." && pwd)
 T=$ROOT/tests/native
 O=$ROOT/build/native
+PIN=$(sed -n 's/^PIN=//p' "$ROOT/tools/native")
 OMC=${OMEGA_NATIVE_OMC:?set OMEGA_NATIVE_OMC to the seeded omc (omega seed/out/omc, sha256 $PIN)}
 got=$(sha256sum < "$OMC" | cut -d' ' -f1)
 [ "$got" = "$PIN" ] || { echo "FAIL omc sha256 $got, pinned $PIN"; exit 1; }
@@ -21,15 +21,31 @@ U="madd smadd fill spin mix big"
 units=""; for u in $U; do units="$units $T/$u.om"; done
 # tools/native: the generator, the units' code, the library source, the header, the python, rust, zig
 # and go bindings, then the library built with the header included (a declaration that disagrees with
-# its definition fails that build).
+# its definition fails that build). Its work/ folder holds the generator and the units' code.
 if OMEGA_NATIVE_OMC="$OMC" "$ROOT/tools/native" "$O" $units > "$O/tools-native.log" 2>&1; then
   pass "tools/native: library + six bindings ($(cd "$O" && cat omega_native.h omega_native.py omega_native.rs omega_native.zig omega_native.go | sha256sum | cut -c1-16))"
 else fail "tools/native"; cat "$O/tools-native.log"; exit 1; fi
-GEN=$O/native-gen
+W=$O/work
+GEN=$W/native-gen
+# A unit outside the subset (here: a uchar result) is refused by name with exit 110, and a previous run's
+# outputs in that folder stay as they were: nothing half-written, no scratch left behind.
+printf 'fn m a ulong to uchar\nret uchar a\nend\n' > "$O/bad.om"
+OMEGA_NATIVE_OMC="$OMC" "$ROOT/tools/native" "$O/keep" "$T/madd.om" > /dev/null 2>&1
+h0=$(sha256sum < "$O/keep/omega_native.h")
+rc=0; OMEGA_NATIVE_OMC="$OMC" "$ROOT/tools/native" "$O/keep" "$T/madd.om" "$O/bad.om" > "$O/refused.log" 2>&1 || rc=$?
+if [ "$rc" = 110 ] && grep -q "refused $O/bad.om" "$O/refused.log" && [ "$(sha256sum < "$O/keep/omega_native.h")" = "$h0" ] \
+   && [ -z "$(ls -A "$O/keep" | grep -v -E '^(omega_native\.(c|h|py|rs|zig|go)|libomega_native\.so|work)$')" ]; then
+  pass "tools/native refuses a unit outside the subset by name (exit 110), previous outputs untouched"
+else fail "tools/native refusal (exit $rc)"; cat "$O/refused.log"; ls -A "$O/keep"; fi
 # Every caller takes its declarations from the generated file; none types an Omega function itself.
 if grep -n -E 'uint32_t omega_|fn omega_|argtypes|CDLL|import "C"' "$T"/caller.* > "$O/hand.log"; then
   fail "a caller declares an Omega function by hand"; cat "$O/hand.log"
 else pass "no caller declares an Omega function by hand"; fi
+# The generated header against prototypes written by hand from the contract (tests/native/reference.c),
+# independent of the generator: a disagreement is a conflicting-types error.
+if cc -std=gnu11 -fsyntax-only -Wall -Wextra -Werror -include "$O/omega_native.h" "$T/reference.c" > "$O/reference.log" 2>&1; then
+  pass "generated header agrees with the hand-written reference prototypes"
+else fail "generated header disagrees with tests/native/reference.c"; cat "$O/reference.log"; fi
 # The embedded code must be the compiler's bytes, unchanged.
 # Each unit is read at its symbol, mapped from load address to file offset through its section.
 emb() {
@@ -45,9 +61,9 @@ ok=1; : > "$O/code.bin"
 for u in $U; do
     off=$(emb "$O/libomega_native.so" $u)
     if [ -z "$off" ]; then ok=0; continue; fi
-    dd if="$O/libomega_native.so" bs=1 skip="$off" count="$(wc -c < "$O/$u.bin")" 2>/dev/null > "$O/$u.emb"
-    cmp -s "$O/$u.bin" "$O/$u.emb" || ok=0
-    cat "$O/$u.bin" >> "$O/code.bin"
+    dd if="$O/libomega_native.so" bs=1 skip="$off" count="$(wc -c < "$W/$u.bin")" 2>/dev/null > "$O/$u.emb"
+    cmp -s "$W/$u.bin" "$O/$u.emb" || ok=0
+    cat "$W/$u.bin" >> "$O/code.bin"
 done
 if [ $ok = 1 ]; then pass "embedded code == omc output, per unit ($(sha256sum < "$O/code.bin" | cut -c1-16))"
 else fail "embedded code differs from omc output"; fi
@@ -68,7 +84,7 @@ if OMEGA_NATIVE_OMC="$OMC" OMEGA_NATIVE_CFLAGS="-nostartfiles -mbranch-protectio
   else fail "c-bti build carries no BTI property"; fi
 else fail "c-bti library build"; cat "$O/bti-native.log" 2> /dev/null || true; fi
 # Generator refusals: names the C side cannot carry give exit 110 and no output, never broken C.
-unitin() { printf '%s' "$1"; printf '\0'; printf '%08d' "$(wc -c < "$O/madd.bin")"; cat "$O/madd.bin"; }
+unitin() { printf '%s' "$1"; printf '\0'; printf '%08d' "$(wc -c < "$W/madd.bin")"; cat "$W/madd.bin"; }
 refuse() {
   rc=0; "$GEN" c < "$O/ref.in" > "$O/ref.out" 2> /dev/null || rc=$?
   if [ "$rc" = 110 ] && [ ! -s "$O/ref.out" ]; then pass "generator refuses $1"; else fail "generator accepted $1 (exit $rc)"; fi
@@ -86,9 +102,9 @@ end
 unitin "fn m $S" > "$O/ref.in"; rc=0; "$GEN" c < "$O/ref.in" > "$O/ref.out" 2> /dev/null || rc=$?
 if [ "$rc" = 0 ] && [ -s "$O/ref.out" ]; then pass "generator accepts the same unit once (control)"
 else fail "generator refused the control unit (exit $rc)"; fi
-rc=0; "$GEN" < "$O/units.in" > "$O/ref.out" 2> /dev/null || rc=$?
+rc=0; "$GEN" < "$W/units.in" > "$O/ref.out" 2> /dev/null || rc=$?
 if [ "$rc" = 110 ] && [ ! -s "$O/ref.out" ]; then pass "generator refuses a missing output word"; else fail "generator ran without an output word (exit $rc)"; fi
-rc=0; "$GEN" java < "$O/units.in" > "$O/ref.out" 2> /dev/null || rc=$?
+rc=0; "$GEN" java < "$W/units.in" > "$O/ref.out" 2> /dev/null || rc=$?
 if [ "$rc" = 110 ] && [ ! -s "$O/ref.out" ]; then pass "generator refuses an unknown output word"; else fail "generator accepted the word java (exit $rc)"; fi
 # The other five languages, each built against its generated binding only.
 if command -v c++ > /dev/null; then
@@ -97,57 +113,65 @@ if command -v c++ > /dev/null; then
 else notrun="$notrun c++"; fi
 if command -v python3 > /dev/null; then run python python3 -I "$O/caller.py"; else notrun="$notrun python"; fi
 if command -v rustc > /dev/null; then
-  bld rust rustc -O --edition 2021 "$O/caller.rs" -L "$O" -C link-arg=-Wl,-rpath,"$O" -o "$O/caller_rs" \
+  # The binding declares `unsafe extern "C"` (Rust 1.82 or later), so it reads under edition 2021 and 2024 alike.
+  bld rust rustc -O --edition 2021 -D warnings "$O/caller.rs" -L "$O" -C link-arg=-Wl,-rpath,"$O" -o "$O/caller_rs" \
     && run rust "$O/caller_rs"
+  bld rust-2024 rustc -O --edition 2024 -D warnings "$O/caller.rs" -L "$O" -C link-arg=-Wl,-rpath,"$O" -o "$O/caller_rs24" \
+    && run rust-2024 "$O/caller_rs24"
 else notrun="$notrun rust"; fi
 if command -v zig > /dev/null; then
   bld zig sh -c 'cd "$1" && zig build-exe caller.zig -L. -lomega_native -lc -rpath "$1" -femit-bin=caller_zig' _ "$O" \
     && run zig "$O/caller_zig"
 else notrun="$notrun zig"; fi
 if command -v go > /dev/null; then
-  # Module omegacaller: caller.go (package main) and omeganative/ holding the generated package and the library.
-  mkdir -p "$O/go/omeganative"; cp "$O/omega_native.go" "$O/libomega_native.so" "$O/go/omeganative/"; cp "$O/caller.go" "$O/go/"
-  bld go sh -c 'cd "$1" && go mod init omegacaller > /dev/null 2>&1 && go build -o caller_go .' _ "$O/go" \
+  # Module omegacaller: caller.go (package main) and omeganative/ holding the generated package, the header
+  # and the library. The binding bakes in no run-time path; this build names the folder through CGO_LDFLAGS.
+  mkdir -p "$O/go/omeganative"; cp "$O/omega_native.go" "$O/omega_native.h" "$O/libomega_native.so" "$O/go/omeganative/"; cp "$O/caller.go" "$O/go/"
+  bld go sh -c 'cd "$1" && go mod init omegacaller > /dev/null 2>&1 && CGO_LDFLAGS="-Wl,-rpath,$1/omeganative" go build -o caller_go .' _ "$O/go" \
     && run go "$O/go/caller_go"
 else notrun="$notrun go"; fi
 # Negative control 1: madd's add turned into sub in the embedded code must be caught by the C caller.
 frame() { cat "$T/$1.om"; printf '\0'; printf '%08d' "$(wc -c < "$2/$1.bin")"; cat "$2/$1.bin"; }
-cp "$O/smadd.bin" "$O/fill.bin" "$O/spin.bin" "$O/mix.bin" "$O/big.bin" "$O/mut/"
+cp "$W/smadd.bin" "$W/fill.bin" "$W/spin.bin" "$W/mix.bin" "$W/big.bin" "$O/mut/"
 printf '\003\174\001\233\140\000\002\313\300\003\137\326' > "$O/mut/madd.bin"
 for u in $U; do frame $u "$O/mut"; done | "$GEN" c > "$O/mut/omega_native.c"
 cc -std=gnu11 -O2 -fPIC -shared -Wl,-soname,libomega_native.so -include "$O/omega_native.h" -o "$O/mut/libomega_native.so" "$O/mut/omega_native.c"
 cc -std=gnu11 -O2 -pthread "$O/caller.c" -L"$O/mut" -lomega_native -Wl,-rpath,"$O/mut" -o "$O/mut/caller_c"
 if "$O/mut/caller_c" > "$O/mut/c.log" 2>&1; then fail "mutant madd (add -> sub) not caught"
 else pass "mutant madd (add -> sub) caught ($(grep -c '^FAIL' "$O/mut/c.log") failing checks)"; fi
-# Negative control 2: one wrong scalar type in each generated binding (a one-byte change to the
-# generator's text) must be caught by that language's build or run. The real library is used.
+# Negative control 2: one wrong scalar type in each generated binding (one word changed on the generator's
+# text line) must be caught by that language's build or run, for the stated reason. The real library is used.
 gmut() {
-  name=$1; ex=$2; w=$3; ext=$4; shift 4; M=$O/mut/$w; mkdir -p "$M"
+  name=$1; ex=$2; w=$3; ext=$4; pat=$5; shift 5; M=$O/mut/$w; mkdir -p "$M"
   sed "$ex" "$ROOT/src/native.om" > "$M/native.om"
-  if cmp -s "$M/native.om" "$ROOT/src/native.om"; then fail "mutant $name did not change the generator"; return 0; fi
+  n=$(diff "$ROOT/src/native.om" "$M/native.om" | grep -c '^<' || true)
+  if [ "$n" != 1 ]; then fail "mutant $name changed $n generator lines, not 1"; return 0; fi
   if ! "$OMC" < "$M/native.om" > "$M/gen" 2> /dev/null; then fail "mutant $name: generator did not build"; return 0; fi
   chmod +x "$M/gen"
-  if ! "$M/gen" "$w" < "$O/units.in" > "$M/omega_native.$ext" 2> /dev/null; then fail "mutant $name: generator refused"; return 0; fi
+  if ! "$M/gen" "$w" < "$W/units.in" > "$M/omega_native.$ext" 2> /dev/null; then fail "mutant $name: generator refused"; return 0; fi
   if cmp -s "$M/omega_native.$ext" "$O/omega_native.$ext"; then fail "mutant $name: binding unchanged"; return 0; fi
-  if "$@" > "$M/check.log" 2>&1; then fail "mutant $name not caught"; else pass "mutant $name caught"; fi
+  if "$@" > "$M/check.log" 2>&1; then fail "mutant $name not caught"
+  elif grep -q -E "$pat" "$M/check.log"; then
+    pass "mutant $name caught: $(grep -m1 -E "$pat" "$M/check.log" | sed 's/^[[:space:]]*//' | cut -c1-80)"
+  else fail "mutant $name failed for another reason (expected /$pat/)"; cat "$M/check.log"; fi
 }
-gmut "h scalar uint64_t -> uint32_t" 's/, uint64_t o_~/, uint32_t o_~/' h h \
+gmut "h scalar uint64_t -> uint32_t" '/^text tb /s/, uint64_t o_~/, uint32_t o_~/' h h 'conflicting types for' \
   cc -std=gnu11 -O2 -fPIC -shared -include "$O/mut/h/omega_native.h" -o "$O/mut/h/lib.so" "$O/omega_native.c"
 if command -v python3 > /dev/null; then
-  gmut "python scalar c_uint64 -> c_uint32" 's/_u64 = ctypes.c_uint64/_u64 = ctypes.c_uint32/' python py \
+  gmut "python scalar c_uint64 -> c_uint32" '/^text tb /s/return ctypes.c_uint64(v)/return ctypes.c_uint32(v)/' python py '^FAIL madd' \
     sh -c 'cp "$1/caller.py" "$1/libomega_native.so" "$1/mut/python/" && python3 -I "$1/mut/python/caller.py"' _ "$O"
 fi
 if command -v rustc > /dev/null; then
-  gmut "rust scalar u64 -> u32" 's/: u64~: \*mut u64/: u32~: *mut u64/' rust rs \
+  gmut "rust scalar u64 -> u32" '/^text tb /s/: u64~: \*mut u64/: u32~: *mut u64/' rust rs 'mismatched types' \
     sh -c 'cp "$1/caller.rs" "$1/mut/rust/" && rustc -O --edition 2021 "$1/mut/rust/caller.rs" -L "$1" -C link-arg=-Wl,-rpath,"$1" -o "$1/mut/rust/caller_rs" && "$1/mut/rust/caller_rs"' _ "$O"
 fi
 if command -v zig > /dev/null; then
-  gmut "zig scalar u64 -> u32" 's/: u64~: ?\[\*\]u64/: u32~: ?[*]u64/' zig zig \
+  gmut "zig scalar u64 -> u32" '/^text tb /s/: u64~: ?\[\*\]u64/: u32~: ?[*]u64/' zig zig 'cannot represent integer value|expected type' \
     sh -c 'cp "$1/caller.zig" "$1/mut/zig/" && cd "$1/mut/zig" && zig build-exe caller.zig -L "$1" -lomega_native -lc -rpath "$1" -femit-bin=caller_zig && ./caller_zig' _ "$O"
 fi
 if command -v go > /dev/null; then
-  gmut "go scalar uint64 -> uint32" 's/ uint64~ unsafe.Pointer/ uint32~ unsafe.Pointer/' go go \
-    sh -c 'mkdir -p "$1/mut/go/omeganative" && mv "$1/mut/go/omega_native.go" "$1/mut/go/omeganative/" && cp "$1/libomega_native.so" "$1/mut/go/omeganative/" && cp "$1/caller.go" "$1/mut/go/" && cd "$1/mut/go" && go mod init omegacaller && go build -o caller_go . && ./caller_go' _ "$O"
+  gmut "go scalar uint64 -> uint32" '/^text tb /s/ uint64~ unsafe.Pointer/ uint32~ unsafe.Pointer/' go go 'cannot use' \
+    sh -c 'mkdir -p "$1/mut/go/omeganative" && mv "$1/mut/go/omega_native.go" "$1/mut/go/omeganative/" && cp "$1/omega_native.h" "$1/libomega_native.so" "$1/mut/go/omeganative/" && cp "$1/caller.go" "$1/mut/go/" && cd "$1/mut/go" && go mod init omegacaller && CGO_LDFLAGS="-Wl,-rpath,$1/mut/go/omeganative" go build -o caller_go . && ./caller_go' _ "$O"
 fi
 for l in $notrun; do echo "NOT_RUN $l caller: toolchain not installed"; done
 if [ "$fails" -ne 0 ]; then echo "NATIVE-CALL FAIL $fails"; exit 1; fi
