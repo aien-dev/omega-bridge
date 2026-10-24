@@ -29,18 +29,18 @@ CUDApp driver/firmware target: NVIDIA 580.173.02, GB10, sm_121.
 | Artifact manifest: text/QMD/cbank SHA-256, contract/spec/ISA/shape/bounds/numeric/provenance | same | PASS, 47 checks |
 | Admission/refusal (tamper, ISA, format, reloc, driver, contract) | same | PASS |
 | Bridge GPU adapter v1 (negotiation + admission, named refusals, no fallback) | `bridge/evidence/MAX-INTEROP/3/` | PASS, 49 checks |
-| Cross-runtime envelope + 416-byte C2 TEST receipt | `omega/evidence/MAX-INTEROP/681/` | PASS, 22 checks |
+| Cross-runtime envelope + 416-byte C2 TEST receipt | `omega/evidence/MAX-INTEROP/681/` | PASS, 26 checks |
 | MAX 26.7 source/API/licence pin and capability matrix | `bridge/docs/max/` | PASS (analysis) |
 | Separate-process MAX vs Omega harness | `bridge/evidence/MAX-INTEROP/5/` | PASS on CPU |
 | MAX/Omega numeric agreement (fixture) | same | bit-identical matmul SHA-256; GQA max abs error 2.7e-7 |
 
 ### Exact artifacts
 
-- Matmul artifact `8dcc18e06f2306a785dd413c73f7289e12df0df995066ccb8cd5ff985a709db6`;
+- Matmul artifact `7c5ab77748c1cd29a50b9cb91efcce6d8200eb30646ce88142f31ba4d7d5544c`;
   cubin `b6ad13f4…`; text `f989e654…`.
-- Attention artifact `b7c2c772ca3401160fa18c73d7c653114db20f928aaa993f217657e81df95cb8`.
-- Envelope `86aabdb2e296636cd485b33a3f7141955431e3165bf857d86077315494622054`;
-  receipt `5c05295af4e9eb482827db52d7f6b6a6b0c2a6b7392d15c8ac9e18b5296a9c27`.
+- Attention artifact `48eac870570fd978aa011973bfc3407fedc6de2f1f1fbe1fb943cc96c9f95c22`.
+- Envelope `4b17c82188c4bfcbdefb3f7c5ca66f6b06245866b4df6f7f12cdf787dc177b00`;
+  receipt `f13b1bff8aac38cbee9c6b23c1557bd0c81f954555e84ebbb17b1f52d618ba76`.
 
 The envelope binds `execution=NOT_RUN`, `oracle_verdict=NOT_RUN`, and a zero
 output digest. It is a provenance/identity record, not a device result.

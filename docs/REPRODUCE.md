@@ -49,10 +49,10 @@ committed evidence:
 ```sh
 ./build/artifact-export matmul --m 16 --k 16 --n 8 \
   --contract-id 647116fc1ba1e1394982fc8ba181ce565293f160a6b56afc0f02b2128a675704 \
-  --out evidence/MAX-INTEROP/68/matmul-16x16x8 --commit UNKNOWN
+  --out evidence/MAX-INTEROP/68/matmul-16x16x8 --commit <40-hex-source-commit>
 ./build/artifact-export attention --q-heads 8 --kv-heads 1 \
   --contract-id 003696e422bba7274877ba9e01a61076ea0f862f32760cbaa06c60f85a115359 \
-  --out evidence/MAX-INTEROP/68/attention-hd128-gqa8 --commit UNKNOWN
+  --out evidence/MAX-INTEROP/68/attention-hd128-gqa8 --commit <40-hex-source-commit>
 ```
 
 ## 3. Envelope + C2 receipt (no GPU)
@@ -63,7 +63,7 @@ sh tests/max-interop/build_receipt.sh
 python3 tests/max-interop/test_envelope.py \
   --artifact ../../cudapp/evidence/MAX-INTEROP/68/matmul-16x16x8 \
   --fixture tests/max-interop/fixtures/matmul-v1.json
-# 22/22; envelope 86aabdb2…, receipt 5c05295a…
+# 26/26; envelope 4b17c821…, receipt f13b1bff…
 ```
 
 The receipt uses the existing TEST key through `src/checker2/c2_receipt.c`; it
