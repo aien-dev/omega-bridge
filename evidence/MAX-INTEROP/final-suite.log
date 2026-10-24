@@ -1,16 +1,13 @@
-=== HEADs ===
-omega 0dbc20671586b0eebdc2f78adcaaca0842399fd6
-cudapp fcd7d24ab786e2fc0e7d512012c79df529ec036f
-bridge bed090452d1224703a729fb3da859f50482f2d85
+=== HEADS ===
+omega e203f819ee19f5015b2595531d13d5d250bdd4cd
+cudapp f0805760067b677a5c5545b1c347cde2e1233fa1
+bridge 3df5132d2117fcfdc3e075ad41932cc437a39dfc
 === omega contracts ===
-contract-check: seed=191b776ef98821597c3e30655da6d680a9b66edbc9ceaca3c39c61ea6df098e9
-contract-check: output=bb9ef9a505d5ff9cb4298cf7bf2fffa8e199d4dce8c5e94baeb2974744918d6d
 {"summary": {"fail": 0, "pass": 26, "total": 26}, "tests": [{"status": "PASS", "test": "contract_ids_match_sha256sum"}, {"status": "PASS", "test": "checker_contract_ids"}, {"status": "PASS", "test": "checker_sha256"}, {"status": "PASS", "test": "checker_input_bound"}, {"status": "PASS", "test": "json_mirrors"}, {"status": "PASS", "test": "checker_accepts_contracts"}, {"status": "PASS", "test": "checker_rejects_mutations"}, {"status": "PASS", "test": "validator_rejects_mutations"}, {"status": "PASS", "test": "validator_accepts_contracts"}, {"status": "PASS", "test": "matmul_known_2x2"}, {"status": "PASS", "test": "matmul_known_1x1"}, {"status": "PASS", "test": "bf16_conversion"}, {"status": "PASS", "test": "attention_single_token"}, {"status": "PASS", "test": "attention_causal_boundary"}, {"status": "PASS", "test": "attention_zero_length"}, {"status": "PASS", "test": "attention_head_map"}, {"status": "PASS", "test": "mutation_non_causal_mask"}, {"status": "PASS", "test": "mutation_wrong_head_map"}, {"status": "PASS", "test": "mutation_wrong_stride"}, {"status": "PASS", "test": "mutation_fp32_accumulation"}, {"status": "PASS", "test": "mutation_changed_tolerance_and_unknown_field"}, {"status": "PASS", "test": "manifest_accepts"}, {"status": "PASS", "test": "manifest_mutations"}, {"status": "PASS", "test": "fixtures_regenerate"}, {"status": "PASS", "test": "fixture_checksums"}, {"status": "PASS", "test": "fixture_oracle_matches"}]}
 === omega envelope ===
-build/receipt-tool: ELF 64-bit LSB pie executable, ARM aarch64, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-aarch64.so.1, BuildID[sha1]=cb9d01935922a1fe5bd19a651da0b15d52c22b8d, for GNU/Linux 3.7.0, not stripped
-{"checks": 22, "envelope_id": "86aabdb2e296636cd485b33a3f7141955431e3165bf857d86077315494622054", "fail": 0, "receipt_id": "5c05295af4e9eb482827db52d7f6b6a6b0c2a6b7392d15c8ac9e18b5296a9c27"}
+{"checks": 26, "envelope_id": "4cd9a49cc37e93f4116b139e892c038508a49cc1ad6746487be8348f5bcf7ba8", "fail": 0, "receipt_id": "daae94b73142f769a073ef1d9c60b7f4cc3bd9fdc13fb1e9d809266dc008634a"}
 === cudapp ===
-test_gpu_artifact_export: 42 checks, 0 failed
+test_gpu_artifact_export: 47 checks, 0 failed
 ARTIFACT SMOKE PASS
 === bridge adapter ===
 SUMMARY {"checks": 49, "fail": 0}
