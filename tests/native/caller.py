@@ -26,5 +26,33 @@ check("fill k=1 traps 3, result unchanged", om.omega_fill(ctypes.byref(r), buf, 
 check("writes before the trap stay visible", list(buf) == [11, 22, 0, 0])
 check("fill k=0 = 3", om.omega_fill(ctypes.byref(r), buf, 4, 0) == 0 and r.value == 3 and list(buf) == [11, 22, 33, 0])
 check("null result refused 32", om.omega_madd(None, 3, 5, 7) == 32)
+# mix: six parameters (ulong, long, view uchar 3, edit uchar 2, view ulong 2, ulong), no result.
+# 5 + 20 + 7 = 32 (calc:08302bc4); 5 + 20 + 300 is 70 over 255 (calc:a6a8bb76), so the conversion traps 5.
+cb = bytes([1, 2, 3])            # view uchar: bytes
+db = (ctypes.c_ubyte * 2)()      # edit uchar: a writable ctypes array
+eb = (u64 * 2)(10, 20)           # view ulong: a ctypes array
+r = u64(SENTINEL)
+check("mix six parameters, void result writes 0",
+      om.omega_mix(ctypes.byref(r), 5, 1, cb, 3, db, 2, eb, 2, 7) == 0 and r.value == 0 and list(db) == [3, 32])
+db[0] = db[1] = 0
+r = u64(SENTINEL)
+check("mix negative long traps 9 after both writes, result unchanged",
+      om.omega_mix(ctypes.byref(r), 5, bits(-1), cb, 3, db, 2, eb, 2, 7) == 9 and r.value == SENTINEL and list(db) == [3, 32])
+db[0] = db[1] = 0
+check("mix uchar conversion 325 traps 5, first write visible",
+      om.omega_mix(ctypes.byref(r), 5, 1, cb, 3, db, 2, eb, 2, 300) == 5 and r.value == SENTINEL and list(db) == [3, 0])
+# The binding refuses what the ABI cannot carry instead of truncating or writing into immutable bytes.
+def refused(f):
+    try:
+        f()
+    except ctypes.ArgumentError:
+        return True
+    return False
+check("scalar 2**64+3 refused, not truncated", refused(lambda: om.omega_madd(ctypes.byref(r), 2**64 + 3, 5, 7)))
+check("scalar -1 refused (pass its bits)", refused(lambda: om.omega_madd(ctypes.byref(r), -1, 5, 7)))
+check("scalar 2.0 refused", refused(lambda: om.omega_madd(ctypes.byref(r), 2.0, 5, 7)))
+check("bytes for an edit uchar array refused", refused(lambda: om.omega_mix(ctypes.byref(r), 5, 1, cb, 3, bytes(2), 2, eb, 2, 7)))
+check("bytes for an edit ulong array refused", refused(lambda: om.omega_fill(ctypes.byref(r), bytes(32), 4, 0)))
+check("call after refusals still works", om.omega_madd(ctypes.byref(r), 3, 5, 7) == 0 and r.value == 22)
 print(("FAIL " if fails else "PASS ") + "%d failure(s)" % fails)
 sys.exit(fails != 0)
