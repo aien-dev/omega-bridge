@@ -21,7 +21,9 @@ for u in $U; do "$OMC" < "$T/$u.om" > "$O/$u.bin"; done
 frame() { cat "$T/$1.om"; printf '\0'; printf '%08d' "$(wc -c < "$2/$1.bin")"; cat "$2/$1.bin"; }
 gen() { for u in $U; do frame $u "$1"; done | "$O/native" > "$1/omega_native.c"; }
 gen "$O"
-cc -std=gnu11 -O2 -Wall -Wextra -Werror -fPIC -shared -o "$O/libomega_native.so" "$O/omega_native.c"
+# The library names itself (soname), so every caller records "libomega_native.so" and finds it via rpath;
+# without it Zig records "./libomega_native.so", which only loads from the build folder.
+cc -std=gnu11 -O2 -Wall -Wextra -Werror -fPIC -shared -Wl,-soname,libomega_native.so -o "$O/libomega_native.so" "$O/omega_native.c"
 # The embedded code must be the compiler's bytes, unchanged.
 # Each unit is read at its symbol, mapped from load address to file offset through its section.
 emb() {
@@ -52,7 +54,9 @@ run c "$O/caller_c"
 # system's crti.o has no landing pad in _init; that is the C library's start code, not the binding's.
 # Without the entry stubs (commit e7777ca) this caller dies with SIGILL on its first call.
 mkdir -p "$O/bti"
-cc -std=gnu11 -O2 -Wall -Wextra -Werror -fPIC -shared -nostartfiles -mbranch-protection=standard \
+# The library names itself (soname), so every caller records "libomega_native.so" and finds it via rpath;
+# without it Zig records "./libomega_native.so", which only loads from the build folder.
+cc -std=gnu11 -O2 -Wall -Wextra -Werror -fPIC -shared -Wl,-soname,libomega_native.so -nostartfiles -mbranch-protection=standard \
   -Wl,-z,force-bti -o "$O/bti/libomega_native.so" "$O/omega_native.c" 2> "$O/bti/cc.log"
 cc -std=gnu11 -O2 -Wall -Wextra -Werror -pthread "$O/caller.c" -L"$O/bti" -lomega_native -Wl,-rpath,"$O/bti" \
   -o "$O/bti/caller_c"
@@ -97,7 +101,7 @@ else notrun="$notrun go"; fi
 cp "$O/smadd.bin" "$O/fill.bin" "$O/spin.bin" "$O/mix.bin" "$O/big.bin" "$O/mut/"
 printf '\003\174\001\233\140\000\002\313\300\003\137\326' > "$O/mut/madd.bin"
 gen "$O/mut"
-cc -std=gnu11 -O2 -fPIC -shared -o "$O/mut/libomega_native.so" "$O/mut/omega_native.c"
+cc -std=gnu11 -O2 -fPIC -shared -Wl,-soname,libomega_native.so -o "$O/mut/libomega_native.so" "$O/mut/omega_native.c"
 cc -std=gnu11 -O2 -pthread "$O/caller.c" -L"$O/mut" -lomega_native -Wl,-rpath,"$O/mut" -o "$O/mut/caller_c"
 if "$O/mut/caller_c" > "$O/mut/c.log" 2>&1; then fail "mutant madd (add -> sub) not caught"
 else pass "mutant madd (add -> sub) caught ($(grep -c '^FAIL' "$O/mut/c.log") failing checks)"; fi

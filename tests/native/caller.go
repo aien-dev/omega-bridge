@@ -1,5 +1,5 @@
 // Go caller (cgo) for the omega-bridge native call ABI v1 test library.
-// NOT_RUN so far: no Go toolchain on the qualification host.
+// Run with Go 1.27.3 (cgo) by tests/native/run.sh (10 checks).
 package main
 
 /*

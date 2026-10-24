@@ -1,5 +1,5 @@
-// Zig caller for the omega-bridge native call ABI v1 test library. Written against Zig 0.13;
-// NOT_RUN so far: no Zig toolchain on the qualification host.
+// Zig caller for the omega-bridge native call ABI v1 test library. Written against Zig 0.13.
+// Run with Zig 0.13.0 by tests/native/run.sh (10 checks).
 const std = @import("std");
 extern fn omega_madd(result: ?*u64, a: u64, b: u64, c: u64) u32;
 extern fn omega_smadd(result: ?*u64, a: u64, b: u64, c: u64) u32;

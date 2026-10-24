@@ -107,5 +107,10 @@ by 70 (calc:a6a8bb76), 4,000,000 bytes is 0.954 of 4 MiB (calc:ffff21b2). Negati
 `sub` in the code must make the C caller fail.
 
 Separate claims, not made here: source translation (ABI v0) and GPU execution are qualified on their
-own. Zig and Go callers exist (tests/native/caller.zig, caller.go) and are NOT_RUN until those
-toolchains are installed. Only AArch64 Linux is supported.
+own. Only AArch64 Linux is supported.
+
+Zig and Go: run with Zig 0.13.0 and Go 1.27.3 (official aarch64 archives, checksums from
+ziglang.org/download/index.json and go.dev/dl, unpacked in the user's ~/.local/opt). Both callers pass
+10 checks. The library is linked with `-soname libomega_native.so`: without that name, Zig records the
+library as `./libomega_native.so` and the caller fails to load outside the build folder (red: dd8b9a9;
+green: this change). The embedded code is unchanged by the name.
