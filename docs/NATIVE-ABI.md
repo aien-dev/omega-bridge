@@ -30,11 +30,18 @@ anything outside the supported signature set is refused (exit 110, no output). T
 - embeds each unit's code byte for byte (tests/native/run.sh compares the bytes inside the built
   library with the compiler's output);
 - enters the code through a small trampoline that saves the callee-saved registers x19..x28 and
-  d8..d15, sets x7 and loads the arguments;
-- gives the code a 32-entry runtime table whose trap entry returns control to the exported function
-  (setjmp/longjmp inside the binding; nothing crosses the caller's frame) and whose other entries
-  refuse with status 34, since function-mode units of this ABI use none of them;
+  d8..d15 on the caller's stack, keeps the caller's stack pointer in x19, sets x7, loads the arguments and
+  runs the code on the binding's own stack (below);
+- gives the code a 32-entry runtime table whose trap entry restores the caller's stack pointer from x19
+  and returns the trap code from the exported function (no setjmp/longjmp, nothing crosses the caller's
+  frame) and whose other entries refuse with status 34, since function-mode units of this ABI use none
+  of them. This relies on the seeded compiler never writing x19..x28 (OSC-1 uses x0..x16, x29, x30);
+- reaches each unit through a two-instruction stub (`bti c`, branch) so the code runs under branch
+  target identification (BTI) without changing the compiler's bytes;
 - exports, per unit, `uint32_t omega_<name>(uint64_t *result, ...)`.
+
+Names must be C identifiers, a parameter name may not end in `_len` (the binding names a length
+`o_<name>_len`), and each unit name appears once; anything else is refused before any C is written.
 
 Supported signatures: up to 6 parameters, each `ulong`, `long`, or `edit`/`view` of `ulong` or `uchar`
 with a fixed length; result `ulong`, `long` or `void`; one function per unit.
@@ -51,10 +58,26 @@ with a fixed length; result `ulong`, `long` or `void`; one function per unit.
 | status 32 | foreign argument refused: null pointer, wrong length, misaligned, address overflow, a writable array overlapping any other array or the result |
 | status 33 | reentry on the same thread (for example from a signal handler during a call) |
 | status 34 | the code reached a runtime entry this ABI does not provide |
+| status 35 | the binding could not map its stack for this thread |
 
 Buffers stay owned by the caller and are borrowed for the call only; Omega keeps no address after it
-returns. Writes made before a trap stay visible (no rollback). The caller supplies an 8 MiB stack, as in
-ABI v0. Calls on different threads are independent; each call has its own runtime table.
+returns. Writes made before a trap stay visible (no rollback). Calls on different threads are independent; each
+call has its own runtime table.
+
+Stack: on its first call from a thread the binding maps 8 MiB of stack for that thread above an 8 MiB
+no-access guard, and frees both when the thread exits. The caller's own stack size does not matter (a
+4,000,000-byte local array runs from a 256 KiB C thread and a default 2 MiB Rust thread). A function-mode
+unit has no call cycles and at most 4 MiB of local arrays per function, so a frame that would pass the
+bottom starts inside the guard and the process faults there; memory below the guard is never written.
+That fault is a crash, not a status: in function mode the seeded compiler does not check the stack
+floor before reserving a frame (program mode traps 6 instead). A clean status needs that check in the
+compiler; it is a compiler gap, not something the binding can add around the code.
+
+Host words: a function-mode unit may use Omega host words (`read`, `write`, ...). They compile to Linux
+system calls made directly by the code, on the calling process and its open descriptors.
+
+Signals: a call from a signal handler while a call is running on the same thread returns 33. A handler
+that leaves Omega code with `siglongjmp` abandons the call; every later call on that thread returns 33.
 
 ## Qualification (`OMEGA_NATIVE_OMC=<seed omc> sh tests/native/run.sh`)
 
@@ -64,10 +87,23 @@ omega-mv PR #696). Expected values come from receipts, not from Omega:
 mod 2^64 = 3637949782307626511 (calc:9bf5b67e, Wolfram agrees); -13 as 64-bit bits = 18446744073709551603
 (calc:cbb0735b); 0+1+...+999999 = 499999500000 (calc:3f197279).
 
-Each caller checks values, wrap-around, signed bits, a signed overflow trap with the result left
-unchanged, a bounds-style trap after two buffer writes (writes visible, result unchanged), a successful
-buffer call, and refused arguments. The C caller also checks misalignment, result/buffer overlap, a call
-after traps, and reentry from a signal handler (status 33). Negative control: madd's `add` changed to
+The C, C++, Python and Rust callers check values, wrap-around, signed bits, a signed overflow trap with
+the result left unchanged, a trap after two buffer writes (writes visible, result unchanged), a
+successful buffer call and a refused null result. The C caller also checks a null buffer, a wrong length,
+misalignment, result/buffer overlap, a view overlapping an edit array, a call after traps, reentry from a
+signal handler (status 33), a six-parameter unit with `view`/`edit` `uchar` and `ulong` arrays and no
+result (success, a `trap 9` after two writes, a conversion trap 5 after one write), a trap from a frame
+holding a 4,000,000-byte local array, that array on a 256 KiB thread, and that x19..x28 and d8..d15 keep
+the caller's values across a normal return and a trap. The Rust caller runs the array on a default
+thread. The C caller runs a second time against a library built with BTI enforced. The generator is
+shown to refuse a non-C unit name, a parameter ending in `_len` and a repeated unit name, and to accept
+the same unit once. Not exercised: status 34 and 35 (no supported unit reaches another runtime entry;
+mapping failure is not induced).
+
+Red before green (this change): with the generator of commit e7777ca, the C caller dies with SIGILL
+under BTI, and the 4,000,000-byte array on a 2 MiB thread dies with SIGSEGV; with this generator both
+pass. Extra receipts: 5+20+7 = 32 (calc:08302bc4), (7+1)+7 = 15 (calc:e44bce3f), 5+20+300 exceeds 255
+by 70 (calc:a6a8bb76), 4,000,000 bytes is 0.954 of 4 MiB (calc:ffff21b2). Negative control: madd's `add` changed to
 `sub` in the code must make the C caller fail.
 
 Separate claims, not made here: source translation (ABI v0) and GPU execution are qualified on their

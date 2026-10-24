@@ -4,6 +4,7 @@ extern "C" {
     fn omega_madd(result: *mut u64, a: u64, b: u64, c: u64) -> u32;
     fn omega_smadd(result: *mut u64, a: u64, b: u64, c: u64) -> u32;
     fn omega_fill(result: *mut u64, buf: *mut u64, buf_len: u64, k: u64) -> u32;
+    fn omega_big(result: *mut u64, n: u64) -> u32;
 }
 
 fn main() {
@@ -30,6 +31,14 @@ fn main() {
         check("fill k=0 = 3", omega_fill(&mut r, buf.as_mut_ptr(), 4, 0) == 0 && r == 3 && buf == [11, 22, 33, 0]);
         check("null result refused 32", omega_madd(std::ptr::null_mut(), 3, 5, 7) == 32);
     }
+    // A std::thread has a 2 MiB stack by default; the 4,000,000-byte local array runs on the binding's own stack.
+    // (7 + 1) + 7 = 15 (calc:e44bce3f).
+    let t = std::thread::spawn(|| {
+        let mut r: u64 = 0;
+        let s = unsafe { omega_big(&mut r, 7) };
+        (s, r)
+    });
+    check("big local array on a default std::thread = 15", t.join().map_or(false, |v| v == (0, 15)));
     println!("{} {} failure(s)", if fails > 0 { "FAIL" } else { "PASS" }, fails);
     std::process::exit(if fails > 0 { 1 } else { 0 });
 }
