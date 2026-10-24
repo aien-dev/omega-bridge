@@ -1,0 +1,1 @@
+tools/native: refused <repo>/build/native/bad.om: outside the native call subset, or a name the binding cannot carry (docs/NATIVE-ABI.md); nothing installed

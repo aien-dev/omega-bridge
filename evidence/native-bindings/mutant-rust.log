@@ -1,5 +1,5 @@
 error[E0308]: mismatched types
-  --> /home/drakestapleton/workspace/bridge-native-call/build/native/mut/rust/caller.rs:17:52
+  --> <repo>/build/native/mut/rust/caller.rs:17:52
    |
 17 |         check("madd wraps = 3", omega_madd(&mut r, u64::MAX, 2, 5) == 0 && r == 3);
    |                                 ----------         ^^^^^^^^ expected `u32`, found `u64`
@@ -7,7 +7,7 @@ error[E0308]: mismatched types
    |                                 arguments to this function are incorrect
    |
 note: function defined here
-  --> /home/drakestapleton/workspace/bridge-native-call/build/native/mut/rust/omega_native.rs:20:12
+  --> <repo>/build/native/mut/rust/omega_native.rs:20:12
    |
 20 |     pub fn omega_madd(result: *mut u64, o_a: u32, o_b: u32, o_c: u32) -> u32;
    |            ^^^^^^^^^^                   ---
@@ -17,7 +17,7 @@ help: you can convert a `u64` to a `u32` and panic if the converted value doesn'
    |                                                            ++++++++++++++++++++
 
 error[E0308]: mismatched types
-  --> /home/drakestapleton/workspace/bridge-native-call/build/native/mut/rust/caller.rs:20:60
+  --> <repo>/build/native/mut/rust/caller.rs:20:60
    |
 20 |         check("madd signed bits = -13", omega_madd(&mut r, (-3i64) as u64, 5, 2) == 0 && r as i64 == -13);
    |                                         ----------         ^^^^^^^^^^^^^^ expected `u32`, found `u64`
@@ -25,7 +25,7 @@ error[E0308]: mismatched types
    |                                         arguments to this function are incorrect
    |
 note: function defined here
-  --> /home/drakestapleton/workspace/bridge-native-call/build/native/mut/rust/omega_native.rs:20:12
+  --> <repo>/build/native/mut/rust/omega_native.rs:20:12
    |
 20 |     pub fn omega_madd(result: *mut u64, o_a: u32, o_b: u32, o_c: u32) -> u32;
    |            ^^^^^^^^^^                   ---
@@ -35,7 +35,7 @@ help: you can convert a `u64` to a `u32` and panic if the converted value doesn'
    |                                                            +              +++++++++++++++++++++
 
 error[E0308]: mismatched types
-  --> /home/drakestapleton/workspace/bridge-native-call/build/native/mut/rust/caller.rs:22:79
+  --> <repo>/build/native/mut/rust/caller.rs:22:79
    |
 22 |         check("smadd overflow traps 1, result unchanged", omega_smadd(&mut r, 1u64 << 62, 4, 0) == 1 && r == SENTINEL);
    |                                                           -----------         ^^^^^^^^^^ expected `u32`, found `u64`
@@ -43,7 +43,7 @@ error[E0308]: mismatched types
    |                                                           arguments to this function are incorrect
    |
 note: function defined here
-  --> /home/drakestapleton/workspace/bridge-native-call/build/native/mut/rust/omega_native.rs:22:12
+  --> <repo>/build/native/mut/rust/omega_native.rs:22:12
    |
 22 |     pub fn omega_smadd(result: *mut u64, o_a: u32, o_b: u32, o_c: u32) -> u32;
    |            ^^^^^^^^^^^                   ---
@@ -52,6 +52,24 @@ help: you can convert a `u64` to a `u32` and panic if the converted value doesn'
 22 |         check("smadd overflow traps 1, result unchanged", omega_smadd(&mut r, (1u64 << 62).try_into().unwrap(), 4, 0) == 1 && r == SENTINEL);
    |                                                                               +          +++++++++++++++++++++
 
-error: aborting due to 3 previous errors
+error[E0308]: mismatched types
+  --> <repo>/build/native/mut/rust/caller.rs:39:34
+   |
+39 |             omega_mix(&mut r, 5, (-1i64) as u64, cb.as_ptr(), 3, db.as_mut_ptr(), 2, eb.as_ptr(), 2, 7) == 9
+   |             ---------            ^^^^^^^^^^^^^^ expected `u32`, found `u64`
+   |             |
+   |             arguments to this function are incorrect
+   |
+note: function defined here
+  --> <repo>/build/native/mut/rust/omega_native.rs:28:12
+   |
+28 |     pub fn omega_mix(result: *mut u64, o_a: u32, o_b: u32, o_c: *const u8, o_c_len: u64, o_d: *mut u8, o_d_len: u64, o_e: *const u64...
+   |            ^^^^^^^^^                             ---
+help: you can convert a `u64` to a `u32` and panic if the converted value doesn't fit
+   |
+39 |             omega_mix(&mut r, 5, ((-1i64) as u64).try_into().unwrap(), cb.as_ptr(), 3, db.as_mut_ptr(), 2, eb.as_ptr(), 2, 7) == 9
+   |                                  +              +++++++++++++++++++++
+
+error: aborting due to 4 previous errors
 
 For more information about this error, try `rustc --explain E0308`.
