@@ -1,0 +1,42 @@
+#!/bin/sh
+# tools/native: one Omega library and its declarations for six languages, from Omega function units.
+# Usage: OMEGA_NATIVE_OMC=<seeded omc> tools/native OUTDIR unit.om [unit.om...]
+# Each unit is one .om function in the native call subset (docs/NATIVE-ABI.md). OUTDIR receives
+#   omega_native.c     the library source: every unit's compiled code, embedded unchanged, behind
+#                      uint32_t omega_<name>(uint64_t *result, ...)
+#   omega_native.h     its C and C++ declarations
+#   omega_native.py    ctypes bindings (import it from beside libomega_native.so)
+#   omega_native.rs    a Rust module (mod omega_native;)
+#   omega_native.zig   a Zig file (@import("omega_native.zig"))
+#   omega_native.go    a cgo package omeganative (a folder of that name holding it and the library)
+#   libomega_native.so the library, built with omega_native.h included, so a declaration that
+#                      disagrees with its definition fails this build
+# all written by one generator, src/native.om, from the units' signatures. A unit outside the subset
+# is refused (exit 110) and no binding is written. Extra C flags: OMEGA_NATIVE_CFLAGS.
+set -eu
+PIN=734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61
+ROOT=$(cd "$(dirname "$0")/.." && pwd)
+OMC=${OMEGA_NATIVE_OMC:?set OMEGA_NATIVE_OMC to the seeded omc (omega seed/out/omc, sha256 $PIN)}
+got=$(sha256sum < "$OMC" | cut -d' ' -f1)
+[ "$got" = "$PIN" ] || { echo "tools/native: omc sha256 $got, pinned $PIN" >&2; exit 1; }
+[ $# -ge 2 ] || { echo "usage: OMEGA_NATIVE_OMC=<omc> tools/native OUTDIR unit.om [unit.om...]" >&2; exit 2; }
+OUT=$1; shift
+mkdir -p "$OUT"
+OUT=$(cd "$OUT" && pwd)
+"$OMC" < "$ROOT/src/native.om" > "$OUT/native-gen"; chmod +x "$OUT/native-gen"
+# The generator's input: each unit's source, a 0 byte, the code length in 8 decimal digits, the code.
+: > "$OUT/units.in"
+for u in "$@"; do
+  b=$(basename "$u" .om)
+  "$OMC" < "$u" > "$OUT/$b.bin"
+  { cat "$u"; printf '\0'; printf '%08d' "$(wc -c < "$OUT/$b.bin")"; cat "$OUT/$b.bin"; } >> "$OUT/units.in"
+done
+# Every output is generated before any is installed, so a refusal leaves OUTDIR without a half set.
+for w in c h python rust zig go; do "$OUT/native-gen" $w < "$OUT/units.in" > "$OUT/.$w.new"; done
+mv "$OUT/.c.new" "$OUT/omega_native.c"; mv "$OUT/.h.new" "$OUT/omega_native.h"
+mv "$OUT/.python.new" "$OUT/omega_native.py"; mv "$OUT/.rust.new" "$OUT/omega_native.rs"
+mv "$OUT/.zig.new" "$OUT/omega_native.zig"; mv "$OUT/.go.new" "$OUT/omega_native.go"
+# The library names itself (soname), so every caller records libomega_native.so and finds it via rpath.
+${CC:-cc} -std=gnu11 -O2 -Wall -Wextra -Werror -fPIC -shared -Wl,-soname,libomega_native.so \
+  -include "$OUT/omega_native.h" ${OMEGA_NATIVE_CFLAGS:-} -o "$OUT/libomega_native.so" "$OUT/omega_native.c"
+echo "tools/native: $# unit(s) -> $OUT/libomega_native.so + omega_native.{c,h,py,rs,zig,go}"
