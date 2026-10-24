@@ -81,7 +81,7 @@ that leaves Omega code with `siglongjmp` abandons the call; every later call on 
 
 ## Qualification (`OMEGA_NATIVE_OMC=<seed omc> sh tests/native/run.sh`)
 
-The compiler is pinned by sha256 (`d0603ff8fc276774ac7b438c27d146123b9a4513547fe9671e36d8e02d183e83`,
+The compiler is pinned by sha256 (`734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61`,
 omega-mv PR #696). Expected values come from receipts, not from Omega:
 (2^64-1)*2+5 mod 2^64 = 3 (calc:93e7b00a); 1311768467463790320*18364758544493064720+1085102592571150095
 mod 2^64 = 3637949782307626511 (calc:9bf5b67e, Wolfram agrees); -13 as 64-bit bits = 18446744073709551603

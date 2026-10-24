@@ -4,7 +4,7 @@
 # OMEGA_NATIVE_OMC names the seeded compiler; its sha256 must be the pinned one below.
 # A missing language toolchain is reported NOT_RUN, never PASS. Exit 0 only when every run check passed.
 set -eu
-PIN=d0603ff8fc276774ac7b438c27d146123b9a4513547fe9671e36d8e02d183e83
+PIN=734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61
 ROOT=$(cd "$(dirname "$0")/../.." && pwd)
 T=$ROOT/tests/native
 O=$ROOT/build/native
