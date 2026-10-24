@@ -1,9 +1,10 @@
-date 2026-10-24T21:47:41Z
-omega-bridge base 2a5615b1e0fc0649be03085521963a8a30f8ca69
+date 2026-10-24T22:01:36Z
+omega-bridge source 6d65708b8ada1ed333e065bafdb74f29cbcc348d (branch feat/native-call-v1, base 2a5615b1e0fc0649be03085521963a8a30f8ca69)
 omc d0603ff8fc276774ac7b438c27d146123b9a4513547fe9671e36d8e02d183e83 from omega-mv seed/omc-unified 9329e7fca
-native.om e4ee71ad335e1e3a6f72a818f8db72d2519f7ee3cb6da8ea0f52e5317672983b
-code d7f5348af06cf56a6a533a11920d2115760b0c1e0a5f8b25bad0862c89aff04e
-libomega_native.so 1c3beccaf4aab0a00502d477527ebbbeaee7603638423558011c28c46fccc28a
+native.om 4bcaff2be7b94edf52e316a47fde0c2f15da9d43e974ada327c6901021aa9f5b
+code 38c294080111990298ac3ce881986d1ba1869b2966b498c36f40485c226c3ee9 (madd smadd fill spin mix big)
+libomega_native.so 7a07ca80ebe150c5a351776f5435dd8d3f2c1ad7bde89dc99394713324839ff5
+libomega_native.so (BTI) 5db7563f65e03ceee766a798921c7594df8054a93b32935303b7e1ea791ee477
 gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
 g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
 Python 3.12.3
