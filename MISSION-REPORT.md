@@ -26,13 +26,13 @@ CUDApp driver/firmware target: NVIDIA 580.173.02, GB10, sm_121.
 | Independent stdlib oracle, deterministic fixtures, mutation corpus | same | PASS |
 | Native `.om` contract checker (seed-built) | `build/contract-check`, ids `647116fc…`, `003696e4…` | PASS |
 | Native sm_121 cubin container from generated text | `cudapp/evidence/MAX-INTEROP/68/`, `nvdisasm`/`cuobjdump` | PASS offline |
-| Artifact manifest: text/QMD/cbank SHA-256, contract/spec/ISA/shape/bounds/numeric/provenance | same | PASS, 42 checks |
+| Artifact manifest: text/QMD/cbank SHA-256, contract/spec/ISA/shape/bounds/numeric/provenance | same | PASS, 47 checks |
 | Admission/refusal (tamper, ISA, format, reloc, driver, contract) | same | PASS |
 | Bridge GPU adapter v1 (negotiation + admission, named refusals, no fallback) | `bridge/evidence/MAX-INTEROP/3/` | PASS, 49 checks |
 | Cross-runtime envelope + 416-byte C2 TEST receipt | `omega/evidence/MAX-INTEROP/681/` | PASS, 22 checks |
 | MAX 26.7 source/API/licence pin and capability matrix | `bridge/docs/max/` | PASS (analysis) |
 | Separate-process MAX vs Omega harness | `bridge/evidence/MAX-INTEROP/5/` | PASS on CPU |
-| MAX/Omega numeric agreement (fixture) | same | bit-identical matmul SHA-256; GQA max abs error 2.4e-7 |
+| MAX/Omega numeric agreement (fixture) | same | bit-identical matmul SHA-256; GQA max abs error 2.7e-7 |
 
 ### Exact artifacts
 
@@ -96,5 +96,5 @@ sh conformance/run.sh
    "real adapter" path is an admission contract, not a loader.
 4. The MAX 26.7 report's main-branch citations are not release evidence; the
    pin lacks those paths.
-5. CUDApp is AGPL-3.0-only; MAX paths mix Apache-2.0/LLVM and the MAX
+5. CUDApp is Apache-2.0 WITH LLVM-exception; MAX paths mix Apache-2.0 WITH LLVM-exception/LLVM and the MAX
    Community License. Any upstream contribution needs its own licence review.

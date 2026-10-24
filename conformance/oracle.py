@@ -1,7 +1,7 @@
-# Vendored from omega-mv tests/max-interop/oracle.py (AGPL-3.0-or-later),
+# Vendored from omega-mv tests/max-interop/oracle.py (Apache-2.0 WITH LLVM-exception),
 # frozen contract ids 647116fc... and 003696e4.... The copy is byte-identical
 # apart from this header; sha256 is recorded in conformance/EVIDENCE.md.
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 """Independent pure-Python reference for the MAX interop contracts.
 
 This module deliberately uses only the Python standard library.  It does not

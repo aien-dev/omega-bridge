@@ -16,7 +16,7 @@ First deliver C and Python for an explicit supported Omega subset and an honest 
 CLI first, noninteractive reproducible build, examples a stranger can run without GPU. Defaults inspect or build an isolated candidate, never overwrite another application. Include dry-run, explicit opt-in, rollback path, and compatibility checks before replacing an implementation. Measure conversion time and end-to-end runtime/call overhead against the same workload and record all results, including regressions. Massive speedups are a goal, not a claim. Preserve correctness before any default replacement.
 
 ## Scope boundaries
-Do not install Jarvis, switch drivers, change 18091, alter other worktrees, or claim arbitrary Python-to-Omega/C-to-Omega conversion. A universal framework is extensible; each actual language support needs its own executable gates. Preserve the original AGPL licence and record recovered-source provenance. Audit before any public flip. The GPU adapter (below) is an attachment boundary, never an alternative GPU stack.
+Do not install Jarvis, switch drivers, change 18091, alter other worktrees, or claim arbitrary Python-to-Omega/C-to-Omega conversion. A universal framework is extensible; each actual language support needs its own executable gates. Preserve the original licence of recovered source and record its provenance. Audit before any public flip. The GPU adapter (below) is an attachment boundary, never an alternative GPU stack.
 
 ## GPU scope decision (2026-10-23)
 

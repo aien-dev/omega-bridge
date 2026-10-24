@@ -16,7 +16,7 @@ Pinned MAX: `max/v26.7.0` = `527d069ee11a41ac5320af1f9402db0a66b2b868`
 3. **Numeric equivalence (host).** MAX 26.7 on CPU and the CUDApp host path
    produce **bit-identical** f32 output for the frozen matmul fixture
    (`sha256 60a7f7d4…`); MAX causal GQA matches the fp64 oracle within
-   `2.4e-7`, far inside the contract tolerance. This validates the harness and
+   `2.7e-7`, far inside the contract tolerance. This validates the harness and
    the mathematical embedding, not GB10 execution.
 4. **Evidence binding.** The envelope binds artifact/cubin/QMD/input/output/
    contract/ISA and a 416-byte TEST-class C2 receipt; tampering, stale epochs

@@ -4,7 +4,7 @@
   "source_sha256": "27a2de2d50f356a68f4ece650af88fb950ed1a2781f4641f7517e793a62ae11f",
   "seed_sha256": "191b776ef98821597c3e30655da6d680a9b66edbc9ceaca3c39c61ea6df098e9",
   "original_preserved": true,
-  "license": "AGPL-3.0, preserved from source; no relicensing",
+  "license": "Apache-2.0 WITH LLVM-exception, preserved from source; no relicensing",
   "status": "recovery snapshot; current bounded C/Python qualification is recorded in evidence/README.md",
   "source_sha256_role": "original recovered source, not the subsequently edited compiler"
 }

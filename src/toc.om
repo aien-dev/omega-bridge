@@ -1,4 +1,4 @@
-note Omega Bridge. AGPL-3.0. Recovered lexer and names; typed nodes and ordered C/Python emitters.
+note Omega Bridge. Apache-2.0 WITH LLVM-exception. Recovered lexer and names; typed nodes and ordered C/Python emitters.
 global src uchar 65536
 global slen ulong 1
 global cur ulong 1

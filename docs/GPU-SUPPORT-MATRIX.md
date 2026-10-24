@@ -7,15 +7,16 @@ cross-context execution without a test.
 
 | Area | What is measured | Status | Evidence / blocker |
 |---|---|---|---|
-| Bridge fake GPU adapter | Deterministic negotiate + refusal round-trip, 47 checks | **PASS (host)** | `evidence/MAX-INTEROP/3/tests.log` |
+| Bridge fake GPU adapter | Deterministic negotiate + refusal round-trip, 49 checks | **PASS (host)** | `evidence/MAX-INTEROP/3/tests.log` |
 | GB10 adapter negotiation | Adapter/ISA/driver/ABI/capability/rights/sync/telemetry admission | **PASS (host)** | `evidence/MAX-INTEROP/3/tests.log` |
-| GB10 artifact admission | Contract/artifact id, cubin format, zero-VA QMD, fresh receipt, producer ownership, no alias | **PASS (host)** | same |
-| CUDApp sm_121 artifact export | ELF cubin, text/QMD/cbank SHA-256, deterministic bytes, 42 checks | **PASS (offline)** | `cudapp/evidence/MAX-INTEROP/68/` |
+| GB10 artifact admission | Manifest contract/artifact id, digest, zero-VA QMD, fresh receipt, producer ownership, no alias (the adapter does not parse cubin; CUDApp admission does) | **PASS (host)** | same |
+| CUDApp sm_121 artifact export | ELF cubin, text/QMD/cbank SHA-256, deterministic bytes, 47 checks | **PASS (offline)** | `cudapp/evidence/MAX-INTEROP/68/` |
 | Cubin structural validity | `nvdisasm -c`, `cuobjdump -res-usage` accept the container and show the generated text | **PASS (offline)** | `cudapp/evidence/MAX-INTEROP/68/smoke.log` |
 | Cubin device load (`cuModuleLoadData`) | Load the exported cubin on GB10 | **NOT_RUN** | GPU reserved by coordinator (`CHIP-RESERVED`); no window authorized |
 | Cubin device execution + numeric parity | Launch the exported matmul/attention cubin and compare to the independent oracle | **NOT_RUN** | same |
-| MAX 26.7.0 sensitivity/probe | `max.driver` surface, device count/api, pinned-source capability map | **PASS (host, no launch)** | `docs/max/MAX-26.7-FEASIBILITY.md` |
-| MAX 26.7.0 graph matmul on CPU | Harness wiring, f32 accumulation of exact bf16 values | **PASS (harness)** | `evidence/MAX-INTEROP/5/harness.log` |
+| MAX 26.7.0 source/API map | Pinned-source capability map, no execution | **PASS (analysis)** | `docs/max/MAX-26.7-FEASIBILITY.md` |
+| MAX 26.7.0 `max.driver` device probe | Device count/api on GB10 | **NOT_RUN** | Chip reserved; no window authorized |
+| MAX 26.7.0 graph matmul on CPU | Harness wiring; fp32 mul-add is exact for the 4×5×3 fixture, so this does not distinguish f32 from fp64 accumulation | **PASS (harness)** | `evidence/MAX-INTEROP/5/harness.log` |
 | MAX 26.7.0 graph matmul on GB10 | Independent MAX graph execution, separate process | **NOT_RUN** | same GPU reservation |
 | MAX 26.7.0 causal GQA on CPU | Harness wiring, fp32 softmax path | **PASS (harness)** | same log |
 | MAX 26.7.0 attention on GB10 | Independent MAX graph execution | **NOT_RUN** | same |
@@ -28,7 +29,7 @@ cross-context execution without a test.
 - MAX on NVIDIA is **not CUDA-free**: its CUDA backend loads `libcuda.so.1`, and
   the pinned documentation requires driver 580 / CUDA 13.0 or later. Omega's own
   native path is CUDA-free; that fact does not transfer to MAX.
-- CUDApp is AGPL-3.0-only. MAX source is Apache-2.0-with-LLVM-exceptions or the
+- CUDApp is Apache-2.0 WITH LLVM-exception. MAX source is Apache-2.0 WITH LLVM-exception-with-LLVM-exceptions or the
   MAX Community License depending on path. No CUDApp source is copied into MAX
   directories; any upstream contribution needs its own licence review.
 - The artifact exporter writes no device address and opens no device. Device

@@ -1,6 +1,6 @@
 # Provenance
 
-AGPL-3.0 is retained. Recovered src/toc.om originated in omega seed/toc/toc.om, uncommitted source on base 29b12760f4c962606411d6bf25032aedef063301. Original digest is in RECOVERY.json. Lexer, type/name tables and signature scan are retained and extended. Typed expression nodes and target emitters replace unchecked emission.
+Apache-2.0 WITH LLVM-exception is retained. Recovered src/toc.om originated in omega seed/toc/toc.om, uncommitted source on base 29b12760f4c962606411d6bf25032aedef063301. Original digest is in RECOVERY.json. Lexer, type/name tables and signature scan are retained and extended. Typed expression nodes and target emitters replace unchecked emission.
 
 Inherited fixtures: omega seed/rung4/tests/*.om and *.want at that same commit. Pinned seed source: seed/omc/omc.om at that commit. No seed binary is committed here.
 

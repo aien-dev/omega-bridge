@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 """Independent judge for one conformance run.
 
 Reads the frozen fixture, checks every declared input checksum, reads the raw
@@ -56,9 +56,15 @@ def main():
 
     if args.expect_device:
         check(meta.get("device") == args.expect_device, f"device {meta.get('device')} != {args.expect_device}")
+    check(meta.get("contract_id") == f["contract_id"], "runner contract id mismatch")
+    check(meta.get("runner") in ("modular-max", "omega-native"), "unknown runner")
+    raw = open(args.result + ".bin", "rb").read()
+    import hashlib
+    check(hashlib.sha256(raw).hexdigest() == meta.get("output_sha256"), "output digest mismatch")
     if meta.get("device") == "gpu":
         check(bool(meta.get("spark_window")), "GPU result has no SPARK_WINDOW identifier")
 
+    max_abs = None
     if f["name"] == "matmul-v1":
         for key in ("a", "b"):
             check(oracle.input_checksum(f["inputs"][key]) == f["input_sha256"][key],
@@ -70,6 +76,7 @@ def main():
         got = read_f32(args.result + ".bin")
         check(len(got) == m * n, f"output length {len(got)} != {m*n}")
         check(oracle.matmul_matches(got, ref), "output does not match the fp64 reference")
+        max_abs = max((abs(int(a) - int(b)) for a, b in zip(got, ref)), default=0)
         check(meta.get("shape") == [m, n], "runner shape mismatch")
         mut = list(got)
         mut[0] = mut[0] * 1.01 + (1e-3 if mut[0] == 0 else 0.0)
@@ -88,6 +95,7 @@ def main():
         got = read_f32(args.result + ".bin")
         check(len(got) == len(ref), f"output length {len(got)} != {len(ref)}")
         check(oracle.attention_matches(got, ref), "output does not match the fp64 reference")
+        max_abs = max((abs(a - b) for a, b in zip(got, ref)), default=0.0)
         check(meta.get("shape") == [s["r"], s["hq"], s["head_dim"]], "runner shape mismatch")
         wrong = oracle.attention_ref(q, k, v, s["base"], s["hq"], s["hkv"], s["head_dim"], head_map="mod")
         check(not oracle.attention_matches(got, wrong), "detector missed the wrong head map")
@@ -97,6 +105,7 @@ def main():
         check(False, "unknown fixture name")
 
     summary = {
+        "max_abs_error": max_abs,
         "runner": meta.get("runner"),
         "device": meta.get("device"),
         "fixture": f["name"],

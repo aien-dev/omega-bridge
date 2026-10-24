@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: AGPL-3.0-or-later */
+/* SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception */
 /* Omega-side conformance runner for the frozen matmul and causal GQA contracts.
  *
  * Generates the same deterministic inputs as conformance/oracle.py (splitmix64,
@@ -73,7 +73,7 @@ static void hex32(const uint8_t d[32], char out[65]) {
 }
 
 static int write_meta(const char *prefix, const char *runner, const char *dev, const char *win,
-                      const char *shape, double t, const char *fields, const float *out, size_t n) {
+                      const char *shape, const char *contract, double t, const char *fields, const float *out, size_t n) {
     char p[1024], h[65];
     uint8_t d[32];
     sha256_hash((const uint8_t *)out, n * sizeof(float), d);
@@ -82,8 +82,9 @@ static int write_meta(const char *prefix, const char *runner, const char *dev, c
     FILE *f = fopen(p, "wb");
     if (!f) return -1;
     fprintf(f, "{\n  \"runner\": \"%s\",\n  \"device\": \"%s\",\n  \"shape\": %s,\n"
+               "  \"contract_id\": \"%s\",\n"
                "  \"seconds\": %.9f,\n  \"spark_window\": %s%s%s,\n  \"output_sha256\": \"%s\"%s\n}\n",
-            runner, dev, shape, t,
+            runner, dev, shape, contract, t,
             win ? "\"" : "", win ? win : "null", win ? "\"" : "",
             h, fields);
     return fclose(f) == 0 ? 0 : -1;
@@ -153,7 +154,7 @@ int main(int argc, char **argv) {
         if (write_bin(out, c, (size_t)m * n)) return 4;
         char shape[128];
         snprintf(shape, sizeof shape, "[%u, %u]", m, n);
-        if (write_meta(out, "omega-native", device ? "gpu" : "host-wiring", win, shape, t, fields, c, (size_t)m * n)) return 4;
+        if (write_meta(out, "omega-native", device ? "gpu" : "host-wiring", win, shape, "647116fc1ba1e1394982fc8ba181ce565293f160a6b56afc0f02b2128a675704", t, fields, c, (size_t)m * n)) return 4;
         free(a); free(b); free(c);
         return 0;
     } else if (strcmp(op, "attention") == 0) {
@@ -184,7 +185,7 @@ int main(int argc, char **argv) {
         if (write_bin(out, o, (size_t)rows * hq * hd)) return 4;
         char shape[128];
         snprintf(shape, sizeof shape, "[%u, %u, %u]", rows, hq, hd);
-        if (write_meta(out, "omega-native", "gpu", win, shape, secs, fields, o, (size_t)rows * hq * hd)) return 4;
+        if (write_meta(out, "omega-native", "gpu", win, shape, "003696e422bba7274877ba9e01a61076ea0f862f32760cbaa06c60f85a115359", secs, fields, o, (size_t)rows * hq * hd)) return 4;
         free(q); free(kk); free(vv); free(o);
         return 0;
     }

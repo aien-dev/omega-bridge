@@ -13,7 +13,7 @@ with `verify.py`.
 ## Observed
 - MAX CPU matmul output SHA-256 `60a7f7d4…` equals the CUDApp host output
   bit-for-bit for the frozen 4x5x3 fixture.
-- MAX causal GQA matches the fp64 oracle; worst absolute error `2.4e-7`.
+- MAX causal GQA matches the fp64 oracle; worst absolute error `2.7e-7`.
 - `verify.py` detects a 1% scaled output, a swapped element and the wrong head
   map.
 - MAX version 26.7.0, accelerator API `cpu`; no device opened.

@@ -1,6 +1,6 @@
 # Omega Bridge
 
-An Omega-written compiler that emits executable C and Python from a checked, bounded Omega subset. Existing C and Python applications can also call generated library functions. AGPL-3.0.
+An Omega-written compiler that emits executable C and Python from a checked, bounded Omega subset. Existing C and Python applications can also call generated library functions. Apache-2.0 WITH LLVM-exception.
 
 The source-only compiler bootstrap currently requires Linux AArch64. Generated C uses GNU C11 and POSIX; generated Python uses Python 3. This branch has local differential tests and caller demos; independent review remains required before release. No universal conversion or performance improvement is claimed.
 
@@ -33,3 +33,11 @@ quiet-build python3 tests/attachments.py
 ```
 
 See [supported features and limits](docs/CAPABILITIES.md), [caller ABI and ownership](docs/ABI.md), [design and study decisions](docs/DESIGN.md), and [provenance](docs/PROVENANCE.md). Text constants, floats, heap operations and other target languages are explicitly unsupported by the C/Python converters. GPU interoperability is a separate, opt-in adapter boundary (it converts no host program): see [GPU adapter](docs/GPU-ADAPTER.md) and the [support matrix](docs/GPU-SUPPORT-MATRIX.md). Python/C input conversion is not implemented. The Python test harness is infrastructure; all conversion logic and both runtime emitters are in [src/toc.om](src/toc.om).
+
+## License
+
+First-party material is licensed under the Apache License, Version 2.0 with LLVM
+Exceptions (`Apache-2.0 WITH LLVM-exception`). See [LICENSE](LICENSE) and
+[NOTICE](NOTICE). The LLVM exception permits compiled object code derived from
+this software to be redistributed under terms of the recipient's choosing.
+Third-party components keep their own notices.

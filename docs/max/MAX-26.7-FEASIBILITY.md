@@ -58,7 +58,7 @@ Command output: `evidence/commands/05-path-divergence.txt`. Main commit: `da0db3
 | `Target/lib/CUDA/M_driver_function.cpp` | MISSING | EXISTS | CUDA plugin source not published at pin. |
 | `max/driver/src/max_license/README.md` | MISSING | EXISTS | NeoDriver does not exist at pin. Pinned driver is `max/python/max/driver/`. |
 | `Target/test/CUDAPluginTest.cpp` | MISSING | EXISTS | No pinned HAL qualification test. |
-| `Licenses/MAX_LICENSE` | MISSING | EXISTS | Pin has `Licenses/LICENSE` (MAX Community License) and root `LICENSE` (Apache-2.0 LLVM). |
+| `Licenses/MAX_LICENSE` | MISSING | EXISTS | Pin has `Licenses/LICENSE` (MAX Community License) and root `LICENSE` (Apache-2.0 WITH LLVM-exception LLVM). |
 | `GraphCompiler/`, `MLRT/`, `max/driver/`, `Kernels/` | MISSING | EXISTS | Compiler/runtime/HAL internals are not in the pinned source distribution. |
 
 Pinned top-level tree (abridged): `AsyncRT Cache Config Init LICENSE Licenses MODULE.bazel Mojo README.md REPO.bazel Support bazel bazelw context7.json docs max pyproject.toml rust_kv tools utils`.
@@ -292,7 +292,7 @@ Ranking criterion: smallest new surface + least MAX modification + lowest legal/
 - **Metadata.** Entry-point name must match the cubin symbol; the wrapper must declare argument types (`DeviceExternalFunction` has no arg-size metadata; `_device_context_extras.mojo:249-250`), so the Mojo function signature must exactly match the cubin kernel ABI. Constant memory, dynamic shared memory and cluster dimensions must be specified explicitly.
 - **Graph-compiler contract.** Shape function may be required for data-dependent outputs (`graph.py:316-340`); graph verification requires the symbol in the kernel library (`custom.py:127`).
 - **No pinned cubin test.** The only test is PTX (`max/mojo/test/asyncrt/test_cuda.mojo:177-186`); SASS support rests on the docstring and release notes.
-- **AGPL boundary.** The cubin can be a separate runtime artifact; see §7.1.
+- **Licence boundary.** The cubin can be a separate runtime artifact; see §7.1.
 
 ### Rank 3 — MAX HAL/NeoDriver bundle path on main (MAX owns everything, but not at the pin)
 
@@ -323,12 +323,12 @@ Ranking criterion: smallest new surface + least MAX modification + lowest legal/
 
 `KernelLibrary` accepts only `.mojoc` or Mojo source (`PIN max/python/max/graph/graph.py:258-283`), and `@extensibility.register` is a compile-time Mojo construct (`decorators.mojo:46-75`). There is no binary op ABI. **UNSUPPORTED** without an upstream change.
 
-### 7.1 License boundary for CUDApp AGPL code
+### 7.1 Licence boundary for CUDApp code
 
 This is an engineering analysis, not legal advice. Two materially different acts:
 
-1. **Runtime loading of a separately produced cubin** (Rank 1/2/3): MAX reads bytes or a file and hands them to the CUDA driver. The cubin is not linked into MAX and is not part of MAX's source; it remains a separate artifact. This is the boundary that best preserves both licenses. Keep the cubin outside MAX-licensed artifacts, do not embed it in a MEF or `.mojoc`, and do not redistribute MAX binaries containing it without review.
-2. **Bundling/embedding** the cubin in a MAX artifact (MEF injection, `.mojoc`, a redistributed wrapper): this distributes CUDApp-generated code inside a MAX-licensed object and may trigger AGPL "Corresponding Source"/distribution obligations for CUDApp and MAX License attribution/object-code obligations for MAX. Avoid without legal review.
+1. **Runtime loading of a separately produced cubin** (Rank 1/2/3): MAX reads bytes or a file and hands them to the CUDA driver. The cubin remains a separate artifact under Apache-2.0 WITH LLVM-exception; this is the cleanest boundary.
+2. **Bundling/embedding** the cubin in a MAX artifact (MEF injection, `.mojoc`, a redistributed wrapper): the LLVM exception permits redistribution of compiled object code under terms of the recipient's choosing, so no CUDApp source-disclosure obligation follows. MAX's own licence and NOTICE/attribution terms still apply to the MAX portions. Keep the CUDApp NOTICE with redistributed CUDApp-derived material.
 
 The MAX Community License's AI clause expressly permits reading/analyzing MAX and developing software that "runs on or interoperates with MAX", while forbidding use of MAX as training input to produce a substitute (`PIN Licenses/LICENSE:81-86`; `MAIN Licenses/MAX_LICENSE:66-71`). This report is analysis; no MAX code was copied into AIEN production paths, and no MAX substitute is being generated.
 
@@ -355,13 +355,13 @@ The MAX Community License's AI clause expressly permits reading/analyzing MAX an
 
 | Path | License | Evidence |
 |---|---|---|
-| `/LICENSE` (repository root) | Apache-2.0 with LLVM Exceptions | `PIN LICENSE:1-3` |
-| `max/python/max/**` (driver, engine, graph) | Apache-2.0 with LLVM Exceptions (file headers) | `PIN max/python/max/driver/__init__.py:4`; `max/python/max/graph/ops/custom.py:4` |
-| `max/mojo/max/**` (GPU host, plugins) | Apache-2.0 with LLVM Exceptions | `PIN max/mojo/max/gpu/host/device_context.mojo:4` |
-| `max/kernels/**` (extensibility, kernels) | Apache-2.0 with LLVM Exceptions | `PIN max/kernels/src/graph_compiler/extensibility/decorators.mojo:4` |
-| `max/include/max/c/*.h` | Apache-2.0 with LLVM Exceptions | `PIN max/include/max/c/context.h:4` |
+| `/LICENSE` (repository root) | Apache-2.0 WITH LLVM-exception with LLVM Exceptions | `PIN LICENSE:1-3` |
+| `max/python/max/**` (driver, engine, graph) | Apache-2.0 WITH LLVM-exception with LLVM Exceptions (file headers) | `PIN max/python/max/driver/__init__.py:4`; `max/python/max/graph/ops/custom.py:4` |
+| `max/mojo/max/**` (GPU host, plugins) | Apache-2.0 WITH LLVM-exception with LLVM Exceptions | `PIN max/mojo/max/gpu/host/device_context.mojo:4` |
+| `max/kernels/**` (extensibility, kernels) | Apache-2.0 WITH LLVM-exception with LLVM Exceptions | `PIN max/kernels/src/graph_compiler/extensibility/decorators.mojo:4` |
+| `max/include/max/c/*.h` | Apache-2.0 WITH LLVM-exception with LLVM Exceptions | `PIN max/include/max/c/context.h:4` |
 | `Licenses/LICENSE` (shipped MAX components) | Modular MAX Community License | `PIN Licenses/LICENSE:1-7`; product split `Licenses/README.md:6-13`; separately licensed components `:88-90` |
-| `Licenses/Third-Party-Notices` | LLVM Apache-2.0 LLVM; NVSHMEM under NVIDIA SDK license; other OSS | `PIN Licenses/Third-Party-Notices:5-8,228-233` |
+| `Licenses/Third-Party-Notices` | LLVM Apache-2.0 WITH LLVM-exception LLVM; NVSHMEM under NVIDIA SDK license; other OSS | `PIN Licenses/Third-Party-Notices:5-8,228-233` |
 | `MAIN SDK/**`, `Target/**`, `MLRT/**`, `max/driver/**` | MAX License (file headers) | `MAIN SDK/include/HAL/M_driver_bundle.h:4-5`; `MAIN max/driver/src/max_license/_hal/context.mojo:1-12` |
 | `MAIN Licenses/MAX_LICENSE` | Modular MAX Community License §1.4(d) AI clause | `MAIN Licenses/MAX_LICENSE:66-71` |
 | `AI_TOOL_POLICY.md` | Contribution policy (not a license): label AI-assisted work, human review | `PIN AI_TOOL_POLICY.md:10-22,42-47,61-72` |
