@@ -7,4 +7,7 @@ PASS fill k=1 traps 3, result unchanged
 PASS writes before the trap stay visible
 PASS fill k=0 = 3
 PASS null result refused 32
+PASS mix six parameters, void result writes 0
+PASS mix negative long traps 9 after both writes, result unchanged
+PASS mix uchar conversion 325 traps 5, first write visible
 PASS 0 failure(s)
