@@ -1,0 +1,37 @@
+/home/drakestapleton/workspace/bridge-native-call/build/native/omega_native.c:118:49: error: conflicting types for ‘omega_madd’; have ‘uint32_t(uint64_t *, uint64_t,  uint64_t,  uint64_t)’ {aka ‘unsigned int(long unsigned int *, long unsigned int,  long unsigned int,  long unsigned int)’}
+  118 | __attribute__((visibility("default"))) uint32_t omega_madd(uint64_t *result, uint64_t o_a, uint64_t o_b, uint64_t o_c)
+      |                                                 ^~~~~~~~~~
+In file included from <command-line>:
+/home/drakestapleton/workspace/bridge-native-call/build/native/mut/h/omega_native.h:19:10: note: previous declaration of ‘omega_madd’ with type ‘uint32_t(uint64_t *, uint32_t,  uint32_t,  uint32_t)’ {aka ‘unsigned int(long unsigned int *, unsigned int,  unsigned int,  unsigned int)’}
+   19 | uint32_t omega_madd(uint64_t *result, uint32_t o_a, uint32_t o_b, uint32_t o_c);
+      |          ^~~~~~~~~~
+/home/drakestapleton/workspace/bridge-native-call/build/native/omega_native.c:134:49: error: conflicting types for ‘omega_smadd’; have ‘uint32_t(uint64_t *, uint64_t,  uint64_t,  uint64_t)’ {aka ‘unsigned int(long unsigned int *, long unsigned int,  long unsigned int,  long unsigned int)’}
+  134 | __attribute__((visibility("default"))) uint32_t omega_smadd(uint64_t *result, uint64_t o_a, uint64_t o_b, uint64_t o_c)
+      |                                                 ^~~~~~~~~~~
+/home/drakestapleton/workspace/bridge-native-call/build/native/mut/h/omega_native.h:21:10: note: previous declaration of ‘omega_smadd’ with type ‘uint32_t(uint64_t *, uint32_t,  uint32_t,  uint32_t)’ {aka ‘unsigned int(long unsigned int *, unsigned int,  unsigned int,  unsigned int)’}
+   21 | uint32_t omega_smadd(uint64_t *result, uint32_t o_a, uint32_t o_b, uint32_t o_c);
+      |          ^~~~~~~~~~~
+/home/drakestapleton/workspace/bridge-native-call/build/native/omega_native.c:150:49: error: conflicting types for ‘omega_fill’; have ‘uint32_t(uint64_t *, void *, uint64_t,  uint64_t)’ {aka ‘unsigned int(long unsigned int *, void *, long unsigned int,  long unsigned int)’}
+  150 | __attribute__((visibility("default"))) uint32_t omega_fill(uint64_t *result, void *o_buf, uint64_t o_buf_len, uint64_t o_k)
+      |                                                 ^~~~~~~~~~
+/home/drakestapleton/workspace/bridge-native-call/build/native/mut/h/omega_native.h:23:10: note: previous declaration of ‘omega_fill’ with type ‘uint32_t(uint64_t *, void *, uint32_t,  uint32_t)’ {aka ‘unsigned int(long unsigned int *, void *, unsigned int,  unsigned int)’}
+   23 | uint32_t omega_fill(uint64_t *result, void *o_buf, uint32_t o_buf_len, uint32_t o_k);
+      |          ^~~~~~~~~~
+/home/drakestapleton/workspace/bridge-native-call/build/native/omega_native.c:167:49: error: conflicting types for ‘omega_spin’; have ‘uint32_t(uint64_t *, uint64_t)’ {aka ‘unsigned int(long unsigned int *, long unsigned int)’}
+  167 | __attribute__((visibility("default"))) uint32_t omega_spin(uint64_t *result, uint64_t o_n)
+      |                                                 ^~~~~~~~~~
+/home/drakestapleton/workspace/bridge-native-call/build/native/mut/h/omega_native.h:25:10: note: previous declaration of ‘omega_spin’ with type ‘uint32_t(uint64_t *, uint32_t)’ {aka ‘unsigned int(long unsigned int *, unsigned int)’}
+   25 | uint32_t omega_spin(uint64_t *result, uint32_t o_n);
+      |          ^~~~~~~~~~
+/home/drakestapleton/workspace/bridge-native-call/build/native/omega_native.c:181:49: error: conflicting types for ‘omega_mix’; have ‘uint32_t(uint64_t *, uint64_t,  uint64_t,  const void *, uint64_t,  void *, uint64_t,  const void *, uint64_t,  uint64_t)’ {aka ‘unsigned int(long unsigned int *, long unsigned int,  long unsigned int,  const void *, long unsigned int,  void *, long unsigned int,  const void *, long unsigned int,  long unsigned int)’}
+  181 | __attribute__((visibility("default"))) uint32_t omega_mix(uint64_t *result, uint64_t o_a, uint64_t o_b, const void *o_c, uint64_t o_c_len, void *o_d, uint64_t o_d_len, const void *o_e, uint64_t o_e_len, uint64_t o_f)
+      |                                                 ^~~~~~~~~
+/home/drakestapleton/workspace/bridge-native-call/build/native/mut/h/omega_native.h:27:10: note: previous declaration of ‘omega_mix’ with type ‘uint32_t(uint64_t *, uint32_t,  uint32_t,  const void *, uint32_t,  void *, uint32_t,  const void *, uint32_t,  uint32_t)’ {aka ‘unsigned int(long unsigned int *, unsigned int,  unsigned int,  const void *, unsigned int,  void *, unsigned int,  const void *, unsigned int,  unsigned int)’}
+   27 | uint32_t omega_mix(uint64_t *result, uint32_t o_a, uint32_t o_b, const void *o_c, uint32_t o_c_len, void *o_d, uint32_t o_d_len, const void *o_e, uint32_t o_e_len, uint32_t o_f);
+      |          ^~~~~~~~~
+/home/drakestapleton/workspace/bridge-native-call/build/native/omega_native.c:206:49: error: conflicting types for ‘omega_big’; have ‘uint32_t(uint64_t *, uint64_t)’ {aka ‘unsigned int(long unsigned int *, long unsigned int)’}
+  206 | __attribute__((visibility("default"))) uint32_t omega_big(uint64_t *result, uint64_t o_n)
+      |                                                 ^~~~~~~~~
+/home/drakestapleton/workspace/bridge-native-call/build/native/mut/h/omega_native.h:29:10: note: previous declaration of ‘omega_big’ with type ‘uint32_t(uint64_t *, uint32_t)’ {aka ‘unsigned int(long unsigned int *, unsigned int)’}
+   29 | uint32_t omega_big(uint64_t *result, uint32_t o_n);
+      |          ^~~~~~~~~

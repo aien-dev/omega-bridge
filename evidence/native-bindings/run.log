@@ -1,0 +1,23 @@
+PASS tools/native: library + six bindings (2beb3d30a6f46b74)
+PASS no caller declares an Omega function by hand
+PASS embedded code == omc output, per unit (38c2940801119902)
+PASS c caller (26 lines)
+PASS c-bti caller (26 lines)
+PASS generator refuses a unit name that is not a C identifier
+PASS generator refuses a parameter name ending in _len
+PASS generator refuses a repeated unit name
+PASS generator accepts the same unit once (control)
+PASS generator refuses a missing output word
+PASS generator refuses an unknown output word
+PASS cpp caller (10 lines)
+PASS python caller (10 lines)
+PASS rust caller (11 lines)
+PASS zig caller (10 lines)
+PASS go caller (10 lines)
+PASS mutant madd (add -> sub) caught (7 failing checks)
+PASS mutant h scalar uint64_t -> uint32_t caught
+PASS mutant python scalar c_uint64 -> c_uint32 caught
+PASS mutant rust scalar u64 -> u32 caught
+PASS mutant zig scalar u64 -> u32 caught
+PASS mutant go scalar uint64 -> uint32 caught
+NATIVE-CALL PASS (not run: none)
