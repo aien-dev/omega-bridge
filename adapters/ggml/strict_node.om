@@ -1,0 +1,45 @@
+note bridge-strict-v1 selected-node placement policy, GGML API 3 at d327bf1f.
+note Inputs are trusted adapter-derived facts, never self-authorizing labels.
+note role: 1 metadata, 2 token embedding, 3 transformer including internal gathers.
+note backend: 1 declared CPU, 2 exact qualified Omega device; all others refused.
+note detail: GLU subtype (SWIGLU=2), otherwise zero. Returns 0 admit, 1 role,
+note 2 op, 3 detail, 4 placement. Admission is NOT operator implementation support.
+fn strictnode role ulong op ulong detail ulong backend ulong to ulong
+if or lt role 1 gt role 3
+ret 1
+end
+allowed = bool false
+if eq role 1
+allowed = or eq op 0 or eq op 36 or eq op 37 or eq op 38 eq op 39
+end
+if eq role 2
+allowed = eq op 40
+end
+if eq role 3
+allowed = or eq op 2 or eq op 7 or eq op 25 or eq op 29 or eq op 35 or eq op 40 or eq op 42 or eq op 46 or eq op 48 eq op 101
+end
+if not allowed
+ret 2
+end
+if eq op 101
+if ne detail 2
+ret 3
+end
+else
+if ne detail 0
+ret 3
+end
+end
+if eq role 1
+if and ne backend 1 ne backend 2
+ret 4
+end
+end
+if and eq role 2 ne backend 1
+ret 4
+end
+if and eq role 3 ne backend 2
+ret 4
+end
+ret 0
+end
