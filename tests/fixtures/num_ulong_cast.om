@@ -1,0 +1,5 @@
+fn main to int
+x = ulong 0
+y = ulong x
+ret int and y ulong 127
+end

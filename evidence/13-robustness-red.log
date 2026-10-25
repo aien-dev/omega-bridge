@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "<repo>/tests/robustness.py", line 18, in <module>
+    assert p.returncode==native.returncode and not p.stdout,(t,p.returncode,native.returncode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('c', 7, 16)

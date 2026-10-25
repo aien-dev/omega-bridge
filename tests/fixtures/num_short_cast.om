@@ -1,0 +1,5 @@
+fn main to int
+x = ulong 32768
+y = short x
+ret int and y short 127
+end

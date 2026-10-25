@@ -1,0 +1,5 @@
+fn main to int
+x = long -3
+y = shr x long 63
+ret int and y long 127
+end

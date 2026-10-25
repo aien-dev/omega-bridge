@@ -1,0 +1,5 @@
+fn main to int
+x = long 9223372036854775807
+y = mul x long 2
+ret int and y long 127
+end

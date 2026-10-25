@@ -1,0 +1,5 @@
+fn main to int
+x = ushort 65535
+y = mul x ushort 2
+ret int and y ushort 127
+end

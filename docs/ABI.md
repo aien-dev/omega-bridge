@@ -1,0 +1,15 @@
+# Experimental library ABI v0
+
+A unit with no main is a library. Its generated public functions are named omega_<source-name>. The seed checks function-mode call cycles; library I/O and exit are refused by the bridge. No global pools are accepted in a function unit. C internal functions are static.
+
+C exports return uint32_t status and take a first uint64_t *result argument. Each scalar argument occupies uint64_t, holding the canonical bits of its declared type. Signed negative inputs use sign-extended two's-complement bits. Arrays cross as void * followed by uint64_t element count; exported arrays are limited to uchar and ulong. Output scalars are written only on success; void functions write zero. Read the generated declarations directly, as examples/caller.c does. ABI v0 is experimental and has no compatibility promise.
+
+Python exports take the same scalar bits and array/count arguments, without the result pointer, and return (status, value). On failure value is None. uchar arrays must be bytearray and ulong arrays must be plain lists containing valid unsigned 64-bit integers. Signed arguments and results use canonical bits here too, not negative Python integers. The generated module checks argument types, values and lengths before entering Omega code.
+
+Status zero is success. Runtime statuses 1 through 7 are the language traps (overflow, divide-by-zero, bounds, loop bound, conversion, resource, shift). Status 8 rejects invalid foreign arguments; status 9 rejects reentry on the active boundary. C catches internal traps with setjmp/longjmp entirely inside the exported wrapper; Python catches a private runtime exception. Neither mechanism crosses the caller boundary. Program mode continues to exit on traps.
+
+Buffers remain owned by the caller and are borrowed synchronously without copying or retaining addresses. Writes before a trap remain visible; there is no transaction rollback. C checks null, alignment, expected length, address arithmetic overflow, overlap involving a writable buffer, and overlap between result storage and any array. It cannot prove that a foreign pointer actually names enough live memory. The caller must supply valid storage and keep it alive, supply an eight-MiB stack, serialize access to each buffer and avoid asynchronous reentry. Python verifies lengths and identity overlap for its supported plain containers. Threads, callbacks, strided arrays, DLPack and host object protocols are outside this ABI.
+
+C library output depends on the platform C runtime. Python output depends on Python. These are target dependencies, not dependencies of the seed's birth. No direct dependency-free ELF writer or stable typed ABI is claimed. The source-only bootstrap never invokes GCC, an assembler or a linker.
+
+Try the two actual callers with quiet-build python3 tests/attachments.py after building. The tests exercise values, borrowed buffer mutation, invalid lengths/null, result overlap, arithmetic traps and a successful subsequent call. No system installation or replacement occurs. To roll back, stop importing/linking the generated module and return to your existing implementation.

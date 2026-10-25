@@ -1,0 +1,5 @@
+fn main to int
+x = ulong 256
+y = uchar x
+ret int and y uchar 127
+end

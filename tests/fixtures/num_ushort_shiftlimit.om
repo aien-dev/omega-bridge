@@ -1,0 +1,6 @@
+fn main to int
+x = ushort 1
+s = ulong 16
+y = shl x s
+ret int y
+end

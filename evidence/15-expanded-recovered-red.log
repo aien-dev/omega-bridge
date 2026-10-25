@@ -1,0 +1,114 @@
+PASS bytecopy
+PASS echo
+PASS fib
+FAIL for_expr_once ('C mismatch', 4, 2, b'', b'', b'')
+PASS for_varchange
+FAIL io_errno ('conversion', 3, b'toc: line 4: error 3\n')
+FAIL local_array ('gcc', b'<repo>/build/tests/local_array.c: In function \xe2\x80\x98main\xe2\x80\x99:\n<repo>/build/tests/local_array.c:26:22: warning: integer constant is so large that it is unsigned\n   26 | o_fill_u64(a_b, a_n, 18446744073709551607);\n      |           ')
+FAIL num_bool ('conversion', 3, b'toc: line 3: error 3\n')
+FAIL num_byte_add ('gcc', b'<repo>/build/tests/num_byte_add.c: In function \xe2\x80\x98main\xe2\x80\x99:\n<repo>/build/tests/num_byte_add.c:25:12: warning: implicit declaration of function \xe2\x80\x98o_add_s\xe2\x80\x99; did you mean \xe2\x80\x98o_add_u\xe2\x80\x99? [-Wimplicit-function-declaration]\n   25 |')
+FAIL num_byte_cast ('C mismatch', 105, 0, b'', b'', b'')
+FAIL num_byte_div ('C mismatch', 101, 0, b'', b'', b'')
+FAIL num_byte_mul ('gcc', b'<repo>/build/tests/num_byte_mul.c: In function \xe2\x80\x98main\xe2\x80\x99:\n<repo>/build/tests/num_byte_mul.c:25:12: warning: implicit declaration of function \xe2\x80\x98o_mul_s\xe2\x80\x99; did you mean \xe2\x80\x98o_mul_u\xe2\x80\x99? [-Wimplicit-function-declaration]\n   25 |')
+FAIL num_byte_neg ('conversion', 3, b'toc: line 3: error 3\n')
+PASS num_byte_rem
+FAIL num_byte_shiftlimit ('conversion', 3, b'toc: line 4: error 3\n')
+FAIL num_byte_shl ('conversion', 3, b'toc: line 3: error 3\n')
+FAIL num_byte_shr ('conversion', 3, b'toc: line 3: error 3\n')
+FAIL num_byte_sub ('gcc', b'<repo>/build/tests/num_byte_sub.c: In function \xe2\x80\x98main\xe2\x80\x99:\n<repo>/build/tests/num_byte_sub.c:25:12: warning: implicit declaration of function \xe2\x80\x98o_sub_s\xe2\x80\x99; did you mean \xe2\x80\x98o_sub_u\xe2\x80\x99? [-Wimplicit-function-declaration]\n   25 |')
+FAIL num_div_negative ('gcc', b'<repo>/build/tests/num_div_negative.c: In function \xe2\x80\x98main\xe2\x80\x99:\n<repo>/build/tests/num_div_negative.c:26:17: warning: implicit declaration of function \xe2\x80\x98o_add_s\xe2\x80\x99; did you mean \xe2\x80\x98o_add_u\xe2\x80\x99? [-Wimplicit-function-declaration]')
+FAIL num_int_add ('gcc', b'<repo>/build/tests/num_int_add.c: In function \xe2\x80\x98main\xe2\x80\x99:\n<repo>/build/tests/num_int_add.c:25:11: warning: implicit declaration of function \xe2\x80\x98o_add_s\xe2\x80\x99; did you mean \xe2\x80\x98o_add_u\xe2\x80\x99? [-Wimplicit-function-declaration]\n   25 | i')
+FAIL num_int_cast ('C mismatch', 105, 0, b'', b'', b'')
+FAIL num_int_div ('C mismatch', 101, 0, b'', b'', b'')
+FAIL num_int_mul ('gcc', b'<repo>/build/tests/num_int_mul.c: In function \xe2\x80\x98main\xe2\x80\x99:\n<repo>/build/tests/num_int_mul.c:25:11: warning: implicit declaration of function \xe2\x80\x98o_mul_s\xe2\x80\x99; did you mean \xe2\x80\x98o_mul_u\xe2\x80\x99? [-Wimplicit-function-declaration]\n   25 | i')
+FAIL num_int_neg ('conversion', 3, b'toc: line 3: error 3\n')
+PASS num_int_rem
+FAIL num_int_shiftlimit ('conversion', 3, b'toc: line 4: error 3\n')
+FAIL num_int_shl ('conversion', 3, b'toc: line 3: error 3\n')
+FAIL num_int_shr ('conversion', 3, b'toc: line 3: error 3\n')
+FAIL num_int_sub ('gcc', b'<repo>/build/tests/num_int_sub.c: In function \xe2\x80\x98main\xe2\x80\x99:\n<repo>/build/tests/num_int_sub.c:25:11: warning: implicit declaration of function \xe2\x80\x98o_sub_s\xe2\x80\x99; did you mean \xe2\x80\x98o_sub_u\xe2\x80\x99? [-Wimplicit-function-declaration]\n   25 | i')
+FAIL num_intmin_literal ('conversion', 3, b'toc: line 3: error 3\n')
+FAIL num_long_add ('gcc', b'<repo>/build/tests/num_long_add.c: In function \xe2\x80\x98main\xe2\x80\x99:\n<repo>/build/tests/num_long_add.c:25:11: warning: implicit declaration of function \xe2\x80\x98o_add_s\xe2\x80\x99; did you mean \xe2\x80\x98o_add_u\xe2\x80\x99? [-Wimplicit-function-declaration]\n   25 |')
+FAIL num_long_cast ('C mismatch', 105, 0, b'', b'', b'')
+PASS num_long_div
+FAIL num_long_mul ('gcc', b'<repo>/build/tests/num_long_mul.c: In function \xe2\x80\x98main\xe2\x80\x99:\n<repo>/build/tests/num_long_mul.c:25:11: warning: implicit declaration of function \xe2\x80\x98o_mul_s\xe2\x80\x99; did you mean \xe2\x80\x98o_mul_u\xe2\x80\x99? [-Wimplicit-function-declaration]\n   25 |')
+FAIL num_long_neg ('conversion', 3, b'toc: line 3: error 3\n')
+PASS num_long_rem
+FAIL num_long_shiftlimit ('conversion', 3, b'toc: line 4: error 3\n')
+FAIL num_long_shl ('conversion', 3, b'toc: line 3: error 3\n')
+FAIL num_long_shr ('conversion', 3, b'toc: line 3: error 3\n')
+FAIL num_long_sub ('gcc', b'<repo>/build/tests/num_long_sub.c: In function \xe2\x80\x98main\xe2\x80\x99:\n<repo>/build/tests/num_long_sub.c:24:30: warning: integer constant is so large that it is unsigned\n   24 | int64_t x=(int64_t)(int64_t)-9223372036854775808;\n      |   ')
+FAIL num_not ('conversion', 3, b'toc: line 3: error 3\n')
+FAIL num_rem_negative ('gcc', b'<repo>/build/tests/num_rem_negative.c: In function \xe2\x80\x98main\xe2\x80\x99:\n<repo>/build/tests/num_rem_negative.c:26:17: warning: implicit declaration of function \xe2\x80\x98o_add_s\xe2\x80\x99; did you mean \xe2\x80\x98o_add_u\xe2\x80\x99? [-Wimplicit-function-declaration]')
+FAIL num_short_add ('gcc', b'<repo>/build/tests/num_short_add.c: In function \xe2\x80\x98main\xe2\x80\x99:\n<repo>/build/tests/num_short_add.c:25:12: warning: implicit declaration of function \xe2\x80\x98o_add_s\xe2\x80\x99; did you mean \xe2\x80\x98o_add_u\xe2\x80\x99? [-Wimplicit-function-declaration]\n   25')
+FAIL num_short_cast ('C mismatch', 105, 0, b'', b'', b'')
+FAIL num_short_div ('C mismatch', 101, 0, b'', b'', b'')
+FAIL num_short_mul ('gcc', b'<repo>/build/tests/num_short_mul.c: In function \xe2\x80\x98main\xe2\x80\x99:\n<repo>/build/tests/num_short_mul.c:25:12: warning: implicit declaration of function \xe2\x80\x98o_mul_s\xe2\x80\x99; did you mean \xe2\x80\x98o_mul_u\xe2\x80\x99? [-Wimplicit-function-declaration]\n   25')
+FAIL num_short_neg ('conversion', 3, b'toc: line 3: error 3\n')
+PASS num_short_rem
+FAIL num_short_shiftlimit ('conversion', 3, b'toc: line 4: error 3\n')
+FAIL num_short_shl ('conversion', 3, b'toc: line 3: error 3\n')
+FAIL num_short_shr ('conversion', 3, b'toc: line 3: error 3\n')
+FAIL num_short_sub ('gcc', b'<repo>/build/tests/num_short_sub.c: In function \xe2\x80\x98main\xe2\x80\x99:\n<repo>/build/tests/num_short_sub.c:25:12: warning: implicit declaration of function \xe2\x80\x98o_sub_s\xe2\x80\x99; did you mean \xe2\x80\x98o_sub_u\xe2\x80\x99? [-Wimplicit-function-declaration]\n   25')
+PASS num_uchar_add
+FAIL num_uchar_cast ('C mismatch', 105, 0, b'', b'', b'')
+PASS num_uchar_div
+PASS num_uchar_mul
+FAIL num_uchar_neg ('conversion', 3, b'toc: line 3: error 3\n')
+PASS num_uchar_rem
+FAIL num_uchar_shiftlimit ('conversion', 3, b'toc: line 4: error 3\n')
+FAIL num_uchar_shl ('conversion', 3, b'toc: line 3: error 3\n')
+FAIL num_uchar_shr ('conversion', 3, b'toc: line 3: error 3\n')
+PASS num_uchar_sub
+PASS num_uint_add
+FAIL num_uint_cast ('C mismatch', 105, 0, b'', b'', b'')
+PASS num_uint_div
+PASS num_uint_mul
+FAIL num_uint_neg ('conversion', 3, b'toc: line 3: error 3\n')
+PASS num_uint_rem
+FAIL num_uint_shiftlimit ('conversion', 3, b'toc: line 4: error 3\n')
+FAIL num_uint_shl ('conversion', 3, b'toc: line 3: error 3\n')
+FAIL num_uint_shr ('conversion', 3, b'toc: line 3: error 3\n')
+PASS num_uint_sub
+PASS num_ulong_add
+PASS num_ulong_cast
+PASS num_ulong_div
+PASS num_ulong_mul
+FAIL num_ulong_neg ('conversion', 3, b'toc: line 3: error 3\n')
+PASS num_ulong_rem
+FAIL num_ulong_shiftlimit ('conversion', 3, b'toc: line 4: error 3\n')
+FAIL num_ulong_shl ('conversion', 3, b'toc: line 3: error 3\n')
+FAIL num_ulong_shr ('conversion', 3, b'toc: line 3: error 3\n')
+PASS num_ulong_sub
+PASS num_ushort_add
+FAIL num_ushort_cast ('C mismatch', 105, 0, b'', b'', b'')
+PASS num_ushort_div
+PASS num_ushort_mul
+FAIL num_ushort_neg ('conversion', 3, b'toc: line 3: error 3\n')
+PASS num_ushort_rem
+FAIL num_ushort_shiftlimit ('conversion', 3, b'toc: line 4: error 3\n')
+FAIL num_ushort_shl ('conversion', 3, b'toc: line 3: error 3\n')
+FAIL num_ushort_shr ('conversion', 3, b'toc: line 3: error 3\n')
+PASS num_ushort_sub
+PASS order_calls
+PASS order_put
+PASS order_trap
+PASS r5b_fwd
+PASS r5b_mut
+PASS sort
+PASS t_bounds
+PASS t_cmp_unsigned
+FAIL t_conv ('C mismatch', 105, 0, b'', b'', b'')
+FAIL t_conv_sign ('C mismatch', 105, 0, b'', b'', b'')
+PASS t_div0
+FAIL t_exit ('conversion', 16, b'toc: line 2: error 16\n')
+FAIL t_loop ('conversion', 16, b'toc: line 3: error 16\n')
+FAIL t_ovf ('gcc', b'<repo>/build/tests/t_ovf.c: In function \xe2\x80\x98main\xe2\x80\x99:\n<repo>/build/tests/t_ovf.c:25:11: warning: implicit declaration of function \xe2\x80\x98o_add_s\xe2\x80\x99; did you mean \xe2\x80\x98o_add_u\xe2\x80\x99? [-Wimplicit-function-declaration]\n   25 | int32_t y=o_a')
+PASS t_rw
+FAIL t_stack ('C mismatch', 106, -11, b'', b'', b'')
+FAIL t_u63 ('conversion', 3, b'toc: line 5: error 3\n')
+FAIL t_u64max ('conversion', 3, b'toc: line 4: error 3\n')
+PASS t_void
+PASS t_write_wrap
+PASS two_loops
+cases=113 failures=70 RC=1

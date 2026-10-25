@@ -1,0 +1,5 @@
+1d3cf32cf9feb120035dce7f276f1be3295c012da4a517068c9d9eba891e9223  conformance/build/fixtures/gqa-causal-v1.json
+1f4d80062a0a4d0d86ff4a21467da840b61a0291c33cfae9bf99b0f17be11019  conformance/build/fixtures/matmul-v1.json
+4e9b2bf0402156d5a431dce04d46ac8cd62069c9c6193491e0889e39f1f2fcb0  conformance/build/max-gqa-causal-v1.bin
+60a7f7d46597cfff1cd126df12aa8583f191fc6c64a2a608341608f2de8e70a4  conformance/build/max-matmul-v1.bin
+60a7f7d46597cfff1cd126df12aa8583f191fc6c64a2a608341608f2de8e70a4  conformance/build/omega-matmul-v1.bin

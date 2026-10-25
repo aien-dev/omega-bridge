@@ -1,0 +1,5 @@
+fn main to int
+x = int -3
+y = shr x int 31
+ret int and y int 127
+end

@@ -1,0 +1,5 @@
+fn main to int
+x = ulong 18446744073709551615
+y = shr x ulong 63
+ret int and y ulong 127
+end

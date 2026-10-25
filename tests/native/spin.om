@@ -1,0 +1,8 @@
+note sum of 0 .. n-1 (n at most 1000000): a loop long enough for the reentry test
+fn spin n ulong to ulong
+s = ulong 0
+for i ulong n
+s = add s i
+end
+ret s
+end

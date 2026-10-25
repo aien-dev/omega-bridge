@@ -1,0 +1,10 @@
+note writes 11 and 22 into buf, traps 3 when k is 1, else writes 33 and returns 3
+fn fill buf edit ulong 4 k ulong to ulong
+put buf 0 11
+put buf 1 22
+if eq k 1
+trap 3
+end
+put buf 2 33
+ret 3
+end

@@ -1,0 +1,5 @@
+fn main to int
+x = short 32767
+y = add x short 1
+ret int and y short 127
+end

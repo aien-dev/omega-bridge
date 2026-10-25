@@ -1,0 +1,21 @@
+PASS bytecopy
+PASS echo
+PASS fib
+PASS r5b_fwd
+PASS r5b_mut
+PASS sort
+PASS t_bounds
+PASS t_cmp_unsigned
+FAIL t_conv ('C mismatch', 105, 0, b'', b'', b'')
+FAIL t_conv_sign ('C mismatch', 105, 0, b'', b'', b'')
+PASS t_div0
+FAIL t_exit ('conversion', 16, b'toc: line 2: error 16\n')
+FAIL t_loop ('conversion', 16, b'toc: line 3: error 16\n')
+FAIL t_ovf ('gcc', b'<repo>/build/tests/t_ovf.c: In function \xe2\x80\x98main\xe2\x80\x99:\n<repo>/build/tests/t_ovf.c:25:11: warning: implicit declaration of function \xe2\x80\x98o_add_s\xe2\x80\x99; did you mean \xe2\x80\x98o_add_u\xe2\x80\x99? [-Wimplicit-function-declaration]\n   25 | int32_t y=o_a')
+PASS t_rw
+FAIL t_stack ('C mismatch', 106, -11, b'', b'', b'')
+FAIL t_u63 ('conversion', 3, b'toc: line 5: error 3\n')
+FAIL t_u64max ('conversion', 3, b'toc: line 4: error 3\n')
+PASS t_void
+PASS t_write_wrap
+cases=20 failures=8 RC=1

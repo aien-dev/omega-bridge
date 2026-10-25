@@ -1,0 +1,38 @@
+// C++ caller for the omega-bridge native call ABI v1 test library.
+#include <cstdint>
+#include <cstdio>
+#include <vector>
+
+extern "C" {
+std::uint32_t omega_madd(std::uint64_t *result, std::uint64_t a, std::uint64_t b, std::uint64_t c);
+std::uint32_t omega_smadd(std::uint64_t *result, std::uint64_t a, std::uint64_t b, std::uint64_t c);
+std::uint32_t omega_fill(std::uint64_t *result, void *buf, std::uint64_t buf_len, std::uint64_t k);
+}
+
+static int fails;
+static void check(const char *name, bool ok)
+{
+    std::printf("%s %s\n", ok ? "PASS" : "FAIL", name);
+    fails += !ok;
+}
+
+int main()
+{
+    const std::uint64_t sentinel = 6148914691236517205ull;
+    std::uint64_t r = 0;
+    check("madd 3*5+7 = 22", omega_madd(&r, 3, 5, 7) == 0 && r == 22);
+    check("madd wraps = 3", omega_madd(&r, UINT64_MAX, 2, 5) == 0 && r == 3);
+    check("madd large", omega_madd(&r, 1311768467463790320ull, 18364758544493064720ull, 1085102592571150095ull) == 0 &&
+                            r == 3637949782307626511ull);
+    check("madd signed bits = -13", omega_madd(&r, static_cast<std::uint64_t>(std::int64_t{-3}), 5, 2) == 0 &&
+                                        static_cast<std::int64_t>(r) == -13);
+    r = sentinel;
+    check("smadd overflow traps 1, result unchanged", omega_smadd(&r, 4611686018427387904ull, 4, 0) == 1 && r == sentinel);
+    std::vector<std::uint64_t> buf(4, 0);
+    check("fill k=1 traps 3, result unchanged", omega_fill(&r, buf.data(), buf.size(), 1) == 3 && r == sentinel);
+    check("writes before the trap stay visible", buf[0] == 11 && buf[1] == 22 && buf[2] == 0);
+    check("fill k=0 = 3", omega_fill(&r, buf.data(), buf.size(), 0) == 0 && r == 3 && buf[2] == 33);
+    check("wrong length refused 32", omega_fill(&r, buf.data(), 3, 0) == 32);
+    std::printf("%s %d failure(s)\n", fails ? "FAIL" : "PASS", fails);
+    return fails != 0;
+}

@@ -1,0 +1,5 @@
+fn main to int
+x = uchar 1
+y = neg x
+ret int and y uchar 127
+end

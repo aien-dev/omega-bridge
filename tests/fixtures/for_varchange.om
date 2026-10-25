@@ -1,0 +1,9 @@
+fn main to int
+n = ulong 4
+s = ulong 0
+for i ulong n
+s = add s 1
+n = sub n 1
+end
+ret int s
+end

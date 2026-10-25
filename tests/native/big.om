@@ -1,0 +1,9 @@
+fn big n ulong to ulong
+x = new ulong 500000 0
+put x 499999 n
+put x 0 add n 1
+if eq n 0
+trap 3
+end
+ret add get x 0 get x 499999
+end

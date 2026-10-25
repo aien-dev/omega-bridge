@@ -1,0 +1,282 @@
+[
+  {
+    "name": "seed_1",
+    "source": "fn f a uint to uint\nret add a q\nend\n",
+    "error": 3,
+    "reason": "unknown name"
+  },
+  {
+    "name": "seed_2",
+    "source": "fn f a uint b ulong to ulong\nret add a b\nend\n",
+    "error": 7,
+    "reason": "20: no implicit widening"
+  },
+  {
+    "name": "seed_3",
+    "source": "fn f a ulong to uint\nret a\nend\n",
+    "error": 7,
+    "reason": "20: no implicit narrowing"
+  },
+  {
+    "name": "seed_4",
+    "source": "fn f a view uchar to uint\nret 0\nend\n",
+    "error": 16,
+    "reason": "16: an array without its length"
+  },
+  {
+    "name": "seed_5",
+    "source": "global g uchar\nfn main to int\nret 0\nend\n",
+    "error": 16,
+    "reason": "16: a pool without its length"
+  },
+  {
+    "name": "seed_6",
+    "source": "fn s a edit uint 4 b edit uint 4 to void\nend\nfn f to uint\nx = new uint 4 0\ns x x\nfree x\nret 0\nend\n",
+    "error": 19,
+    "reason": "18: one array twice in a call"
+  },
+  {
+    "name": "seed_7",
+    "source": "global g uint 4\nfn s a view uint 4 to uint\nret get a 0\nend\nfn main to int\nr = s g\nret 0\nend\n",
+    "error": 19,
+    "reason": "18: a global passed"
+  },
+  {
+    "name": "seed_8",
+    "source": "fn s a view uint 4 to void\nput a 0 1\nend\n",
+    "error": 20,
+    "reason": "17: write through a view"
+  },
+  {
+    "name": "seed_9",
+    "source": "text t \"ab\"\nfn main to int\nput t 0 1\nret 0\nend\n",
+    "error": 20,
+    "reason": "17: write into a text"
+  },
+  {
+    "name": "seed_10",
+    "source": "text t \"ab\"\nfn main to int\nn = read 0 t 0 1\nret 0\nend\n",
+    "error": 20,
+    "reason": "17: read into a text"
+  },
+  {
+    "name": "seed_11",
+    "source": "fn s a edit uint 4 to void\nend\nfn f a view uint 4 to uint\ns a\nret 0\nend\n",
+    "error": 20,
+    "reason": "17: an edit argument from a view"
+  },
+  {
+    "name": "seed_12",
+    "source": "fn main to int\nx = new uint 4 0\nr = get x 4\nret 0\nend\n",
+    "error": 21,
+    "reason": "23: a number index outside the array"
+  },
+  {
+    "name": "seed_13",
+    "source": "fn s a view uint 4 to uint\nret 0\nend\nfn f to uint\nx = new uint 5 0\nr = s x\nret r\nend\n",
+    "error": 7,
+    "reason": "17: an array of another shape"
+  },
+  {
+    "name": "seed_14",
+    "source": "text t \"a\\qb\"\nfn main to int\nret 0\nend\n",
+    "error": 22,
+    "reason": "19: an escape with no meaning"
+  },
+  {
+    "name": "seed_15",
+    "source": "text t \"ab\nfn main to int\nret 0\nend\n",
+    "error": 22,
+    "reason": "a text with no end"
+  },
+  {
+    "name": "seed_16",
+    "source": "global g ulong 16777217\nfn main to int\nret 0\nend\n",
+    "error": 23,
+    "reason": "24: a pool over its limit"
+  },
+  {
+    "name": "seed_17",
+    "source": "fn main to int\nx = new ulong 600000 0\nret 0\nend\n",
+    "error": 23,
+    "reason": "24: local arrays over 4 MiB"
+  },
+  {
+    "name": "seed_18",
+    "source": "fn f a uint to uint\nret a\nx = a\nend\n",
+    "error": 17,
+    "reason": "a line after ret"
+  },
+  {
+    "name": "seed_19",
+    "source": "fn f a uint to uint\nif eq a 0\nret 1\nend\nend\n",
+    "error": 18,
+    "reason": "a value function that can reach its end"
+  },
+  {
+    "name": "seed_20",
+    "source": "fn f a uint to uint\nret f a\nend\n",
+    "error": 9,
+    "reason": "a self-call in function mode (stack use bounded by the call order)"
+  },
+  {
+    "name": "seed_21",
+    "source": "global g uint 4\nfn f a uint to uint\nret a\nend\n",
+    "error": 9,
+    "reason": "a pool in function mode"
+  },
+  {
+    "name": "seed_22",
+    "source": "fn main to int\nif true\nx = new uint 4 0\nend\nret 0\nend\n",
+    "error": 9,
+    "reason": "new inside a block"
+  },
+  {
+    "name": "seed_23",
+    "source": "fn main a int to int\nret a\nend\n",
+    "error": 9,
+    "reason": "main with parameters"
+  },
+  {
+    "name": "seed_24",
+    "source": "fn s a edit int 2 to void\nput a 1 9\nend\nfn main to int\nx = new int 2 0\ns view x\nret get x 1\nend\n",
+    "error": 20,
+    "reason": "17: view A to an edit parameter (L412 probe view_pfx_to_edit)"
+  },
+  {
+    "name": "seed_25",
+    "source": "fn main to int\nx = ulong -1\nret 0\nend\n",
+    "error": 8,
+    "reason": "20: a negative number is not a ulong"
+  },
+  {
+    "name": "seed_26",
+    "source": "fn main to int\nx = long 9223372036854775808\nret 0\nend\n",
+    "error": 8,
+    "reason": "20: 2^63 is not a long"
+  },
+  {
+    "name": "seed_27",
+    "source": "fn main to int\nx = byte 18446744073709551615\nret 0\nend\n",
+    "error": 8,
+    "reason": "20: 2^64 - 1 is not a byte (no wrap to -1)"
+  },
+  {
+    "name": "seed_28",
+    "source": "fn main to int\nx = ulong 18446744073709551616\nret 0\nend\n",
+    "error": 8,
+    "reason": "23: 2^64 is no whole number of any type"
+  },
+  {
+    "name": "seed_29",
+    "source": "fn main to int\nx = ulong 100000000000000000000\nret 0\nend\n",
+    "error": 6,
+    "reason": "a number of 21 digits"
+  },
+  {
+    "name": "seed_30",
+    "source": "global g uchar 9223372036854775808\nfn main to int\nret 0\nend\n",
+    "error": 23,
+    "reason": "24: a pool of 2^63 elements is over its limit"
+  },
+  {
+    "name": "seed_31",
+    "source": "fn main to int\nx = new uint 4 0\nfree x\nret 0\nend\n",
+    "error": 9,
+    "reason": "24: free is not a word (no heap, nothing given back by hand)"
+  },
+  {
+    "name": "seed_32",
+    "source": "fn f a int b int to int\nret 0\nend\nfn g to int\nx = own a\nret 0\nend\n",
+    "error": 9,
+    "reason": "own is not in the subset"
+  },
+  {
+    "name": "seed_33",
+    "source": "fn f a uint to uint\nret a\nend\nfn g f uint to uint\nret f\nend\n",
+    "error": 10,
+    "reason": "a name equal to a function"
+  },
+  {
+    "name": "seed_34",
+    "source": "fn f a uint to uint\nabcdefghi = a\nret a\nend\n",
+    "error": 13,
+    "reason": "a variable over 8 characters"
+  },
+  {
+    "name": "seed_35",
+    "source": "fn f a uint to uint\nret a\n",
+    "error": 15,
+    "reason": "a function without end"
+  },
+  {
+    "name": "seed_36",
+    "source": "end\n",
+    "error": 16,
+    "reason": "end outside a function"
+  },
+  {
+    "name": "seed_37",
+    "source": "ret 5\n",
+    "error": 16,
+    "reason": "a statement outside a function"
+  },
+  {
+    "name": "seed_38",
+    "source": "fn f a uint to uint\nret add a 12x\nend\n",
+    "error": 6,
+    "reason": "bad number"
+  },
+  {
+    "name": "seed_39",
+    "source": "fn f to void\nret\nend\nfn g to uint\nx = f\nret 0\nend\n",
+    "error": 7,
+    "reason": "a void function used as a value"
+  },
+  {
+    "name": "seed_40",
+    "source": "fn f to uint\nret 1\nend\nfn g to void\nf\nend\n",
+    "error": 7,
+    "reason": "a value function called as a statement"
+  },
+  {
+    "name": "empty",
+    "source": "",
+    "error": null
+  },
+  {
+    "name": "text_target",
+    "source": "text t \"abc\"\nfn main to int\nret 0\nend\n",
+    "backend_error": 24
+  },
+  {
+    "name": "five_params",
+    "source": "fn f a ulong b ulong c ulong d ulong e ulong to ulong\nret a\nend\nfn main to int\nret int f 1 2 3 4 5\nend\n",
+    "backend_error": 24
+  },
+  {
+    "name": "long_name",
+    "source": "fn toolongname to int\nret 0\nend\nfn main to int\nret toolongname\nend\n",
+    "backend_error": 13
+  },
+  {
+    "name": "library_io",
+    "source": "fn f a edit uchar 4 to long\nret read 0 a 0 4\nend\n",
+    "backend_error": 24
+  },
+  {
+    "name": "library_array_width",
+    "source": "fn f a view short 4 to short\nret get a 0\nend\n",
+    "backend_error": 24
+  },
+  {
+    "name": "local_storage_limit",
+    "source": "fn main to int\na = new ushort 20000 0\nret 0\nend\n",
+    "backend_error": 23
+  },
+  {
+    "name": "inherited_text_program",
+    "source": "note text bytes with every escape are written to stdout and read back with get and len\ntext t \"a\\tb\\\\c\\\"d\\ne\"\nglobal g uchar 16\nfn main to int\nn = write int 1 t ulong 0 len t\nput g 0 get t 2\nret add int get t 0 int add len t ulong get g 0\nend\n",
+    "backend_error": 24
+  }
+]

@@ -1,0 +1,114 @@
+PASS bytecopy
+PASS echo
+PASS fib
+PASS for_expr_once
+PASS for_varchange
+PASS io_errno
+PASS local_array
+PASS num_bool
+PASS num_byte_add
+PASS num_byte_cast
+PASS num_byte_div
+PASS num_byte_mul
+PASS num_byte_neg
+PASS num_byte_rem
+FAIL num_byte_shiftlimit ('C mismatch', 107, 105, b'', b'', b'')
+FAIL num_byte_shl ('C mismatch', 101, 126, b'', b'', b'')
+PASS num_byte_shr
+PASS num_byte_sub
+PASS num_div_negative
+PASS num_int_add
+PASS num_int_cast
+PASS num_int_div
+PASS num_int_mul
+PASS num_int_neg
+PASS num_int_rem
+FAIL num_int_shiftlimit ('C mismatch', 107, 105, b'', b'', b'')
+FAIL num_int_shl ('C mismatch', 101, 126, b'', b'', b'')
+PASS num_int_shr
+PASS num_int_sub
+PASS num_intmin_literal
+PASS num_long_add
+PASS num_long_cast
+PASS num_long_div
+PASS num_long_mul
+PASS num_long_neg
+PASS num_long_rem
+FAIL num_long_shiftlimit ('C mismatch', 107, 105, b'', b'', b'')
+FAIL num_long_shl ('C mismatch', 101, 126, b'', b'', b'')
+PASS num_long_shr
+PASS num_long_sub
+FAIL num_not ('conversion', 7, b'toc: line 3: error 7\n')
+PASS num_rem_negative
+PASS num_short_add
+PASS num_short_cast
+PASS num_short_div
+PASS num_short_mul
+PASS num_short_neg
+PASS num_short_rem
+FAIL num_short_shiftlimit ('C mismatch', 107, 105, b'', b'', b'')
+FAIL num_short_shl ('C mismatch', 101, 126, b'', b'', b'')
+PASS num_short_shr
+PASS num_short_sub
+PASS num_uchar_add
+PASS num_uchar_cast
+PASS num_uchar_div
+PASS num_uchar_mul
+PASS num_uchar_neg
+PASS num_uchar_rem
+FAIL num_uchar_shiftlimit ('C mismatch', 107, 105, b'', b'', b'')
+PASS num_uchar_shl
+PASS num_uchar_shr
+PASS num_uchar_sub
+PASS num_uint_add
+PASS num_uint_cast
+PASS num_uint_div
+PASS num_uint_mul
+PASS num_uint_neg
+PASS num_uint_rem
+FAIL num_uint_shiftlimit ('C mismatch', 107, 105, b'', b'', b'')
+PASS num_uint_shl
+PASS num_uint_shr
+PASS num_uint_sub
+PASS num_ulong_add
+PASS num_ulong_cast
+PASS num_ulong_div
+PASS num_ulong_mul
+PASS num_ulong_neg
+PASS num_ulong_rem
+FAIL num_ulong_shiftlimit ('C mismatch', 107, 105, b'', b'', b'')
+PASS num_ulong_shl
+PASS num_ulong_shr
+PASS num_ulong_sub
+PASS num_ushort_add
+PASS num_ushort_cast
+PASS num_ushort_div
+PASS num_ushort_mul
+PASS num_ushort_neg
+PASS num_ushort_rem
+FAIL num_ushort_shiftlimit ('C mismatch', 107, 105, b'', b'', b'')
+PASS num_ushort_shl
+PASS num_ushort_shr
+PASS num_ushort_sub
+PASS order_calls
+PASS order_put
+PASS order_trap
+PASS r5b_fwd
+PASS r5b_mut
+PASS sort
+PASS t_bounds
+PASS t_cmp_unsigned
+PASS t_conv
+PASS t_conv_sign
+PASS t_div0
+PASS t_exit
+PASS t_loop
+PASS t_ovf
+PASS t_rw
+PASS t_stack
+PASS t_u63
+PASS t_u64max
+PASS t_void
+PASS t_write_wrap
+PASS two_loops
+cases=113 failures=13 RC=1

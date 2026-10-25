@@ -1,0 +1,5 @@
+fn main to int
+x = ulong 128
+y = byte x
+ret int and y byte 127
+end

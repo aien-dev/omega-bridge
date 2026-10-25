@@ -1,0 +1,5 @@
+fn main to int
+x = int 2147483647
+y = mul x int 2
+ret int and y int 127
+end

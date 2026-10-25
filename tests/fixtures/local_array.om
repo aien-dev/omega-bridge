@@ -1,0 +1,5 @@
+fn main to int
+a = new short 3 -9
+put a 1 short -17
+ret int add get a 1 short 20
+end

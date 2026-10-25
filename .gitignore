@@ -1,4 +1,6 @@
-build/
-.superpowers/
+/build/
 __pycache__/
 *.pyc
+
+# conformance build outputs
+conformance/build/

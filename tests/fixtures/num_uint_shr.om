@@ -1,0 +1,5 @@
+fn main to int
+x = uint 4294967295
+y = shr x uint 31
+ret int and y uint 127
+end

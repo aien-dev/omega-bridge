@@ -1,0 +1,5 @@
+fn main to int
+x = uchar 255
+y = mul x uchar 2
+ret int and y uchar 127
+end

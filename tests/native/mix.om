@@ -1,0 +1,7 @@
+fn mix a ulong b long c view uchar 3 d edit uchar 2 e view ulong 2 f ulong to void
+put d 0 get c 2
+put d 1 uchar add a add get e 1 f
+if lt b 0
+trap 9
+end
+end

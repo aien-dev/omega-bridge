@@ -1,0 +1,20 @@
+note hsum: a unit with private helpers. The compiler enters a function-mode unit at its last function
+note (word 0 branches there), so only that function is bound; sq and cap are internal calls.
+fn sq x ulong to ulong
+ret mul x x
+end
+
+fn cap x ulong to ulong
+if gt x 1000000
+trap 9
+end
+ret x
+end
+
+fn hsum a view uchar 4 b ulong to ulong
+s = b
+for i ulong 4
+s = add s sq ulong get a i
+end
+ret cap s
+end

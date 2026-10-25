@@ -1,0 +1,8 @@
+fn main to int
+x = true
+y = xor x false
+if and y not false
+ret 7
+end
+ret 1
+end

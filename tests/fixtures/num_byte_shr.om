@@ -1,0 +1,5 @@
+fn main to int
+x = byte -3
+y = shr x byte 7
+ret int and y byte 127
+end

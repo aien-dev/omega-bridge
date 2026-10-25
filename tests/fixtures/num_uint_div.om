@@ -1,0 +1,5 @@
+fn main to int
+x = uint 0
+y = div x uint 0
+ret int and y uint 127
+end

@@ -1,0 +1,11 @@
+build/fixtures/matmul-v1.json {'a': '3aa39ad076cf6dc08de24cfb31132d2d6adc6444623933786889b2bca15a76cf', 'b': 'ecad04839ce22217a1f5e35def8ceee26fce87819d28a70067574fc4cb7604fe'}
+build/fixtures/gqa-causal-v1.json {'q': '1644b426e47bebd43a1c9b91bb11376f07e7a2678e727a43b37a681313e9c729', 'k': 'a621e99db699a04a01876ff78e30f85f4ccdfa6aa2d4507ae6c92db4fdbd4b08', 'v': '4427d100d96dfe263dde83154be5f60ec368d068b86baaea0f02dd878014ddc9'}
+build/omega_runner: ELF 64-bit LSB pie executable, ARM aarch64, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-aarch64.so.1, BuildID[sha1]=ffa06df8c9c6251921be69325c93ba98711db52a, for GNU/Linux 3.7.0, not stripped
+{"accelerator_api": "cpu", "compile_seconds": 2.0521096989978105, "device": "cpu", "execute_seconds": 0.0006413970259018242, "max_version": "26.7.0", "numeric_path": "f32-accumulation", "output_sha256": "60a7f7d46597cfff1cd126df12aa8583f191fc6c64a2a608341608f2de8e70a4", "runner": "modular-max", "shape": [4, 3], "spark_window": null}
+{"checks": 8, "contract_id": "647116fc1ba1e1394982fc8ba181ce565293f160a6b56afc0f02b2128a675704", "device": "cpu", "fail": 0, "fixture": "matmul-v1", "runner": "modular-max"}
+{"accelerator_api": "cpu", "compile_seconds": 1.5519195219967514, "device": "cpu", "execute_seconds": 0.0011786979739554226, "max_version": "26.7.0", "numeric_path": "fp32-softmax", "output_sha256": "4e9b2bf0402156d5a431dce04d46ac8cd62069c9c6193491e0889e39f1f2fcb0", "runner": "modular-max", "shape": [2, 4, 128], "spark_window": null}
+{"checks": 9, "contract_id": "003696e422bba7274877ba9e01a61076ea0f862f32760cbaa06c60f85a115359", "device": "cpu", "fail": 0, "fixture": "gqa-causal-v1", "runner": "modular-max"}
+{"checks": 8, "contract_id": "647116fc1ba1e1394982fc8ba181ce565293f160a6b56afc0f02b2128a675704", "device": "host-wiring", "fail": 0, "fixture": "matmul-v1", "runner": "omega-native"}
+DEVICE RUNS: NOT_RUN (pass --device inside an authorized spark-window)
+CONFORMANCE HARNESS PASS
+rc=0

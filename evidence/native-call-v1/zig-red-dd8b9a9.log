@@ -1,0 +1,15 @@
+PASS embedded code == omc output, per unit (38c2940801119902)
+PASS c caller (26 lines)
+PASS c-bti caller (26 lines)
+PASS generator refuses a unit name that is not a C identifier
+PASS generator refuses a parameter name ending in _len
+PASS generator refuses a repeated unit name
+PASS generator accepts the same unit once (control)
+PASS cpp caller (10 lines)
+PASS python caller (10 lines)
+PASS rust caller (11 lines)
+FAIL zig caller
+/home/drakestapleton/workspace/bridge-native-call/build/native/caller_zig: error while loading shared libraries: ./libomega_native.so: cannot open shared object file: No such file or directory
+PASS go caller (10 lines)
+PASS mutant madd (add -> sub) caught (7 failing checks)
+NATIVE-CALL FAIL 1

@@ -1,0 +1,21 @@
+PASS bytecopy
+PASS echo
+PASS fib
+PASS r5b_fwd
+PASS r5b_mut
+PASS sort
+PASS t_bounds
+PASS t_cmp_unsigned
+PASS t_conv
+PASS t_conv_sign
+PASS t_div0
+PASS t_exit
+PASS t_loop
+PASS t_ovf
+PASS t_rw
+PASS t_stack
+PASS t_u63
+PASS t_u64max
+PASS t_void
+PASS t_write_wrap
+cases=20 failures=0 RC=0

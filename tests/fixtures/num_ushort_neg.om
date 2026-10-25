@@ -1,0 +1,5 @@
+fn main to int
+x = ushort 1
+y = neg x
+ret int and y ushort 127
+end

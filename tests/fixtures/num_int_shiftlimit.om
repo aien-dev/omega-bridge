@@ -1,0 +1,6 @@
+fn main to int
+x = int 1
+s = ulong 32
+y = shl x s
+ret int y
+end

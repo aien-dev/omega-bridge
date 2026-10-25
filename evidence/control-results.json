@@ -1,0 +1,50 @@
+[
+  {
+    "target": "c",
+    "case": "num_ulong_add",
+    "native_exit": 0,
+    "mutant_exit": 126,
+    "mutant_sha256": "4e7f1fbae746447c6ceb1e3abc2b29e928f3d597b0a10a506d0aa6d17405097b",
+    "stderr": ""
+  },
+  {
+    "target": "python",
+    "case": "num_ulong_add",
+    "native_exit": 0,
+    "mutant_exit": 126,
+    "mutant_sha256": "cc2956c1aca28012942626d4aa1fc376a9ac4a8402824be2caa73bc16c84157d",
+    "stderr": ""
+  },
+  {
+    "target": "c",
+    "case": "t_bounds",
+    "native_exit": 103,
+    "mutant_exit": 1,
+    "mutant_sha256": "af30b1480214b2ea370b3464ba4ab9c9acffbfaf455d56c6bbd5f00f7489a1bc",
+    "stderr": "<repo>/build/controls/mut.c:27:102: runtime error: load of address 0xbcb31ced0407 with insufficient space for an object of type 'uint8_t'\n0xbcb31ced0407: note: pointer points here\n 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00\n             ^ \n"
+  },
+  {
+    "target": "python",
+    "case": "t_bounds",
+    "native_exit": 103,
+    "mutant_exit": 1,
+    "mutant_sha256": "1c3477b0bc1a00d8d3fca181ced444e0ee12c99ae34ea249d3c3199767488d5d",
+    "stderr": "Traceback (most recent call last):\n  File \"<repo>/build/controls/mut.py\", line 87, in <module>\n    _os._exit(f0()&255)\n              ^^^^\n  File \"<repo>/build/controls/mut.py\", line 85, in f0\n    return o_leave(o_cast(8, 2, o_get(g0, g0_n, v0, 2)))\n                                ^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/build/controls/mut.py\", line 55, in o_get\n    return p[i]\n           ~^^^\nIndexError: bytearray index out of range\n"
+  },
+  {
+    "target": "c",
+    "case": "order_calls",
+    "native_exit": 1,
+    "mutant_exit": 105,
+    "mutant_sha256": "6f508417f32a10931359b62403a59f8182c3352f1fbca1a68be26444ffe0588d",
+    "stderr": ""
+  },
+  {
+    "target": "python",
+    "case": "order_calls",
+    "native_exit": 1,
+    "mutant_exit": 105,
+    "mutant_sha256": "ad3b173117de77d2eec59dc42533aaceafec6198d93387c109be305108f23847",
+    "stderr": ""
+  }
+]
