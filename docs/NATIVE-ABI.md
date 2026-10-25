@@ -193,14 +193,19 @@ refused unit.
 
 ## G1 sample (`OMEGA_NATIVE_OMC=<seed omc> sh tests/native/g1/run.sh`)
 
-omega-mv #624 milestone G1: `tests/native/g1/calc.om`, `fn calc i0 ulong i1 ulong to ulong` computing
-`(i0 + i1) * (i0 - i1)` modulo 2^64 with a `new ulong` SSA array in the lowering form of
-`spec/universal/translation-v1.md` section 5 (hand-written; no semantic `note` line). `tools/native`
-builds it; the C, C++, Python, Rust, Zig and Go callers read `i0 i1` lines and print `i0 i1 status
-result`, and each output must equal, line for line, the Python bigint reference
-(`tests/native/g1/reference.py`) on 81 vectors: every ordered pair of 0, 1, 2, 2^32, 2^63-1, 2^63,
-2^63+1, 2^64-2, 2^64-1. Negative control: the unit with `sub` changed to `add` must disagree. The run
-writes `build/g1/manifest.json`: the source identity (sha256 of the `.om` bytes, not the section 4
-semantic identity), the omc, `src/native.om` and `tools/native` sha256, the code, library and binding
-sha256, ISA aarch64, the ELF class and machine from `readelf -h`, ABI `omega-native-v1`, OS Linux, and
-each caller's status (PASS, FAIL or NOT_RUN for a missing toolchain) with its vector count.
+omega-mv #624 milestone G1: `fn calc i0 ulong i1 ulong to ulong` computing `(i0 + i1) * (i0 - i1)` modulo
+2^64 with a `new ulong` SSA array in the lowering form of `spec/universal/translation-v1.md` section 5.
+`OMEGA_G1_UNIT` names the unit: by default `tests/native/g1/calc.om` (hand-written, no semantic `note`
+line); `tests/native/g1/calc.lowered.om` is the unit the omega-mv pipeline generated from C
+(`c-import | lower`, producing command and commit in `tests/native/g1/README.md`). The bound function's
+name and arity come from the unit's last `fn` line and must be `calc` with two inputs (what the callers
+and the reference implement). `tools/native` builds it; the C, C++, Python, Rust, Zig and Go callers read
+`i0 i1` lines and print `i0 i1 status result`, and each output must equal, line for line, the Python
+bigint reference (`tests/native/g1/reference.py`) on 81 vectors: every ordered pair of 0, 1, 2, 2^32,
+2^63-1, 2^63, 2^63+1, 2^64-2, 2^64-1. Negative control: the unit with its first `sub` changed to `add`
+must disagree. The run writes `build/g1/manifest.json`: the unit, its function and arity; the source
+identity (sha256 of the `.om` bytes); the semantic identity (section 4) when the unit's first line is
+`note omega.universal.lower.v1 semantic <hex>`, else null; the omc, `src/native.om` and `tools/native`
+sha256; the code, library and binding sha256; ISA aarch64, the ELF class and machine from `readelf -h`,
+ABI `omega-native-v1`, OS Linux; and each caller's status (PASS, FAIL or NOT_RUN for a missing
+toolchain) with its vector count and toolchain path.

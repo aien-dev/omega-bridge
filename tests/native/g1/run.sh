@@ -3,6 +3,11 @@
 # 2^64 as a function-mode .om unit with a "new ulong" SSA array, compiled by the pinned omc, bound by
 # tools/native, and called from C, C++, Python, Rust, Zig and Go. Every caller's output on the boundary
 # vectors must equal the Python bigint reference line for line. Writes build/g1/manifest.json.
+# OMEGA_G1_UNIT names the unit (default tests/native/g1/calc.om, hand-written; calc.lowered.om is the one
+# the omega-mv pipeline generated). The bound function's name and arity come from the unit's last fn
+# line; the callers and the reference implement calc with two inputs, so any other is a FAIL. A first
+# line "note omega.universal.lower.v1 semantic <64 hex>" is recorded as the semantic identity, apart from
+# the source identity (sha256 of the unit's bytes).
 # A missing toolchain is NOT_RUN, never PASS. Exit 0 only when every caller that ran passed.
 set -eu
 PIN=734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61
@@ -13,13 +18,27 @@ OMC=${OMEGA_NATIVE_OMC:?set OMEGA_NATIVE_OMC to the seeded omc (omega seed/out/o
 got=$(sha256sum < "$OMC" | cut -d' ' -f1)
 [ "$got" = "$PIN" ] || { echo "FAIL omc sha256 $got, pinned $PIN"; exit 1; }
 command -v python3 > /dev/null || { echo "FAIL python3 (the reference) is not installed"; exit 1; }
-rm -rf "$O"; mkdir -p "$O/mut"
+rm -rf "$O"; mkdir -p "$O/mut" "$O/unit"
 fails=0
 pass() { echo "PASS $1"; }
 fail() { echo "FAIL $1"; fails=$((fails + 1)); }
-OMEGA_NATIVE_OMC="$OMC" "$ROOT/tools/native" "$O" "$T/calc.om" > "$O/tools-native.log" 2>&1 \
+UNIT=${OMEGA_G1_UNIT:-$T/calc.om}
+[ -f "$UNIT" ] || { echo "FAIL unit $UNIT not found"; exit 1; }
+FNL=$(grep '^fn ' "$UNIT" | tail -n 1)
+NAME=$(printf '%s\n' "$FNL" | awk '{ print $2 }')
+ARITY=$(printf '%s\n' "$FNL" | awk '{ n = 0; for (i = 3; i < NF; i += 2) { if ($i == "to") break; n++ } print n }')
+SEM=$(head -n 1 "$UNIT" | awk '$1 == "note" && $2 == "omega.universal.lower.v1" && $3 == "semantic" { print $4 }')
+if head -n 1 "$UNIT" | grep -q '^note omega.universal.lower.v1 '; then
+  if printf '%s\n' "$SEM" | grep -qx '[0-9a-f]\{64\}'; then pass "unit carries semantic identity $SEM"
+  else fail "unit's lower.v1 note line has no 64-hex semantic identity"; SEM=; fi
+fi
+if [ "$NAME" = calc ] && [ "$ARITY" = 2 ]; then pass "bound function $NAME, $ARITY inputs ($FNL)"
+else echo "FAIL bound function '$FNL': the callers and the reference implement calc with 2 inputs"; exit 1; fi
+# tools/native names a unit's code after its file, so the unit is bound from a copy named after its function.
+cp "$UNIT" "$O/unit/$NAME.om"
+OMEGA_NATIVE_OMC="$OMC" "$ROOT/tools/native" "$O" "$O/unit/$NAME.om" > "$O/tools-native.log" 2>&1 \
   || { echo "FAIL tools/native"; cat "$O/tools-native.log"; exit 1; }
-"$OMC" < "$T/calc.om" > "$O/calc.bin"
+"$OMC" < "$UNIT" > "$O/calc.bin"
 if cmp -s "$O/calc.bin" "$O/work/calc.bin"; then pass "calc compiled ($(wc -c < "$O/calc.bin") bytes of code)"
 else fail "tools/native compiled calc differently from omc"; fi
 # The embedded code must be omc's bytes: read at ombr_code_calc, mapped to its file offset.
@@ -80,10 +99,10 @@ if command -v go > /dev/null; then
   try go "$tc" sh -c 'cd "$1" && go mod init omegacaller > /dev/null 2>&1 && CGO_LDFLAGS="-Wl,-rpath,$1/omeganative" go build -o caller_go .' _ "$O/go" \
     && { "$O/go/caller_go" < "$O/vectors.txt" > "$O/go.out" 2> "$O/go.err" || true; cmpout go "$tc"; }
 else notrun go go; fi
-# Negative control: the same unit with its sub turned into add, bound and called from C, must disagree
-# with the reference on these vectors.
-sed 's/^put v 3 sub /put v 3 add /' "$T/calc.om" > "$O/mut/calc.om"
-if cmp -s "$O/mut/calc.om" "$T/calc.om"; then fail "mutant calc (sub -> add) did not change the unit"
+# Negative control: the same unit with its (first) sub turned into add, bound and called from C, must
+# disagree with the reference on these vectors.
+sed '0,/^\(put v [0-9]* \)sub /s//\1add /' "$UNIT" > "$O/mut/calc.om"
+if cmp -s "$O/mut/calc.om" "$UNIT"; then fail "mutant calc (sub -> add) did not change the unit"
 elif OMEGA_NATIVE_OMC="$OMC" "$ROOT/tools/native" "$O/mut" "$O/mut/calc.om" > "$O/mut/tools-native.log" 2>&1 \
     && cc -std=c17 -O2 "$O/caller.c" -I"$O/mut" -L"$O/mut" -lomega_native -Wl,-rpath,"$O/mut" -o "$O/mut/caller_c" \
     && "$O/mut/caller_c" < "$O/vectors.txt" > "$O/mut/c.out"; then
@@ -93,9 +112,10 @@ elif OMEGA_NATIVE_OMC="$OMC" "$ROOT/tools/native" "$O/mut" "$O/mut/calc.om" > "$
 else fail "mutant calc (sub -> add) did not build"; fi
 # The manifest: identities of the inputs and the artifact, the ELF header, and each caller's status.
 readelf -h "$O/libomega_native.so" > "$O/readelf-h.txt"
-python3 -I - "$O" "$ROOT" "$N" "$got" > "$O/manifest.json" << 'EOF'
-import hashlib, json, subprocess, sys
-O, ROOT, N, OMC_SHA = sys.argv[1], sys.argv[2], int(sys.argv[3]), sys.argv[4]
+python3 -I - "$O" "$ROOT" "$N" "$got" "$UNIT" "$NAME" "$ARITY" "$SEM" > "$O/manifest.json" << 'EOF'
+import hashlib, json, os, subprocess, sys
+O, ROOT, N, OMC_SHA, UNIT, NAME, ARITY, SEM = sys.argv[1:9]
+N, ARITY = int(N), int(ARITY)
 def sha(p):
     return hashlib.sha256(open(p, "rb").read()).hexdigest()
 elf = {}
@@ -110,12 +130,15 @@ for line in open(O + "/status.txt"):
     callers[lang] = {"status": status, "vectors": N if status != "NOT_RUN" else 0,
                      "matched": int(matched), "toolchain": tc}
 uname = subprocess.run(["uname", "-s", "-m"], capture_output=True, text=True).stdout.split()
+unit = os.path.realpath(UNIT)
 m = {
     "schema": "omega-bridge.native-artifact-manifest.v1",
-    "unit": "calc",
-    "semantic_id": {"kind": "source_identity", "algorithm": "sha256", "of": "tests/native/g1/calc.om bytes",
-                    "value": sha(ROOT + "/tests/native/g1/calc.om"),
-                    "note": "identity of the .om source bytes, not the translation-v1 section 4 semantic identity"},
+    "unit": {"file": os.path.relpath(unit, ROOT) if unit.startswith(ROOT + "/") else unit,
+             "function": NAME, "inputs": ARITY},
+    "source_identity": {"algorithm": "sha256", "of": "the unit's .om bytes", "value": sha(unit)},
+    "semantic_identity": ({"value": SEM, "from": "the unit's first line: note omega.universal.lower.v1 semantic",
+                           "definition": "spec/universal/translation-v1.md section 4 (omega-mv)"}
+                          if SEM else None),
     "omc_sha256": OMC_SHA,
     "native_om_sha256": sha(ROOT + "/src/native.om"),
     "tools_native_sha256": sha(ROOT + "/tools/native"),
