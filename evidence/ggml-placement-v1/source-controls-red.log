@@ -1,0 +1,2 @@
+CAUGHT tampered src/compiler/osc_interp.c: exact hash refusal before compiler
+INVALID/UNCAUGHT tampered src/compiler/model/osc_model.h: rc=99 (hash refusal before compiler required)
