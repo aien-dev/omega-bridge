@@ -148,8 +148,9 @@ signal handler (status 33), a trap from a frame holding a 4,000,000-byte local a
 256 KiB thread, and that x19..x28 and d8..d15 keep the caller's values across a normal return and a trap.
 The Rust caller runs the array on a default thread and is built twice, under edition 2021 and edition
 2024, with warnings as errors. The C caller runs a second time against a library built with BTI enforced.
-`tests/native/reference.c`, prototypes for the six test units written by hand from this contract, is
-compiled with the generated header included: a disagreement is a conflicting-types error. The generator
+`tests/native/reference.c`, prototypes for the seven test units (with `hsum`, bound at its last function)
+written by hand from this contract, is compiled with the generated header included: a disagreement is a
+conflicting-types error. The generator
 is shown to refuse a non-C unit name, a parameter ending in `_len` and a repeated unit name, and to accept
 the same unit once; `tools/native` is shown to refuse a unit with a `uchar` result by name, with exit 110,
 leaving a previous run's outputs untouched. Not exercised: status 34 and 35 (no supported unit reaches
@@ -189,3 +190,17 @@ per kind instead of `c_void_p` (which took `bytes` for a writable array and trun
 silently); the Go preamble including the header instead of repeating prototypes, with no baked
 run-time path; `tools/native` producing in a scratch folder, installing together, and naming the
 refused unit.
+
+## G1 sample (`OMEGA_NATIVE_OMC=<seed omc> sh tests/native/g1/run.sh`)
+
+omega-mv #624 milestone G1: `tests/native/g1/calc.om`, `fn calc i0 ulong i1 ulong to ulong` computing
+`(i0 + i1) * (i0 - i1)` modulo 2^64 with a `new ulong` SSA array in the lowering form of
+`spec/universal/translation-v1.md` section 5 (hand-written; no semantic `note` line). `tools/native`
+builds it; the C, C++, Python, Rust, Zig and Go callers read `i0 i1` lines and print `i0 i1 status
+result`, and each output must equal, line for line, the Python bigint reference
+(`tests/native/g1/reference.py`) on 81 vectors: every ordered pair of 0, 1, 2, 2^32, 2^63-1, 2^63,
+2^63+1, 2^64-2, 2^64-1. Negative control: the unit with `sub` changed to `add` must disagree. The run
+writes `build/g1/manifest.json`: the source identity (sha256 of the `.om` bytes, not the section 4
+semantic identity), the omc, `src/native.om` and `tools/native` sha256, the code, library and binding
+sha256, ISA aarch64, the ELF class and machine from `readelf -h`, ABI `omega-native-v1`, OS Linux, and
+each caller's status (PASS, FAIL or NOT_RUN for a missing toolchain) with its vector count.
