@@ -32,7 +32,7 @@ anything outside the supported signature set is refused (exit 110, no output). T
 - enters the code through a small trampoline that saves the callee-saved registers x19..x28 and
   d8..d15 on the caller's stack, keeps the caller's stack pointer in x19, sets x7, loads the arguments and
   runs the code on the binding's own stack (below);
-- gives the code a 32-entry runtime table whose trap entry restores the caller's stack pointer from x19
+- gives the code a read-only 32-entry runtime table whose trap entry restores the caller's stack pointer from x19
   and returns the trap code from the exported function (no setjmp/longjmp, nothing crosses the caller's
   frame) and whose other entries refuse with status 34, since function-mode units of this ABI use none
   of them. This relies on the seeded compiler never writing x19..x28 (OSC-1 uses x0..x16, x29, x30);
@@ -65,8 +65,8 @@ embedded code, with any Omega types. Only the last function's signature must be 
 | status 35 | the binding could not map its stack for this thread |
 
 Buffers stay owned by the caller and are borrowed for the call only; Omega keeps no address after it
-returns. Writes made before a trap stay visible (no rollback). Calls on different threads are independent; each
-call has its own runtime table.
+returns. Writes made before a trap stay visible (no rollback). Calls on different threads are independent. The runtime table is one read-only table shared by
+every call and thread (the code only reads it); a write to it would fault.
 
 Stack: on its first call from a thread the binding maps 8 MiB of stack for that thread above an 8 MiB
 no-access guard, and frees both when the thread exits. The caller's own stack size does not matter (a
