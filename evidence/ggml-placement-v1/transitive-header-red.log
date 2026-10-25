@@ -1,0 +1,4 @@
+OK bytes=5120 functions=3
+reference trap=0 result=0
+PASS GGML placement policy: host reference only
+NOT_RUN seeded native compilation/execution, GGML callbacks/hook, GPU/model/hardware
