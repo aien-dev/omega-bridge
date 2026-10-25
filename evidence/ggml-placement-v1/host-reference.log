@@ -1,0 +1,16 @@
+CAUGHT tampered src/compiler/osc_interp.c: exact hash refusal before compiler
+CAUGHT tampered src/compiler/model/osc_model.h: exact hash refusal before compiler
+PASS 2/2 source-provenance controls; no native/hardware qualification
+OK bytes=5120 functions=3
+reference trap=0 result=0
+PASS GGML placement policy: host reference only
+NOT_RUN seeded native compilation/execution, GGML callbacks/hook, GPU/model/hardware
+CAUGHT broad-get-rows: assertion 2 (host reference only)
+CAUGHT cpu-transformer: assertion 2 (host reference only)
+CAUGHT cont-as-metadata: assertion 52 (host reference only)
+CAUGHT wrong-glu-subtype: assertion 14 (host reference only)
+CAUGHT missing-nodes: assertion 44 (host reference only)
+CAUGHT stale-graph: assertion 46 (host reference only)
+CAUGHT stale-residency: assertion 48 (host reference only)
+CAUGHT empty-graph: assertion 41 (host reference only)
+PASS 8/8 host-reference controls; no native/hardware qualification
