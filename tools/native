@@ -1,7 +1,8 @@
 #!/bin/sh
 # tools/native: one Omega library and its declarations for six languages, from Omega function units.
 # Usage: OMEGA_NATIVE_OMC=<seeded omc> tools/native OUTDIR unit.om [unit.om...]
-# Each unit is one .om function in the native call subset (docs/NATIVE-ABI.md). OUTDIR receives
+# Each unit is one .om file in the native call subset (docs/NATIVE-ABI.md): its last function is bound,
+# earlier ones are private helpers. OUTDIR receives
 #   omega_native.c     the library source: every unit's compiled code, embedded unchanged, behind
 #                      uint32_t omega_<name>(uint64_t *result, ...)
 #   omega_native.h     its C and C++ declarations

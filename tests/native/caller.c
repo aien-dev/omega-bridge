@@ -129,6 +129,12 @@ int main(void)
     pv = ombr_probe((void *)omega_smadd, &r, UINT64_C(4611686018427387904), 4, 0);
     check("x19..x28 and d8..d15 kept across a trap", (uint32_t)pv == 1 && (pv >> 32) == 0 && r == SENTINEL);
 
+    /* A unit with private helpers: only its last function is bound; helper calls and a helper's trap work. */
+    const unsigned char hb[4] = {1, 2, 3, 4}, hx[4] = {255, 255, 255, 255};
+    check("hsum 1+4+9+16+5 = 35 through two helpers", omega_hsum(&r, hb, 4, 5) == 0 && r == 35);
+    r = SENTINEL;
+    check("hsum: a helper's trap 9 returns 9, result unchanged", omega_hsum(&r, hx, 4, 999000) == 9 && r == SENTINEL);
+
     struct sigaction sa;
     memset(&sa, 0, sizeof sa);
     sa.sa_handler = on_alarm;
