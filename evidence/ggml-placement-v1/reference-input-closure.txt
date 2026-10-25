@@ -1,0 +1,2 @@
+REFERENCE_LOCAL_DEPENDENCIES 31 PINNED 31 MISSING [] EXTRA []
+PASS exact transitive local dependency closure
