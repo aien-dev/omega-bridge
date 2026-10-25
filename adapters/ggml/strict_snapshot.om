@@ -1,0 +1,19 @@
+note bridge-strict-v1 snapshot consistency only. Counts and nonzero generation
+note tokens come from the trusted future whole-graph adapter/manifest owner.
+note Returns 0 admit, 1 empty, 2 missing/extra nodes, 3 stale graph, 4 stale storage.
+note Equal tokens do not authenticate topology, coverage, lifetime or placement.
+fn strictsnapshot observed ulong expected ulong graph ulong currentgraph ulong residency ulong currentresidency ulong to ulong
+if or eq observed 0 eq expected 0
+ret 1
+end
+if ne observed expected
+ret 2
+end
+if or eq graph 0 ne graph currentgraph
+ret 3
+end
+if or eq residency 0 ne residency currentresidency
+ret 4
+end
+ret 0
+end
