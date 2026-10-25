@@ -4,7 +4,7 @@ omc /home/drakestapleton/workspace/omega-seedqual-20261025/seed/out/omc sha256 7
 generator src/native.om sha256 be7d150b3c932b95110c4a689fb73c2d7052ff10d7ab9f8a841e3ae87a86bd64
 tools/native sha256 288c0eeff52d22ef8dd2368cd22ae055a63fd94f0eef472a30ddda4f58871b66
 tests/native/g1/calc.om sha256 fdd1117fc7e4cafb1b7bc5ebbddfb503c38c7b01e1a3a28261bd183194c0565a (source identity)
-which on the login PATH: rustc=/home/drakestapleton/.cargo/bin/rustc cargo=/home/drakestapleton/.cargo/bin/cargo python3=/usr/bin/python3 g++=/usr/bin/g++ zig=/home/drakestapleton/.local/toolchains/zig/zig go=/home/drakestapleton/.local/toolchains/go/bin/go 
+which on the login PATH (env -i PATH=~/.cargo/bin:/usr/local/bin:/usr/bin:/bin): rustc=/home/drakestapleton/.cargo/bin/rustc cargo=/home/drakestapleton/.cargo/bin/cargo python3=/usr/bin/python3 g++=/usr/bin/g++ zig=missing go=missing 
 PATH for run.log, g1.log: ~/.local/toolchains/zig : ~/.local/toolchains/go/bin : ~/.cargo/bin : /usr/local/bin : /usr/bin : /bin
 zig /home/drakestapleton/.local/toolchains/zig/zig 0.17.0
 go /home/drakestapleton/.local/toolchains/go/bin/go go version go1.27.3 linux/arm64
