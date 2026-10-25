@@ -44,7 +44,11 @@ Names must be C identifiers, a parameter name may not end in `_len` (the binding
 `o_<name>_len`), and each unit name appears once; anything else is refused before any C is written.
 
 Supported signatures: up to 6 parameters, each `ulong`, `long`, or `edit`/`view` of `ulong` or `uchar`
-with a fixed length; result `ulong`, `long` or `void`; one function per unit.
+with a fixed length; result `ulong`, `long` or `void`. A unit may hold several functions: the seeded
+compiler enters function-mode code at the unit's last function (word 0 is a branch to it), so the
+binding exports that one and the earlier functions stay private helpers, called directly inside the
+embedded code, with any Omega types. Only the last function's signature must be supported
+(`tests/native/hsum.om`: two helpers, one of which traps).
 
 ## Contract
 

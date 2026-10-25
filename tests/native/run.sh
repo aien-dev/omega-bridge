@@ -16,7 +16,7 @@ fails=0; notrun=""
 pass() { echo "PASS $1"; }
 fail() { echo "FAIL $1"; fails=$((fails + 1)); }
 "$OMC" < "$ROOT/src/native.om" > "$O/native"; chmod +x "$O/native"
-U="madd smadd fill spin mix big"
+U="madd smadd fill spin mix big hsum"
 for u in $U; do "$OMC" < "$T/$u.om" > "$O/$u.bin"; done
 frame() { cat "$T/$1.om"; printf '\0'; printf '%08d' "$(wc -c < "$2/$1.bin")"; cat "$2/$1.bin"; }
 gen() { for u in $U; do frame $u "$1"; done | "$O/native" > "$1/omega_native.c"; }
@@ -82,6 +82,19 @@ end
 unitin "fn m $S" > "$O/ref.in"; rc=0; "$O/native" < "$O/ref.in" > "$O/ref.out" 2> /dev/null || rc=$?
 if [ "$rc" = 0 ] && [ -s "$O/ref.out" ]; then pass "generator accepts the same unit once (control)"
 else fail "generator refused the control unit (exit $rc)"; fi
+H='fn h x uint to uint
+ret x
+end
+
+'
+unitin "${H}fn m x uint to ulong
+ret 0
+end
+" > "$O/ref.in"; refuse "a last (bound) function with an unsupported parameter type"
+unitin "${H}fn m $S" > "$O/ref.in"; rc=0; "$O/native" < "$O/ref.in" > "$O/ref.out" 2> /dev/null || rc=$?
+if [ "$rc" = 0 ] && grep -q 'omega_m(' "$O/ref.out" && ! grep -q 'omega_h(' "$O/ref.out"; then
+  pass "generator binds only the last function; an earlier helper of any type stays private"
+else fail "generator mishandled a helper before the bound function (exit $rc)"; fi
 if command -v c++ > /dev/null; then
   c++ -std=c++17 -O2 -Wall -Wextra -Werror "$O/caller.cpp" -L"$O" -lomega_native -Wl,-rpath,"$O" -o "$O/caller_cpp"
   run cpp "$O/caller_cpp"
@@ -98,7 +111,7 @@ if command -v go > /dev/null; then
   (cd "$O" && go mod init omegacaller > /dev/null 2>&1 && go build -o caller_go caller.go) && run go "$O/caller_go"
 else notrun="$notrun go"; fi
 # Negative control: madd's add turned into sub must be caught.
-cp "$O/smadd.bin" "$O/fill.bin" "$O/spin.bin" "$O/mix.bin" "$O/big.bin" "$O/mut/"
+cp "$O/smadd.bin" "$O/fill.bin" "$O/spin.bin" "$O/mix.bin" "$O/big.bin" "$O/hsum.bin" "$O/mut/"
 printf '\003\174\001\233\140\000\002\313\300\003\137\326' > "$O/mut/madd.bin"
 gen "$O/mut"
 cc -std=gnu11 -O2 -fPIC -shared -Wl,-soname,libomega_native.so -o "$O/mut/libomega_native.so" "$O/mut/omega_native.c"

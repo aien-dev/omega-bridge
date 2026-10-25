@@ -2,9 +2,11 @@ note native.om: omega-bridge native call ABI v1 binding generator (docs/NATIVE-A
 note Input on stdin, one or more units: the unit's .om source, a 0 byte, its code length as 8 decimal
 note digits, then the function-mode machine code the seeded compiler wrote for that source.
 note Output on stdout, only after every unit is accepted: one C file that embeds each code unchanged
-note and exports uint32_t omega_<name>(uint64_t *result, ...) per unit. A unit holds one function;
-note parameters are ulong or long scalars, or edit/view arrays of ulong or uchar; the result is ulong,
-note long or void. Anything else is refused: trap 10 (exit 110) and no output.
+note and exports uint32_t omega_<name>(uint64_t *result, ...) per unit. The bound function is the
+note unit's last one, which is where the compiler enters function-mode code (word 0 branches to it);
+note earlier functions are private helpers with any types. The bound function's parameters are ulong
+note or long scalars, or edit/view arrays of ulong or uchar; its result is ulong, long or void.
+note Anything else is refused: trap 10 (exit 110) and no output.
 global inb uchar 1048576
 global outb uchar 4194304
 global st ulong 8
@@ -173,7 +175,7 @@ ret 0
 end
 ret 1
 end
-note sigln: the start of the one line in p .. q-1 that begins with "fn ".
+note sigln: the start of the last line in p .. q-1 that begins with "fn " (the compiler's entry).
 fn sigln p ulong q ulong to ulong
 fl = ulong 0
 nf = ulong 0
@@ -191,7 +193,7 @@ ls = add i 1
 end
 i = add i 1
 end
-if ne nf 1
+if eq nf 0
 trap 10
 end
 ret fl
