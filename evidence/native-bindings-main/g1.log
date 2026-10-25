@@ -1,3 +1,4 @@
+PASS bound function calc, 2 inputs (fn calc i0 ulong i1 ulong to ulong)
 PASS calc compiled (148 bytes of code)
 PASS embedded code == omc output
 PASS c caller (81/81 vectors)
