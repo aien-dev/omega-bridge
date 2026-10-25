@@ -1,4 +1,4 @@
-/* A hand-written statement of the six test units' exported C signatures, from the contract in
+/* A hand-written statement of the seven test units' exported C signatures, from the contract in
  * docs/NATIVE-ABI.md and the units' Omega signature lines, independent of the generator.
  * tests/native/run.sh compiles this file with the generated omega_native.h included first: if the
  * generator's declarations disagree with these, the compiler reports conflicting types. */
@@ -17,3 +17,5 @@ uint32_t omega_mix(uint64_t *result, uint64_t a, uint64_t b, const void *c, uint
                    const void *e, uint64_t e_len, uint64_t f);
 /* fn big n ulong to ulong */
 uint32_t omega_big(uint64_t *result, uint64_t n);
+/* fn hsum a view uchar 4 b ulong to ulong (its last function; the two before it are private helpers) */
+uint32_t omega_hsum(uint64_t *result, const void *a, uint64_t a_len, uint64_t b);
