@@ -49,7 +49,8 @@ try() {
   fail "$lang build"; cat "$O/$lang-build.log"; rec "$lang" FAIL 0 "$tc"; return 1
 }
 notrun() { echo "NOT_RUN $1 caller: $2 not installed"; rec "$1" NOT_RUN 0 "-"; }
-ver() { "$@" 2>&1 | head -n 1; }
+# ver TOOL ARGS: the tool's resolved path, then the first line of its version output.
+ver() { printf '%s: ' "$(command -v "$1")"; "$@" 2>&1 | head -n 1; }
 if command -v cc > /dev/null; then
   tc=$(ver cc --version)
   try c "$tc" cc -std=c17 -O2 -Wall -Wextra -Werror "$O/caller.c" -L"$O" -lomega_native -Wl,-rpath,"$O" -o "$O/caller_c" \
@@ -68,7 +69,7 @@ if command -v rustc > /dev/null; then
     && { "$O/caller_rs" < "$O/vectors.txt" > "$O/rust.out" 2> "$O/rust.err" || true; cmpout rust "$tc"; }
 else notrun rust rustc; fi
 if command -v zig > /dev/null; then
-  tc="zig $(ver zig version)"
+  tc=$(ver zig version)
   try zig "$tc" sh -c 'cd "$1" && zig build-exe caller.zig -L. -lomega_native -lc -rpath "$1" -femit-bin=caller_zig' _ "$O" \
     && { "$O/caller_zig" < "$O/vectors.txt" > "$O/zig.out" 2> "$O/zig.err" || true; cmpout zig "$tc"; }
 else notrun zig zig; fi
