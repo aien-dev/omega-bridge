@@ -1,0 +1,5 @@
+note (a * b + c) modulo 2^64: ulong mul and add wrap by definition
+fn madd a ulong b ulong c ulong to ulong
+p = mul a b
+ret add p c
+end

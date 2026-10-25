@@ -1,0 +1,11 @@
+PASS madd 3*5+7 = 22
+PASS madd wraps = 3
+PASS madd large
+PASS madd signed bits = -13
+PASS smadd overflow traps 1, result unchanged
+PASS fill k=1 traps 3, result unchanged
+PASS writes before the trap stay visible
+PASS fill k=0 = 3
+PASS null result refused 32
+PASS big local array on a default std::thread = 15
+PASS 0 failure(s)

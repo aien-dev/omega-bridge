@@ -1,0 +1,14 @@
+date 2026-10-24T22:43:31Z
+omega-bridge source 1e408441b95fea3690edae7f5005c17b18901d70 (branch feat/native-call-v1, base 2a5615b1e0fc0649be03085521963a8a30f8ca69)
+omc 734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61 from omega-mv seed/omc-unified 45e7519 (seed tree of 4cc1a0b7a)
+native.om 4bcaff2be7b94edf52e316a47fde0c2f15da9d43e974ada327c6901021aa9f5b
+code 38c294080111990298ac3ce881986d1ba1869b2966b498c36f40485c226c3ee9 (madd smadd fill spin mix big)
+libomega_native.so a73edebeef7b811a46b46b785a08430443e66305f35488b9e4ab292c0a342d93
+libomega_native.so (BTI) 3ab86feb4d2530f36ff1fe354836df34a89f07b77bd88fc503aa7fd266b0340a
+gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+Python 3.12.3
+rustc 1.98.1 (48a229cea 2026-09-01)
+zig 0.13.0 (ziglang.org zig-linux-aarch64-0.13.0.tar.xz sha256 041ac42323837eb5624068acd8b00cd5777dac4cf91179e8dad7a7e90dd0c556)
+go version go1.27.3 linux/arm64 (go.dev go1.27.3.linux-arm64.tar.gz sha256 a06e99309dbcbdca1a8ccd2282c3ee146e55930886e26b4f1193269587165f49)
+Linux 7.0.0-1019-nvidia aarch64
