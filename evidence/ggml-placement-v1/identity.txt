@@ -1,0 +1,17 @@
+reference-source-commit=697539a577ee7594ba12d905062f2e09cb9cc77c
+bridge-base=247bcb154c9fca0451de47124402a858d07d20f3
+host=x86_64-linux
+cc=Debian 14.2.0-19
+claimed-status=HOST_REFERENCE_ONLY
+node-red-exit=1 result=2
+snapshot-red-exit=1 result=41
+host-reference-exit=0 controls=8/8
+new-native-exit=77 NOT_RUN
+inherited-suite-exit=1 NOT_RUN missing original pinned seed
+inherited-native-exit=2 NOT_RUN missing OMEGA_NATIVE_OMC
+cc-sha256=a23ecab8ff08f09ad8c80602c2c5df7f49e09c25905cb8975902e101bf72635f
+reference-interpreter-source-sha256=3a77128f2cf04670a41c103c8593dd48d052add4b5f804cbc181fe9bf07df26b
+reference-local-input-closure=31/31 no missing or extra local files
+source-provenance-controls=2/2 exact hash refusals before compiler
+review-fix-base=3432356654813c31bc24dbd8d81f2698a720fb8e
+review-fix=pin transitive osc_model.h; production semantics unchanged
