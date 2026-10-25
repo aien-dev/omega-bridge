@@ -12,7 +12,7 @@
     "file": "libomega_native.so",
     "sha256": "432e80edb8a9cbcba03f4a5723176bc1e555264f37f65adae61996f880c9f8cf"
   },
-  "bridge_commit": "b76af737a95c6775f015e2b3af950d65f4a38fa6",
+  "bridge_commit": "b560a8ccb38281bbbc8978bc4d8978b793012e91",
   "bridge_tree_dirty": false,
   "callers": {
     "c": {
@@ -68,15 +68,18 @@
   "omc_sha256": "734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61",
   "os": "Linux",
   "schema": "omega-bridge.native-artifact-manifest.v1",
-  "semantic_id": {
+  "semantic_identity": null,
+  "source_identity": {
     "algorithm": "sha256",
-    "kind": "source_identity",
-    "note": "identity of the .om source bytes, not the translation-v1 section 4 semantic identity",
-    "of": "tests/native/g1/calc.om bytes",
+    "of": "the unit's .om bytes",
     "value": "fdd1117fc7e4cafb1b7bc5ebbddfb503c38c7b01e1a3a28261bd183194c0565a"
   },
   "tools_native_sha256": "288c0eeff52d22ef8dd2368cd22ae055a63fd94f0eef472a30ddda4f58871b66",
-  "unit": "calc",
+  "unit": {
+    "file": "tests/native/g1/calc.om",
+    "function": "calc",
+    "inputs": 2
+  },
   "vectors": {
     "count": 81,
     "expect_sha256": "e2aae9e16e0c12a751dc1e95b628e0f0eb48dadd4d1709f3d8c31e949ecaa49a",
