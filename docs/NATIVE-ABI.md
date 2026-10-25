@@ -287,15 +287,15 @@ bridge rather than from handwritten C.
 memory passed as edit. Function-mode stack exhaustion faults as in v1. Loops in the seeded compiler
 run at most 1,000,000 passes (trap 4 beyond); a unit over a longer view must loop in parts (`part`).
 
-### Qualification (`OMEGA_NATIVE_OMC=<seed omc> sh tests/native/v2/run.sh [measure]`)
+### Qualification (`OMEGA_NATIVE_OMC=<seed omc> OMEGA_NATIVE_OMC2=<OM-2 omc> sh tests/native/v2/run.sh [measure]`)
 
-**The OM-2 compiler does not exist yet** (omega-mv S4, branch `om2/compiler-s4`, not landed). Until it
-does, `OMEGA_NATIVE_OMC2` defaults to `tests/native/v2/standin-omc`, which is not a compiler: it
-recognizes the three OM-2 test units (`vec`, `lay`, `one`) by their bytes and writes code built from
-their hand-written OM-1 stand-ins (`tests/native/v2/standin/<unit>.<k>.om`), each compiled by the
-pinned seeded omc under the convention above, behind the agreed entry table (`tests/native/v2/entry.om`).
-Every result is about the bridge around that code; none is about OM-2 code generation. The stand-in's
-sha256 is the omc digest those bindings carry, so they cannot pass for S4's.
+Recorded with the OM-2 compiler of omega-mv `om2/compiler-s4` @ f6a6492fd (draft PR #764, ledger L834),
+sha256 `499236398aabc652e2dae27fe4bdc4c5db3d3726314356e0dbef23e3345803ec`, which compiles the three OM-2
+test units `tests/native/v2/{vec,lay,one}.om`; that digest is the `omc=` of their identities. Its code
+follows the convention above with no departure found: the entry table (vec: six `b` words), the slots
+and element counts, the out pointers, and the traps the callers expect (the `part` checks in the
+contract's order, element bounds, trap 9 after an out write). Before S4 existed the bridge was developed
+against hand-written OM-1 stand-ins of these units (commit 1392549); they are removed.
 
 The run checks: v1 byte identity (above); every identity string against `sha256sum` (oracle); the
 embedded code against the compiler's bytes; the exact exported symbol set (15 `omega2_` symbols, 12
@@ -322,25 +322,25 @@ trap; NULL and misaligned out; 2000 interleaved rounds across the three separate
 and the OM-1 `madd` in one binary (module boundary); reentry from a signal handler (33); two threads
 with their own stacks and out buffers.
 
-Caller cost (HOST, `run.sh measure`, GB10 host CPU under load average 6-13 from other work, lowest of 7
-runs, ns per call, three runs; the per-byte figures are the stand-in's OM-1 code, not OM-2 code):
+Caller cost (HOST, `run.sh measure`, GB10 host CPU under load average 7-11 from other work, lowest of 7
+runs, ns per call, two runs, S4 code):
 
 | call | ns |
 |---|---|
 | refused (argument checks only, no entry) | 2.6-3.1 |
-| empty view (checks, entry, register saves, stack switch) | 7.4-7.5 |
-| one view, code returns its len | 7.3-7.8 |
-| ABI v1, three scalars (baseline) | 5.3-6.1 |
+| one view, code returns its len (checks, entry, register saves, stack switch) | 8.0-8.2 |
+| empty view to `bsum` (its chunk loop runs once and calls `psum`) | 9.8 |
+| ABI v1, three scalars (baseline) | 5.2-6.1 |
 | a plain noinline C call (scale) | 1.4 |
-| one view and an 8-byte out (zero, run, memmove) | 13.1-14.2 |
-| 16-byte view sum (scalar C loop 4.9-5.1) | 14.1-16.2 |
-| 4 KiB view sum: 0.475-0.517 ns/B (C 0.258) | 1945-2116 |
-| 16 MiB view sum: 0.485-0.572 ns/B (C 0.275-0.297) | 8.1-9.6 ms |
-| a thread's first call (maps its 8 MiB stack and 8 MiB guard), then the second | 4.6-13.9 us, 48-80 |
+| one view and an 8-byte out (zero, run, memmove) | 14.3-15.0 |
+| 16-byte view sum (scalar C loop 4.9) | 15.0-15.5 |
+| 4 KiB view sum: 0.346 ns/B (C 0.258) | 1418 |
+| 16 MiB view sum: 0.379-0.384 ns/B (C 0.291-0.295) | 6.4 ms |
+| a thread's first call (maps its 8 MiB stack and 8 MiB guard), then the second | 11.5-12.4 us, 64 |
 
-The fixed v2 overhead over a plain C call is about 6 ns (checks about 1.5, entry and stack switch
-about 4.5), about 1.5 ns over v1 for one view; an out costs its zeroing and copy. Memory: 16 MiB of
+The fixed v2 overhead over a plain C call is about 6.6 ns (checks about 1.5, entry and stack switch
+about 5), about 2 ns over v1 for one view; an out costs its zeroing and copy. Memory: 16 MiB of
 NORESERVE address space per calling thread; the RSS did not change at KiB resolution over a new thread's
 first two calls.
 
-Not run: S4 code (not available); status 34 and 35 (as v1).
+Not run: status 34 and 35 (as v1).

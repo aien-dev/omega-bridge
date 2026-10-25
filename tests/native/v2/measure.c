@@ -1,8 +1,8 @@
 /* Native ABI v2 caller cost (tests/native/v2/run.sh measure): what a C caller pays per call, split into
  * the argument checks, the entry (callee-saved registers, stack switch, runtime table), the out-buffer
  * copies and the Omega code itself, for a small and a large view. Each figure is the lowest of 7 runs of
- * N calls (ns per call, CLOCK_MONOTONIC). The code is the stand-in's (OM-1 code under the agreed
- * convention), so the per-byte figures measure that code, not the OM-2 compiler's. HOST evidence. */
+ * N calls (ns per call, CLOCK_MONOTONIC). The code is what OMEGA_NATIVE_OMC2 compiled from vec.om, lay.om
+ * and madd.om. HOST evidence. */
 #define _GNU_SOURCE
 #include "omega_native.h"
 #include <pthread.h>

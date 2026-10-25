@@ -1,5 +1,0 @@
-note stand-in for lay.om export 3 (halt o out ulong 2): writes o[0] then traps 9.
-fn halt o edit ulong 2 to void
-put o 0 7
-trap 9
-end

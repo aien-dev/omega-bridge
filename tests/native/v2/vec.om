@@ -1,7 +1,6 @@
 note vec.om: an OM-2 unit for the native ABI v2 tests (tests/native/v2/run.sh): six exports over
 note unsized views and one private helper. A loop runs at most 1000000 passes (trap 4 beyond, as in
-note OM-1), so the sums go in parts of at most 1000000 elements. Until the OM-2 compiler exists its
-note code comes from standin/vec.<k>.om (standin-omc).
+note OM-1), so the sums go in parts of at most 1000000 elements.
 om2
 fn psum p view uchar * to ulong
 s = ulong 0

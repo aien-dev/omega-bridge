@@ -1,8 +1,0 @@
-note stand-in for vec.om export 5 (lsum d view long *): a signed sum, trap 1 on overflow.
-fn lsum d view long 16777216 n ulong to long
-s = long 0
-for i ulong n
-s = add s get d i
-end
-ret s
-end

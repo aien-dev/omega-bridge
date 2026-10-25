@@ -1,5 +1,5 @@
 note lay.om: an OM-2 unit for the native ABI v2 tests (tests/native/v2/run.sh): a layout parameter and
-note out parameters. Until the OM-2 compiler exists its code comes from standin/lay.<k>.om.
+note out parameters.
 note bridge c-type blk lay_blk
 note bridge c-define LAY_TAG_SIZE 8
 om2

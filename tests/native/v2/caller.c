@@ -183,7 +183,7 @@ int main(void)
     }
     check("bsum split at every point 0..64", split);
 
-    /* Large inputs: 16 MiB of bytes, 16 Mi uint words (the stand-in code's limit is 2^24 elements). */
+    /* Large inputs: 16 MiB of bytes, 16 Mi uint words, summed by the unit in parts of 1000000. */
     uint64_t nb = 16777216;
     uint8_t *lb = malloc(nb);
     uint32_t *lw = malloc(nb * 4);

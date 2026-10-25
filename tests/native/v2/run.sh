@@ -1,10 +1,8 @@
 #!/bin/sh
 # Native call ABI v2 qualification (docs/NATIVE-ABI.md, ABI v2). OMEGA_NATIVE_OMC names the seeded omc
-# (pinned by tools/native). OMEGA_NATIVE_OMC2 names the OM-2 compiler; by default it is
-# tests/native/v2/standin-omc, which is NOT an OM-2 compiler: it writes the code of this folder's OM-2
-# units from their OM-1 stand-ins (standin/), compiled by the seeded omc under the calling convention
-# agreed with omega-mv S4. Every result below is about the bridge (generator, checks, copies, symbols,
-# identity) around that code, not about OM-2 code generation. A missing language toolchain is reported
+# (pinned by tools/native); OMEGA_NATIVE_OMC2 names the OM-2 compiler that compiles this folder's OM-2
+# units (omega-mv om2/compiler-s4 @ f6a6492fd, sha256 49923639...803ec, when this run was recorded; its
+# digest is what the identities carry). A missing language toolchain is reported
 # NOT_RUN, never PASS. Exit 0 only when every run check passed. `run.sh measure` also runs the cost
 # measurement (tests/native/v2/measure.c).
 set -eu
@@ -13,7 +11,7 @@ T=$ROOT/tests/native/v2
 O=$ROOT/build/native-v2
 PIN=$(sed -n 's/^PIN=//p' "$ROOT/tools/native")
 OMC=${OMEGA_NATIVE_OMC:?set OMEGA_NATIVE_OMC to the seeded omc (omega seed/out/omc, sha256 $PIN)}
-OMC2=${OMEGA_NATIVE_OMC2:-$T/standin-omc}
+OMC2=${OMEGA_NATIVE_OMC2:?set OMEGA_NATIVE_OMC2 to the OM-2 compiler (omega-mv om2/compiler-s4 seed/out/omc)}
 export OMEGA_NATIVE_OMC OMEGA_NATIVE_OMC2="$OMC2"
 got=$(sha256sum < "$OMC" | cut -d' ' -f1)
 [ "$got" = "$PIN" ] || { echo "FAIL omc sha256 $got, pinned $PIN"; exit 1; }
