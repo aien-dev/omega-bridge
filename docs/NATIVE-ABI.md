@@ -321,6 +321,16 @@ generator refusals of OM-2 input with a control; and three negative controls (th
 edit-overlap rule and the out copy each removed from a copy of the generator must make the C caller
 fail, on the checks named).
 
+For the out-of-line API the run also checks: every existing output (`c h python rust zig go api`)
+byte-identical to 3bb8b8a's generator on the v2 set; `tests/native/v2/fsuse.c`, built with
+`-ffreestanding -fno-builtin` from `omega_api_decl.h`, has exactly the undefined symbols `absorb bsum
+digest swap8` (no `abort`), while `omega_api_defs.o` holds the `abort` reference; the same object from
+the inline `omega_api.h` references `abort` (control); linked with `omega_api_defs.o` and the library it
+computes the right values, and a trapping call aborts (SIGABRT). Two generator mutants are caught: the
+prototype-only branch disabled (definitions in `omega_api_decl.h`: the freestanding build fails on the
+undeclared `abort`), and the inline branch disabled (`omega_api.h` loses `static inline`: caught by the
+byte-identity check).
+
 The C caller covers: values; empty views (NULL, misaligned); NULL with len 1; misalignment by 1, 2 and
 4 for 4- and 8-byte elements and an edit; `len*size` overflow (2^62 x 4, 2^61 x 8, 2^64-1); address wrap
 at 2^64-16 (end 2^64 refused, end 2^64-8 accepted); a 2^32+5-element length accepted and passed whole
