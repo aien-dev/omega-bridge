@@ -282,6 +282,18 @@ unsized view, `CNAME *` for a layout, `T [N]` for out), calling `omega2_NAME` an
 nonzero status. This is how the C names of a consumer API (for example `sha256_init`) come from the
 bridge rather than from handwritten C.
 
+**Out-of-line API** (output words `apih` and `apic`, installed as `omega_api_decl.h` and
+`omega_api_defs.c` beside `omega_api.h`), for a consumer that must not reference the C library from the
+objects that use the API (a freestanding object: an inline wrapper puts an `abort` reference into every
+object that includes `omega_api.h`). `omega_api_decl.h` holds the same layouts, defines and static
+assertions and only the prototypes of the same C functions (external linkage, no `stdlib.h`); an object
+including it references only the API functions it calls. `omega_api_defs.c` includes it and `stdlib.h`
+and holds their definitions, each calling `omega2_NAME` and `abort()` on a nonzero status, exactly as
+the inline ones; it is compiled into the consumer's hosted binding (for the SHA cutover, the generated
+`src/omega_om_units.c`). `tools/native` compiles the header alone and the definitions against it
+(`-Wmissing-prototypes -Werror`). `omega_api.h` is unchanged, byte for byte. Use one form or the
+other in a program, not both: each defines the functions under the same names.
+
 **Unsupported (caller precondition, not detected),** as the contract states: that the memory exists for
 `len` elements, is writable for edit, or stays alive during the call; forged lengths and read-only
 memory passed as edit. Function-mode stack exhaustion faults as in v1. Loops in the seeded compiler

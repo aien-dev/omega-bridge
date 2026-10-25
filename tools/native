@@ -16,8 +16,11 @@
 #   omega_native.zig   a Zig 0.13 file (@import("omega_native.zig"))
 #   omega_native.go    a cgo package omeganative: a folder of that name holding it, omega_native.h
 #                      and the library
-#   omega_api.h        only with an OM-2 unit: its layouts as C structs and its exports as C functions
-#                      that abort() on a nonzero status (includes omega_native.h)
+#   omega_api.h        only with an OM-2 unit: its layouts as C structs and its exports as static
+#                      inline C functions that abort() on a nonzero status (includes omega_native.h)
+#   omega_api_decl.h   only with an OM-2 unit: the same layouts and the exports' prototypes only, so
+#   omega_api_defs.c   an object that includes it references no C library function; their
+#                      out-of-line definitions (the abort() calls) are in omega_api_defs.c
 #   libomega_native.so the library, built with omega_native.h included, so a declaration that
 #                      disagrees with its definition fails this build
 #   work/              the generator (native-gen), each unit's code (<unit>.bin), the framed
@@ -67,7 +70,7 @@ for u in "$@"; do
   cat "$W/one.in" >> "$W/work/units.in"
   echo "omega-ident 1 unit=$name abi=$abi profile=$prof src=$(sha256sum < "$u" | cut -d' ' -f1) omc=$pin path=$u" >> "$W/work/ident.txt"
 done
-words="c h python rust zig go"; [ $v2 = 0 ] || words="$words api"
+words="c h python rust zig go"; [ $v2 = 0 ] || words="$words api apih apic"
 for w in $words; do
   if ! "$W/work/native-gen" $w < "$W/work/units.in" > "$W/$w.out" 2> /dev/null; then
     echo "tools/native: refused the set of units (a bound or unit name repeats); nothing installed" >&2
@@ -76,14 +79,19 @@ for w in $words; do
 done
 mv "$W/c.out" "$W/omega_native.c"; mv "$W/h.out" "$W/omega_native.h"; mv "$W/python.out" "$W/omega_native.py"
 mv "$W/rust.out" "$W/omega_native.rs"; mv "$W/zig.out" "$W/omega_native.zig"; mv "$W/go.out" "$W/omega_native.go"
-[ $v2 = 0 ] || mv "$W/api.out" "$W/omega_api.h"
+[ $v2 = 0 ] || { mv "$W/api.out" "$W/omega_api.h"; mv "$W/apih.out" "$W/omega_api_decl.h"; mv "$W/apic.out" "$W/omega_api_defs.c"; }
 # The library names itself (soname), so every caller records libomega_native.so and finds it via rpath.
 ${CC:-cc} -std=gnu11 -O2 -Wall -Wextra -Werror -fPIC -shared -Wl,-soname,libomega_native.so \
   -include "$W/omega_native.h" ${OMEGA_NATIVE_CFLAGS:-} -o "$W/libomega_native.so" "$W/omega_native.c"
-# The API header must compile on its own: its layout size and offset checks are C static assertions.
-[ $v2 = 0 ] || ${CC:-cc} -std=gnu11 -fsyntax-only -Wall -Wextra -Werror -I "$W" -x c "$W/omega_api.h"
+# The API headers must compile on their own: their layout size and offset checks are C static
+# assertions. The definitions are compiled against their prototypes (a disagreement fails here).
+if [ $v2 = 1 ]; then
+  ${CC:-cc} -std=gnu11 -fsyntax-only -Wall -Wextra -Werror -I "$W" -x c "$W/omega_api.h"
+  ${CC:-cc} -std=gnu11 -fsyntax-only -Wall -Wextra -Werror -I "$W" -x c "$W/omega_api_decl.h"
+  ${CC:-cc} -std=gnu11 -fsyntax-only -Wall -Wextra -Werror -Wmissing-prototypes -I "$W" "$W/omega_api_defs.c"
+fi
 # Install together: the previous run's outputs go, the new set comes in.
-for f in omega_native.c omega_native.h omega_native.py omega_native.rs omega_native.zig omega_native.go omega_api.h libomega_native.so work; do
+for f in omega_native.c omega_native.h omega_native.py omega_native.rs omega_native.zig omega_native.go omega_api.h omega_api_decl.h omega_api_defs.c libomega_native.so work; do
   rm -rf "$OUT/$f"; [ ! -e "$W/$f" ] || mv "$W/$f" "$OUT/$f"
 done
-echo "tools/native: $# unit(s) -> $OUT/libomega_native.so + omega_native.{c,h,py,rs,zig,go}$([ $v2 = 0 ] || echo ' + omega_api.h') (+ work/)"
+echo "tools/native: $# unit(s) -> $OUT/libomega_native.so + omega_native.{c,h,py,rs,zig,go}$([ $v2 = 0 ] || echo ' + omega_api.h, omega_api_decl.h, omega_api_defs.c') (+ work/)"

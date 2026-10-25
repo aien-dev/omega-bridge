@@ -41,16 +41,12 @@ PASS generator refuses a c-type note naming no layout
 PASS mutant wrap caught (1 failing checks, e.g. #748 golden: vpart len 2^64-1, o 2^64-2, k 4 refused (32))
 PASS mutant overlap caught (9 failing checks, e.g. vcopy edit == view refused)
 PASS mutant outcopy caught (6 failing checks, e.g. digest: tag, a's bytes, zeros; result n)
-MEASURE refused-call (checks only, no entry) 2.6 ns
-MEASURE empty-view-call (checks + entry + stack switch, 0 elements) 9.8 ns
-MEASURE vlen-call (one view, code returns its len) 8.2 ns
-MEASURE v1-madd-call (ABI v1 baseline, three scalars) 6.1 ns
-MEASURE swap8-call (view + 8-byte out: zero, code, memmove) 14.3 ns
-MEASURE c-direct-call (a plain noinline C call, for scale) 1.4 ns
-MEASURE small-view bsum 16 B: omega 15.5 ns, scalar C loop 4.9 ns
-MEASURE view bsum 4 KiB: omega 1417.8 ns (0.346 ns/B), scalar C loop 1058.2 ns (0.258 ns/B)
-MEASURE large-view bsum 16 MiB: omega 6439909 ns (0.384 ns/B), scalar C loop 4949858 ns (0.295 ns/B)
-MEASURE first call on a new thread (maps 8 MiB stack + 8 MiB guard) 11489 ns, second 64 ns
-MEASURE RSS around a new thread's first two calls: 17916 KiB -> 17916 KiB
-INFO load: 8.00 7.10 7.00 5/3489 3928483
+PASS outputs c h python rust zig go api byte-identical to 3bb8b8a's generator on the v2 set
+PASS freestanding object from omega_api_decl.h: undefined symbols are only absorb bsum digest swap8 (no abort)
+PASS omega_api_defs.o defines the API (swap8 ...) and holds the abort reference
+PASS control: the same object from the inline omega_api.h references abort (what the freestanding gate refuses)
+PASS freestanding object + omega_api_defs.o + library: results correct
+PASS out-of-line wrapper aborts on a nonzero status (SIGABRT, exit 134)
+PASS mutant apih (definitions in the header) caught: implicit declaration of function ‘abort’
+PASS mutant api (inline wrappers lose static inline) caught by the byte-identity check
 NATIVE-V2 PASS (not run: none)

@@ -253,6 +253,62 @@ mut wrap '/^text fv /s/ || n \* es > UINTPTR_MAX - lo)/)/' '#748 golden: vpart l
 mut overlap '/^text fv /s/if ((sp\[i\].w == 1 || sp\[j\].w == 1 ||/if ((/' 'vcopy edit == view'
 mut outcopy '/^text fv /s/memmove(o\[i\].dst, buf\[i\], o\[i\].n);/;/' 'digest: tag'
 
+# 10a. The C API out of line (outputs apih, apic) for freestanding consumers. The inline header
+# (output api) stays byte for byte what 3bb8b8a's generator wrote, as does every other output.
+git -C "$ROOT" show 3bb8b8a:src/native.om > "$O/native-3bb.om"
+"$OMC" < "$O/native-3bb.om" > "$O/gen-3bb"; chmod +x "$O/gen-3bb"
+ok=1
+for w in c h python rust zig go api; do
+  "$O/gen-3bb" $w < "$W/units.in" > "$O/a.out"; "$GEN" $w < "$W/units.in" > "$O/b.out"
+  cmp -s "$O/a.out" "$O/b.out" || { ok=0; echo "DIFF $w"; }
+done
+if [ $ok = 1 ]; then pass "outputs c h python rust zig go api byte-identical to 3bb8b8a's generator on the v2 set"
+else fail "an existing output changed against 3bb8b8a"; fi
+FS=$O/fs; mkdir -p "$FS"
+FSCF="-std=gnu11 -ffreestanding -fno-builtin -O2 -Wall -Wextra -Werror -c"
+# fsobj DIR: the freestanding object from DIR's omega_api_decl.h; prints its undefined symbols.
+fsobj() { cc $FSCF -I "$1" "$T/fsuse.c" -o "$1/fsuse.o" > "$1/fs-build.log" 2>&1 && nm -u "$1/fsuse.o" | awk '{print $2}' | sort; }
+u=$(fsobj "$O" | tr '\n' ' ')
+if [ "$u" = "absorb bsum digest swap8 " ]; then pass "freestanding object from omega_api_decl.h: undefined symbols are only absorb bsum digest swap8 (no abort)"
+else fail "freestanding object references: $u"; cat "$O/fs-build.log"; fi
+cc -std=gnu11 -O2 -Wall -Wextra -Werror -Wmissing-prototypes -I "$O" -c "$O/omega_api_defs.c" -o "$FS/defs.o"
+if nm -u "$FS/defs.o" | awk '{print $2}' | grep -qx abort && nm "$FS/defs.o" | grep -q ' T swap8$'; then
+  pass "omega_api_defs.o defines the API (swap8 ...) and holds the abort reference"
+else fail "omega_api_defs.o"; nm "$FS/defs.o"; fi
+sed 's/"omega_api_decl.h"/"omega_api.h"/' "$T/fsuse.c" > "$FS/fsuse_inline.c"
+cc $FSCF -I "$O" "$FS/fsuse_inline.c" -o "$FS/fsuse_inline.o"
+if nm -u "$FS/fsuse_inline.o" | awk '{print $2}' | grep -qx abort; then pass "control: the same object from the inline omega_api.h references abort (what the freestanding gate refuses)"
+else fail "control: the inline object has no abort reference"; fi
+cc -std=gnu11 -O2 -I "$O" "$T/fsmain.c" "$O/fsuse.o" "$FS/defs.o" -L"$O" -lomega_native -Wl,-rpath,"$O" -o "$FS/fsmain"
+if "$FS/fsmain" > "$FS/run.log" 2>&1 && grep -q '^PASS fs_check 0' "$FS/run.log"; then pass "freestanding object + omega_api_defs.o + library: results correct"
+else fail "freestanding run"; cat "$FS/run.log"; fi
+rc=0; "$FS/fsmain" refuse > "$FS/refuse.log" 2>&1 || rc=$?
+if [ $rc = 134 ]; then pass "out-of-line wrapper aborts on a nonzero status (SIGABRT, exit 134)"; else fail "out-of-line wrapper on a trap: exit $rc"; fi
+# Mutants. apih: the prototype-only branch disabled, so apih writes the definitions into the header;
+# the freestanding fixture must catch it (abort in the object, or abort undeclared there). api: the
+# inline branch disabled, so api loses `static inline`; the byte-identity check must catch it.
+amut() {
+  name=$1; ex=$2; M=$O/amut-$name; mkdir -p "$M"
+  sed "$ex" "$ROOT/src/native.om" > "$M/native.om"
+  n=$(diff "$ROOT/src/native.om" "$M/native.om" | grep -c '^<' || true)
+  [ "$n" = 1 ] || { fail "mutant $name changed $n lines"; return 1; }
+  "$OMC" < "$M/native.om" > "$M/gen"; chmod +x "$M/gen"
+  cp "$O/omega_native.h" "$M/"
+  for w in api apih apic; do "$M/gen" $w < "$W/units.in" > "$M/$w.out"; done
+  cp "$M/api.out" "$M/omega_api.h"; cp "$M/apih.out" "$M/omega_api_decl.h"
+}
+if amut apih '/^if eq get st 5 8$/s/8$/98/'; then
+  u=$(fsobj "$M" | tr '\n' ' ' || true)
+  if echo "$u" | grep -qw abort || grep -q "implicit declaration of function .abort." "$M/fs-build.log"; then
+    pass "mutant apih (definitions in the header) caught: $(echo "$u" | grep -qw abort && echo "abort undefined in the freestanding object" || grep -m1 -o "implicit declaration of function .abort." "$M/fs-build.log")"
+  else fail "mutant apih not caught ($u)"; fi
+fi
+if amut api '/^if eq get st 5 7$/s/7$/97/'; then
+  if cmp -s "$M/api.out" "$O/omega_api.h"; then fail "mutant api not caught: inline header unchanged"
+  elif ! grep -q 'static inline' "$M/api.out"; then pass "mutant api (inline wrappers lose static inline) caught by the byte-identity check"
+  else fail "mutant api changed something else"; fi
+fi
+
 # 10. Cost (HOST): call overhead, stack switch, copies, small and large views.
 if [ "${1:-}" = measure ]; then
   cc -std=gnu11 -O2 -Wall -Wextra -Werror -pthread -I "$O" "$T/measure.c" -L"$O" -lomega_native -Wl,-rpath,"$O" -o "$O/measure" \
