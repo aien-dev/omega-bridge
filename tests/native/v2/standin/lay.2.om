@@ -1,0 +1,11 @@
+note stand-in for lay.om export 2 (swap8 d view uchar * o out uchar 8): o is d's first eight bytes
+note reversed; a d of fewer than eight traps 3 before any write (the first get is d[7]).
+fn swap8 d view uchar 16777216 n ulong o edit uchar 8 to ulong
+if lt n 8
+trap 3
+end
+for i ulong 8
+put o i get d sub 7 i
+end
+ret n
+end

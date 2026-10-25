@@ -1,0 +1,5 @@
+note bsum.om: an OM-1 unit named like vec.om's export bsum. Its ABI v1 bindings declare omega_bsum; a
+note caller built from them against a library holding only vec.om (ABI v2) must fail to link.
+fn bsum d view uchar 4 to ulong
+ret 0
+end

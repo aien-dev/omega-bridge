@@ -1,0 +1,8 @@
+note one.om: an OM-2 unit without export for the native ABI v2 tests: its last fn is bound (v1 rule),
+note as omega2_fillv. Until the OM-2 compiler exists its code comes from standin/one.0.om.
+om2
+fn fillv d edit ulong * v ulong to void
+for i ulong len d
+put d i v
+end
+end

@@ -1,0 +1,6 @@
+note stand-in for one.om (fillv d edit ulong * v ulong): every element of d becomes v.
+fn fillv d edit ulong 16777216 n ulong v ulong to void
+for i ulong n
+put d i v
+end
+end

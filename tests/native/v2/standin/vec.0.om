@@ -1,0 +1,16 @@
+note stand-in for vec.om export 0 (bsum d view uchar *): d is (x0 pointer, x1 count). Loops run in
+note chunks of 1000000 passes, the seeded compiler's per-loop bound (trap 4 beyond it).
+fn bsum d view uchar 16777216 n ulong to ulong
+s = ulong 0
+for c ulong add div n 1000000 1
+o = mul c 1000000
+k = sub n o
+if gt k 1000000
+k = 1000000
+end
+for i ulong k
+s = add s ulong get d add o i
+end
+end
+ret s
+end

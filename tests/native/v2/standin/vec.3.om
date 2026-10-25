@@ -1,0 +1,11 @@
+note stand-in for vec.om export 3 (vcopy s view ushort * d edit ushort *): an index of d at or past
+note its count traps 3, as the OM-2 element check does.
+fn vcopy s view ushort 16777216 n ulong d edit ushort 16777216 m ulong to ulong
+for i ulong n
+if ge i m
+trap 3
+end
+put d i get s i
+end
+ret n
+end

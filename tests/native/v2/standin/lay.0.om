@@ -1,0 +1,22 @@
+note stand-in for lay.om export 0 (absorb c edit blk d view uchar *): blk a (uint, bytes 0..3) gets the
+note byte sum modulo 2^32, n (ulong, bytes 8..15) the count, both little endian.
+fn absorb c edit uchar 24 d view uchar 16777216 m ulong to void
+s = ulong 0
+for i ulong 4
+s = or s shl ulong get c i mul i 8
+end
+for i ulong m
+s = and add s ulong get d i 4294967295
+end
+for i ulong 4
+put c i uchar and shr s mul i 8 255
+end
+n = ulong 0
+for i ulong 8
+n = or n shl ulong get c add 8 i mul i 8
+end
+n = add n m
+for i ulong 8
+put c add 8 i uchar and shr n mul i 8 255
+end
+end

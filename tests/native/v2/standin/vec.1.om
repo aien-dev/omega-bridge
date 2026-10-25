@@ -1,0 +1,15 @@
+note stand-in for vec.om export 1 (wsum d view uint *), in chunks of 1000000 passes.
+fn wsum d view uint 16777216 n ulong to ulong
+s = ulong 0
+for c ulong add div n 1000000 1
+o = mul c 1000000
+k = sub n o
+if gt k 1000000
+k = 1000000
+end
+for i ulong k
+s = add s ulong get d add o i
+end
+end
+ret s
+end

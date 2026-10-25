@@ -1,0 +1,28 @@
+PASS tools/native: library + six bindings (5e381a4b84d80053)
+PASS tools/native refuses a unit outside the subset by name (exit 110), previous outputs untouched
+PASS no caller declares an Omega function by hand
+PASS generated header agrees with the hand-written reference prototypes
+PASS embedded code == omc output, per unit (85b3add4fe86a894)
+PASS c caller (28 lines)
+PASS c-bti caller (28 lines)
+PASS generator refuses a unit name that is not a C identifier
+PASS generator refuses a parameter name ending in _len
+PASS generator refuses a repeated unit name
+PASS generator accepts the same unit once (control)
+PASS generator refuses a last (bound) function with an unsupported parameter type
+PASS generator binds only the last function; an earlier helper of any type stays private
+PASS generator refuses a missing output word
+PASS generator refuses an unknown output word
+PASS cpp caller (13 lines)
+PASS python caller (19 lines)
+PASS rust caller (14 lines)
+PASS rust-2024 caller (14 lines)
+PASS zig caller (13 lines)
+PASS go caller (13 lines)
+PASS mutant madd (add -> sub) caught (7 failing checks)
+PASS mutant h scalar uint64_t -> uint32_t caught: /home/drakestapleton/workspace/bridge-slice-abi/build/native/omega_native.c:116:
+PASS mutant python scalar c_uint64 -> c_uint32 caught: FAIL madd wraps = 3
+PASS mutant rust scalar u64 -> u32 caught: error[E0308]: mismatched types
+PASS mutant zig scalar u64 -> u32 caught: caller.zig:17:62: error: type 'u32' cannot represent integer value '184467440737
+PASS mutant go scalar uint64 -> uint32 caught: ./caller.go:29:44: cannot use ^uint64(0) (constant 18446744073709551615 of type 
+NATIVE-CALL PASS (not run: none)

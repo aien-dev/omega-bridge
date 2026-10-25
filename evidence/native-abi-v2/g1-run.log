@@ -1,0 +1,12 @@
+PASS bound function calc, 2 inputs (fn calc i0 ulong i1 ulong to ulong)
+PASS calc compiled (148 bytes of code)
+PASS embedded code == omc output
+PASS c caller (81/81 vectors)
+PASS cpp caller (81/81 vectors)
+PASS python caller (81/81 vectors)
+PASS rust caller (81/81 vectors)
+PASS zig caller (81/81 vectors)
+PASS go caller (81/81 vectors)
+PASS mutant calc (sub -> add) caught (50/81 vectors differ)
+manifest /home/drakestapleton/workspace/bridge-slice-abi/build/g1/manifest.json
+G1-CALC PASS (not run: none)

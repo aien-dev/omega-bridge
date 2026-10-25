@@ -1,0 +1,4 @@
+note stand-in for vec.om export 2 (vlen d view ulong *): the count, no element read.
+fn vlen d view ulong 1 n ulong to ulong
+ret n
+end
