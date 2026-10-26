@@ -156,6 +156,13 @@ the same unit once; `tools/native` is shown to refuse a unit with a `uchar` resu
 leaving a previous run's outputs untouched. Not exercised: status 34 and 35 (no supported unit reaches
 another runtime entry; mapping failure is not induced).
 
+Qualification requires an executed PASS for each caller (`c`, `c-bti`, `cpp`, `python`, `rust`, `zig`,
+`go`). A present Zig/Go toolchain that fails to build emits `FAIL` and makes the runner exit nonzero.
+A missing toolchain emits `NOT_RUN` and makes the runner exit nonzero, not a qualified PASS. Run
+`OMEGA_NATIVE_OMC=<seed omc> sh tests/native/test_build_failures.sh` to check build-failure and
+missing-toolchain controls, followed by positive calls with the real Zig and Go toolchains. The
+historical `evidence/native-call-v1/run.log` predates this runner correction and is not rewritten.
+
 Red before green (this change): with the generator of commit e7777ca, the C caller dies with SIGILL
 under BTI, and the 4,000,000-byte array on a 2 MiB thread dies with SIGSEGV; with this generator both
 pass. Extra receipts: 5+20+7 = 32 (calc:08302bc4), (7+1)+7 = 15 (calc:e44bce3f), 5+20+300 exceeds 255
