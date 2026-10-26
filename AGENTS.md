@@ -58,7 +58,7 @@ OMEGA_SEED=build/bootstrap/omc sh tools/build-gpu-adapter.sh
 python3 tests/gpu/test_gpu_adapter.py
 ```
 
-`tools/test.sh` ends with `ALL SUITES RC=0`. `tests/native/run.sh` reports a missing language toolchain (Zig 0.13.0, Go) as NOT_RUN, never PASS. `tools/bridge` writes to stdout only after the whole conversion succeeds and refuses to run if `build/compiler.sha256` no longer matches (rebuild with `tools/build.sh`).
+`tools/test.sh` ends with `ALL SUITES RC=0`. `tests/native/run.sh` emits `NATIVE-CALL PASS` only after all seven required callers (including C with BTI) have built and executed successfully. Missing language toolchains emit NOT_RUN and exit nonzero; present toolchains whose builds fail emit FAIL and exit nonzero. `tests/native/test_build_failures.sh` exercises both refusal paths with failing-toolchain controls, then runs the real Zig and Go callers. `tools/bridge` writes to stdout only after the whole conversion succeeds and refuses to run if `build/compiler.sha256` no longer matches (rebuild with `tools/build.sh`).
 
 `conformance/run.sh` needs `MAXPY` (a Modular MAX 26.7 venv); without `--device` it runs on CPU only. `conformance/run.sh --device` and `tools/run-device-window.sh --ledger <ID>` need the NVIDIA GB10 on a DGX Spark inside an authorized `spark-window`, plus a sibling CUDApp build. Do not run them anywhere else.
 
