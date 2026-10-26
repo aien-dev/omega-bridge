@@ -97,7 +97,7 @@ def _native():
         path = os.path.join(CACHE, "native-%s" % OMC_SHA256[:12])
         with open(os.path.join(ROOT, "src", "native.om"), "rb") as f:
             _compile_om(f.read(), path)
-        os.chmod(path, 0o755)
+        os.chmod(path, 0o700)
         _NATIVE = path
     return _NATIVE
 
