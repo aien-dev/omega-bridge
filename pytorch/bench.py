@@ -3,7 +3,8 @@
 Run (both arms in the same process, on the same pinned core, one thread each):
   CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=1 OMEGA_OMC=<omega-mv seed/out/omc> \
     taskset -c 17 python3 pytorch/bench.py --rounds 30 --out timings.json
-Writes raw per-call nanoseconds for both arms plus /proc/loadavg before and after. It computes no
+Writes raw per-call nanoseconds for both arms, /proc/loadavg before every sample and before and after
+the run, and labels the run "taken under load" when any sample saw load1 above 8. It computes no
 statistics: summarise the raw numbers separately (the receipt names the tool used).
 """
 
@@ -58,20 +59,27 @@ def main():
         torch.testing.assert_close(got, want)
         rec["parity_max_abs"] = (got - want).abs().max().item()
         ot.reset_stats()
-        eager, omega = [], []
+        eager, omega, eager_load, omega_load = [], [], [], []
         for r in range(a.rounds):  # interleaved, order alternating per round
-            arms = [(eager, m), (omega, c)] if r % 2 == 0 else [(omega, c), (eager, m)]
-            for sink, f in arms:
+            arms = [(eager, eager_load, m), (omega, omega_load, c)]
+            if r % 2:
+                arms.reverse()
+            for sink, loads, f in arms:
+                loads.append(loadavg())  # /proc/loadavg read before each sample, outside the timed span
                 t0 = time.perf_counter_ns()
                 f(x)
                 sink.append(time.perf_counter_ns() - t0)
     rec["stats"] = {k: v for k, v in ot.STATS.items()}
     rec["eager_ns"], rec["omega_ns"] = eager, omega
+    rec["eager_loadavg"], rec["omega_loadavg"] = eager_load, omega_load
     rec["loadavg_after"] = loadavg()
+    load1 = [float(s.split()[0]) for s in eager_load + omega_load]
+    rec["max_load1"] = max(load1)
+    rec["label"] = "taken under load (load1 > 8)" if max(load1) > 8 else "load1 <= 8 for every sample"
     with open(a.out, "w") as f:
         json.dump(rec, f, indent=1)
-    print(json.dumps({k: rec[k] for k in ("loadavg_before", "loadavg_after", "affinity", "torch_threads",
-                                          "parity_max_abs", "stats")}))
+    print(json.dumps({k: rec[k] for k in ("loadavg_before", "loadavg_after", "max_load1", "label", "affinity",
+                                          "torch_threads", "parity_max_abs", "stats")}))
 
 
 if __name__ == "__main__":
