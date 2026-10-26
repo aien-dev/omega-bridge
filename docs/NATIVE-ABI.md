@@ -43,19 +43,22 @@ anything outside the supported signature set is refused (exit 110, no output). T
 Names must be C identifiers, a parameter name may not end in `_len` (the binding names a length
 `o_<name>_len`), and each unit name appears once; anything else is refused before any C is written.
 
-Supported signatures: up to 6 parameters, each `ulong`, `long`, or `edit`/`view` of `ulong` or `uchar`
-with a fixed length; result `ulong`, `long` or `void`. A unit may hold several functions: the seeded
-compiler enters function-mode code at the unit's last function (word 0 is a branch to it), so the
-binding exports that one and the earlier functions stay private helpers, called directly inside the
-embedded code, with any Omega types. Only the last function's signature must be supported
-(`tests/native/hsum.om`: two helpers, one of which traps).
+Supported signatures: up to 6 parameters, each `ulong`, `long`, or `edit`/`view` of `ulong`, `uchar`
+or `f32` with a fixed length; result `ulong`, `long` or `void`. A length is a decimal number or the name
+of an integer constant declared on its own line before the signature as exactly
+`const NAME ulong DIGITS` (OMEGESE 9.12); any other spelling of a constant used as a length is refused,
+so a shape-specialised unit can be written as one fixed kernel text after a header of constants. A unit
+may hold several functions: the seeded compiler enters function-mode code at the unit's last function
+(word 0 is a branch to it), so the binding exports that one and the earlier functions stay private
+helpers, called directly inside the embedded code, with any Omega types. Only the last function's
+signature must be supported (`tests/native/hsum.om`: two helpers, one of which traps).
 
 ## Contract
 
 | | |
 |---|---|
 | scalar argument | `uint64_t`, the canonical bits of its type; a `long` is its two's-complement bits (-3 is 18446744073709551613) |
-| array argument | `void *` (`const void *` for `view`) then `uint64_t` element count, which must equal the declared length |
+| array argument | `void *` (`const void *` for `view`) then `uint64_t` element count, which must equal the declared length; elements are 8 bytes (`ulong`), 1 byte (`uchar`) or 4 bytes (`f32`, IEEE-754 binary32), and the address must be aligned to the element size |
 | result | written only on status 0; a `void` function writes 0 |
 | status 0 | success |
 | status 1..14 | the Omega trap code (1 overflow, 2 divide by zero, 3 bounds, 4 loop bound, 5 conversion, 6 resource, 7 shift, or a `trap N` code) |
@@ -119,6 +122,14 @@ by 70 (calc:a6a8bb76), 4,000,000 bytes is 0.954 of 4 MiB (calc:ffff21b2). Negati
 
 Separate claims, not made here: source translation (ABI v0) and GPU execution are qualified on their
 own. Only AArch64 Linux is supported.
+
+`f32` arrays and constant lengths (2026-10-26, for `pytorch/`): exercised by
+`pytorch/tests/test_omega_torch.py` (class `Binding`: a `const L ulong 6` f32 unit binds with element
+size 4 and the right writable flags; a `const L uint 6` length and an `f64` array are refused with exit
+110 and no output) and by every PyTorch op test, which calls f32 units through this binding. Those tests
+use the omega-mv main compiler (`2c82480596bbdc50cda9626866209ef662d5834f278f839ff4ce0250c495029f`,
+omega-mv `369dbc96`), because floats are newer than the pin above. `tests/native/run.sh` with the pinned
+compiler still prints `NATIVE-CALL PASS` with this generator.
 
 Zig and Go: run with Zig 0.13.0 and Go 1.27.3 (official aarch64 archives, checksums from
 ziglang.org/download/index.json and go.dev/dl, unpacked in the user's ~/.local/opt). Both callers pass

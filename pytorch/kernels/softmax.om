@@ -1,0 +1,72 @@
+note softmax: o[R,C] = exp(x - rowmax) / rowsum over the last dimension (aten._softmax, dim -1,
+note half_to_float false), row-major f32. Exponentials and sums are f64, each output rounded once to
+note f32. A row holding NaN gives NaN. The caller supplies const lines R C RC before this text.
+note expd: e^x in f64. x = k ln2 + r with k the nearest integer to x/ln2 and |r| <= ln2/2; e^r by the
+note degree-13 Taylor polynomial in Horner form (s = 1 + r s / n, n = 13 .. 1), whose truncation is
+note below 5.9e-18 relative (Wolfram: (Log[2]/2)^14/14! Exp[Log[2]/2] = 5.85e-18); then times 2^k
+note built from its exponent bits. Below -746 the result is 0 (e^x < 2^-1075, Wolfram: Log[2^-1074] =
+note -744.44); above 709.79 it is infinity (Log[$MaxMachineNumber] = 709.7827).
+fn expd x f64 to f64
+if ne x x
+ret x
+end
+if lt x -746.0f64
+ret 0.0f64
+end
+if gt x 709.79f64
+ret div 1.0f64 0.0f64
+end
+kf = mul x 1.442695040888963387f64
+ki = long kf
+fr = sub kf f64 ki
+if gt fr 0.5f64
+ki = add ki 1
+end
+if lt fr -0.5f64
+ki = sub ki 1
+end
+r = sub x mul f64 ki 0.6931471805599453094f64
+s = 1.0f64
+for j ulong 13
+n = f64 sub 13 j
+s = add 1.0f64 div mul r s n
+end
+sc = 1.0f64
+if lt ki -1000
+sc = bitcast f64 shl ulong 423 52
+ki = add ki 600
+end
+if gt ki 1000
+sc = bitcast f64 shl ulong 1623 52
+ki = sub ki 600
+end
+e = bitcast f64 shl ulong add ki 1023 52
+ret mul mul s e sc
+end
+note smrow: softmax of row i into o, through the f64 scratch row t.
+fn smrow x view f32 RC o edit f32 RC t edit f64 C i ulong to void
+b = mul i C
+m = get x b
+for j ulong C
+v = get x add b j
+if gt v m
+m = v
+end
+end
+mf = f64 m
+s = 0.0f64
+for j ulong C
+e = expd sub f64 get x add b j mf
+put t j e
+s = add s e
+end
+for j ulong C
+put o add b j f32 div get t j s
+end
+end
+fn softmax x view f32 RC o edit f32 RC to void
+t = new f64 C 0.0f64
+for i ulong R
+smrow x o t i
+end
+end

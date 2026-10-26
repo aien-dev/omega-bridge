@@ -1,0 +1,12 @@
+note relu: o = x where x is not below 0.0, else 0.0 (aten.relu); NaN is kept, as aten.relu keeps it.
+note The caller supplies the const line L (the element count) before this text.
+fn relu x view f32 L o edit f32 L to void
+for i ulong L
+v = get x i
+if lt v 0.0f32
+put o i 0.0f32
+else
+put o i v
+end
+end
+end

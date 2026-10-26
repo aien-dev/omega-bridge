@@ -1,0 +1,21 @@
+note linear: o[M,N] = c[N] + a[M,K] @ w[N,K]^T, the addmm of a torch.nn.Linear whose weight transpose
+note (aten.permute [1,0]) feeds only this addmm; w is read in place, nothing is copied. Each sum starts
+note at the bias, is summed in f64 and rounded once to f32. Consts M K N MK NK MN come first.
+fn lindot c view f32 N a view f32 MK w view f32 NK i ulong j ulong to f64
+s = f64 get c j
+ia = mul i K
+iw = mul j K
+for k ulong K
+s = add s mul f64 get a ia f64 get w iw
+ia = add ia 1
+iw = add iw 1
+end
+ret s
+end
+fn linear c view f32 N a view f32 MK w view f32 NK o edit f32 MN to void
+for i ulong M
+for j ulong N
+put o add mul i N j f32 lindot c a w i j
+end
+end
+end

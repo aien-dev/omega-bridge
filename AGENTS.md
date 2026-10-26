@@ -11,6 +11,7 @@ Shared rules: read https://www.aienos.com/agents/RULES.md first. This file adds 
 - `tools/`: shell entry points (`bootstrap.sh`, `build.sh`, `test.sh`, `bridge`, `build-gpu-adapter.sh`, `run-device-window.sh`).
 - `tests/`: Python test harness (infrastructure only), fixtures, refusal cases, native callers in six languages, GPU adapter protocol tests.
 - `conformance/`: separate-process Omega versus Modular MAX harness. `evidence/`: raw logs and result manifests.
+- `pytorch/`: `torch.compile` backend `"omega"` (docs/OMEGA-TORCH.md). Kernels are `.om` (`pytorch/kernels/`); `pytorch/omega_torch/` is interim Python glue that registers the backend, walks the FX graph and calls units through the native ABI. It must never compute a tensor value; an unsupported op raises, and eager fallback only happens for ops the caller names, counted.
 - No compiler binary is stored here. Python/C input conversion is not implemented. Text constants, floats, heap operations and other target languages are refused by the C/Python converters.
 
 ## Installation

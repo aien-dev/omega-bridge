@@ -1,0 +1,9 @@
+note tr: o[C,R] = x[R,C] transposed (aten.permute with dims [1,0]) into a new row-major array.
+note The caller supplies const lines R C RC before this text.
+fn tr x view f32 RC o edit f32 RC to void
+for i ulong R
+for j ulong C
+put o add mul j R i get x add mul i C j
+end
+end
+end
