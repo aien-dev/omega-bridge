@@ -1,0 +1,27 @@
+test_const_f32_bound (pytorch.tests.test_omega_torch.Binding.test_const_f32_bound) ... ok
+test_const_not_ulong_refused (pytorch.tests.test_omega_torch.Binding.test_const_not_ulong_refused) ... ok
+test_f64_array_refused (pytorch.tests.test_omega_torch.Binding.test_f64_array_refused) ... ok
+test_array_limit_refused (pytorch.tests.test_omega_torch.FailClosed.test_array_limit_refused) ... ok
+test_broadcast_add_refused (pytorch.tests.test_omega_torch.FailClosed.test_broadcast_add_refused) ... ok
+test_explicit_fallback_is_counted (pytorch.tests.test_omega_torch.FailClosed.test_explicit_fallback_is_counted) ... ok
+test_unsupported_op_raises_and_runs_nothing (pytorch.tests.test_omega_torch.FailClosed.test_unsupported_op_raises_and_runs_nothing) ... ok
+test_wrong_length_status_32 (pytorch.tests.test_omega_torch.FailClosed.test_wrong_length_status_32) ... ok
+test_mlp_parity_and_all_omega (pytorch.tests.test_omega_torch.Model.test_mlp_parity_and_all_omega) ... ok
+test_mutant_linear_caught (pytorch.tests.test_omega_torch.NegativeControl.test_mutant_linear_caught) ... ok
+test_mutant_relu_caught (pytorch.tests.test_omega_torch.NegativeControl.test_mutant_relu_caught) ... ok
+test_mutant_softmax_caught (pytorch.tests.test_omega_torch.NegativeControl.test_mutant_softmax_caught) ... ok
+test_add (pytorch.tests.test_omega_torch.Ops.test_add) ... ok
+test_addmm (pytorch.tests.test_omega_torch.Ops.test_addmm) ... ok
+test_linear (pytorch.tests.test_omega_torch.Ops.test_linear) ... ok
+test_mm (pytorch.tests.test_omega_torch.Ops.test_mm) ... ok
+test_mm_exact_integers (pytorch.tests.test_omega_torch.Ops.test_mm_exact_integers) ... ok
+test_permute (pytorch.tests.test_omega_torch.Ops.test_permute) ... ok
+test_relu (pytorch.tests.test_omega_torch.Ops.test_relu) ... ok
+test_softmax (pytorch.tests.test_omega_torch.Ops.test_softmax) ... ok
+test_softmax_two_ulp_of_float64 (pytorch.tests.test_omega_torch.Ops.test_softmax_two_ulp_of_float64) ... ok
+test_softmax_wolfram (pytorch.tests.test_omega_torch.Ops.test_softmax_wolfram) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 2.235s
+
+OK
