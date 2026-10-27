@@ -1,0 +1,26 @@
+PASS seed_40 7
+PASS empty 16
+PASS text_target 24
+PASS five_params 24
+PASS long_name 13
+PASS library_io 24
+PASS library_array_width 24
+PASS local_storage_limit 23
+PASS inherited_text_program 24
+PASS r5b_assign 7
+PASS r5b_cycle 9
+refusal cases=50 failures=0 RC=0
+C caller: values, mutation, traps, invalid lengths and recovery OK
+Python caller: values, mutation, traps, invalid lengths and recovery OK
+attachment cases=2 failures=0 RC=0
+PASS detected c num_ulong_add native_exit 0 mutant_exit 126
+PASS detected python num_ulong_add native_exit 0 mutant_exit 126
+PASS detected c t_bounds native_exit 103 mutant_exit 1
+PASS detected python t_bounds native_exit 103 mutant_exit 1
+PASS detected c order_calls native_exit 1 mutant_exit 105
+PASS detected python order_calls native_exit 1 mutant_exit 105
+PASS deterministic nonempty output
+control cases=7 failures=0 RC=0
+robustness cases=225 target_accepts=4 target_refusals=446 failures=0 RC=0
+ALL SUITES RC=0
+RC=0

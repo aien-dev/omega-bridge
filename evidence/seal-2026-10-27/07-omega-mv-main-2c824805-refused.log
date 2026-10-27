@@ -1,0 +1,10 @@
+omega-mv main e5b32567a7aff3ce594e3254a622a846a6cd190b
+omega-from-seed RC=0
+PASS cycle exit 9
+PASS assign exit 7
+RC=0
+2c82480596bbdc50cda9626866209ef662d5834f278f839ff4ce0250c495029f  ~/work/truth/omvseed/seed/out/omc
+FAIL omc sha256 2c82480596bbdc50cda9626866209ef662d5834f278f839ff4ce0250c495029f, pinned 734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61
+tests/native/run.sh with omega-mv main omc: RC=1 (nonzero expected)
+seed fingerprint mismatch
+tools/build.sh with omega-mv main omc: RC=1 (nonzero expected)

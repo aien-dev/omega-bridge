@@ -1,0 +1,19 @@
+OMEGA_NATIVE_OMC=<omega worktree 55f9b0af>/seed/out/omc
+734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61  <omega worktree 55f9b0af>/seed/out/omc
+PASS embedded code == omc output, per unit (85b3add4fe86a894)
+PASS c caller (28 lines)
+PASS c-bti caller (28 lines)
+PASS generator refuses a unit name that is not a C identifier
+PASS generator refuses a parameter name ending in _len
+PASS generator refuses a repeated unit name
+PASS generator accepts the same unit once (control)
+PASS generator refuses a last (bound) function with an unsupported parameter type
+PASS generator binds only the last function; an earlier helper of any type stays private
+PASS cpp caller (10 lines)
+PASS python caller (10 lines)
+PASS rust caller (11 lines)
+PASS mutant madd (add -> sub) caught (7 failing checks)
+NOT_RUN zig caller: toolchain not installed
+NOT_RUN go caller: toolchain not installed
+NATIVE-CALL NOT_RUN (not run: zig go)
+RC=1

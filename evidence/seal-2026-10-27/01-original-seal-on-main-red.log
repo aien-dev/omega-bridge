@@ -1,0 +1,11 @@
+tree=main 358c50516 seal=evidence/files.sha256 6d3e4903e9a1ffe92023297a910da641bd7cbe6bb3d04cb07a3cf0dcf6d75d2b
+.gitignore: FAILED
+LICENSE: FAILED
+README.md: FAILED
+docs/DESIGN.md: FAILED
+docs/PROVENANCE.md: FAILED
+docs/RECOVERY.json: FAILED
+src/toc.om: FAILED
+sha256sum: WARNING: 7 computed checksums did NOT match
+OK_count=176
+RC=1

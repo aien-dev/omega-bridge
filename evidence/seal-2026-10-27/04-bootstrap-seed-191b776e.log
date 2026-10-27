@@ -1,0 +1,7 @@
+om4.bin 14224 bytes
+source=29b12760f4c962606411d6bf25032aedef063301
+8608fa11f6a2cf1c50db22d871eef16b00d5bc719bc1a222cc3e456984ac5ebf  seed/omc/omc.om
+191b776ef98821597c3e30655da6d680a9b66edbc9ceaca3c39c61ea6df098e9  ../omc
+bootstrap fixpoint RC=0
+RC=0
+191b776ef98821597c3e30655da6d680a9b66edbc9ceaca3c39c61ea6df098e9  build/bootstrap/omc

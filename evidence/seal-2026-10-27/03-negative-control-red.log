@@ -1,0 +1,4 @@
+mutation: byte 100 of src/toc.om set to 'X' in scratch worktree of 11cbe8accb81cda8e98b61bdf6f1f6c67f11261e
+src/toc.om: FAILED
+sha256sum: WARNING: 1 computed checksum did NOT match
+RC=1 (nonzero expected)
