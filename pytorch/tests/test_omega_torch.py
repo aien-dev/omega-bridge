@@ -171,6 +171,70 @@ class FailClosed(unittest.TestCase):
             ot.call_unit(fn, "relu", [torch.zeros(5), torch.zeros(4)])
         self.assertIn("status 32", str(cm.exception))
 
+    def test_zero_copy_in_place(self):
+        # The unit writes straight into the caller's storage: a 4-element slice of a 10-element tensor is
+        # written in place and the elements around it keep their value, so no binding-side buffer exists.
+        fn = ot.load_unit("relu", [("L", 4)], 2)
+        x = torch.tensor([-1.0, 2.0, -3.0, 4.0])
+        big = torch.full((10,), 7.0)
+        ptr = big.data_ptr()
+        ot.call_unit(fn, "relu", [x, big[3:7]])
+        self.assertEqual(big.tolist(), [7.0, 7.0, 7.0, 0.0, 2.0, 0.0, 4.0, 7.0, 7.0, 7.0])
+        self.assertEqual(big.data_ptr(), ptr)
+        self.assertEqual(x.tolist(), [-1.0, 2.0, -3.0, 4.0])
+
+
+def dtype_mismatch_refused():
+    """Lower relu(a) + b for float32 and then the identical graph for float64. True when the float64 graph
+    is refused (the graph cache did not hand it the float32 plan), False when it ran."""
+    f = lambda a, b: torch.relu(a) + b
+    with torch.no_grad():
+        c = compiled(f)
+        c(torch.randn(3, 5), torch.randn(3, 5))
+        try:
+            c(torch.randn(3, 5, dtype=torch.float64), torch.randn(3, 5, dtype=torch.float64))
+        except Exception as e:
+            return "OmegaRefused" in repr(e) + str(e) and "dtype torch.float64" in str(e)
+    return False
+
+
+class GraphCache(unittest.TestCase):
+    """_lower keeps one lowering per graph key; a repeated graph is neither re-planned nor rebuilt."""
+
+    def test_repeat_graph_hits_cache(self):
+        m = MLP().eval()
+        x, y = torch.randn(4, 16), torch.randn(4, 32)
+        got1, want = run_both(m, x, y)
+        built, libs = ot.STATS["units_built"], ot.STATS["libraries_built"]
+        got2, _ = run_both(m, x, y)  # run_both resets Dynamo: the same aten graph reaches _lower again
+        self.assertEqual(ot.STATS["graph_cache_hits"], 1)
+        self.assertEqual(ot.STATS["graphs"], 0)
+        self.assertEqual((ot.STATS["units_built"], ot.STATS["libraries_built"]), (built, libs))
+        torch.testing.assert_close(got1, want)
+        torch.testing.assert_close(got2, want)
+
+    def test_new_shape_misses_cache(self):
+        f = lambda t: torch.relu(t)
+        run_both(f, torch.randn(3, 4))
+        got, want = run_both(f, torch.randn(4, 3))
+        torch.testing.assert_close(got, want)
+        self.assertEqual((ot.STATS["graph_cache_hits"], ot.STATS["graphs"]), (0, 1))
+
+    def test_dtype_mismatch_refused(self):
+        self.assertTrue(dtype_mismatch_refused())
+
+    def test_dtype_blind_cache_caught(self):
+        # Negative control: a graph key that leaves out dtype hands the float64 graph the float32 plan,
+        # which then runs; dtype_mismatch_refused() must report that.
+        real, before = ot._val_sig, set(ot._GRAPHS)
+        ot._val_sig = lambda v: (lambda s: s[:1] + s[2:] if s[0] == "tensor" else s)(real(v))  # no dtype
+        try:
+            self.assertFalse(dtype_mismatch_refused())
+        finally:
+            ot._val_sig = real
+            for k in set(ot._GRAPHS) - before:
+                del ot._GRAPHS[k]
+
 
 class NegativeControl(unittest.TestCase):
     """Deliberately wrong kernels must make the parity checks fail."""

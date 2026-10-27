@@ -20,6 +20,7 @@ import os
 import subprocess
 import tempfile
 import threading
+import time
 
 import torch
 from torch._dynamo import register_backend
@@ -36,10 +37,16 @@ ROOT = os.path.dirname(os.path.dirname(HERE))
 KERNEL_DIR = os.environ.get("OMEGA_TORCH_KERNELS", os.path.join(ROOT, "pytorch", "kernels"))
 CACHE = os.environ.get("OMEGA_TORCH_CACHE", os.path.join(ROOT, "build", "torch"))
 
-STATS = {"graphs": 0, "omega_calls": 0, "eager_fallback_calls": 0, "units_built": 0, "per_op": {}}
+STATS = {"graphs": 0, "graph_cache_hits": 0, "omega_calls": 0, "eager_fallback_calls": 0, "units_built": 0,
+         "libraries_built": 0, "per_op": {}}
+# Compile-side wall time in ns, summed over the process (perf_counter_ns around each phase): omc on
+# kernels, omc on src/native.om, the native binder, cc, dlopen, and _lower as a whole (which contains
+# all of the former when a unit is built). Read by pytorch/bench_split.py; never reset by reset_stats().
+TIMES = {"omc": 0, "native_omc": 0, "binder": 0, "cc": 0, "dlopen": 0, "lower": 0}
 _FALLBACK = set(filter(None, os.environ.get("OMEGA_TORCH_FALLBACK", "").split(",")))
 _LOCK = threading.Lock()
-_LIBS = {}
+_LIBS = {}  # library key -> {unit name: ctypes function}
+_GRAPHS = {}  # graph key (_graph_key) -> the lowered graph function
 _NATIVE = None
 
 STATUS = {1: "overflow", 2: "divide by zero", 3: "bounds", 4: "loop bound", 5: "conversion",
@@ -62,7 +69,7 @@ def set_fallback(ops):
 
 
 def reset_stats():
-    STATS.update(graphs=0, omega_calls=0, eager_fallback_calls=0, per_op={})
+    STATS.update(graphs=0, graph_cache_hits=0, omega_calls=0, eager_fallback_calls=0, per_op={})
 
 
 def _sha(path):
@@ -80,11 +87,13 @@ def _omc():
     return path
 
 
-def _compile_om(src, out):
+def _compile_om(src, out, phase="omc"):
+    t0 = time.perf_counter_ns()
     with open(out, "wb") as o, tempfile.TemporaryFile() as err:
         rc = subprocess.run([_omc()], input=src, stdout=o, stderr=err).returncode
         err.seek(0)
         msg = err.read().decode(errors="replace").strip()
+    TIMES[phase] += time.perf_counter_ns() - t0
     if rc != 0 or msg:
         os.unlink(out)
         raise OmegaRefused("omc refused the unit (rc=%d): %s" % (rc, msg))
@@ -96,56 +105,104 @@ def _native():
         os.makedirs(CACHE, exist_ok=True)
         path = os.path.join(CACHE, "native-%s" % OMC_SHA256[:12])
         with open(os.path.join(ROOT, "src", "native.om"), "rb") as f:
-            _compile_om(f.read(), path)
+            _compile_om(f.read(), path, "native_omc")
         os.chmod(path, 0o700)
         _NATIVE = path
     return _NATIVE
 
 
-def unit_source(kernel, consts):
-    """The unit text: one "const NAME ulong V" line per shape constant, then the kernel file."""
+def unit_source(kernel, consts, name=None):
+    """The unit text: one "const NAME ulong V" line per shape constant, then the kernel file. With name,
+    the entry function is renamed to it, so that one library can hold several specialisations of a kernel
+    (the binding refuses two units with the same name); nothing else in the text changes."""
     head = "".join("const %s ulong %d\n" % (k, v) for k, v in consts)
     with open(os.path.join(KERNEL_DIR, kernel + ".om"), "rb") as f:
-        return head.encode() + f.read()
+        body = b"\n" + f.read()
+    if name is not None and name != kernel:
+        old, new = b"\nfn %s " % kernel.encode(), b"\nfn %s " % name.encode()
+        if body.count(old) != 1:
+            raise OmegaRefused("kernel %s: entry 'fn %s' must appear exactly once" % (kernel, kernel))
+        body = body.replace(old, new)
+    return head.encode() + body[1:]
+
+
+def load_units(units):
+    """Build and load ONE library holding every unit of a graph, and return its ctypes functions in order.
+
+    units: a list of (kernel, consts, nargs). Equal (kernel, consts) pairs share one unit. Each distinct
+    unit is compiled by omc; all of them go to src/native.om in a single frame stream, so the binding is
+    one C file, compiled by one cc run and opened by one dlopen. The library is cached on disk under
+    build/torch/<sha256 of the compiler pin, src/native.om and every unit source in order>.
+    Each function is omega_<name>(uint64_t *result, (ptr, len) * nargs), where name is the kernel for its
+    first specialisation in the library and kernel_<j> for the j-th further one."""
+    if not units:
+        return []
+    names, srcs, seen = {}, [], {}
+    for kernel, consts, nargs in units:
+        k = (kernel, tuple(consts))
+        if k not in names:
+            j = seen.get(kernel, 0)
+            seen[kernel] = j + 1
+            names[k] = (kernel if j == 0 else "%s_%d" % (kernel, j), nargs)
+            srcs.append((names[k][0], unit_source(kernel, consts, names[k][0])))
+    h = hashlib.sha256(OMC_SHA256.encode())
+    with open(os.path.join(ROOT, "src", "native.om"), "rb") as f:
+        h.update(f.read())
+    for name, src in srcs:
+        h.update(b"%d\0%s\0" % (len(src), name.encode()) + src)
+    key = h.hexdigest()[:24]
+    with _LOCK:
+        lib = _LIBS.get(key)
+        if lib is None:
+            d = os.path.join(CACHE, key)
+            os.makedirs(d, exist_ok=True)
+            so = os.path.join(d, "libomega.so")
+            if not os.path.exists(so):
+                frames = []
+                for name, src in srcs:
+                    binp = os.path.join(d, name + ".bin")
+                    _compile_om(src, binp)
+                    with open(binp, "rb") as f:
+                        code = f.read()
+                    frames.append(src + b"\0" + b"%08d" % len(code) + code)
+                cfile = os.path.join(d, "binding.c")
+                t0 = time.perf_counter_ns()
+                with open(cfile, "wb") as o:
+                    rc = subprocess.run([_native()], input=b"".join(frames), stdout=o,
+                                        stderr=subprocess.DEVNULL).returncode
+                TIMES["binder"] += time.perf_counter_ns() - t0
+                if rc != 0:
+                    raise OmegaRefused("src/native.om refused units %s (exit %d)" % ([n for n, _ in srcs], rc))
+                tmp = so + ".tmp"
+                t0 = time.perf_counter_ns()
+                subprocess.run(["cc", "-std=gnu11", "-O2", "-Wall", "-Wextra", "-Werror", "-fPIC", "-shared",
+                                "-o", tmp, cfile], check=True)
+                TIMES["cc"] += time.perf_counter_ns() - t0
+                os.replace(tmp, so)
+                STATS["units_built"] += len(srcs)
+                STATS["libraries_built"] += 1
+            t0 = time.perf_counter_ns()
+            dll = ctypes.CDLL(so)
+            TIMES["dlopen"] += time.perf_counter_ns() - t0
+            lib = {}
+            for name, nargs in names.values():
+                fn = getattr(dll, "omega_" + name)
+                fn.argtypes = [ctypes.POINTER(ctypes.c_uint64)] + [ctypes.c_void_p, ctypes.c_uint64] * nargs
+                fn.restype = ctypes.c_uint32
+                lib[name] = fn
+            _LIBS[key] = lib
+    return [lib[names[(kernel, tuple(consts))][0]] for kernel, consts, _ in units]
 
 
 def load_unit(kernel, consts, nargs):
-    """Compile kernel specialised to consts, bind it with src/native.om, build and load the library.
-    Returns the ctypes function omega_<kernel>(uint64_t *result, (ptr, len) * nargs)."""
-    src = unit_source(kernel, consts)
-    with open(os.path.join(ROOT, "src", "native.om"), "rb") as f:
-        key = hashlib.sha256(src + OMC_SHA256.encode() + f.read()).hexdigest()[:24]
-    with _LOCK:
-        if key in _LIBS:
-            return _LIBS[key]
-        d = os.path.join(CACHE, key)
-        os.makedirs(d, exist_ok=True)
-        so = os.path.join(d, "lib%s.so" % kernel)
-        if not os.path.exists(so):
-            binp = os.path.join(d, kernel + ".bin")
-            _compile_om(src, binp)
-            with open(binp, "rb") as f:
-                code = f.read()
-            frame = src + b"\0" + b"%08d" % len(code) + code
-            cfile = os.path.join(d, "binding.c")
-            with open(cfile, "wb") as o:
-                rc = subprocess.run([_native()], input=frame, stdout=o, stderr=subprocess.DEVNULL).returncode
-            if rc != 0:
-                raise OmegaRefused("src/native.om refused unit %s (exit %d)" % (kernel, rc))
-            tmp = so + ".tmp"
-            subprocess.run(["cc", "-std=gnu11", "-O2", "-Wall", "-Wextra", "-Werror", "-fPIC", "-shared",
-                            "-o", tmp, cfile], check=True)
-            os.replace(tmp, so)
-            STATS["units_built"] += 1
-        fn = getattr(ctypes.CDLL(so), "omega_" + kernel)
-        fn.argtypes = [ctypes.POINTER(ctypes.c_uint64)] + [ctypes.c_void_p, ctypes.c_uint64] * nargs
-        fn.restype = ctypes.c_uint32
-        _LIBS[key] = fn
-        return fn
+    """One unit in a library of its own (load_units with a single unit)."""
+    return load_units([(kernel, consts, nargs)])[0]
 
 
 def call_unit(fn, name, tensors):
-    """Call a bound unit on f32 CPU tensors (borrowed for the call). Raises on any nonzero status."""
+    """Call a bound unit on f32 CPU tensors. Zero copy: the binding receives each tensor's own storage
+    address and element count, and the Omega code reads and writes that storage in place (the tensors are
+    borrowed for the call). Raises on any nonzero status."""
     args = []
     for t in tensors:
         args += [t.data_ptr(), t.numel()]
@@ -257,7 +314,43 @@ def _plan_node(n, users):
     return "%s: no Omega kernel" % t
 
 
+def _val_sig(v):
+    """The part of a node's example value that its lowering depends on: for a tensor its dtype, shape,
+    strides, device and layout (a cached plan for float32 must never serve a float64 graph)."""
+    if isinstance(v, torch.Tensor):
+        return ("tensor", str(v.dtype), tuple(str(s) for s in v.shape), tuple(str(s) for s in v.stride()),
+                v.device.type, str(v.layout))
+    return ("value", repr(v))
+
+
+def _graph_key(gm):
+    """sha256 over everything a lowered graph depends on: the compiler pin, src/native.om, every kernel
+    source in KERNEL_DIR, the fallback set, and each node in order (op, target, arguments with nodes named
+    by position, and _val_sig of its example value)."""
+    h = hashlib.sha256(OMC_SHA256.encode())
+    with open(os.path.join(ROOT, "src", "native.om"), "rb") as f:
+        h.update(f.read())
+    for name in sorted(os.listdir(KERNEL_DIR)):
+        if name.endswith(".om"):
+            with open(os.path.join(KERNEL_DIR, name), "rb") as f:
+                h.update(b"\0%s\0" % name.encode() + f.read())
+    h.update(repr(sorted(_FALLBACK)).encode())
+    pos = {}
+    for i, n in enumerate(gm.graph.nodes):
+        pos[n] = i
+        a = torch.fx.node.map_arg((n.args, n.kwargs), lambda x: "%%%d" % pos[x])
+        h.update(repr((n.op, str(n.target), a, _val_sig(_meta(n)))).encode() + b"\n")
+    return h.hexdigest()
+
+
 def _lower(gm, example_inputs):
+    """Lower an aten graph to one Omega library, or return the cached lowering of an identical graph."""
+    gkey = _graph_key(gm)
+    with _LOCK:
+        run = _GRAPHS.get(gkey)
+    if run is not None:
+        STATS["graph_cache_hits"] += 1
+        return run
     g = gm.graph
     users = {n: list(n.users) for n in g.nodes}
     steps, refused, fused = [], [], set()
@@ -281,12 +374,13 @@ def _lower(gm, example_inputs):
     if refused:
         raise OmegaRefused("Omega backend refuses this graph (nothing ran; no eager fallback):\n  "
                            + "\n  ".join(refused))
+    units = [(p[0], p[1], len(p[2]) + 1) for kind, n, p in steps if kind == "omega"]
+    fns = iter(load_units(units))
     compiled = []
     for kind, n, p in steps:
         if kind == "omega":
             kernel, consts, ins = p
-            compiled.append((kind, n, kernel, load_unit(kernel, consts, len(ins) + 1), ins,
-                             _static_shape(_meta(n))))
+            compiled.append((kind, n, kernel, next(fns), ins, _static_shape(_meta(n))))
         else:
             compiled.append((kind, n, None, None, None, None))
     placeholders = [n for n in g.nodes if n.op == "placeholder"]
@@ -314,6 +408,8 @@ def _lower(gm, example_inputs):
         return tuple(torch.fx.node.map_arg(out_node.args[0], lambda x: env[x]))
 
     run._omega_steps = [(s[0], s[2] or str(s[1].target)) for s in live_steps]
+    with _LOCK:
+        _GRAPHS[gkey] = run
     return run
 
 
@@ -327,7 +423,11 @@ def omega(gm, example_inputs):
         raise OmegaRefused("a CUDA device is visible; milestone 1 is CPU-only (set CUDA_VISIBLE_DEVICES=)")
 
     def fw(g, inputs):
-        return _lower(g, inputs)
+        t0 = time.perf_counter_ns()
+        try:
+            return _lower(g, inputs)
+        finally:
+            TIMES["lower"] += time.perf_counter_ns() - t0
 
     return aot_module_simplified(gm, example_inputs, fw_compiler=fw,
                                  decompositions=core_aten_decompositions())
