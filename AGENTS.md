@@ -1,6 +1,8 @@
-# Omega Bridge (an Omega-written compiler from a checked Omega subset to C and Python, plus native call and GPU adapter boundaries)
+# Omega Bridge (Omega's compatibility gateway: a checked Omega subset converted to C and Python, native call bindings and GPU artifact negotiation)
 
 > `src/toc.om` is an Omega program, built by the pinned seeded Omega compiler, that emits executable C and Python from a checked, bounded Omega subset (ABI v0). `src/native.om` generates a C binding so C, C++, Python, Rust, Zig and Go call the machine code the seeded compiler produced (native call ABI v1). `src/gpu_adapter.om` is an opt-in GPU adapter boundary that negotiates and admits artifacts; it converts no host program. Linux AArch64 only. Independent review remains required before release; no universal conversion or speedup is claimed.
+
+> Ownership rule (ARCH-0042, aien-dev/aien-architecture-mv#342, PROPOSED): Omega owns computation, CUDA++ owns GPU execution, Omega Bridge owns compatibility. This repository is not a second Omega compiler, encoder or GPU runtime: it builds with omega-mv's pinned compiler and runs Omega GPU work only through aien-dev/CUDApp. Remaining overlaps: omega-mv#870 (own seed bootstrap), omega-mv#871 (own front end in `src/toc.om`).
 
 Shared rules: read https://www.aienos.com/agents/RULES.md first. This file adds what is specific to this repository; where the two differ, this file wins here.
 

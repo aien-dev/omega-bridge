@@ -16,9 +16,12 @@ capabilities. It is a pure boundary:
 - it never falls back to CPU, to another backend, or to a less capable adapter;
 - it has no network, telemetry or install path.
 
-Native ownership stays with the existing projects: Omega/CUDApp own the sm_121
-encoder, code generator, QMD template, driver client, artifact exporter and
-verifier. MAX/Mojo extensions, if any, remain isolated third-party artifacts.
+Native ownership follows ARCH-0042 (Omega owns computation, CUDA++ owns GPU
+execution, Omega Bridge owns compatibility). CUDA++ (aien-dev/CUDApp) owns the
+sm_121 encoder, GPU code generator, QMD template, driver client, kernel runtime,
+artifact exporter and cubin verifier. Omega (aien-dev/omega-mv) owns the language,
+the compiler and the declared kernel contract. MAX/Mojo extensions, if any, remain
+isolated third-party artifacts.
 
 ## 2. Activation
 
