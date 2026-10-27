@@ -1,0 +1,31 @@
+#!/bin/sh
+# Usage: OMEGA_NATIVE_OMC=<seeded omc> tools/native-binding UNIT.om|- [UNIT.om ...] > binding.c
+# Compiles each function-mode unit (no fn main) with the pinned seeded compiler and binds them with
+# src/native.om (native call ABI v1, docs/NATIVE-ABI.md): one C file exporting
+# uint32_t omega_<name>(uint64_t *result, ...) per unit, with each unit's code embedded unchanged.
+# The C file builds on Linux AArch64 (cc -shared -fPIC) and on macOS arm64 (clang -shared -fPIC).
+# This script runs on Linux AArch64 only, because the seeded compiler is a Linux AArch64 executable.
+# On success the C is on stdout (exit 0); on any refusal stdout is empty, the reason is on stderr, exit 65.
+set -eu
+PIN=734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61
+[ "$#" -ge 1 ] || { echo 'usage: OMEGA_NATIVE_OMC=<seeded omc> tools/native-binding UNIT.om [UNIT.om ...] > binding.c' >&2; exit 64; }
+OMC=${OMEGA_NATIVE_OMC:?set OMEGA_NATIVE_OMC to the seeded omc (sha256 $PIN)}
+got=$(sha256sum < "$OMC" | cut -d' ' -f1)
+[ "$got" = "$PIN" ] || { echo "native-binding: omc sha256 $got, pinned $PIN" >&2; exit 65; }
+ROOT=$(cd "$(dirname "$0")/.." && pwd)
+tmp=$(mktemp -d)
+trap 'rm -rf "$tmp"' EXIT HUP INT TERM
+"$OMC" < "$ROOT/src/native.om" > "$tmp/native" || { echo 'native-binding: generator did not compile' >&2; exit 65; }
+chmod +x "$tmp/native"
+: > "$tmp/in"
+for f; do
+    # "-" reads one unit from standard input (for callers on another host: ssh spark ... - < unit.om).
+    if [ "$f" = - ]; then cat > "$tmp/stdin.om"; f=$tmp/stdin.om; fi
+    if grep -q '^fn main\( \|$\)' "$f"; then echo "native-binding: $f: has fn main; only function-mode units bind" >&2; exit 65; fi
+    rc=0; "$OMC" < "$f" > "$tmp/code" 2> "$tmp/err" || rc=$?
+    if [ "$rc" != 0 ]; then echo "native-binding: $f: compile exit $rc: $(cat "$tmp/err")" >&2; exit 65; fi
+    { cat "$f"; printf '\0'; printf '%08d' "$(wc -c < "$tmp/code")"; cat "$tmp/code"; } >> "$tmp/in"
+done
+rc=0; "$tmp/native" < "$tmp/in" > "$tmp/out" || rc=$?
+if [ "$rc" != 0 ]; then echo "native-binding: generator refused the units (exit $rc; see docs/NATIVE-ABI.md)" >&2; exit 65; fi
+cat "$tmp/out"

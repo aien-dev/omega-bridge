@@ -1,6 +1,7 @@
 # Python caller for the omega-bridge native call ABI v1 test library (ctypes, standard library only).
 import ctypes, os, sys
-lib = ctypes.CDLL(os.path.join(os.path.dirname(os.path.abspath(__file__)), "libomega_native.so"))
+so = "libomega_native.dylib" if sys.platform == "darwin" else "libomega_native.so"
+lib = ctypes.CDLL(os.path.join(os.path.dirname(os.path.abspath(__file__)), so))
 u64, u32, P = ctypes.c_uint64, ctypes.c_uint32, ctypes.POINTER(ctypes.c_uint64)
 for name in ("omega_madd", "omega_smadd"):
     getattr(lib, name).argtypes, getattr(lib, name).restype = [P, u64, u64, u64], u32
