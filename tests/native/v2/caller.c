@@ -1,4 +1,4 @@
-/* Native ABI v2 oracle (tests/native/v2/run.sh): calls the OM-2 test units vec, lay and one, and the
+/* Native ABI v2 oracle (tests/native/v2/run.sh): calls the OM-2 test units vec, lay, one and hoist, and the
  * OM-1 unit madd, through the generated declarations only (omega_native.h, omega_api.h). Expected
  * values are computed here independently of Omega. Prints one PASS or FAIL line per check; exit 0
  * only when all pass. */
@@ -65,6 +65,23 @@ static void *swap_thread(void *arg)
     }
     return 0;
 }
+
+/* ombr_probe(fn, result, a, b, c): set x19..x28 and d8..d15 to known values, call fn(result, a, b, c),
+ * then return the status in the low 32 bits and the number of changed registers in the high 32 bits
+ * (as tests/native/caller.c). */
+uint64_t ombr_probe(void *fn, uint64_t *result, uint64_t a, uint64_t b, uint64_t c);
+__asm__(".text\n.balign 4\n.globl ombr_probe\n.type ombr_probe,%function\nombr_probe:\nhint #34\n"
+        "stp x29,x30,[sp,#-160]!\nmov x29,sp\nstp x19,x20,[sp,#16]\nstp x21,x22,[sp,#32]\nstp x23,x24,[sp,#48]\n"
+        "stp x25,x26,[sp,#64]\nstp x27,x28,[sp,#80]\nstp d8,d9,[sp,#96]\nstp d10,d11,[sp,#112]\n"
+        "stp d12,d13,[sp,#128]\nstp d14,d15,[sp,#144]\nmov x16,x0\nmov x0,x1\nmov x1,x2\nmov x2,x3\nmov x3,x4\n"
+        "mov x19,#119\nmov x20,#120\nmov x21,#121\nmov x22,#122\nmov x23,#123\nmov x24,#124\nmov x25,#125\nmov x26,#126\nmov x27,#127\nmov x28,#128\n"
+        "mov x9,#108\nfmov d8,x9\nmov x9,#109\nfmov d9,x9\nmov x9,#110\nfmov d10,x9\nmov x9,#111\nfmov d11,x9\nmov x9,#112\nfmov d12,x9\nmov x9,#113\nfmov d13,x9\nmov x9,#114\nfmov d14,x9\nmov x9,#115\nfmov d15,x9\n"
+        "blr x16\nmov w0,w0\nmov x9,#0\n"
+        "cmp x19,#119\ncinc x9,x9,ne\ncmp x20,#120\ncinc x9,x9,ne\ncmp x21,#121\ncinc x9,x9,ne\ncmp x22,#122\ncinc x9,x9,ne\ncmp x23,#123\ncinc x9,x9,ne\ncmp x24,#124\ncinc x9,x9,ne\ncmp x25,#125\ncinc x9,x9,ne\ncmp x26,#126\ncinc x9,x9,ne\ncmp x27,#127\ncinc x9,x9,ne\ncmp x28,#128\ncinc x9,x9,ne\n"
+        "fmov x10,d8\ncmp x10,#108\ncinc x9,x9,ne\nfmov x10,d9\ncmp x10,#109\ncinc x9,x9,ne\nfmov x10,d10\ncmp x10,#110\ncinc x9,x9,ne\nfmov x10,d11\ncmp x10,#111\ncinc x9,x9,ne\nfmov x10,d12\ncmp x10,#112\ncinc x9,x9,ne\nfmov x10,d13\ncmp x10,#113\ncinc x9,x9,ne\nfmov x10,d14\ncmp x10,#114\ncinc x9,x9,ne\nfmov x10,d15\ncmp x10,#115\ncinc x9,x9,ne\n"
+        "orr x0,x0,x9,lsl #32\nldp d14,d15,[sp,#144]\nldp d12,d13,[sp,#128]\nldp d10,d11,[sp,#112]\nldp d8,d9,[sp,#96]\n"
+        "ldp x27,x28,[sp,#80]\nldp x25,x26,[sp,#64]\nldp x23,x24,[sp,#48]\nldp x21,x22,[sp,#32]\nldp x19,x20,[sp,#16]\n"
+        "ldp x29,x30,[sp],#160\nret\n.size ombr_probe,.-ombr_probe\n");
 
 int main(void)
 {
@@ -347,6 +364,22 @@ int main(void)
     pthread_join(t1, 0);
     pthread_join(t2, 0);
     check("two threads x 20000 swap8 calls", ok1 && ok2);
+
+    /* Callee-saved registers: hoist's code keeps its loop constants in x20..x22 (with a hoisting OM-2
+     * omc; run.sh reports whether this one does). The caller's x19..x28 and d8..d15 survive a normal
+     * return and a trap 9 taken after the loop. */
+    uint64_t hd[64], pv;
+    for (int i = 0; i < 64; i++)
+        hd[i] = (uint64_t)i;
+    r = R0;
+    pv = ombr_probe((void *)omega2_hadd, &r, (uint64_t)(uintptr_t)hd, 64, 0);
+    int hok = 1;
+    for (int i = 0; i < 64; i++)
+        hok &= hd[i] == (uint64_t)i + 70000;
+    check("hoist: x19..x28 and d8..d15 kept across a normal return", (uint32_t)pv == OMEGA_OK && (pv >> 32) == 0 && r == 64 * 10000ull && hok);
+    r = R0;
+    pv = ombr_probe((void *)omega2_hadd, &r, (uint64_t)(uintptr_t)hd, 64, 1);
+    check("hoist: x19..x28 and d8..d15 kept across a trap 9", (uint32_t)pv == 9 && (pv >> 32) == 0 && r == R0);
 
     free(lb);
     free(lw);

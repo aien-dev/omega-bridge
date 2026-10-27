@@ -38,7 +38,9 @@ anything outside the supported signature set, and a missing or unknown output wo
 - gives the code a read-only 32-entry runtime table whose trap entry restores the caller's stack pointer from x19
   and returns the trap code from the exported function (no setjmp/longjmp, nothing crosses the caller's
   frame) and whose other entries refuse with status 34, since function-mode units of this ABI use none
-  of them. This relies on the seeded compiler never writing x19..x28 (OSC-1 uses x0..x16, x29, x30);
+  of them. This relies on the unit's code never writing x19: OSC-1 (OM-1) uses x0..x16, x29, x30, and an
+  OM-2 omc with loop-constant hoisting (omega-mv perf/omc-loop-checks) also writes x20..x27, which the
+  trampoline restores on a return and on a trap (tests/native/v2 `hoist`);
 - reaches each unit through a two-instruction stub (`bti c`, branch) so the code runs under branch
   target identification (BTI) without changing the compiler's bytes;
 - exports, per unit, `uint32_t omega_<name>(uint64_t *result, ...)`.

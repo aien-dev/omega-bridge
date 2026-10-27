@@ -1,0 +1,18 @@
+note hoist.om: an OM-2 unit for the native ABI v2 tests whose code writes callee-saved registers. An OM-2 omc
+note with loop-constant hoisting (omega-mv perf/omc-loop-checks, omc 55b73f0a) keeps the literals 70000,
+note 90000 and 80000 of the constant-count loop in x20, x21 and x22; caller.c checks that x19..x28 and
+note d8..d15 keep the caller's values across a normal return and a trap (trap 9 after the loop, so after
+note those registers were written).
+om2
+export fn hadd d edit ulong 64 k ulong to ulong
+s = ulong 0
+for i ulong 64
+put d i add get d i 70000
+s = add s 90000
+s = sub s 80000
+end
+if ne k 0
+trap 9
+end
+ret s
+end

@@ -20,9 +20,9 @@ fails=0; notrun=""
 pass() { echo "PASS $1"; }
 fail() { echo "FAIL $1"; fails=$((fails + 1)); }
 echo "INFO omc $got; OM-2 compiler $OMC2 sha256 $(sha256sum < "$OMC2" | cut -d' ' -f1)"
-V2="vec lay one"
+V2="vec lay one hoist"
 units="$ROOT/tests/native/madd.om"; for u in $V2; do units="$units $T/$u.om"; done
-if "$ROOT/tools/native" "$O" $units > "$O/tools-native.log" 2>&1; then pass "tools/native: madd (OM-1) + vec, lay, one (OM-2): library, six bindings, omega_api.h"
+if "$ROOT/tools/native" "$O" $units > "$O/tools-native.log" 2>&1; then pass "tools/native: madd (OM-1) + vec, lay, one, hoist (OM-2): library, six bindings, omega_api.h"
 else fail "tools/native"; cat "$O/tools-native.log"; exit 1; fi
 W=$O/work; GEN=$W/native-gen
 
@@ -77,11 +77,17 @@ for u in $V2; do
   cmp -s "$W/$u.bin" "$O/$u.emb" || ok=0
 done
 if [ $ok = 1 ]; then pass "embedded code == compiler output, per OM-2 unit"; else fail "embedded code differs"; fi
+# hoist.om exercises the callee-saved registers only if this OM-2 compiler keeps a value in x19..x28
+# (loop-constant hoisting, omega-mv perf/omc-loop-checks); the C caller's probe checks them either way.
+if objdump -D -b binary -m aarch64 "$W/hoist.bin" | grep -q -E '[[:space:]](mov|movk|movz)[[:space:]]+x(19|2[0-8]),'; then
+  echo "INFO hoist: this OM-2 compiler writes a callee-saved register (x19..x28) in hoist's code"
+else echo "INFO hoist: this OM-2 compiler writes no callee-saved register in hoist's code (no hoisting)"; fi
 # The exported symbols: one omega2_ per export, one ident per unit, the OM-1 unit's omega_, nothing else.
 nm -D --defined-only "$O/libomega_native.so" | awk '{print $3}' | grep -E '^omega' | sort > "$O/syms.txt"
-printf '%s\n' omega2_absorb omega2_bsum omega2_digest omega2_fillv omega2_halt omega2_ident_lay omega2_ident_one \
-  omega2_ident_vec omega2_lsum omega2_swap8 omega2_two omega2_vcopy omega2_vlen omega2_vpart omega2_wsum omega_madd | sort > "$O/syms.want"
-if cmp -s "$O/syms.txt" "$O/syms.want"; then pass "exported symbols: 15 omega2_ (12 exports, 3 idents) + omega_madd; no psum, no v1 name for a v2 unit"
+printf '%s\n' omega2_absorb omega2_bsum omega2_digest omega2_fillv omega2_hadd omega2_halt omega2_ident_hoist omega2_ident_lay \
+  omega2_ident_one omega2_ident_vec omega2_lsum omega2_swap8 omega2_two omega2_vcopy omega2_vlen omega2_vpart omega2_wsum omega_madd \
+  | sort > "$O/syms.want"
+if cmp -s "$O/syms.txt" "$O/syms.want"; then pass "exported symbols: 17 omega2_ (13 exports, 4 idents) + omega_madd; no psum, no v1 name for a v2 unit"
 else fail "exported symbols"; diff "$O/syms.want" "$O/syms.txt" || true; fi
 
 # 4. No caller declares an Omega function by hand.
