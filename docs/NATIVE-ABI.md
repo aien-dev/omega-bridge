@@ -78,7 +78,9 @@ floor before reserving a frame (program mode traps 6 instead). A clean status ne
 compiler; it is a compiler gap, not something the binding can add around the code.
 
 Host words: a function-mode unit may use Omega host words (`read`, `write`, ...). They compile to Linux
-system calls made directly by the code, on the calling process and its open descriptors.
+system calls made directly by the code, on the calling process and its open descriptors. macOS numbers
+its system calls differently, so a unit whose code holds an `svc` instruction word is Linux-only: the
+generator puts `#error` for that unit under `__APPLE__` (see Platforms).
 
 Signals: a call from a signal handler while a call is running on the same thread returns 33. A handler
 that leaves Omega code with `siglongjmp` abandons the call; every later call on that thread returns 33.
@@ -118,10 +120,46 @@ by 70 (calc:a6a8bb76), 4,000,000 bytes is 0.954 of 4 MiB (calc:ffff21b2). Negati
 `sub` in the code must make the C caller fail.
 
 Separate claims, not made here: source translation (ABI v0) and GPU execution are qualified on their
-own. Only AArch64 Linux is supported.
+own.
 
 Zig and Go: run with Zig 0.13.0 and Go 1.27.3 (official aarch64 archives, checksums from
 ziglang.org/download/index.json and go.dev/dl, unpacked in the user's ~/.local/opt). Both callers pass
 10 checks. The library is linked with `-soname libomega_native.so`: without that name, Zig records the
 library as `./libomega_native.so` and the caller fails to load outside the build folder (red: dd8b9a9;
 green: this change). The embedded code is unchanged by the name.
+
+## Platforms
+
+One generated C file builds on Linux AArch64 (ELF) and on macOS arm64 (Mach-O); any other target stops
+at `#error`. Only the assembler spelling differs, through the `OMBR_*` macros at the top of the file:
+on Mach-O, C names carry a leading underscore, hidden is `.private_extern`, there is no `.type` or
+`.size`, the code goes in `__TEXT,__text`, and `ombr_trap`/`ombr_no_entry` are `.alt_entry` points of
+`ombr_enter` with a local `Lombr_leave` label, so the linker cannot split them from the shared exit
+path. The instructions and the embedded bytes are the same on both; on Linux, `cc -S` output for the
+seven test units is identical to that of the previous ELF-only generator apart from the file name line.
+
+- x18 is reserved on macOS. The seeded compiler's code uses x0..x16, x29 and x30; the macOS runner
+  disassembles each embedded unit and refuses any `x18`/`w18` (with a control that writes x18).
+- `hint #34`/`hint #38` (BTI landing pads) execute as no-ops where BTI is not enforced.
+- The stack mapping uses `MAP_NORESERVE` and `MAP_ANONYMOUS`, both provided by macOS with `-std=gnu11`;
+  the pthread key destructor frees each thread's stack on thread exit on both systems.
+- Units with host words build on Linux only (see Host words).
+
+Generating a binding needs Linux AArch64, because the seeded compiler is a Linux AArch64 executable:
+
+```
+OMEGA_NATIVE_OMC=<seed omc> tools/native-binding unit.om [more.om ...] > binding.c
+ssh <linux-aarch64-host> 'OMEGA_NATIVE_OMC=<seed omc> <repo>/tools/native-binding -' < unit.om > binding.c
+```
+
+It checks the compiler's pinned sha256, refuses a unit with `fn main`, and writes the C only when every
+unit is accepted (exit 65 and empty output otherwise). Build it on macOS with
+`clang -std=gnu11 -O2 -fPIC -shared -install_name @rpath/libomega_native.dylib -o libomega_native.dylib binding.c`.
+
+macOS qualification, in two steps: `OMEGA_NATIVE_OMC=<seed omc> sh tests/native/run-macos.sh bundle DIR`
+on Linux AArch64 compiles the units and generates the bindings; `sh DIR/run-macos.sh run DIR` on macOS
+arm64 needs only clang, its tools and python3. It builds the dylib, compares each unit's embedded bytes
+with the compiler's output, checks for x18, runs the C and Python callers, checks that the add -> sub
+mutant of `madd` is both embedded as generated and caught by the C caller, and checks that the host-word
+unit `tests/native/hostw.om` is refused by the macOS build. Last line: `NATIVE-CALL-MACOS PASS`. The C++,
+Rust, Zig and Go callers and the BTI-enforced build are exercised on Linux only.

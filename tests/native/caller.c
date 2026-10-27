@@ -28,7 +28,14 @@ static void check(const char *name, int ok)
 /* ombr_probe(fn, result, a, b, c): set x19..x28 and d8..d15 to known values, call fn(result, a, b, c),
  * then return the status in the low 32 bits and the number of changed registers in the high 32 bits. */
 uint64_t ombr_probe(void *fn, uint64_t *result, uint64_t a, uint64_t b, uint64_t c);
-__asm__(".text\n.balign 4\n.globl ombr_probe\n.type ombr_probe,%function\nombr_probe:\nhint #34\n"
+#if defined(__APPLE__) /* Mach-O: C names carry a leading underscore; there is no .type or .size. */
+#define PROBE_BEGIN ".globl _ombr_probe\n_ombr_probe:\n"
+#define PROBE_END ""
+#else
+#define PROBE_BEGIN ".globl ombr_probe\n.type ombr_probe,%function\nombr_probe:\n"
+#define PROBE_END ".size ombr_probe,.-ombr_probe\n"
+#endif
+__asm__(".text\n.balign 4\n" PROBE_BEGIN "hint #34\n"
         "stp x29,x30,[sp,#-160]!\nmov x29,sp\nstp x19,x20,[sp,#16]\nstp x21,x22,[sp,#32]\nstp x23,x24,[sp,#48]\n"
         "stp x25,x26,[sp,#64]\nstp x27,x28,[sp,#80]\nstp d8,d9,[sp,#96]\nstp d10,d11,[sp,#112]\n"
         "stp d12,d13,[sp,#128]\nstp d14,d15,[sp,#144]\nmov x16,x0\nmov x0,x1\nmov x1,x2\nmov x2,x3\nmov x3,x4\n"
@@ -39,7 +46,7 @@ __asm__(".text\n.balign 4\n.globl ombr_probe\n.type ombr_probe,%function\nombr_p
         "fmov x10,d8\ncmp x10,#108\ncinc x9,x9,ne\nfmov x10,d9\ncmp x10,#109\ncinc x9,x9,ne\nfmov x10,d10\ncmp x10,#110\ncinc x9,x9,ne\nfmov x10,d11\ncmp x10,#111\ncinc x9,x9,ne\nfmov x10,d12\ncmp x10,#112\ncinc x9,x9,ne\nfmov x10,d13\ncmp x10,#113\ncinc x9,x9,ne\nfmov x10,d14\ncmp x10,#114\ncinc x9,x9,ne\nfmov x10,d15\ncmp x10,#115\ncinc x9,x9,ne\n"
         "orr x0,x0,x9,lsl #32\nldp d14,d15,[sp,#144]\nldp d12,d13,[sp,#128]\nldp d10,d11,[sp,#112]\nldp d8,d9,[sp,#96]\n"
         "ldp x27,x28,[sp,#80]\nldp x25,x26,[sp,#64]\nldp x23,x24,[sp,#48]\nldp x21,x22,[sp,#32]\nldp x19,x20,[sp,#16]\n"
-        "ldp x29,x30,[sp],#160\nret\n.size ombr_probe,.-ombr_probe\n");
+        "ldp x29,x30,[sp],#160\nret\n" PROBE_END);
 
 static void *big_thread(void *p)
 {

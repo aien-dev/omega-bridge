@@ -1,0 +1,7 @@
+note A function-mode unit with a host word: its write is a Linux system call (svc) made by the code itself.
+note The generated C must refuse to build on macOS, which numbers system calls differently.
+fn hostw x ulong to ulong
+b = new uchar 4 65
+n = write 1 b 0 1
+ret add x ulong n
+end
