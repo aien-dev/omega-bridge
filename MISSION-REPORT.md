@@ -28,7 +28,7 @@ CUDApp driver/firmware target: NVIDIA 580.173.02, GB10, sm_121.
 | Native sm_121 cubin container from generated text | `cudapp/evidence/MAX-INTEROP/68/`, `nvdisasm`/`cuobjdump` | PASS offline |
 | Artifact manifest: text/QMD/cbank SHA-256, contract/spec/ISA/shape/bounds/numeric/provenance | same | PASS, 47 checks |
 | Admission/refusal (tamper, ISA, format, reloc, driver, contract) | same | PASS |
-| Bridge GPU adapter v1 (negotiation + admission, named refusals, no fallback) | `bridge/evidence/MAX-INTEROP/3/` | PASS, 49 checks |
+| Bridge GPU adapter v1 (accept/refuse only on stdin/stdout, no GPU contact; negotiation + admission, named refusals, no fallback) | `bridge/evidence/MAX-INTEROP/3/` | PASS on the host, 49 checks |
 | Cross-runtime envelope + 416-byte C2 TEST receipt | `omega/evidence/MAX-INTEROP/681/` | PASS, 26 checks |
 | MAX 26.7 source/API/licence pin and capability matrix | `bridge/docs/max/` | PASS (analysis) |
 | Separate-process MAX vs Omega harness | `bridge/evidence/MAX-INTEROP/5/` | PASS on CPU |
@@ -66,7 +66,11 @@ device, context, queue, allocation and error ownership: accept a cubin ELF as
 bytes (not UTF-8 `String`), document primary-context identity, define the entry
 name and parameter ABI, return deterministic errors for wrong arch/entry, and
 ship a cubin load/launch qualification test. Details and proposed signatures:
-`docs/MAX-INTEGRATION.md`. No contact with Modular has been made; no PR exists.
+`docs/MAX-INTEGRATION.md`. No PR exists.
+
+Correction (2026-10-27): this report first said "No contact with Modular has
+been made". That is out of date: Drake Stapleton has an ongoing email thread
+with Modular. Nothing beyond that is claimed here.
 
 ## 5. Reproduce
 

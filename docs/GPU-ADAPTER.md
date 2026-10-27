@@ -1,8 +1,13 @@
 # Omega Bridge GPU adapter protocol v1
 
-Status: implemented and host-qualified (`src/gpu_adapter.om`, 47 checks). No
-device is opened by the adapter. Hardware load/execution is **NOT_RUN** until a
-coordinated Spark window; see [GPU-SUPPORT-MATRIX.md](GPU-SUPPORT-MATRIX.md).
+Status: implemented and host-tested (`src/gpu_adapter.om`; the recorded run
+`evidence/MAX-INTEROP/3/tests.log` ends `SUMMARY {"checks": 49, "fail": 0}`).
+
+Plainly: the "GPU adapter" is accept/refuse only. It reads one request on stdin
+and writes `ACCEPT` or `REFUSE` on stdout. It has no GPU contact: it opens no
+device, loads nothing onto a GPU and runs nothing on one. Hardware
+load/execution by any other component is **NOT_RUN** until a coordinated Spark
+window; see [GPU-SUPPORT-MATRIX.md](GPU-SUPPORT-MATRIX.md).
 
 ## 1. What this is, and what it is not
 

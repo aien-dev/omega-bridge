@@ -7,9 +7,9 @@ cross-context execution without a test.
 
 | Area | What is measured | Status | Evidence / blocker |
 |---|---|---|---|
-| Bridge fake GPU adapter | Deterministic negotiate + refusal round-trip, 49 checks | **PASS (host)** | `evidence/MAX-INTEROP/3/tests.log` |
-| GB10 adapter negotiation | Adapter/ISA/driver/ABI/capability/rights/sync/telemetry admission | **PASS (host)** | `evidence/MAX-INTEROP/3/tests.log` |
-| GB10 artifact admission | Manifest contract/artifact id, digest, zero-VA QMD, fresh receipt, producer ownership, no alias (the adapter does not parse cubin; CUDApp admission does) | **PASS (host)** | same |
+| Bridge fake GPU adapter | Deterministic negotiate + refusal round-trip on stdin/stdout, 49 checks; accept/refuse only, no GPU contact | **PASS (host)** | `evidence/MAX-INTEROP/3/tests.log` |
+| GB10 adapter negotiation | Accept/refuse decision on a text request naming adapter/ISA/driver/ABI/capability/rights/sync/telemetry; no GPU is opened or queried | **PASS (host)** | `evidence/MAX-INTEROP/3/tests.log` |
+| GB10 artifact admission | Accept/refuse decision on manifest contract/artifact id, digest, zero-VA QMD, fresh receipt, producer ownership, no alias; no GPU is opened (the adapter does not parse cubin; CUDApp admission does) | **PASS (host)** | same |
 | CUDApp sm_121 artifact export | ELF cubin, text/QMD/cbank SHA-256, deterministic bytes, 47 checks | **PASS (offline)** | `cudapp/evidence/MAX-INTEROP/68/` |
 | Cubin structural validity | `nvdisasm -c`, `cuobjdump -res-usage` accept the container and show the generated text | **PASS (offline)** | `cudapp/evidence/MAX-INTEROP/68/smoke.log` |
 | Cubin device load (`cuModuleLoadData`) | Load the exported cubin on GB10 | **NOT_RUN** | GPU reserved by coordinator (`CHIP-RESERVED`); no window authorized |

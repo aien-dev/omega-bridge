@@ -1,0 +1,30 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  bridge:
+    # tools/bootstrap.sh needs Linux AArch64.
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: Newest seal matches the tree
+        run: |
+          seal=$(ls -d evidence/seal-*/files.sha256 | sort | tail -n 1)
+          echo "seal: $seal"
+          sha256sum --check --strict "$seal"
+      - name: Source-only bootstrap (pinned seed, fixpoint)
+        run: sh tools/bootstrap.sh
+      - name: Bridge suites (differential, refusals, callers, controls, robustness)
+        run: sh tools/test.sh
+      - name: GPU adapter accept/refuse tests (no device is opened)
+        run: |
+          OMEGA_SEED=build/bootstrap/omc sh tools/build-gpu-adapter.sh
+          python3 tests/gpu/test_gpu_adapter.py
