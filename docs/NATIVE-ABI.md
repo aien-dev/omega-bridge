@@ -52,6 +52,18 @@ binding exports that one and the earlier functions stay private helpers, called 
 embedded code, with any Omega types. Only the last function's signature must be supported
 (`tests/native/hsum.om`: two helpers, one of which traps).
 
+Python mode: input that starts with the 4 bytes `0`, `p`, `y`, newline, followed by the same units, makes
+`src/native.om` write a Python 3 module (standard library `ctypes` only) instead of the C file. It binds the
+library built from the C file the same units generate: one `omega_<name>(lib, o_<param>, ...)` per unit,
+where `lib` is `ctypes.CDLL(path)`. Before the call it refuses, in Python, a scalar that is not an `int`
+in the type's range (`bool` and `float` included), an array that is not a C-contiguous buffer of the
+declared element size and format (`Q`/`L`/`N`, `B`/`c`, `f`, `H`/`e`), a wrong element count, and a
+read-only buffer for an `edit` array; a read-only buffer for a `view` array is copied. A nonzero status
+raises `OmegaError(unit, status)`; otherwise it returns the result (`long` as a signed `int`, `void` as
+`None`). The C library still makes every contract check above. Refusals are the same as C mode (exit
+110, no output); C mode output is byte for byte what it was before Python mode existed. This is a
+binding generator for Omega units, not a converter of Python programs.
+
 ## Contract
 
 | | |
@@ -106,7 +118,7 @@ shown to refuse a non-C unit name, a parameter ending in `_len` and a repeated u
 the same unit once. Not exercised: status 34 and 35 (no supported unit reaches another runtime entry;
 mapping failure is not induced).
 
-Qualification requires an executed PASS for each caller (`c`, `c-bti`, `cpp`, `python`, `rust`, `zig`,
+Qualification requires an executed PASS for each caller (`c`, `c-bti`, `cpp`, `python`, `python-gen`, `rust`, `zig`,
 `go`). A present Zig/Go toolchain that fails to build emits `FAIL` and makes the runner exit nonzero.
 A missing toolchain emits `NOT_RUN` and makes the runner exit nonzero, not a qualified PASS. Run
 `OMEGA_NATIVE_OMC=<seed omc> sh tests/native/test_build_failures.sh` to check build-failure and
@@ -120,6 +132,19 @@ it computes itself with the compiler's `_Float16` conversion, and checks the ref
 2-byte-misaligned `f32`, odd-address `ushort`, a wrong length, an `f32` edit overlapping an `f32` view, a
 `ushort` view overlapping an `f32` edit, and a null `ushort` edit (all status 32). Negative control:
 fsum's `add` changed to `sub` in the source must make the caller fail. First user: aien-dev/ggml-omega.
+
+Python mode, in the same runner: `tests/native/pybind.py` loads the module generated from the seven
+units plus `fsum` and `halve` and the library built from their C file. It checks every unit's value
+against values it computes in Python (wrap-around, signed result, trap statuses as `OmegaError` with the
+writes before the trap visible, in-place `edit` arrays, `None` for `void`, private helpers, `f32` lanes
+and binary16 halving through `struct`), and ten refusals before the call (length, `f64` and `int32`
+buffers for an `f32` view, a read-only `edit`, negative, 2^64, `bool`, `float` and 2^63 scalars) plus a
+read-only `view` accepted. The generator is shown to refuse Python mode with no unit, a non-C unit name
+and an unsupported bound signature, and C mode output is checked to carry no Python text. Negative
+control: the madd `add`→`sub` mutant must also fail through the Python module. Expected values,
+WolframLanguageEvaluator: `{Sum[i,{i,0,999}], 1+4+9+16+10, 8+7, 5+100+3, -3*5+2}` → `{499500, 40, 15, 108, -13}`;
+fsum lanes `{1.5+1.0, 2.25+0.5, -3.0+2.0, 0.125-0.25}` → `{2.5, 2.75, -1., -0.125}` (all exact in binary32),
+d[0]+d[3] → 2.375; halving `{3.0, -0.75, 1024}` → `{1.5, -0.375, 512}`.
 
 Red before green (this change): with the generator of commit e7777ca, the C caller dies with SIGILL
 under BTI, and the 4,000,000-byte array on a 2 MiB thread dies with SIGSEGV; with this generator both

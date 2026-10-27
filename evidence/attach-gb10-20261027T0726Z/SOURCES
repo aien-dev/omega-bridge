@@ -1,0 +1,2 @@
+CUDApp src: aien-dev/CUDApp#139 fba0384 (diff -rq src clean), libomega_gpu.a sha256 725341d11fb8d879f70101fbf1c580aadee6aa113dfe1e46ca0374ad76a3543e
+libcudapp_attach.so sha256 b5fb715c9fe7dd48749a01ccd699135eca7f3e5a26635b28c510b5441de7a426; torch 2.14.1+cpu; python Python 3.12.3

@@ -100,6 +100,25 @@ if command -v c++ > /dev/null; then
   run cpp "$O/caller_cpp"
 else notrun="$notrun c++"; fi
 if command -v python3 > /dev/null; then run python python3 -I "$O/caller.py"; else notrun="$notrun python"; fi
+# py mode: input led by the 4 bytes 0 "py" newline gives a Python module (ctypes) for the C file the same
+# units generate. The units here add the f32 and ushort kinds (fsum, halve) to the C callers' set.
+PU="$U fsum halve"
+for u in fsum halve; do "$OMC" < "$T/$u.om" > "$O/$u.bin"; done
+pygen() { for u in $PU; do frame $u "$1"; done | "$O/native" > "$1/py/omega_native.c"
+  { printf '\0py\n'; for u in $PU; do frame $u "$1"; done; } | "$O/native" > "$1/py/omega_native.py"
+  cc -std=gnu11 -O2 -Wall -Wextra -Werror -fPIC -shared -o "$1/py/libomega_native.so" "$1/py/omega_native.c"; }
+mkdir -p "$O/py" "$O/mut/py"; pygen "$O"
+printf '\0py\n' > "$O/ref.in"; refuse "py mode with no unit"
+{ printf '\0py\n'; unitin "fn a-b $S"; } > "$O/ref.in"; refuse "py mode: a unit name that is not a C identifier"
+{ printf '\0py\n'; unitin "${H}fn m x uint to ulong
+ret 0
+end
+"; } > "$O/ref.in"; refuse "py mode: a bound function with an unsupported parameter type"
+if grep -q 'omega_native.py\|ctypes\|def omega_' "$O/omega_native.c"; then fail "C mode output carries py mode text"
+else pass "C mode output unchanged by py mode (no Python text)"; fi
+if command -v python3 > /dev/null; then
+  run python-gen python3 -I "$T/pybind.py" "$O/py/omega_native.py" "$O/py/libomega_native.so"
+else notrun="$notrun python-gen"; fi
 if command -v rustc > /dev/null; then
   rustc -O --edition 2021 "$O/caller.rs" -L "$O" -C link-arg=-Wl,-rpath,"$O" -o "$O/caller_rs"
   run rust "$O/caller_rs"
@@ -115,16 +134,23 @@ if command -v go > /dev/null; then
   else fail "go build"; cat "$O/go.build.log"; fi
 else notrun="$notrun go"; fi
 # Negative control: madd's add turned into sub must be caught.
-cp "$O/smadd.bin" "$O/fill.bin" "$O/spin.bin" "$O/mix.bin" "$O/big.bin" "$O/hsum.bin" "$O/mut/"
+cp "$O/smadd.bin" "$O/fill.bin" "$O/spin.bin" "$O/mix.bin" "$O/big.bin" "$O/hsum.bin" "$O/fsum.bin" "$O/halve.bin" "$O/mut/"
 printf '\003\174\001\233\140\000\002\313\300\003\137\326' > "$O/mut/madd.bin"
 gen "$O/mut"
 cc -std=gnu11 -O2 -fPIC -shared -Wl,-soname,libomega_native.so -o "$O/mut/libomega_native.so" "$O/mut/omega_native.c"
 cc -std=gnu11 -O2 -pthread "$O/caller.c" -L"$O/mut" -lomega_native -Wl,-rpath,"$O/mut" -o "$O/mut/caller_c"
 if "$O/mut/caller_c" > "$O/mut/c.log" 2>&1; then fail "mutant madd (add -> sub) not caught"
 else pass "mutant madd (add -> sub) caught ($(grep -c '^FAIL' "$O/mut/c.log") failing checks)"; fi
+# The same mutant through the generated Python module must be caught too.
+if command -v python3 > /dev/null; then
+  pygen "$O/mut"
+  if python3 -I "$T/pybind.py" "$O/mut/py/omega_native.py" "$O/mut/py/libomega_native.so" > "$O/mut/py.log" 2>&1; then
+    fail "mutant madd (add -> sub) not caught through the py mode module"
+  else pass "mutant madd (add -> sub) caught through the py mode module ($(grep -c '^FAIL' "$O/mut/py.log") failing checks)"; fi
+fi
 for l in $notrun; do echo "NOT_RUN $l caller: toolchain not installed"; done
 if [ "$fails" -eq 0 ]; then
-  for l in c c-bti cpp python rust zig go; do
+  for l in c c-bti cpp python python-gen rust zig go; do
     case " $ran " in *" $l "*) ;; *) case " $notrun " in *" $l "*) ;; *) fail "$l caller not executed" ;; esac ;; esac
   done
 fi
