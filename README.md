@@ -34,6 +34,8 @@ quiet-build python3 tests/attachments.py
 
 See [supported features and limits](docs/CAPABILITIES.md), [caller ABI and ownership](docs/ABI.md), [design and study decisions](docs/DESIGN.md), and [provenance](docs/PROVENANCE.md). Text constants, floats, heap operations and other target languages are explicitly unsupported by the C/Python converters. GPU interoperability is a separate, opt-in adapter boundary (it converts no host program): see [GPU adapter](docs/GPU-ADAPTER.md) and the [support matrix](docs/GPU-SUPPORT-MATRIX.md). Python/C input conversion is not implemented. The Python test harness is infrastructure; all conversion logic and both runtime emitters are in [src/toc.om](src/toc.om).
 
+PyTorch: `torch.compile(model, backend="omega")` runs a small set of float32 core-ATen ops (mm, addmm, 2-D transpose, add, relu, softmax) on CPU through Omega-generated AArch64 kernels called via the native call ABI, and refuses everything else. The Python under `pytorch/omega_torch/` is interim glue that computes no tensor value. Exercised on CPU against PyTorch eager only; see [docs/OMEGA-TORCH.md](docs/OMEGA-TORCH.md).
+
 ## License
 
 First-party material is licensed under the Apache License, Version 2.0 with LLVM

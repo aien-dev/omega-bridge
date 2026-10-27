@@ -1,0 +1,21 @@
+note addmm: o[M,N] = c[N] + a[M,K] @ b[K,N] (aten.addmm, beta 1, alpha 1, bias over rows), row-major
+note f32. Each sum starts at the bias, is summed in f64 and rounded once to f32.
+note The caller supplies const lines M K N MK KN MN before this text.
+fn amdot c view f32 N a view f32 MK b view f32 KN i ulong j ulong to f64
+s = f64 get c j
+ia = mul i K
+rb = j
+for k ulong K
+s = add s mul f64 get a ia f64 get b rb
+ia = add ia 1
+rb = add rb N
+end
+ret s
+end
+fn addmm c view f32 N a view f32 MK b view f32 KN o edit f32 MN to void
+for i ulong M
+for j ulong N
+put o add mul i N j f32 amdot c a b i j
+end
+end
+end

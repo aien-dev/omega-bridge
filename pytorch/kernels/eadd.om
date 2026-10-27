@@ -1,0 +1,7 @@
+note eadd: o = a + b element by element (aten.add.Tensor, alpha 1, equal shapes), one f32 rounding.
+note The caller supplies the const line L (the element count) before this text.
+fn eadd a view f32 L b view f32 L o edit f32 L to void
+for i ulong L
+put o i add get a i get b i
+end
+end

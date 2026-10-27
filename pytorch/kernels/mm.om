@@ -1,0 +1,20 @@
+note mm: o[M,N] = a[M,K] @ b[K,N] (aten.mm), row-major f32. Each dot product is summed in f64 and
+note rounded once to f32. The caller supplies const lines M K N MK KN MN before this text.
+fn mmdot a view f32 MK b view f32 KN i ulong j ulong to f64
+s = 0.0f64
+ia = mul i K
+rb = j
+for k ulong K
+s = add s mul f64 get a ia f64 get b rb
+ia = add ia 1
+rb = add rb N
+end
+ret s
+end
+fn mm a view f32 MK b view f32 KN o edit f32 MN to void
+for i ulong M
+for j ulong N
+put o add mul i N j f32 mmdot a b i j
+end
+end
+end
