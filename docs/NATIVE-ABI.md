@@ -43,8 +43,10 @@ anything outside the supported signature set is refused (exit 110, no output). T
 Names must be C identifiers, a parameter name may not end in `_len` (the binding names a length
 `o_<name>_len`), and each unit name appears once; anything else is refused before any C is written.
 
-Supported signatures: up to 6 parameters, each `ulong`, `long`, or `edit`/`view` of `ulong` or `uchar`
-with a fixed length; result `ulong`, `long` or `void`. A unit may hold several functions: the seeded
+Supported signatures: up to 6 parameters, each `ulong`, `long`, or `edit`/`view` of `ulong`, `uchar`,
+`f32` or `ushort` with a fixed length; result `ulong`, `long` or `void`. An `f32` array is packed binary32
+(4-byte elements, 4-byte alignment) and a `ushort` array is packed 16-bit words (2-byte alignment), for
+example binary16 bits that the Omega code converts itself. A unit may hold several functions: the seeded
 compiler enters function-mode code at the unit's last function (word 0 is a branch to it), so the
 binding exports that one and the earlier functions stay private helpers, called directly inside the
 embedded code, with any Omega types. Only the last function's signature must be supported
@@ -110,6 +112,14 @@ A missing toolchain emits `NOT_RUN` and makes the runner exit nonzero, not a qua
 `OMEGA_NATIVE_OMC=<seed omc> sh tests/native/test_build_failures.sh` to check build-failure and
 missing-toolchain controls, followed by positive calls with the real Zig and Go toolchains. The
 historical `evidence/native-call-v1/run.log` predates this runner correction and is not rewritten.
+
+The `f32` and `ushort` kinds: `OMEGA_NATIVE_OMC=<seed omc> sh tests/native/kinds.sh` (same pinned
+compiler) binds `fsum.om` (an `f32` view, a `ushort` view of binary16 bits converted in Omega, an `f32`
+edit array) and `halve.om` (a `ushort` edit array in place). The C caller compares every lane to values
+it computes itself with the compiler's `_Float16` conversion, and checks the refusals for these kinds:
+2-byte-misaligned `f32`, odd-address `ushort`, a wrong length, an `f32` edit overlapping an `f32` view, a
+`ushort` view overlapping an `f32` edit, and a null `ushort` edit (all status 32). Negative control:
+fsum's `add` changed to `sub` in the source must make the caller fail. First user: aien-dev/ggml-omega.
 
 Red before green (this change): with the generator of commit e7777ca, the C caller dies with SIGILL
 under BTI, and the 4,000,000-byte array on a 2 MiB thread dies with SIGSEGV; with this generator both

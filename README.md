@@ -34,6 +34,10 @@ quiet-build python3 tests/attachments.py
 
 See [supported features and limits](docs/CAPABILITIES.md), [caller ABI and ownership](docs/ABI.md), [design and study decisions](docs/DESIGN.md), and [provenance](docs/PROVENANCE.md). Text constants, floats, heap operations and other target languages are explicitly unsupported by the C/Python converters. GPU interoperability is a separate, opt-in adapter boundary (it converts no host program): see [GPU adapter](docs/GPU-ADAPTER.md) and the [support matrix](docs/GPU-SUPPORT-MATRIX.md). Python/C input conversion is not implemented. The Python test harness is infrastructure; all conversion logic and both runtime emitters are in [src/toc.om](src/toc.om).
 
+## Connected repos
+
+- [aien-dev/ggml-omega](https://github.com/aien-dev/ggml-omega): a ggml/llama.cpp backend whose op kernels are seeded-Omega units bound through this repo's [native call ABI](docs/NATIVE-ABI.md) (`f32`/`ushort` array kinds). It pins this repo's `src/native.om` by sha256.
+
 ## License
 
 First-party material is licensed under the Apache License, Version 2.0 with LLVM

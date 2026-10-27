@@ -1,0 +1,18 @@
+note fsum: d[i] = a[i] + f16 h[i] in f32 for 4 lanes (h binary16 bits, converted here; zero and normal
+note inputs), and returns the f32 bit pattern of d[0] + d[3]: an f32 view, a ushort view and an f32 edit array.
+fn h2b h ushort to uint
+v = uint h
+s = shl and shr v 15 1 31
+e = and shr v 10 31
+m = and v 1023
+if eq e 0
+ret s
+end
+ret or or s shl add e 112 23 shl m 13
+end
+fn fsum a view f32 4 h view ushort 4 d edit f32 4 to ulong
+for i ulong 4
+put d i add get a i bitcast f32 h2b get h i
+end
+ret ulong bitcast uint add get d 0 get d 3
+end
