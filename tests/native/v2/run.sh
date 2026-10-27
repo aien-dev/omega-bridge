@@ -1,8 +1,9 @@
 #!/bin/sh
 # Native call ABI v2 qualification (docs/NATIVE-ABI.md, ABI v2). OMEGA_NATIVE_OMC names the seeded omc
 # (pinned by tools/native); OMEGA_NATIVE_OMC2 names the OM-2 compiler that compiles this folder's OM-2
-# units (omega-mv om2/compiler-s4 @ f6a6492fd, sha256 49923639...803ec, when this run was recorded; its
-# digest is what the identities carry). A missing language toolchain is reported
+# units; it must hoist loop constants (omega-mv perf/omc-loop-checks @ c4953df7b, sha256 13ce76c2...8b69,
+# when this run was recorded; its digest is what the identities carry), or the hoist check fails. A
+# missing language toolchain is reported
 # NOT_RUN, never PASS. Exit 0 only when every run check passed. `run.sh measure` also runs the cost
 # measurement (tests/native/v2/measure.c).
 set -eu
@@ -86,11 +87,19 @@ for u in $V2; do
   cmp -s "$W/$u.bin" "$O/$u.emb" || ok=0
 done
 if [ $ok = 1 ]; then pass "embedded code == compiler output, per OM-2 unit"; else fail "embedded code differs"; fi
-# hoist.om exercises the callee-saved registers only if this OM-2 compiler keeps a value in x19..x28
-# (loop-constant hoisting, omega-mv perf/omc-loop-checks); the C caller's probe checks them either way.
-if objdump -D -b binary -m aarch64 "$W/hoist.bin" | grep -q -E '[[:space:]](mov|movk|movz)[[:space:]]+x(19|2[0-8]),'; then
-  echo "INFO hoist: this OM-2 compiler writes a callee-saved register (x19..x28) in hoist's code"
-else echo "INFO hoist: this OM-2 compiler writes no callee-saved register in hoist's code (no hoisting)"; fi
+# Registers the code writes, decoded: the first operand of every instruction that has a destination (not
+# a store, compare, test or branch). hoist must write x20..x26 (hadd's seven hoisted constants) and some of
+# d8..d15 (inner's conversions; s8..s15 count); no unit's code may name x19 or x29 at all (NATIVE-ABI.md:
+# the trampoline's trap path rests on x19). A non-hoisting OMEGA_NATIVE_OMC2 fails here.
+dst() { objdump -D -b binary -m aarch64 "$1" | awk -F'\t' 'NF >= 4 && $3 !~ /^(st|cmp|cmn|tst|cb|tb|b$|b\.|bl|br|ret|ccmp|fcmp|prfm|hint|nop|dmb)/ {split($4, a, ","); gsub(/ /, "", a[1]); print a[1]}' | sort -u; }
+dst "$W/hoist.bin" > "$O/hoist.dst"
+hx=$(grep -c -x -E 'x2[0-6]' "$O/hoist.dst" || true); hd=$(grep -c -x -E '[ds]([89]|1[0-5])' "$O/hoist.dst" || true)
+if [ "$hx" = 7 ] && [ "$hd" -ge 1 ]; then pass "hoist writes x20..x26 and $hd of d8..d15 (decoded destinations)"
+else fail "hoist writes $hx of x20..x26 and $hd of d8..d15: OMEGA_NATIVE_OMC2 does not hoist (omega-mv perf/omc-loop-checks)"; fi
+ok=1; for u in $V2; do
+  if objdump -D -b binary -m aarch64 "$W/$u.bin" | awk -F'\t' 'NF >= 4' | cut -f4 | grep -q -w -E '[xw](19|29)'; then ok=0; echo "INFO $u names x19 or x29"; fi
+done
+if [ $ok = 1 ]; then pass "no OM-2 unit's code names x19 or x29"; else fail "a unit's code names x19 or x29"; fi
 # The exported symbols: one omega2_ per export, one ident per unit, the OM-1 unit's omega_, nothing else.
 nm -D --defined-only "$O/libomega_native.so" | awk '{print $3}' | grep -E '^omega' | sort > "$O/syms.txt"
 printf '%s\n' omega2_absorb omega2_bsum omega2_digest omega2_fillv omega2_hadd omega2_halt omega2_ident_hoist omega2_ident_lay \
@@ -267,6 +276,36 @@ mut() {
 mut wrap '/^text fv /s/ || n \* es > UINTPTR_MAX - lo)/)/' '#748 golden: vpart len 2\^64-1'
 mut overlap '/^text fv /s/if ((sp\[i\].w == 1 || sp\[j\].w == 1 ||/if ((/' 'vcopy edit == view'
 mut outcopy '/^text fv /s/memmove(o\[i\].dst, buf\[i\], o\[i\].n);/;/' 'digest: tag'
+
+# 9b. The trampoline alone: tramp.c includes the generated omega_native.c and calls ombr_enter directly
+# (no C wrapper that could keep a register for itself) with a hand-assembled unit that writes x20..x29 and
+# d8..d15, returning and trapping. Then one mutant per restore pair in ombr_leave, each removed in a copy
+# of the generator (x29: restored no more, x30 still): every one must make tramp fail.
+tb() { cc -std=gnu11 -O2 -Wall -Wextra -Werror -include "$1/omega_native.h" -I "$1" "$T/tramp.c" -o "$1/tramp" > "$1/tramp-build.log" 2>&1; }
+if tb "$O" && "$O/tramp" > "$O/tramp.log" 2>&1; then pass "trampoline called directly: $(grep -c '^PASS' "$O/tramp.log") checks (return, trap)"
+else fail "trampoline called directly"; cat "$O/tramp-build.log" "$O/tramp.log"; fi
+tmut() {
+  name=$1; M=$O/tmut-$name; mkdir -p "$M"
+  sed "$2" "$ROOT/src/native.om" > "$M/native.om"
+  n=$(diff "$ROOT/src/native.om" "$M/native.om" | grep -c '^<' || true)
+  [ "$n" = 1 ] || { fail "trampoline mutant $name changed $n lines"; return 0; }
+  "$OMC" < "$M/native.om" > "$M/gen"; chmod +x "$M/gen"
+  "$M/gen" c < "$W/units.in" > "$M/omega_native.c"; "$M/gen" h < "$W/units.in" > "$M/omega_native.h"
+  cmp -s "$M/omega_native.c" "$O/omega_native.c" && { fail "trampoline mutant $name: library unchanged"; return 0; }
+  tb "$M" || { fail "trampoline mutant $name: build"; cat "$M/tramp-build.log"; return 0; }
+  if timeout 10 "$M/tramp" > "$M/tramp.log" 2>&1; then fail "trampoline mutant $name not caught"
+  else pass "trampoline mutant $name caught ($(grep -c '^FAIL' "$M/tramp.log") failing checks$(grep -q 'TRAMP FAIL' "$M/tramp.log" || echo ', crashed'))"; fi
+}
+tmut x19x20 's/ldp x19,x20,\[sp,#16\]\\\\n//'
+tmut x21x22 's/ldp x21,x22,\[sp,#32\]\\\\n//'
+tmut x23x24 's/ldp x23,x24,\[sp,#48\]\\\\n//'
+tmut x25x26 's/ldp x25,x26,\[sp,#64\]\\\\n//'
+tmut x27x28 's/ldp x27,x28,\[sp,#80\]\\\\n//'
+tmut d8d9 's/ldp d8,d9,\[sp,#96\]\\\\n//'
+tmut d10d11 's/ldp d10,d11,\[sp,#112\]\\\\n//'
+tmut d12d13 's/ldp d12,d13,\[sp,#128\]\\\\n//'
+tmut d14d15 's/ldp d14,d15,\[sp,#144\]\\\\n//'
+tmut x29 's/ldp x29,x30,\[sp\],#176\\\\n/ldr x30,[sp,#8]\\\\nadd sp,sp,#176\\\\n/'
 
 # 10a. The C API out of line (outputs apih, apic) for freestanding consumers. The inline header
 # (output api) stays byte for byte what 3d79d77's generator (with #17's prelude) wrote, as does every

@@ -1,18 +1,47 @@
 note hoist.om: an OM-2 unit for the native ABI v2 tests whose code writes callee-saved registers. An OM-2 omc
-note with loop-constant hoisting (omega-mv perf/omc-loop-checks, omc 55b73f0a) keeps the literals 70000,
-note 90000 and 80000 of the constant-count loop in x20, x21 and x22; caller.c checks that x19..x28 and
-note d8..d15 keep the caller's values across a normal return and a trap (trap 9 after the loop, so after
-note those registers were written).
+note with loop-constant hoisting (omega-mv perf/omc-loop-checks, omc 13ce76c2) keeps the seven literals of
+note hadd's constant-count loop in x20..x26, the most it hoists, and inner's two in x20 and x21; inner's
+note conversions with eleven values live are made in v8 and up, so they write d8..d15. caller.c checks that
+note x19..x28 and d8..d15 keep the caller's values across a normal return and a trap 9 raised in inner, a
+note callee of the exported function, after both functions wrote those registers. run.sh decodes the code
+note and fails unless x20..x26 and some of d8..d15 are written and x19 and x29 are not.
 om2
+fn inner k ulong to ulong
+s = ulong 0
+for i ulong 64
+s = add s 50001
+s = sub s 50000
+end
+b = add s 1
+c = add s 2
+d = add s 3
+e = add s 4
+f = add s 5
+g = add s 6
+h = add s 7
+j = add s 8
+x = ulong f64 add s 10
+y = ulong f32 f64 add s 11
+if ne k 0
+trap 9
+end
+s = add s add b c
+s = add s add d e
+s = add s add f g
+s = add s add h j
+s = add s x
+ret add s y
+end
 export fn hadd d edit ulong 64 k ulong to ulong
 s = ulong 0
 for i ulong 64
 put d i add get d i 70000
-s = add s 90000
-s = sub s 80000
+s = add s 90001
+s = sub s 80002
+s = add s 60003
+s = sub s 50004
+s = add s 40005
+s = sub s 30006
 end
-if ne k 0
-trap 9
-end
-ret s
+ret add s inner k
 end

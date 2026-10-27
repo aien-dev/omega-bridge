@@ -66,6 +66,25 @@ static void *swap_thread(void *arg)
     return 0;
 }
 
+/* hoist_thread: 5000 calls of the hoisting unit on this thread's own Omega stack; every fifth call traps
+ * in inner, after the loop wrote this thread's array. */
+static void *hoist_thread(void *arg)
+{
+    uint8_t *ok = arg;
+    uint64_t d[64] = {0};
+    *ok = 1;
+    for (int k = 0; k < 5000; k++) {
+        uint64_t r = R0, t = (uint64_t)(k % 5 == 4);
+        uint32_t s = omega2_hadd(&r, d, 64, t);
+        if (t ? s != 9 || r != R0 : s != OMEGA_OK || r != 1920569)
+            *ok = 0;
+        for (int i = 0; i < 64; i++)
+            if (d[i] != 70000ull * (uint64_t)(k + 1))
+                *ok = 0;
+    }
+    return 0;
+}
+
 /* ombr_probe(fn, result, a, b, c): set x19..x28 and d8..d15 to known values, call fn(result, a, b, c),
  * then return the status in the low 32 bits and the number of changed registers in the high 32 bits
  * (as tests/native/caller.c). */
@@ -365,9 +384,10 @@ int main(void)
     pthread_join(t2, 0);
     check("two threads x 20000 swap8 calls", ok1 && ok2);
 
-    /* Callee-saved registers: hoist's code keeps its loop constants in x20..x22 (with a hoisting OM-2
-     * omc; run.sh reports whether this one does). The caller's x19..x28 and d8..d15 survive a normal
-     * return and a trap 9 taken after the loop. */
+    /* Callee-saved registers: hoist's code keeps hadd's seven loop constants in x20..x26 and inner's in x20
+     * and x21, and inner's conversions write d8..d15 (with a hoisting OM-2 omc; run.sh fails unless the code
+     * writes them). The caller's x19..x28 and d8..d15 survive a normal return and a trap 9 raised in inner,
+     * the exported function's callee. 1920569 = 64 * 29997 + 761 (inner's result for k = 0). */
     uint64_t hd[64], pv;
     for (int i = 0; i < 64; i++)
         hd[i] = (uint64_t)i;
@@ -376,10 +396,16 @@ int main(void)
     int hok = 1;
     for (int i = 0; i < 64; i++)
         hok &= hd[i] == (uint64_t)i + 70000;
-    check("hoist: x19..x28 and d8..d15 kept across a normal return", (uint32_t)pv == OMEGA_OK && (pv >> 32) == 0 && r == 64 * 10000ull && hok);
+    check("hoist: x19..x28 and d8..d15 kept across a normal return", (uint32_t)pv == OMEGA_OK && (pv >> 32) == 0 && r == 1920569 && hok);
     r = R0;
     pv = ombr_probe((void *)omega2_hadd, &r, (uint64_t)(uintptr_t)hd, 64, 1);
-    check("hoist: x19..x28 and d8..d15 kept across a trap 9", (uint32_t)pv == 9 && (pv >> 32) == 0 && r == R0);
+    check("hoist: x19..x28 and d8..d15 kept across a trap 9 in a callee", (uint32_t)pv == 9 && (pv >> 32) == 0 && r == R0);
+    uint8_t hk1 = 0, hk2 = 0;
+    pthread_create(&t1, 0, hoist_thread, &hk1);
+    pthread_create(&t2, 0, hoist_thread, &hk2);
+    pthread_join(t1, 0);
+    pthread_join(t2, 0);
+    check("two threads x 5000 hadd calls (every fifth a trap)", hk1 && hk2);
 
     free(lb);
     free(lw);
