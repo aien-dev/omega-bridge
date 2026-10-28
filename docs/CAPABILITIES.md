@@ -93,3 +93,63 @@ No device qualification is implied.
 byte-for-byte over zero, subnormal, normal, overflow, infinity and NaN inputs.
 It includes baseline/Python, public-float, array, numeric-cast, unsupported-op,
 header-validation and fast-math refusal controls. These are host results only.
+
+## Portable import-free scalar profile
+
+`tools/bridge-freest c|h SOURCE.om` is a separate, fail-closed profile. It
+does not replace the hosted `tools/bridge-seeded c|python|h` roots. Its parser,
+structural checks and emitter are implemented in `src/freest.om`, derived from
+the baseline converter's lexer, signature tables and typed expression nodes.
+The shell entrypoint only snapshots, checks compiler fingerprints, validates
+with the seeded frontend, compiles the Omega converter and publishes its output
+after success. It implements no source parser.
+
+Use the same `OMEGA_SEED` baseline fingerprint and `OMEGA_SEEDED_OMC` frontend
+fingerprint documented above. The wrapper validates and converts the identical
+snapshot. No native x86 Omega compiler is required: portable C is compiled by the
+consumer's C compiler. Both `c` and `h` traverse the complete source before
+publishing bytes, including every unused helper. Headers cannot bypass profile
+refusal. The input bounds and scalar type/name limits remain those of the
+seeded frontend and converter tables.
+
+The accepted subset is integer-only, stateless and nontrapping: scalar
+signatures, literal constants, scalar locals, `if`/`else`, `ret`, and acyclic
+function calls. Unsigned non-bool addition, subtraction, multiplication and
+negation wrap at the declared width. Integer comparisons and bitwise operations
+are supported, as are identity and same-signedness widening conversions
+(including bool to a wider unsigned type). Signed arithmetic, division,
+remainder, every shift, narrowing and signedness-changing conversions are
+refused conservatively, even when a particular constant or path could be safe.
+Loops, arrays, mutable globals, text, I/O, host words, `main`, recursion, floats,
+explicit traps, contracts and OM-2 are outside this profile. Refusal applies to
+the complete unit, not merely the exported root or reachable helpers. No
+function-name whitelist is used.
+Spell scalar types as `bool`, `uchar`, `ushort`, `uint`, `ulong`, `byte`,
+`short`, `int` or `long`; short type aliases are outside this profile.
+
+The final function is exported as `uint32_t omega_NAME(uint64_t *result, ...)`.
+The result pointer is first. Arguments and results use canonical uint64_t
+integer bits, including sign extension for signed values. Status 0 stores the
+result; status 32 refuses null, misaligned or wrapping result addresses and
+noncanonical scalar arguments before any store. As with other native pointer
+ABIs, callers remain responsible for supplying valid writable storage; the
+profile does not probe mapped-memory permissions. There are no runtime traps,
+reentry state, TLS, setjmp/longjmp, libc calls or host imports in generated code.
+The output includes only the standard integer type header and pure local
+helpers; it is not a call into AArch64 machine code.
+
+For independent integration, dispatch a future `bridge-seeded freest|freest-h`
+mode directly to `tools/bridge-freest c|h` before its hosted-mode case. Keep
+the hosted roots unchanged. `tests/freest.py` exercises both hosted and freest
+revision/epoch roots, the result-first ABI and exhausted-generation boundaries,
+arbitrary helpers, structural refusal controls and a wrong-result control.
+It inspects O0/O2 freestanding objects and a `-r -nostdlib` link with `nm -u`
+(requiring an empty set, not an import allowlist) and `readelf` (no TLS sections).
+Run it after `tools/build.sh` with both pinned compilers configured. Set
+`FREEST_CUDAPP_ROOT` to use a consumer checkout's actual revision/epoch sources
+instead of the checked-in source-shape fixtures. For x86-64 execution from an
+AArch64 host, set `CC=x86_64-linux-gnu-gcc` and
+`FREEST_RUNNER='qemu-x86_64 -L /usr/x86_64-linux-gnu'`.
+The default hosted optimization is O2; `HOSTED_OPT` selects an explicit
+comparison build and is printed in the result. These are targeted host checks,
+not device qualification.

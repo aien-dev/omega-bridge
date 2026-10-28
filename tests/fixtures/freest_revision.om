@@ -1,0 +1,8 @@
+note SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+note CUDApp om/pipeline/revision.om scalar source shape; zero refuses exhausted generation.
+fn native_revision previous ulong to ulong
+if eq previous 18446744073709551615
+ret 0
+end
+ret add previous 1
+end

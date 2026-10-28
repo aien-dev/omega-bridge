@@ -1,0 +1,23 @@
+note SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+note Arbitrary names, constants, nested calls, branch locals, signed comparisons and wrap.
+const STEP ulong 1
+fn upper x uint to ulong
+ret ulong add x uint 1
+end
+fn choose x long to long
+if lt x long 0
+ret long -1
+else
+ret long 1
+end
+end
+fn portable_scalar value uint signedv long to ulong
+v = upper value
+if lt choose signedv long 0
+narrow = uchar 7
+v = add v ulong narrow
+else
+v = add v STEP
+end
+ret v
+end
