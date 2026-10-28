@@ -20,10 +20,10 @@ units and supplies their compiler identity, as before.
 
 For `--target x86linux`, `OMEGA_NATIVE_X86_OMC` compiles **both** OM-1 and OM-2
 units and must have sha256
-`f7752bc5c800e85c2393a08153786d0a6bc4516c9cea955fe27624228d6d1409`.
+`badedbb0c6287887641fcd7e97301b43b5f82f2d7a2838bbe0d17547873108be`.
 Its compiler source sha256 is
-`e9d70e7cbe1b7026b2fcac5bbf61a64bde931b50a632c954355ba5299954a61c`,
-at omega-mv `efd15c234afc584e1e67492e736cbb42806c2a7d` on pending compiler draft #923.
+`4b5392fffd25a3a37844ad8bb5138fbaada690be7dae95132614524bdb78a1e0`,
+at omega-mv `3e66b6744590cc72c623d8e09413b9072bcab36e` on pending compiler draft #923.
 This is a separate candidate compiler pin, not a replacement for the generator's
 baseline pin. `OMEGA_NATIVE_OMC2` is not used for this target. Each compiler
 input is `target x86linux\n` followed by the snapshotted source. The directive
@@ -52,11 +52,11 @@ compiler digest refuses before generating or installing outputs.
 **Evidence boundary:** the x86 integration is IMPLEMENTED and EXERCISED under
 QEMU 10.0.14, not qualified by the historical AArch64 receipts below. At the
 current x86 compiler pin, see
-[`evidence/native-x86-f7752bc5/qualification.json`](../evidence/native-x86-f7752bc5/qualification.json)
-and its command receipts; the earlier pin's receipts remain in
-`evidence/native-x86/`. Native physical x86-64 execution remains **NOT_RUN**.
+[`evidence/native-x86-badedbb0/qualification.json`](../evidence/native-x86-badedbb0/qualification.json)
+and its command receipts; earlier pins' receipts remain in
+`evidence/native-x86-f7752bc5/` and `evidence/native-x86/`. Native physical x86-64 execution remains **NOT_RUN**.
 No GPU execution is part of this target. The compiler dependency is draft PR
-#923, whose full differential at this pin is FAIL (60 cases), so this bridge
+#923, whose full differential at this pin is FAIL (54 cases), so this bridge
 receipt does not qualify the compiler.
 
 ### x86 emulator runner and QEMU oracle
