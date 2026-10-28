@@ -1,0 +1,4 @@
+PASS control zig-build (exit 1; NATIVE-CALL FAIL)
+PASS control go-build (exit 1; NATIVE-CALL FAIL)
+PASS control missing (exit 1; NATIVE-CALL NOT_RUN)
+PASS native callers: Zig and Go built and executed; no missing languages
