@@ -37,7 +37,7 @@
 # Freestanding x86 output is not supported and is refused before creating OUTDIR.
 set -eu
 PIN=734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61
-X86_PIN=1f0fdef06574ffec782c164941114edcf51f36f9f9cd1e79bc0452dbcebb3322
+X86_PIN=f7752bc5c800e85c2393a08153786d0a6bc4516c9cea955fe27624228d6d1409
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 OMC=${OMEGA_NATIVE_OMC:?set OMEGA_NATIVE_OMC to the seeded omc (omega seed/out/omc, sha256 $PIN)}
 got=$(sha256sum < "$OMC" | cut -d' ' -f1)

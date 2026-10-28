@@ -320,9 +320,20 @@ class Suite:
         for args in ([], ["java", "x86linux"], ["c", "unknown"], ["c", "x86linux", "extra"]):
             result = self.call([self.gen, *args], data=self.frame_set)
             self.check("generator refuses argument vector " + repr(args), result.returncode == 110 and not result.stdout)
+        wrong_pin = dict(self.env, OMEGA_NATIVE_X86_OMC=self.omc)
+        absent = self.out / "wrong-compiler-pin"
+        result = self.call([ROOT / "tools/native", "--target", "x86linux", absent, N / "madd.om"], env=wrong_pin)
+        self.check("mismatched x86 compiler refuses before creating outputs",
+                   result.returncode == 1 and not result.stdout and b"x86 omc sha256" in result.stderr
+                   and b", pinned " in result.stderr and not absent.exists())
         keep = self.out / "keep"
         self.must([ROOT / "tools/native", "--target", "x86linux", keep, N / "madd.om"])
         before = {str(p.relative_to(keep)): p.read_bytes() for p in keep.rglob("*") if p.is_file()}
+        result = self.call([ROOT / "tools/native", "--target", "x86linux", keep, N / "madd.om"], env=wrong_pin)
+        after = {str(p.relative_to(keep)): p.read_bytes() for p in keep.rglob("*") if p.is_file()}
+        self.check("mismatched x86 compiler preserves previous outputs",
+                   result.returncode == 1 and not result.stdout and b"x86 omc sha256" in result.stderr
+                   and before == after)
         bad = self.out / "bad.om"
         bad.write_bytes(b"fn m a ulong to uchar\nret uchar a\nend\n")
         result = self.call([ROOT / "tools/native", "--target", "x86linux", keep, N / "madd.om", bad])

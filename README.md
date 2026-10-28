@@ -64,8 +64,10 @@ The x86 emulator suite selects its oracle with `QEMU_X86_64`; use the unpatched
 QEMU 10.0.14 oracle and guest Python setup documented in
 [native call ABI](docs/NATIVE-ABI.md#x86-emulator-runner-and-qemu-oracle).
 QEMU 8.2.2 has observed signal and `/proc/self/maps` limitations for these
-callers. The full suite and failed/missing-toolchain controls passed EMULATED;
-see [the pinned receipts](evidence/native-x86/qualification.json). Physical x86
+callers. At the current x86 compiler pin, the full suite plus mismatched-pin and
+failed/missing-toolchain controls passed EMULATED; see
+[the pinned receipts](evidence/native-x86-f7752bc5/qualification.json). The
+earlier pin's receipts remain in `evidence/native-x86/`. Physical x86
 execution remains NOT_RUN.
 
 ## License
