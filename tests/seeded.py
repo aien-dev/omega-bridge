@@ -98,14 +98,15 @@ end
 """)
 (b / "unit.c").write_bytes(checked(["sh", "tools/bridge-seeded", "c", unit]))
 header = checked(["sh", "tools/bridge-seeded", "h", unit])
-assert b"omega_seedunit" in header and b"{" not in header
+assert b"omega_seedunit" in header and b"const void *" in header and b"{" not in header
 (b / "unit.h").write_bytes(b"#include <stdint.h>\n" + header)
 (b / "caller.c").write_text('''#include "unit.h"
 int main(void) {
-    uint64_t a[4] = {42}, out[4] = {0}, result = 0;
+    const uint64_t a[4] = {42};
+    uint64_t out[4] = {0}, result = 0;
     if (omega_seedunit(0,a,4,out,4) != 32) return 1;
     if (omega_seedunit(&result,a,3,out,4) != 32) return 2;
-    if (omega_seedunit(&result,a,4,a,4) != 32) return 3;
+    if (omega_seedunit(&result,out,4,out,4) != 32) return 3;
     if (omega_seedunit(&result,a,4,out,4) != 0 || result != 42 || out[0] != 42) return 4;
     return 0;
 }

@@ -59,7 +59,7 @@ The result pointer comes first; scalars use canonical uint64_t bits; arrays
 use address and element-count pairs. Counts must equal the declared fixed
 shape. ABI statuses are 0 for completion, 1 through 14 for Omega traps, 32 for
 invalid host arguments or overlapping arrays, and 33 for reentry. Views are
-not written by Omega. Generated C contains the implementation and checked
+not written by Omega and use const-qualified C pointers. Generated C contains the implementation and checked
 runtime, not a call into AArch64 machine code, and can be compiled on Linux
 x86-64 with GNU C. Native call adapters remain a separate AArch64 path.
 
