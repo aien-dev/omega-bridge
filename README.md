@@ -23,6 +23,14 @@ qualification. Native x86 compiled-C consumer coverage is separate in CUDApp's
 `Ampere native x86 host` workflow; the failing native Omega compiler923 is
 not a dependency of either route.
 
+The scalar profile admits unsigned shifts only when the count is a literal
+or resolved scalar constant below the operand's width. Dynamic, negative,
+boolean, signed-operand and out-of-width shifts remain refused across the
+whole unit, including unused helpers. Count validation precedes emission;
+the generated C uses unsigned operations, masking left-shift results to
+the source width. `tests/freest.py` compares accepted shifts against the
+pinned seed and challenges the result with a wrong-direction mutant.
+
 Convert and run an example:
 
 ```sh

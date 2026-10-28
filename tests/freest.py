@@ -88,6 +88,32 @@ int main(void) {
         p = subprocess.run([*RUNNER, t / 'wrong'], capture_output=True)
         assert p.returncode == 10, p.returncode
         print('PASS wrong-result negative control exits 10')
+        # Results are observed from the pinned seed, never guessed expected
+        # constants. C consumers execute on their native host architecture.
+        for typ, count, projection in (
+                ('uchar', 0, 0), ('uchar', 1, 0),
+                ('ushort', 1, 0), ('uint', 1, 0), ('ulong', 63, 63)):
+            for op in ('shl', 'shr'):
+                fixture = t / 'shift.om'
+                body = f'fn shift x {typ} to {typ}\nret {op} x {count}\nend\n'
+                fixture.write_text(body)
+                portable = run([ROOT / 'tools/bridge-freest', 'c', fixture])
+                native_source = body + f'fn main to int\nr = shift {typ} 1\nret int and shr ulong r {projection} 255\nend\n'
+                native = t / 'shift-native'
+                native.write_bytes(run([os.environ['OMEGA_SEEDED_OMC']], input=native_source.encode()))
+                native.chmod(0o755)
+                expected = subprocess.run([native], capture_output=True).returncode
+                assert expected not in range(101, 115), expected
+                c = t / 'shift.c'
+                caller = '\nint main(void){uint64_t out=0;if(omega_shift(&out,1))return 99;return (int)((out >> ' + str(projection) + ')&255);}\n'
+                c.write_bytes(portable + caller.encode())
+                run([CC, '-std=c11', '-O2', '-Wall', '-Wextra', '-Werror', c, '-o', t / 'shift'])
+                assert subprocess.run([*RUNNER, t / 'shift'], capture_output=True).returncode == expected, (typ, op, count)
+                if typ == 'ulong' and op == 'shl':
+                    c.write_bytes(portable.replace(b'case 15:return (a<<b)&mask;', b'case 15:return (a>>b)&mask;') + caller.encode())
+                    run([CC, '-std=c11', '-O2', '-Wall', '-Wextra', '-Werror', c, '-o', t / 'shift-wrong'])
+                    assert subprocess.run([*RUNNER, t / 'shift-wrong'], capture_output=True).returncode != expected
+        print('PASS literal-count shifts: seed/native-C parity and wrong-direction negative control')
         root = 'fn arbitrary x ulong to ulong\nret x\nend\n'
         hidden = lambda body: f'fn hidden x ulong to ulong\n{body}\nend\n' + root
         refusals = {
@@ -108,8 +134,13 @@ int main(void) {
             'signed-mul': 'fn hidden x long to long\nret mul x 2\nend\n' + root,
             'div': hidden('ret div x 1'),
             'rem': hidden('ret rem x 1'),
-            'shift': hidden('ret shl x 1'),
-            'right-shift': hidden('ret shr x 1'),
+            'shift': hidden('ret shl x x'),
+            'right-shift': hidden('ret shr x x'),
+            'shift-at-width': hidden('ret shl x 64'),
+            'right-shift-at-width': hidden('ret shr x 64'),
+            'negative-shift': hidden('ret shl x -1'),
+            'boolean-shift': hidden('ret shr x true'),
+            'signed-shift': 'fn hidden x long to long\nret shr x 1\nend\n' + root,
             'narrow': hidden('v = uint x\nret ulong v'),
             'sign-conversion': hidden('v = long x\nret ulong v'),
             'trap': hidden('trap 1'),
