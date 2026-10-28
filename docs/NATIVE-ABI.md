@@ -5,10 +5,128 @@ the seeded Omega compiler itself produced. Nothing is translated: each foreign l
 compiled Omega function. Omega's language and its internal calling rules are unchanged; the bridge
 adapts the foreign side to them.
 
+## Target selection and compiler custody
+
+`tools/native [--target aarch64linux|x86linux] [--freestanding] OUTDIR unit.om...`
+selects the output ABI explicitly. The default is `aarch64linux`; it keeps the
+existing generator invocation and compiler inputs unchanged. The tool does not
+infer a target from the build host or try to execute a generated library.
+
+`OMEGA_NATIVE_OMC` remains mandatory for both targets and must have sha256
+`734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61`.
+It builds `src/native.om` into the AArch64-hosted `work/native-gen`. With the
+default target it also compiles OM-1 units; `OMEGA_NATIVE_OMC2` compiles OM-2
+units and supplies their compiler identity, as before.
+
+For `--target x86linux`, `OMEGA_NATIVE_X86_OMC` compiles **both** OM-1 and OM-2
+units and must have sha256
+`1f0fdef06574ffec782c164941114edcf51f36f9f9cd1e79bc0452dbcebb3322`.
+The candidate comes from omega-mv commit
+`f633bf986823741f377f1037ebd2171bbfb84178` (draft PR #923), with
+`seed/omc/omc.om` sha256
+`26b93cf3612077802a06d4eaee1a9f618857dbcb1c0cfb9c67474e85e4ce787e`.
+This is a separate candidate compiler pin, not a replacement for the generator's
+baseline pin. `OMEGA_NATIVE_OMC2` is not used for this target. Each compiler
+input is `target x86linux\n` followed by the snapshotted source. The directive
+exists only in `work/<unit>.compile.om`: profile detection, generator framing,
+the `src=` identity and `work/<unit>.om` all retain the exact original source
+bytes. The `omc=` identity records the x86 compiler's digest, not the baseline
+generator compiler's digest.
+
+The x86 generator contract is `native-gen OUTPUT x86linux` for every output,
+including the per-unit admission pass. Default AArch64 calls remain
+`native-gen OUTPUT`. Set `CC` to a compiler for the selected target; for example:
+
+```sh
+OMEGA_NATIVE_OMC=/path/to/baseline/omc \
+OMEGA_NATIVE_X86_OMC=/path/to/x86/omc \
+CC=x86_64-linux-gnu-gcc \
+tools/native --target x86linux build/native-x86 \
+  tests/native/madd.om tests/native/v2/vec.om
+```
+
+The x86 target is hosted Linux x86-64 SysV output. `--freestanding` remains
+AArch64-only: combining it with `--target x86linux` refuses with exit 110 before
+creating OUTDIR. An unknown target or malformed option exits 2. A mismatched
+compiler digest refuses before generating or installing outputs.
+
+**Evidence boundary:** the x86 integration is IMPLEMENTED and EXERCISED under
+QEMU 10.0.14, not qualified by the historical AArch64 receipts below. See
+[`evidence/native-x86/qualification.json`](../evidence/native-x86/qualification.json)
+and its command receipts. Native physical x86-64 execution remains **NOT_RUN**.
+No GPU execution is part of this target; the compiler dependency is draft PR #923.
+
+### x86 emulator runner and QEMU oracle
+
+`sh tests/native/x86/run.sh [EMPTY_OUTPUT]` cross-builds the callers and executes
+all target programs through `QEMU_X86_64`, even on an x86 build host. It requires
+the baseline and x86 compiler variables above, `CC`/`CXX` targeting x86 Linux,
+Rust's `x86_64-unknown-linux-gnu` standard library, Zig 0.13, Go with cgo, and an
+x86 Linux Python interpreter supplied as `OMEGA_NATIVE_X86_PYTHON`. This is not
+the build host's Python. `OMEGA_NATIVE_X86_SYSROOT` defaults to
+`/usr/x86_64-linux-gnu`; `OMEGA_NATIVE_X86_LIBPATH` optionally supplies the guest
+library search path. `tests/native/x86/prepare.py EMPTY_OUTPUT` extracts a Python
+oracle without installing host packages and prints the Python/library variables;
+its `runtime-packages.json` records exact archive versions and digests.
+
+Select the emulator explicitly for qualification:
+
+```sh
+OMEGA_NATIVE_OMC=/path/to/baseline/omc \
+OMEGA_NATIVE_X86_OMC=/path/to/x86/omc \
+CC=x86_64-linux-gnu-gcc CXX=x86_64-linux-gnu-g++ \
+QEMU_X86_64=/path/to/qemu-10.0.14/build/qemu-x86_64 \
+OMEGA_NATIVE_X86_PYTHON=/path/to/amd64-python/root/usr/bin/python3.12 \
+OMEGA_NATIVE_X86_LIBPATH=/path/to/amd64-python/root/usr/lib/x86_64-linux-gnu:/path/to/amd64-python/root/lib/x86_64-linux-gnu:/usr/x86_64-linux-gnu/lib \
+sh tests/native/x86/run.sh build/native-x86-new
+```
+
+Integration observations found crashes in the C signal control and Rust/Go
+`/proc/self/maps` paths under QEMU 8.2.2. The unchanged callers exited 0 with
+unpatched QEMU 10.0.14. Do not alter callers or weaken signal/thread controls
+to accommodate the older emulator. The complete integrated suite and its
+failed/missing-toolchain controls subsequently passed under 10.0.14 (EMULATED).
+
+The replacement oracle comes from
+<https://download.qemu.org/qemu-10.0.14.tar.xz>, archive SHA256
+`c7230968906fdb5540d803e2af1f515e77590a414f2a4dbd3ec9ada3c47083d0`.
+QEMU is a read-only verification oracle, not a bridge build or production
+dependency, and does not require an Omega replacement. With the native compiler,
+Python, Ninja, pkg-config and GLib development prerequisites installed, a minimal
+user-mode build from the verified, unpacked source is:
+
+```sh
+mkdir qemu-10.0.14/build
+cd qemu-10.0.14/build
+../configure --target-list=x86_64-linux-user --disable-system --disable-docs \
+  --without-default-features --disable-tools --disable-guest-agent \
+  --disable-plugins --disable-slirp --disable-pixman --disable-capstone \
+  --disable-fdt --audio-drv-list=
+ninja qemu-x86_64
+```
+
+No installation or host binfmt registration is required. Keep its source digest,
+configure command, binary digest and `--version` output with the execution
+receipt. An emulator PASS still leaves physical x86 execution NOT_RUN.
+
+The exercised aggregate command is
+`python3 tests/native/x86/test_build_failures.py [EMPTY_OUTPUT]`, with the same
+environment as the runner above. It requires actual successful C, C++, Python,
+Rust (2021 and 2024), Zig and Go executions; failed Zig/Go compilers and missing
+toolchains must refuse aggregate PASS. The positive case also exercises the
+existing ABI-v2 pointer/status-32, signal-reentry/status-33, stale-identity and
+thread controls, private-symbol/TLS isolation, and boundary/API mutants. Added
+controls cover nested traps, bad-runtime/status-34 recovery, SysV saved-register
+sentinels, and the fixed owned-stack floor after out-buffer allocation.
+All 150 baseline/output comparisons with `0c4cb9ff` passed byte-for-byte,
+including unchanged AArch64 freestanding refusals. The receipts retain the
+earlier failing emulator run rather than rewriting it as a pass.
+
 ## What Omega produces
 
-A unit with no `fn main` is compiled by the seeded compiler (`seed/out/omc`) in function mode: raw
-AArch64 words, entry at word 0 (`docs/one_layer/OMEGESE.md` 9.1). Its rules (`docs/osc/OSC-1-DESIGN.md`
+For the default AArch64 target, a unit with no `fn main` is compiled by the seeded
+compiler (`seed/out/omc`) in function mode: raw AArch64 words, entry at word 0
+(`docs/one_layer/OMEGESE.md` 9.1). Its rules (`docs/osc/OSC-1-DESIGN.md`
 section 7): parameters in x0..x5 (an `edit`/`view` array arrives as its address; its length is part of
 its type), result in x0, the runtime table pointer in x7. A trap loads its code into x1, the table into
 x0 and branches to the table entry at offset 16; it never returns. `madd` below compiles to three
@@ -24,11 +142,12 @@ end
 ## The binding
 
 `src/native.om` is an Omega program. It reads units (the unit's source, a 0 byte, the code length as 8
-decimal digits, the code) and one argument naming the output: `c` is the library source, one C file;
+decimal digits, the code) and an argument naming the output: `c` is the library source, one C file;
 `h`, `python`, `rust`, `zig` and `go` are that library's declarations for those languages (next
-section), written from the same parsed signatures. Output appears only after every unit is accepted;
-anything outside the supported signature set, and a missing or unknown output word, is refused (exit
-110, no output). The C file:
+section), written from the same parsed signatures. An optional second argument `x86linux` selects
+the x86 binding; omitting it keeps AArch64 output. Output appears only after every unit is accepted;
+anything outside the supported signature set, and a missing or unknown output word or unknown target,
+is refused (exit 110, no output). The default AArch64 C file:
 
 - embeds each unit's code byte for byte (tests/native/run.sh compares the bytes inside the built
   library with the compiler's output);
@@ -42,6 +161,32 @@ anything outside the supported signature set, and a missing or unknown output wo
 - reaches each unit through a two-instruction stub (`bti c`, branch) so the code runs under branch
   target identification (BTI) without changing the compiler's bytes;
 - exports, per unit, `uint32_t omega_<name>(uint64_t *result, ...)`.
+
+### x86-64 SysV entry and trap contract
+
+The foreign entry point uses the Linux x86-64 SysV C ABI; embedded Omega code
+does not. Its private frame ABI stores arguments in the old RBP-relative,
+negative-offset slot area. The trampoline supplies the initial 256-byte area
+covering 18 storage slots, establishes the owned stack, and enters the selected
+six-byte JMP/NOP export slot. The Omega result returns in RAX.
+
+R12 retains the native stack anchor, R14 points to the read-only runtime table,
+and R15 holds the owned-stack floor. The trampoline restores the SysV
+callee-saved registers and the caller's stack on both success and trap return.
+The compiler's **bare-unit** trap hook must put the trap code in ESI and execute
+`jmp *16(%r14)` to runtime entry 2. The binding's trap handler uses the saved
+native anchor and returns that code as the public status; it must not terminate
+the calling process. A compiler that still lowers bare-unit traps to process
+exit does not satisfy this contract. The pinned candidate includes the
+bare-unit trap hook; compiler availability is not an execution receipt, and
+bridge trap-return exercise remains pending.
+
+Indirect entry veneers use `endbr64` for Intel CET indirect branch tracking
+(IBT) landing. This does **not** support CET shadow-stack enforcement: a trap's
+nonlocal return abandons intermediate Omega call frames rather than unwinding
+their shadow-stack entries. Do not claim shadow-stack compatibility or run this
+binding under enforced shadow stacks. None of these mechanisms changes the
+compiler's embedded machine bytes or the public argument/status contract.
 
 All private `ombr_` and `ombr2_` assembly labels have local binding; private C helpers,
 runtime tables and per-translation-unit TLS retain static linkage. Independently generated
@@ -67,7 +212,7 @@ Names must be C identifiers, a parameter name may not end in `_len` (the binding
 
 Supported signatures: up to 6 parameters, each `ulong`, `long`, or `edit`/`view` of `ulong` or `uchar`
 with a fixed length; result `ulong`, `long` or `void`. A unit may hold several functions: the seeded
-compiler enters function-mode code at the unit's last function (word 0 is a branch to it), so the
+compiler enters function-mode code at the unit's last function (the leading entry branches to it), so the
 binding exports that one and the earlier functions stay private helpers, called directly inside the
 embedded code, with any Omega types. Only the last function's signature must be supported
 (`tests/native/hsum.om`: two helpers, one of which traps).
@@ -77,6 +222,7 @@ embedded code, with any Omega types. Only the last function's signature must be 
 `OMEGA_NATIVE_OMC=<seed omc> tools/native --freestanding OUTDIR unit.om...` installs
 `omega_native.c`, `omega_native.h`, `omega_native.o` and compiler-custody `work/` files.
 Direct framed-input users select generator output `freest`; declarations remain output `h`.
+This output is supported only for the default `aarch64linux` target.
 The public ABI is unchanged: `uint32_t omega_<name>(uint64_t *result, ...)`, with
 `ulong`/`long` scalar arguments and `ulong`, `long` or `void` results. Compiler bytes
 are embedded unchanged. A trap returns its status and leaves `*result` unchanged;
@@ -111,8 +257,8 @@ control whose old-reread mutant admits mismatched source/code and is caught.
 
 ## The declarations for each language (`tools/native`)
 
-`OMEGA_NATIVE_OMC=<seed omc> tools/native OUTDIR unit.om...` compiles the units with the pinned
-compiler, runs the generator once per output word and installs, into OUTDIR:
+`OMEGA_NATIVE_OMC=<seed omc> tools/native OUTDIR unit.om...` compiles the units with the selected
+target's compiler, runs the generator once per output word and installs, into OUTDIR:
 
 | file | for | how a program uses it |
 |---|---|---|
@@ -176,13 +322,19 @@ That fault is a crash, not a status: in function mode the seeded compiler does n
 floor before reserving a frame (program mode traps 6 instead). A clean status needs that check in the
 compiler; it is a compiler gap, not something the binding can add around the code.
 
-Host words: a function-mode unit may use Omega host words (`read`, `write`, ...). They compile to Linux
-system calls made directly by the code, on the calling process and its open descriptors.
+Host words are not an isolation boundary: permitted function-mode operations
+make Linux system calls directly in the calling process, using its descriptors.
+For the pinned x86 compiler, legacy `read`/`write` use the `om4`/`VT_SYS` path and
+`xio`, which remains permitted in bare units; it preserves the binding's R12
+native anchor and R14 runtime-table register. The separate advanced host-helper
+dispatcher `xhost` requires program mode and refuses bare units with compiler
+error 9. Do not generalize that advanced-helper refusal to legacy `read`/`write`.
+This is a compiler-source boundary, not exercised x86 syscall evidence.
 
 Signals: a call from a signal handler while a call is running on the same thread returns 33. A handler
 that leaves Omega code with `siglongjmp` abandons the call; every later call on that thread returns 33.
 
-## Qualification (`OMEGA_NATIVE_OMC=<seed omc> sh tests/native/run.sh`)
+## AArch64 qualification (`OMEGA_NATIVE_OMC=<seed omc> sh tests/native/run.sh`)
 
 The compiler is pinned by sha256 (`734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61`,
 omega-mv PR #696). Expected values come from receipts, not from Omega:
@@ -226,7 +378,7 @@ by 70 (calc:a6a8bb76), 4,000,000 bytes is 0.954 of 4 MiB (calc:ffff21b2). Negati
 `sub` in the code must make the C caller fail.
 
 Separate claims, not made here: source translation (ABI v0) and GPU execution are qualified on their
-own. Only AArch64 Linux is supported.
+own. These historical qualification results cover AArch64 Linux, not the x86 target.
 
 Zig and Go: run with Zig 0.13.0 and Go 1.27.3 (official aarch64 archives, checksums from
 ziglang.org/download/index.json and go.dev/dl, unpacked in the user's ~/.local/opt). Both callers pass
@@ -289,8 +441,8 @@ Functions that are not exported stay private: no symbol. All exports of a unit s
 and the library's one runtime (stack, table, reentry flag). Bound names (v1 unit names and v2 exports)
 share one table: a repeat is refused.
 
-**Calling convention** (agreed with the OM-2 compiler lane, omega-mv S4, ledger L834). Parameters go to
-x0..x5 in order, result in x0, runtime table in x7, trap through entry 2 with its code in x1 (as v1):
+**AArch64 calling convention** (agreed with the OM-2 compiler lane, omega-mv S4, ledger L834).
+Parameters go to x0..x5 in order, result in x0, runtime table in x7, trap through entry 2 with its code in x1 (as v1):
 
 | Omega parameter | slots | C argument(s) | checks before any Omega code runs (status 32) |
 |---|---|---|---|
@@ -312,20 +464,23 @@ status 0 is it copied to the caller's pointer with `memmove`, so it may overlap 
 (`sha256_hash(buf, n, buf)`), and nothing is written there on a trap or refusal. The generator refuses
 more than 65536 out bytes per export (they come out of the 8 MiB thread stack).
 
-**Multi-entry code.** With exports, words 0 .. E-1 of the unit's code are `b <export k>` (E <= 32, the
-compiler's limit); the binding enters export k at byte 4k, through its own `bti c` stub. The generator
-refuses code shorter than 4E bytes.
+**Multi-entry code.** With AArch64 exports, words 0 .. E-1 of the unit's code are
+`b <export k>` (E <= 32, the compiler's limit); the binding enters export k at byte
+4k, through its own `bti c` stub, and refuses code shorter than 4E bytes.
+For `x86linux`, each entry is a six-byte JMP/NOP slot and the binding selects the
+corresponding slot; it must not apply AArch64 word offsets or BTI stubs.
 
 **Identity.** Each OM-2 binding embeds `omega-ident 1 unit=U abi=2 profile=OM-2 src=S omc=C`: U the
 unit's file basename with every byte outside `[A-Za-z0-9_]` made `_` (`sha256-om2.om` gives
 `sha256_om2`), S the sha256 of the unit's exact source bytes, computed by `src/native.om` itself (a
-FIPS 180-4 SHA-256 in Omega), C the sha256 of the compiler that wrote the code (`OMEGA_NATIVE_OMC2`),
-supplied by `tools/native` (contract C3: the compiler does not report its own identity). The library
+FIPS 180-4 SHA-256 in Omega), C the sha256 of the compiler that wrote the code (`OMEGA_NATIVE_OMC2`
+for AArch64 or the pinned `OMEGA_NATIVE_X86_OMC` for x86), supplied by `tools/native`
+(contract C3: the compiler does not report its own identity). The library
 exports `const char *omega2_ident_U(void)`; each binding carries the expected string: C/C++
 `OMEGA2_IDENT_U`, Python `OMEGA2_IDENT_U` (bytes; importing the module raises `ImportError` when the
 library's string differs), Rust `OMEGA2_IDENT_U: &str`, Zig `OMEGA2_IDENT_U`, Go `Omega2Ident_U` and
 `Omega2_ident_U()`. OM-1 units embed no identity (their bindings stay byte-identical); `tools/native`
-writes every unit's identity, the OM-1 ones with `abi=1 profile=OM-1` and the pinned omc, to
+writes every unit's identity, the OM-1 ones with `abi=1 profile=OM-1` and the selected compiler, to
 `work/ident.txt` (harness-side; `om/units.sh --check` in omega-mv refuses a stale unit).
 
 **Generator input.** An OM-2 unit's frame is the v1 frame followed by the line
@@ -362,7 +517,7 @@ other in a program, not both: each defines the functions under the same names.
 memory passed as edit. Function-mode stack exhaustion faults as in v1. Loops in the seeded compiler
 run at most 1,000,000 passes (trap 4 beyond); a unit over a longer view must loop in parts (`part`).
 
-### Qualification (`OMEGA_NATIVE_OMC=<seed omc> OMEGA_NATIVE_OMC2=<OM-2 omc> sh tests/native/v2/run.sh [measure]`)
+### AArch64 qualification (`OMEGA_NATIVE_OMC=<seed omc> OMEGA_NATIVE_OMC2=<OM-2 omc> sh tests/native/v2/run.sh [measure]`)
 
 Recorded with the OM-2 compiler of omega-mv `om2/compiler-s4` @ f6a6492fd (draft PR #764, ledger L834),
 sha256 `499236398aabc652e2dae27fe4bdc4c5db3d3726314356e0dbef23e3345803ec`, which compiles the three OM-2
