@@ -14,6 +14,15 @@ quiet-build tools/test.sh
 
 On a host without quiet-build, run those scripts directly. The bootstrap fetches the exact Omega source commit recorded in docs/PROVENANCE.md. Access to the upstream repository is required. An existing checkout can supply it through OMEGA_SOURCE; it is read only. No compiler binary is stored in this repository. If you already have the qualified seed, OMEGA_SEED can name it; its fingerprint is enforced.
 
+The `Portable bridge behavior` workflow runs the existing baseline suite,
+`tests/seeded.py`, `tests/seeded_float.py`, and `tests/freest.py` on disposable
+Linux AArch64 runners. It source-bootstraps the baseline, checks the exact
+seeded compiler hash, and exercises the pinned CUDApp revision/epoch roots.
+This is executable behavior and refusal coverage, not CodeQL or device
+qualification. Native x86 compiled-C consumer coverage is separate in CUDApp's
+`Ampere native x86 host` workflow; the failing native Omega compiler923 is
+not a dependency of either route.
+
 Convert and run an example:
 
 ```sh

@@ -1,0 +1,38 @@
+# SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+name: Portable bridge behavior
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  portable-behavior:
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 40
+    env:
+      OMEGA_SEED: ${{ github.workspace }}/build/bootstrap/omc
+      OMEGA_SEEDED_OMC: ${{ runner.temp }}/omega-mv/seed/out/omc
+      FREEST_CUDAPP_ROOT: ${{ runner.temp }}/cudapp
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Source bootstrap and exact seeded oracle
+        run: |
+          sh tools/bootstrap.sh
+          git clone -q https://github.com/aien-dev/omega-mv "$RUNNER_TEMP/omega-mv"
+          git -C "$RUNNER_TEMP/omega-mv" checkout -q e5b32567a7aff3ce594e3254a622a846a6cd190b
+          printf '%s  %s\n' 2c82480596bbdc50cda9626866209ef662d5834f278f839ff4ce0250c495029f "$OMEGA_SEEDED_OMC" | sha256sum --check --strict
+          sh tools/build.sh
+          git clone -q https://github.com/aien-dev/CUDApp "$RUNNER_TEMP/cudapp"
+          git -C "$RUNNER_TEMP/cudapp" checkout -q dbb1b5002fd7d96ff4695b2da4dcb3238db226c2
+      - name: Unchanged baseline behavioral and refusal suites
+        run: sh tools/test.sh
+      - name: Seeded differential and binary32 refusal controls
+        run: |
+          python3 tests/seeded.py
+          python3 tests/seeded_float.py
+      - name: Actual scalar roots, checked hosted ABI and import-free controls
+        run: python3 tests/freest.py
