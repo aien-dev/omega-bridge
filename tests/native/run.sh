@@ -122,6 +122,9 @@ cc -std=gnu11 -O2 -fPIC -shared -Wl,-soname,libomega_native.so -o "$O/mut/libome
 cc -std=gnu11 -O2 -pthread "$O/caller.c" -L"$O/mut" -lomega_native -Wl,-rpath,"$O/mut" -o "$O/mut/caller_c"
 if "$O/mut/caller_c" > "$O/mut/c.log" 2>&1; then fail "mutant madd (add -> sub) not caught"
 else pass "mutant madd (add -> sub) caught ($(grep -c '^FAIL' "$O/mut/c.log") failing checks)"; fi
+if python3 "$T/test_private_symbols.py" > "$O/private-symbols.log" 2>&1; then
+  pass "separate binding translation units, private symbols, traps, threads and global-symbol mutant"
+else fail "private binding symbols"; cat "$O/private-symbols.log"; fi
 for l in $notrun; do echo "NOT_RUN $l caller: toolchain not installed"; done
 if [ "$fails" -eq 0 ]; then
   for l in c c-bti cpp python rust zig go; do

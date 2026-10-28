@@ -43,6 +43,13 @@ anything outside the supported signature set is refused (exit 110, no output). T
 Names must be C identifiers, a parameter name may not end in `_len` (the binding names a length
 `o_<name>_len`), and each unit name appears once; anything else is refused before any C is written.
 
+All emitted `ombr_*` assembly definitions have local ELF binding, including code, entry stubs and
+runtime trampolines. C-defined runtime helpers and state retain `static` linkage; the `extern`
+declarations only reference assembler-owned local definitions and do not export them. Only
+`omega_<name>` is public. Independently generated C translation units can therefore be linked
+together without renaming or weak symbols. Each translation unit owns its runtime table, reentry
+flag, thread stack and pthread destructor key; units generated together share that private runtime.
+
 Supported signatures: up to 6 parameters, each `ulong`, `long`, or `edit`/`view` of `ulong` or `uchar`
 with a fixed length; result `ulong`, `long` or `void`. A unit may hold several functions: the seeded
 compiler enters function-mode code at the unit's last function (word 0 is a branch to it), so the
@@ -65,8 +72,9 @@ embedded code, with any Omega types. Only the last function's signature must be 
 | status 35 | the binding could not map its stack for this thread |
 
 Buffers stay owned by the caller and are borrowed for the call only; Omega keeps no address after it
-returns. Writes made before a trap stay visible (no rollback). Calls on different threads are independent. The runtime table is one read-only table shared by
-every call and thread (the code only reads it); a write to it would fault.
+returns. Writes made before a trap stay visible (no rollback). Calls on different threads are independent.
+Each generated translation unit has one read-only runtime table shared by its calls and threads (the
+code only reads it); a write to it would fault.
 
 Stack: on its first call from a thread the binding maps 8 MiB of stack for that thread above an 8 MiB
 no-access guard, and frees both when the thread exits. The caller's own stack size does not matter (a
@@ -110,6 +118,12 @@ A missing toolchain emits `NOT_RUN` and makes the runner exit nonzero, not a qua
 `OMEGA_NATIVE_OMC=<seed omc> sh tests/native/test_build_failures.sh` to check build-failure and
 missing-toolchain controls, followed by positive calls with the real Zig and Go toolchains. The
 historical `evidence/native-call-v1/run.log` predates this runner correction and is not rewritten.
+
+`python3 tests/native/test_private_symbols.py` (with the same `OMEGA_NATIVE_OMC`) independently
+generates `madd` and `smadd` bindings, links their separate objects into one caller, checks local
+private symbols and the exact public export names with `nm`, and runs trap recovery and both units
+concurrently on separate threads. Restoring `.globl ombr_enter` must make the link fail with a
+multiple-definition diagnostic. The native-call runner includes this regression.
 
 Red before green (this change): with the generator of commit e7777ca, the C caller dies with SIGILL
 under BTI, and the 4,000,000-byte array on a 2 MiB thread dies with SIGSEGV; with this generator both

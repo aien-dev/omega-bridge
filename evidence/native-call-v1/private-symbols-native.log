@@ -1,0 +1,17 @@
+PASS embedded code == omc output, per unit (85b3add4fe86a894)
+PASS c caller (28 lines)
+PASS c-bti caller (28 lines)
+PASS generator refuses a unit name that is not a C identifier
+PASS generator refuses a parameter name ending in _len
+PASS generator refuses a repeated unit name
+PASS generator accepts the same unit once (control)
+PASS generator refuses a last (bound) function with an unsupported parameter type
+PASS generator binds only the last function; an earlier helper of any type stays private
+PASS cpp caller (10 lines)
+PASS python caller (10 lines)
+PASS rust caller (11 lines)
+PASS zig caller (10 lines)
+PASS go caller (10 lines)
+PASS mutant madd (add -> sub) caught (7 failing checks)
+PASS separate binding translation units, private symbols, traps, threads and global-symbol mutant
+NATIVE-CALL PASS (not run: none)

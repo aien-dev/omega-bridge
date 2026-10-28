@@ -1,0 +1,2 @@
+PASS public binding text and embedded code byte-identical; only .globl -> .local differs
+PASS consumer omc 2c82480596bbdc50cda9626866209ef662d5834f278f839ff4ce0250c495029f: separate units, trap recovery and concurrent threads
