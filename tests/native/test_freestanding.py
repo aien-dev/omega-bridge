@@ -106,6 +106,60 @@ int main(void) {
         assert p.returncode != 0 and b'pthread_self' in p.stderr and b'imports refused' in p.stderr, p.stderr
         assert (out / 'omega_native.o').read_bytes() == before
         print('PASS pthread-import emitter mutant rejected by freestanding gate, installed object unchanged')
+        # Inspector failures are refusals, not an empty, implicitly accepted symbol set.
+        fakebin = t / 'fakebin'
+        fakebin.mkdir()
+        inspectenv = os.environ.copy()
+        inspectenv['PATH'] = str(fakebin) + os.pathsep + inspectenv['PATH']
+        for command, status in (('nm', 1), ('nm', 127), ('awk', 1)):
+            fake = fakebin / command
+            fake.write_text(f'#!/bin/sh\nexit {status}\n')
+            fake.chmod(0o755)
+            p = subprocess.run([ROOT / 'tools/native', '--freestanding', out, epoch],
+                               env=inspectenv, capture_output=True)
+            assert p.returncode != 0 and b'inspection' in p.stderr, p.stderr
+            assert (out / 'omega_native.o').read_bytes() == before
+            fake.unlink()
+        print('PASS failing/missing symbol inspector and failing import filter refuse; installed object unchanged')
+
+        # Inject a source replacement just after the real, still-pinned compiler
+        # returns. No timing race and no fake compiler/hash oracle are involved.
+        race = t / 'race-tool'
+        (race / 'tools').mkdir(parents=True)
+        (race / 'src').mkdir()
+        shutil.copy2(ROOT / 'src/native.om', race / 'src/native.om')
+        driver = (ROOT / 'tools/native').read_text()
+        marker = '    "$OMC" < "$src" > "$W/work/$b.bin"'
+        assert marker in driver
+        driver = driver.replace(marker, marker + '\n    cp -- "$RACE_PURE" "$u"')
+        target = t / 'race.om'
+        unsafe = b'fn race n ulong to ulong\na = new ulong 1 0\nret n\nend\n'
+        safe = b'fn race n ulong to ulong\nret n\nend\n'
+        replacement = t / 'pure.om'
+        replacement.write_bytes(safe)
+        raceenv = os.environ.copy()
+        raceenv['RACE_PURE'] = str(replacement)
+        script = race / 'tools/native'
+        script.write_text(driver)
+        script.chmod(0o755)
+        target.write_bytes(unsafe)
+        p = subprocess.run([script, '--freestanding', out, target], env=raceenv, capture_output=True)
+        assert p.returncode == 110 and b'refused' in p.stderr, p.stderr
+        assert target.read_bytes() == safe
+        assert (out / 'omega_native.o').read_bytes() == before
+        # Restore the old reread defect: now the exact same swap incorrectly
+        # admits non-pure machine code under the replacement's pure source.
+        unsnapshotted = driver.replace('src=$W/work/$b.om', 'src=$u')
+        assert unsnapshotted != driver
+        script.write_text(unsnapshotted)
+        target.write_bytes(unsafe)
+        raceout = t / 'race-mutant-output'
+        run([script, '--freestanding', raceout, target], env=raceenv)
+        frame = (raceout / 'work/units.in').read_bytes()
+        actualsource, payload = frame.split(b'\0', 1)
+        assert actualsource == safe
+        assert payload[8:] == run([OMC], input=unsafe)
+        print('PASS source-swap control refuses original non-pure snapshot; reread mutant admits mismatched source/code and is caught')
 
 
 if __name__ == '__main__':
