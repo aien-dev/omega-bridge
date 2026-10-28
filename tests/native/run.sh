@@ -187,6 +187,7 @@ if command -v go > /dev/null; then
 fi
 if python3 "$T/test_freestanding.py"; then pass "pure scalar freestanding transport + import mutant"; else fail "freestanding transport"; fi
 if python3 "$T/test_private_symbols.py"; then pass "private linkage and thread isolation"; else fail "private linkage regression"; fi
+if python3 "$T/test_capacity.py"; then pass "bounded aggregate frame/output capacity + old-limit mutants"; else fail "native aggregate capacity"; fi
 for l in $notrun; do echo "NOT_RUN $l caller: toolchain not installed"; done
 if [ "$fails" -eq 0 ]; then
   for l in c c-bti cpp python rust zig go; do
