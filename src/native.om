@@ -10,8 +10,8 @@ note code (word 0 branches to it); earlier functions are private helpers with an
 note function's parameters are ulong or long scalars, or edit/view arrays of ulong or uchar; its
 note result is ulong, long or void. Anything else, and a missing or unknown argument, is refused:
 note trap 10 (exit 110) and no output.
-global inb uchar 1048576
-global outb uchar 4194304
+global inb uchar 4194304
+global outb uchar 16777216
 global st ulong 16
 global md uchar 8
 global tks ulong 40
