@@ -45,6 +45,7 @@ break
 end
 n = add n i
 end
+ignored = chain0 n
 a = new ulong 4 0
 put a 0 chain39 n
 ret int first view a
@@ -77,6 +78,13 @@ for target, ext in [("c", "c"), ("python", "py")]:
         got = run([sys.executable, path])
     assert result(got) == expected, (target, expected, result(got))
     outputs[target] = text
+# Strict-host control: losing the unused-source-local annotation must fail.
+assert b"__attribute__((unused))" in outputs["c"]
+warning_mutant = b / "warning-mutant.c"
+warning_mutant.write_bytes(outputs["c"].replace(b"__attribute__((unused)) ", b""))
+p = run(["gcc", "-std=gnu11", "-O2", "-Wall", "-Wextra", "-Werror",
+         warning_mutant, "-o", b / "warning-mutant"])
+assert p.returncode != 0 and b"unused variable" in p.stderr
 # Control: the same differential rejects an actual arithmetic emission defect.
 assert b"(a+b)&mask" in outputs["c"]
 mutant = b / "mutant.c"

@@ -62,6 +62,11 @@ invalid host arguments or overlapping arrays, and 33 for reentry. Views are
 not written by Omega and use const-qualified C pointers. Generated C contains the implementation and checked
 runtime, not a call into AArch64 machine code, and can be compiled on Linux
 x86-64 with GNU C. Native call adapters remain a separate AArch64 path.
+Literal-count loops do not emit an unused runtime guard counter. Seeded C
+marks source scalar declarations as possibly unused, preserving evaluation of
+their initializers, including calls with side effects. This is declaration
+metadata, not a repository warning-flag change. The seeded strict-host test
+compiles with `-Wall -Wextra -Werror` and includes an annotation-removal mutant.
 
 Qualification is separate from implementation. Run the unchanged baseline
 `tools/test.sh` first, then `python3 tests/seeded.py` with both pinned compilers
