@@ -1,0 +1,11 @@
+go: creating new go.mod: module omegacaller
+go: to add module requirements and sums:
+	go mod tidy
+# omegacaller
+./caller.go:29:44: cannot use ^uint64(0) (constant 18446744073709551615 of type uint64) as uint32 value in argument to on.Omega_madd
+./caller.go:30:40: cannot use 1311768467463790320 (untyped int constant) as uint32 value in argument to on.Omega_madd (overflows)
+./caller.go:30:61: cannot use 18364758544493064720 (untyped int constant) as uint32 value in argument to on.Omega_madd (overflows)
+./caller.go:30:83: cannot use 1085102592571150095 (untyped int constant) as uint32 value in argument to on.Omega_madd (overflows)
+./caller.go:32:52: cannot use uint64(m3) (value of type uint64) as uint32 value in argument to on.Omega_madd
+./caller.go:34:71: cannot use 1 << 62 (untyped int constant 4611686018427387904) as uint32 value in argument to on.Omega_smadd (overflows)
+./caller.go:52:23: cannot use uint64(m1) (value of type uint64) as uint32 value in argument to on.Omega_mix

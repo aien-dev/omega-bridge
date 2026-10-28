@@ -1,0 +1,12 @@
+date 2026-10-25T21:10:14Z
+host Linux 7.0.0-1019-nvidia aarch64
+omc 734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61 (omega-mv main acb3f15c seed/out/omc)
+om2-compiler /tmp/om2c/s4/omc-s4-f6a6492f 499236398aabc652e2dae27fe4bdc4c5db3d3726314356e0dbef23e3345803ec (omega-mv om2/compiler-s4 @ f6a6492fd, PR #764)
+cc cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+c++ c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+python3 Python 3.12.3
+rustc rustc 1.98.1 (48a229cea 2026-09-01)
+zig 0.13.0 /home/drakestapleton/.local/opt/zig-linux-aarch64-0.13.0
+go go version go1.27.3 linux/arm64
+objdump GNU objdump (GNU Binutils for Ubuntu) 2.42
+sha256sum sha256sum 0.8.0

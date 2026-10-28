@@ -1,0 +1,19 @@
+PASS madd 3*5+7 = 22
+FAIL madd wraps = 3
+FAIL madd large
+FAIL madd signed bits = -13
+FAIL smadd overflow traps 1, result unchanged
+FAIL fill k=1 traps 3, result unchanged
+PASS writes before the trap stay visible
+PASS fill k=0 = 3
+PASS null result refused 32
+PASS mix six parameters, void result writes 0
+FAIL mix negative long traps 9 after both writes, result unchanged
+FAIL mix uchar conversion 325 traps 5, first write visible
+PASS scalar 2**64+3 refused, not truncated
+PASS scalar -1 refused (pass its bits)
+PASS scalar 2.0 refused
+PASS bytes for an edit uchar array refused
+PASS bytes for an edit ulong array refused
+PASS call after refusals still works
+FAIL 7 failure(s)
