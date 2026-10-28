@@ -332,4 +332,5 @@ if [ "${1:-}" = measure ]; then
 fi
 for l in $notrun; do echo "NOT_RUN $l caller: toolchain not installed"; done
 if [ "$fails" -ne 0 ]; then echo "NATIVE-V2 FAIL $fails"; exit 1; fi
+if [ -n "$notrun" ]; then echo "NATIVE-V2 NOT_RUN (not run:$notrun)"; exit 1; fi
 echo "NATIVE-V2 PASS (not run:${notrun:- none})"
