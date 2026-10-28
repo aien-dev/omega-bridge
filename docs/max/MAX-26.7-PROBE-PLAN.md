@@ -29,7 +29,7 @@ Definitions:
 Before any GPU probe:
 
 1. Confirm the pin of the checkout used for comparison:
-   `git -C /home/drakestapleton/workspace/maxinterop/max-source rev-parse HEAD` → must be `527d069...`.
+   `git -C ~/workspace/maxinterop/max-source rev-parse HEAD` → must be `527d069...`.
 2. Confirm the installed MAX version and build:
    `$MAXPY -c "import max; print(max.__file__, getattr(max,'__version__','NO_VERSION'))"`
 3. Record `nvidia-smi -q` and `nvidia-smi --query-compute-apps=pid,process_name,used_memory --format=csv` **without killing anything**.
@@ -248,7 +248,7 @@ If `unshare` is unavailable, use `strace -f -e trace=network -o "$WINDOW/net.log
 ### P10 — Static license and provenance check
 
 ```bash
-git -C /home/drakestapleton/workspace/maxinterop/max-source rev-parse HEAD
+git -C "$HOME/workspace/maxinterop/max-source" rev-parse HEAD
 sha256sum -c SHA256SUMS
 ```
 
@@ -430,7 +430,7 @@ ID=G2-ordering
 OUT=evidence/probes/$ID
 mkdir -p "$OUT"
 { echo "date: $(date -Is)"; echo "host: $(uname -a)";
-  echo "pin: $(git -C /home/drakestapleton/workspace/maxinterop/max-source rev-parse HEAD)";
+  echo "pin: $(git -C "$HOME/workspace/maxinterop/max-source" rev-parse HEAD)";
   echo "max: $($MAXPY -c 'import max;print(max.__file__,getattr(max,"__version__",None))')";
   echo "gpu: $(nvidia-smi --query-gpu=name,driver_version,compute_cap --format=csv,noheader)";
 } > "$OUT/meta.txt"
