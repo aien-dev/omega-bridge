@@ -1,6 +1,6 @@
 #!/bin/sh
 # tools/native: one Omega library and its declarations for six languages, from Omega function units.
-# Usage: OMEGA_NATIVE_OMC=<seeded omc> [OMEGA_NATIVE_OMC2=<OM-2 omc>] tools/native OUTDIR unit.om [unit.om...]
+# Usage: OMEGA_NATIVE_OMC=<seeded omc> [OMEGA_NATIVE_OMC2=<OM-2 omc>] tools/native [--freestanding] OUTDIR unit.om [unit.om...]
 # Each unit is one .om file in the native call subset (docs/NATIVE-ABI.md). An OM-1 unit (ABI v1): its
 # last function is bound as omega_<name>, earlier ones are private helpers. An OM-2 unit (its first
 # line that is not a note is exactly om2; ABI v2): each `export fn` (or, with none, its last function)
@@ -30,12 +30,17 @@
 # refusal (a unit outside the subset, or a name the binding cannot carry) names the unit, exits 110
 # and installs nothing; a previous run's outputs are replaced only on success. Extra C flags:
 # OMEGA_NATIVE_CFLAGS.
+# --freestanding accepts only pure integer-scalar OM-1 units and installs omega_native.{c,h,o}
+# plus work/. The object has no undefined symbols except the GPU_FS_LINK libc-string allowlist.
+# Calls use the caller's stack; traps return status without TLS, heap or a hosted runtime.
 set -eu
 PIN=734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 OMC=${OMEGA_NATIVE_OMC:?set OMEGA_NATIVE_OMC to the seeded omc (omega seed/out/omc, sha256 $PIN)}
 got=$(sha256sum < "$OMC" | cut -d' ' -f1)
 [ "$got" = "$PIN" ] || { echo "tools/native: omc sha256 $got, pinned $PIN" >&2; exit 1; }
+CMODE=c
+if [ "${1:-}" = --freestanding ]; then CMODE=freest; shift; fi
 [ $# -ge 2 ] || { echo "usage: OMEGA_NATIVE_OMC=<omc> tools/native OUTDIR unit.om [unit.om...]" >&2; exit 2; }
 OUT=$1; shift
 mkdir -p "$OUT"
@@ -63,7 +68,7 @@ for u in "$@"; do
   name=$(printf '%s' "$b" | tr -c 'A-Za-z0-9_' '_')
   { cat "$u"; printf '\0'; printf '%08d' "$(wc -c < "$W/work/$b.bin")"; cat "$W/work/$b.bin"
     [ $abi = 1 ] || printf 'omega-unit %s %s\n' "$name" "$pin"; } > "$W/one.in"
-  if ! "$W/work/native-gen" c < "$W/one.in" > /dev/null 2>&1; then
+  if ! "$W/work/native-gen" "$CMODE" < "$W/one.in" > /dev/null 2>&1; then
     echo "tools/native: refused $u: outside the native call subset, or a name the binding cannot carry (docs/NATIVE-ABI.md); nothing installed" >&2
     exit 110
   fi
@@ -71,18 +76,29 @@ for u in "$@"; do
   echo "omega-ident 1 unit=$name abi=$abi profile=$prof src=$(sha256sum < "$u" | cut -d' ' -f1) omc=$pin path=$u" >> "$W/work/ident.txt"
 done
 words="c h python rust zig go"; [ $v2 = 0 ] || words="$words api apih apic"
+[ "$CMODE" != freest ] || words="freest h"
 for w in $words; do
   if ! "$W/work/native-gen" $w < "$W/work/units.in" > "$W/$w.out" 2> /dev/null; then
     echo "tools/native: refused the set of units (a bound or unit name repeats); nothing installed" >&2
     exit 110
   fi
 done
-mv "$W/c.out" "$W/omega_native.c"; mv "$W/h.out" "$W/omega_native.h"; mv "$W/python.out" "$W/omega_native.py"
-mv "$W/rust.out" "$W/omega_native.rs"; mv "$W/zig.out" "$W/omega_native.zig"; mv "$W/go.out" "$W/omega_native.go"
+mv "$W/$CMODE.out" "$W/omega_native.c"; mv "$W/h.out" "$W/omega_native.h"
+if [ "$CMODE" = c ]; then
+  mv "$W/python.out" "$W/omega_native.py"; mv "$W/rust.out" "$W/omega_native.rs"
+  mv "$W/zig.out" "$W/omega_native.zig"; mv "$W/go.out" "$W/omega_native.go"
+fi
 [ $v2 = 0 ] || { mv "$W/api.out" "$W/omega_api.h"; mv "$W/apih.out" "$W/omega_api_decl.h"; mv "$W/apic.out" "$W/omega_api_defs.c"; }
 # The library names itself (soname), so every caller records libomega_native.so and finds it via rpath.
+if [ "$CMODE" = freest ]; then
+  ${CC:-cc} -std=gnu11 -O2 -Wall -Wextra -Werror -Wmissing-prototypes -ffreestanding -fno-builtin \
+    -include "$W/omega_native.h" ${OMEGA_NATIVE_CFLAGS:-} -c -o "$W/omega_native.o" "$W/omega_native.c"
+  bad=$(nm -u "$W/omega_native.o" | awk '{print $NF}' | grep -Ev '^(_GLOBAL_OFFSET_TABLE_|memcpy|memmove|memset|memcmp|strlen|strcmp)$' || true)
+  [ -z "$bad" ] || { echo "tools/native: freestanding object imports refused: $bad" >&2; exit 1; }
+else
 ${CC:-cc} -std=gnu11 -O2 -Wall -Wextra -Werror -fPIC -shared -Wl,-soname,libomega_native.so \
   -include "$W/omega_native.h" ${OMEGA_NATIVE_CFLAGS:-} -o "$W/libomega_native.so" "$W/omega_native.c"
+fi
 # The API headers must compile on their own: their layout size and offset checks are C static
 # assertions. The definitions are compiled against their prototypes (a disagreement fails here).
 if [ $v2 = 1 ]; then
@@ -91,7 +107,11 @@ if [ $v2 = 1 ]; then
   ${CC:-cc} -std=gnu11 -fsyntax-only -Wall -Wextra -Werror -Wmissing-prototypes -I "$W" "$W/omega_api_defs.c"
 fi
 # Install together: the previous run's outputs go, the new set comes in.
-for f in omega_native.c omega_native.h omega_native.py omega_native.rs omega_native.zig omega_native.go omega_api.h omega_api_decl.h omega_api_defs.c libomega_native.so work; do
+for f in omega_native.c omega_native.h omega_native.o omega_native.py omega_native.rs omega_native.zig omega_native.go omega_api.h omega_api_decl.h omega_api_defs.c libomega_native.so work; do
   rm -rf "$OUT/$f"; [ ! -e "$W/$f" ] || mv "$W/$f" "$OUT/$f"
 done
-echo "tools/native: $# unit(s) -> $OUT/libomega_native.so + omega_native.{c,h,py,rs,zig,go}$([ $v2 = 0 ] || echo ' + omega_api.h, omega_api_decl.h, omega_api_defs.c') (+ work/)"
+if [ "$CMODE" = freest ]; then
+  echo "tools/native: $# pure scalar unit(s) -> $OUT/omega_native.{c,h,o} (+ work/)"
+else
+  echo "tools/native: $# unit(s) -> $OUT/libomega_native.so + omega_native.{c,h,py,rs,zig,go}$([ $v2 = 0 ] || echo ' + omega_api.h, omega_api_decl.h, omega_api_defs.c') (+ work/)"
+fi

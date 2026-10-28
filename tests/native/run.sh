@@ -186,6 +186,7 @@ if command -v go > /dev/null; then
   gmut "go scalar uint64 -> uint32" '/^text tb /s/ uint64~ unsafe.Pointer/ uint32~ unsafe.Pointer/' go go 'cannot use' \
     sh -c 'mkdir -p "$1/mut/go/omeganative" && mv "$1/mut/go/omega_native.go" "$1/mut/go/omeganative/" && cp "$1/omega_native.h" "$1/libomega_native.so" "$1/mut/go/omeganative/" && cp "$1/caller.go" "$1/mut/go/" && cd "$1/mut/go" && go mod init omegacaller && CGO_LDFLAGS="-Wl,-rpath,$1/mut/go/omeganative" go build -o caller_go . && ./caller_go' _ "$O"
 fi
+if python3 "$T/test_freestanding.py"; then pass "pure scalar freestanding transport + import mutant"; else fail "freestanding transport"; fi
 for l in $notrun; do echo "NOT_RUN $l caller: toolchain not installed"; done
 if [ "$fails" -ne 0 ]; then echo "NATIVE-CALL FAIL $fails"; exit 1; fi
 echo "NATIVE-CALL PASS (not run:${notrun:- none})"

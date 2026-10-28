@@ -53,6 +53,40 @@ binding exports that one and the earlier functions stay private helpers, called 
 embedded code, with any Omega types. Only the last function's signature must be supported
 (`tests/native/hsum.om`: two helpers, one of which traps).
 
+## Freestanding integer-scalar output
+
+`OMEGA_NATIVE_OMC=<seed omc> tools/native --freestanding OUTDIR unit.om...` installs
+`omega_native.c`, `omega_native.h`, `omega_native.o` and compiler-custody `work/` files.
+Direct framed-input users select generator output `freest`; declarations remain output `h`.
+The public ABI is unchanged: `uint32_t omega_<name>(uint64_t *result, ...)`, with
+`ulong`/`long` scalar arguments and `ulong`, `long` or `void` results. Compiler bytes
+are embedded unchanged. A trap returns its status and leaves `*result` unchanged;
+success writes the result (zero for `void`), and bad result arguments return 32.
+
+Unlike hosted output `c`, this mode runs on the caller's stack and needs no pthread,
+mmap, heap, TLS or mutable runtime state. Its private trampolines and read-only runtime
+table have translation-unit-local linkage. Nested traps unwind to that call's saved
+frame, so independent calls and threads do not share trap or stack state. The caller
+must provide sufficient stack for the compiled scalar functions; there is no separate
+guarded stack, stack-allocation status or hosted reentry restriction.
+
+The emitter validates every source token, including unused helpers, against the bounded
+function-mode integer-scalar subset: integer/bool types, decimal integer literals,
+scalar locals, functions, arithmetic, comparisons, control flow, contracts and traps.
+Arrays (including local arrays), globals, text, host words, floating-point operations
+and OM-2 units are refused with exit 110 and no output. Ordinary compiler source
+validation still applies. As with hosted transport, framed source and machine bytes
+must come from the same pinned compiler invocation; this is not an arbitrary-bytecode
+sandbox. `tools/native` maintains that correspondence.
+
+The object is built with `-ffreestanding -fno-builtin`, against its generated public
+header. Its undefined symbols must satisfy the GPU_FS_LINK allowlist: only
+`memcpy`, `memmove`, `memset`, `memcmp`, `strlen`, `strcmp` and the toolchain's
+`_GLOBAL_OFFSET_TABLE_` marker. A refused import leaves prior outputs untouched.
+`tests/native/test_freestanding.py` exercises epoch increment/MAX refusal, nested trap
+unwind, independent scalar units, concurrent threads, non-pure source refusals and
+a generator mutant that introduces `pthread_self` and must fail the import gate.
+
 ## The declarations for each language (`tools/native`)
 
 `OMEGA_NATIVE_OMC=<seed omc> tools/native OUTDIR unit.om...` compiles the units with the pinned
