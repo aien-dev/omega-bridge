@@ -34,13 +34,26 @@ jobs:
       - name: Explicit x86 verification oracle, never a production dependency
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y gcc-x86-64-linux-gnu qemu-user=1:8.2.2+ds-0ubuntu1.19
-          dpkg-query -W gcc-x86-64-linux-gnu qemu-user
+          sudo apt-get install -y gcc-x86-64-linux-gnu
+          package=qemu-user-static_8.2.2+ds-0ubuntu1.19_arm64.deb
+          curl --fail --location --silent --show-error --proto '=https' --tlsv1.2 \
+            "https://ports.ubuntu.com/pool/universe/q/qemu/$package" --output "$RUNNER_TEMP/$package"
+          printf '%s  %s\n' f2ab6b2194533169e1fb9afdb697bd5ddc654741f564dc56e4fb3311bc8f290a "$RUNNER_TEMP/$package" | sha256sum --check --strict
+          mkdir -p "$RUNNER_TEMP/qemu-x86"
+          dpkg-deb --fsys-tarfile "$RUNNER_TEMP/$package" | tar -x -C "$RUNNER_TEMP/qemu-x86" ./usr/bin/qemu-x86_64-static
+          printf '%s  %s\n' c27c1662c0de66728244d60448a6614b8fc612e18c2e9d270837c071f3fb4e4f "$RUNNER_TEMP/qemu-x86/usr/bin/qemu-x86_64-static" | sha256sum --check --strict
+          sudo install -m755 "$RUNNER_TEMP/qemu-x86/usr/bin/qemu-x86_64-static" /usr/local/bin/qemu-x86_64
+          dpkg-query -W gcc-x86-64-linux-gnu
           qemu-x86_64 --version
-          sha256sum /usr/bin/qemu-x86_64
+          sha256sum /usr/local/bin/qemu-x86_64
       - name: Seeded differential and binary32 refusal controls
         run: |
           python3 tests/seeded.py
           python3 tests/seeded_float.py
       - name: Actual scalar roots, checked hosted ABI and import-free controls
+        run: python3 tests/freest.py
+      - name: EMULATED x86 scalar consumers, explicit user-mode interpreter
+        env:
+          CC: x86_64-linux-gnu-gcc
+          FREEST_RUNNER: qemu-x86_64 -L /usr/x86_64-linux-gnu
         run: python3 tests/freest.py
