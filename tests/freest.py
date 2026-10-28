@@ -22,7 +22,7 @@ def main():
         t = Path(td)
         objects = []
         for name in ('revision', 'epoch', 'scalar'):
-            src = ROOT / f'tests/fixtures/freest_{name}.om'
+            src = ROOT / f'tests/freest-fixtures/{name}.om'
             if name != 'scalar' and os.environ.get('FREEST_CUDAPP_ROOT'):
                 src = Path(os.environ['FREEST_CUDAPP_ROOT']) / f'om/pipeline/{name}.om'
             c = t / f'{name}.c'
