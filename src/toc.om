@@ -16,16 +16,16 @@ global side uchar 4096
 global sidec ulong 1
 global mc ulong 1
 global nf ulong 1
-global fn_name ulong 32
-global fn_off ulong 32
-global fn_nl ulong 32
-global fn_ret ulong 32
-global fn_np ulong 32
-global fn_pt ulong 128
-global fn_pl ulong 128
-global fn_pk ulong 128
-global fn_poff ulong 128
-global fn_pnl ulong 128
+global fn_name ulong 64
+global fn_off ulong 64
+global fn_nl ulong 64
+global fn_ret ulong 64
+global fn_np ulong 64
+global fn_pt ulong 384
+global fn_pl ulong 384
+global fn_pk ulong 384
+global fn_poff ulong 384
+global fn_pnl ulong 384
 global ng ulong 1
 global g_off ulong 8
 global g_nl ulong 8
@@ -53,10 +53,24 @@ global nb ulong 1024
 global nv ulong 1024
 global nx ulong 1024
 global ny ulong 1024
-global args ulong 4096
+global args ulong 6144
 global saved ulong 32
 global loopvar ulong 32
 global loopty ulong 32
+note Extended, separately seed-checked mode; baseline capability limits remain unchanged.
+global seeded ulong 1
+global nc ulong 1
+global co_off ulong 32
+global co_nl ulong 32
+global co_ty ulong 32
+global co_val ulong 32
+global co_neg ulong 32
+text cword "const"
+text bword "break"
+text breakc "break;\n"
+text breakp "break\n"
+text guardc "++>=16777216)o_trap(4);\n"
+text guardp ">=16777216: o_trap(4)\n"
 text capmsg "unsupported bridge capability\n"
 text z0 "/* Emitted by Omega Bridge. GNU C11, POSIX. Scalars use canonical 64-bit bits. */\n#include <stdint.h>\n#include <stddef.h>\n#include <unistd.h>\n#include <errno.h>\n#include <setjmp.h>\nstatic _Thread_local jmp_buf o_jmp;\nstatic _Thread_local int o_busy;\nstatic __attribute__((noreturn)) void o_trap(int c){if(o_busy)longjmp(o_jmp,c);_exit(100+c);}\nstatic _Thread_local unsigned o_depth;\nstatic void o_enter(void){if(++o_depth>128)o_trap(6);}\nstatic uint64_t o_leave(uint64_t v){--o_depth;return v;}\nstatic unsigned o_width(unsigned t){static const unsigned w[]={0,1,8,16,32,64,8,16,32,64};return w[t];}\nstatic __int128 o_value(unsigned t,uint64_t v){return t>=6 && v>>63 ? (__int128)v-(((__int128)1)<<64):(__int128)v;}\nstatic uint64_t o_norm(unsigned t,__int128 v,int code){unsigned w=o_width(t);if(t>=6){__int128 m=((__int128)1)<<(w-1);if(v< -m||v>=m)o_trap(code);}else {if(v<0||(__uint128_t)v>=(((__uint128_t)1)<<w))o_trap(code);}return (uint64_t)v;}\nstatic uint64_t o_cast(unsigned t,unsigned s,uint64_t a){return o_norm(t,o_value(s,a),5);}\nstatic uint64_t o_op(unsigned op,unsigned t,uint64_t a,uint64_t b){\n __int128 x=o_value(t,a),y=o_value(t,b),z=0;unsigned w=o_width(t);uint64_t mask=w==64?UINT64_MAX:(((uint64_t)1<<w)-1);\n if(op>=6&&op<=11){switch(op){case 6:return x==y;case 7:return x!=y;case 8:return x<y;case 9:return x<=y;case 10:return x>y;default:return x>=y;}}\n if(op==12)return a&b;if(op==13)return a|b;if(op==14)return a^b;\n if(op==15||op==16){if(b>=w)o_trap(7);if(op==15)return t>=6?o_norm(t,x*(((__int128)1)<<b),1):(a<<b)&mask;if(t<6)return a>>b;if(!b)return a;return (a>>b)|((a>>63)?(UINT64_MAX<<(64-b)):0);}\n if(op==17){if(t<6)return (0-a)&mask;return o_norm(t,-x,1);}if(op==18)return t==1?!a:(t>=6?~a:(~a)&mask);\n if(op==4||op==5){if(!b)o_trap(2);z=op==4?x/y:x%y;return t>=6?o_norm(t,z,1):(uint64_t)z;}\n if(t<6){if(op==1)return (a+b)&mask;if(op==2)return (a-b)&mask;return (a*b)&mask;}\n if(op==1)z=x+y;if(op==2)z=x-y;if(op==3)z=x*y;return o_norm(t,z,1);\n}\nstatic uint64_t o_get(void *p,uint64_t n,uint64_t i,unsigned t){if(i>=n)o_trap(3);switch(t){case 2:return ((uint8_t*)p)[i];case 3:return ((uint16_t*)p)[i];case 4:return ((uint32_t*)p)[i];case 5:return ((uint64_t*)p)[i];case 6:return (uint64_t)((int8_t*)p)[i];case 7:return (uint64_t)((int16_t*)p)[i];case 8:return (uint64_t)((int32_t*)p)[i];default:return (uint64_t)((int64_t*)p)[i];}}\nstatic void o_put(void *p,uint64_t n,uint64_t i,uint64_t v,unsigned t){if(i>=n)o_trap(3);o_norm(t,o_value(t,v),5);switch(t){case 2:((uint8_t*)p)[i]=(uint8_t)v;break;case 3:((uint16_t*)p)[i]=(uint16_t)v;break;case 4:((uint32_t*)p)[i]=(uint32_t)v;break;case 5:((uint64_t*)p)[i]=v;break;case 6:((int8_t*)p)[i]=(int8_t)o_value(t,v);break;case 7:((int16_t*)p)[i]=(int16_t)o_value(t,v);break;case 8:((int32_t*)p)[i]=(int32_t)o_value(t,v);break;default:((int64_t*)p)[i]=(int64_t)o_value(t,v);}}\nstatic void o_fill(void *p,uint64_t n,uint64_t v,unsigned t){for(uint64_t i=0;i<n;i++)o_put(p,n,i,v,t);}\nstatic uint64_t o_io(unsigned op,uint64_t fd,void *p,uint64_t n,uint64_t off,uint64_t len){if(off>n||len>n-off)o_trap(3);int f=(int)o_value(8,fd);ssize_t r=op==1?read(f,(uint8_t*)p+off,(size_t)len):write(f,(uint8_t*)p+off,(size_t)len);return r<0?(uint64_t)(-(int64_t)errno):(uint64_t)r;}\nstatic int o_valid(unsigned t,uint64_t v){unsigned w=o_width(t);__int128 x=o_value(t,v);__int128 m=((__int128)1)<<(t>=6?w-1:w);return t>=6?x>=-m&&x<m:x>=0&&x<m;}\nstatic int o_buf(void *p,uint64_t n,uint64_t want,unsigned t){uintptr_t a=(uintptr_t)p;uint64_t z=t==2?1:8;return p&&n==want&&a%z==0&&n<=UINTPTR_MAX/z&&a<=UINTPTR_MAX-n*z;}\nstatic int o_overlap(void *a,uint64_t an,void *b,uint64_t bn){uintptr_t x=(uintptr_t)a,y=(uintptr_t)b;return x<y+bn&&y<x+an;}\n"
 text z1 "# Emitted by Omega Bridge. Scalar values use canonical 64-bit bits.\nimport os as _os\n_MASK = (1 << 64) - 1\n_depth = 0\n_busy = False\nclass _Trap(Exception):\n    pass\ndef o_trap(c):\n    if _busy: raise _Trap(c)\n    _os._exit(100 + c)\ndef o_enter():\n    global _depth\n    _depth += 1\n    if _depth > 128: o_trap(6)\ndef o_leave(v):\n    global _depth\n    _depth -= 1\n    return v\ndef o_width(t):\n    return (0,1,8,16,32,64,8,16,32,64)[t]\ndef o_value(t,v):\n    return v - (1 << 64) if t >= 6 and v >> 63 else v\ndef o_norm(t,v,code):\n    w = o_width(t)\n    lo,hi = (-(1 << (w-1)),1 << (w-1)) if t >= 6 else (0,1 << w)\n    if not lo <= v < hi: o_trap(code)\n    return v & _MASK\ndef o_cast(t,s,a):\n    return o_norm(t,o_value(s,a),5)\ndef o_op(op,t,a,b):\n    x,y = o_value(t,a),o_value(t,b)\n    w = o_width(t)\n    mask = (1 << w)-1\n    if 6 <= op <= 11: return int((x==y,x!=y,x<y,x<=y,x>y,x>=y)[op-6])\n    if op == 12: return a & b\n    if op == 13: return a | b\n    if op == 14: return a ^ b\n    if op in (15,16):\n        if b >= w: o_trap(7)\n        if op == 15: return o_norm(t,x*(1<<b),1) if t>=6 else (a<<b)&mask\n        return (x >> b) & _MASK\n    if op == 17: return ((-a)&mask) if t < 6 else o_norm(t,-x,1)\n    if op == 18: return int(not a) if t==1 else (~a)&(_MASK if t>=6 else mask)\n    if op in (4,5):\n        if not b: o_trap(2)\n        q = abs(x)//abs(y)\n        if (x<0) != (y<0): q = -q\n        z = q if op == 4 else x-q*y\n    elif op == 1: z=x+y\n    elif op == 2: z=x-y\n    else: z=x*y\n    return o_norm(t,z,1) if t>=6 else z & mask\ndef o_get(p,n,i,t):\n    if i>=n: o_trap(3)\n    return p[i]\ndef o_put(p,n,i,v,t):\n    if i>=n: o_trap(3)\n    p[i]=o_norm(t,o_value(t,v),5)\ndef o_fill(p,n,v,t):\n    for i in range(n): o_put(p,n,i,v,t)\ndef o_io(op,fd,p,n,off,length):\n    if off>n or length>n-off: o_trap(3)\n    try:\n        if op==1:\n            data=_os.read(o_value(8,fd),length)\n            p[off:off+len(data)]=data\n            return len(data)\n        return _os.write(o_value(8,fd),bytes(p[off:off+length]))\n    except OSError as exc: return (-exc.errno)&_MASK\ndef o_valid(t,v):\n    if type(v) is not int or not 0<=v<=_MASK: return False\n    w=o_width(t)\n    x=o_value(t,v)\n    return -(1<<(w-1))<=x<(1<<(w-1)) if t>=6 else x<(1<<w)\ndef o_buf(p,n,want,t,edit):\n    if type(n) is not int or n!=want: return False\n    if t==2:\n        return type(p) is bytearray and len(p)==n\n    return type(p) is list and len(p)==n and all(o_valid(t,x) for x in p)\n"
@@ -186,6 +200,17 @@ text z124 "return (exc.args[0],None)\n"
 text z125 "finally:\n"
 text z126 "_busy=False\n"
 text z127 "_depth=0\n"
+note The portable ABI retains the native adapter's argument/reentry status numbers.
+text s89 ")return 32;\n"
+text s90 ": return (32,None)\n"
+text s98 "))return 32;\n"
+text s105 ": return (32,None)\n"
+text s112 "){\nif(!o_buf(result,1,1,5))return 32;\n"
+text s114 "if(o_busy)return 33;\no_busy=1;o_depth=0;int code=setjmp(o_jmp);\nif(!code)*result="
+text s117 "if _busy: return (33,None)\n"
+note Generated common runtime is deliberately shared by all bounded programs.
+text shead "#if defined(__GNUC__)\n#pragma GCC diagnostic push\n#pragma GCC diagnostic ignored \"-Wunused-function\"\n#pragma GCC diagnostic ignored \"-Wunused-parameter\"\n#pragma GCC diagnostic ignored \"-Wmisleading-indentation\"\n#endif\n"
+text stail "#if defined(__GNUC__)\n#pragma GCC diagnostic pop\n#endif\n"
 
 fn mputb b uchar to void
 m = get mc 0
@@ -445,6 +470,79 @@ i = add i 1
 end
 ret 99
 end
+fn kwconst to ulong
+if or eq get seeded 0 0 ne get tl 0 len cword
+ret 0
+end
+for i ulong len cword
+if ne get src add get ts 0 i get cword i
+ret 0
+end
+end
+ret 1
+end
+
+fn constof to ulong
+i = ulong 0
+while lt i get nc 0
+if eq same_name get co_off i get co_nl i 1
+ret i
+end
+i = add i 1
+end
+ret 99
+end
+
+note A length is a literal or a previously checked unsigned numeric constant.
+fn tokval to ulong
+if eq get tk 0 2
+ret get tw 0
+end
+c = constof
+if eq c 99
+fail 16
+end
+if ne get co_ty c 5
+fail 16
+end
+ret get co_val c
+end
+
+fn parsecon to void
+tok
+if ne get tk 0 1
+fail 16
+end
+i = get nc 0
+if ge i 32
+fail 14
+end
+if ne constof 99
+fail 10
+end
+put co_off i get ts 0
+put co_nl i get tl 0
+tok
+t = ty_of get tw 0
+if eq t 0
+fail 7
+end
+tok
+if ne get tk 0 2
+fail 24
+end
+negative = ulong 0
+if eq get src get ts 0 45
+negative = 1
+end
+n = node 1 0 0 negative get tw 0
+checknum n t
+put co_ty i t
+put co_val i get nv n
+put co_neg i get nb n
+put nc 0 add i 1
+end
+
 
 fn add_loc o ulong n ulong ty ulong k ulong ln ulong par ulong to void
 i = get nloc 0
@@ -460,22 +558,38 @@ put loc_par i par
 put nloc 0 add i 1
 end
 
+fn caplim n ulong old ulong ext ulong code ulong to void
+if eq get seeded 0 0
+if ge n old
+fail code
+end
+else
+if ge n ext
+fail code
+end
+end
+end
+
+fn viewlen n ulong to void
+if eq get seeded 0 1
+if or eq n 0 gt n 16777216
+fail 23
+end
+end
+end
+
 fn walk_sig rec ulong to void
 tok
 if ne get tk 0 1
 fail 16
 end
-if gt get tl 0 8
-fail 13
-end
+caplim get tl 0 9 65 13
 ix = get nf 0
 if eq rec 1
 if ne fn_of 99
 fail 10
 end
-if ge ix 32
-fail 14
-end
+caplim ix 32 64 14
 put fn_name ix get tw 0
 put fn_off ix get ts 0
 put fn_nl ix get tl 0
@@ -514,10 +628,8 @@ if eq pty 0
 fail 7
 end
 tok
-if ne get tk 0 2
-fail 16
-end
-pln = get tw 0
+pln = tokval
+viewlen pln
 else
 pty = ty_of get tw 0
 if eq pty 0
@@ -525,10 +637,8 @@ fail 7
 end
 end
 if eq rec 1
-if ge get fn_np ix 4
-fail 24
-end
-slot = add mul ix 4 get fn_np ix
+caplim get fn_np ix 4 6 24
+slot = add mul ix 6 get fn_np ix
 put fn_pt slot pty
 put fn_pl slot pln
 put fn_pk slot pk
@@ -601,10 +711,15 @@ if eq isw 119165519096935 1
 parse_global
 tok
 else
+if eq kwconst 1
+parsecon
+tok
+else
 while and ne get tk 0 0 ne get tk 0 3
 tok
 end
 tok
+end
 end
 end
 end
@@ -692,7 +807,58 @@ ret 1
 end
 
 
+fn seedstr k ulong to ulong
+if eq k 89
+for i ulong len s89
+e_b ulong get s89 i
+end
+ret 1
+end
+if eq k 90
+for i ulong len s90
+e_b ulong get s90 i
+end
+ret 1
+end
+if or eq k 98 eq k 102
+for i ulong len s98
+e_b ulong get s98 i
+end
+ret 1
+end
+if eq k 105
+for i ulong len s105
+e_b ulong get s105 i
+end
+ret 1
+end
+if eq k 112
+for i ulong len s112
+e_b ulong get s112 i
+end
+ret 1
+end
+if eq k 114
+for i ulong len s114
+e_b ulong get s114 i
+end
+ret 1
+end
+if eq k 117
+for i ulong len s117
+e_b ulong get s117 i
+end
+ret 1
+end
+ret 0
+end
+
 fn emitstr k ulong to void
+if eq get seeded 0 1
+if eq seedstr k 1
+ret
+end
+end
 i = ulong 0
 if eq k 0
 while lt i len z0
@@ -1038,6 +1204,12 @@ end
 ret
 end
 if eq k 49
+if eq get seeded 0 1
+for j ulong len guardc
+e_b ulong get guardc j
+end
+ret
+end
 while lt i len z49
 e_b ulong get z49 i
 i = add i 1
@@ -1052,6 +1224,12 @@ end
 ret
 end
 if eq k 51
+if eq get seeded 0 1
+for j ulong len guardp
+e_b ulong get guardp j
+end
+ret
+end
 while lt i len z51
 e_b ulong get z51 i
 i = add i 1
@@ -1664,6 +1842,11 @@ end
 
 fn arr to ulong
 tok
+if eq get seeded 0 1
+if or eq isw 2003134838 1 eq isw 1953064037 1
+tok
+end
+end
 l = loc_of
 if ne l 99
 if eq get loc_k l 0
@@ -1823,6 +2006,10 @@ n = node 3 rt a b op
 put nx n t
 ret n
 end
+c = constof
+if ne c 99
+ret node 1 get co_ty c 0 get co_neg c get co_val c
+end
 f = fn_of
 if ne f 99
 ret callnode f
@@ -1841,7 +2028,7 @@ fn callnode f ulong to ulong
 n = node 7 get fn_ret f 0 0 f
 i = ulong 0
 while lt i get fn_np f
-slot = add mul f 4 i
+slot = add mul f 6 i
 arg = ulong 0
 if gt get fn_pk slot 0
 arg = arr
@@ -1856,9 +2043,9 @@ writable arg
 end
 j = ulong 0
 while lt j i
-s = add mul f 4 j
+s = add mul f 6 j
 if gt get fn_pk s 0
-if eq get args add mul n 4 j arg
+if eq get args add mul n 6 j arg
 fail 19
 end
 end
@@ -1868,7 +2055,7 @@ else
 arg = expr get fn_pt slot
 expect arg get fn_pt slot
 end
-put args add mul n 4 i arg
+put args add mul n 6 i arg
 i = add i 1
 end
 ret n
@@ -2091,7 +2278,7 @@ while lt i get fn_np f
 if gt i 0
 e_comma
 end
-s = add mul f 4 i
+s = add mul f 6 i
 if gt get fn_pk s 0
 if eq get target 0 0
 emitstr 29
@@ -2323,8 +2510,48 @@ end
 end
 end
 
+fn kwbreak to ulong
+if or eq get seeded 0 0 ne get tl 0 len bword
+ret 0
+end
+for i ulong len bword
+if ne get src add get ts 0 i get bword i
+ret 0
+end
+end
+ret 1
+end
+
+fn ebreak to void
+d = get bd 0
+found = ulong 0
+while gt d 0
+d = sub d 1
+if or eq get bk d 4 eq get bk d 5
+found = 1
+end
+end
+if eq found 0
+fail 15
+end
+indent
+if eq get target 0 0
+for i ulong len breakc
+e_b ulong get breakc i
+end
+else
+for i ulong len breakp
+e_b ulong get breakp i
+end
+end
+end
+
 fn eone to ulong
 w = get tw 0
+if eq kwbreak 1
+ebreak
+ret 1
+end
 if eq w 1702129518
 while and ne get tk 0 0 ne get tk 0 3
 tok
@@ -2398,6 +2625,9 @@ if eq w 435610544247
 v = expr 1
 expect v 1
 limit = ulong 1000000
+if eq get seeded 0 1
+limit = 16777216
+end
 tok
 if eq isw 431349919586 1
 tok
@@ -2513,7 +2743,7 @@ put nloc 0 0
 put localuse 0 0
 i = ulong 0
 while lt i get fn_np f
-s = add mul f 4 i
+s = add mul f 6 i
 add_loc get fn_poff s get fn_pnl s get fn_pt s get fn_pk s get fn_pl s 1
 i = add i 1
 end
@@ -2543,6 +2773,11 @@ fn generate to void
 put oc 0 0
 put bd 0 0
 if eq get target 0 0
+if eq get seeded 0 1
+for j ulong len shead
+e_b ulong get shead j
+end
+end
 emitstr 0
 else
 emitstr 1
@@ -2568,7 +2803,7 @@ while ne get tk 0 3
 if eq isw 28262 1
 efn
 else
-if eq isw 119165519096935 1
+if or eq isw 119165519096935 1 eq kwconst 1
 while and ne get tk 0 0 ne get tk 0 3
 tok
 end
@@ -2588,6 +2823,9 @@ tok
 end
 if eq get hasmain 0 0
 i = ulong 0
+if eq get seeded 0 1
+i = sub get nf 0 1
+end
 while lt i get nf 0
 exportfn i
 i = add i 1
@@ -2608,6 +2846,11 @@ emitstr 83
 end
 end
 i = add i 1
+end
+end
+if and eq get seeded 0 1 eq get target 0 0
+for j ulong len stail
+e_b ulong get stail j
 end
 end
 end
@@ -2631,10 +2874,14 @@ end
 end
 put slen 0 off
 put line 0 1
-if eq get src 0 80
+mode = get src 0
+if or or eq mode 68 eq mode 81 eq mode 72
+put seeded 0 1
+end
+if or eq mode 80 eq mode 81
 put target 0 1
 else
-if ne get src 0 67
+if and and ne mode 67 ne mode 68 ne mode 72
 fail 24
 end
 end
@@ -2642,7 +2889,11 @@ namescan
 if eq get nf 0 0
 fail 16
 end
+if eq mode 72
+genhead
+else
 generate
+end
 w = write 1 outb 0 get oc 0
 if ne w long get oc 0
 ret 1
@@ -2658,12 +2909,12 @@ if eq py 0
 emitstr 84
 i = ulong 0
 while lt i get fn_np f
-slot = add mul f 4 i
+slot = add mul f 6 i
 if eq get fn_pk slot 0
 emitstr 85
 named 112 i
 e_b 61
-eexpr get args add mul n 4 i
+eexpr get args add mul n 6 i
 e_b 59
 end
 i = add i 1
@@ -2676,8 +2927,8 @@ while lt i get fn_np f
 if gt i 0
 e_comma
 end
-slot = add mul f 4 i
-arg = get args add mul n 4 i
+slot = add mul f 6 i
+arg = get args add mul n 6 i
 if gt get fn_pk slot 0
 arrp arg
 e_comma
@@ -2710,7 +2961,7 @@ if gt i 0
 e_comma
 end
 named 112 i
-s = add mul f 4 i
+s = add mul f 6 i
 if gt get fn_pk s 0
 e_comma
 named 112 i
@@ -2729,7 +2980,7 @@ end
 end
 
 fn excheck f ulong i ulong to void
-s = add mul f 4 i
+s = add mul f 6 i
 indent
 if eq get target 0 0
 emitstr 91
@@ -2778,8 +3029,8 @@ end
 end
 
 fn exalias f ulong i ulong j ulong to void
-s = add mul f 4 i
-r = add mul f 4 j
+s = add mul f 6 i
+r = add mul f 6 j
 if and gt get fn_pk s 0 gt get fn_pk r 0
 if or eq get fn_pk s 3 eq get fn_pk r 3
 indent
@@ -2816,6 +3067,39 @@ end
 end
 end
 
+fn genhead to void
+if ne get hasmain 0 0
+fail 24
+end
+put oc 0 0
+f = sub get nf 0 1
+emitstr 106
+exname f
+e_b 40
+emitstr 108
+i = ulong 0
+while lt i get fn_np f
+s = add mul f 6 i
+e_comma
+if gt get fn_pk s 0
+emitstr 109
+else
+emitstr 110
+end
+named 112 i
+if gt get fn_pk s 0
+e_comma
+euint
+named 112 i
+emitstr 111
+end
+i = add i 1
+end
+e_b 41
+e_b 59
+e_b 10
+end
+
 fn exportfn f ulong to void
 py = get target 0
 put bd 0 0
@@ -2831,7 +3115,7 @@ emitstr 108
 end
 i = ulong 0
 while lt i get fn_np f
-s = add mul f 4 i
+s = add mul f 6 i
 if or eq py 0 gt i 0
 e_comma
 end

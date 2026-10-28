@@ -1,6 +1,6 @@
 # Omega Bridge (an Omega-written compiler from a checked Omega subset to C and Python, plus native call and GPU adapter boundaries)
 
-> `src/toc.om` is an Omega program, built by the pinned seeded Omega compiler, that emits executable C and Python from a checked, bounded Omega subset (ABI v0). `src/native.om` generates a C binding so C, C++, Python, Rust, Zig and Go call the machine code the seeded compiler produced (native call ABI v1). `src/gpu_adapter.om` is an opt-in GPU adapter boundary that negotiates and admits artifacts; it converts no host program. Linux AArch64 only. Independent review remains required before release; no universal conversion or speedup is claimed.
+> `src/toc.om` is an Omega program, built by the pinned seeded Omega compiler, that emits executable C and Python from a checked, bounded Omega subset (ABI v0). `src/native.om` generates a C binding so C, C++, Python, Rust, Zig and Go call the machine code the seeded compiler produced (native call ABI v1). `src/gpu_adapter.om` is an opt-in GPU adapter boundary that negotiates and admits artifacts; it converts no host program. Building the converter and native call adapters needs Linux AArch64; emitted C is portable to Linux x86-64. Independent review remains required before release; no universal conversion or speedup is claimed.
 
 Shared rules: read https://www.aienos.com/agents/RULES.md first. This file adds what is specific to this repository; where the two differ, this file wins here.
 
@@ -31,6 +31,7 @@ The bootstrap fetches the Omega source commit recorded in `docs/PROVENANCE.md` (
 - `OMEGA_SOURCE`: an existing Omega checkout to read the pinned commit from instead of fetching it (read only).
 - `OMEGA_SEED`: an already qualified seed compiler; its sha256 must be the pinned one above.
 - `OMEGA_NATIVE_OMC`: the seeded compiler for the native call tests, the omega-mv `seed/out/omc` (sha256 `734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61`, omega-mv PR #696).
+- `OMEGA_SEEDED_OMC`: optional additive `tools/bridge-seeded` frontend compiler, omega-mv `e5b32567`, sha256 `2c82480596bbdc50cda9626866209ef662d5834f278f839ff4ce0250c495029f`. It does not replace the baseline build/test seed. See `docs/CAPABILITIES.md` and run `python3 tests/seeded.py` after the unchanged baseline suite.
 - `MAXPY`: Python interpreter of a venv with `modular==26.7.0`, used by `conformance/run.sh`.
 - On a shared build host, prefix the build and test commands with `quiet-build`, as the README does. Without it, run the scripts directly.
 

@@ -31,3 +31,40 @@ Full-program results are compared byte-for-byte on stdout/stderr and process sta
 Other conversion targets need a real emitter, capability checks, reference executor, differential corpus and an attachment gate; no language other than C and Python has a converter. Calling a compiled Omega function in place from C, C++, Python, Rust, Zig or Go is the native call adapter (docs/NATIVE-ABI.md): `tools/native` builds the library and writes each language's declarations from the Omega signatures. That is a call into Omega's machine code, a separate claim from conversion. JavaScript, Java, C#, Fortran and other languages have no implemented or tested adapter here.
 
 The seed's optional grouped-expression syntax and explicit `view A` argument prefix are not lowered by this bridge; use ordinary prefix expressions and view-typed parameters. Source constructs beyond the table may be accepted by the seed and then refused by the target compiler. Error 24 includes an unsupported-capability diagnostic; errors 13/14/23 identify name, table/output or storage limits. No target output is published on these failures.
+
+## Additive seeded frontend
+
+`tools/bridge-seeded c|python|h SOURCE.om` is an explicit frontend mode for
+omega-mv `e5b32567`, requiring `OMEGA_SEEDED_OMC` with sha256
+`2c82480596bbdc50cda9626866209ef662d5834f278f839ff4ce0250c495029f`.
+The source snapshot is checked by that exact compiler before conversion. A
+different compiler fingerprint refuses with status 65 and no target output.
+This mode does not change `tools/bridge`, its baseline seed
+`191b776ef98821597c3e30655da6d680a9b66edbc9ceaca3c39c61ea6df098e9`,
+or the required `tools/test.sh` suite.
+
+The additive mode accepts at most 32 numeric literal constants, 64 functions,
+six parameters per function, names up to 64 bytes, fixed view/edit shapes up to
+16,777,216 elements, explicit `view`/`edit` call prefixes and bounded-loop
+`break`. Default variable-loop and while guards are 16,777,216 iterations.
+Global/local allocation limits, checked arithmetic, bounds, alias refusals,
+call budget, no-heap language restriction and unsupported-feature refusals
+remain unchanged. Text constants, floating point and external calls remain
+unsupported. These are implementation bounds, not performance measurements.
+
+Function units export only their final function, using `omega_NAME`.
+`h` emits that C declaration from the same checked signature metadata as `c`.
+The result pointer comes first; scalars use canonical uint64_t bits; arrays
+use address and element-count pairs. Counts must equal the declared fixed
+shape. ABI statuses are 0 for completion, 1 through 14 for Omega traps, 32 for
+invalid host arguments or overlapping arrays, and 33 for reentry. Views are
+not written by Omega. Generated C contains the implementation and checked
+runtime, not a call into AArch64 machine code, and can be compiled on Linux
+x86-64 with GNU C. Native call adapters remain a separate AArch64 path.
+
+Qualification is separate from implementation. Run the unchanged baseline
+`tools/test.sh` first, then `python3 tests/seeded.py` with both pinned compilers
+configured. The latter compares native Omega, generated C and Python,
+executes generated x86-64 machine code through qemu-x86_64, checks the header
+ABI, and includes wrong-seed and arithmetic-emitter negative controls.
+No device qualification is implied.
