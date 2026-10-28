@@ -52,9 +52,10 @@ remains distinct; public `omega_`/`omega2_` exports and compiler machine bytes a
 requires a `.globl ombr_enter` emitter mutant to fail linking.
 
 The emitter has finite pools of 4194304 input bytes and 16777216 output bytes for
-the complete framed unit set and one generated output. Exhausting a pool traps with
-resource status 6 (process exit 106), before any generated output is written. This
-does not relax individual compiler, source-language, slot or unit-count limits.
+the complete framed unit set and one generated output. Input must be strictly smaller
+than its pool (maximum 4194303 bytes); output may fill its pool exactly. Exhausting
+a pool traps with resource status 6 (process exit 106), before any generated output
+is written. This does not relax individual compiler, source-language, slot or unit-count limits.
 `tests/native/test_capacity.py` compiles a matching 16-unit frame exceeding the former
 1048576-byte input and 4194304-byte output pools, builds and calls both endpoint units,
 restores each old pool size as a failing mutant, and checks both current overflow

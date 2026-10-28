@@ -55,6 +55,8 @@ def main():
             assert mutant != source
             refused(build(mutant, tmp / ("old-" + pool.split()[0].decode())), frame)
         # Hostile protocol inputs exercise each real upper boundary separately.
+        refused(generator, b"\0" * 4194304)
+        print("CAPACITY PASS: current input pool exhaustion exits 106 with no output")
         # The output probe deliberately has unmatched source/code custody: it is
         # never executed and is solely an emitter-resource refusal control.
         oversized = []
@@ -63,7 +65,10 @@ def main():
             code = checked([OMC], input=unit).stdout
             oversized_code = code + b"\xff" * (875000 - len(code))
             oversized.append(unit + b"\0" + f"{len(oversized_code):08d}".encode() + oversized_code)
-        refused(generator, b"".join(oversized))
+        oversized_frame = b"".join(oversized)
+        assert len(oversized_frame) < 4194304
+        refused(generator, oversized_frame)
+        print("CAPACITY PASS: current output pool exhaustion exits 106 with no output")
         print(f"CAPACITY PASS: compiler-built frame {len(frame)} bytes, C {len(result.stdout)} bytes, both endpoint calls")
         print("CAPACITY PASS: old input/output bound mutants and new input/output overflow controls refuse with no output")
 
