@@ -43,6 +43,14 @@ anything outside the supported signature set, and a missing or unknown output wo
   target identification (BTI) without changing the compiler's bytes;
 - exports, per unit, `uint32_t omega_<name>(uint64_t *result, ...)`.
 
+All private `ombr_` and `ombr2_` assembly labels have local binding; private C helpers,
+runtime tables and per-translation-unit TLS retain static linkage. Independently generated
+C units can be linked together without helper collisions. Their trap/stack/thread state
+remains distinct; public `omega_`/`omega2_` exports and compiler machine bytes are unchanged.
+`tests/native/test_private_symbols.py` regenerates two separate bindings, checks their
+`nm` visibility and exact public exports, exercises traps and concurrent threads, and
+requires a `.globl ombr_enter` emitter mutant to fail linking.
+
 Names must be C identifiers, a parameter name may not end in `_len` (the binding names a length
 `o_<name>_len`), and each unit name appears once; anything else is refused before any C is written.
 
