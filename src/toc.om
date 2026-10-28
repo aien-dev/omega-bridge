@@ -1,5 +1,5 @@
 note Omega Bridge. Apache-2.0 WITH LLVM-exception. Recovered lexer and names; typed nodes and ordered C/Python emitters.
-global src uchar 65536
+global src uchar 1048576
 global slen ulong 1
 global cur ulong 1
 global line ulong 1
@@ -8,7 +8,7 @@ global tw ulong 1
 global tl ulong 1
 global ts ulong 1
 global held ulong 1
-global outb uchar 262144
+global outb uchar 4194304
 global oc ulong 1
 global msg uchar 64
 global digs uchar 24
@@ -16,16 +16,16 @@ global side uchar 4096
 global sidec ulong 1
 global mc ulong 1
 global nf ulong 1
-global fn_name ulong 64
-global fn_off ulong 64
-global fn_nl ulong 64
-global fn_ret ulong 64
-global fn_np ulong 64
-global fn_pt ulong 384
-global fn_pl ulong 384
-global fn_pk ulong 384
-global fn_poff ulong 384
-global fn_pnl ulong 384
+global fn_name ulong 512
+global fn_off ulong 512
+global fn_nl ulong 512
+global fn_ret ulong 512
+global fn_np ulong 512
+global fn_pt ulong 3072
+global fn_pl ulong 3072
+global fn_pk ulong 3072
+global fn_poff ulong 3072
+global fn_pnl ulong 3072
 global ng ulong 1
 global g_off ulong 8
 global g_nl ulong 8
@@ -65,6 +65,30 @@ global co_nl ulong 32
 global co_ty ulong 32
 global co_val ulong 32
 global co_neg ulong 32
+global fsgn ulong 1
+global fnd ulong 1
+global fp10 long 1
+global fsuf ulong 1
+global fg_fl ulong 1
+global fg_seen ulong 1
+global fg_ex long 1
+global fg_esign long 1
+global fg_ed ulong 1
+global fg_ty ulong 1
+global fg_e long 1
+global fg_q ulong 1
+global fg_m ulong 1
+global fg_stk ulong 1
+global fg_low ulong 1
+global fg_ov ulong 1
+text fword "f32"
+text bcword "bitcast"
+text absword "fabs"
+text fcall ";o_f32("
+text cntword "continue"
+text cntc "continue;\n"
+text volword "volatile uint64_t "
+text frun "#include <float.h>\n#include <fenv.h>\n#if FLT_RADIX != 2 || FLT_MANT_DIG != 24 || FLT_MAX_EXP != 128 || FLT_EVAL_METHOD != 0\n#error unsupported binary32 environment\n#endif\n#if defined(__FAST_MATH__)\n#error fast math is not a supported Omega environment\n#endif\nstatic uint64_t o_f32(unsigned op,uint64_t a,uint64_t b){uint32_t ua=(uint32_t)a,ub=(uint32_t)b,ur;float x,y;__builtin_memcpy(&x,&ua,4);__builtin_memcpy(&y,&ub,4);if(op==1)return ua&UINT32_C(0x7fffffff);if(op==2){volatile float z=x*y;__builtin_memcpy(&ur,(const void*)&z,4);return ur;}return x<=y;}\n"
 text cword "const"
 text bword "break"
 text breakc "break;\n"
@@ -279,7 +303,7 @@ end
 
 fn e_b c ulong to void
 o = get oc 0
-if ge o 262144
+if ge o 4194304
 fail 14
 end
 put outb o uchar c
@@ -305,11 +329,26 @@ end
 ret 0
 end
 
+fn tok_flt to ulong
+for j ulong get tl 0
+q = get src add get ts 0 j
+if or or eq q 46 eq q 101 eq q 69
+put tk 0 4
+ret 1
+end
+end
+ret 0
+end
+
 fn tok_num to void
+note Only the seeded C frontend admits explicit binary32 literals.
 v = ulong 0
 i = ulong 0
 minus = ulong 0
 p = get ts 0
+if eq tok_flt 1
+ret
+end
 if eq get src p 45
 minus = 1
 i = 1
@@ -397,6 +436,11 @@ end
 end
 
 fn ty_of w ulong to ulong
+if and eq get seeded 0 1 eq get target 0 0
+if eq floatkw 1
+ret 11
+end
+end
 if eq w 1819242338
 ret 1
 end
@@ -428,7 +472,7 @@ ret 0
 end
 
 fn signed t ulong to ulong
-if ge t 6
+if and ge t 6 le t 9
 ret 1
 end
 ret 0
@@ -478,7 +522,7 @@ ret i
 end
 i = add i 1
 end
-ret 99
+ret 4096
 end
 fn kwconst to ulong
 if or eq get seeded 0 0 ne get tl 0 len cword
@@ -596,10 +640,10 @@ end
 caplim get tl 0 9 65 13
 ix = get nf 0
 if eq rec 1
-if ne fn_of 99
+if ne fn_of 4096
 fail 10
 end
-caplim ix 32 64 14
+caplim ix 32 512 14
 put fn_name ix get tw 0
 put fn_off ix get ts 0
 put fn_nl ix get tl 0
@@ -610,7 +654,7 @@ end
 put cfi 0 ix
 else
 put cfi 0 fn_of
-if eq get cfi 0 99
+if eq get cfi 0 4096
 fail 3
 end
 end
@@ -634,6 +678,9 @@ end
 if gt pk 0
 tok
 pty = ty_of get tw 0
+if eq pty 11
+fail 24
+end
 if eq pty 0
 fail 7
 end
@@ -685,6 +732,9 @@ put g_off i get ts 0
 put g_nl i get tl 0
 tok
 ty = ty_of get tw 0
+if eq ty 11
+fail 24
+end
 if eq ty 0
 fail 7
 end
@@ -1895,6 +1945,16 @@ end
 
 fn expr exp ulong to ulong
 tok
+if eq get tk 0 4
+if or eq get seeded 0 0 ne get target 0 0
+fail 24
+end
+fparse get ts 0 get tl 0
+if ne get fsuf 0 1
+fail 24
+end
+ret node 1 11 0 0 fbits 10
+end
 if eq get tk 0 2
 negative = ulong 0
 if eq get src get ts 0 45
@@ -1919,12 +1979,39 @@ ret node 1 1 0 0 bv
 end
 t = ty_of w
 if gt t 0
+if eq t 11
+fail 24
+end
 a = expr 0
+if eq get nt a 11
+fail 24
+end
 if eq get nt a 0
 checknum a t
 ret a
 end
 ret node 4 t a 0 0
+end
+if and eq get seeded 0 1 eq get target 0 0
+fk = floatkw
+if eq fk 2
+tok
+bt = ty_of get tw 0
+if and ne bt 4 ne bt 11
+fail 24
+end
+aa = expr 0
+at = get nt aa
+if not or and eq bt 4 eq at 11 and eq bt 11 eq at 4
+fail 24
+end
+ret node 9 bt aa 0 0
+end
+if eq fk 3
+aa = expr 11
+expect aa 11
+ret node 10 11 aa 0 1
+end
 end
 if eq w 7628135
 a = arr
@@ -2008,6 +2095,11 @@ fail 11
 end
 end
 t = get nt a
+if eq t 11
+if and ne op 3 ne op 9
+fail 24
+end
+end
 rt = t
 if and ge op 6 le op 11
 rt = 1
@@ -2021,7 +2113,7 @@ if ne c 99
 ret node 1 get co_ty c 0 get co_neg c get co_val c
 end
 f = fn_of
-if ne f 99
+if ne f 4096
 ret callnode f
 end
 l = loc_of
@@ -2134,6 +2226,14 @@ if eq k 6
 arrn a
 ret
 end
+if eq k 9
+eexpr a
+ret
+end
+if eq k 10
+emitfloat v a b
+ret
+end
 if eq k 4
 emitstr 6
 e_dec t
@@ -2157,6 +2257,14 @@ e_b 41
 ret
 end
 if eq k 3
+if eq get nx n 11
+fv = ulong 2
+if eq v 9
+fv = 3
+end
+emitfloat fv a b
+ret
+end
 if eq py 0
 emitstr 8
 eexpr a
@@ -2331,6 +2439,9 @@ fail 7
 end
 tok
 t = ty_of get tw 0
+if eq t 11
+fail 24
+end
 if lt t 2
 fail 7
 end
@@ -2344,8 +2455,14 @@ fail 23
 end
 sz = mul ln div width t 8
 put localuse 0 add get localuse 0 sz
+if eq get seeded 0 0
 if gt get localuse 0 32768
 fail 23
+end
+else
+if gt get localuse 0 16777216
+fail 23
+end
 end
 v = expr t
 expect v t
@@ -2566,6 +2683,10 @@ end
 
 fn eone to ulong
 w = get tw 0
+if eq kwcont 1
+econt
+ret 1
+end
 if eq kwbreak 1
 ebreak
 ret 1
@@ -2733,7 +2854,7 @@ eput
 ret 1
 end
 f = fn_of
-if ne f 99
+if ne f 4096
 if ne get fn_ret f 10
 fail 7
 end
@@ -2797,6 +2918,11 @@ e_b ulong get shead j
 end
 end
 emitstr 0
+if eq get seeded 0 1
+for j ulong len frun
+e_b ulong get frun j
+end
+end
 else
 emitstr 1
 end
@@ -2877,7 +3003,7 @@ fn main to int
 off = ulong 0
 go = ulong 1
 while eq go 1
-n = read 0 src off sub 65536 off
+n = read 0 src off sub 1048576 off
 if lt n 0
 fail 1
 end
@@ -2885,7 +3011,7 @@ if eq n 0
 go = 0
 else
 off = add off ulong n
-if ge off 65536
+if ge off 1048576
 fail 14
 end
 end
@@ -2908,6 +3034,8 @@ if eq get nf 0 0
 fail 16
 end
 if eq mode 72
+generate
+put oc 0 0
 genhead
 else
 generate
@@ -3120,6 +3248,14 @@ e_b 10
 end
 
 fn exportfn f ulong to void
+if eq get fn_ret f 11
+fail 24
+end
+for i ulong get fn_np f
+if eq get fn_pt add mul f 6 i 11
+fail 24
+end
+end
 py = get target 0
 put bd 0 0
 if eq py 0
@@ -3143,7 +3279,9 @@ if gt get fn_pk s 0
 viewqual get fn_pk s
 emitstr 109
 else
-emitstr 110
+for j ulong len volword
+e_b ulong get volword j
+end
 end
 end
 named 112 i
@@ -3211,4 +3349,383 @@ indent
 emitstr 127
 end
 put bd 0 0
+end
+
+note Literal conversion copied from omega e5b32567 seed/omc/omc.om lines1811-2116; unchanged algorithm, input buffer renamed.
+note ---- float literals: a token is the decimal value fsgn * fnd * 10^fp10, fsuf 0 none / 1 f32 / 2 f64.
+note fg_* hold the working state of the one literal being converted (see fparse/fbits/fnorm/fgen).
+
+note ======== float literals: decimal text to IEEE-754 binary32/binary64 ========
+note The literal is fnd * 10^fp10. The converter normalizes fnd to a 64-bit significand, applies the
+note decimal scale one factor of ten at a time (fmul10/fdiv10) while folding lost bits into one sticky
+note flag, then rounds once (froundsh) and packs (fpack). It covers the full IEEE range, subnormals
+note included, and refuses (error 8) only a value that rounds to infinity or whose digits do not fit
+note in 2^63-1.
+
+note blen: bits needed for x (0 for zero)
+fn blen x ulong to ulong
+n = ulong 0
+while ne x 0
+x = shr x 1
+n = add n 1
+end
+ret n
+end
+
+note fparse: read the literal text inp[pos, pos+len) into fsgn, fnd, fp10, fsuf (0 none, 1 f32, 2 f64).
+note Grammar: [-]digits[.digits][(e|E)[+|-]digits][f32|f64]. At most 2^63-1 significant digits
+note (error 8), a dot with no digit after it is error 6, |exponent| <= 999 (error 8).
+fn fparse pos ulong ln ulong to void
+p = pos
+e = add pos ln
+put fsgn 0 0
+put fsuf 0 0
+put fnd 0 0
+put fg_fl 0 0
+put fg_seen 0 0
+if eq get src p 45
+put fsgn 0 1
+p = add p 1
+end
+go = true
+while and go lt p e
+b = get src p
+d = sub ulong b 48
+if le d 9
+if gt get fnd 0 922337203685477580
+fail 8
+end
+if and eq get fnd 0 922337203685477580 gt d 7
+fail 8
+end
+put fnd 0 add mul get fnd 0 10 d
+if ne get fg_seen 0 0
+put fg_fl 0 add get fg_fl 0 1
+end
+p = add p 1
+else
+if and eq b 46 eq get fg_seen 0 0
+put fg_seen 0 1
+p = add p 1
+else
+go = false
+end
+end
+end
+if and ne get fg_seen 0 0 eq get fg_fl 0 0
+fail 6
+end
+p = fexp p e
+p = fsufx p e
+if ne p e
+fail 6
+end
+x = mul get fg_esign 0 get fg_ex 0
+put fp10 0 sub x long get fg_fl 0
+end
+
+note fexp: the exponent of the literal, if present: fg_ex, fg_esign, fg_ed. Returns the new position.
+fn fexp p ulong e ulong to ulong
+put fg_ex 0 0
+put fg_esign 0 1
+if and lt p e or eq get src p 101 eq get src p 69
+p = add p 1
+if lt p e
+if or eq get src p 43 eq get src p 45
+if eq get src p 45
+put fg_esign 0 -1
+end
+p = add p 1
+end
+end
+put fg_ed 0 0
+go = true
+while and go lt p e
+d = sub ulong get src p 48
+if gt d 9
+go = false
+else
+put fg_ex 0 add mul get fg_ex 0 10 long d
+if gt get fg_ex 0 999
+fail 8
+end
+put fg_ed 0 add get fg_ed 0 1
+p = add p 1
+end
+end
+if eq get fg_ed 0 0
+fail 6
+end
+end
+ret p
+end
+
+note fsufx: the optional f32/f64 suffix: fsuf 1 or 2. Returns the new position.
+fn fsufx p ulong e ulong to ulong
+if lt p e
+r = sub e p
+if ne r 3
+fail 6
+end
+if ne get src p 102
+fail 6
+end
+if and eq get src add p 1 51 eq get src add p 2 50
+put fsuf 0 1
+else
+if and eq get src add p 1 54 eq get src add p 2 52
+put fsuf 0 2
+else
+fail 6
+end
+end
+p = add p 3
+end
+ret p
+end
+
+note fbits: the parsed literal as IEEE bits of type ty (10 f32, 11 f64). Zero keeps the sign (-0.0).
+note fmul10 / fdiv10: one exact decimal step on the normalized significand fg_m (value = fg_m * 2^fg_e),
+note keeping fg_m in [2^63, 2^64) and folding every lost bit into fg_stk. No rounding happens here.
+fn fmul10 to void
+m = get fg_m 0
+hi = shr m 32
+lo = and m 4294967295
+p0 = mul lo 10
+p1 = mul hi 10
+hi2 = add p1 shr p0 32
+put fg_low 0 or shl and hi2 4294967295 32 and p0 4294967295
+put fg_ov 0 shr hi2 32
+fmn10
+end
+
+fn fmn10 to void
+ov = get fg_ov 0
+low = get fg_low 0
+s = blen ov
+if ne s 0
+st = or get fg_stk 0 and low sub shl 1 s 1
+put fg_stk 0 st
+put fg_m 0 or shl ov sub 64 s shr low s
+put fg_e 0 add get fg_e 0 long s
+else
+put fg_m 0 low
+end
+end
+
+fn fdiv10 to void
+m = get fg_m 0
+q = div m 10
+if ne rem m 10 0
+put fg_stk 0 1
+end
+s = ulong 0
+while lt q 9223372036854775808
+q = shl q 1
+s = add s 1
+end
+put fg_m 0 q
+put fg_e 0 sub get fg_e 0 long s
+end
+
+note froundsh: round fg_m right by sh bits to fg_q, nearest even; the guard and every lower bit
+note (plus fg_stk) decide. sh may be 64 (then q is zero and bit 63 is the guard).
+fn froundsh sh ulong to void
+m = get fg_m 0
+q = ulong 0
+guard = ulong 0
+lost = ulong 0
+if eq sh 0
+q = m
+else
+if ge sh 64
+guard = shr m 63
+lost = and m 9223372036854775807
+else
+q = shr m sh
+guard = and shr m sub sh 1 1
+if gt sub sh 1 0
+lost = and m sub shl 1 sub sh 1 1
+end
+end
+end
+sticky = or get fg_stk 0 lost
+if ne guard 0
+if or ne sticky 0 eq and q 1 1
+q = add q 1
+end
+end
+put fg_q 0 q
+end
+
+note fpack: fg_m/fg_e to IEEE bits of fg_ty, including subnormals; a literal that rounds to infinity
+note is refused (error 8).
+fn fpack to ulong
+p = ulong 53
+bias = long 1023
+maxe = long 2047
+emin = long -1022
+mb = ulong 52
+w = ulong 64
+if eq get fg_ty 0 10
+p = ulong 24
+bias = long 127
+maxe = long 255
+emin = long -126
+mb = ulong 23
+w = ulong 32
+end
+e = add get fg_e 0 63
+if ge e emin
+sh = sub 64 p
+froundsh sh
+q = get fg_q 0
+if eq q shl 1 p
+q = shr q 1
+e = add e 1
+end
+E = add e bias
+if ge E maxe
+fail 8
+end
+q = and q sub shl 1 sub p 1 1
+q = or q shl ulong E mb
+q = or q shl get fsgn 0 sub w 1
+ret q
+end
+k = ulong sub emin e
+sh = add sub 64 p k
+if gt sh 64
+ret shl get fsgn 0 sub w 1
+end
+froundsh sh
+q = get fg_q 0
+q = or q shl get fsgn 0 sub w 1
+ret q
+end
+
+fn fbits ty ulong to ulong
+put fg_ty 0 ty
+put fg_stk 0 0
+if eq get fnd 0 0
+w = ulong 64
+if eq ty 10
+w = ulong 32
+end
+b = ulong 0
+if ne get fsgn 0 0
+b = shl ulong 1 sub w 1
+end
+ret b
+end
+b = blen get fnd 0
+sh = sub 64 b
+put fg_m 0 shl get fnd 0 sh
+put fg_e 0 sub 0 long sh
+p = get fp10 0
+if gt p 0
+i = ulong 0
+n = ulong p
+while lt i n
+fmul10
+i = add i 1
+end
+else
+if lt p 0
+i = ulong 0
+n = ulong sub 0 p
+while lt i n
+fdiv10
+i = add i 1
+end
+end
+end
+ret fpack
+end
+
+fn floatkw to ulong
+if eq get tl 0 len fword
+ok = true
+for i ulong len fword
+if ne get src add get ts 0 i get fword i
+ok = false
+end
+end
+if ok
+ret 1
+end
+end
+if eq get tl 0 len bcword
+ok = true
+for i ulong len bcword
+if ne get src add get ts 0 i get bcword i
+ok = false
+end
+end
+if ok
+ret 2
+end
+end
+if eq get tl 0 len absword
+ok = true
+for i ulong len absword
+if ne get src add get ts 0 i get absword i
+ok = false
+end
+end
+if ok
+ret 3
+end
+end
+ret 0
+end
+
+fn emitfloat op ulong a ulong b ulong to void
+emitstr 8
+eexpr a
+emitstr 9
+if eq op 1
+e_b 48
+else
+eexpr b
+end
+for i ulong len fcall
+e_b ulong get fcall i
+end
+e_dec op
+e_comma
+emitstr 12
+end
+
+fn kwcont to ulong
+if or eq get seeded 0 0 ne get target 0 0
+ret 0
+end
+if ne get tl 0 len cntword
+ret 0
+end
+for i ulong len cntword
+if ne get src add get ts 0 i get cntword i
+ret 0
+end
+end
+ret 1
+end
+
+fn econt to void
+d = get bd 0
+found = false
+while gt d 0
+d = sub d 1
+if or eq get bk d 4 eq get bk d 5
+found = true
+end
+end
+if not found
+fail 15
+end
+indent
+for i ulong len cntc
+e_b ulong get cntc i
+end
 end

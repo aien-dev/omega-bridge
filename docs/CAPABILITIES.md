@@ -43,18 +43,32 @@ This mode does not change `tools/bridge`, its baseline seed
 `191b776ef98821597c3e30655da6d680a9b66edbc9ceaca3c39c61ea6df098e9`,
 or the required `tools/test.sh` suite.
 
-The additive mode accepts at most 32 numeric literal constants, 64 functions,
+The additive mode accepts at most 32 numeric literal constants, 512 functions,
 six parameters per function, function names up to the frontend's 63-byte limit
 (other names retain its limits), fixed view/edit shapes up to
 16,777,216 elements, explicit `view`/`edit` call prefixes and bounded-loop
-`break`. Default variable-loop and while guards are 16,777,216 iterations.
-Global/local allocation limits, checked arithmetic, bounds, alias refusals,
-call budget, no-heap language restriction and unsupported-feature refusals
-remain unchanged. Text constants, floating point and external calls remain
-unsupported. These are implementation bounds, not performance measurements.
+`break`. Seeded C also supports `continue` within a checked enclosing loop.
+Default variable-loop and while guards are 16,777,216 iterations. Source and
+emission storage are bounded at 1 MiB and 4 MiB; seeded local array storage is
+bounded at 16 MiB, while the baseline local-storage refusal remains 32 KiB.
+Checked arithmetic, bounds, alias refusals, call budget and no-heap restrictions
+remain enforced. Text constants and external calls remain unsupported.
+These are implementation bounds, not performance measurements.
+
+Seeded C permits internal binary32 scalars for explicit `f32` literals,
+`bitcast uint`/`bitcast f32`, `fabs`, multiplication and ordered `le`.
+Decimal conversion reuses the pinned Omega e5b32567 implementation; storage is
+canonical IEEE-754 bits and C arithmetic uses binary32 intermediates under the
+host's default floating-point environment. Fast-math and incompatible binary32
+implementations are refused at C compilation. Public floating-point
+parameters/results, floating-point arrays, numeric float casts and other
+float operators remain refused, as do all Python and baseline float inputs.
+No implicit f64 or approximate integer substitute is emitted.
 
 Function units export only their final function, using `omega_NAME`.
-`h` emits that C declaration from the same checked signature metadata as `c`.
+`h` validates every function body through the same emitter before emitting the
+C declaration from checked signature metadata. Exported scalar value parameters
+are volatile inside the checked setjmp wrapper; the public ABI is unchanged.
 The result pointer comes first; scalars use canonical uint64_t bits; arrays
 use address and element-count pairs. Counts must equal the declared fixed
 shape. ABI statuses are 0 for completion, 1 through 14 for Omega traps, 32 for
@@ -74,3 +88,8 @@ configured. The latter compares native Omega, generated C and Python,
 executes generated x86-64 machine code through qemu-x86_64, checks the header
 ABI, and includes wrong-seed and arithmetic-emitter negative controls.
 No device qualification is implied.
+
+`python3 tests/seeded_float.py` compares the seeded executable and generated C
+byte-for-byte over zero, subnormal, normal, overflow, infinity and NaN inputs.
+It includes baseline/Python, public-float, array, numeric-cast, unsupported-op,
+header-validation and fast-math refusal controls. These are host results only.
