@@ -3,8 +3,7 @@
 # (a*b+c) modulo 2^64, called from C, C++, Python, Rust, Zig and Go. tools/native builds the library
 # and writes every language's declarations from the Omega signatures (one generator, src/native.om);
 # no caller declares an Omega function by hand. OMEGA_NATIVE_OMC names the seeded compiler; its sha256
-# must be the one tools/native pins. A missing language toolchain is reported NOT_RUN, never PASS.
-# Exit 0 only when every run check passed.
+# must be the one tools/native pins. A missing caller or failed build is never a qualified PASS.
 set -eu
 ROOT=$(cd "$(dirname "$0")/../.." && pwd)
 T=$ROOT/tests/native
@@ -14,7 +13,7 @@ OMC=${OMEGA_NATIVE_OMC:?set OMEGA_NATIVE_OMC to the seeded omc (omega seed/out/o
 got=$(sha256sum < "$OMC" | cut -d' ' -f1)
 [ "$got" = "$PIN" ] || { echo "FAIL omc sha256 $got, pinned $PIN"; exit 1; }
 rm -rf "$O"; mkdir -p "$O" "$O/mut"
-fails=0; notrun=""
+fails=0; notrun=""; ran=""
 pass() { echo "PASS $1"; }
 fail() { echo "FAIL $1"; fails=$((fails + 1)); }
 U="madd smadd fill spin mix big hsum"
@@ -67,7 +66,7 @@ for u in $U; do
 done
 if [ $ok = 1 ]; then pass "embedded code == omc output, per unit ($(sha256sum < "$O/code.bin" | cut -c1-16))"
 else fail "embedded code differs from omc output"; fi
-run() { lang=$1; shift; if "$@" > "$O/$lang.log" 2>&1; then pass "$lang caller ($(grep -c '^PASS' "$O/$lang.log") lines)"; else fail "$lang caller"; cat "$O/$lang.log"; fi; }
+run() { lang=$1; shift; ran="$ran $lang"; if "$@" > "$O/$lang.log" 2>&1; then pass "$lang caller ($(grep -c '^PASS' "$O/$lang.log") lines)"; else fail "$lang caller"; cat "$O/$lang.log"; fi; }
 bld() { lang=$1; shift; if "$@" > "$O/$lang-build.log" 2>&1; then return 0; fi; fail "$lang build"; cat "$O/$lang-build.log"; return 1; }
 cp "$T"/caller.* "$O/"
 bld c cc -std=gnu11 -O2 -Wall -Wextra -Werror -pthread "$O/caller.c" -L"$O" -lomega_native -Wl,-rpath,"$O" -o "$O/caller_c" \
@@ -187,6 +186,13 @@ if command -v go > /dev/null; then
     sh -c 'mkdir -p "$1/mut/go/omeganative" && mv "$1/mut/go/omega_native.go" "$1/mut/go/omeganative/" && cp "$1/omega_native.h" "$1/libomega_native.so" "$1/mut/go/omeganative/" && cp "$1/caller.go" "$1/mut/go/" && cd "$1/mut/go" && go mod init omegacaller && CGO_LDFLAGS="-Wl,-rpath,$1/mut/go/omeganative" go build -o caller_go . && ./caller_go' _ "$O"
 fi
 if python3 "$T/test_freestanding.py"; then pass "pure scalar freestanding transport + import mutant"; else fail "freestanding transport"; fi
+if python3 "$T/test_private_symbols.py"; then pass "private linkage and thread isolation"; else fail "private linkage regression"; fi
 for l in $notrun; do echo "NOT_RUN $l caller: toolchain not installed"; done
-if [ "$fails" -ne 0 ]; then echo "NATIVE-CALL FAIL $fails"; exit 1; fi
-echo "NATIVE-CALL PASS (not run:${notrun:- none})"
+if [ "$fails" -eq 0 ]; then
+  for l in c c-bti cpp python rust zig go; do
+    case " $ran " in *" $l "*) ;; *) case " $notrun " in *" $l "*) ;; *) fail "$l caller not executed" ;; esac ;; esac
+  done
+fi
+if [ "$fails" -ne 0 ]; then echo "NATIVE-CALL FAIL $fails (not run:${notrun:- none})"; exit 1; fi
+if [ -n "$notrun" ]; then echo "NATIVE-CALL NOT_RUN (not run:$notrun)"; exit 1; fi
+echo "NATIVE-CALL PASS (not run: none)"
