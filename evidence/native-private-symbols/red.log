@@ -1,0 +1,13 @@
+/usr/bin/ld: /tmp/omega-private-symbols-z8k7ea9g/normal/smadd.o: in function `ombr_enter':
+smadd.c:(.text+0x0): multiple definition of `ombr_enter'; /tmp/omega-private-symbols-z8k7ea9g/normal/madd.o:madd.c:(.text+0x0): first defined here
+/usr/bin/ld: /tmp/omega-private-symbols-z8k7ea9g/normal/smadd.o: in function `ombr_trap':
+smadd.c:(.text+0x94): multiple definition of `ombr_trap'; /tmp/omega-private-symbols-z8k7ea9g/normal/madd.o:madd.c:(.text+0x94): first defined here
+/usr/bin/ld: /tmp/omega-private-symbols-z8k7ea9g/normal/smadd.o: in function `ombr_no_entry':
+smadd.c:(.text+0xb0): multiple definition of `ombr_no_entry'; /tmp/omega-private-symbols-z8k7ea9g/normal/madd.o:madd.c:(.text+0xb0): first defined here
+collect2: error: ld returned 1 exit status
+Traceback (most recent call last):
+  File "/tmp/bridge-private-compat/tests/native/test_private_symbols.py", line 73, in <module>
+    main()
+  File "/tmp/bridge-private-compat/tests/native/test_private_symbols.py", line 53, in main
+    raise AssertionError("separately generated bindings must link")
+AssertionError: separately generated bindings must link

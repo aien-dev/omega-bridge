@@ -26,13 +26,13 @@ if "$ROOT/tools/native" "$O" $units > "$O/tools-native.log" 2>&1; then pass "too
 else fail "tools/native"; cat "$O/tools-native.log"; exit 1; fi
 W=$O/work; GEN=$W/native-gen
 
-# basegen REV NAME: the generator src/native.om had at REV, with only its `text pre` line (the C prelude)
-# replaced by this tree's, so that 7e8dab0 (#17: runtime entry table as C11 initializers, a one-line
-# prelude change) is the only output change allowed for. REVs are commits on this branch: 5458684 has
-# the blob of the pre-rebase 3f05908, 3d79d77 that of 3bb8b8a (both unreachable after the rebase).
+# basegen REV NAME: the historical generator, with the current C runtime prelude and only
+# private assembly-linkage directives normalized. Public wrappers, signatures, compiler bytes
+# and declarations remain byte-compared. REVs are reachable on this branch: 5458684 has the blob
+# of pre-rebase 3f05908, 3d79d77 that of 3bb8b8a.
 basegen() {
   PRE=$(grep '^text pre ' "$ROOT/src/native.om"); export PRE
-  git -C "$ROOT" show "$1:src/native.om" | awk '/^text pre /{print ENVIRON["PRE"]; next} {print}' > "$O/native-$2.om"
+  git -C "$ROOT" show "$1:src/native.om" | awk '/^text pre /{print ENVIRON["PRE"]; next} /^text fr |^text fv /{gsub(/[.]globl ombr_code_/, ".local ombr_code_"); gsub(/[.]globl ombr_entry_/, ".local ombr_entry_"); gsub(/[.]globl ombr2_code_/, ".local ombr2_code_")} {print}' > "$O/native-$2.om"
   "$OMC" < "$O/native-$2.om" > "$O/gen-$2"; chmod +x "$O/gen-$2"
 }
 
@@ -54,7 +54,7 @@ for w in c h python rust zig go; do
   "$O/gen-v1" $w < "$O/v1set.in" > "$O/a.out"; "$GEN" $w < "$O/v1set.in" > "$O/b.out"
   if cmp -s "$O/a.out" "$O/b.out"; then same=$((same + 1)); else diff=$((diff + 1)); echo "DIFF set $w"; fi
 done
-if [ $diff = 0 ]; then pass "ABI v1 bindings byte-identical to 5458684's generator (with #17's prelude): $same unit x output cases (every tests/native and g1 unit, and the set)"
+if [ $diff = 0 ]; then pass "ABI v1 bindings byte-identical to 5458684's generator (runtime/private linkage normalized): $same unit x output cases (every tests/native and g1 unit, and the set)"
 else fail "ABI v1 bindings changed in $diff cases"; fi
 
 # 2. Identity: each v2 unit's embedded source digest equals sha256sum of its file (oracle), the omc digest
@@ -92,6 +92,9 @@ printf '%s\n' omega2_absorb omega2_bsum omega2_digest omega2_fillv omega2_halt o
   omega2_ident_vec omega2_lsum omega2_swap8 omega2_two omega2_vcopy omega2_vlen omega2_vpart omega2_wsum omega_madd | sort > "$O/syms.want"
 if cmp -s "$O/syms.txt" "$O/syms.want"; then pass "exported symbols: 15 omega2_ (12 exports, 3 idents) + omega_madd; no psum, no v1 name for a v2 unit"
 else fail "exported symbols"; diff "$O/syms.want" "$O/syms.txt" || true; fi
+if nm --defined-only "$O/libomega_native.so" | awk '$3 ~ /^ombr2_code_/ {n++; if ($2 != "t") bad=1} END {exit bad || n != 3}'; then
+  pass "ABI v2 embedded code labels are private local text symbols"
+else fail "ABI v2 private code linkage"; fi
 
 # 4. No caller declares an Omega function by hand.
 if grep -n -E 'uint32_t omega|fn omega|argtypes|CDLL|import "C"' "$T"/caller.* > "$O/hand.log"; then
@@ -271,7 +274,7 @@ for w in c h python rust zig go api; do
   "$O/gen-3bb" $w < "$W/units.in" > "$O/a.out"; "$GEN" $w < "$W/units.in" > "$O/b.out"
   cmp -s "$O/a.out" "$O/b.out" || { ok=0; echo "DIFF $w"; }
 done
-if [ $ok = 1 ]; then pass "outputs c h python rust zig go api byte-identical to 3d79d77's generator (with #17's prelude) on the v2 set"
+if [ $ok = 1 ]; then pass "outputs c h python rust zig go api byte-identical to 3d79d77's generator (runtime/private linkage normalized) on the v2 set"
 else fail "an existing output changed against 3d79d77"; fi
 FS=$O/fs; mkdir -p "$FS"
 FSCF="-std=gnu11 -ffreestanding -fno-builtin -O2 -Wall -Wextra -Werror -c"

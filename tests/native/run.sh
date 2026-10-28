@@ -185,6 +185,7 @@ if command -v go > /dev/null; then
   gmut "go scalar uint64 -> uint32" '/^text tb /s/ uint64~ unsafe.Pointer/ uint32~ unsafe.Pointer/' go go 'cannot use' \
     sh -c 'mkdir -p "$1/mut/go/omeganative" && mv "$1/mut/go/omega_native.go" "$1/mut/go/omeganative/" && cp "$1/omega_native.h" "$1/libomega_native.so" "$1/mut/go/omeganative/" && cp "$1/caller.go" "$1/mut/go/" && cd "$1/mut/go" && go mod init omegacaller && CGO_LDFLAGS="-Wl,-rpath,$1/mut/go/omeganative" go build -o caller_go . && ./caller_go' _ "$O"
 fi
+if python3 "$T/test_private_symbols.py"; then pass "private linkage and thread isolation"; else fail "private linkage regression"; fi
 for l in $notrun; do echo "NOT_RUN $l caller: toolchain not installed"; done
 if [ "$fails" -eq 0 ]; then
   for l in c c-bti cpp python rust zig go; do
