@@ -44,7 +44,8 @@ This mode does not change `tools/bridge`, its baseline seed
 or the required `tools/test.sh` suite.
 
 The additive mode accepts at most 32 numeric literal constants, 64 functions,
-six parameters per function, names up to 64 bytes, fixed view/edit shapes up to
+six parameters per function, function names up to the frontend's 63-byte limit
+(other names retain its limits), fixed view/edit shapes up to
 16,777,216 elements, explicit `view`/`edit` call prefixes and bounded-loop
 `break`. Default variable-loop and while guards are 16,777,216 iterations.
 Global/local allocation limits, checked arithmetic, bounds, alias refusals,
