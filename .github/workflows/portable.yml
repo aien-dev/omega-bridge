@@ -13,14 +13,15 @@ jobs:
     timeout-minutes: 40
     env:
       OMEGA_SEED: ${{ github.workspace }}/build/bootstrap/omc
-      OMEGA_SEEDED_OMC: ${{ runner.temp }}/omega-mv/seed/out/omc
-      FREEST_CUDAPP_ROOT: ${{ runner.temp }}/cudapp
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
       - name: Source bootstrap and exact seeded oracle
         run: |
+          OMEGA_SEEDED_OMC="$RUNNER_TEMP/omega-mv/seed/out/omc"
+          echo "OMEGA_SEEDED_OMC=$OMEGA_SEEDED_OMC" >> "$GITHUB_ENV"
+          echo "FREEST_CUDAPP_ROOT=$RUNNER_TEMP/cudapp" >> "$GITHUB_ENV"
           sh tools/bootstrap.sh
           git clone -q https://github.com/aien-dev/omega-mv "$RUNNER_TEMP/omega-mv"
           git -C "$RUNNER_TEMP/omega-mv" checkout -q e5b32567a7aff3ce594e3254a622a846a6cd190b

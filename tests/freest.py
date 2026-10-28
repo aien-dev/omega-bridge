@@ -88,24 +88,38 @@ int main(void) {
         p = subprocess.run([*RUNNER, t / 'wrong'], capture_output=True)
         assert p.returncode == 10, p.returncode
         print('PASS wrong-result negative control exits 10')
-        # Results are observed from the pinned seed, never guessed expected
-        # constants. C consumers execute on their native host architecture.
-        for typ, count, projection in (
-                ('uchar', 0, 0), ('uchar', 1, 0),
-                ('ushort', 1, 0), ('uint', 1, 0), ('ulong', 63, 63)):
+        # WolframLanguageEvaluator (parent routed): Table[{w,w-1,2^w-1,
+        # BitAnd[BitShiftLeft[2^w-1,w-1],2^w-1],
+        # BitShiftRight[2^w-1,w-1]},{w,{8,16,32,64}}] ->
+        # {{8,7,255,128,1},{16,15,65535,32768,1},
+        # {32,31,4294967295,2147483648,1},
+        # {64,63,18446744073709551615,9223372036854775808,1}}.
+        # Native seed results independently check the projected result byte.
+        for typ, count, projection, value, left, right in (
+                ('uchar', 0, 0, 1, None, None),
+                ('uchar', 1, 0, 1, None, None),
+                ('ushort', 1, 0, 1, None, None),
+                ('uint', 1, 0, 1, None, None),
+                ('ulong', 63, 63, 1, None, None),
+                ('uchar', 7, 0, 255, 128, 1),
+                ('ushort', 15, 0, 65535, 32768, 1),
+                ('uint', 31, 0, 4294967295, 2147483648, 1),
+                ('ulong', 63, 0, 18446744073709551615, 9223372036854775808, 1)):
             for op in ('shl', 'shr'):
                 fixture = t / 'shift.om'
                 body = f'fn shift x {typ} to {typ}\nret {op} x {count}\nend\n'
                 fixture.write_text(body)
                 portable = run([ROOT / 'tools/bridge-freest', 'c', fixture])
-                native_source = body + f'fn main to int\nr = shift {typ} 1\nret int and shr ulong r {projection} 255\nend\n'
+                native_source = body + f'fn main to int\nr = shift {typ} {value}\nret int and shr ulong r {projection} 255\nend\n'
                 native = t / 'shift-native'
                 native.write_bytes(run([os.environ['OMEGA_SEEDED_OMC']], input=native_source.encode()))
                 native.chmod(0o755)
                 expected = subprocess.run([native], capture_output=True).returncode
                 assert expected not in range(101, 115), expected
                 c = t / 'shift.c'
-                caller = '\nint main(void){uint64_t out=0;if(omega_shift(&out,1))return 99;return (int)((out >> ' + str(projection) + ')&255);}\n'
+                bound = left if op == 'shl' else right
+                check = '' if bound is None else f'if(out != UINT64_C({bound}))return 98;'
+                caller = '\nint main(void){uint64_t out=0;if(omega_shift(&out,UINT64_C(' + str(value) + ')))return 99;' + check + 'return (int)((out >> ' + str(projection) + ')&255);}\n'
                 c.write_bytes(portable + caller.encode())
                 run([CC, '-std=c11', '-O2', '-Wall', '-Wextra', '-Werror', c, '-o', t / 'shift'])
                 assert subprocess.run([*RUNNER, t / 'shift'], capture_output=True).returncode == expected, (typ, op, count)
