@@ -45,8 +45,8 @@ if [ "${1:-}" = --freestanding ]; then CMODE=freest; shift; fi
 OUT=$1; shift
 mkdir -p "$OUT"
 OUT=$(cd "$OUT" && pwd)
-W=$OUT/.native-work.$$
-rm -rf "$W"; mkdir -p "$W/work"
+W=$(mktemp -d "$OUT/.native-work.XXXXXX")
+mkdir "$W/work"
 trap 'rm -rf "$W"' EXIT
 "$OMC" < "$ROOT/src/native.om" > "$W/work/native-gen"; chmod +x "$W/work/native-gen"
 # The generator's input: each unit's source, a 0 byte, the code length in 8 decimal digits, the code;
@@ -56,24 +56,28 @@ trap 'rm -rf "$W"' EXIT
 v2=0
 for u in "$@"; do
   b=$(basename "$u" .om)
+  # One snapshot supplies profile, compilation, framing and identity even if the
+  # caller replaces the original file while its compiler is running.
+  cp -- "$u" "$W/work/$b.om"
+  src=$W/work/$b.om
   # The profile: the first line that is not a note (the generator applies the same rule).
-  if [ "$(sed -n '/^ *note\( \|$\)/d; p; q' "$u")" = om2 ]; then
+  if [ "$(sed -n '/^ *note\( \|$\)/d; p; q' "$src")" = om2 ]; then
     OMC2=${OMEGA_NATIVE_OMC2:?tools/native: $u is an OM-2 unit; set OMEGA_NATIVE_OMC2 to the OM-2 compiler}
     pin=$(sha256sum < "$OMC2" | cut -d' ' -f1); abi=2; prof=OM-2; v2=1
-    "$OMC2" < "$u" > "$W/work/$b.bin"
+    "$OMC2" < "$src" > "$W/work/$b.bin"
   else
     pin=$PIN; abi=1; prof=OM-1
-    "$OMC" < "$u" > "$W/work/$b.bin"
+    "$OMC" < "$src" > "$W/work/$b.bin"
   fi
   name=$(printf '%s' "$b" | tr -c 'A-Za-z0-9_' '_')
-  { cat "$u"; printf '\0'; printf '%08d' "$(wc -c < "$W/work/$b.bin")"; cat "$W/work/$b.bin"
+  { cat "$src"; printf '\0'; printf '%08d' "$(wc -c < "$W/work/$b.bin")"; cat "$W/work/$b.bin"
     [ $abi = 1 ] || printf 'omega-unit %s %s\n' "$name" "$pin"; } > "$W/one.in"
   if ! "$W/work/native-gen" "$CMODE" < "$W/one.in" > /dev/null 2>&1; then
     echo "tools/native: refused $u: outside the native call subset, or a name the binding cannot carry (docs/NATIVE-ABI.md); nothing installed" >&2
     exit 110
   fi
   cat "$W/one.in" >> "$W/work/units.in"
-  echo "omega-ident 1 unit=$name abi=$abi profile=$prof src=$(sha256sum < "$u" | cut -d' ' -f1) omc=$pin path=$u" >> "$W/work/ident.txt"
+  echo "omega-ident 1 unit=$name abi=$abi profile=$prof src=$(sha256sum < "$src" | cut -d' ' -f1) omc=$pin path=$u" >> "$W/work/ident.txt"
 done
 words="c h python rust zig go"; [ $v2 = 0 ] || words="$words api apih apic"
 [ "$CMODE" != freest ] || words="freest h"
@@ -93,8 +97,16 @@ fi
 if [ "$CMODE" = freest ]; then
   ${CC:-cc} -std=gnu11 -O2 -Wall -Wextra -Werror -Wmissing-prototypes -ffreestanding -fno-builtin \
     -include "$W/omega_native.h" ${OMEGA_NATIVE_CFLAGS:-} -c -o "$W/omega_native.o" "$W/omega_native.c"
-  bad=$(nm -u "$W/omega_native.o" | awk '{print $NF}' | grep -Ev '^(_GLOBAL_OFFSET_TABLE_|memcpy|memmove|memset|memcmp|strlen|strcmp)$' || true)
-  [ -z "$bad" ] || { echo "tools/native: freestanding object imports refused: $bad" >&2; exit 1; }
+  if ! nm -u "$W/omega_native.o" > "$W/undefined.txt"; then
+    echo "tools/native: freestanding symbol inspection failed; nothing installed" >&2
+    exit 1
+  fi
+  if ! awk 'NF && $NF !~ /^(_GLOBAL_OFFSET_TABLE_|memcpy|memmove|memset|memcmp|strlen|strcmp)$/ {print $NF; bad=1} END {exit bad}' \
+    "$W/undefined.txt" > "$W/refused-imports.txt"; then
+    echo "tools/native: freestanding imports refused by inspection; nothing installed" >&2
+    cat "$W/refused-imports.txt" >&2
+    exit 1
+  fi
 else
 ${CC:-cc} -std=gnu11 -O2 -Wall -Wextra -Werror -fPIC -shared -Wl,-soname,libomega_native.so \
   -include "$W/omega_native.h" ${OMEGA_NATIVE_CFLAGS:-} -o "$W/libomega_native.so" "$W/omega_native.c"

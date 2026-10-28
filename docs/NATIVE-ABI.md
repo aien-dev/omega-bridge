@@ -95,15 +95,18 @@ Arrays (including local arrays), globals, text, host words, floating-point opera
 and OM-2 units are refused with exit 110 and no output. Ordinary compiler source
 validation still applies. As with hosted transport, framed source and machine bytes
 must come from the same pinned compiler invocation; this is not an arbitrary-bytecode
-sandbox. `tools/native` maintains that correspondence.
+sandbox. `tools/native` snapshots each input once in private scratch storage; profile
+detection, compilation, framing and identity all consume that same snapshot.
 
 The object is built with `-ffreestanding -fno-builtin`, against its generated public
 header. Its undefined symbols must satisfy the GPU_FS_LINK allowlist: only
 `memcpy`, `memmove`, `memset`, `memcmp`, `strlen`, `strcmp` and the toolchain's
-`_GLOBAL_OFFSET_TABLE_` marker. A refused import leaves prior outputs untouched.
-`tests/native/test_freestanding.py` exercises epoch increment/MAX refusal, nested trap
-unwind, independent scalar units, concurrent threads, non-pure source refusals and
-a generator mutant that introduces `pthread_self` and must fail the import gate.
+`_GLOBAL_OFFSET_TABLE_` marker. Failed symbol extraction or filtering is a refusal,
+not an empty accepted import set. Any refused import/inspection leaves prior outputs
+untouched. `tests/native/test_freestanding.py` exercises epoch increment/MAX refusal,
+nested trap unwind, independent scalar units, concurrent threads, non-pure source
+refusals, a pthread-emitter mutant, failed inspectors and a deterministic source-swap
+control whose old-reread mutant admits mismatched source/code and is caught.
 
 ## The declarations for each language (`tools/native`)
 

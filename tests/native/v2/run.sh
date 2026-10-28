@@ -32,7 +32,7 @@ W=$O/work; GEN=$W/native-gen
 # of pre-rebase 3f05908, 3d79d77 that of 3bb8b8a.
 basegen() {
   PRE=$(grep '^text pre ' "$ROOT/src/native.om"); export PRE
-  git -C "$ROOT" show "$1:src/native.om" | awk '/^text pre /{print ENVIRON["PRE"]; next} /^text fr |^text fv /{gsub(/[.]globl ombr_code_/, ".local ombr_code_"); gsub(/[.]globl ombr_entry_/, ".local ombr_entry_"); gsub(/[.]globl ombr2_code_/, ".local ombr2_code_")} {print}' > "$O/native-$2.om"
+  git -C "$ROOT" show "$1:src/native.om" | awk '/^text pre /{print ENVIRON["PRE"]; next} /^text fr |^text fv /{gsub(/[.]globl ombr_code_/, ".local ombr_code_"); gsub(/[.]globl ombr_entry_/, ".local ombr_entry_"); gsub(/[.]globl ombr2_code_/, ".local ombr2_code_"); gsub(/[.]globl ombr2_entry_/, ".local ombr2_entry_")} {print}' > "$O/native-$2.om"
   "$OMC" < "$O/native-$2.om" > "$O/gen-$2"; chmod +x "$O/gen-$2"
 }
 
@@ -95,6 +95,9 @@ else fail "exported symbols"; diff "$O/syms.want" "$O/syms.txt" || true; fi
 if nm --defined-only "$O/libomega_native.so" | awk '$3 ~ /^ombr2_code_/ {n++; if ($2 != "t") bad=1} END {exit bad || n != 3}'; then
   pass "ABI v2 embedded code labels are private local text symbols"
 else fail "ABI v2 private code linkage"; fi
+if nm --defined-only "$O/libomega_native.so" | awk '$3 ~ /^ombr/ && $2 !~ /^[a-z]$/ {bad=1} END {exit bad}'; then
+  pass "all ABI v1/v2 private runtime, code and entry symbols have local binding"
+else fail "nonlocal private runtime symbol"; fi
 
 # 4. No caller declares an Omega function by hand.
 if grep -n -E 'uint32_t omega|fn omega|argtypes|CDLL|import "C"' "$T"/caller.* > "$O/hand.log"; then
