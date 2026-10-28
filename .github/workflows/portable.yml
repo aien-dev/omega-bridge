@@ -30,6 +30,13 @@ jobs:
           git -C "$RUNNER_TEMP/cudapp" checkout -q dbb1b5002fd7d96ff4695b2da4dcb3238db226c2
       - name: Unchanged baseline behavioral and refusal suites
         run: sh tools/test.sh
+      - name: Explicit x86 verification oracle, never a production dependency
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y gcc-x86-64-linux-gnu qemu-user=1:8.2.2+ds-0ubuntu1.19
+          dpkg-query -W gcc-x86-64-linux-gnu qemu-user
+          qemu-x86_64 --version
+          sha256sum /usr/bin/qemu-x86_64
       - name: Seeded differential and binary32 refusal controls
         run: |
           python3 tests/seeded.py
