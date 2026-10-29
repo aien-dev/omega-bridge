@@ -1,0 +1,356 @@
+PASS Python is ELF64 x86-64, not the host interpreter
+PASS generator compiler pin
+PASS x86 compiler pin
+INFO x86 compiler sha256=f7752bc5c800e85c2393a08153786d0a6bc4516c9cea955fe27624228d6d1409
+INFO generator compiler sha256=734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61
+PASS x86 Python interpreter and ctypes runtime
+PASS tools/native built mixed OM-1/OM-2 x86 library and all bindings
+PASS x86 floor uses actual usable stack base, independent of out carve
+PASS library ELF machine is x86-64
+PASS original source/compiler identity madd
+PASS source snapshot excludes target directive madd
+PASS compiler bytes reproduce madd
+PASS embedded bytes unchanged madd
+PASS original source/compiler identity vec
+PASS source snapshot excludes target directive vec
+PASS compiler bytes reproduce vec
+PASS six-byte JMP/NOP entry slots vec
+PASS independent x86 instruction oracle vec
+PASS embedded bytes unchanged vec
+PASS original source/compiler identity lay
+PASS source snapshot excludes target directive lay
+PASS compiler bytes reproduce lay
+PASS six-byte JMP/NOP entry slots lay
+PASS independent x86 instruction oracle lay
+PASS embedded bytes unchanged lay
+PASS original source/compiler identity one
+PASS source snapshot excludes target directive one
+PASS compiler bytes reproduce one
+PASS embedded bytes unchanged one
+PASS exact public ABI symbol set
+PASS all runtime/code/entry symbols private
+PASS no caller hand-declares Omega ABI
+PASS target-independent declarations h
+PASS target-independent declarations python
+PASS target-independent declarations rust
+PASS target-independent declarations zig
+PASS target-independent declarations go
+PASS target-independent declarations api
+PASS target-independent declarations apih
+PASS target-independent declarations apic
+PASS AArch64 byte parity 0c4cb9ff big.om c
+PASS AArch64 byte parity 0c4cb9ff big.om h
+PASS AArch64 byte parity 0c4cb9ff big.om python
+PASS AArch64 byte parity 0c4cb9ff big.om rust
+PASS AArch64 byte parity 0c4cb9ff big.om zig
+PASS AArch64 byte parity 0c4cb9ff big.om go
+PASS AArch64 byte parity 0c4cb9ff big.om api
+PASS AArch64 byte parity 0c4cb9ff big.om apih
+PASS AArch64 byte parity 0c4cb9ff big.om apic
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0069.log
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0070.log
+PASS AArch64 byte parity 0c4cb9ff big.om freest
+PASS AArch64 byte parity 0c4cb9ff fill.om c
+PASS AArch64 byte parity 0c4cb9ff fill.om h
+PASS AArch64 byte parity 0c4cb9ff fill.om python
+PASS AArch64 byte parity 0c4cb9ff fill.om rust
+PASS AArch64 byte parity 0c4cb9ff fill.om zig
+PASS AArch64 byte parity 0c4cb9ff fill.om go
+PASS AArch64 byte parity 0c4cb9ff fill.om api
+PASS AArch64 byte parity 0c4cb9ff fill.om apih
+PASS AArch64 byte parity 0c4cb9ff fill.om apic
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0089.log
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0090.log
+PASS AArch64 byte parity 0c4cb9ff fill.om freest
+PASS AArch64 byte parity 0c4cb9ff g1/calc.lowered.om c
+PASS AArch64 byte parity 0c4cb9ff g1/calc.lowered.om h
+PASS AArch64 byte parity 0c4cb9ff g1/calc.lowered.om python
+PASS AArch64 byte parity 0c4cb9ff g1/calc.lowered.om rust
+PASS AArch64 byte parity 0c4cb9ff g1/calc.lowered.om zig
+PASS AArch64 byte parity 0c4cb9ff g1/calc.lowered.om go
+PASS AArch64 byte parity 0c4cb9ff g1/calc.lowered.om api
+PASS AArch64 byte parity 0c4cb9ff g1/calc.lowered.om apih
+PASS AArch64 byte parity 0c4cb9ff g1/calc.lowered.om apic
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0109.log
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0110.log
+PASS AArch64 byte parity 0c4cb9ff g1/calc.lowered.om freest
+PASS AArch64 byte parity 0c4cb9ff g1/calc.om c
+PASS AArch64 byte parity 0c4cb9ff g1/calc.om h
+PASS AArch64 byte parity 0c4cb9ff g1/calc.om python
+PASS AArch64 byte parity 0c4cb9ff g1/calc.om rust
+PASS AArch64 byte parity 0c4cb9ff g1/calc.om zig
+PASS AArch64 byte parity 0c4cb9ff g1/calc.om go
+PASS AArch64 byte parity 0c4cb9ff g1/calc.om api
+PASS AArch64 byte parity 0c4cb9ff g1/calc.om apih
+PASS AArch64 byte parity 0c4cb9ff g1/calc.om apic
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0129.log
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0130.log
+PASS AArch64 byte parity 0c4cb9ff g1/calc.om freest
+PASS AArch64 byte parity 0c4cb9ff hsum.om c
+PASS AArch64 byte parity 0c4cb9ff hsum.om h
+PASS AArch64 byte parity 0c4cb9ff hsum.om python
+PASS AArch64 byte parity 0c4cb9ff hsum.om rust
+PASS AArch64 byte parity 0c4cb9ff hsum.om zig
+PASS AArch64 byte parity 0c4cb9ff hsum.om go
+PASS AArch64 byte parity 0c4cb9ff hsum.om api
+PASS AArch64 byte parity 0c4cb9ff hsum.om apih
+PASS AArch64 byte parity 0c4cb9ff hsum.om apic
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0149.log
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0150.log
+PASS AArch64 byte parity 0c4cb9ff hsum.om freest
+PASS AArch64 byte parity 0c4cb9ff madd.om c
+PASS AArch64 byte parity 0c4cb9ff madd.om h
+PASS AArch64 byte parity 0c4cb9ff madd.om python
+PASS AArch64 byte parity 0c4cb9ff madd.om rust
+PASS AArch64 byte parity 0c4cb9ff madd.om zig
+PASS AArch64 byte parity 0c4cb9ff madd.om go
+PASS AArch64 byte parity 0c4cb9ff madd.om api
+PASS AArch64 byte parity 0c4cb9ff madd.om apih
+PASS AArch64 byte parity 0c4cb9ff madd.om apic
+PASS AArch64 byte parity 0c4cb9ff madd.om freest
+PASS AArch64 byte parity 0c4cb9ff mix.om c
+PASS AArch64 byte parity 0c4cb9ff mix.om h
+PASS AArch64 byte parity 0c4cb9ff mix.om python
+PASS AArch64 byte parity 0c4cb9ff mix.om rust
+PASS AArch64 byte parity 0c4cb9ff mix.om zig
+PASS AArch64 byte parity 0c4cb9ff mix.om go
+PASS AArch64 byte parity 0c4cb9ff mix.om api
+PASS AArch64 byte parity 0c4cb9ff mix.om apih
+PASS AArch64 byte parity 0c4cb9ff mix.om apic
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0189.log
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0190.log
+PASS AArch64 byte parity 0c4cb9ff mix.om freest
+PASS AArch64 byte parity 0c4cb9ff smadd.om c
+PASS AArch64 byte parity 0c4cb9ff smadd.om h
+PASS AArch64 byte parity 0c4cb9ff smadd.om python
+PASS AArch64 byte parity 0c4cb9ff smadd.om rust
+PASS AArch64 byte parity 0c4cb9ff smadd.om zig
+PASS AArch64 byte parity 0c4cb9ff smadd.om go
+PASS AArch64 byte parity 0c4cb9ff smadd.om api
+PASS AArch64 byte parity 0c4cb9ff smadd.om apih
+PASS AArch64 byte parity 0c4cb9ff smadd.om apic
+PASS AArch64 byte parity 0c4cb9ff smadd.om freest
+PASS AArch64 byte parity 0c4cb9ff spin.om c
+PASS AArch64 byte parity 0c4cb9ff spin.om h
+PASS AArch64 byte parity 0c4cb9ff spin.om python
+PASS AArch64 byte parity 0c4cb9ff spin.om rust
+PASS AArch64 byte parity 0c4cb9ff spin.om zig
+PASS AArch64 byte parity 0c4cb9ff spin.om go
+PASS AArch64 byte parity 0c4cb9ff spin.om api
+PASS AArch64 byte parity 0c4cb9ff spin.om apih
+PASS AArch64 byte parity 0c4cb9ff spin.om apic
+PASS AArch64 byte parity 0c4cb9ff spin.om freest
+PASS AArch64 byte parity 0c4cb9ff v2/lay.om c
+PASS AArch64 byte parity 0c4cb9ff v2/lay.om h
+PASS AArch64 byte parity 0c4cb9ff v2/lay.om python
+PASS AArch64 byte parity 0c4cb9ff v2/lay.om rust
+PASS AArch64 byte parity 0c4cb9ff v2/lay.om zig
+PASS AArch64 byte parity 0c4cb9ff v2/lay.om go
+PASS AArch64 byte parity 0c4cb9ff v2/lay.om api
+PASS AArch64 byte parity 0c4cb9ff v2/lay.om apih
+PASS AArch64 byte parity 0c4cb9ff v2/lay.om apic
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0249.log
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0250.log
+PASS AArch64 byte parity 0c4cb9ff v2/lay.om freest
+PASS AArch64 byte parity 0c4cb9ff v2/one.om c
+PASS AArch64 byte parity 0c4cb9ff v2/one.om h
+PASS AArch64 byte parity 0c4cb9ff v2/one.om python
+PASS AArch64 byte parity 0c4cb9ff v2/one.om rust
+PASS AArch64 byte parity 0c4cb9ff v2/one.om zig
+PASS AArch64 byte parity 0c4cb9ff v2/one.om go
+PASS AArch64 byte parity 0c4cb9ff v2/one.om api
+PASS AArch64 byte parity 0c4cb9ff v2/one.om apih
+PASS AArch64 byte parity 0c4cb9ff v2/one.om apic
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0269.log
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0270.log
+PASS AArch64 byte parity 0c4cb9ff v2/one.om freest
+PASS AArch64 byte parity 0c4cb9ff v2/v1use/bsum.om c
+PASS AArch64 byte parity 0c4cb9ff v2/v1use/bsum.om h
+PASS AArch64 byte parity 0c4cb9ff v2/v1use/bsum.om python
+PASS AArch64 byte parity 0c4cb9ff v2/v1use/bsum.om rust
+PASS AArch64 byte parity 0c4cb9ff v2/v1use/bsum.om zig
+PASS AArch64 byte parity 0c4cb9ff v2/v1use/bsum.om go
+PASS AArch64 byte parity 0c4cb9ff v2/v1use/bsum.om api
+PASS AArch64 byte parity 0c4cb9ff v2/v1use/bsum.om apih
+PASS AArch64 byte parity 0c4cb9ff v2/v1use/bsum.om apic
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0289.log
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0290.log
+PASS AArch64 byte parity 0c4cb9ff v2/v1use/bsum.om freest
+PASS AArch64 byte parity 0c4cb9ff v2/vec.om c
+PASS AArch64 byte parity 0c4cb9ff v2/vec.om h
+PASS AArch64 byte parity 0c4cb9ff v2/vec.om python
+PASS AArch64 byte parity 0c4cb9ff v2/vec.om rust
+PASS AArch64 byte parity 0c4cb9ff v2/vec.om zig
+PASS AArch64 byte parity 0c4cb9ff v2/vec.om go
+PASS AArch64 byte parity 0c4cb9ff v2/vec.om api
+PASS AArch64 byte parity 0c4cb9ff v2/vec.om apih
+PASS AArch64 byte parity 0c4cb9ff v2/vec.om apic
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0309.log
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0310.log
+PASS AArch64 byte parity 0c4cb9ff v2/vec.om freest
+PASS AArch64 byte parity 0c4cb9ff v1-set c
+PASS AArch64 byte parity 0c4cb9ff v1-set h
+PASS AArch64 byte parity 0c4cb9ff v1-set python
+PASS AArch64 byte parity 0c4cb9ff v1-set rust
+PASS AArch64 byte parity 0c4cb9ff v1-set zig
+PASS AArch64 byte parity 0c4cb9ff v1-set go
+PASS AArch64 byte parity 0c4cb9ff v1-set api
+PASS AArch64 byte parity 0c4cb9ff v1-set apih
+PASS AArch64 byte parity 0c4cb9ff v1-set apic
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0329.log
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0330.log
+PASS AArch64 byte parity 0c4cb9ff v1-set freest
+PASS AArch64 byte parity 0c4cb9ff v2-set c
+PASS AArch64 byte parity 0c4cb9ff v2-set h
+PASS AArch64 byte parity 0c4cb9ff v2-set python
+PASS AArch64 byte parity 0c4cb9ff v2-set rust
+PASS AArch64 byte parity 0c4cb9ff v2-set zig
+PASS AArch64 byte parity 0c4cb9ff v2-set go
+PASS AArch64 byte parity 0c4cb9ff v2-set api
+PASS AArch64 byte parity 0c4cb9ff v2-set apih
+PASS AArch64 byte parity 0c4cb9ff v2-set apic
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0349.log
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0350.log
+PASS AArch64 byte parity 0c4cb9ff v2-set freest
+PASS c caller built
+PASS c caller EMULATED
+PASS cpp caller built
+PASS cpp caller EMULATED
+PASS go caller built
+PASS go caller EMULATED
+PASS python caller EMULATED
+PASS rust caller built
+PASS rust caller EMULATED
+PASS rust-2024 caller EMULATED
+INFO exit=42 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0362.log
+FAIL zig caller built
+PASS SysV AMD64 saved-register oracle EMULATED
+PASS stale source mutation changes bytes
+PASS stale h generated
+PASS stale python generated
+INFO exit=3 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0368.log
+PASS stale C identity refused
+PASS fresh C identity control
+INFO exit=1 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0371.log
+PASS stale Python import refused for identity
+PASS v1 refusal binding generated h
+PASS v1 refusal binding generated python
+PASS v1 refusal binding generated rust
+PASS v1 refusal binding generated zig
+PASS v1 refusal binding generated go
+INFO exit=1 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0378.log
+PASS c refuses old v1 symbol
+INFO exit=1 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0379.log
+PASS cpp refuses old v1 symbol
+INFO exit=1 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0380.log
+PASS go refuses old v1 symbol
+INFO exit=1 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0381.log
+PASS python refuses old v1 symbol
+INFO exit=1 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0382.log
+PASS rust refuses old v1 symbol
+INFO exit=42 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0383.log
+FAIL zig refuses old v1 symbol
+PASS generator accepts refusal control
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0385.log
+PASS generator refuses missing identity
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0386.log
+PASS generator refuses short digest
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0387.log
+PASS generator refuses nonhex digest
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0388.log
+PASS generator refuses invalid unit name
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0389.log
+PASS generator refuses repeated unit
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0390.log
+PASS generator refuses repeated export
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0391.log
+PASS generator refuses diag
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0392.log
+PASS generator refuses eight slots
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0393.log
+PASS generator refuses unknown layout
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0394.log
+PASS generator refuses oversized out
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0395.log
+PASS generator refuses uint scalar
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0396.log
+PASS generator refuses uint result
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0397.log
+PASS generator refuses reserved len name
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0398.log
+PASS generator refuses short six-byte entry table
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0399.log
+PASS generator refuses unknown c-type layout
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0400.log
+PASS generator refuses argument vector []
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0401.log
+PASS generator refuses argument vector ['java', 'x86linux']
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0402.log
+PASS generator refuses argument vector ['c', 'unknown']
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0403.log
+PASS generator refuses argument vector ['c', 'x86linux', 'extra']
+INFO exit=1 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0404.log
+PASS mismatched x86 compiler refuses before creating outputs
+INFO exit=1 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0406.log
+PASS mismatched x86 compiler preserves previous outputs
+INFO exit=110 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0407.log
+PASS tools/native refusal preserves previous outputs and removes scratch
+PASS wrap mutant generated c
+PASS wrap mutant generated h
+PASS wrap mutant differs
+INFO exit=-11 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0413.log
+PASS wrap mutant caught by existing boundary oracle
+PASS overlap mutant generated c
+PASS overlap mutant generated h
+PASS overlap mutant differs
+INFO exit=1 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0419.log
+PASS overlap mutant caught by existing boundary oracle
+PASS outcopy mutant generated c
+PASS outcopy mutant generated h
+PASS outcopy mutant differs
+INFO exit=1 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0425.log
+PASS outcopy mutant caught by existing boundary oracle
+PASS private fixture generated madd
+PASS separate object private locals madd
+PASS private fixture generated smadd
+PASS separate object private locals smadd
+PASS separate bindings and TLS isolation EMULATED
+PASS private fixture generated madd
+PASS private fixture generated smadd
+INFO exit=1 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0443.log
+PASS global helper mutant rejected at link
+PASS prototype-only API has no libc imports
+PASS out-of-line API owns abort and definitions
+PASS inline API import negative control
+PASS out-of-line API EMULATED
+INFO exit=-6 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0453.log
+PASS out-of-line API trap aborts
+PASS apih API mutant generated
+PASS prototype-only API mutant caught
+PASS api API mutant generated
+PASS inline API mutant caught
+PASS nested explicit trap uses ESI and runtime table slot 2
+PASS legacy basic write remains permitted in bare code
+INFO exit=9 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0464.log
+PASS advanced bare host helper remains compiler refusal 9
+PASS trap control generated c
+PASS trap control generated h
+PASS trap: status 5, sentinel, saved regs and subsequent call EMULATED
+PASS zero-code control generated c
+PASS zero-code control generated h
+PASS zero-code: status 34, sentinel, saved regs and subsequent call EMULATED
+PASS wrong-slot control generated c
+PASS wrong-slot control generated h
+PASS wrong-slot: status 34, sentinel, saved regs and subsequent call EMULATED
+PASS xsave-stack control generated c
+PASS xsave control bounds only owned runtime stack
+PASS xsave-stack control generated h
+PASS xsave-stack: status 6, sentinel, saved regs and subsequent call EMULATED
+PASS direct floor oracle generated c
+PASS direct floor oracle generated h
+PASS direct floor oracle finds one true-floor argument
+PASS actual R15 mapping floor with ABI-v2 out buffer EMULATED
+INFO exit=1 log=/home/drakestapleton/work/bridge-x86/build/x86-controls-f7752bc5/ZIG/0490.log
+PASS carved-top floor mutant rejected without crash EMULATED
+NATIVE-X86 NATIVE NOT_RUN (physical x86 execution not requested)
+NATIVE-X86 FAIL zig caller built; zig refuses old v1 symbol
