@@ -69,6 +69,11 @@ failed/missing-toolchain controls passed EMULATED; see
 [the pinned receipts](evidence/native-x86-62775d2a.json). Earlier
 pins' receipts remain in `evidence/native-x86-badedbb0/`, `evidence/native-x86-f7752bc5/` and `evidence/native-x86/`. Physical x86
 execution remains NOT_RUN.
+## Human-Directed Agentic Engineering
+
+Development follows Human-Directed Agentic Engineering (HDAE): humans define goals, architecture, constraints, acceptance criteria, and stopping points; agents implement, execute checks, diagnose failures, and revise within those boundaries. Human review retains responsibility for claims, acceptance, and release decisions.
+
+For the documented method and a systems-software case study, see Gregory M. Kurtzer, [*Ginux: Building an Independent Kernel That Runs Linux Userspace through Human-Directed Agentic Engineering* (2026)](https://doi.org/10.5281/zenodo.23682548). This method citation does not widen the checked conversion subset or replace independent review.
 
 ## License
 
