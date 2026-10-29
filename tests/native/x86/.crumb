@@ -1,0 +1,20 @@
+{
+  "extensions": {
+    "generated": {
+      "children": [],
+      "children_root": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compiled_at": "2026-10-28T23:42:26Z",
+      "compiler": "crumb-compile/1",
+      "digest": "sha256:04e703f9be6d638494401f7ac438adbe71987ea921b99dd8d1637bae4b25da23",
+      "evidence_files": 0,
+      "evidence_root": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "files": 11,
+      "generated_at_commit": "29087763accea55666ac7a4c14ecb37cef1c2be8",
+      "source_tree": "sha256:f4f487543a11eaf2366684257529ae670cfbcef2b49be2187735961ce68c5e2d"
+    }
+  },
+  "layer": "tests",
+  "name": "x86-native-tests",
+  "purpose": "Cross-toolchain ABI v2 qualification under qemu-x86_64; never native hardware evidence",
+  "schema_version": "1.0.0"
+}

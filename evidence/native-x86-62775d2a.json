@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "date": "2026-10-28",
+  "status": "EMULATED_PASS",
+  "native_x86": "NOT_RUN",
+  "gpu": "NOT_RUN",
+  "bridge_commit": "8a9618fa2f4e623f332973fd12ab5c466e8356f7",
+  "compiler_commit": "7ab5fdd067884fd3044155084b39163da1be5c8a",
+  "compiler_source_sha256": "96d51b63c8f451661ac715395078e04f39195e50c9e8fe37746cda121e4d7a1e",
+  "x86_omc_sha256": "62775d2a391cfef7cde64e387655caa9809a267093112910ec76bfa568f3712b",
+  "baseline_omc_sha256": "734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61",
+  "tools_native_sha256": "1d62607e131dfa603a97aec5dbc1a9d82d76fb71df8f6015d706e59071c2ae7b",
+  "suite_sha256": "476b420ec302625ac45975b7237d5ab3042cce759d6e3a68b0dd477ba1ac98a6",
+  "controls_sha256": "9b5ff1ced02ae86ab7c61ea8cf64280fd5ff9cd256a1958c309bf17b397856ef",
+  "qemu_binary_sha256": "fd7ae7768c1d698d387893688d28abde90512f1f445d171a1389110eb7c237ee",
+  "commands": [
+    {
+      "command": "sh tests/native/x86/run.sh EMPTY_OUTPUT",
+      "exit": 0
+    },
+    {
+      "command": "python3 tests/native/x86/test_build_failures.py EMPTY_OUTPUT",
+      "exit": 0
+    }
+  ],
+  "results": [
+    "six language callers built and executed",
+    "wrong compiler pin refused",
+    "actual floor positive and carved-floor mutant controls passed",
+    "failing Zig and Go toolchains refused aggregate pass",
+    "missing Zig and Go refused aggregate pass",
+    "real toolchain positive control passed"
+  ],
+  "transcript": {
+    "path": "evidence/native-x86-62775d2a-controls.log",
+    "sha256": "4f78ea33036f20b903bc79cde68feab2384152768fa0196a119bb4f7fd44c428",
+    "scope": "verdict lines; unchanged raw logs retained locally"
+  },
+  "raw_log_sha256": {
+    "positive": "68e873f1958b018b9ff36186ac3abecd09b584019b01447c1ed1416bff3a7343",
+    "controls": "a00394ddc84352d23f49f28a0893bbbe5e7f4067e13a66e4f0a45ad74cfe9383"
+  },
+  "compiler_full_differential": "pending separate full compiler run; bridge PASS does not qualify the compiler"
+}

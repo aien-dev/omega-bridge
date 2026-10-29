@@ -1,0 +1,32 @@
+{
+  "evidence": "EXERCISED HOST; no GPU, service or deployment qualification",
+  "corrects": "coverage-correction.log",
+  "qualified_paths": {
+    "src/native.om": "d3cfe0561696aad92164ddf11340522645cf6daf7af238835c3d3c61ecdef656",
+    "tools/native": "2a3ba02fb4addbfc51a86c385a60fa191546fbc28f81d615047f4213ebd734f8",
+    "tests/native/run.sh": "c82dd9e78cccb784f2e4388d1514259e85c22717d50a8d6915314752aed21e65",
+    "tests/native/test_capacity.py": "6642931cb8f91a9f49d2e835d1c2d501b5888e74efbe40827f71d664c7128a03",
+    "tests/native/test_freestanding.py": "ebf835b6e3adc7d3c987824fd18ebb420af01beb9240dab64c244de094987102",
+    "tests/native/test_private_symbols.py": "faaa52bc48268b2623b07af39dd81c91c6c53f0740e902d967d658e5303b5113",
+    "tests/native/v2/run.sh": "a646a68d7e2f8b4784bbf9e83ad925c6931279db3b3b05385ba2360f58a3a2d8"
+  },
+  "commands": [
+    {
+      "argv": [
+        "sh",
+        "tests/native/run.sh"
+      ],
+      "exit": 0,
+      "log": "native-boundaries.log"
+    }
+  ],
+  "unchanged_prior_checks": {
+    "qualification": "qualification.json",
+    "logs": [
+      "failures.log",
+      "v2.log",
+      "consumer-actual31.log"
+    ],
+    "scope": "Native generator/tools and every qualified executable test except test_capacity.py are byte-identical to the prior receipt. Corrected input guard test is covered by native-boundaries.log; prior build-failure/v2 and real-consumer emission/compilation evidence remains valid."
+  }
+}
