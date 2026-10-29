@@ -58,6 +58,9 @@ python3 tests/attachments.py
 # Native call ABI v1: one compiled Omega function called from C, C++, Python, Rust, Zig, Go
 OMEGA_NATIVE_OMC=/path/to/omega-mv/seed/out/omc sh tests/native/run.sh
 
+# f32 and ushort array kinds (C oracle, refusals, add->sub mutant)
+OMEGA_NATIVE_OMC=/path/to/omega-mv/seed/out/omc sh tests/native/kinds.sh
+
 # Hosted x86 native output (cross-build only; this command does not execute callers)
 OMEGA_NATIVE_OMC=/path/to/baseline/omc OMEGA_NATIVE_X86_OMC=/path/to/x86/omc \
   CC=x86_64-linux-gnu-gcc tools/native --target x86linux build/native-x86 tests/native/madd.om
