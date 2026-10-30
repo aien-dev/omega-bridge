@@ -1,0 +1,10 @@
+test_invalid_version_is_unknown (__main__.MaxVersionMetadataTests.test_invalid_version_is_unknown) ... ok
+test_missing_version_is_unknown (__main__.MaxVersionMetadataTests.test_missing_version_is_unknown) ... ok
+test_observed_version_is_preserved (__main__.MaxVersionMetadataTests.test_observed_version_is_preserved) ... ok
+test_unavailable_module_is_unknown (__main__.MaxVersionMetadataTests.test_unavailable_module_is_unknown) ... ok
+test_unreadable_version_is_unknown (__main__.MaxVersionMetadataTests.test_unreadable_version_is_unknown) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.035s
+
+OK
