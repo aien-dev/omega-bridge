@@ -1,0 +1,201 @@
+2799338 brk(NULL) = 0x000055555555e000
+2799338 mmap(NULL,8192,PROT_READ|PROT_WRITE,MAP_PRIVATE|MAP_ANONYMOUS,-1,0) = 0x00002aaaab2e9000
+2799338 access("/etc/ld.so.preload",R_OK) = -1 errno=2 (No such file or directory)
+2799338 openat(-100,"$BRIDGE/build/x86-python/root/usr/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v3/libomega_native.so",O_RDONLY|O_CLOEXEC) = -1 errno=2 (No such file or directory)
+2799338 newfstatat(-100,"$BRIDGE/build/x86-python/root/usr/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v3/",0x00002aaaab2aa5a0,0) = -1 errno=2 (No such file or directory)
+2799338 openat(-100,"$BRIDGE/build/x86-python/root/usr/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v2/libomega_native.so",O_RDONLY|O_CLOEXEC) = -1 errno=2 (No such file or directory)
+2799338 newfstatat(-100,"$BRIDGE/build/x86-python/root/usr/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v2/",0x00002aaaab2aa5a0,0) = -1 errno=2 (No such file or directory)
+2799338 openat(-100,"$BRIDGE/build/x86-python/root/usr/lib/x86_64-linux-gnu/libomega_native.so",O_RDONLY|O_CLOEXEC) = -1 errno=2 (No such file or directory)
+2799338 newfstatat(-100,"$BRIDGE/build/x86-python/root/usr/lib/x86_64-linux-gnu/",0x00002aaaab2aa5a0,0) = 0
+2799338 openat(-100,"$BRIDGE/build/x86-python/root/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v3/libomega_native.so",O_RDONLY|O_CLOEXEC) = -1 errno=2 (No such file or directory)
+2799338 newfstatat(-100,"$BRIDGE/build/x86-python/root/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v3/",0x00002aaaab2aa5a0,0) = -1 errno=2 (No such file or directory)
+2799338 openat(-100,"$BRIDGE/build/x86-python/root/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v2/libomega_native.so",O_RDONLY|O_CLOEXEC) = -1 errno=2 (No such file or directory)
+2799338 newfstatat(-100,"$BRIDGE/build/x86-python/root/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v2/",0x00002aaaab2aa5a0,0) = -1 errno=2 (No such file or directory)
+2799338 openat(-100,"$BRIDGE/build/x86-python/root/lib/x86_64-linux-gnu/libomega_native.so",O_RDONLY|O_CLOEXEC) = -1 errno=2 (No such file or directory)
+2799338 newfstatat(-100,"$BRIDGE/build/x86-python/root/lib/x86_64-linux-gnu/",0x00002aaaab2aa5a0,0) = -1 errno=2 (No such file or directory)
+2799338 openat(-100,"/usr/x86_64-linux-gnu/lib/glibc-hwcaps/x86-64-v3/libomega_native.so",O_RDONLY|O_CLOEXEC) = -1 errno=2 (No such file or directory)
+2799338 newfstatat(-100,"/usr/x86_64-linux-gnu/lib/glibc-hwcaps/x86-64-v3/",0x00002aaaab2aa5a0,0) = -1 errno=2 (No such file or directory)
+2799338 openat(-100,"/usr/x86_64-linux-gnu/lib/glibc-hwcaps/x86-64-v2/libomega_native.so",O_RDONLY|O_CLOEXEC) = -1 errno=2 (No such file or directory)
+2799338 newfstatat(-100,"/usr/x86_64-linux-gnu/lib/glibc-hwcaps/x86-64-v2/",0x00002aaaab2aa5a0,0) = -1 errno=2 (No such file or directory)
+2799338 openat(-100,"/usr/x86_64-linux-gnu/lib/libomega_native.so",O_RDONLY|O_CLOEXEC) = -1 errno=2 (No such file or directory)
+2799338 newfstatat(-100,"/usr/x86_64-linux-gnu/lib/",0x00002aaaab2aa5a0,0) = 0
+2799338 openat(-100,"$BRIDGE/build/x86-suite-first/library/glibc-hwcaps/x86-64-v3/libomega_native.so",O_RDONLY|O_CLOEXEC) = -1 errno=2 (No such file or directory)
+2799338 newfstatat(-100,"$BRIDGE/build/x86-suite-first/library/glibc-hwcaps/x86-64-v3/",0x00002aaaab2aa5a0,0) = -1 errno=2 (No such file or directory)
+2799338 openat(-100,"$BRIDGE/build/x86-suite-first/library/glibc-hwcaps/x86-64-v2/libomega_native.so",O_RDONLY|O_CLOEXEC) = -1 errno=2 (No such file or directory)
+2799338 newfstatat(-100,"$BRIDGE/build/x86-suite-first/library/glibc-hwcaps/x86-64-v2/",0x00002aaaab2aa5a0,0) = -1 errno=2 (No such file or directory)
+2799338 openat(-100,"$BRIDGE/build/x86-suite-first/library/libomega_native.so",O_RDONLY|O_CLOEXEC) = 3
+2799338 read(3,0xab2aa708,832) = 832
+2799338 fstat(3,0x00002aaaab2aa5a0) = 0
+2799338 mmap(NULL,28776,PROT_READ,MAP_PRIVATE|MAP_DENYWRITE,3,0) = 0x00002aaaab2eb000
+2799338 mmap(0x00002aaaab2ec000,16384,PROT_EXEC|PROT_READ,MAP_PRIVATE|MAP_DENYWRITE|MAP_FIXED,3,0x1000) = 0x00002aaaab2ec000
+2799338 mmap(0x00002aaaab2f0000,4096,PROT_READ,MAP_PRIVATE|MAP_DENYWRITE|MAP_FIXED,3,0x5000) = 0x00002aaaab2f0000
+2799338 mmap(0x00002aaaab2f1000,8192,PROT_READ|PROT_WRITE,MAP_PRIVATE|MAP_DENYWRITE|MAP_FIXED,3,0x5000) = 0x00002aaaab2f1000
+2799338 close(3) = 0
+2799338 openat(-100,"$BRIDGE/build/x86-python/root/usr/lib/x86_64-linux-gnu/libc.so.6",O_RDONLY|O_CLOEXEC) = -1 errno=2 (No such file or directory)
+2799338 openat(-100,"/usr/x86_64-linux-gnu/lib/libc.so.6",O_RDONLY|O_CLOEXEC) = 3
+2799338 read(3,0xab2aa6e8,832) = 832
+2799338 pread64(3,0x00002aaaab2aa120,784,64) = 784
+2799338 fstat(3,0x00002aaaab2aa580) = 0
+2799338 pread64(3,0x00002aaaab2aa1d0,784,64) = 784
+2799338 mmap(NULL,2170256,PROT_READ,MAP_PRIVATE|MAP_DENYWRITE,3,0) = 0x00002aaaab2f3000
+2799338 mmap(0x00002aaaab31b000,1605632,PROT_EXEC|PROT_READ,MAP_PRIVATE|MAP_DENYWRITE|MAP_FIXED,3,0x28000) = 0x00002aaaab31b000
+2799338 mmap(0x00002aaaab4a3000,323584,PROT_READ,MAP_PRIVATE|MAP_DENYWRITE|MAP_FIXED,3,0x1b0000) = 0x00002aaaab4a3000
+2799338 mmap(0x00002aaaab4f2000,24576,PROT_READ|PROT_WRITE,MAP_PRIVATE|MAP_DENYWRITE|MAP_FIXED,3,0x1fe000) = 0x00002aaaab4f2000
+2799338 mmap(0x00002aaaab4f8000,52624,PROT_READ|PROT_WRITE,MAP_PRIVATE|MAP_ANONYMOUS|MAP_FIXED,-1,0) = 0x00002aaaab4f8000
+2799338 close(3) = 0
+2799338 mmap(NULL,12288,PROT_READ|PROT_WRITE,MAP_PRIVATE|MAP_ANONYMOUS,-1,0) = 0x00002aaaab505000
+2799338 arch_prctl(4098,46912506976064,-46912506978512,34,4294967295,0) = 0
+2799338 set_tid_address(0x2aaaab505a10) = 2799338
+2799338 set_robust_list(0x2aaaab505a20,24) = -1 errno=38 (Function not implemented)
+2799338 Unknown syscall 334
+2799338 mprotect(0x00002aaaab4f2000,16384,PROT_READ) = 0
+2799338 mprotect(0x00002aaaab2f1000,4096,PROT_READ) = 0
+2799338 mprotect(0x000055555555c000,4096,PROT_READ) = 0
+2799338 mprotect(0x00002aaaab2e2000,8192,PROT_READ) = 0
+2799338 prlimit64(0,RLIMIT_STACK,NULL,0x00002aaaab2ab0f0) = 0 ({rlim_cur=8388608,rlim_max=-1})
+2799338 fstat(1,0x00002aaaab2aac80) = 0
+2799338 getrandom(0x2aaaab4fd178,8,1) = 8
+2799338 brk(NULL) = 0x000055555555e000
+2799338 brk(0x000055555557f000) = 0x000055555557f000
+2799338 write(1,0x5555e2a0,34)PASS ident vec: library == header
+ = 34
+2799338 write(1,0x5555e2a0,34)PASS ident lay: library == header
+ = 34
+2799338 write(1,0x5555e2a0,34)PASS ident one: library == header
+ = 34
+2799338 write(1,0x5555e2a0,186)IDENT omega-ident 1 unit=vec abi=2 profile=OM-2 src=14674a73af4385e328f2d7a27113b929306b9df7163303cb60fe3e47a7f99596 omc=1f0fdef06574ffec782c164941114edcf51f36f9f9cd1e79bc0452dbcebb3322
+ = 186
+2799338 write(1,0x5555e2a0,186)IDENT omega-ident 1 unit=lay abi=2 profile=OM-2 src=e4504d41e6615768c9884d2162401196c14c11043d2dfea7da689f3679c5aa0f omc=1f0fdef06574ffec782c164941114edcf51f36f9f9cd1e79bc0452dbcebb3322
+ = 186
+2799338 write(1,0x5555e2a0,186)IDENT omega-ident 1 unit=one abi=2 profile=OM-2 src=a70725ed6b14197106f056e25377886fe6becd58b53fe55fa37db20b358e734b omc=1f0fdef06574ffec782c164941114edcf51f36f9f9cd1e79bc0452dbcebb3322
+ = 186
+2799338 futex(0x00002aaaab2f205c,FUTEX_PRIVATE_FLAG|FUTEX_WAKE,2147483647,NULL,0x00002aaaab4f8780,-1420851328) = 0
+2799338 mmap(NULL,16777216,PROT_READ|PROT_WRITE,MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE,-1,0) = 0x00002aaaab508000
+2799338 mprotect(0x00002aaaab508000,8388608,PROT_NONE) = 0
+2799338 write(1,0x5555e2a0,20)PASS bsum abc = 294
+ = 20
+2799338 write(1,0x5555e2a0,38)PASS wsum {1,2,3,2^32-1} = 4294967301
+ = 38
+2799338 write(1,0x5555e2a0,25)PASS lsum {-5,7,-9} = -7
+ = 25
+2799338 write(1,0x5555e2a0,45)PASS lsum overflow traps 1, result unchanged
+ = 45
+2799338 write(1,0x5555e2a0,24)PASS bsum (NULL, 0) = 0
+ = 24
+2799338 write(1,0x5555e2a0,30)PASS wsum (misaligned, 0) = 0
+ = 30
+2799338 write(1,0x5555e2a0,24)PASS vlen (NULL, 0) = 0
+ = 24
+2799338 write(1,0x5555e2a0,29)PASS NULL with len 1 refused
+ = 29
+2799338 write(1,0x5555e2a0,34)PASS wsum misaligned by 1 refused
+ = 34
+2799338 write(1,0x5555e2a0,34)PASS wsum misaligned by 2 refused
+ = 34
+2799338 write(1,0x5555e2a0,34)PASS vlen misaligned by 4 refused
+ = 34
+2799338 write(1,0x5555e2a0,40)PASS vcopy edit misaligned by 1 refused
+ = 40
+2799338 write(1,0x5555e2a0,42)PASS wsum len*4 = 2^64 (len 2^62) refused
+ = 42
+2799338 write(1,0x5555e2a0,45)PASS vlen len*8 overflows (len 2^61) refused
+ = 45
+2799338 write(1,0x5555e2a0,29)PASS vlen len 2^64-1 refused
+ = 29
+2799338 write(1,0x5555e2a0,63)PASS #748 golden: vpart len 2^64-1, o 2^64-2, k 4 refused (32)
+ = 63
+2799338 write(1,0x5555e2a0,29)PASS bsum len 2^64-1 refused
+ = 29
+2799338 write(1,0x5555e2a0,47)PASS vlen at 2^64-16, len 2 (end 2^64) refused
+ = 47
+2799338 write(1,0x5555e2a0,50)PASS vlen at 2^64-16, len 1 (end 2^64-8) accepted
+ = 50
+2799338 write(1,0x5555e2a0,49)PASS wsum at 2^64-16, len 2^62-4 (wraps) refused
+ = 49
+2799338 mmap(NULL,40,PROT_NONE,MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE,-1,0) = 0x00002aaaac508000
+2799338 write(1,0x5555e2a0,49)PASS vlen len 2^32+5 accepted, len arrives whole
+ = 49
+2799338 munmap(0x00002aaaac508000,40) = 0
+2799338 write(1,0x5555e2a0,25)PASS result NULL refused
+ = 25
+2799338 write(1,0x5555e2a0,81)PASS #748 golden: vpart len 16, o 2^64-2, k 4 traps 3 (wrapped o+k = 2 not used)
+ = 81
+2799338 write(1,0x5555e2a0,70)PASS vpart over every o, k in 0..18 of a 16-byte view (sum or trap 3)
+ = 70
+2799338 write(1,0x5555e2a0,54)PASS vpart o = len, k = 0 (empty part at the end) = 0
+ = 54
+2799338 write(1,0x5555e2a0,33)PASS vpart o 2^64-1, k 1 traps 3
+ = 33
+2799338 write(1,0x5555e2a0,37)PASS bsum split at every point 0..64
+ = 37
+2799338 mmap(NULL,16781312,PROT_READ|PROT_WRITE,MAP_PRIVATE|MAP_ANONYMOUS,-1,0) = 0x00002ab2ac509000
+2799338 mmap(NULL,67112960,PROT_READ|PROT_WRITE,MAP_PRIVATE|MAP_ANONYMOUS,-1,0) = 0x00002ab2ad50a000
+2799338 write(1,0x5555e2a0,29)PASS bsum 16 MiB = reference
+ = 29
+2799338 write(1,0x5555e2a0,43)PASS wsum 16 Mi words (64 MiB) = reference
+ = 43
+2799338 write(1,0x5555e2a0,62)PASS bsum 16 MiB at an odd address (uchar needs no alignment)
+ = 62
+2799338 write(1,0x5555e2a0,32)PASS vcopy edit == view refused
+ = 32
+2799338 write(1,0x5555e2a0,60)PASS vcopy edit overlapping the view by one element refused
+ = 60
+2799338 write(1,0x5555e2a0,48)PASS vcopy adjacent ranges (half-open) accepted
+ = 48
+2799338 write(1,0x5555e2a0,41)PASS vcopy both empty at one address = 0
+ = 41
+2799338 write(1,0x5555e2a0,71)PASS vcopy empty edit inside the view passes the bridge (code traps 3)
+ = 71
+2799338 write(1,0x5555e2a0,42)PASS vcopy empty view inside the edit = 0
+ = 42
+2799338 write(1,0x5555e2a0,42)PASS vcopy result inside the edit refused
+ = 42
+2799338 write(1,0x5555e2a0,51)PASS bsum result inside the view refused (v1 rule)
+ = 51
+2799338 write(1,0x5555e2a0,55)PASS vcopy short edit traps 3 after the writes it made
+ = 55
+2799338 write(1,0x5555e2a0,40)PASS absorb twice: a = byte sum, n = 67
+ = 40
+2799338 write(1,0x5555e2a0,45)PASS digest: tag, a's bytes, zeros; result n
+ = 45
+2799338 write(1,0x5555e2a0,32)PASS absorb NULL layout refused
+ = 32
+2799338 write(1,0x5555e2a0,48)PASS absorb layout overlapping the view refused
+ = 48
+2799338 write(1,0x5555e2a0,29)PASS digest NULL out refused
+ = 29
+2799338 write(1,0x5555e2a0,47)PASS digest out overlapping the result refused
+ = 47
+2799338 write(1,0x5555e2a0,65)PASS swap8 out == view: reversed in place (memmove after return)
+ = 65
+2799338 write(1,0x5555e2a0,47)PASS swap8 out overlapping the view by 4 bytes
+ = 47
+2799338 write(1,0x5555e2a0,41)PASS digest out over its own layout view
+ = 41
+2799338 write(1,0x5555e2a0,63)PASS swap8 short view traps 3, out untouched, result unchanged
+ = 63
+2799338 write(1,0x5555e2a0,71)PASS halt traps 9 after writing its out buffer: caller's out untouched
+ = 71
+2799338 write(1,0x5555e2a0,33)PASS halt out misaligned refused
+ = 33
+2799338 write(1,0x5555e2a0,32)PASS two outs adjacent accepted
+ = 32
+2799338 write(1,0x5555e2a0,46)PASS two outs overlapping by one byte refused
+ = 46
+2799338 write(1,0x5555e2a0,37)PASS two outs at one address refused
+ = 37
+2799338 write(1,0x5555e2a0,46)PASS fillv (OM-2, no export) fills 5 elements
+ = 46
+2799338 write(1,0x5555e2a0,67)PASS 2000 interleaved rounds: vec, lay, one (OM-2) and madd (OM-1)
+ = 67
+2799338 write(1,0x5555e2a0,69)PASS no symbol for the private helper psum (omega2_psum, omega_psum)
+ = 69
+2799338 write(1,0x5555e2a0,69)PASS no v1 symbol for a v2 unit (omega_bsum, omega_fillv, omega_vec)
+ = 69
+2799338 write(1,0x5555e2a0,48)PASS no v2 symbol for the v1 unit (omega2_madd)
+ = 48
+2799338 rt_sigaction(SIGALRM,0x00002aaaab2aaf00,NULL) = 0
+2799338 setitimer(ITIMER_REAL,{it_interval={tv_sec = 0,tv_usec = 0},it_value={tv_sec = 0,tv_usec = 2000},},NULL) = 0 (old_value = NULL)
+--- SIGALRM {si_signo=SIGALRM, si_code=SI_KERNEL, si_pid=0, si_uid=0} ---
+--- SIGSEGV {si_signo=SIGSEGV, si_code=SI_KERNEL, si_pid=0, si_uid=0} ---
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped

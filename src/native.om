@@ -1,15 +1,19 @@
 note native.om: omega-bridge native call ABI v1 binding generator (docs/NATIVE-ABI.md).
 note Input on stdin, one or more units: the unit's .om source, a 0 byte, its code length as 8 decimal
 note digits, then the function-mode machine code the seeded compiler wrote for that source.
-note Output on stdout, only after every unit is accepted: one C file that embeds each code unchanged
-note and exports uint32_t omega_<name>(uint64_t *result, ...) per unit. The bound function is the
-note unit's last one, which is where the compiler enters function-mode code (word 0 branches to it);
-note earlier functions are private helpers with any types. The bound function's parameters are ulong
-note or long scalars, or edit/view arrays of ulong or uchar; its result is ulong, long or void.
-note Anything else is refused: trap 10 (exit 110) and no output.
-global inb uchar 1048576
-global outb uchar 4194304
-global st ulong 8
+note One argument names the output: c is the library source, one C file that embeds each code
+note unchanged and exports uint32_t omega_<name>(uint64_t *result, ...) per unit; h, python, rust,
+note zig and go are that library's declarations for those languages, written from the same
+note signatures (tools/native runs all six). Output on stdout, only after every unit is accepted.
+note The bound function is the unit's last one, which is where the compiler enters function-mode
+note code (word 0 branches to it); earlier functions are private helpers with any types. The bound
+note function's parameters are ulong or long scalars, or edit/view arrays of ulong or uchar; its
+note result is ulong, long or void. Anything else, and a missing or unknown argument, is refused:
+note trap 10 (exit 110) and no output.
+global inb uchar 4194304
+global outb uchar 16777216
+global st ulong 16
+global md uchar 8
 global tks ulong 40
 global tke ulong 40
 global pk ulong 6
@@ -20,9 +24,185 @@ global dg uchar 24
 global us ulong 256
 global ue ulong 256
 text hx "0123456789abcdef"
+global xt ulong 1
+text xtname "x86linux"
+text xjmp ":\\nendbr64\\njmp ombr_code_~:\\nendbr64\\njmp ombr2_code_"
+text xasm "/* SysV AMD64 adapter to the pinned private Omega frame ABI. R12 anchors the native\n * stack, R14 the runtime table, R15 the owned-stack floor. Advanced host helpers\n * that clobber those registers are forbidden in function mode; legacy read/write preserve them.\n * CET shadow-stack enforcement is not supported by the nonlocal trap return. */\n__asm__(\".text\\n.balign 16\\n.local ombr_enter\\n.hidden ombr_enter\\n.type ombr_enter,@function\\nombr_enter:\\n\"\n        \"endbr64\\npush %rbx\\npush %rbp\\npush %r12\\npush %r13\\npush %r14\\npush %r15\\npush %rcx\\n\"\n        \"mov %rsp,%r12\\nmov %rdx,%r14\\nmov %r9,%r15\\nmov %rdi,%r10\\n\"\n        \"mov %r8,%rbp\\nmov %r8,%rsp\\nsub $256,%rsp\\n\"\n        \"mov 0(%rsi),%rax\\nmov %rax,-8(%rbp)\\nmov 8(%rsi),%rax\\nmov %rax,-16(%rbp)\\n\"\n        \"mov 16(%rsi),%rax\\nmov %rax,-24(%rbp)\\nmov 24(%rsi),%rax\\nmov %rax,-32(%rbp)\\n\"\n        \"mov 32(%rsi),%rax\\nmov %rax,-40(%rbp)\\nmov 40(%rsi),%rax\\nmov %rax,-48(%rbp)\\n\"\n        \"call *%r10\\nmov %r12,%rsp\\nmov (%rsp),%rcx\\nmov %rax,(%rcx)\\nxor %eax,%eax\\n\"\n        \"ombr_leave:\\nadd $8,%rsp\\npop %r15\\npop %r14\\npop %r13\\npop %r12\\npop %rbp\\npop %rbx\\nret\\n\"\n        \".size ombr_enter,.-ombr_enter\\n.local ombr_trap\\n.hidden ombr_trap\\n.type ombr_trap,@function\\nombr_trap:\\n\"\n        \"endbr64\\nmov %r12,%rsp\\nlea -1(%rsi),%eax\\ncmp $13,%eax\\nmov $34,%eax\\ncmovbe %esi,%eax\\njmp ombr_leave\\n\"\n        \".size ombr_trap,.-ombr_trap\\n.local ombr_no_entry\\n.hidden ombr_no_entry\\n.type ombr_no_entry,@function\\nombr_no_entry:\\n\"\n        \"endbr64\\nmov %r12,%rsp\\nmov $34,%eax\\njmp ombr_leave\\n.size ombr_no_entry,.-ombr_no_entry\\n\");\nuint32_t ombr_xenter(const void *code, const uint64_t *args, const ombr_rt *rt, uint64_t *out, void *top, void *floor) __asm__(\"ombr_enter\") __attribute__((visibility(\"hidden\")));\n/* The true mapping floor must not move when ABI-v2 out buffers lower top. */\n#define ombr_enter(code,args,rt,out,top) ombr_xenter(code,args,rt,out,top,ombr_stk - OMBR_STACK)\n"
+text xs "/* ombr_enter"
+text xe "static void ombr_free"
 text kw "toeditviewulonglongucharvoidmain"
-text fr "__asm__(\".section .text.omega_bridge,\\\"ax\\\",@progbits\\n.balign 4\\n.globl ombr_code_~\\n.hidden ombr_code_~\\nombr_code_~:\\n.byte ~\\n.previous\\n\");\nextern const unsigned char ombr_entry_~[] __attribute__((visibility(\"hidden\")));\n__attribute__((visibility(\"default\"))) uint32_t omega_~(uint64_t *result~, uint64_t o_~, void *o_~, const void *o_~_len~)\n{\n    ombr_span sp[7];\n    unsigned ns = 0;\n    uint64_t a[6] = {0};\n    if (ombr_span_add(sp, &ns, result, 1u, 1u, 8u, 1))\n        return OMEGA_BAD_ARG;\n~    if (ombr_span_add(sp, &ns, o_~, o_~_len, ~u, ~))\n        return OMEGA_BAD_ARG;\n    a[~] = (uint64_t)(uintptr_t)o_~;\n~    a[~] = o_~    if (ombr_overlap(sp, ns))\n        return OMEGA_BAD_ARG;\n    return ombr_run(ombr_entry_~, a, result, ~);\n}\n~\\n.globl ombr_entry_~\\n.hidden ombr_entry_~\\nombr_entry_~:\\nhint #34\\nb ombr_code_"
-text pre "/* Generated by omega-bridge src/native.om: native call ABI v1 (docs/NATIVE-ABI.md).\n * The Omega machine code below is embedded byte for byte as the seeded compiler wrote it.\n * This file only adapts the C calling convention to it. Regenerate it; do not edit it. */\n#include <pthread.h>\n#include <signal.h>\n#include <stdint.h>\n#include <sys/mman.h>\n#define OMEGA_OK 0u\n#define OMEGA_BAD_ARG 32u\n#define OMEGA_REENTRY 33u\n#define OMEGA_BAD_RT 34u\n#define OMEGA_NO_STACK 35u\n#define OMBR_STACK (8u << 20)\n#define OMBR_GUARD (8u << 20)\n/* entry[2] is the trap entry (OSC-1 section 7). */\ntypedef struct ombr_rt { const void *entry[32]; } ombr_rt;\ntypedef struct ombr_span { uintptr_t lo, hi; int w; } ombr_span;\nstatic _Thread_local volatile sig_atomic_t ombr_active;\nstatic _Thread_local unsigned char *ombr_stk;\nstatic pthread_key_t ombr_key;\nstatic int ombr_keyok;\nstatic pthread_once_t ombr_once = PTHREAD_ONCE_INIT;\nuint32_t ombr_enter(const void *code, const uint64_t *args, const ombr_rt *rt, uint64_t *out, void *top)\n    __attribute__((visibility(\"hidden\")));\nextern const unsigned char ombr_trap[] __attribute__((visibility(\"hidden\")));\nextern const unsigned char ombr_no_entry[] __attribute__((visibility(\"hidden\")));\n/* ombr_enter saves the callee-saved registers on the caller's stack, keeps that stack pointer in x19 and\n * runs the code on the binding's own stack. A normal return stores x0 through out and\n * returns 0. A runtime entry restores the stack pointer from x19 and returns a status; out is not\n * written. The seeded compiler never writes x19..x28. Runtime entries are reached by blr/br, so they\n * start with bti jc. */\n__asm__(\".text\\n.balign 4\\n.globl ombr_enter\\n.hidden ombr_enter\\n.type ombr_enter,%function\\nombr_enter:\\n\"\n        \"hint #34\\nstp x29,x30,[sp,#-176]!\\nmov x29,sp\\nstp x19,x20,[sp,#16]\\nstp x21,x22,[sp,#32]\\n\"\n        \"stp x23,x24,[sp,#48]\\nstp x25,x26,[sp,#64]\\nstp x27,x28,[sp,#80]\\nstp d8,d9,[sp,#96]\\n\"\n        \"stp d10,d11,[sp,#112]\\nstp d12,d13,[sp,#128]\\nstp d14,d15,[sp,#144]\\nstr x3,[sp,#160]\\n\"\n        \"mov x19,sp\\nmov x16,x0\\nmov x17,x1\\nmov x7,x2\\nmov sp,x4\\n\"\n        \"ldp x0,x1,[x17]\\nldp x2,x3,[x17,#16]\\nldp x4,x5,[x17,#32]\\nblr x16\\n\"\n        \"mov sp,x19\\nldr x9,[sp,#160]\\nstr x0,[x9]\\nmov w0,#0\\n\"\n        \"ombr_leave:\\nldp d14,d15,[sp,#144]\\nldp d12,d13,[sp,#128]\\nldp d10,d11,[sp,#112]\\n\"\n        \"ldp d8,d9,[sp,#96]\\nldp x27,x28,[sp,#80]\\nldp x25,x26,[sp,#64]\\nldp x23,x24,[sp,#48]\\n\"\n        \"ldp x21,x22,[sp,#32]\\nldp x19,x20,[sp,#16]\\nldp x29,x30,[sp],#176\\nret\\n.size ombr_enter,.-ombr_enter\\n\"\n        \".globl ombr_trap\\n.hidden ombr_trap\\n.type ombr_trap,%function\\nombr_trap:\\nhint #38\\n\"\n        \"mov sp,x19\\nsub x2,x1,#1\\nmov w3,#34\\ncmp x2,#13\\ncsel w0,w1,w3,ls\\nb ombr_leave\\n\"\n        \".size ombr_trap,.-ombr_trap\\n\"\n        \".globl ombr_no_entry\\n.hidden ombr_no_entry\\n.type ombr_no_entry,%function\\nombr_no_entry:\\nhint #38\\n\"\n        \"mov sp,x19\\nmov w0,#34\\nb ombr_leave\\n.size ombr_no_entry,.-ombr_no_entry\\n\");\nstatic void ombr_free(void *p)\n{\n    munmap(p, OMBR_STACK + OMBR_GUARD);\n}\nstatic void ombr_init(void)\n{\n    ombr_keyok = pthread_key_create(&ombr_key, ombr_free) == 0;\n}\n/* The thread's Omega stack: OMBR_STACK usable bytes above an OMBR_GUARD no-access region. A function-mode\n * unit has no call cycles and at most 4 MiB of local arrays per function (OMEGESE, local arrays), so a frame that\n * would pass the bottom starts inside the guard and faults there; nothing below the guard is touched. */\nstatic unsigned char *ombr_stack(void)\n{\n    if (ombr_stk)\n        return ombr_stk;\n    pthread_once(&ombr_once, ombr_init);\n    if (!ombr_keyok)\n        return 0;\n    unsigned char *p = mmap(0, OMBR_STACK + OMBR_GUARD, PROT_READ | PROT_WRITE,\n                            MAP_PRIVATE | MAP_ANONYMOUS | MAP_NORESERVE, -1, 0);\n    if (p == MAP_FAILED)\n        return 0;\n    if (mprotect(p, OMBR_GUARD, PROT_NONE) != 0 || pthread_setspecific(ombr_key, p) != 0) {\n        munmap(p, OMBR_STACK + OMBR_GUARD);\n        return 0;\n    }\n    ombr_stk = p + OMBR_GUARD + OMBR_STACK;\n    return ombr_stk;\n}\nstatic int ombr_span_add(ombr_span *sp, unsigned *ns, const void *p, uint64_t n, uint64_t want, uint64_t es, int w)\n{\n    uintptr_t lo = (uintptr_t)p;\n    if (!p || n != want || lo % es != 0u || n > (UINTPTR_MAX - lo) / es)\n        return 1;\n    sp[*ns].lo = lo;\n    sp[*ns].hi = lo + n * es;\n    sp[*ns].w = w;\n    (*ns)++;\n    return 0;\n}\nstatic int ombr_overlap(const ombr_span *sp, unsigned ns)\n{\n    for (unsigned i = 0; i < ns; i++)\n        for (unsigned j = i + 1; j < ns; j++)\n            if ((sp[i].w || sp[j].w) && sp[i].lo < sp[j].hi && sp[j].lo < sp[i].hi)\n                return 1;\n    return 0;\n}\n/* One read-only runtime table for every call and thread: the code only reads it (a write would fault). */\nstatic const ombr_rt ombr_rt_table = {{ [0 ... 1] = ombr_no_entry, [2] = ombr_trap, [3 ... 31] = ombr_no_entry }};\nstatic uint32_t ombr_run(const void *code, const uint64_t *args, uint64_t *result, int has_value)\n{\n    if (ombr_active)\n        return OMEGA_REENTRY;\n    ombr_active = 1;\n    unsigned char *top = ombr_stack();\n    if (!top) {\n        ombr_active = 0;\n        return OMEGA_NO_STACK;\n    }\n    uint64_t v = 0;\n    uint32_t s = ombr_enter(code, args, &ombr_rt_table, &v, top);\n    ombr_active = 0;\n    if (s == OMEGA_OK)\n        *result = has_value ? v : 0u;\n    return s;\n}\n"
+text fr "__asm__(\".section .text.omega_bridge,\\\"ax\\\",@progbits\\n.balign 4\\n.local ombr_code_~\\n.hidden ombr_code_~\\nombr_code_~:\\n.byte ~\\n.previous\\n\");\nextern const unsigned char ombr_entry_~[] __attribute__((visibility(\"hidden\")));\n__attribute__((visibility(\"default\"))) uint32_t omega_~(uint64_t *result~, uint64_t o_~, void *o_~, const void *o_~_len~)\n{\n    ombr_span sp[7];\n    unsigned ns = 0;\n    uint64_t a[6] = {0};\n    if (ombr_span_add(sp, &ns, result, 1u, 1u, 8u, 1))\n        return OMEGA_BAD_ARG;\n~    if (ombr_span_add(sp, &ns, o_~, o_~_len, ~u, ~))\n        return OMEGA_BAD_ARG;\n    a[~] = (uint64_t)(uintptr_t)o_~;\n~    a[~] = o_~    if (ombr_overlap(sp, ns))\n        return OMEGA_BAD_ARG;\n    return ombr_run(ombr_entry_~, a, result, ~);\n}\n~\\n.local ombr_entry_~\\n.hidden ombr_entry_~\\nombr_entry_~:\\nhint #34\\nb ombr_code_"
+text pre "/* Generated by omega-bridge src/native.om: native call ABI v1 (docs/NATIVE-ABI.md).\n * The Omega machine code below is embedded byte for byte as the seeded compiler wrote it.\n * This file only adapts the C calling convention to it. Regenerate it; do not edit it. */\n#include <pthread.h>\n#include <signal.h>\n#include <stdint.h>\n#include <sys/mman.h>\n#define OMEGA_OK 0u\n#define OMEGA_BAD_ARG 32u\n#define OMEGA_REENTRY 33u\n#define OMEGA_BAD_RT 34u\n#define OMEGA_NO_STACK 35u\n#define OMBR_STACK (8u << 20)\n#define OMBR_GUARD (8u << 20)\n/* entry[2] is the trap entry (OSC-1 section 7). */\ntypedef struct ombr_rt { const void *entry[32]; } ombr_rt;\ntypedef struct ombr_span { uintptr_t lo, hi; int w; } ombr_span;\nstatic _Thread_local volatile sig_atomic_t ombr_active;\nstatic _Thread_local unsigned char *ombr_stk;\nstatic pthread_key_t ombr_key;\nstatic int ombr_keyok;\nstatic pthread_once_t ombr_once = PTHREAD_ONCE_INIT;\nuint32_t ombr_enter(const void *code, const uint64_t *args, const ombr_rt *rt, uint64_t *out, void *top)\n    __attribute__((visibility(\"hidden\")));\nextern const unsigned char ombr_trap[] __attribute__((visibility(\"hidden\")));\nextern const unsigned char ombr_no_entry[] __attribute__((visibility(\"hidden\")));\n/* ombr_enter saves the callee-saved registers on the caller's stack, keeps that stack pointer in x19 and\n * runs the code on the binding's own stack. A normal return stores x0 through out and\n * returns 0. A runtime entry restores the stack pointer from x19 and returns a status; out is not\n * written. The seeded compiler never writes x19..x28. Runtime entries are reached by blr/br, so they\n * start with bti jc. */\n__asm__(\".text\\n.balign 4\\n.local ombr_enter\\n.hidden ombr_enter\\n.type ombr_enter,%function\\nombr_enter:\\n\"\n        \"hint #34\\nstp x29,x30,[sp,#-176]!\\nmov x29,sp\\nstp x19,x20,[sp,#16]\\nstp x21,x22,[sp,#32]\\n\"\n        \"stp x23,x24,[sp,#48]\\nstp x25,x26,[sp,#64]\\nstp x27,x28,[sp,#80]\\nstp d8,d9,[sp,#96]\\n\"\n        \"stp d10,d11,[sp,#112]\\nstp d12,d13,[sp,#128]\\nstp d14,d15,[sp,#144]\\nstr x3,[sp,#160]\\n\"\n        \"mov x19,sp\\nmov x16,x0\\nmov x17,x1\\nmov x7,x2\\nmov sp,x4\\n\"\n        \"ldp x0,x1,[x17]\\nldp x2,x3,[x17,#16]\\nldp x4,x5,[x17,#32]\\nblr x16\\n\"\n        \"mov sp,x19\\nldr x9,[sp,#160]\\nstr x0,[x9]\\nmov w0,#0\\n\"\n        \"ombr_leave:\\nldp d14,d15,[sp,#144]\\nldp d12,d13,[sp,#128]\\nldp d10,d11,[sp,#112]\\n\"\n        \"ldp d8,d9,[sp,#96]\\nldp x27,x28,[sp,#80]\\nldp x25,x26,[sp,#64]\\nldp x23,x24,[sp,#48]\\n\"\n        \"ldp x21,x22,[sp,#32]\\nldp x19,x20,[sp,#16]\\nldp x29,x30,[sp],#176\\nret\\n.size ombr_enter,.-ombr_enter\\n\"\n        \".local ombr_trap\\n.hidden ombr_trap\\n.type ombr_trap,%function\\nombr_trap:\\nhint #38\\n\"\n        \"mov sp,x19\\nsub x2,x1,#1\\nmov w3,#34\\ncmp x2,#13\\ncsel w0,w1,w3,ls\\nb ombr_leave\\n\"\n        \".size ombr_trap,.-ombr_trap\\n\"\n        \".local ombr_no_entry\\n.hidden ombr_no_entry\\n.type ombr_no_entry,%function\\nombr_no_entry:\\nhint #38\\n\"\n        \"mov sp,x19\\nmov w0,#34\\nb ombr_leave\\n.size ombr_no_entry,.-ombr_no_entry\\n\");\nstatic void ombr_free(void *p)\n{\n    munmap(p, OMBR_STACK + OMBR_GUARD);\n}\nstatic void ombr_init(void)\n{\n    ombr_keyok = pthread_key_create(&ombr_key, ombr_free) == 0;\n}\n/* The thread's Omega stack: OMBR_STACK usable bytes above an OMBR_GUARD no-access region. A function-mode\n * unit has no call cycles and at most 4 MiB of local arrays per function (OMEGESE, local arrays), so a frame that\n * would pass the bottom starts inside the guard and faults there; nothing below the guard is touched. */\nstatic unsigned char *ombr_stack(void)\n{\n    if (ombr_stk)\n        return ombr_stk;\n    pthread_once(&ombr_once, ombr_init);\n    if (!ombr_keyok)\n        return 0;\n    unsigned char *p = mmap(0, OMBR_STACK + OMBR_GUARD, PROT_READ | PROT_WRITE,\n                            MAP_PRIVATE | MAP_ANONYMOUS | MAP_NORESERVE, -1, 0);\n    if (p == MAP_FAILED)\n        return 0;\n    if (mprotect(p, OMBR_GUARD, PROT_NONE) != 0 || pthread_setspecific(ombr_key, p) != 0) {\n        munmap(p, OMBR_STACK + OMBR_GUARD);\n        return 0;\n    }\n    ombr_stk = p + OMBR_GUARD + OMBR_STACK;\n    return ombr_stk;\n}\nstatic int ombr_span_add(ombr_span *sp, unsigned *ns, const void *p, uint64_t n, uint64_t want, uint64_t es, int w)\n{\n    uintptr_t lo = (uintptr_t)p;\n    if (!p || n != want || lo % es != 0u || n > (UINTPTR_MAX - lo) / es)\n        return 1;\n    sp[*ns].lo = lo;\n    sp[*ns].hi = lo + n * es;\n    sp[*ns].w = w;\n    (*ns)++;\n    return 0;\n}\nstatic int ombr_overlap(const ombr_span *sp, unsigned ns)\n{\n    for (unsigned i = 0; i < ns; i++)\n        for (unsigned j = i + 1; j < ns; j++)\n            if ((sp[i].w || sp[j].w) && sp[i].lo < sp[j].hi && sp[j].lo < sp[i].hi)\n                return 1;\n    return 0;\n}\n/* One read-only runtime table for every call and thread: the code only reads it (a write would fault). */\nstatic const ombr_rt ombr_rt_table = {{ ombr_no_entry, ombr_no_entry, ombr_trap, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry }};\nstatic uint32_t ombr_run(const void *code, const uint64_t *args, uint64_t *result, int has_value)\n{\n    if (ombr_active)\n        return OMEGA_REENTRY;\n    ombr_active = 1;\n    unsigned char *top = ombr_stack();\n    if (!top) {\n        ombr_active = 0;\n        return OMEGA_NO_STACK;\n    }\n    uint64_t v = 0;\n    uint32_t s = ombr_enter(code, args, &ombr_rt_table, &v, top);\n    ombr_active = 0;\n    if (s == OMEGA_OK)\n        *result = has_value ? v : 0u;\n    return s;\n}\n"
+note mo: the output names; tb: the binding texts, fragments separated by ~ (byte 126): 0-11 h,
+note 12-21 python, 22-34 rust, 35-46 zig, 47-64 go (its C preamble includes the generated header).
+text mo "chpythonrustziggoapihapicfreest"
+text tb "/* Generated by omega-bridge src/native.om: native call ABI v1 (docs/NATIVE-ABI.md).\n * C and C++ declarations for libomega_native. Regenerate it; do not edit it.\n * Status: 0 done; 1..14 the Omega trap code; 32 argument refused (null, wrong length, misaligned,\n * overlap); 33 reentry; 34 bad runtime entry; 35 no stack. The result is written only on status 0.\n * A long is its two's-complement bits; an array is its address then its element count.\n * Parameter names carry o_ so no language's reserved words collide. */\n#ifndef OMEGA_NATIVE_H\n#define OMEGA_NATIVE_H\n#include <stdint.h>\n#ifdef __cplusplus\nextern \"C\" {\n#endif\n#define OMEGA_OK 0u\n#define OMEGA_BAD_ARG 32u\n#define OMEGA_REENTRY 33u\n#define OMEGA_BAD_RT 34u\n#define OMEGA_NO_STACK 35u\n~/* ~ */\nuint32_t omega_~(uint64_t *result~, uint64_t o_~, void *o_~, const void *o_~, void *o_~, const void *o_~_len~);\n~#ifdef __cplusplus\n}\n#endif\n#endif\n~# Generated by omega-bridge src/native.om: native call ABI v1 (docs/NATIVE-ABI.md).\n# ctypes declarations for libomega_native.so beside this file. Regenerate it; do not edit it.\n# Status: 0 done; 1..14 the Omega trap code; 32 argument refused (None, wrong length, misaligned,\n# overlap); 33 reentry; 34 bad runtime entry; 35 no stack. The result (a ctypes.c_uint64 passed with\n# ctypes.byref) is written only on status 0. A scalar is an int in 0 .. 2**64-1 (a long is passed as its\n# two's-complement bits); anything else raises ctypes.ArgumentError, nothing is truncated. An array is a\n# ctypes array of its element type (bytes for a view uchar) then its element count; an edit array must\n# be writable, so bytes are refused there.\nimport ctypes, os\nOMEGA_OK, OMEGA_BAD_ARG, OMEGA_REENTRY, OMEGA_BAD_RT, OMEGA_NO_STACK = 0, 32, 33, 34, 35\nlib = ctypes.CDLL(os.path.join(os.path.dirname(os.path.abspath(__file__)), \"libomega_native.so\"))\nclass _u64:\n    @classmethod\n    def from_param(cls, v):\n        if type(v) is not int or v < 0 or v > 18446744073709551615:\n            raise ValueError(\"omega scalar: an int in 0 .. 2**64-1 expected, got %r\" % (v,))\n        return ctypes.c_uint64(v)\n_res = ctypes.POINTER(ctypes.c_uint64)\n_a3 = ctypes.POINTER(ctypes.c_uint64)  # edit ulong: a writable ctypes array of c_uint64\n_a4 = ctypes.POINTER(ctypes.c_uint64)  # view ulong: a ctypes array of c_uint64\n_a5 = ctypes.POINTER(ctypes.c_ubyte)  # edit uchar: a writable ctypes array of c_ubyte\n_a6 = ctypes.c_char_p  # view uchar: bytes, or a ctypes array of c_char\n~# ~\nomega_~ = lib.omega_~\nomega_~.argtypes = [_res~, _u64~, _a~]\nomega_~.restype = ctypes.c_uint32\n~// Generated by omega-bridge src/native.om: native call ABI v1 (docs/NATIVE-ABI.md).\n// Declarations for libomega_native (build with -L <its directory>; Rust 1.82 or later). Regenerate it; do not edit it.\n// Status: 0 done; 1..14 the Omega trap code; 32 argument refused (null, wrong length, misaligned,\n// overlap); 33 reentry; 34 bad runtime entry; 35 no stack. The result is written only on status 0.\n// A long is its two's-complement bits (an i64 as u64); an array is its pointer then its element count.\n#[allow(dead_code)]\npub const OMEGA_OK: u32 = 0;\n#[allow(dead_code)]\npub const OMEGA_BAD_ARG: u32 = 32;\n#[allow(dead_code)]\npub const OMEGA_REENTRY: u32 = 33;\n#[allow(dead_code)]\npub const OMEGA_BAD_RT: u32 = 34;\n#[allow(dead_code)]\npub const OMEGA_NO_STACK: u32 = 35;\n#[allow(dead_code)]\n#[link(name = \"omega_native\")]\nunsafe extern \"C\" {\n~    // ~\n    pub fn omega_~(result: *mut u64~, o_~: u64~: *mut u64~: *const u64~: *mut u8~: *const u8~_len: u64~) -> u32;\n~}\n~// Generated by omega-bridge src/native.om: native call ABI v1 (docs/NATIVE-ABI.md).\n// Declarations for libomega_native (build with -L<its directory> -lomega_native -lc). Regenerate it; do not edit it.\n// Status: 0 done; 1..14 the Omega trap code; 32 argument refused (null, wrong length, misaligned,\n// overlap); 33 reentry; 34 bad runtime entry; 35 no stack. The result is written only on status 0.\n// A long is its two's-complement bits (@bitCast); an array is its pointer then its element count.\npub const OMEGA_OK: u32 = 0;\npub const OMEGA_BAD_ARG: u32 = 32;\npub const OMEGA_REENTRY: u32 = 33;\npub const OMEGA_BAD_RT: u32 = 34;\npub const OMEGA_NO_STACK: u32 = 35;\n~// ~\npub extern fn omega_~(result: ?*u64~, o_~: u64~: ?[*]u64~: ?[*]const u64~: ?[*]u8~: ?[*]const u8~_len: u64~) u32;\n~// Generated by omega-bridge src/native.om: native call ABI v1 (docs/NATIVE-ABI.md).\n// cgo package omeganative: this file, omega_native.h and libomega_native.so in one folder. Regenerate it;\n// do not edit it. No run-time path is baked in: the program's build names the folder (CGO_LDFLAGS set to\n// -Wl,-rpath,<folder>), or LD_LIBRARY_PATH does.\n// Status: 0 done; 1..14 the Omega trap code; 32 argument refused (nil, wrong length, misaligned,\n// overlap); 33 reentry; 34 bad runtime entry; 35 no stack. The result is written only on status 0.\n// A long is its two's-complement bits (an int64 as uint64); an array is an unsafe.Pointer to memory\n// holding no Go pointers, then its element count.\npackage omeganative\n\n/*\n#cgo CFLAGS: -I${SRCDIR}\n#cgo LDFLAGS: -L${SRCDIR} -lomega_native\n#include \"omega_native.h\"\n*/\nimport \"C\"\n\nimport \"unsafe\"\n\nconst (\n\tOmegaOK uint32 = 0\n\tOmegaBadArg uint32 = 32\n\tOmegaReentry uint32 = 33\n\tOmegaBadRt uint32 = 34\n\tOmegaNoStack uint32 = 35\n)\n~\n// ~\nfunc Omega_~(result *uint64~, o_~ uint64~ unsafe.Pointer~ unsafe.Pointer~ unsafe.Pointer~ unsafe.Pointer~_len uint64~) uint32 {\n\treturn uint32(C.omega_~((*C.uint64_t)(unsafe.Pointer(result))~, C.uint64_t(o_~)~, o_~_len)~))\n}\n"
+note Freestanding output accepts integer scalars only: no arrays, storage, host words or OM-2.
+global fns ulong 1024
+global fne ulong 1024
+global fnc ulong 1
+text fw "|note|fn|to|ret|if|else|end|for|while|bound|break|continue|trap|requires|ensures|invariant|result|const|bool|uchar|ushort|uint|ulong|byte|short|int|long|true|false|add|sub|mul|div|rem|and|or|xor|shl|shr|neg|not|eq|ne|lt|le|gt|ge|bitcast|(|)|=|void|"
+text fp "/* Generated pure integer-scalar freestanding native ABI v1 binding. */\n#include <stdint.h>\n#define OMEGA_OK 0u\n#define OMEGA_BAD_ARG 32u\n#define OMEGA_BAD_RT 34u\ntypedef struct ombr_rt { const void *entry[32]; } ombr_rt;\nuint32_t ombr_enter(const void *code, const uint64_t *args, const ombr_rt *rt, uint64_t *out, void *top)\n    __attribute__((visibility(\"hidden\")));\nextern const unsigned char ombr_trap[] __attribute__((visibility(\"hidden\")));\nextern const unsigned char ombr_no_entry[] __attribute__((visibility(\"hidden\")));\n/* ombr_enter saves the callee-saved registers on the caller's stack, keeps that stack pointer in x19 and\n * runs the pure scalar code on the caller's stack. A normal return stores x0 through out and\n * returns 0. A runtime entry restores the stack pointer from x19 and returns a status; out is not\n * written. The seeded compiler never writes x19..x28. Runtime entries are reached by blr/br, so they\n * start with bti jc. */\n__asm__(\".text\\n.balign 4\\n.local ombr_enter\\n.hidden ombr_enter\\n.type ombr_enter,%function\\nombr_enter:\\n\"\n        \"hint #34\\nstp x29,x30,[sp,#-176]!\\nmov x29,sp\\nstp x19,x20,[sp,#16]\\nstp x21,x22,[sp,#32]\\n\"\n        \"stp x23,x24,[sp,#48]\\nstp x25,x26,[sp,#64]\\nstp x27,x28,[sp,#80]\\nstp d8,d9,[sp,#96]\\n\"\n        \"stp d10,d11,[sp,#112]\\nstp d12,d13,[sp,#128]\\nstp d14,d15,[sp,#144]\\nstr x3,[sp,#160]\\n\"\n        \"mov x19,sp\\nmov x16,x0\\nmov x17,x1\\nmov x7,x2\\n\"\n        \"ldp x0,x1,[x17]\\nldp x2,x3,[x17,#16]\\nldp x4,x5,[x17,#32]\\nblr x16\\n\"\n        \"mov sp,x19\\nldr x9,[sp,#160]\\nstr x0,[x9]\\nmov w0,#0\\n\"\n        \"ombr_leave:\\nldp d14,d15,[sp,#144]\\nldp d12,d13,[sp,#128]\\nldp d10,d11,[sp,#112]\\n\"\n        \"ldp d8,d9,[sp,#96]\\nldp x27,x28,[sp,#80]\\nldp x25,x26,[sp,#64]\\nldp x23,x24,[sp,#48]\\n\"\n        \"ldp x21,x22,[sp,#32]\\nldp x19,x20,[sp,#16]\\nldp x29,x30,[sp],#176\\nret\\n.size ombr_enter,.-ombr_enter\\n\"\n        \".local ombr_trap\\n.hidden ombr_trap\\n.type ombr_trap,%function\\nombr_trap:\\nhint #38\\n\"\n        \"mov sp,x19\\nsub x2,x1,#1\\nmov w3,#34\\ncmp x2,#13\\ncsel w0,w1,w3,ls\\nb ombr_leave\\n\"\n        \".size ombr_trap,.-ombr_trap\\n\"\n        \".local ombr_no_entry\\n.hidden ombr_no_entry\\n.type ombr_no_entry,%function\\nombr_no_entry:\\nhint #38\\n\"\n        \"mov sp,x19\\nmov w0,#34\\nb ombr_leave\\n.size ombr_no_entry,.-ombr_no_entry\\n\");\nstatic const ombr_rt ombr_rt_table = {{ ombr_no_entry, ombr_no_entry, ombr_trap, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry, ombr_no_entry }};\nstatic uint32_t ombr_run(const void *code, const uint64_t *args, uint64_t *result, int has_value)\n{\n    uint64_t v = 0;\n    uint32_t status = ombr_enter(code, args, &ombr_rt_table, &v, 0);\n    if (status == OMEGA_OK)\n        *result = has_value ? v : 0u;\n    return status;\n}\n"
+text fb ")\n{\n    uint64_t a[6] = {0};\n    if (!result || (uintptr_t)result % 8u != 0u || (uintptr_t)result > UINTPTR_MAX - 8u)\n        return OMEGA_BAD_ARG;\n~    return ombr_run(ombr_entry_"
+fn fword k ulong to ulong
+i = ulong 0
+while lt add i 1 len fw
+if eq get fw i 124
+j = add i 1
+while and lt j len fw ne get fw j 124
+j = add j 1
+end
+if eq fis k add i 1 sub j add i 1 1
+ret 1
+end
+i = j
+else
+i = add i 1
+end
+end
+ret 0
+end
+fn fmatch k ulong s ulong e ulong to ulong
+ret samenm get tks k get tke k s e
+end
+fn fadd k ulong to void
+n = get fnc 0
+if ge n len fns
+trap 10
+end
+put fns n get tks k
+put fne n get tke k
+put fnc 0 add n 1
+end
+fn fis k ulong off ulong n ulong to ulong
+s = get tks k
+e = get tke k
+if ne sub e s n
+ret 0
+end
+for j ulong n
+if ne get inb add s j get fw add off j
+ret 0
+end
+end
+ret 1
+end
+fn fnum k ulong to ulong
+s = get tks k
+e = get tke k
+if ge s e
+ret 0
+end
+if eq get inb s 45
+s = add s 1
+end
+if eq s e
+ret 0
+end
+while lt s e
+b = get inb s
+if or lt b 48 gt b 57
+ret 0
+end
+s = add s 1
+end
+ret 1
+end
+fn fknown k ulong to ulong
+if eq fword k 1
+ret 1
+end
+if eq fnum k 1
+ret 1
+end
+for j ulong get fnc 0
+if eq fmatch k get fns j get fne j 1
+ret 1
+end
+end
+ret 0
+end
+fn fcheck p ulong q ulong to void
+put fnc 0 0
+for pass ulong 2
+i = p
+while lt i q
+nt = tokln i q
+next = add get st 7 1
+if gt nt 0
+if eq fis 0 1 4 0
+if eq pass 0
+if eq fis 0 6 2 1
+if lt nt 4
+trap 10
+end
+fadd 1
+k = ulong 2
+while lt add k 1 nt
+if eq fis k 9 2 1
+break
+end
+fadd k
+k = add k 2
+end
+end
+if ge nt 2
+if or eq fis 0 28 3 1 eq fis 0 98 5 1
+fadd 1
+end
+if eq fis 1 241 1 1
+fadd 0
+end
+end
+else
+for k ulong nt
+if eq fknown k 0
+trap 10
+end
+end
+end
+end
+end
+i = next
+end
+end
+end
+fn fpre to void
+for i ulong len fp
+ob get fp i
+end
+end
+fn fbody to void
+for i ulong len fb
+if eq get fb i 126
+break
+end
+ob get fb i
+end
+for j ulong get st 2
+if gt get pk j 2
+trap 10
+end
+ofr 19
+odec j
+ofr 20
+opn j
+ofr 18
+end
+skip = ulong 1
+for i ulong len fb
+if eq skip 0
+ob get fb i
+end
+if eq get fb i 126
+skip = 0
+end
+end
+oname 1
+ofr 22
+odec get st 3
+ofr 23
+end
 note ob: append one byte to the output pool (trap 6 when it is full).
 fn ob b uchar to void
 n = get st 1
@@ -64,14 +244,68 @@ ob uchar 120
 ob get hx shr b 4
 ob get hx and b 15
 end
+note Match only the assembly boundary markers, leaving the shared C runtime byte-identical.
+fn xbegin i ulong to bool
+if gt add i len xs len pre
+ret false
+end
+for j ulong len xs
+if ne get pre add i j get xs j
+ret false
+end
+end
+ret true
+end
+fn xend i ulong to bool
+if gt add i len xe len pre
+ret false
+end
+for j ulong len xe
+if ne get pre add i j get xe j
+ret false
+end
+end
+ret true
+end
 note opre: the fixed runtime part of the C file.
 fn opre to void
-for i ulong len pre
+i = ulong 0
+while lt i len pre
+if and eq get xt 0 1 xbegin i
+for j ulong len xasm
+ob get xasm j
+end
+while not xend i
+i = add i 1
+if ge i len pre
+trap 10
+end
+end
+end
 ob get pre i
+i = add i 1
+end
+end
+note xbranch: architecture-specific private entry veneer; code bytes stay unchanged.
+fn xbranch k ulong to void
+c = ulong 0
+for i ulong len xjmp
+b = get xjmp i
+if eq b 126
+c = add c 1
+else
+if eq c k
+ob b
+end
+end
 end
 end
 note ofr: fragment k of fr (fragments are separated by ~, byte 126).
 fn ofr k ulong to void
+if and eq get xt 0 1 eq k 27
+xbranch 0
+ret
+end
 c = ulong 0
 for i ulong len fr
 b = get fr i
@@ -83,6 +317,93 @@ ob b
 end
 end
 end
+end
+note ofb: fragment k of tb.
+fn ofb k ulong to void
+c = ulong 0
+for i ulong len tb
+b = get tb i
+if eq b 126
+c = add c 1
+else
+if eq c k
+ob b
+end
+end
+end
+end
+note mdis: 1 when the argument in md (its length in st 8) is mo[o .. o+n-1], else 0.
+fn mdis o ulong n ulong to ulong
+if ne get st 8 n
+ret 0
+end
+for j ulong n
+if ne get md j get mo add o j
+ret 0
+end
+end
+ret 1
+end
+note rmode: the one argument as an output number: 1 c, 2 h, 3 python, 4 rust, 5 zig, 6 go.
+fn rmode to ulong
+if or lt argcnt 2 gt argcnt 3
+trap 10
+end
+if eq argcnt 3
+z = argread 2 md 0 8
+if ne z 8
+trap 10
+end
+for j ulong 8
+if ne get md j get xtname j
+trap 10
+end
+end
+put xt 0 1
+end
+k = argread 1 md 0 8
+if lt k 0
+trap 10
+end
+put st 8 ulong k
+m = ulong 0
+if eq mdis 0 1 1
+m = 1
+end
+if eq mdis 1 1 1
+m = 2
+end
+if eq mdis 2 6 1
+m = 3
+end
+if eq mdis 8 4 1
+m = 4
+end
+if eq mdis 12 3 1
+m = 5
+end
+if eq mdis 15 2 1
+m = 6
+end
+if eq mdis 17 3 1
+m = 7
+end
+if eq mdis 17 4 1
+m = 8
+end
+if eq mdis 21 4 1
+m = 9
+end
+if eq mdis 25 6 1
+m = 10
+end
+if eq m 0
+trap 10
+end
+if and eq get xt 0 1 eq m 10
+trap 10
+end
+ret m
 end
 note tkis: 1 when token k is the keyword kw[o .. o+n-1], else 0.
 fn tkis k ulong o ulong n ulong to ulong
@@ -121,6 +442,7 @@ e = p
 while and lt e q ne get inb e 10
 e = add e 1
 end
+put st 7 e
 n = ulong 0
 s = p
 i = p
@@ -149,6 +471,10 @@ end
 note opn: the name of parameter j.
 fn opn j ulong to void
 orng get ps j get pe j
+end
+note osig: the unit's signature line (st 6 .. st 7), the comment each binding carries.
+fn osig to void
+orng get st 6 get st 7
 end
 note sepat: where the 0 byte after the source starting at p is.
 fn sepat p ulong to ulong
@@ -342,6 +668,7 @@ end
 note parse: read the signature line at fl; parameters into ps pe pk pl, their count into st 2,
 note 1 or 0 into st 3 for a function with or without a value.
 fn parse fl ulong q ulong to void
+put st 6 fl
 nt = tokln fl q
 if lt nt 4
 trap 10
@@ -392,7 +719,10 @@ trap 10
 end
 cl = add mul cl 10 ulong sub d 48
 end
-if or eq cl 0 ne rem cl 4 0
+if eq cl 0
+trap 10
+end
+if and eq get xt 0 0 ne rem cl 4 0
 trap 10
 end
 if gt cl sub t c0
@@ -496,16 +826,1616 @@ ofr 22
 odec get st 3
 ofr 23
 end
-note unit: accept the unit at p, emit its C, return where the next unit starts.
+note edeclC: a declaration with the type before the name (h): the comment
+note fragments at cb (open, close + head) and the type fragments at tb (result, scalar, the four
+note array kinds, the length suffix, close).
+fn edeclC cb ulong tp ulong to void
+ofb cb
+osig
+ofb add cb 1
+oname 1
+ofb tp
+for j ulong get st 2
+x = get pk j
+if le x 2
+ofb add tp 1
+opn j
+else
+ofb add tp sub x 1
+opn j
+ofb add tp 1
+opn j
+ofb add tp 6
+end
+end
+ofb add tp 7
+end
+note edeclR: a declaration with the name before the type (rust, zig, the go wrapper head): the
+note type fragments at tp are result, the name prefix, scalar, the four array kinds, length, close.
+fn edeclR cb ulong tp ulong to void
+ofb cb
+osig
+ofb add cb 1
+oname 1
+ofb tp
+for j ulong get st 2
+x = get pk j
+ofb add tp 1
+opn j
+if le x 2
+ofb add tp 2
+else
+ofb add tp x
+ofb add tp 1
+opn j
+ofb add tp 7
+end
+end
+ofb add tp 8
+end
+note epy: the python declaration: the function, its argument types, its result type.
+fn epy to void
+ofb 13
+osig
+ofb 14
+oname 1
+ofb 15
+oname 1
+ofb 16
+oname 1
+ofb 17
+for j ulong get st 2
+if le get pk j 2
+ofb 18
+else
+ofb 19
+odec get pk j
+ofb 18
+end
+end
+ofb 20
+oname 1
+ofb 21
+end
+note ecall: the go wrapper's call of the C function and its end.
+fn ecall to void
+oname 1
+ofb 59
+for j ulong get st 2
+if le get pk j 2
+ofb 60
+opn j
+ofb 61
+else
+ofb 62
+opn j
+ofb 60
+opn j
+ofb 63
+end
+end
+ofb 64
+end
+note emit: the parsed unit in the output named by st 5.
+fn emit c0 ulong cl ulong to void
+m = get st 5
+if eq m 10
+ecode c0 cl
+esig
+fbody
+end
+if eq m 1
+ecode c0 cl
+esig
+ebody
+end
+if eq m 2
+edeclC 1 3
+end
+if eq m 3
+epy
+end
+if eq m 4
+edeclR 23 25
+end
+if eq m 5
+edeclR 36 38
+end
+if eq m 6
+edeclR 48 50
+ecall
+end
+end
+note ======== ABI v2: OM-2 units (docs/NATIVE-ABI.md, ABI v2) ========
+note An OM-2 unit (its first line that is not a note is exactly om2) is bound as omega2_<name>, one symbol
+note per `export fn` (in source order; without any export, the last fn as in v1), and carries its
+note identity. Its frame is the v1 frame followed by the line `omega-unit NAME OMC`, NAME the unit's C
+note name and OMC the sha256 of the compiler that wrote the code (64 hex digits), both supplied by
+note tools/native. The source sha256 is computed here from the unit's exact bytes. A parameter is a
+note ulong or long scalar (one slot), a sized array `view|edit T N` (one slot), an unsized view
+note `view|edit T *` (two slots: pointer, element count), a layout `view|edit L` (one slot) or
+note `out T N` (one slot), T any of uchar ushort uint ulong byte short int long; at most 6 slots; the
+note result is ulong, long or void. s2: 0 the C prelude written, 1 2 the unit name, 3 the omc digest,
+note 4 the export count, 5 slots used, 6 7 the source, 8 has a value, 9 out bytes, 10 layouts,
+note 11 unit names, 12 the entry index, 13 14 the code, 16 17 the bound name, 18 the result type.
+note q*: per parameter class (1 scalar, 2 sized array, 3 unsized view, 4 layout, 5 out), mode (0 view,
+note 1 edit), element type, count (or layout size), first slot, layout index.
+global s2 ulong 32
+global qk ulong 6
+global qm ulong 6
+global qt ulong 6
+global qn ulong 6
+global qs ulong 6
+global ql ulong 6
+global lys ulong 32
+global lye ulong 32
+global lyz ulong 32
+global lyl ulong 32
+global lcs ulong 32
+global lce ulong 32
+global uns ulong 256
+global une ulong 256
+global exl ulong 32
+global fds ulong 256
+global fde ulong 256
+global fdt ulong 256
+global fdc ulong 256
+global fdo ulong 256
+global fdb ulong 256
+global fdu ulong 256
+global shk ulong 72
+global shw ulong 64
+global shh ulong 8
+global shv ulong 8
+global shb uchar 64
+note kv: the OM-2 words: export 0, fn 6, out 8, om2 11, ushort 14, uint 20, byte 24, short 28, int 33,
+note layout 36, field 42, end 47, note 50, bridge 54, c-type 60, c-define 66, little 74, big 80, * 83,
+note at 84, omega-unit 86.
+text kv "exportfnoutom2ushortuintbyteshortintlayoutfieldendnotebridgec-typec-definelittlebig*atomega-unit"
+note fv: the v2 output fragments, separated by ~ (byte 126): 0 the C prelude, 1-10 the code and the
+note identity, 11-13 the identity text, 14-20 an entry stub, 21-24 the C function head, 25-30 a C
+note parameter, 31-50 the C body, 51-56 h, 57-75 and 155 python, 76-88 rust, 89-98 zig, 99-117 go,
+note 118-154 the api header. tn: the element type names, 8 per language: C, ctypes, rust and zig, cgo.
+text fv "/* ABI v2 (docs/NATIVE-ABI.md, ABI v2): OM-2 units, bound as omega2_<export>. An unsized view is its\n * pointer and its element count; a layout is a pointer to its fixed bytes; an out parameter is written\n * to a buffer the binding owns and copied to the caller only after status 0. */\n#include <string.h>\ntypedef struct ombr2_out { unsigned slot; uint64_t n; void *dst; } ombr2_out;\n/* A library of OM-2 units alone calls neither of the ABI v1 helpers. */\n__attribute__((unused)) static void ombr2_keep(void)\n{\n    (void)ombr_overlap;\n    (void)ombr_run;\n}\n/* An unsized view of n elements of es bytes. n == 0 is the empty view whatever the pointer (it adds no\n * range, so it overlaps nothing). Otherwise refused: a null pointer, a pointer not aligned to es,\n * n * es over 64 bits, or an end past the top of the address space. */\n__attribute__((unused)) static int ombr2_view(ombr_span *sp, unsigned *ns, const void *p, uint64_t n, uint64_t es, int w)\n{\n    uintptr_t lo = (uintptr_t)p;\n    if (n == 0u)\n        return 0;\n    if (!p || lo % es != 0u || n > UINT64_MAX / es || n * es > UINTPTR_MAX - lo)\n        return 1;\n    sp[*ns].lo = lo;\n    sp[*ns].hi = lo + n * es;\n    sp[*ns].w = w;\n    (*ns)++;\n    return 0;\n}\n/* A fixed range of nb > 0 bytes (a layout or an out parameter) aligned to es. */\n__attribute__((unused)) static int ombr2_fixed(ombr_span *sp, unsigned *ns, const void *p, uint64_t nb, uint64_t es,\n                                               int w)\n{\n    uintptr_t lo = (uintptr_t)p;\n    if (!p || lo % es != 0u || nb > UINTPTR_MAX - lo)\n        return 1;\n    sp[*ns].lo = lo;\n    sp[*ns].hi = lo + nb;\n    sp[*ns].w = w;\n    (*ns)++;\n    return 0;\n}\n/* w: 0 view, 1 edit or the result, 2 out. Refused: an edit or the result overlapping any other range,\n * or two out ranges overlapping. An out may overlap a view: it is written only after the code returns. */\nstatic int ombr2_overlap(const ombr_span *sp, unsigned ns)\n{\n    for (unsigned i = 0; i < ns; i++)\n        for (unsigned j = i + 1; j < ns; j++)\n            if ((sp[i].w == 1 || sp[j].w == 1 || (sp[i].w == 2 && sp[j].w == 2))\n                && sp[i].lo < sp[j].hi && sp[j].lo < sp[i].hi)\n                return 1;\n    return 0;\n}\n/* As ombr_run, and each out buffer is carved from the top of the thread's Omega stack (16-byte aligned,\n * zero-filled), passed in its slot and copied to the caller with memmove only after status 0. */\nstatic uint32_t ombr2_run(const void *code, uint64_t *args, uint64_t *result, int has_value, const ombr2_out *o,\n                          unsigned no)\n{\n    if (ombr_active)\n        return OMEGA_REENTRY;\n    ombr_active = 1;\n    unsigned char *top = ombr_stack();\n    if (!top) {\n        ombr_active = 0;\n        return OMEGA_NO_STACK;\n    }\n    unsigned char *buf[6] = {0};\n    for (unsigned i = 0; i < no; i++) {\n        top -= (o[i].n + 15u) / 16u * 16u;\n        memset(top, 0, o[i].n);\n        buf[i] = top;\n        args[o[i].slot] = (uint64_t)(uintptr_t)top;\n    }\n    uint64_t v = 0;\n    uint32_t s = ombr_enter(code, args, &ombr_rt_table, &v, top);\n    if (s == OMEGA_OK) {\n        for (unsigned i = 0; i < no; i++)\n            memmove(o[i].dst, buf[i], o[i].n);\n        *result = has_value ? v : 0u;\n    }\n    ombr_active = 0;\n    return s;\n}\n~__asm__(\".section .text.omega_bridge,\\\"ax\\\",@progbits\\n.balign 4\\n.local ombr2_code_~\\n.hidden ombr2_code_~\\nombr2_code_~:\\n.byte ~\\n.previous\\n\");\n~static const char ombr2_ident_~[] = \"~\";\n__attribute__((visibility(\"default\"))) const char *omega2_ident_~(void)\n{\n    return ombr2_ident_~;\n}\n~omega-ident 1 unit=~ abi=2 profile=OM-2 src=~ omc=~__asm__(\".section .text.omega_bridge,\\\"ax\\\",@progbits\\n.balign 4\\n.local ombr2_entry_~\\n.hidden ombr2_entry_~\\nombr2_entry_~:\\nhint #34\\nb ombr2_code_~+~\\n.previous\\n\");\nextern const unsigned char ombr2_entry_~[] __attribute__((visibility(\"hidden\")));\n~/* ~ */\n__attribute__((visibility(\"default\"))) uint32_t omega2_~(uint64_t *result~)\n{\n    ombr_span sp[7];\n    unsigned ns = 0;\n    uint64_t a[6] = {0};\n    ombr2_out ou[6] = {{0, 0, 0}};\n    unsigned no = 0;\n    if (ombr_span_add(sp, &ns, result, 1u, 1u, 8u, 1))\n        return OMEGA_BAD_ARG;\n~, uint64_t o_~, ~const ~ *o_~, uint64_t o_~_len~    if (ombr_span_add(sp, &ns, o_~, o_~_len, ~u, ~))\n        return OMEGA_BAD_ARG;\n~    a[~] = (uint64_t)(uintptr_t)o_~;\n~] = o_~    if (ombr2_view(sp, &ns, o_~    if (ombr2_fixed(sp, &ns, o_~_len;\n~2))\n        return OMEGA_BAD_ARG;\n    ou[no].slot = ~u;\n    ou[no].n = ~u;\n    ou[no].dst = o_~;\n    no++;\n~1u, ~    if (ombr2_overlap(sp, ns))\n        return OMEGA_BAD_ARG;\n    return ombr2_run(ombr2_entry_~, a, result, ~, ou, no);\n}\n~#define OMEGA2_IDENT_~ \"~\"\nconst char *omega2_ident_~(void);\n~ */\nuint32_t omega2_~);\n~# ~\nomega2_~ = lib.omega2_~.argtypes = [_res~]\nomega2_~.restype = ctypes.c_uint32\n~, _u64~, ctypes.c_char_p~, ctypes.POINTER(ctypes.~)~omega2_ident_~.argtypes = []\nomega2_ident_~.restype = ctypes.c_char_p\nOMEGA2_IDENT_~ = b\"~\"\nif omega2_ident_~() != OMEGA2_IDENT_~:\n    raise ImportError(\"libomega_native.so is not the library this binding was generated with: the identity of unit ~ differs\")\n~\n~    // ~\n    pub fn omega2_~(result: *mut u64~) -> u32;\n~, o_~: u64~: *const ~: *mut ~_len: u64~    pub fn omega2_ident_~() -> *const u8;\n}\n#[allow(dead_code, non_upper_case_globals)]\npub const OMEGA2_IDENT_~: &str = \"~\";\n#[allow(dead_code)]\n#[link(name = \"omega_native\")]\nunsafe extern \"C\" {\n~// ~\npub extern fn omega2_~(result: ?*u64~) u32;\n~: ?[*]const ~: ?[*]~pub const OMEGA2_IDENT_~ = \"~\";\npub extern fn omega2_ident_~() [*:0]const u8;\n~\n// ~\nfunc Omega2_~(result *uint64~) uint32 {\n\treturn uint32(C.omega2_~((*C.uint64_t)(unsafe.Pointer(result))~))\n}\n~ uint64~ unsafe.Pointer~_len uint64~, C.uint64_t(o_~)~, (*C.~)(o_~_len)~\nconst Omega2Ident_~ = \"~\"\n\nfunc Omega2_ident_~() string {\n\treturn C.GoString(C.omega2_ident_~())\n}\n~/* Generated by omega-bridge src/native.om: the C API of the ABI v2 units in libomega_native\n * (docs/NATIVE-ABI.md, ABI v2). Each function calls omega2_<name> and calls abort() on a nonzero status.\n * Regenerate it; do not edit it. */\n#ifndef OMEGA_API_H\n#define OMEGA_API_H\n#include <stddef.h>\n#include <stdint.h>\n#include <stdlib.h>\n#include \"omega_native.h\"\n#ifdef __cplusplus\n#define OMBR_ASSERT static_assert\nextern \"C\" {\n#else\n#define OMBR_ASSERT _Static_assert\n#endif\n~#ifdef __cplusplus\n}\n#endif\n#endif\n~#define ~ ~typedef struct {\n~} ~;\nOMBR_ASSERT(sizeof(~) == ~, \"layout ~ size\");\n~OMBR_ASSERT(offsetof(~, ~ field ~\");\n~    ~[~];\n~    uint8_t ombr_pad~ */\nstatic inline ~void~uint64_t~int64_t~(~)\n{\n    uint64_t r = 0;\n    if (omega2_~(&r~) != OMEGA_OK)\n        abort();\n~    (void)r;\n}\n~    return r;\n}\n~    return (int64_t)r;\n}\n~, ~ o_~ *o_~, size_t o_~, (uint8_t *)o_~, (const uint8_t *)o_~, (uint64_t)o_~]~ = lib."
+text tn "uint8_t~uint16_t~uint32_t~uint64_t~int8_t~int16_t~int32_t~int64_t~c_uint8~c_uint16~c_uint32~c_uint64~c_int8~c_int16~c_int32~c_int64~u8~u16~u32~u64~i8~i16~i32~i64~uint8_t~uint16_t~uint32_t~uint64_t~int8_t~int16_t~int32_t~int64_t"
+note shx: SHA-256 (FIPS 180-4) K[0..63] then H0[0..7], 8 hex digits each.
+text shx "428a2f9871374491b5c0fbcfe9b5dba53956c25b59f111f1923f82a4ab1c5ed5d807aa9812835b01243185be550c7dc372be5d7480deb1fe9bdc06a7c19bf174e49b69c1efbe47860fc19dc6240ca1cc2de92c6f4a7484aa5cb0a9dc76f988da983e5152a831c66db00327c8bf597fc7c6e00bf3d5a7914706ca63511429296727b70a852e1b21384d2c6dfc53380d13650a7354766a0abb81c2c92e92722c85a2bfe8a1a81a664bc24b8b70c76c51a3d192e819d6990624f40e3585106aa07019a4c1161e376c082748774c34b0bcb5391c0cb34ed8aa4a5b9cca4f682e6ff3748f82ee78a5636f84c878148cc7020890befffaa4506cebbef9a3f7c67178f26a09e667bb67ae853c6ef372a54ff53a510e527f9b05688c1f83d9ab5be0cd19"
+note fa: the out-of-line API fragments (outputs apih and apic), separated by ~: 0 the close of a
+note signature comment, 1 the end of a prototype, 2 the apih header's start, 3 the apic file's start.
+text fa " */\n~);\n~/* Generated by omega-bridge src/native.om: the C API of the ABI v2 units in libomega_native\n * (docs/NATIVE-ABI.md, ABI v2), declarations only (output apih). The definitions are the generated C\n * file of output apic: each calls omega2_<name> and calls abort() on a nonzero status. Including this\n * header references no C library function. Regenerate it; do not edit it. */\n#ifndef OMEGA_API_DECL_H\n#define OMEGA_API_DECL_H\n#include <stddef.h>\n#include <stdint.h>\n#include \"omega_native.h\"\n#ifdef __cplusplus\n#define OMBR_ASSERT static_assert\nextern \"C\" {\n#else\n#define OMBR_ASSERT _Static_assert\n#endif\n~/* Generated by omega-bridge src/native.om: the definitions of the C API declared in\n * omega_api_decl.h (output apic). Each calls omega2_<name> and calls abort() on a nonzero status.\n * Regenerate it; do not edit it. */\n#include <stdlib.h>\n#include \"omega_api_decl.h\"\n"
+fn ofa k ulong to void
+c = ulong 0
+for i ulong len fa
+b = get fa i
+if eq b 126
+c = add c 1
+else
+if eq c k
+ob b
+end
+end
+end
+end
+note ofv / otn: fragment k of fv / tn.
+fn ofv k ulong to void
+if and eq get xt 0 1 eq k 17
+xbranch 1
+ret
+end
+c = ulong 0
+for i ulong len fv
+b = get fv i
+if eq b 126
+c = add c 1
+else
+if eq c k
+ob b
+end
+end
+end
+end
+fn otn k ulong to void
+c = ulong 0
+for i ulong len tn
+b = get tn i
+if eq b 126
+c = add c 1
+else
+if eq c k
+ob b
+end
+end
+end
+end
+note ---- SHA-256 of the unit's source bytes (the identity's src) ----
+note rr: a 32-bit value rotated right by n (1 .. 31).
+fn rr x ulong n ulong to ulong
+ret and or shr x n shl x sub 32 n 4294967295
+end
+fn sg0 a ulong to ulong
+ret xor xor rr a 2 rr a 13 rr a 22
+end
+fn sg1 e ulong to ulong
+ret xor xor rr e 6 rr e 11 rr e 25
+end
+fn chf e ulong f ulong g ulong to ulong
+ret xor and e f and xor e 4294967295 g
+end
+fn mjf a ulong b ulong c ulong to ulong
+ret xor xor and a b and a c and b c
+end
+note shkin: K and the initial hash value from shx.
+fn shkin to void
+for i ulong 72
+v = ulong 0
+for j ulong 8
+c = ulong get shx add mul i 8 j
+if lt c 58
+v = or shl v 4 sub c 48
+else
+v = or shl v 4 sub c 87
+end
+end
+put shk i v
+end
+for i ulong 8
+put shh i get shk add 64 i
+end
+end
+note shsch: the message schedule shw of the block in shb.
+fn shsch to void
+for i ulong 16
+j = mul i 4
+v = shl ulong get shb j 24
+v = or v shl ulong get shb add j 1 16
+v = or v shl ulong get shb add j 2 8
+v = or v ulong get shb add j 3
+put shw i v
+end
+for i ulong 48
+t = add i 16
+x = get shw sub t 15
+y = get shw sub t 2
+s0 = xor xor rr x 7 rr x 18 shr x 3
+s1 = xor xor rr y 17 rr y 19 shr y 10
+x = and add get shw sub t 16 s0 4294967295
+put shw t and add add x get shw sub t 7 s1 4294967295
+end
+end
+note shrnd: round i on the working words shv (a .. h): the words move down one place, e and a get
+note the new values.
+fn shrnd i ulong to void
+e = get shv 4
+t1 = add add get shv 7 sg1 e chf e get shv 5 get shv 6
+t1 = and add add t1 get shk i get shw i 4294967295
+a = get shv 0
+t2 = and add sg0 a mjf a get shv 1 get shv 2 4294967295
+for j ulong 7
+k = sub 7 j
+put shv k get shv sub k 1
+end
+put shv 4 and add get shv 4 t1 4294967295
+put shv 0 and add t1 t2 4294967295
+end
+note shblk: one 64-byte block of shb into the hash value shh.
+fn shblk to void
+shsch
+for i ulong 8
+put shv i get shh i
+end
+for i ulong 64
+shrnd i
+end
+for i ulong 8
+put shh i and add get shh i get shv i 4294967295
+end
+end
+note shpad: byte k of the padded message inb[p .. p+n): the bytes, 0x80, zeros, then from lb the bit
+note length, big endian.
+fn shpad p ulong n ulong k ulong lb ulong to ulong
+if lt k n
+ret ulong get inb add p k
+end
+if eq k n
+ret 128
+end
+if ge k lb
+ret and shr mul n 8 mul sub 7 sub k lb 8 255
+end
+ret 0
+end
+note shsrc: the SHA-256 of inb[p .. q) into shh.
+fn shsrc p ulong q ulong to void
+shkin
+n = sub q p
+nb = div add n 72 64
+lb = sub mul nb 64 8
+for bk ulong nb
+for i ulong 64
+put shb i uchar shpad p n add mul bk 64 i lb
+end
+shblk
+end
+end
+note ohx8: shh as 64 lowercase hex digits.
+fn ohx8 to void
+for i ulong 8
+w = get shh i
+for j ulong 8
+ob get hx and shr w sub 28 mul j 4 15
+end
+end
+end
+note ---- reading OM-2 units ----
+note tvis: 1 when token k is the OM-2 word kv[o .. o+n-1], else 0.
+fn tvis k ulong o ulong n ulong to ulong
+s = get tks k
+e = get tke k
+if ne sub e s n
+ret 0
+end
+for j ulong n
+if ne get inb add s j get kv add o j
+ret 0
+end
+end
+ret 1
+end
+note atkv: 1 when the bytes at i (below q) are kv[o .. o+n-1], else 0.
+fn atkv i ulong q ulong o ulong n ulong to ulong
+if gt add i n q
+ret 0
+end
+for j ulong n
+if ne get inb add i j get kv add o j
+ret 0
+end
+end
+ret 1
+end
+note atsp: 1 when the byte at i (below q) is a space, else 0.
+fn atsp i ulong q ulong to ulong
+if ge i q
+ret 0
+end
+if ne get inb i 32
+ret 0
+end
+ret 1
+end
+note lend: where the line starting at i ends (its newline, or q).
+fn lend i ulong q ulong to ulong
+e = i
+while and lt e q ne get inb e 10
+e = add e 1
+end
+ret e
+end
+note isexp / islay / isbrn: the line at i starts with "export fn " / "layout " / "note bridge ".
+fn isexp i ulong q ulong to ulong
+if and eq atkv i q 0 6 1 eq atsp add i 6 q 1
+if and eq atkv add i 7 q 6 2 1 eq atsp add i 9 q 1
+ret 1
+end
+end
+ret 0
+end
+fn islay i ulong q ulong to ulong
+if and eq atkv i q 36 6 1 eq atsp add i 6 q 1
+ret 1
+end
+ret 0
+end
+fn isbrn i ulong q ulong to ulong
+if and eq atkv i q 50 4 1 eq atsp add i 4 q 1
+if and eq atkv add i 5 q 54 6 1 eq atsp add i 11 q 1
+ret 1
+end
+end
+ret 0
+end
+note prof: 1 when the unit p .. q-1 is OM-2: its first line that is not a note (a line whose first word
+note is note) is exactly om2; else 0. A first such line that starts with the word om2 but is not exactly
+note om2 (om2 diag, om2 fmt) is refused: that unit is not compiled to code.
+fn prof p ulong q ulong to ulong
+i = p
+while lt i q
+e = lend i q
+s = i
+while and lt s e eq get inb s 32
+s = add s 1
+end
+nt = ulong 0
+if eq atkv s e 50 4 1
+if or eq add s 4 e eq atsp add s 4 e 1
+nt = 1
+end
+end
+if eq nt 0
+if and eq s i eq sub e i 3
+if eq atkv i e 11 3 1
+ret 1
+end
+end
+if eq atkv s e 11 3 1
+if or eq add s 3 e eq atsp add s 3 e 1
+trap 10
+end
+end
+ret 0
+end
+i = add e 1
+end
+ret 0
+end
+note ismain: 1 when bytes s .. e-1 are main.
+fn ismain s ulong e ulong to ulong
+if ne sub e s 4
+ret 0
+end
+for j ulong 4
+if ne get inb add s j get kw add 28 j
+ret 0
+end
+end
+ret 1
+end
+note bname: refuse a bound name that is not a C identifier, is main, or repeats an earlier bound name
+note (v1 unit names and v2 exports share one table: their symbols and wrappers must not collide).
+fn bname s ulong e ulong to void
+if eq cidr s e 0
+trap 10
+end
+if eq ismain s e 1
+trap 10
+end
+n = get st 4
+if ge n 256
+trap 10
+end
+for j ulong n
+if eq samenm s e get us j get ue j 1
+trap 10
+end
+end
+put us n s
+put ue n e
+put st 4 add n 1
+end
+note tyix: token k as an element type: 0 uchar, 1 ushort, 2 uint, 3 ulong, 4 byte, 5 short, 6 int, 7 long;
+note 8 when it is none of them. Its size is 1 << (type and 3).
+fn tyix k ulong to ulong
+if eq tkis k 19 5 1
+ret 0
+end
+if eq tvis k 14 6 1
+ret 1
+end
+if eq tvis k 20 4 1
+ret 2
+end
+if eq tkis k 10 5 1
+ret 3
+end
+if eq tvis k 24 4 1
+ret 4
+end
+if eq tvis k 28 5 1
+ret 5
+end
+if eq tvis k 33 3 1
+ret 6
+end
+if eq tkis k 15 4 1
+ret 7
+end
+ret 8
+end
+fn tsize t ulong to ulong
+ret shl 1 and t 3
+end
+note lyfind: the index of the unit's layout named by token k (s2 10 when there is none).
+fn lyfind k ulong to ulong
+n = get s2 10
+for j ulong n
+if eq samenm get tks k get tke k get lys j get lye j 1
+ret j
+end
+end
+ret n
+end
+note lays: the unit's layouts (`layout NAME SIZE` lines) and their C names (`note bridge c-type L CNAME`,
+note else L); a `note bridge` line that is neither c-type nor c-define is refused.
+fn lays p ulong q ulong to void
+put s2 10 0
+i = p
+while lt i q
+e = lend i q
+if eq islay i q 1
+if ne tokln i q 3
+trap 10
+end
+n = get s2 10
+if ge n 32
+trap 10
+end
+if eq cidr get tks 1 get tke 1 0
+trap 10
+end
+if lt lyfind 1 n
+trap 10
+end
+z = tknum 2
+if gt z 4096
+trap 10
+end
+put lys n get tks 1
+put lye n get tke 1
+put lcs n get tks 1
+put lce n get tke 1
+put lyz n z
+put lyl n i
+put s2 10 add n 1
+end
+i = add e 1
+end
+i = p
+while lt i q
+e = lend i q
+if eq isbrn i q 1
+if ne tokln i q 5
+trap 10
+end
+if eq cidr get tks 3 get tke 3 0
+trap 10
+end
+if eq tvis 2 60 6 1
+li = lyfind 3
+if ge li get s2 10
+trap 10
+end
+if eq cidr get tks 4 get tke 4 0
+trap 10
+end
+put lcs li get tks 4
+put lce li get tke 4
+else
+if eq tvis 2 66 8 0
+trap 10
+end
+x = tknum 4
+end
+end
+i = add e 1
+end
+end
+note exps: the starts of the unit's `export fn` lines, in source order, into exl; their count into s2 4.
+fn exps p ulong q ulong to ulong
+n = ulong 0
+ls = p
+i = p
+while lt i q
+if eq i ls
+if eq isexp i q 1
+if ge n 32
+trap 10
+end
+put exl n i
+n = add n 1
+end
+end
+if eq get inb i 10
+ls = add i 1
+end
+i = add i 1
+end
+put s2 4 n
+ret n
+end
+note trail: the line `omega-unit NAME OMC` at i; the unit name must be new. Returns where the next unit
+note starts.
+fn trail i ulong to ulong
+t = get st 0
+if ge i t
+trap 10
+end
+if ne tokln i t 3
+trap 10
+end
+e = get st 7
+if ge e t
+trap 10
+end
+if eq tvis 0 86 10 0
+trap 10
+end
+s = get tks 1
+x = get tke 1
+if eq cidr s x 0
+trap 10
+end
+n = get s2 11
+if ge n 256
+trap 10
+end
+for j ulong n
+if eq samenm s x get uns j get une j 1
+trap 10
+end
+end
+put uns n s
+put une n x
+put s2 11 add n 1
+put s2 1 s
+put s2 2 x
+h = get tks 2
+if ne sub get tke 2 h 64
+trap 10
+end
+for j ulong 64
+c = get inb add h j
+if and or lt c 48 gt c 57 or lt c 97 gt c 102
+trap 10
+end
+end
+put s2 3 h
+ret add e 1
+end
+note pparam2: record the OM-2 parameter at token k as parameter st 2; return the token after it.
+fn pparam2 k ulong nt ulong to ulong
+np = get st 2
+if ge np 6
+trap 10
+end
+if ge add k 1 nt
+trap 10
+end
+put ps np get tks k
+put pe np get tke k
+pname get tks k get tke k
+put st 2 add np 1
+sl = get s2 5
+put qs np sl
+put qm np 0
+ty = add k 1
+x = tyix ty
+if or eq x 3 eq x 7
+put qk np 1
+put qt np x
+put s2 5 add sl 1
+ret add k 2
+end
+if ge add k 3 nt
+trap 10
+end
+if eq tvis ty 8 3 1
+t = tyix add k 2
+if eq t 8
+trap 10
+end
+n = tknum add k 3
+if or eq n 0 gt n 65536
+trap 10
+end
+ob2 = add get s2 9 mul n tsize t
+if gt ob2 65536
+trap 10
+end
+put s2 9 ob2
+put qk np 5
+put qm np 1
+put qt np t
+put qn np n
+put s2 5 add sl 1
+ret add k 4
+end
+m = ulong 2
+if eq tkis ty 2 4 1
+m = 1
+end
+if eq tkis ty 6 4 1
+m = 0
+end
+if eq m 2
+trap 10
+end
+put qm np m
+t = tyix add k 2
+if eq t 8
+li = lyfind add k 2
+if ge li get s2 10
+trap 10
+end
+put qk np 4
+put ql np li
+put qn np get lyz li
+put s2 5 add sl 1
+ret add k 3
+end
+if ge add k 3 nt
+trap 10
+end
+put qt np t
+if eq tvis add k 3 83 1 1
+put qk np 3
+put s2 5 add sl 2
+ret add k 4
+end
+n = tknum add k 3
+if or eq n 0 gt n 16777216
+trap 10
+end
+put qk np 2
+put qn np n
+put s2 5 add sl 1
+ret add k 4
+end
+note parse2: the OM-2 signature line at fl (`export fn NAME ...` or `fn NAME ...`): its parameters into
+note ps pe q*, their count into st 2, slots s2 5, has a value s2 8, result type s2 18, name s2 16 17.
+fn parse2 fl ulong q ulong to void
+put st 6 fl
+nt = tokln fl q
+ni = ulong 1
+if eq tvis 0 0 6 1
+if eq tvis 1 6 2 0
+trap 10
+end
+ni = 2
+end
+if lt nt add ni 3
+trap 10
+end
+bname get tks ni get tke ni
+put s2 16 get tks ni
+put s2 17 get tke ni
+put st 2 0
+put s2 5 0
+put s2 9 0
+k = add ni 1
+while eq tkis k 0 2 0
+k = pparam2 k nt
+if ge k nt
+trap 10
+end
+end
+if ne add k 2 nt
+trap 10
+end
+if gt get s2 5 6
+trap 10
+end
+r = add k 1
+put s2 8 1
+put s2 18 3
+if eq tkis r 15 4 1
+put s2 18 7
+else
+if eq tkis r 24 4 1
+put s2 8 0
+put s2 18 9
+else
+if eq tkis r 10 5 0
+trap 10
+end
+end
+end
+end
+note ---- writing OM-2 units ----
+fn oun to void
+orng get s2 1 get s2 2
+end
+fn oen to void
+orng get s2 16 get s2 17
+end
+note oid: the identity: omega-ident 1 unit=NAME abi=2 profile=OM-2 src=SHA256 omc=SHA256.
+fn oid to void
+ofv 11
+oun
+ofv 12
+ohx8
+ofv 13
+h = get s2 3
+orng h add h 64
+end
+fn esz j ulong to ulong
+ret tsize get qt j
+end
+note hasln: 1 when parameter j carries a count (a sized or unsized array).
+fn hasln j ulong to ulong
+if or eq get qk j 2 eq get qk j 3
+ret 1
+end
+ret 0
+end
+note cpar: the C parameter list (the library and the header).
+fn cpar to void
+for j ulong get st 2
+x = get qk j
+if eq x 1
+ofv 25
+opn j
+else
+ofv 26
+if eq get qm j 0
+ofv 27
+end
+if eq x 4
+otn 0
+else
+otn get qt j
+end
+ofv 28
+opn j
+if eq hasln j 1
+ofv 29
+opn j
+ofv 30
+end
+end
+end
+end
+note cslot: "    a[S] = (uint64_t)(uintptr_t)o_N;"
+fn cslot j ulong to void
+ofv 36
+odec get qs j
+ofv 37
+opn j
+ofv 38
+end
+note cbody: the checks of each parameter, in order, and its slot words.
+fn cbody to void
+for j ulong get st 2
+x = get qk j
+if eq x 1
+ofv 36
+odec get qs j
+ofv 39
+opn j
+ofv 38
+end
+if eq x 2
+ofv 31
+opn j
+ofv 32
+opn j
+ofv 33
+odec get qn j
+ofv 34
+odec esz j
+ofv 34
+odec get qm j
+ofv 35
+cslot j
+end
+if eq x 3
+ofv 40
+opn j
+ofv 32
+opn j
+ofv 33
+odec esz j
+ofv 34
+odec get qm j
+ofv 35
+cslot j
+ofv 36
+odec add get qs j 1
+ofv 39
+opn j
+ofv 42
+end
+if eq x 4
+ofv 41
+opn j
+ofv 26
+odec get qn j
+ofv 34
+ofv 47
+odec get qm j
+ofv 35
+cslot j
+end
+if eq x 5
+ofv 41
+opn j
+ofv 26
+odec mul get qn j esz j
+ofv 34
+odec esz j
+ofv 34
+ofv 43
+odec get qs j
+ofv 44
+odec mul get qn j esz j
+ofv 45
+opn j
+ofv 46
+end
+end
+end
+note ecode2: the unit's code, embedded unchanged, at ombr2_code_<unit>.
+fn ecode2 to void
+ofv 1
+oun
+ofv 2
+oun
+ofv 3
+oun
+ofv 4
+c0 = get s2 13
+for j ulong get s2 14
+if gt j 0
+ob uchar 44
+end
+ohex get inb add c0 j
+end
+ofv 5
+ofv 6
+oun
+ofv 7
+oid
+ofv 8
+oun
+ofv 9
+oun
+ofv 10
+end
+note cone: one entry in C: its stub (bti c, a branch to word k of the code) and its function.
+fn cone to void
+ofv 14
+oen
+ofv 15
+oen
+ofv 16
+oen
+ofv 17
+oun
+ofv 18
+stride = ulong 4
+if eq get xt 0 1
+stride = 6
+end
+odec mul get s2 12 stride
+ofv 19
+oen
+ofv 20
+ofv 21
+osig
+ofv 22
+oen
+ofv 23
+cpar
+ofv 24
+cbody
+ofv 48
+oen
+ofv 49
+odec get s2 8
+ofv 50
+end
+fn hone to void
+ofv 21
+osig
+ofv 55
+oen
+ofv 23
+cpar
+ofv 56
+end
+fn hid to void
+ofv 51
+oun
+ofv 52
+oid
+ofv 53
+oun
+ofv 54
+end
+note pyty: the ctypes type of the pointer of parameter j (a view of uchar takes bytes, as in v1).
+fn pyty j ulong to void
+x = get qk j
+t = get qt j
+if eq x 4
+t = 0
+end
+if and eq get qm j 0 eq t 0
+ofv 64
+else
+ofv 65
+otn add 8 t
+ofv 66
+end
+end
+fn pyone to void
+ofv 57
+osig
+ofv 58
+oen
+ofv 59
+oen
+ofv 58
+oen
+ofv 60
+for j ulong get st 2
+if eq get qk j 1
+ofv 63
+else
+pyty j
+if eq hasln j 1
+ofv 63
+end
+end
+end
+ofv 61
+oen
+ofv 62
+end
+fn pyid to void
+ofv 67
+oun
+ofv 155
+ofv 67
+oun
+ofv 75
+ofv 67
+oun
+ofv 68
+oun
+ofv 69
+oun
+ofv 70
+oid
+ofv 71
+oun
+ofv 72
+oun
+ofv 73
+oun
+ofv 74
+end
+note rzpar: the rust (z 0) or zig (z 1) parameter list.
+fn rzpar z ulong to void
+for j ulong get st 2
+x = get qk j
+ofv 80
+opn j
+if eq x 1
+ofv 81
+else
+if eq get qm j 0
+if eq z 0
+ofv 82
+else
+ofv 93
+end
+else
+if eq z 0
+ofv 83
+else
+ofv 94
+end
+end
+t = get qt j
+if eq x 4
+t = 0
+end
+otn add 16 t
+if eq hasln j 1
+ofv 80
+opn j
+ofv 84
+end
+end
+end
+end
+fn rsone to void
+ofv 76
+osig
+ofv 77
+oen
+ofv 78
+rzpar 0
+ofv 79
+end
+fn rsid to void
+ofv 85
+oun
+ofv 86
+oun
+ofv 87
+oid
+ofv 88
+end
+fn zgone to void
+ofv 89
+osig
+ofv 90
+oen
+ofv 91
+rzpar 1
+ofv 92
+end
+fn zgid to void
+ofv 95
+oun
+ofv 96
+oid
+ofv 97
+oun
+ofv 98
+end
+fn goone to void
+ofv 99
+osig
+ofv 100
+oen
+ofv 101
+for j ulong get st 2
+ofv 80
+opn j
+if eq get qk j 1
+ofv 105
+else
+ofv 106
+if eq hasln j 1
+ofv 80
+opn j
+ofv 107
+end
+end
+end
+ofv 102
+oen
+ofv 103
+for j ulong get st 2
+if eq get qk j 1
+ofv 108
+opn j
+ofv 109
+else
+ofv 110
+t = get qt j
+if eq get qk j 4
+t = 0
+end
+otn add 24 t
+ofv 111
+opn j
+ofv 109
+if eq hasln j 1
+ofv 108
+opn j
+ofv 112
+end
+end
+end
+ofv 104
+end
+fn goid to void
+ofv 113
+oun
+ofv 114
+oid
+ofv 115
+oun
+ofv 116
+oun
+ofv 117
+end
+note ---- the api header (output api): layouts as C structs, exports as C functions ----
+note adefs: `note bridge c-define NAME VALUE` lines as #define NAME VALUE.
+fn adefs p ulong q ulong to void
+i = p
+while lt i q
+e = lend i q
+if eq isbrn i q 1
+x = tokln i q
+if eq tvis 2 66 8 1
+ofv 120
+oname 3
+ofv 121
+oname 4
+ofv 75
+end
+end
+i = add e 1
+end
+end
+note afield: the field line just tokenized (nt tokens) into field slot n of a layout of z bytes:
+note field F T [COUNT] at OFF little|big; COUNT omitted is a scalar (fdc 0), given is an array.
+fn afield n ulong z ulong nt ulong to void
+o = ulong 3
+put fdc n 0
+if eq nt 7
+c = tknum 3
+if or eq c 0 gt c 4096
+trap 10
+end
+put fdc n c
+o = 4
+else
+if ne nt 6
+trap 10
+end
+end
+if eq cidr get tks 1 get tke 1 0
+trap 10
+end
+t = tyix 2
+if eq t 8
+trap 10
+end
+if eq tvis o 84 2 0
+trap 10
+end
+off = tknum add o 1
+put fdb n 2
+if eq tvis add o 2 74 6 1
+put fdb n 0
+end
+if eq tvis add o 2 80 3 1
+put fdb n 1
+end
+if eq get fdb n 2
+trap 10
+end
+c = get fdc n
+if eq c 0
+c = 1
+end
+if gt add off mul c tsize t z
+trap 10
+end
+put fds n get tks 1
+put fde n get tke 1
+put fdt n t
+put fdo n off
+put fdu n 0
+end
+note afpad: an explicit padding member for bytes a .. b-1.
+fn afpad a ulong b ulong to void
+if lt a b
+ofv 135
+odec a
+ofv 133
+odec sub b a
+ofv 134
+end
+end
+note afmem: the member of field n: its type and count, or bytes when big-endian or misaligned.
+fn afmem n ulong to void
+t = get fdt n
+c = get fdc n
+z = tsize t
+ofv 132
+if or eq get fdb n 1 ne rem get fdo n z 0
+otn 0
+ofv 121
+orng get fds n get fde n
+ofv 133
+if eq c 0
+odec z
+else
+odec mul c z
+end
+ofv 134
+else
+otn t
+ofv 121
+orng get fds n get fde n
+if eq c 0
+ofv 38
+else
+ofv 133
+odec c
+ofv 134
+end
+end
+end
+note alrd: the field lines of layout li (up to its `end` line) into the field slots; returns their count.
+fn alrd li ulong to ulong
+z = get lyz li
+q = get s2 7
+i = add lend get lyl li q 1
+n = ulong 0
+go = ulong 1
+while eq go 1
+if ge i q
+trap 10
+end
+e = lend i q
+x = tokln i q
+if eq x 0
+trap 10
+end
+if eq tvis 0 47 3 1
+if ne x 1
+trap 10
+end
+go = 0
+else
+if eq tvis 0 42 5 0
+trap 10
+end
+if ge n 256
+trap 10
+end
+afield n z x
+n = add n 1
+end
+i = add e 1
+end
+ret n
+end
+note fdmin: the unused field (of n) with the lowest offset.
+fn fdmin n ulong to ulong
+b = ulong 256
+for j ulong n
+if eq get fdu j 0
+if eq b 256
+b = j
+else
+if lt get fdo j get fdo b
+b = j
+end
+end
+end
+end
+put fdu b 1
+ret b
+end
+note alay: layout li as a C struct with its members at their offsets (fields may be listed in any order;
+note an overlap is refused), then its size and every field offset checked by the C compiler.
+fn alay li ulong to void
+n = alrd li
+ofv 122
+cur = ulong 0
+for r ulong n
+b = fdmin n
+if lt get fdo b cur
+trap 10
+end
+afpad cur get fdo b
+afmem b
+c = get fdc b
+if eq c 0
+c = 1
+end
+cur = add get fdo b mul c tsize get fdt b
+end
+afpad cur get lyz li
+ofv 123
+orng get lcs li get lce li
+ofv 124
+orng get lcs li get lce li
+ofv 125
+odec get lyz li
+ofv 126
+orng get lys li get lye li
+ofv 127
+for j ulong n
+ofv 128
+orng get lcs li get lce li
+ofv 129
+orng get fds j get fde j
+ofv 125
+odec get fdo j
+ofv 126
+orng get lys li get lye li
+ofv 130
+orng get fds j get fde j
+ofv 131
+end
+end
+note apone: one export as a C function that aborts on a nonzero status: static inline in output api;
+note in apih its prototype only; in apic its out-of-line definition.
+fn apone to void
+ofv 21
+osig
+if eq get st 5 7
+ofv 136
+else
+ofa 0
+end
+if eq get s2 8 0
+ofv 137
+else
+if eq get s2 18 7
+ofv 139
+else
+ofv 138
+end
+end
+ofv 121
+oen
+ofv 140
+if eq get st 2 0
+ofv 137
+end
+for j ulong get st 2
+if gt j 0
+ofv 147
+end
+x = get qk j
+if eq x 1
+otn get qt j
+ofv 148
+opn j
+else
+if and eq get qm j 0 ne x 5
+ofv 27
+end
+if eq x 4
+orng get lcs get ql j get lce get ql j
+else
+otn get qt j
+end
+if or eq x 3 eq x 4
+ofv 149
+opn j
+if eq x 3
+ofv 150
+opn j
+ofv 30
+end
+else
+ofv 148
+opn j
+ofv 133
+odec get qn j
+ofv 154
+end
+end
+end
+if eq get st 5 8
+ofa 1
+ret
+end
+ofv 141
+oen
+ofv 142
+for j ulong get st 2
+x = get qk j
+if eq x 1
+ofv 153
+opn j
+end
+if or eq x 2 eq x 3
+ofv 32
+opn j
+if eq x 2
+ofv 147
+odec get qn j
+else
+ofv 32
+opn j
+ofv 30
+end
+end
+if eq x 4
+if eq get qm j 0
+ofv 152
+else
+ofv 151
+end
+opn j
+end
+if eq x 5
+ofv 32
+opn j
+end
+end
+ofv 143
+if eq get s2 8 0
+ofv 144
+else
+if eq get s2 18 7
+ofv 146
+else
+ofv 145
+end
+end
+end
+note eone2: the bound entry just parsed, in the output st 5.
+fn eone2 to void
+m = get st 5
+if eq m 1
+cone
+end
+if eq m 2
+hone
+end
+if eq m 3
+pyone
+end
+if eq m 4
+rsone
+end
+if eq m 5
+zgone
+end
+if eq m 6
+goone
+end
+if ge m 7
+apone
+end
+end
+note unit2: accept the OM-2 unit p .. q-1 (q its 0 byte), emit it, return where the next unit starts.
+fn unit2 p ulong q ulong to ulong
+put s2 6 p
+put s2 7 q
+lays p q
+cl = codelen q
+c0 = add q 9
+put s2 13 c0
+put s2 14 cl
+nx = trail add c0 cl
+shsrc p q
+nex = exps p q
+stride = ulong 4
+if eq get xt 0 1
+stride = 6
+end
+if gt mul nex stride cl
+trap 10
+end
+m = get st 5
+if eq m 1
+if eq get s2 0 0
+ofv 0
+put s2 0 1
+end
+ecode2
+end
+if eq m 2
+hid
+end
+if eq m 3
+pyid
+end
+if eq m 5
+zgid
+end
+if eq m 6
+goid
+end
+if or eq m 7 eq m 8
+adefs p q
+for li ulong get s2 10
+alay li
+end
+end
+if eq nex 0
+put s2 12 0
+parse2 sigln p q q
+eone2
+else
+for k ulong nex
+put s2 12 k
+parse2 get exl k q
+eone2
+end
+end
+if eq m 4
+rsid
+end
+ret nx
+end
+note unit: accept the unit at p, emit it, return where the next unit starts.
 fn unit p ulong to ulong
 q = sepat p
+if eq get st 5 10
+fcheck p q
+end
+if eq prof p q 1
+ret unit2 p q
+end
 fl = sigln p q
 parse fl q
 cl = codelen q
 c0 = add q 9
-ecode c0 cl
-esig
-ebody
+emit c0 cl
 ret add c0 cl
 end
 note slurp: all of stdin into inb; refuse input that fills the pool.
@@ -528,11 +2458,43 @@ end
 ret t
 end
 fn main to int
+m = rmode
 t = slurp
 put st 0 t
 put st 1 0
 put st 4 0
+put st 5 m
+if eq m 10
+fpre
+end
+if eq m 1
 opre
+else
+if eq m 2
+ofb 0
+end
+if eq m 3
+ofb 12
+end
+if eq m 4
+ofb 22
+end
+if eq m 5
+ofb 35
+end
+if eq m 6
+ofb 47
+end
+if eq m 7
+ofv 118
+end
+if eq m 8
+ofa 2
+end
+if eq m 9
+ofa 3
+end
+end
 p = ulong 0
 nu = ulong 0
 while lt p t
@@ -541,6 +2503,15 @@ nu = add nu 1
 end
 if eq nu 0
 trap 10
+end
+if eq m 2
+ofb 11
+end
+if eq m 4
+ofb 34
+end
+if or eq m 7 eq m 8
+ofv 119
 end
 o = ulong 0
 m = get st 1

@@ -1,0 +1,28 @@
+PASS madd 3*5+7 = 22
+PASS madd wraps: (2^64-1)*2+5 = 3
+PASS madd large = 3637949782307626511
+PASS madd signed bits: -3*5+2 = -13
+PASS smadd -3*5+2 = -13
+PASS smadd 2^62*4 traps 1, result unchanged
+PASS fill k=1 traps 3, result unchanged
+PASS fill k=1 writes before the trap stay visible
+PASS fill k=0 returns 3, writes 11 22 33
+PASS null result refused 32
+PASS null buffer refused 32, result unchanged
+PASS buffer length 3 refused 32
+PASS misaligned buffer refused 32
+PASS result inside buffer refused 32, buffer untouched
+PASS call after traps still works
+PASS mix six parameters, void result writes 0
+PASS mix negative long traps 9 after both writes, result unchanged
+PASS mix uchar conversion 325 traps 5, first write visible
+PASS mix view overlapping the edit array refused 32, nothing written
+PASS big local array on the main thread = 15
+PASS big traps 3 from a frame holding a local array, result unchanged
+PASS big on a 256 KiB thread runs on the binding's stack = 15
+PASS x19..x28 and d8..d15 kept across a normal return
+PASS x19..x28 and d8..d15 kept across a trap
+PASS hsum 1+4+9+16+5 = 35 through two helpers
+PASS hsum: a helper's trap 9 returns 9, result unchanged
+PASS reentry from a signal handler during a call refused 33
+PASS 0 failure(s)
