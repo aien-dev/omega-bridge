@@ -1,7 +1,7 @@
 # Audit scope
 
 Written for an outside, independent security audit. Revision described:
-`358c505105793f202ad2b0c32a8623b606e029cd` on `main`, 2026-10-26. Everything below is taken from
+`ed420fcbffa1ad83db78111deb836dd880ed891e` on `main`, 2026-10-28. Everything below is taken from
 the repository's own files at that revision; items marked NOT_RUN were not executed while writing
 this document.
 
@@ -10,8 +10,13 @@ this document.
 Omega Bridge is a compiler written in Omega that emits executable C (GNU C11, POSIX) and Python 3
 from a checked, bounded subset of Omega (ABI v0). `src/native.om` generates C bindings so C, C++,
 Python, Rust, Zig and Go can call machine code produced by the seeded Omega compiler (native call
-ABI v1). `src/gpu_adapter.om` is an opt-in GPU adapter that negotiates and admits artifacts; it
-opens no device and converts no host program. It runs on Linux AArch64 only. There is no C or
+ABI v1 for OM-1 units and ABI v2 for OM-2 units, `docs/NATIVE-ABI.md`). `tools/native
+--freestanding` emits an AArch64 object for pure integer-scalar OM-1 units with no hosted runtime.
+`tools/native --target x86linux` emits hosted x86-64 SysV Linux bindings from a separately pinned
+x86 compiler; that path is EXERCISED under emulation only (`evidence/native-x86-62775d2a.json`)
+and native x86-64 execution is NOT_RUN. `src/gpu_adapter.om` is an opt-in GPU adapter that
+negotiates and admits artifacts; it opens no device and converts no host program. The default
+target is Linux AArch64. There is no C or
 Python input frontend. The Python under `tests/` and `conformance/` is test infrastructure and
 does not ship. Status: local differential tests and caller demos; independent review required
 before release.
@@ -40,7 +45,9 @@ before release.
    conformance test suite.
 7. Test integrity: `tools/test.sh`, `tests/differential.py`, `tests/refusals.py`,
    `tests/attachments.py`, `tests/controls.py`, `tests/robustness.py`, `tests/native/run.sh`,
-   `tests/native/test_build_failures.sh`, `tests/gpu/test_gpu_adapter.py`.
+   `tests/native/v2/run.sh` (ABI v2 and freestanding), `tests/native/test_freestanding.py`,
+   `tests/native/x86/run.sh` (x86linux, EMULATED), `tests/native/test_build_failures.sh`,
+   `tests/gpu/test_gpu_adapter.py`.
 
 `.github/workflows/ci.yml` (added by the audit-readiness change) replays the compiler from
 source with `tools/bootstrap.sh` and runs `sh tools/test.sh` on a GitHub-hosted arm64 runner;
@@ -100,6 +107,8 @@ with `quiet-build`; without it, run the scripts directly.
 tools/test.sh
 python3 tests/attachments.py
 OMEGA_NATIVE_OMC=/path/to/omega-mv/seed/out/omc sh tests/native/run.sh
+OMEGA_NATIVE_OMC=/path/to/omega-mv/seed/out/omc sh tests/native/v2/run.sh
+OMEGA_NATIVE_X86_OMC=/path/to/x86/omc sh tests/native/x86/run.sh
 sh tests/native/test_build_failures.sh
 OMEGA_SEED=build/bootstrap/omc sh tools/build-gpu-adapter.sh
 python3 tests/gpu/test_gpu_adapter.py
@@ -112,6 +121,9 @@ tools/run-device-window.sh --ledger <ID>
   with `ALL SUITES RC=0`. `evidence/README.md` records 397 cases, 0 failures. NOT_RUN here.
 - `tests/native/run.sh`: prints `NATIVE-CALL PASS` only after all seven required callers build
   and run; missing toolchains print NOT_RUN and exit nonzero. NOT_RUN here.
+- `tests/native/v2/run.sh`: ABI v2 (OM-2) bindings and the `--freestanding` object. NOT_RUN here.
+- `tests/native/x86/run.sh`: x86linux bindings under a QEMU user-mode oracle (`QEMU_X86_64`);
+  EMULATED only, physical x86-64 NOT_RUN. NOT_RUN here.
 - `tests/gpu/test_gpu_adapter.py`: 47 checks, no device. NOT_RUN here.
 - `conformance/run.sh` needs a Modular MAX 26.7 venv (`modular==26.7.0`); CPU only without
   `--device`. NOT_RUN here.
@@ -138,7 +150,6 @@ tools/run-device-window.sh --ledger <ID>
   ship.
 - External services: GitHub fetch of the pinned Omega commit at bootstrap; Python package index
   for the MAX venv, if built.
-- No GitHub Actions.
 
 ## Evidence
 
