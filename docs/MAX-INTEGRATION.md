@@ -22,6 +22,22 @@ Pinned MAX: `max/v26.7.0` = `527d069ee11a41ac5320af1f9402db0a66b2b868`
    contract/ISA and a 416-byte TEST-class C2 receipt; tampering, stale epochs
    and wrong ids are refused.
 
+## CPU route: Omega kernel as a MAX custom op — EXERCISED(host CPU)
+
+On the Spark's Grace aarch64 host, MAX 26.7.0 runs the seeded Omega unit
+`max-cpu/omatmul.om` (bf16 → f32 matmul) **inside a MAX graph** as the CPU custom
+op `omega_matmul`. The library comes from the unchanged `tools/native` path; the
+only non-Omega code is one Mojo glue file (`max-cpu/kernels/__init__.mojo`,
+`OwnedDLHandle` + dlsym) and the Python harness. `max-cpu/run.sh` reproduces it:
+15 numeric cases PASS within the Wolfram-derived f32 bound and bit-identical to
+`ops.matmul`; wrong-symbol, plain-`external_call`, shape-refusal (Omega results
+1/2/3, plus a graph-construction refusal) and index-mutant negatives all fail as
+required. At 256x256x256 the scalar Omega op is 112x slower than `ops.matmul`
+(warm p50 49.4 ms vs 0.44 ms). This is a host-CPU result only; it says nothing
+about GB10 and is not a hardware qualification. Evidence, pins, the six Omega
+gaps and a MAX 26.7.0 kernel-cache observation:
+[evidence/MAX-CPU/README.md](../evidence/MAX-CPU/README.md).
+
 ## What is not proven, and why
 
 - **No GB10 run exists.** The chip is reserved by the coordinator
@@ -64,7 +80,8 @@ context the module lands in; (c) deterministic error for a wrong arch/entry;
 loads a cubin, not only PTX.
 
 Until that exists or the release exposes the main HAL path, this repository
-does **not** claim in-graph native execution. The separate-process harness is the
+does **not** claim in-graph native GPU execution (the CPU route above is a separate,
+host-only result). The separate-process harness is the
 supported demonstration, and it is ready to run the moment a GPU window is
 authorized.
 

@@ -1,0 +1,4 @@
+kernels=/dev/shm/omega-max-cpu/mogg-repro/pkg/kernels
+want 'Failed to materialize symbols'
+got: ran
+OMEGA_MAX_NEG_LOAD: FAIL
