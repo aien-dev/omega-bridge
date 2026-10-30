@@ -1,0 +1,10 @@
+note fsout.om: an out parameter written before a trap. Freestanding ABI v2 copies the out buffer back
+note only on status 0, so after the trap the caller's buffer must hold what it held before the call.
+om2
+export fn fsout x ulong o out uchar 16 to ulong
+put o 0 7
+if eq x 0
+trap 5
+end
+ret add x 1
+end

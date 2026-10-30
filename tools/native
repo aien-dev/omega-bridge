@@ -31,9 +31,13 @@
 # refusal (a unit outside the subset, or a name the binding cannot carry) names the unit, exits 110
 # and installs nothing; a previous run's outputs are replaced only on success. Extra C flags:
 # OMEGA_NATIVE_CFLAGS.
-# --freestanding accepts only pure integer-scalar OM-1 units and installs omega_native.{c,h,o}
-# plus work/. The object has no undefined symbols except the GPU_FS_LINK libc-string allowlist.
-# Calls use the caller's stack; traps return status without TLS, heap or a hosted runtime.
+# --freestanding accepts pure integer-scalar OM-1 units and OM-2 units without host effects, and
+# installs omega_native.{c,h,o} plus work/; with an OM-2 unit also omega_api_decl.h and
+# omega_api_defs.{c,o}, whose wrappers call __builtin_trap() on a nonzero status (output fapic)
+# instead of abort(). No omega_api.h (its inline wrappers call abort()). The objects have no
+# undefined symbols except the GPU_FS_LINK libc-string allowlist. Calls use the caller's stack, an
+# OM-2 out parameter is a zero-filled buffer in the entry's frame copied back only on status 0, and
+# traps return status without TLS, heap or a hosted runtime.
 # Freestanding x86 output is not supported and is refused before creating OUTDIR.
 set -eu
 PIN=734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61
@@ -121,7 +125,7 @@ for u in "$@"; do
   echo "omega-ident 1 unit=$name abi=$abi profile=$prof src=$(sha256sum < "$src" | cut -d' ' -f1) omc=$pin path=$u" >> "$W/work/ident.txt"
 done
 words="c h python rust zig go"; [ $v2 = 0 ] || words="$words api apih apic"
-[ "$CMODE" != freest ] || words="freest h"
+[ "$CMODE" != freest ] || { words="freest h"; [ $v2 = 0 ] || words="$words apih fapic"; }
 for w in $words; do
   if ! generate "$w" < "$W/work/units.in" > "$W/$w.out" 2> /dev/null; then
     echo "tools/native: refused the set of units (a bound or unit name repeats); nothing installed" >&2
@@ -133,16 +137,32 @@ if [ "$CMODE" = c ]; then
   mv "$W/python.out" "$W/omega_native.py"; mv "$W/rust.out" "$W/omega_native.rs"
   mv "$W/zig.out" "$W/omega_native.zig"; mv "$W/go.out" "$W/omega_native.go"
 fi
-[ $v2 = 0 ] || { mv "$W/api.out" "$W/omega_api.h"; mv "$W/apih.out" "$W/omega_api_decl.h"; mv "$W/apic.out" "$W/omega_api_defs.c"; }
+if [ "$CMODE" = freest ]; then
+  [ $v2 = 0 ] || { mv "$W/apih.out" "$W/omega_api_decl.h"; mv "$W/fapic.out" "$W/omega_api_defs.c"; }
+elif [ $v2 = 1 ]; then
+  mv "$W/api.out" "$W/omega_api.h"; mv "$W/apih.out" "$W/omega_api_decl.h"; mv "$W/apic.out" "$W/omega_api_defs.c"
+fi
 # The library names itself (soname), so every caller records libomega_native.so and finds it via rpath.
 if [ "$CMODE" = freest ]; then
+  objs=omega_native.o
   ${CC:-cc} -std=gnu11 -O2 -Wall -Wextra -Werror -Wmissing-prototypes -ffreestanding -fno-builtin \
     -include "$W/omega_native.h" ${OMEGA_NATIVE_CFLAGS:-} -c -o "$W/omega_native.o" "$W/omega_native.c"
-  if ! nm -u "$W/omega_native.o" > "$W/undefined.txt"; then
-    echo "tools/native: freestanding symbol inspection failed; nothing installed" >&2
-    exit 1
+  if [ $v2 = 1 ]; then
+    objs="$objs omega_api_defs.o"
+    ${CC:-cc} -std=gnu11 -O2 -Wall -Wextra -Werror -Wmissing-prototypes -ffreestanding -fno-builtin \
+      -I "$W" ${OMEGA_NATIVE_CFLAGS:-} -c -o "$W/omega_api_defs.o" "$W/omega_api_defs.c"
   fi
-  if ! awk 'NF && $NF !~ /^(_GLOBAL_OFFSET_TABLE_|memcpy|memmove|memset|memcmp|strlen|strcmp)$/ {print $NF; bad=1} END {exit bad}' \
+  # The objects are linked together, so one's reference to another's global definition (the
+  # fapic wrappers calling omega2_*) is not an import; everything else must be on the allowlist.
+  : > "$W/undefined.txt"; : > "$W/defined.txt"
+  for o in $objs; do
+    if ! nm -u "$W/$o" >> "$W/undefined.txt" || ! nm --defined-only -g "$W/$o" >> "$W/defined.txt"; then
+      echo "tools/native: freestanding symbol inspection failed; nothing installed" >&2
+      exit 1
+    fi
+  done
+  if ! awk -v defs="$W/defined.txt" 'BEGIN {while ((getline l < defs) > 0) {n = split(l, f); if (n) def[f[n]] = 1}}
+    NF && !($NF in def) && $NF !~ /^(_GLOBAL_OFFSET_TABLE_|memcpy|memmove|memset|memcmp|strlen|strcmp)$/ {print $NF; bad=1} END {exit bad}' \
     "$W/undefined.txt" > "$W/refused-imports.txt"; then
     echo "tools/native: freestanding imports refused by inspection; nothing installed" >&2
     cat "$W/refused-imports.txt" >&2
@@ -155,16 +175,16 @@ fi
 # The API headers must compile on their own: their layout size and offset checks are C static
 # assertions. The definitions are compiled against their prototypes (a disagreement fails here).
 if [ $v2 = 1 ]; then
-  ${CC:-cc} -std=gnu11 -fsyntax-only -Wall -Wextra -Werror -I "$W" -x c "$W/omega_api.h"
+  [ "$CMODE" = freest ] || ${CC:-cc} -std=gnu11 -fsyntax-only -Wall -Wextra -Werror -I "$W" -x c "$W/omega_api.h"
   ${CC:-cc} -std=gnu11 -fsyntax-only -Wall -Wextra -Werror -I "$W" -x c "$W/omega_api_decl.h"
   ${CC:-cc} -std=gnu11 -fsyntax-only -Wall -Wextra -Werror -Wmissing-prototypes -I "$W" "$W/omega_api_defs.c"
 fi
 # Install together: the previous run's outputs go, the new set comes in.
-for f in omega_native.c omega_native.h omega_native.o omega_native.py omega_native.rs omega_native.zig omega_native.go omega_api.h omega_api_decl.h omega_api_defs.c libomega_native.so work; do
+for f in omega_native.c omega_native.h omega_native.o omega_native.py omega_native.rs omega_native.zig omega_native.go omega_api.h omega_api_decl.h omega_api_defs.c omega_api_defs.o libomega_native.so work; do
   rm -rf "$OUT/$f"; [ ! -e "$W/$f" ] || mv "$W/$f" "$OUT/$f"
 done
 if [ "$CMODE" = freest ]; then
-  echo "tools/native: $# pure scalar unit(s) -> $OUT/omega_native.{c,h,o} (+ work/)"
+  echo "tools/native: $# unit(s) -> $OUT/omega_native.{c,h,o}$([ $v2 = 0 ] || echo ' + omega_api_decl.h, omega_api_defs.{c,o}') (+ work/)"
 else
   echo "tools/native: $# unit(s) -> $OUT/libomega_native.so + omega_native.{c,h,py,rs,zig,go}$([ $v2 = 0 ] || echo ' + omega_api.h, omega_api_decl.h, omega_api_defs.c') (+ work/)"
 fi

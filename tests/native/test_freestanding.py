@@ -76,13 +76,15 @@ int main(void) {
             'host': 'fn epoch n ulong to ulong\nr = getpid\nret n\nend\n',
             'exit': 'fn epoch n ulong to ulong\nexit 0\nret n\nend\n',
             'hidden-host-helper': 'fn hidden to ulong\nret monons\nend\nfn epoch n ulong to ulong\nret n\nend\n',
-            'om2': 'om2\nfn epoch n ulong to ulong\nret n\nend\n',
+            # OM-2 itself is accepted (tests/native/test_freestanding_om2.py); a frame without the
+            # omega-unit trailer is not.
+            'om2-no-trailer': 'om2\nfn epoch n ulong to ulong\nret n\nend\n',
         }
         for name, source in refusals.items():
             frame = source.encode() + b'\0' + f'{len(code):08d}'.encode() + code
             p = subprocess.run([gen, 'freest'], input=frame, capture_output=True)
             assert p.returncode == 110 and not p.stdout, (name, p.returncode, p.stdout)
-        print('PASS freestanding refuses arrays, storage, text, host effects including unused helper and OM-2 before any output')
+        print('PASS freestanding refuses arrays, storage, text, host effects including unused helper and an OM-2 frame without its trailer before any output')
         # Mutate the .om emitter, not a production C implementation. The normal tools/native gate
         # must refuse an actual pthread import and leave an already installed library untouched.
         mutant = t / 'mutant'
