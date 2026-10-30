@@ -1,0 +1,7 @@
+note halve: h[i] = binary16 bits of half the f16 value h[i] (exponent minus 1; normal inputs above 2^-13),
+note an edit ushort array written in place.
+fn halve h edit ushort 3 to void
+for i ulong 3
+put h i sub get h i 1024
+end
+end
