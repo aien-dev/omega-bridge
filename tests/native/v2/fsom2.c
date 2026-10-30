@@ -3,6 +3,7 @@
  * one line per check; `fsom2 trap` calls a C API wrapper on a trapping input and must not return. */
 #include "omega_api_decl.h"
 #include <pthread.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <string.h>
 
