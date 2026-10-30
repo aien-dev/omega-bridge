@@ -39,9 +39,14 @@ omega-mv `e5b32567`, requiring `OMEGA_SEEDED_OMC` with sha256
 `2c82480596bbdc50cda9626866209ef662d5834f278f839ff4ce0250c495029f`.
 The source snapshot is checked by that exact compiler before conversion. A
 different compiler fingerprint refuses with status 65 and no target output.
-This mode does not change `tools/bridge`, its baseline seed
-`191b776ef98821597c3e30655da6d680a9b66edbc9ceaca3c39c61ea6df098e9`,
-or the required `tools/test.sh` suite.
+This mode keeps `tools/bridge`'s baseline seed
+`191b776ef98821597c3e30655da6d680a9b66edbc9ceaca3c39c61ea6df098e9` and the
+required `tools/test.sh` suite, but the shared `src/toc.om` emitter changes
+baseline `tools/bridge c|python` output text: exported scalar parameters of
+narrowing functions become `volatile`, the `o_get`/`o_io`/`o_buf` helpers take
+`const void *`, and unused loop counters are no longer emitted. The behavior
+suites (`tools/test.sh`, seeded, seeded-float, freestanding) are unchanged and
+pass; byte-identical output to the previous `tools/bridge` is not claimed.
 
 The additive mode accepts at most 32 numeric literal constants, 512 functions,
 six parameters per function, function names up to the frontend's 63-byte limit
