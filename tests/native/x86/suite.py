@@ -25,6 +25,9 @@ N = ROOT / "tests/native"
 OUTPUTS = {"c": "c", "h": "h", "python": "py", "rust": "rs", "zig": "zig", "go": "go",
            "api": "api.h", "apih": "api_decl.h", "apic": "api_defs.c"}
 REQUIRED = {"c", "cpp", "python", "rust", "zig", "go"}
+# The AArch64 parity baseline is the generator of the last intentional AArch64 output change:
+# f637021 (#26, f32 and ushort array kinds). Moving it requires a reviewed AArch64 output change.
+BASELINE = "f637021"
 
 
 def digest(data):
@@ -448,7 +451,7 @@ class Suite:
 
     def aarch64_parity(self):
         baseline = self.out / "baseline-native-gen"
-        source = self.must(["git", "-C", str(ROOT), "show", "0c4cb9ff:src/native.om"])
+        source = self.must(["git", "-C", str(ROOT), "show", BASELINE + ":src/native.om"])
         baseline.write_bytes(self.must([self.omc], data=source))
         baseline.chmod(0o755)
         frames = {}
@@ -473,7 +476,7 @@ class Suite:
             for word in (*OUTPUTS, "freest"):
                 old = self.generate(word, frame, baseline, target=False)
                 new = self.generate(word, frame, target=False)
-                self.check("AArch64 byte parity 0c4cb9ff " + name + " " + word,
+                self.check("AArch64 byte parity " + BASELINE + " " + name + " " + word,
                            old.returncode == new.returncode and old.stdout == new.stdout and old.stderr == new.stderr)
 
     def trap_controls(self):

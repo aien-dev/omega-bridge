@@ -127,7 +127,10 @@ controls cover nested traps, bad-runtime/status-34 recovery, SysV saved-register
 sentinels, and the fixed owned-stack floor after out-buffer allocation.
 All 150 baseline/output comparisons with `0c4cb9ff` passed byte-for-byte,
 including unchanged AArch64 freestanding refusals. The receipts retain the
-earlier failing emulator run rather than rewriting it as a pass.
+earlier failing emulator run rather than rewriting it as a pass. #26 (`f637021`,
+f32 and ushort array kinds) then changed AArch64 output on purpose, so that
+baseline failed 42 comparisons on main; the baseline is now `f637021`, the
+generator of the last intentional AArch64 output change.
 
 ## What Omega produces
 
