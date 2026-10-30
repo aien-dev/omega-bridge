@@ -2,7 +2,7 @@
 
 Omega's compatibility gateway. `src/toc.om` is an Omega program that converts a checked, bounded Omega subset into executable C and Python; `src/native.om` generates bindings so existing C, C++, Python, Rust, Zig and Go code calls compiled Omega; `src/gpu_adapter.om` negotiates and admits GPU artifacts and runs no kernel. Apache-2.0 WITH LLVM-exception.
 
-Ownership rule ([ARCH-0042](https://github.com/aien-dev/aien-architecture-mv/pull/342), PROPOSED): Omega owns computation, CUDA++ owns GPU execution, Omega Bridge owns compatibility.
+Ownership rule ([ARCH-0042](https://github.com/aien-dev/aien-architecture-mv/pull/342), Accepted (Drake, 2026-10-30)): Omega owns computation, CUDA++ owns GPU execution, Omega Bridge owns compatibility.
 
 - **Omega Bridge (this repository)** owns compatibility: conversion to C and Python, native-call bindings, framework attachments (MAX conformance; PyTorch and GGML pending (#23/#30, ggml-omega#1/#2)) and GPU artifact negotiation. It exists so existing ecosystems can adopt Omega without rewriting; it makes them optional and does not constrain Omega to them.
 - **[Omega](https://github.com/aien-dev/omega-mv)** owns computation: the language and its semantics, the seeded compiler and its pin. This repository builds with that compiler; it is not a second Omega compiler. Today `tools/bootstrap.sh` replays the seed itself and `src/toc.om` keeps its own front end; both stay as they are, and new compiler work goes to Omega ([omega-mv#870](https://github.com/aien-dev/omega-mv/issues/870), [omega-mv#871](https://github.com/aien-dev/omega-mv/issues/871)).
