@@ -1,0 +1,12 @@
+note Lowering top for an ABI-v2 out must not lower the true stack floor.
+om2
+fn outleaf x ulong to ulong
+ret add x 1
+end
+fn outmid x ulong to ulong
+ret outleaf x
+end
+export fn outtrap o out uchar 64 to ulong
+put o 0 1
+ret outmid 0
+end

@@ -1,0 +1,12 @@
+HOST emitter-capacity evidence (2026-10-28)
+Generator compiled with native generator compiler734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61.
+python3 tests/native/test_capacity.py
+CAPACITY PASS: compiler-built frame 2622384 bytes, C 5260780 bytes, both endpoint calls
+CAPACITY PASS: old input/output bound mutants and new input/output overflow controls refuse with no output
+
+Independent real-consumer fixture, captured by NativeIntegrate before emission:
+/tmp/native-units-framed-v2.in: 1778905 bytes (31 compiled roots).
+Expanded generator `c`: exit0, generated C5063961 bytes.
+cc -std=gnu11 -O2 -Wall -Wextra -Werror -c actual31.c -o actual31.o: exit0.
+The real fixture proves aggregate emission and C compilation, not runtime behavior of those31 roots. The compiler-built committed regression separately calls its two endpoint units. No GPU/service/deployment evidence.
+Captured real-frame SHA256: cf6ab2c745e632016c18da815f52bc0387713435440d816ae198201a8accefbd

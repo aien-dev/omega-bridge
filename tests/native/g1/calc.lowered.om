@@ -1,0 +1,12 @@
+note omega.universal.lower.v1 semantic 8dc67eafc9e818d649f0cbcc59d226acbb7b2fd7fd4318f2e6b9a4d67a69fd1b
+fn calc i0 ulong i1 ulong to ulong
+v = new ulong 7 0
+put v 0 i0
+put v 1 i1
+put v 2 add get v 0 get v 1
+put v 3 sub get v 0 get v 1
+put v 4 mul get v 2 get v 3
+put v 5 0
+put v 6 add get v 4 get v 5
+ret get v 6
+end

@@ -1,0 +1,51 @@
+{
+ "schema": 1,
+ "date": "2026-10-28",
+ "status": "EXERCISED",
+ "backend": "EMULATED",
+ "native_x86": "NOT_RUN",
+ "gpu": "NOT_RUN",
+ "bridge_parent": "29087763accea55666ac7a4c14ecb37cef1c2be8",
+ "tools_native_sha256": "57d45d7e44a9b31c7b3b844581c8a7783d210e2192c8bbde6f3a60e8f9ef2662",
+ "suite_sha256": "476b420ec302625ac45975b7237d5ab3042cce759d6e3a68b0dd477ba1ac98a6",
+ "compiler_commit": "3e66b6744590cc72c623d8e09413b9072bcab36e",
+ "compiler_source_sha256": "4b5392fffd25a3a37844ad8bb5138fbaada690be7dae95132614524bdb78a1e0",
+ "baseline_omc_sha256": "734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61",
+ "x86_omc_sha256": "badedbb0c6287887641fcd7e97301b43b5f82f2d7a2838bbe0d17547873108be",
+ "qemu_source_sha256": "c7230968906fdb5540d803e2af1f515e77590a414f2a4dbd3ec9ada3c47083d0",
+ "qemu_binary_sha256": "fd7ae7768c1d698d387893688d28abde90512f1f445d171a1389110eb7c237ee",
+ "command": "python3 tests/native/x86/test_build_failures.py /tmp/x86-controls-badedbb0.Dejg",
+ "exit": 0,
+ "environment": {
+  "OMEGA_NATIVE_OMC": "$BASELINE_OMC",
+  "OMEGA_NATIVE_X86_OMC": "$COMPILER/seed/out/omc",
+  "CC": "x86_64-linux-gnu-gcc",
+  "CXX": "$HOME/.local/opt/zig-linux-aarch64-0.13.0/zig c++ -target x86_64-linux-gnu",
+  "ZIG": "$HOME/.local/opt/zig-linux-aarch64-0.13.0/zig",
+  "GO": "$HOME/.local/opt/go1.27.3/bin/go",
+  "GOMAXPROCS": "2",
+  "QEMU_X86_64": "$BRIDGE/build/qemu-oracle/build/qemu-x86_64",
+  "OMEGA_NATIVE_X86_PYTHON": "$BRIDGE/build/x86-python/root/usr/bin/python3.12",
+  "OMEGA_NATIVE_X86_LIBPATH": "$BRIDGE/build/x86-python/root/usr/lib/x86_64-linux-gnu:$BRIDGE/build/x86-python/root/lib/x86_64-linux-gnu:/usr/x86_64-linux-gnu/lib"
+ },
+ "verdicts": [
+  "PASS failed-toolchain control ZIG",
+  "PASS failed-toolchain control GO",
+  "PASS missing Zig and Go refuse aggregate PASS (#34)",
+  "PASS x86 compiler pin",
+  "PASS mismatched x86 compiler refuses before creating outputs",
+  "PASS mismatched x86 compiler preserves previous outputs",
+  "NATIVE-X86 NATIVE NOT_RUN (physical x86 execution not requested)",
+  "NATIVE-X86 EMULATED PASS (six languages built and run; native x86 NOT_RUN)",
+  "NATIVE-X86 CONTROLS PASS (EMULATED; native x86 NOT_RUN)"
+ ],
+ "files_sha256": {
+  "controls.log": "6599483e6f48af02f7d335650c78ced1380ecf76153fec6bf9e5026c818e8273",
+  "positive.log": "83a8331e0b98133f79e49e0c9f7a78eab61c6dd1615a6126f236c0221739fa94",
+  "missing.log": "0a6bbf42904f46ca793ab79fb1099daa0a2904b55e47ba1130d8f95b7d887fea",
+  "ZIG.log": "1127b6215be3e173103737238bd4b3197d535cb91d5aea7a1fed20638cd2c4a9",
+  "GO.log": "a879af1d95e1553ca4569f64f6deb89ae0989564edfc3804071a36f641bd0f14"
+ },
+ "compiler_full_differential": "FAIL: 14,936 PASS, 54 FAIL, 10 NOT_RUN, 216 EXCLUDED at compiler 3e66b674 (omega-mv#923 d5b445b7, corpus JSONL sha256 493ca297bc59269f077205974db5f074516a5b2db7f4b08ffb5f9f7340e10f6b); this bridge receipt does not qualify the compiler",
+ "previous_pin_refusal": "tools/native --target x86linux with omc f7752bc5c800e85c (previous pin) exits 1 before creating OUTDIR: 'x86 omc sha256 f7752bc5..., pinned badedbb0...'; same command with badedbb0 and CC=x86_64-linux-gnu-gcc exits 0, 8 files, x86-64 ELF libomega_native.so"
+}

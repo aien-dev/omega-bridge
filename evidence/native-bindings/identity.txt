@@ -1,0 +1,21 @@
+date 2026-10-24T23:52:14Z
+source commit 350e82bf70c7120be3e429141d28ae23eb6af381 (branch feat/native-bindings, on feat/native-call-v1 9d5f768)
+omc sha256 734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61
+generator src/native.om sha256 e1d0c562b691e5930567d16a2688ed910b476c741d9cca73403d1b7f6565c066
+tools/native sha256 aa0c978c92cb7d5be2743f6be6097c6ec2455c16026a7141c83b3c97b1460534
+embedded code (six units) sha256 38c294080111990298ac3ce881986d1ba1869b2966b498c36f40485c226c3ee9
+omega_native.c sha256 ce64c4b50d5d54904398d657a1977abe2fe6bad6497503ad55668d247ee77fef
+omega_native.h sha256 fe3a520a5fdd62897ff4f00d0e3c8a78a33ba79e93cbe42f93b7819692d430f0
+omega_native.py sha256 b87c4c0509cae5158116baf99ebe4d09f1495f2414fd9e2083a7646f7c9cc4e8
+omega_native.rs sha256 01ba5d3953356ffa968524c0eb096b69ac4b2161c2fdd5ce93e72ea6468d74b5
+omega_native.zig sha256 196447e328340385b814d0a787dbd871726465a8e33e88aabdf184a55103ca09
+omega_native.go sha256 ee1ae689e82f99b1738736c074b5815d894f964a11cebdff3168741cd9c3284b
+cc cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+c++ c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+python3 Python 3.12.3
+rustc rustc 1.98.1 (48a229cea 2026-09-01)
+zig 0.13.0 (archive sha256 041ac42323837eb5624068acd8b00cd5777dac4cf91179e8dad7a7e90dd0c556)
+go go version go1.27.3 linux/arm64 (archive sha256 a06e99309dbcbdca1a8ccd2282c3ee146e55930886e26b4f1193269587165f49)
+machine Linux 7.0.0-1019-nvidia aarch64
+checks 25 PASS, 0 FAIL, 0 NOT_RUN
+verdict NATIVE-CALL PASS (not run: none)

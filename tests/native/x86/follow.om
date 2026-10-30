@@ -1,0 +1,4 @@
+note This scalar call must work after recovery from a nested unit's trap.
+fn follow x ulong to ulong
+ret x
+end

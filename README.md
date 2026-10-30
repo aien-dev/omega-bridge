@@ -1,6 +1,6 @@
 # Omega Bridge
 
-An Omega-written compiler that emits executable C and Python from a checked, bounded Omega subset. Existing C and Python applications can also call generated library functions, and compiled Omega units are callable from C, C++, Python, Rust, Zig and Go through the [native call ABI](docs/NATIVE-ABI.md), whose generator (`src/native.om`) also writes the Python `ctypes` binding module itself. Apache-2.0 WITH LLVM-exception.
+An Omega-written compiler that emits executable C and Python from a checked, bounded Omega subset. Existing C and Python applications can also call generated library functions, and compiled Omega functions can be called in place from C, C++, Python, Rust, Zig and Go through the native call adapter. Apache-2.0 WITH LLVM-exception.
 
 The source-only compiler bootstrap currently requires Linux AArch64. Generated C uses GNU C11 and POSIX; generated Python uses Python 3. This branch has local differential tests and caller demos; independent review remains required before release. No universal conversion or performance improvement is claimed.
 
@@ -32,20 +32,59 @@ Run real C and Python application callers:
 quiet-build python3 tests/attachments.py
 ```
 
-See [supported features and limits](docs/CAPABILITIES.md), [caller ABI and ownership](docs/ABI.md), [design and study decisions](docs/DESIGN.md), and [provenance](docs/PROVENANCE.md). Text constants, floats, heap operations and other target languages are explicitly unsupported by the C/Python converters. GPU interoperability is a separate, opt-in adapter boundary (it converts no host program): see [GPU adapter](docs/GPU-ADAPTER.md) and the [support matrix](docs/GPU-SUPPORT-MATRIX.md). Conversion of Python or C source into Omega is not implemented and not claimed: outside frameworks connect by calling compiled Omega code, not by being converted. The Python test harness is infrastructure; all conversion logic and both runtime emitters are in [src/toc.om](src/toc.om).
+See [supported features and limits](docs/CAPABILITIES.md), [caller ABI and ownership](docs/ABI.md), [design and study decisions](docs/DESIGN.md), and [provenance](docs/PROVENANCE.md). Text constants, floats, heap operations and other target languages are explicitly unsupported by the C/Python converters. GPU interoperability is a separate, opt-in adapter boundary (it converts no host program): see [GPU adapter](docs/GPU-ADAPTER.md) and the [support matrix](docs/GPU-SUPPORT-MATRIX.md). Python/C input conversion is not implemented. The Python test harness is infrastructure; all conversion logic and both runtime emitters are in [src/toc.om](src/toc.om).
 
+Call compiled Omega in place from six languages (the native call adapter, a separate claim from conversion: it runs Omega's own machine code, it does not turn Omega into another language):
+
+```sh
+OMEGA_NATIVE_OMC=<seeded omc> tools/native build/native tests/native/madd.om
+```
+
+That writes `libomega_native.so` and, from the same Omega signatures, `omega_native.h` (C and C++), `omega_native.py`, `omega_native.rs`, `omega_native.zig` and `omega_native.go`; a program includes or imports its file and calls `omega_madd`, nothing is declared by hand. One generator, [src/native.om](src/native.om), writes all six. Contract, limits and the qualification run: [native call ABI](docs/NATIVE-ABI.md).
+
+`f32` and `ushort` array kinds (4-byte and 2-byte elements) are qualified by `OMEGA_NATIVE_OMC=<seeded omc> sh tests/native/kinds.sh`. The contract is in [native call ABI](docs/NATIVE-ABI.md).
+
+The native target defaults to `aarch64linux`. Hosted x86-64 SysV Linux bindings
+are selected explicitly; there is no build-host architecture inference:
+
+```sh
+OMEGA_NATIVE_OMC=/path/to/baseline/omc \
+OMEGA_NATIVE_X86_OMC=/path/to/x86/omc \
+CC=x86_64-linux-gnu-gcc \
+tools/native --target x86linux build/native-x86 tests/native/madd.om
+```
+
+The existing pinned `OMEGA_NATIVE_OMC` remains required to build the generator.
+The separately pinned `OMEGA_NATIVE_X86_OMC` compiles both OM-1 and OM-2 inputs;
+its target directive is not added to the source identity. Pins and the exact
+generator contract are in [native call ABI](docs/NATIVE-ABI.md#target-selection-and-compiler-custody).
+`--freestanding` remains AArch64-only and refuses x86. Cross-building a library
+does not execute its callers. QEMU results are emulator evidence, not native
+x86-64 qualification; native execution is NOT_RUN until exercised on an x86-64
+host. The historical AArch64 evidence does not qualify this x86 integration.
+The x86 emulator suite selects its oracle with `QEMU_X86_64`; use the unpatched
+QEMU 10.0.14 oracle and guest Python setup documented in
+[native call ABI](docs/NATIVE-ABI.md#x86-emulator-runner-and-qemu-oracle).
+QEMU 8.2.2 has observed signal and `/proc/self/maps` limitations for these
+callers. At the current x86 compiler pin, the full suite plus mismatched-pin and
+failed/missing-toolchain controls passed EMULATED; see
+[the pinned receipts](evidence/native-x86-62775d2a.json). Earlier
+pins' receipts remain in `evidence/native-x86-badedbb0/`, `evidence/native-x86-f7752bc5/` and `evidence/native-x86/`. Physical x86
+execution remains NOT_RUN.
 ## Framework attachments
 
 | Framework | Attachment | Scope (receipt) |
 |---|---|---|
 | llama.cpp / ggml | [aien-dev/ggml-omega](https://github.com/aien-dev/ggml-omega), an out-of-tree ggml backend built on `src/native.om` | host device (draft ggml-omega#1): 16 ops on Omega CPU code; opt-in `OmegaGB10` device (draft ggml-omega#2): MUL_MAT, RMS_NORM, swiglu on the GB10 through CUDA++ (CUDApp#139 `gemm_ex`), every other op on ggml's CPU backend; test-backend-ops against the CPU backend on the chip, MUL_MAT 871 / RMS_NORM 7 / SWIGLU 12 cases OK, 0 FAIL |
-| PyTorch | [attach/torch](attach/torch/cudapp_torch.py): `torch.library` ops `cudapp::mm` (f32, bf16, f16) and `cudapp::swiglu` (f32) calling CUDA++ (`omega_gpu_gemm_ex`, `omega_gpu_swiglu_f32`) on the GB10 | CPU tensors in and out (staged to the chip per call), no autograd; checked against torch CPU plus `torch.library.opcheck` and a mutant (`attach/torch/test_cudapp_torch.py`) |
+| PyTorch | [attach/torch](attach/torch/cudapp_torch.py): `torch.library` ops `cudapp::mm` (f32, bf16, f16) and `cudapp::swiglu` (f32) calling CUDA++ (`omega_gpu_gemm_ex`, `omega_gpu_swiglu_f32`) on the GB10 | CPU tensors in and out (staged to the chip per call), no autograd; checked against torch CPU plus `torch.library.opcheck` and a mutant (`attach/torch/test_cudapp_torch.py`); receipt `evidence/attach-gb10-20261027T0726Z/`, EXERCISED on a single GB10 |
 
-`attach/torch` is migration-pending host glue (`ctypes` at the torch ABI surface, switch `MIGRATION_PENDING`); its named successor is a binding module generated by `src/native.om` Python mode once CUDA++ entries are callable as Omega units. Neither attachment has run a model on the GB10 yet: that needs an exclusive GPU window.
+`attach/torch` is migration-pending host glue (`ctypes` at the torch ABI surface, switch `MIGRATION_PENDING`); its named successor is the `omega_native.py` binding that `tools/native` writes (the `python` word of `src/native.om`) once CUDA++ entries are callable as Omega units. Neither attachment has run a model on the GB10 yet: that needs an exclusive GPU window.
 
-## Connected repos
+## Human-Directed Agentic Engineering
 
-- [aien-dev/ggml-omega](https://github.com/aien-dev/ggml-omega): a ggml/llama.cpp backend whose op kernels are seeded-Omega units bound through this repo's [native call ABI](docs/NATIVE-ABI.md) (`f32`/`ushort` array kinds). It pins this repo's `src/native.om` by sha256.
+Development follows Human-Directed Agentic Engineering (HDAE): humans define goals, architecture, constraints, acceptance criteria, and stopping points; agents implement, execute checks, diagnose failures, and revise within those boundaries. Human review retains responsibility for claims, acceptance, and release decisions.
+
+For the documented method and a systems-software case study, see Gregory M. Kurtzer, [*Ginux: Building an Independent Kernel That Runs Linux Userspace through Human-Directed Agentic Engineering* (2026)](https://doi.org/10.5281/zenodo.23682548). This method citation does not widen the checked conversion subset or replace independent review.
 
 ## License
 

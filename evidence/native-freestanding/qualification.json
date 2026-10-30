@@ -1,0 +1,40 @@
+{
+  "evidence": "EXERCISED HOST; no GPU, service or deployment qualification",
+  "source_snapshot": "b8be22810c4e23892b893fe425e8b8adea09c1a8",
+  "qualified_paths": {
+    "src/native.om": "67ad95596d4791633d858d1330a3e6204c55233aa28916c534b713cd85a8456f",
+    "tools/native": "2a3ba02fb4addbfc51a86c385a60fa191546fbc28f81d615047f4213ebd734f8",
+    "tests/native/run.sh": "d352a7533bc5f4d5ed70450c9309d28ee6dce82759b5c82e377abf7c05582831",
+    "tests/native/test_freestanding.py": "ebf835b6e3adc7d3c987824fd18ebb420af01beb9240dab64c244de094987102",
+    "tests/native/test_private_symbols.py": "faaa52bc48268b2623b07af39dd81c91c6c53f0740e902d967d658e5303b5113",
+    "tests/native/v2/run.sh": "a646a68d7e2f8b4784bbf9e83ad925c6931279db3b3b05385ba2360f58a3a2d8"
+  },
+  "compiler_sha256": "734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61",
+  "om2_compiler_sha256": "2c82480596bbdc50cda9626866209ef662d5834f278f839ff4ce0250c495029f",
+  "commands": [
+    {
+      "argv": [
+        "sh",
+        "tests/native/run.sh"
+      ],
+      "exit": 0,
+      "log": "native-custody.log"
+    },
+    {
+      "argv": [
+        "sh",
+        "tests/native/test_build_failures.sh"
+      ],
+      "exit": 0,
+      "log": "failures-custody.log"
+    },
+    {
+      "argv": [
+        "sh",
+        "tests/native/v2/run.sh"
+      ],
+      "exit": 0,
+      "log": "v2-custody.log"
+    }
+  ]
+}

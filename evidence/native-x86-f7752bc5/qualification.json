@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "date": "2026-10-28",
+  "status": "EXERCISED",
+  "backend": "EMULATED",
+  "native_x86": "NOT_RUN",
+  "gpu": "NOT_RUN",
+  "bridge_parent": "81c7ec3d95469b8ae60b3cf6797068decc1900de",
+  "tools_native_sha256": "f28dd76cda7529a10cbb5b19e7c13a3a0d68baf9b4683347d7f45d082a577d73",
+  "suite_sha256": "476b420ec302625ac45975b7237d5ab3042cce759d6e3a68b0dd477ba1ac98a6",
+  "compiler_commit": "efd15c234afc584e1e67492e736cbb42806c2a7d",
+  "compiler_source_sha256": "e9d70e7cbe1b7026b2fcac5bbf61a64bde931b50a632c954355ba5299954a61c",
+  "baseline_omc_sha256": "734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61",
+  "x86_omc_sha256": "f7752bc5c800e85c2393a08153786d0a6bc4516c9cea955fe27624228d6d1409",
+  "qemu_source_sha256": "c7230968906fdb5540d803e2af1f515e77590a414f2a4dbd3ec9ada3c47083d0",
+  "qemu_binary_sha256": "fd7ae7768c1d698d387893688d28abde90512f1f445d171a1389110eb7c237ee",
+  "command": "python3 tests/native/x86/test_build_failures.py build/x86-controls-f7752bc5",
+  "exit": 0,
+  "environment": {
+    "OMEGA_NATIVE_OMC": "$BASELINE_OMC",
+    "OMEGA_NATIVE_X86_OMC": "$COMPILER/seed/out/omc",
+    "CC": "x86_64-linux-gnu-gcc",
+    "CXX": "$HOME/.local/opt/zig-linux-aarch64-0.13.0/zig c++ -target x86_64-linux-gnu",
+    "ZIG": "$HOME/.local/opt/zig-linux-aarch64-0.13.0/zig",
+    "GO": "$HOME/.local/opt/go1.27.3/bin/go",
+    "GOMAXPROCS": "2",
+    "QEMU_X86_64": "$BRIDGE/build/qemu-oracle/build/qemu-x86_64",
+    "OMEGA_NATIVE_X86_PYTHON": "$BRIDGE/build/x86-python/root/usr/bin/python3.12",
+    "OMEGA_NATIVE_X86_LIBPATH": "$BRIDGE/build/x86-python/root/usr/lib/x86_64-linux-gnu:$BRIDGE/build/x86-python/root/lib/x86_64-linux-gnu:/usr/x86_64-linux-gnu/lib"
+  },
+  "verdicts": [
+    "PASS failed-toolchain control ZIG",
+    "PASS failed-toolchain control GO",
+    "PASS missing Zig and Go refuse aggregate PASS (#34)",
+    "PASS x86 compiler pin",
+    "PASS mismatched x86 compiler refuses before creating outputs",
+    "PASS mismatched x86 compiler preserves previous outputs",
+    "NATIVE-X86 EMULATED PASS (six languages built and run; native x86 NOT_RUN)",
+    "NATIVE-X86 CONTROLS PASS (EMULATED; native x86 NOT_RUN)"
+  ],
+  "files_sha256": {
+    "controls.log": "9f7b394e5c3dc25ec5523d60bc38d4201e89ad4f3511cc15d7e50f604aa61635",
+    "positive.log": "6800326bc5b441772f8ff4df234bbd72ed07fb6706ce78ae04e6042de74f6ca9",
+    "missing.log": "84b08c3d179340a3b3add409dabbe4070a793b462cafebff4994911cac669378",
+    "ZIG.log": "3aeb7d2e3f016a7304db9541b969b3c0bdca776b79ef2003fcdf44bc7a187d8c",
+    "GO.log": "ba1fc602fdfa0d41741e4a979c4eb7507da0561d4193132b1a624acec5deb04a"
+  },
+  "compiler_full_differential": "FAIL: 14,930 PASS, 60 FAIL, 10 NOT_RUN, 216 EXCLUDED at the compiler pin; this bridge receipt does not qualify the compiler"
+}

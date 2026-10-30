@@ -1,0 +1,71 @@
+2799257 brk(NULL) = 0x00005555555ae000
+2799257 mmap(NULL,8192,PROT_READ|PROT_WRITE,MAP_PRIVATE|MAP_ANONYMOUS,-1,0) = 0x00002aaaab2e9000
+2799257 access("/etc/ld.so.preload",R_OK) = -1 errno=2 (No such file or directory)
+2799257 openat(-100,"$BRIDGE/build/x86-python/root/usr/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v3/libomega_native.so",O_RDONLY|O_CLOEXEC) = -1 errno=2 (No such file or directory)
+2799257 newfstatat(-100,"$BRIDGE/build/x86-python/root/usr/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v3/",0x00002aaaab2aa5a0,0) = -1 errno=2 (No such file or directory)
+2799257 openat(-100,"$BRIDGE/build/x86-python/root/usr/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v2/libomega_native.so",O_RDONLY|O_CLOEXEC) = -1 errno=2 (No such file or directory)
+2799257 newfstatat(-100,"$BRIDGE/build/x86-python/root/usr/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v2/",0x00002aaaab2aa5a0,0) = -1 errno=2 (No such file or directory)
+2799257 openat(-100,"$BRIDGE/build/x86-python/root/usr/lib/x86_64-linux-gnu/libomega_native.so",O_RDONLY|O_CLOEXEC) = -1 errno=2 (No such file or directory)
+2799257 newfstatat(-100,"$BRIDGE/build/x86-python/root/usr/lib/x86_64-linux-gnu/",0x00002aaaab2aa5a0,0) = 0
+2799257 openat(-100,"$BRIDGE/build/x86-python/root/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v3/libomega_native.so",O_RDONLY|O_CLOEXEC) = -1 errno=2 (No such file or directory)
+2799257 newfstatat(-100,"$BRIDGE/build/x86-python/root/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v3/",0x00002aaaab2aa5a0,0) = -1 errno=2 (No such file or directory)
+2799257 openat(-100,"$BRIDGE/build/x86-python/root/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v2/libomega_native.so",O_RDONLY|O_CLOEXEC) = -1 errno=2 (No such file or directory)
+2799257 newfstatat(-100,"$BRIDGE/build/x86-python/root/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v2/",0x00002aaaab2aa5a0,0) = -1 errno=2 (No such file or directory)
+2799257 openat(-100,"$BRIDGE/build/x86-python/root/lib/x86_64-linux-gnu/libomega_native.so",O_RDONLY|O_CLOEXEC) = -1 errno=2 (No such file or directory)
+2799257 newfstatat(-100,"$BRIDGE/build/x86-python/root/lib/x86_64-linux-gnu/",0x00002aaaab2aa5a0,0) = -1 errno=2 (No such file or directory)
+2799257 openat(-100,"/usr/x86_64-linux-gnu/lib/glibc-hwcaps/x86-64-v3/libomega_native.so",O_RDONLY|O_CLOEXEC) = -1 errno=2 (No such file or directory)
+2799257 newfstatat(-100,"/usr/x86_64-linux-gnu/lib/glibc-hwcaps/x86-64-v3/",0x00002aaaab2aa5a0,0) = -1 errno=2 (No such file or directory)
+2799257 openat(-100,"/usr/x86_64-linux-gnu/lib/glibc-hwcaps/x86-64-v2/libomega_native.so",O_RDONLY|O_CLOEXEC) = -1 errno=2 (No such file or directory)
+2799257 newfstatat(-100,"/usr/x86_64-linux-gnu/lib/glibc-hwcaps/x86-64-v2/",0x00002aaaab2aa5a0,0) = -1 errno=2 (No such file or directory)
+2799257 openat(-100,"/usr/x86_64-linux-gnu/lib/libomega_native.so",O_RDONLY|O_CLOEXEC) = -1 errno=2 (No such file or directory)
+2799257 newfstatat(-100,"/usr/x86_64-linux-gnu/lib/",0x00002aaaab2aa5a0,0) = 0
+2799257 openat(-100,"$BRIDGE/build/x86-suite-first/library/glibc-hwcaps/x86-64-v3/libomega_native.so",O_RDONLY|O_CLOEXEC) = -1 errno=2 (No such file or directory)
+2799257 newfstatat(-100,"$BRIDGE/build/x86-suite-first/library/glibc-hwcaps/x86-64-v3/",0x00002aaaab2aa5a0,0) = -1 errno=2 (No such file or directory)
+2799257 openat(-100,"$BRIDGE/build/x86-suite-first/library/glibc-hwcaps/x86-64-v2/libomega_native.so",O_RDONLY|O_CLOEXEC) = -1 errno=2 (No such file or directory)
+2799257 newfstatat(-100,"$BRIDGE/build/x86-suite-first/library/glibc-hwcaps/x86-64-v2/",0x00002aaaab2aa5a0,0) = -1 errno=2 (No such file or directory)
+2799257 openat(-100,"$BRIDGE/build/x86-suite-first/library/libomega_native.so",O_RDONLY|O_CLOEXEC) = 3
+2799257 read(3,0xab2aa708,832) = 832
+2799257 fstat(3,0x00002aaaab2aa5a0) = 0
+2799257 mmap(NULL,28776,PROT_READ,MAP_PRIVATE|MAP_DENYWRITE,3,0) = 0x00002aaaab2eb000
+2799257 mmap(0x00002aaaab2ec000,16384,PROT_EXEC|PROT_READ,MAP_PRIVATE|MAP_DENYWRITE|MAP_FIXED,3,0x1000) = 0x00002aaaab2ec000
+2799257 mmap(0x00002aaaab2f0000,4096,PROT_READ,MAP_PRIVATE|MAP_DENYWRITE|MAP_FIXED,3,0x5000) = 0x00002aaaab2f0000
+2799257 mmap(0x00002aaaab2f1000,8192,PROT_READ|PROT_WRITE,MAP_PRIVATE|MAP_DENYWRITE|MAP_FIXED,3,0x5000) = 0x00002aaaab2f1000
+2799257 close(3) = 0
+2799257 openat(-100,"$BRIDGE/build/x86-python/root/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",O_RDONLY|O_CLOEXEC) = -1 errno=2 (No such file or directory)
+2799257 openat(-100,"/usr/x86_64-linux-gnu/lib/libgcc_s.so.1",O_RDONLY|O_CLOEXEC) = 3
+2799257 read(3,0xab2aa6e8,832) = 832
+2799257 fstat(3,0x00002aaaab2aa580) = 0
+2799257 mmap(NULL,185256,PROT_READ,MAP_PRIVATE|MAP_DENYWRITE,3,0) = 0x00002aaaab2f3000
+2799257 mmap(0x00002aaaab2f7000,147456,PROT_EXEC|PROT_READ,MAP_PRIVATE|MAP_DENYWRITE|MAP_FIXED,3,0x4000) = 0x00002aaaab2f7000
+2799257 mmap(0x00002aaaab31b000,16384,PROT_READ,MAP_PRIVATE|MAP_DENYWRITE|MAP_FIXED,3,0x28000) = 0x00002aaaab31b000
+2799257 mmap(0x00002aaaab31f000,8192,PROT_READ|PROT_WRITE,MAP_PRIVATE|MAP_DENYWRITE|MAP_FIXED,3,0x2b000) = 0x00002aaaab31f000
+2799257 close(3) = 0
+2799257 openat(-100,"$BRIDGE/build/x86-python/root/usr/lib/x86_64-linux-gnu/libc.so.6",O_RDONLY|O_CLOEXEC) = -1 errno=2 (No such file or directory)
+2799257 openat(-100,"/usr/x86_64-linux-gnu/lib/libc.so.6",O_RDONLY|O_CLOEXEC) = 3
+2799257 read(3,0xab2aa6c8,832) = 832
+2799257 pread64(3,0x00002aaaab2aa100,784,64) = 784
+2799257 fstat(3,0x00002aaaab2aa560) = 0
+2799257 pread64(3,0x00002aaaab2aa1b0,784,64) = 784
+2799257 mmap(NULL,2170256,PROT_READ,MAP_PRIVATE|MAP_DENYWRITE,3,0) = 0x00002aaaab321000
+2799257 mmap(0x00002aaaab349000,1605632,PROT_EXEC|PROT_READ,MAP_PRIVATE|MAP_DENYWRITE|MAP_FIXED,3,0x28000) = 0x00002aaaab349000
+2799257 mmap(0x00002aaaab4d1000,323584,PROT_READ,MAP_PRIVATE|MAP_DENYWRITE|MAP_FIXED,3,0x1b0000) = 0x00002aaaab4d1000
+2799257 mmap(0x00002aaaab520000,24576,PROT_READ|PROT_WRITE,MAP_PRIVATE|MAP_DENYWRITE|MAP_FIXED,3,0x1fe000) = 0x00002aaaab520000
+2799257 mmap(0x00002aaaab526000,52624,PROT_READ|PROT_WRITE,MAP_PRIVATE|MAP_ANONYMOUS|MAP_FIXED,-1,0) = 0x00002aaaab526000
+2799257 close(3) = 0
+2799257 mmap(NULL,8192,PROT_READ|PROT_WRITE,MAP_PRIVATE|MAP_ANONYMOUS,-1,0) = 0x00002aaaab533000
+2799257 arch_prctl(4098,46912507165632,-46912507168080,136,244,0) = 0
+2799257 set_tid_address(0x2aaaab533e90) = 2799257
+2799257 set_robust_list(0x2aaaab533ea0,24) = -1 errno=38 (Function not implemented)
+2799257 Unknown syscall 334
+2799257 mprotect(0x00002aaaab520000,16384,PROT_READ) = 0
+2799257 mprotect(0x00002aaaab31f000,4096,PROT_READ) = 0
+2799257 mprotect(0x00002aaaab2f1000,4096,PROT_READ) = 0
+2799257 mprotect(0x00005555555aa000,12288,PROT_READ) = 0
+2799257 mprotect(0x00002aaaab2e2000,8192,PROT_READ) = 0
+2799257 prlimit64(0,RLIMIT_STACK,NULL,0x00002aaaab2ab0f0) = 0 ({rlim_cur=8388608,rlim_max=-1})
+2799257 poll(0x2aaaab2ab2c0,3,0) = 0
+2799257 rt_sigaction(SIGPIPE,0x00002aaaab2ab020,0x00002aaaab2ab0c0) = 0
+2799257 getrandom(0x2aaaab52b178,8,1) = 8
+2799257 brk(NULL) = 0x00005555555ae000
+2799257 brk(0x00005555555cf000) = 0x00005555555cf000
+2799257 openat(-100,"/proc/self/maps",O_RDONLY|O_CLOEXEC)qemu-x86_64: QEMU internal SIGSEGV {code=MAPERR, addr=0x20}

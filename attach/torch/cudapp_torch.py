@@ -12,8 +12,8 @@ result back. Arithmetic (CUDApp src/omega_gpu_gemm_ex.h, src/omega_gpu_elementwi
 The library is CUDA++'s libomega_gpu.a linked into one shared object (build.sh, CUDAPP_TORCH_LIB).
 
 MIGRATION-PENDING host glue (Python): torch.library registration is a Python/C++ ABI, which seeded Omega cannot
-emit yet. MIGRATION_PENDING below marks it; the named successor is a binding module emitted by omega-bridge
-src/native.om's py mode (tests/native/run.sh, tests/native/pybind.py) for an Omega unit that calls the CUDA++ entries, once Omega
+emit yet. MIGRATION_PENDING below marks it; the named successor is the omega_native.py binding that
+omega-bridge tools/native writes (the python word of src/native.om) for an Omega unit that calls the CUDA++ entries, once Omega
 code can call host functions.
 """
 import ctypes
