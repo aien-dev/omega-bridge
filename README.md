@@ -48,6 +48,8 @@ OMEGA_NATIVE_OMC=<seeded omc> tools/native build/native tests/native/madd.om
 
 That writes `libomega_native.so` and, from the same Omega signatures, `omega_native.h` (C and C++), `omega_native.py`, `omega_native.rs`, `omega_native.zig` and `omega_native.go`; a program includes or imports its file and calls `omega_madd`, nothing is declared by hand. One generator, [src/native.om](src/native.om), writes all six. Contract, limits and the qualification run: [native call ABI](docs/NATIVE-ABI.md).
 
+`f32` and `ushort` array kinds (4-byte and 2-byte elements) are qualified by `OMEGA_NATIVE_OMC=<seeded omc> sh tests/native/kinds.sh`. The contract is in [native call ABI](docs/NATIVE-ABI.md).
+
 The native target defaults to `aarch64linux`. Hosted x86-64 SysV Linux bindings
 are selected explicitly; there is no build-host architecture inference:
 
