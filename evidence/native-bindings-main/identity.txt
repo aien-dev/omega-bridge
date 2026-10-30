@@ -1,0 +1,20 @@
+date 2026-10-25T14:47:37Z
+source commit b560a8ccb38281bbbc8978bc4d8978b793012e91 (branch feat/native-bindings-main: PR #9 247bcb1 rebased onto main 012860d); run.log, g1.log, g1-lowered.log at this commit; g1-zig0.13.log and calc-manifest-zig0.13.json at b76af73
+omc /home/drakestapleton/workspace/omega-seedqual-20261025/seed/out/omc sha256 734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61
+generator src/native.om sha256 be7d150b3c932b95110c4a689fb73c2d7052ff10d7ab9f8a841e3ae87a86bd64
+tools/native sha256 288c0eeff52d22ef8dd2368cd22ae055a63fd94f0eef472a30ddda4f58871b66
+tests/native/g1/calc.om sha256 fdd1117fc7e4cafb1b7bc5ebbddfb503c38c7b01e1a3a28261bd183194c0565a (source identity)
+which on the login PATH (env -i PATH=~/.cargo/bin:/usr/local/bin:/usr/bin:/bin): rustc=/home/drakestapleton/.cargo/bin/rustc cargo=/home/drakestapleton/.cargo/bin/cargo python3=/usr/bin/python3 g++=/usr/bin/g++ zig=missing go=missing 
+PATH for run.log, g1.log: ~/.local/toolchains/zig : ~/.local/toolchains/go/bin : ~/.cargo/bin : /usr/local/bin : /usr/bin : /bin
+zig /home/drakestapleton/.local/toolchains/zig/zig 0.17.0
+go /home/drakestapleton/.local/toolchains/go/bin/go go version go1.27.3 linux/arm64
+g1-zig0.13.log: the same with /home/drakestapleton/.local/opt/zig-linux-aarch64-0.13.0 first (0.13.0)
+cc cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+python3 Python 3.12.3
+rustc rustc 1.98.1 (48a229cea 2026-09-01)
+machine Linux 7.0.0-1019-nvidia aarch64
+tests/native/run.sh: 27 PASS, 0 FAIL; NATIVE-CALL PASS (not run: none)
+tests/native/g1/run.sh: 10 PASS, 0 FAIL; G1-CALC PASS (not run: none)
+tests/native/g1/run.sh (zig 0.13): 9 PASS, 0 FAIL; G1-CALC PASS (not run: none)
+tests/native/g1/calc.lowered.om sha256 5a86d68bd0b30a89656552f6075bddbda5b12e39cd96e6ac97d03891b2b0a187 (source identity); semantic identity 8dc67eafc9e818d649f0cbcc59d226acbb7b2fd7fd4318f2e6b9a4d67a69fd1b; generated at omega-mv 2ef48347 (tests/native/g1/README.md)
+OMEGA_G1_UNIT=tests/native/g1/calc.lowered.om tests/native/g1/run.sh: 11 PASS, 0 FAIL; G1-CALC PASS (not run: none)

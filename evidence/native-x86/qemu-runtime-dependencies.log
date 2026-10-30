@@ -1,0 +1,6 @@
+	linux-vdso.so.1 (0x0000e37d325bc000)
+	libm.so.6 => /lib/aarch64-linux-gnu/libm.so.6 (0x0000e37d32220000)
+	libglib-2.0.so.0 => $BRIDGE/build/qemu-oracle/deps/root/usr/lib/aarch64-linux-gnu/libglib-2.0.so.0 (0x0000e37d320a0000)
+	libc.so.6 => /lib/aarch64-linux-gnu/libc.so.6 (0x0000e37d31ee0000)
+	/lib/ld-linux-aarch64.so.1 (0x0000e37d32580000)
+	libpcre2-8.so.0 => /lib/aarch64-linux-gnu/libpcre2-8.so.0 (0x0000e37d31e30000)

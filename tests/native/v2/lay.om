@@ -1,0 +1,45 @@
+note lay.om: an OM-2 unit for the native ABI v2 tests (tests/native/v2/run.sh): a layout parameter and
+note out parameters.
+note bridge c-type blk lay_blk
+note bridge c-define LAY_TAG_SIZE 8
+om2
+layout blk 24
+field a uint at 0 little
+field n ulong at 8 little
+field tag uchar 8 at 16 little
+end
+export fn absorb c edit blk d view uchar * to void
+s = get c a
+for i ulong len d
+s = add s uint get d i
+end
+put c a s
+put c n add get c n len d
+end
+export fn digest c view blk o out uchar 16 to ulong
+for i ulong 8
+put o i get c tag i
+end
+x = get c a
+for i ulong 4
+put o add 8 i uchar and x 255
+x = shr x 8
+end
+ret get c n
+end
+export fn swap8 d view uchar * o out uchar 8 to ulong
+for i ulong 8
+put o i get d sub 7 i
+end
+ret len d
+end
+export fn halt o out ulong 2 to void
+put o 0 7
+trap 9
+end
+export fn two a out uchar 4 b out uchar 4 to void
+for i ulong 4
+put a i uchar add i 1
+put b i uchar add i 5
+end
+end

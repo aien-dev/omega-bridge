@@ -1,0 +1,58 @@
+note vec.om: an OM-2 unit for the native ABI v2 tests (tests/native/v2/run.sh): six exports over
+note unsized views and one private helper. A loop runs at most 1000000 passes (trap 4 beyond, as in
+note OM-1), so the sums go in parts of at most 1000000 elements.
+om2
+fn psum p view uchar * to ulong
+s = ulong 0
+for i ulong len p
+s = add s ulong get p i
+end
+ret s
+end
+export fn bsum d view uchar * to ulong
+s = ulong 0
+n = len d
+for c ulong add div n 1000000 1
+o = mul c 1000000
+k = sub n o
+if gt k 1000000
+k = 1000000
+end
+s = add s psum part d o k
+end
+ret s
+end
+export fn wsum d view uint * to ulong
+s = ulong 0
+n = len d
+for c ulong add div n 1000000 1
+o = mul c 1000000
+k = sub n o
+if gt k 1000000
+k = 1000000
+end
+for i ulong k
+s = add s ulong get d add o i
+end
+end
+ret s
+end
+export fn vlen d view ulong * to ulong
+ret len d
+end
+export fn vcopy s view ushort * d edit ushort * to ulong
+for i ulong len s
+put d i get s i
+end
+ret len s
+end
+export fn vpart d view uchar * o ulong k ulong to ulong
+ret psum part d o k
+end
+export fn lsum d view long * to long
+s = long 0
+for i ulong len d
+s = add s get d i
+end
+ret s
+end

@@ -1,0 +1,13 @@
+note Nested calls use xsave, and trap recovery must not depend on unwinding RBP.
+fn trleaf x ulong to ulong
+if eq x 0
+trap 5
+end
+ret x
+end
+fn trmid x ulong to ulong
+ret trleaf x
+end
+fn trapcall x ulong to ulong
+ret trmid x
+end
