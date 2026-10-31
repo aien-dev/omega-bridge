@@ -7,7 +7,7 @@ adapts the foreign side to them.
 
 ## Target selection and compiler custody
 
-`tools/native [--target aarch64linux|x86linux] [--freestanding] OUTDIR unit.om...`
+`tools/native [--target aarch64linux|x86linux] [--freestanding] [--host] OUTDIR unit.om...`
 selects the output ABI explicitly. The default is `aarch64linux`; it keeps the
 existing generator invocation and compiler inputs unchanged. The tool does not
 infer a target from the build host or try to execute a generated library.
@@ -447,8 +447,9 @@ toolchain) with its vector count and toolchain path.
 ABI v2 adds to every v1 rule and check above; nothing in v1 changes. An OM-2 unit is one whose first
 line that is not a note (a line whose first word is `note`) is exactly `om2`; a first such line that
 starts with the word `om2` but is not exactly `om2` (`om2 diag`, `om2 fmt`) is refused. Every other
-unit is OM-1 and gets the v1 binding, byte for byte what the generator of 3f05908 writes (checked on
-every unit in `tests/native` and `tests/native/g1`, alone and as the v1 suite's set, in all six outputs).
+unit is OM-1 and gets the v1 binding, byte for byte what the generator of 74fcd43 writes (checked on
+every unit in `tests/native` and `tests/native/g1`, alone and as the v1 suite's set, in all six outputs;
+the baseline was 3f05908 until #26's f32 and ushort kinds changed the Python output for every unit).
 
 **Symbols.** Every OM-2 unit is bound as v2, whatever its parameter kinds (erratum E1): each
 `export fn NAME` (source order) gets `uint32_t omega2_NAME(uint64_t *result, ...)`; without any
@@ -534,6 +535,26 @@ other in a program, not both: each defines the functions under the same names.
 memory passed as edit. Function-mode stack exhaustion faults as in v1. Loops in the seeded compiler
 run at most 1,000,000 passes (trap 4 beyond); a unit over a longer view must loop in parts (`part`).
 
+**Host words** (`tools/native --host`; omega-mv #1008, `fn hostval` in `seed/omc/omc.om`). The OM-2
+compiler of omega-mv #1008 (omc sha256 `3988c31f9697a01f1436b7a75f6c956b37bc5301155b3ec8ca1b06b92118f7c4`)
+lets an OM-2 function unit use nine host words: `fclose fopen fstat stat getuid geteuid getgid getegid
+lstat`. Every other host word stays refused in function mode by the compiler, and OM-1 units get none.
+The bridge admits such a unit only when the caller asks: without `--host`, a unit whose source names any
+of the 83 host words (outside a note line) is refused with status 110 and nothing is installed; with
+`--host`, the nine words are admitted in an OM-2 unit and every other host word, or any host word in an
+OM-1 unit, is still refused. `src/native.om` judges the source itself (`fn hscan`): words are split at
+blanks, tabs, CR, LF and parentheses as the compiler splits them, and a line whose first word is exactly
+`note` is skipped, so a note may name a host word. The scan is conservative: a host word inside a text
+literal also counts. The identity of a unit that uses any of the nine gains ` host=w1,w2,...` (the words
+in the order above, only those used), in the embedded string and in `work/ident.txt`, which then comes
+from the generator (output word `ident`) for every OM-2 unit; a unit without host words gets the same
+bytes with and without `--host`. `--host` is AArch64 Linux only and hosted only: with `--target x86linux`
+or `--freestanding` it is refused (110) before OUTDIR is created. The words run on the calling thread
+with its credentials and file descriptors; a descriptor a unit opens is the process's descriptor until
+the unit closes it, and a trap between `fopen` and `fclose` leaks it (write units so nothing between
+them can trap). Out buffers still live on the Omega stack until the copy after status 0: a unit that
+returns a secret leaves a copy there until the thread's next call overwrites it.
+
 ### AArch64 qualification (`OMEGA_NATIVE_OMC=<seed omc> OMEGA_NATIVE_OMC2=<OM-2 omc> sh tests/native/v2/run.sh [measure]`)
 
 Recorded with the OM-2 compiler of omega-mv `om2/compiler-s4` @ f6a6492fd (draft PR #764, ledger L834),
@@ -565,6 +586,19 @@ computes the right values, and a trapping call aborts (SIGABRT). Two generator m
 prototype-only branch disabled (definitions in `omega_api_decl.h`: the freestanding build fails on the
 undeclared `abort`), and the inline branch disabled (`omega_api.h` loses `static inline`: caught by the
 byte-identity check).
+
+Host words (section 11): without `--host`, `tests/native/v2/host/hfile.om` (all nine words) is refused
+and nothing is installed; `--host --freestanding` and `--host --target x86linux` are refused before
+OUTDIR; with `--host` its identity names the nine words, and a C caller (`hcall.c`) and a Rust caller
+(`hcall.rs`) check its results against libc and `std`: the uid/gid sum, a 5-byte read, `-ENOENT` for a
+missing path, `-ELOOP` for a symlink (`fopen` with `O_NOFOLLOW`), `st_size`. The v2 set built with
+`--host` is byte-identical in all nine outputs. The generator, fed directly: `geteuid` after `(`, a tab
+and before a CR is refused without host and named with it; host words in note lines (also indented,
+tab-separated) pass without host; `(note geteuid` is not a note; `unlink` (outside the nine) and
+`geteuid` in an OM-1 unit are refused even with host; `getuidx` is not a host word. Mutant: the scan
+removed from `fn unit` lets the parenthesised `geteuid` through without host (caught). The zig and go
+callers need their toolchains on PATH (zig 0.13.0, go 1.27.3 were used); without them the run reports
+NOT_RUN and exits 1.
 
 The C caller covers: values; empty views (NULL, misaligned); NULL with len 1; misalignment by 1, 2 and
 4 for 4- and 8-byte elements and an edit; `len*size` overflow (2^62 x 4, 2^61 x 8, 2^64-1); address wrap

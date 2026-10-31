@@ -50,6 +50,8 @@ That writes `libomega_native.so` and, from the same Omega signatures, `omega_nat
 
 `f32` and `ushort` array kinds (4-byte and 2-byte elements) are qualified by `OMEGA_NATIVE_OMC=<seeded omc> sh tests/native/kinds.sh`. The contract is in [native call ABI](docs/NATIVE-ABI.md).
 
+`tools/native --host` admits an OM-2 unit that reads files and its own credentials through nine host words (`fclose fopen fstat stat getuid geteuid getgid getegid lstat`), compiled by the OM-2 compiler of omega-mv #1008; without the flag any host word is refused, and every other host word is refused either way. The words used are named in the unit's identity (` host=...`). AArch64 Linux, hosted only. Qualified by section 11 of `tests/native/v2/run.sh`; the contract is in [native call ABI](docs/NATIVE-ABI.md#abi-v2-om-2-units-omega-mv-747-contract-specomegese-om2md-section-6-errata-e1-and-e5).
+
 The native target defaults to `aarch64linux`. Hosted x86-64 SysV Linux bindings
 are selected explicitly; there is no build-host architecture inference:
 

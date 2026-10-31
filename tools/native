@@ -1,6 +1,6 @@
 #!/bin/sh
 # tools/native: one Omega library and its declarations for six languages, from Omega function units.
-# Usage: OMEGA_NATIVE_OMC=<seeded omc> tools/native [--target aarch64linux|x86linux] [--freestanding] OUTDIR unit.om [unit.om...]
+# Usage: OMEGA_NATIVE_OMC=<seeded omc> tools/native [--target aarch64linux|x86linux] [--freestanding] [--host] OUTDIR unit.om [unit.om...]
 # Each unit is one .om file in the native call subset (docs/NATIVE-ABI.md). An OM-1 unit (ABI v1): its
 # last function is bound as omega_<name>, earlier ones are private helpers. An OM-2 unit (its first
 # line that is not a note is exactly om2; ABI v2): each `export fn` (or, with none, its last function)
@@ -35,6 +35,10 @@
 # plus work/. The object has no undefined symbols except the GPU_FS_LINK libc-string allowlist.
 # Calls use the caller's stack; traps return status without TLS, heap or a hosted runtime.
 # Freestanding x86 output is not supported and is refused before creating OUTDIR.
+# --host lets OM-2 units use the file and identity host words (fclose fopen fstat stat lstat getuid
+# geteuid getgid getegid; docs/NATIVE-ABI.md, host words); every other host word, and any host word
+# in an OM-1 unit, is still refused. An OM-2 unit's identity then ends with host=<the words it uses>.
+# --host is aarch64linux only and not freestanding; either combination is refused before OUTDIR.
 set -eu
 PIN=734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61
 X86_PIN=be8c51301307555254fc59e351d281aae1aa096d91521777e33a41c8b446448a
@@ -44,9 +48,11 @@ got=$(sha256sum < "$OMC" | cut -d' ' -f1)
 [ "$got" = "$PIN" ] || { echo "tools/native: omc sha256 $got, pinned $PIN" >&2; exit 1; }
 CMODE=c
 TARGET=aarch64linux
+HOST=0
 while [ $# -gt 0 ]; do
   case "$1" in
     --freestanding) CMODE=freest; shift ;;
+    --host) HOST=1; shift ;;
     --target)
       [ $# -ge 2 ] || { echo "tools/native: --target requires aarch64linux or x86linux" >&2; exit 2; }
       TARGET=$2; shift 2 ;;
@@ -55,6 +61,8 @@ while [ $# -gt 0 ]; do
     *) break ;;
   esac
 done
+[ "$HOST" = 0 ] || [ "$CMODE" != freest ] || { echo "tools/native: --host is not freestanding; nothing installed" >&2; exit 110; }
+[ "$HOST" = 0 ] || [ "$TARGET" = aarch64linux ] || { echo "tools/native: --host is supported only for aarch64linux; nothing installed" >&2; exit 110; }
 case "$TARGET" in
   aarch64linux) ;;
   x86linux)
@@ -64,7 +72,7 @@ case "$TARGET" in
     [ "$got" = "$X86_PIN" ] || { echo "tools/native: x86 omc sha256 $got, pinned $X86_PIN" >&2; exit 1; } ;;
   *) echo "tools/native: unknown target $TARGET (expected aarch64linux or x86linux)" >&2; exit 2 ;;
 esac
-[ $# -ge 2 ] || { echo "usage: OMEGA_NATIVE_OMC=<omc> tools/native [--target aarch64linux|x86linux] [--freestanding] OUTDIR unit.om [unit.om...]" >&2; exit 2; }
+[ $# -ge 2 ] || { echo "usage: OMEGA_NATIVE_OMC=<omc> tools/native [--target aarch64linux|x86linux] [--freestanding] [--host] OUTDIR unit.om [unit.om...]" >&2; exit 2; }
 OUT=$1; shift
 mkdir -p "$OUT"
 OUT=$(cd "$OUT" && pwd)
@@ -75,6 +83,8 @@ trap 'rm -rf "$W"' EXIT
 generate() {
   if [ "$TARGET" = x86linux ]; then
     "$W/work/native-gen" "$1" x86linux
+  elif [ "$HOST" = 1 ]; then
+    "$W/work/native-gen" "$1" host
   else
     "$W/work/native-gen" "$1"
   fi
@@ -118,7 +128,13 @@ for u in "$@"; do
     exit 110
   fi
   cat "$W/one.in" >> "$W/work/units.in"
-  echo "omega-ident 1 unit=$name abi=$abi profile=$prof src=$(sha256sum < "$src" | cut -d' ' -f1) omc=$pin path=$u" >> "$W/work/ident.txt"
+  if [ $abi = 2 ]; then
+    # The generator states an OM-2 unit's identity (with host= when it uses host words).
+    id=$(generate ident < "$W/one.in")
+    printf '%s path=%s\n' "$id" "$u" >> "$W/work/ident.txt"
+  else
+    echo "omega-ident 1 unit=$name abi=$abi profile=$prof src=$(sha256sum < "$src" | cut -d' ' -f1) omc=$pin path=$u" >> "$W/work/ident.txt"
+  fi
 done
 words="c h python rust zig go"; [ $v2 = 0 ] || words="$words api apih apic"
 [ "$CMODE" != freest ] || words="freest h"

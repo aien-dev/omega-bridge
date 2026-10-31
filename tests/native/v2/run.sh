@@ -29,16 +29,17 @@ W=$O/work; GEN=$W/native-gen
 # basegen REV NAME: the historical generator, with the current C runtime prelude and only
 # private assembly-linkage directives normalized. Public wrappers, signatures, compiler bytes
 # and declarations remain byte-compared. REVs are reachable on this branch: 5458684 has the blob
-# of pre-rebase 3f05908, 3d79d77 that of 3bb8b8a.
+# of pre-rebase 3f05908, 3d79d77 that of 3bb8b8a; 74fcd43 is main before host words (after #26's
+# f32 and ushort kinds, which changed the python output and accept fsum and halve).
 basegen() {
   PRE=$(grep '^text pre ' "$ROOT/src/native.om"); export PRE
   git -C "$ROOT" show "$1:src/native.om" | awk '/^text pre /{print ENVIRON["PRE"]; next} /^text fr |^text fv /{gsub(/[.]globl ombr_code_/, ".local ombr_code_"); gsub(/[.]globl ombr_entry_/, ".local ombr_entry_"); gsub(/[.]globl ombr2_code_/, ".local ombr2_code_"); gsub(/[.]globl ombr2_entry_/, ".local ombr2_entry_")} {print}' > "$O/native-$2.om"
   "$OMC" < "$O/native-$2.om" > "$O/gen-$2"; chmod +x "$O/gen-$2"
 }
 
-# 1. ABI v1 output unchanged: the generator of 5458684 (plus #17's prelude) and this one, on every
+# 1. ABI v1 output unchanged: the generator of 74fcd43 (plus the current prelude) and this one, on every
 # existing unit alone and on the v1 suite's set, for all six outputs.
-basegen 5458684 v1
+basegen 74fcd43 v1
 same=0; diff=0; : > "$O/v1set.in"
 for u in "$ROOT"/tests/native/*.om "$ROOT"/tests/native/g1/*.om; do
   "$OMC" < "$u" > "$O/one.bin" 2> /dev/null || continue
@@ -54,7 +55,7 @@ for w in c h python rust zig go; do
   "$O/gen-v1" $w < "$O/v1set.in" > "$O/a.out"; "$GEN" $w < "$O/v1set.in" > "$O/b.out"
   if cmp -s "$O/a.out" "$O/b.out"; then same=$((same + 1)); else diff=$((diff + 1)); echo "DIFF set $w"; fi
 done
-if [ $diff = 0 ]; then pass "ABI v1 bindings byte-identical to 5458684's generator (runtime/private linkage normalized): $same unit x output cases (every tests/native and g1 unit, and the set)"
+if [ $diff = 0 ]; then pass "ABI v1 bindings byte-identical to 74fcd43's generator (runtime/private linkage normalized): $same unit x output cases (every tests/native and g1 unit, and the set)"
 else fail "ABI v1 bindings changed in $diff cases"; fi
 
 # 2. Identity: each v2 unit's embedded source digest equals sha256sum of its file (oracle), the omc digest
@@ -269,16 +270,16 @@ mut overlap '/^text fv /s/if ((sp\[i\].w == 1 || sp\[j\].w == 1 ||/if ((/' 'vcop
 mut outcopy '/^text fv /s/memmove(o\[i\].dst, buf\[i\], o\[i\].n);/;/' 'digest: tag'
 
 # 10a. The C API out of line (outputs apih, apic) for freestanding consumers. The inline header
-# (output api) stays byte for byte what 3d79d77's generator (with #17's prelude) wrote, as does every
-# other output.
-basegen 3d79d77 3bb
+# (output api) stays byte for byte what 74fcd43's generator (main before host words, with the current
+# prelude) wrote, as does every other output: a unit without host words is generated as before.
+basegen 74fcd43 main
 ok=1
-for w in c h python rust zig go api; do
-  "$O/gen-3bb" $w < "$W/units.in" > "$O/a.out"; "$GEN" $w < "$W/units.in" > "$O/b.out"
+for w in c h python rust zig go api apih apic; do
+  "$O/gen-main" $w < "$W/units.in" > "$O/a.out"; "$GEN" $w < "$W/units.in" > "$O/b.out"
   cmp -s "$O/a.out" "$O/b.out" || { ok=0; echo "DIFF $w"; }
 done
-if [ $ok = 1 ]; then pass "outputs c h python rust zig go api byte-identical to 3d79d77's generator (runtime/private linkage normalized) on the v2 set"
-else fail "an existing output changed against 3d79d77"; fi
+if [ $ok = 1 ]; then pass "outputs c h python rust zig go api apih apic byte-identical to 74fcd43's generator (runtime/private linkage normalized) on the v2 set"
+else fail "an existing output changed against 74fcd43"; fi
 FS=$O/fs; mkdir -p "$FS"
 FSCF="-std=gnu11 -ffreestanding -fno-builtin -O2 -Wall -Wextra -Werror -c"
 # fsobj DIR: the freestanding object from DIR's omega_api_decl.h; prints its undefined symbols.
@@ -323,6 +324,88 @@ if amut api '/^if eq get st 5 7$/s/7$/97/'; then
   elif ! grep -q 'static inline' "$M/api.out"; then pass "mutant api (inline wrappers lose static inline) caught by the byte-identity check"
   else fail "mutant api changed something else"; fi
 fi
+
+# 11. Host words (docs/NATIVE-ABI.md, "Host words"). An OM-2 function unit may use the nine file and
+# identity host words (omega-mv om2 function mode) only when tools/native gets --host; native.om judges
+# the source (note lines skipped, blank and parenthesis separators), the shell only sequences.
+H=$O/host; mkdir -p "$H"; HU=$T/host/hfile.om
+hw="fclose,fopen,fstat,stat,getuid,geteuid,getgid,getegid,lstat"
+# tnat NAME WANT ARGS...: tools/native ARGS must exit WANT; a refusal must leave nothing installed (its
+# OUTDIR absent, or empty as tools/native leaves it when the generator refuses a unit).
+tnat() {
+  name=$1; want=$2; shift 2; rc=0
+  "$ROOT/tools/native" "$@" > "$H/$name.log" 2>&1 || rc=$?
+  if [ $rc != "$want" ]; then fail "tools/native $name: exit $rc, want $want"; cat "$H/$name.log"; return 1; fi
+  if [ "$want" != 0 ] && [ -n "$(ls -A "$H/$name" 2> /dev/null)" ]; then fail "tools/native $name refused but installed: $(ls -A "$H/$name")"; return 1; fi
+  pass "tools/native $name: exit $want$( [ "$want" = 0 ] || printf ' (%s)' "$(tail -n 1 "$H/$name.log")")"
+}
+tnat nohost 110 "$H/nohost" "$HU" || true
+tnat hostfs 110 --host --freestanding "$H/hostfs" "$HU" || true
+tnat hostx86 110 --target x86linux --host "$H/hostx86" "$HU" || true
+if tnat hostok 0 --host "$H/hostok" "$ROOT/tests/native/madd.om" "$HU"; then
+  want="omega-ident 1 unit=hfile abi=2 profile=OM-2 src=$(sha256sum < "$HU" | cut -d' ' -f1) omc=$(sha256sum < "$OMC2" | cut -d' ' -f1) host=$hw"
+  if grep -q -F "OMEGA2_IDENT_hfile \"$want\"" "$H/hostok/omega_native.h" && grep -q -F "\"$want\"" "$H/hostok/omega_native.c" \
+    && grep -q -F "$want path=$HU" "$H/hostok/work/ident.txt"; then pass "hfile identity names its host words: host=$hw"
+  else fail "hfile identity"; grep hfile "$H/hostok/work/ident.txt" || true; fi
+  printf 'abcde' > "$H/five"; ln -sf "$H/five" "$H/link"
+  bld host-c cc -std=gnu11 -O2 -Wall -Wextra -Werror -I "$H/hostok" "$T/host/hcall.c" -L"$H/hostok" -lomega_native -Wl,-rpath,"$H/hostok" -o "$H/hcall_c" \
+    && run host-c "$H/hcall_c" "$H/five" "$H/missing" "$H/link"
+  if command -v rustc > /dev/null; then
+    cp "$T/host/hcall.rs" "$H/hostok/omega_native.rs" "$H/"
+    bld host-rust rustc -O --edition 2021 -D warnings "$H/hcall.rs" -L "$H/hostok" -C link-arg=-Wl,-rpath,"$H/hostok" -o "$H/hcall_rs" \
+      && run host-rust "$H/hcall_rs" "$H/five" "$H/missing" "$H/link"
+  else notrun="$notrun host-rust"; fi
+fi
+# --host changes nothing for units without host words: the v2 set built with --host, every output equal.
+if tnat hostset 0 --host "$H/hostset" $units; then
+  ok=1
+  for f in omega_native.c omega_native.h omega_native.py omega_native.rs omega_native.zig omega_native.go omega_api.h omega_api_decl.h omega_api_defs.c; do
+    cmp -s "$O/$f" "$H/hostset/$f" || { ok=0; echo "DIFF $f"; }
+  done
+  if [ $ok = 1 ]; then pass "--host is inert for the v2 set (no host words): all nine generated files byte-identical"; else fail "--host changed a unit without host words"; fi
+fi
+# The scanner, fed straight to native-gen: source forms the compiler accepts (OMC2 compiles each), and
+# sources framed with a clean unit's code to reach the forms the compilers refuse (OM-1, unlink).
+# frame SRC BIN OUT: the tools/native framing, with the omega-unit line when SRC is OM-2.
+frame() {
+  { cat "$1"; printf '\0'; printf '%08d' "$(wc -c < "$2")"; cat "$2"
+    [ "$(sed -n '/^ *note\( \|$\)/d; p; q' "$1")" != om2 ] || printf 'omega-unit hu %s\n' "$(sha256sum < "$OMC2" | cut -d' ' -f1)"
+  } > "$3"
+}
+# gcase NAME SRC BIN NOHOST HOST: native-gen c on the frame, without and with host, must exit NOHOST and
+# HOST; with HOST 0, ident must carry exactly the host suffix given in HW (empty: no host= at all).
+gcase() {
+  frame "$2" "$3" "$H/$1.in"; a=0; b=0
+  "$GEN" c < "$H/$1.in" > /dev/null 2>&1 || a=$?
+  "$GEN" c host < "$H/$1.in" > /dev/null 2>&1 || b=$?
+  id=""; [ "$b" != 0 ] || [ "$(sed -n '/^ *note\( \|$\)/d; p; q' "$2")" != om2 ] || id=$("$GEN" ident host < "$H/$1.in")
+  case "$id" in *" host="*) got=${id##* host=};; *) got="";; esac
+  if [ $a = "$4" ] && [ $b = "$5" ] && [ "$got" = "$HW" ]; then pass "native-gen $1: exit $a without host, $b with host${HW:+, host=$HW}"
+  else fail "native-gen $1: exit $a/$b (want $4/$5), host=$got (want $HW)"; fi
+}
+printf 'om2\nexport fn a to ulong\nx = ulong 7\nret x\nend\n' > "$H/clean.om"; "$OMC2" < "$H/clean.om" > "$H/clean.bin"
+printf 'fn a to ulong\nx = ulong 7\nret x\nend\n' > "$H/clean1.om"; "$OMC" < "$H/clean1.om" > "$H/clean1.bin"
+HW="" gcase clean "$H/clean.om" "$H/clean.bin" 0 0
+HW="" gcase clean1 "$H/clean1.om" "$H/clean1.bin" 0 0
+for c in paren:'x = ulong (geteuid)' tab:"$(printf 'x = ulong\tgeteuid')" cr:"$(printf 'x = ulong geteuid\r')"; do
+  printf 'om2\nexport fn a to ulong\n%s\nret x\nend\n' "${c#*:}" > "$H/${c%%:*}.om"
+  if "$OMC2" < "$H/${c%%:*}.om" > "$H/${c%%:*}.bin" 2> /dev/null; then HW=geteuid gcase "${c%%:*}" "$H/${c%%:*}.om" "$H/${c%%:*}.bin" 110 0
+  else fail "OMC2 refuses the ${c%%:*} form"; fi
+done
+printf 'om2\nnote uses unlink fopen geteuid only in a note\n  note\tlstat after blanks\nexport fn a to ulong\nx = ulong 7\nret x\nend\n' > "$H/note.om"
+"$OMC2" < "$H/note.om" > "$H/note.bin"; HW="" gcase note "$H/note.om" "$H/note.bin" 0 0
+printf 'om2\nexport fn a to ulong\nx = ulong 7 (note geteuid\nret x\nend\n' > "$H/pnote.om"; HW=geteuid gcase pnote "$H/pnote.om" "$H/clean.bin" 110 0
+printf 'om2\nexport fn a to ulong\nx = unlink 7\nret x\nend\n' > "$H/unlink.om"; HW="" gcase unlink "$H/unlink.om" "$H/clean.bin" 110 110
+printf 'fn a to ulong\nx = ulong geteuid\nret x\nend\n' > "$H/om1.om"; HW="" gcase om1 "$H/om1.om" "$H/clean1.bin" 110 110
+printf 'om2\nexport fn a to ulong\nx = ulong getuidx\nret x\nend\n' > "$H/near.om"; HW="" gcase near "$H/near.om" "$H/clean.bin" 0 0
+# Mutant: the scan disabled in fn unit; the paren case must then pass without host, and be caught.
+M=$O/hmut; mkdir -p "$M"
+sed '/^hscan p q v$/s/^/note /' "$ROOT/src/native.om" > "$M/native.om"
+if [ "$(diff "$ROOT/src/native.om" "$M/native.om" | grep -c '^<' || true)" = 1 ] && "$OMC" < "$M/native.om" > "$M/gen"; then
+  chmod +x "$M/gen"; rc=0; "$M/gen" c < "$H/paren.in" > /dev/null 2>&1 || rc=$?
+  if [ $rc = 0 ]; then pass "mutant hscan-off caught: paren case exits 0 without host (the check above wants 110)"
+  else fail "mutant hscan-off not caught (exit $rc)"; fi
+else fail "mutant hscan-off did not apply"; fi
 
 # 10. Cost (HOST): call overhead, stack switch, copies, small and large views.
 if [ "${1:-}" = measure ]; then
