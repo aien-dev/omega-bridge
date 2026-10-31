@@ -1,0 +1,1216 @@
+note SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+note Portable scalar freest profile. Lexer, names and typed nodes derived from toc.om at dfd8393.
+note Entire unit is structurally checked before stdout, including unused helpers.
+note Supported: integer scalar signatures/constants/locals, if/else/ret, acyclic calls,
+note unsigned wrap arithmetic, bitwise operations and literal-count shifts below operand width, comparisons, safe widening casts.
+note No loops, storage, arrays, text, main, floats, host words, recursion or potentially trapping operations.
+global src uchar 65536
+global slen ulong 1
+global cur ulong 1
+global line ulong 1
+global tk ulong 1
+global tw ulong 1
+global tl ulong 1
+global ts ulong 1
+global held ulong 1
+global outb uchar 262144
+global oc ulong 1
+global msg uchar 64
+global digs uchar 24
+global mc ulong 1
+global nf ulong 1
+global fn_off ulong 64
+global fn_nl ulong 64
+global fn_ret ulong 64
+global fn_np ulong 64
+global fn_pt ulong 384
+global fn_poff ulong 384
+global fn_pnl ulong 384
+global nloc ulong 1
+global loc_off ulong 32
+global loc_nl ulong 32
+global loc_ty ulong 32
+global bd ulong 1
+global bk ulong 32
+global cfi ulong 1
+global hasmain ulong 1
+
+global nn ulong 1
+global nk ulong 1024
+global nt ulong 1024
+global na ulong 1024
+global nb ulong 1024
+global nv ulong 1024
+global nx ulong 1024
+global args ulong 6144
+global saved ulong 32
+note Signature metadata matches the separately seeded checked frontend.
+global seeded ulong 1
+global nc ulong 1
+global co_off ulong 32
+global co_nl ulong 32
+global co_ty ulong 32
+global co_val ulong 32
+global co_neg ulong 32
+global edges ulong 4096
+text cword "const"
+text capmsg "unsupported freest scalar capability\n"
+
+text preamble "/* Omega Bridge portable nontrapping scalar profile. No host runtime. */\n#include <stdint.h>\n#if defined(__GNUC__)\n#pragma GCC diagnostic push\n#pragma GCC diagnostic ignored \"-Wunused-function\"\n#pragma GCC diagnostic ignored \"-Wunused-parameter\"\n#pragma GCC diagnostic ignored \"-Wunused-variable\"\n#endif\nstatic unsigned ombr_fs_width(unsigned t){static const unsigned w[]={0,1,8,16,32,64,8,16,32,64};return w[t];}\nstatic int ombr_fs_valid(unsigned t,uint64_t v){unsigned w=ombr_fs_width(t);if(t<6)return w==64||v<((uint64_t)1<<w);if(w==64)return 1;uint64_t m=(uint64_t)1<<(w-1);return v<m||v>=UINT64_MAX-m+1;}\nstatic uint64_t ombr_fs_op(unsigned op,unsigned t,uint64_t a,uint64_t b){unsigned w=ombr_fs_width(t);uint64_t mask=UINT64_MAX>>(64-w);if(op>=6&&op<=11){uint64_t x=a,y=b;if(t>=6){x^=(uint64_t)1<<63;y^=(uint64_t)1<<63;}switch(op){case 6:return x==y;case 7:return x!=y;case 8:return x<y;case 9:return x<=y;case 10:return x>y;default:return x>=y;}}switch(op){case 1:return (a+b)&mask;case 2:return (a-b)&mask;case 3:return (a*b)&mask;case 12:return a&b;case 13:return a|b;case 14:return a^b;case 15:return (a<<b)&mask;case 16:return a>>b;case 17:return (0-a)&mask;default:return t==1?!a:t>=6?~a:(~a)&mask;}}\n"
+text tail "#if defined(__GNUC__)\n#pragma GCC diagnostic pop\n#endif\n"
+text cstatic "static uint64_t "
+text cuint "uint64_t "
+text cvoid "void"
+text cret "return "
+text cif "if("
+text celse "}else{\n"
+text cclose "}\n"
+text copen "){\n"
+text cul "ULL"
+text cop "ombr_fs_op("
+text cvalid "if(!ombr_fs_valid("
+text cbad "))return 32;\n"
+text cexport "uint32_t omega_"
+text cresult "uint64_t *result"
+text cptr "){\nif(!result || (uintptr_t)result%_Alignof(uint64_t) || (uintptr_t)result>UINTPTR_MAX-sizeof(uint64_t))return 32;\n"
+text cstore "*result="
+text cdone ");\nreturn 0;\n}\n"
+text cproto ");\n"
+
+fn mputb b uchar to void
+m = get mc 0
+put msg m b
+put mc 0 add m 1
+end
+
+fn mputn v ulong to void
+d = new uchar 20 0
+i = ulong 0
+x = v
+put d 0 uchar add rem x 10 48
+x = div x 10
+i = add i 1
+while gt x 0
+put d i uchar add rem x 10 48
+x = div x 10
+i = add i 1
+end
+j = i
+while gt j 0
+j = sub j 1
+mputb get d j
+end
+end
+
+fn fail code ulong to void
+put mc 0 0
+mputb 116
+mputb 111
+mputb 99
+mputb 58
+mputb 32
+mputb 108
+mputb 105
+mputb 110
+mputb 101
+mputb 32
+mputn get line 0
+mputb 58
+mputb 32
+mputb 101
+mputb 114
+mputb 114
+mputb 111
+mputb 114
+mputb 32
+mputn code
+mputb 10
+w = write 2 msg 0 get mc 0
+if eq code 24
+w = write 2 capmsg 0 len capmsg
+end
+exit int code
+end
+
+fn e_b c ulong to void
+o = get oc 0
+if ge o 262144
+fail 14
+end
+put outb o uchar c
+put oc 0 add o 1
+end
+
+fn e_src a ulong n ulong to void
+i = ulong 0
+while lt i n
+e_b ulong get src add a i
+i = add i 1
+end
+end
+
+fn isw w ulong to ulong
+if and eq get tk 0 1 eq get tw 0 w
+ret 1
+end
+ret 0
+end
+
+fn tok_num to void
+v = ulong 0
+i = ulong 0
+minus = ulong 0
+p = get ts 0
+if eq get src p 45
+minus = 1
+i = 1
+end
+while lt i get tl 0
+b = get src add p i
+v = add mul v 10 sub ulong b ulong 48
+i = add i 1
+end
+if eq minus 1
+v = sub 0 v
+end
+put tw 0 v
+put tk 0 2
+end
+
+fn tok2 c uchar to void
+put ts 0 get cur 0
+w = ulong 0
+sh = ulong 0
+n = ulong 0
+go = ulong 1
+while eq go 1
+if ge get cur 0 get slen 0
+go = 0
+else
+b = get src get cur 0
+if le b 32
+go = 0
+else
+if lt n 8
+w = or w shl ulong b sh
+sh = add sh 8
+end
+n = add n 1
+put cur 0 add get cur 0 1
+end
+end
+end
+put tw 0 w
+put tl 0 n
+f = get src get ts 0
+num = ulong 0
+if eq f 45
+num = 1
+end
+if and ge f 48 le f 57
+num = 1
+end
+if eq num 1
+tok_num
+else
+put tk 0 1
+end
+end
+
+fn tok to void
+if eq get held 0 1
+put held 0 0
+ret
+end
+go = ulong 1
+while eq go 1
+if ge get cur 0 get slen 0
+put tk 0 3
+ret
+end
+c = get src get cur 0
+if or or eq c 32 eq c 9 eq c 13
+put cur 0 add get cur 0 1
+else
+if eq c 10
+put cur 0 add get cur 0 1
+put line 0 add get line 0 1
+put tk 0 0
+ret
+end
+if lt c 32
+fail 16
+end
+tok2 c
+ret
+end
+end
+end
+
+fn ty_of w ulong to ulong
+if eq w 1819242338
+ret 1
+end
+if eq w 491260502901
+ret 2
+end
+if eq w 128034844210037
+ret 3
+end
+if eq w 1953393013
+ret 4
+end
+if eq w 444234427509
+ret 5
+end
+if eq w 1702132066
+ret 6
+end
+if eq w 500136110195
+ret 7
+end
+if eq w 7630441
+ret 8
+end
+if eq w 1735290732
+ret 9
+end
+ret 0
+end
+
+fn signed t ulong to ulong
+if ge t 6
+ret 1
+end
+ret 0
+end
+
+fn same_name o ulong n ulong to ulong
+if ne n get tl 0
+ret 0
+end
+i = ulong 0
+while lt i n
+if ne get src add o i get src add get ts 0 i
+ret 0
+end
+i = add i 1
+end
+ret 1
+end
+
+fn loc_of to ulong
+i = ulong 0
+while lt i get nloc 0
+if eq same_name get loc_off i get loc_nl i 1
+ret i
+end
+i = add i 1
+end
+ret 99
+end
+
+fn fn_of to ulong
+i = ulong 0
+while lt i get nf 0
+if eq same_name get fn_off i get fn_nl i 1
+ret i
+end
+i = add i 1
+end
+ret 99
+end
+
+fn kwconst to ulong
+if or eq get seeded 0 0 ne get tl 0 len cword
+ret 0
+end
+for i ulong len cword
+if ne get src add get ts 0 i get cword i
+ret 0
+end
+end
+ret 1
+end
+
+fn constof to ulong
+i = ulong 0
+while lt i get nc 0
+if eq same_name get co_off i get co_nl i 1
+ret i
+end
+i = add i 1
+end
+ret 99
+end
+
+note A length is a literal or a previously checked unsigned numeric constant.
+
+fn parsecon to void
+tok
+if ne get tk 0 1
+fail 16
+end
+i = get nc 0
+if ge i 32
+fail 14
+end
+if ne constof 99
+fail 10
+end
+put co_off i get ts 0
+put co_nl i get tl 0
+tok
+t = ty_of get tw 0
+if eq t 0
+fail 7
+end
+tok
+if ne get tk 0 2
+fail 24
+end
+negative = ulong 0
+if eq get src get ts 0 45
+negative = 1
+end
+n = node 1 0 0 negative get tw 0
+checknum n t
+put co_ty i t
+put co_val i get nv n
+put co_neg i get nb n
+put nc 0 add i 1
+end
+
+fn add_loc o ulong n ulong ty ulong to void
+i = get nloc 0
+if ge i 32
+fail 14
+end
+put loc_off i o
+put loc_nl i n
+put loc_ty i ty
+put nloc 0 add i 1
+end
+
+fn caplim n ulong old ulong ext ulong code ulong to void
+if eq get seeded 0 0
+if ge n old
+fail code
+end
+else
+if ge n ext
+fail code
+end
+end
+end
+
+fn walk_sig rec ulong to void
+tok
+if ne get tk 0 1
+fail 16
+end
+caplim get tl 0 9 65 13
+ix = get nf 0
+if eq rec 1
+if ne fn_of 99
+fail 10
+end
+caplim ix 32 64 14
+put fn_off ix get ts 0
+put fn_nl ix get tl 0
+put fn_np ix 0
+if eq get tw 0 1852399981
+put hasmain 0 1
+end
+put cfi 0 ix
+else
+put cfi 0 fn_of
+if eq get cfi 0 99
+fail 3
+end
+end
+tok
+while eq isw 28532 0
+if ne get tk 0 1
+fail 16
+end
+po = get ts 0
+pn = get tl 0
+tok
+if or eq isw 2003134838 1 eq isw 1953064037 1
+fail 24
+end
+pty = ty_of get tw 0
+if eq pty 0
+fail 7
+end
+if eq rec 1
+caplim get fn_np ix 4 6 24
+slot = add mul ix 6 get fn_np ix
+put fn_pt slot pty
+put fn_poff slot po
+put fn_pnl slot pn
+put fn_np ix add get fn_np ix 1
+end
+tok
+end
+tok
+rt = ulong 10
+if eq isw 1684631414 0
+rt = ty_of get tw 0
+if eq rt 0
+fail 7
+end
+end
+if eq rec 1
+put fn_ret ix rt
+put nf 0 add ix 1
+end
+end
+
+fn e_comma to void
+e_b 44
+e_b 32
+end
+
+fn e_dec v ulong to void
+x = v
+p = ulong 0
+put digs 0 uchar add rem x 10 48
+x = div x 10
+p = add p 1
+while gt x 0
+put digs p uchar add rem x 10 48
+x = div x 10
+p = add p 1
+end
+while gt p 0
+p = sub p 1
+e_b ulong get digs p
+end
+end
+
+fn op_of w ulong to ulong
+if eq w 6579297
+ret 1
+end
+if eq w 6452595
+ret 2
+end
+if eq w 7107949
+ret 3
+end
+if eq w 7760228
+ret 4
+end
+if eq w 7169394
+ret 5
+end
+if eq w 29029
+ret 6
+end
+if eq w 25966
+ret 7
+end
+if eq w 29804
+ret 8
+end
+if eq w 25964
+ret 9
+end
+if eq w 29799
+ret 10
+end
+if eq w 25959
+ret 11
+end
+if eq w 6581857
+ret 12
+end
+if eq w 29295
+ret 13
+end
+ret 0
+end
+
+fn node k ulong t ulong a ulong b ulong v ulong to ulong
+n = get nn 0
+if ge n 1024
+fail 14
+end
+put nk n k
+put nt n t
+put na n a
+put nb n b
+put nv n v
+put nn 0 add n 1
+ret n
+end
+
+fn width t ulong to ulong
+if eq t 1
+ret 1
+end
+if or eq t 2 eq t 6
+ret 8
+end
+if or eq t 3 eq t 7
+ret 16
+end
+if or eq t 4 eq t 8
+ret 32
+end
+ret 64
+end
+
+fn checknum n ulong t ulong to void
+v = get nv n
+isneg = get nb n
+w = width t
+if eq signed t 1
+lim = shl ulong 1 sub w 1
+if eq isneg 1
+if gt sub 0 v lim
+fail 8
+end
+else
+if ge v lim
+fail 8
+end
+end
+else
+if eq isneg 1
+fail 8
+end
+if lt w 64
+if ge v shl ulong 1 w
+fail 8
+end
+end
+end
+put nt n t
+end
+
+fn expect n ulong t ulong to void
+if eq get nt n 0
+checknum n t
+else
+if ne get nt n t
+fail 7
+end
+end
+end
+
+fn named ch ulong n ulong to void
+e_b ch
+e_dec n
+end
+
+fn emitstr k ulong to void
+if eq k 0
+for j ulong len preamble
+e_b ulong get preamble j
+end
+ret
+end
+if eq k 1
+for j ulong len tail
+e_b ulong get tail j
+end
+ret
+end
+if eq k 2
+for j ulong len cstatic
+e_b ulong get cstatic j
+end
+ret
+end
+if eq k 3
+for j ulong len cuint
+e_b ulong get cuint j
+end
+ret
+end
+if eq k 4
+for j ulong len cvoid
+e_b ulong get cvoid j
+end
+ret
+end
+if eq k 5
+for j ulong len cret
+e_b ulong get cret j
+end
+ret
+end
+if eq k 6
+for j ulong len cif
+e_b ulong get cif j
+end
+ret
+end
+if eq k 7
+for j ulong len celse
+e_b ulong get celse j
+end
+ret
+end
+if eq k 8
+for j ulong len cclose
+e_b ulong get cclose j
+end
+ret
+end
+if eq k 9
+for j ulong len copen
+e_b ulong get copen j
+end
+ret
+end
+if eq k 10
+for j ulong len cul
+e_b ulong get cul j
+end
+ret
+end
+if eq k 11
+for j ulong len cop
+e_b ulong get cop j
+end
+ret
+end
+if eq k 12
+for j ulong len cvalid
+e_b ulong get cvalid j
+end
+ret
+end
+if eq k 13
+for j ulong len cbad
+e_b ulong get cbad j
+end
+ret
+end
+if eq k 14
+for j ulong len cexport
+e_b ulong get cexport j
+end
+ret
+end
+if eq k 15
+for j ulong len cresult
+e_b ulong get cresult j
+end
+ret
+end
+if eq k 16
+for j ulong len cptr
+e_b ulong get cptr j
+end
+ret
+end
+if eq k 17
+for j ulong len cstore
+e_b ulong get cstore j
+end
+ret
+end
+if eq k 18
+for j ulong len cdone
+e_b ulong get cdone j
+end
+ret
+end
+if eq k 19
+for j ulong len cproto
+e_b ulong get cproto j
+end
+ret
+end
+fail 24
+end
+
+
+fn namescan to void
+put cur 0 1
+put line 0 1
+put held 0 0
+tok
+while ne get tk 0 3
+if eq isw 28262 1
+walk_sig 1
+else
+if eq kwconst 1
+parsecon
+end
+end
+while and ne get tk 0 0 ne get tk 0 3
+tok
+end
+if ne get tk 0 3
+tok
+end
+end
+if or eq get nf 0 0 eq get hasmain 0 1
+fail 24
+end
+for f ulong get nf 0
+if eq get fn_ret f 10
+fail 24
+end
+end
+end
+
+note Expression nodes are shared with the checked hosted converter, but the accepted
+note operations here must be total over every admitted scalar value, not just literals.
+fn expr exp ulong to ulong
+tok
+if eq get tk 0 2
+negative = ulong 0
+if eq get src get ts 0 45
+negative = 1
+end
+n = node 1 0 0 negative get tw 0
+if gt exp 0
+checknum n exp
+end
+ret n
+end
+if ne get tk 0 1
+fail 4
+end
+w = get tw 0
+if or eq w 1702195828 eq w 435728179558
+bv = ulong 0
+if eq w 1702195828
+bv = 1
+end
+ret node 1 1 0 0 bv
+end
+t = ty_of w
+if gt t 0
+a = expr 0
+if eq get nt a 0
+checknum a t
+ret a
+end
+s = get nt a
+if or and ge t 6 lt s 6 and lt t 6 ge s 6
+fail 24
+end
+if lt width t width s
+fail 24
+end
+ret node 4 t a 0 0
+end
+op = op_of w
+if eq w 7499640
+op = 14
+end
+if eq w 7104627
+op = 15
+end
+if eq w 7497843
+op = 16
+end
+if eq w 6776174
+op = 17
+end
+if eq w 7630702
+op = 18
+end
+if or eq op 4 eq op 5
+fail 24
+end
+if gt op 0
+a = expr 0
+b = ulong 0
+if lt op 17
+b = expr 0
+if and eq get nt a 0 eq get nt b 0
+fail 11
+end
+if eq get nt a 0
+checknum a get nt b
+end
+if eq get nt b 0
+checknum b get nt a
+end
+if ne get nt a get nt b
+fail 7
+end
+else
+if eq get nt a 0
+fail 11
+end
+end
+t = get nt a
+if or eq op 15 eq op 16
+if or eq t 1 ge t 6
+fail 24
+end
+if ne get nk b 1
+fail 24
+end
+if ge get nv b width t
+fail 24
+end
+end
+if or le op 3 eq op 17
+if or eq t 1 ge t 6
+fail 24
+end
+end
+rt = t
+if and ge op 6 le op 11
+rt = 1
+end
+n = node 3 rt a b op
+put nx n t
+ret n
+end
+c = constof
+if ne c 99
+ret node 1 get co_ty c 0 get co_neg c get co_val c
+end
+f = fn_of
+if ne f 99
+ret callnode f
+end
+l = loc_of
+if eq l 99
+fail 24
+end
+ret node 2 get loc_ty l l 0 0
+end
+
+fn callnode f ulong to ulong
+put edges add mul get cfi 0 64 f 1
+n = node 7 get fn_ret f 0 0 f
+i = ulong 0
+while lt i get fn_np f
+slot = add mul f 6 i
+arg = expr get fn_pt slot
+expect arg get fn_pt slot
+put args add mul n 6 i arg
+i = add i 1
+end
+ret n
+end
+
+fn eexpr n ulong to void
+k = get nk n
+a = get na n
+b = get nb n
+v = get nv n
+if eq k 1
+e_dec v
+emitstr 10
+ret
+end
+if eq k 2
+named 118 a
+ret
+end
+if eq k 4
+eexpr a
+ret
+end
+if eq k 3
+emitstr 11
+e_dec v
+e_comma
+e_dec get nx n
+e_comma
+eexpr a
+e_comma
+if lt v 17
+eexpr b
+else
+e_b 48
+end
+e_b 41
+ret
+end
+if eq k 7
+named 102 v
+e_b 40
+for i ulong get fn_np v
+if gt i 0
+e_comma
+end
+eexpr get args add mul n 6 i
+end
+e_b 41
+ret
+end
+fail 24
+end
+
+fn signature f ulong to void
+emitstr 2
+named 102 f
+e_b 40
+for i ulong get fn_np f
+if gt i 0
+e_comma
+end
+emitstr 3
+named 118 i
+end
+if eq get fn_np f 0
+emitstr 4
+end
+e_b 41
+end
+
+fn eassign to void
+o = get ts 0
+n = get tl 0
+known = loc_of
+if gt n 8
+fail 13
+end
+tok
+if ne isw 61 1
+fail 24
+end
+t = ulong 0
+if ne known 99
+t = get loc_ty known
+end
+v = expr t
+if or eq get nt v 0 eq get nt v 10
+fail 7
+end
+if eq known 99
+known = get nloc 0
+add_loc o n get nt v
+emitstr 3
+else
+expect v t
+end
+named 118 known
+e_b 61
+eexpr v
+e_b 59
+e_b 10
+end
+
+fn eone to ulong
+w = get tw 0
+if eq w 1702129518
+while and ne get tk 0 0 ne get tk 0 3
+tok
+end
+put held 0 1
+ret 1
+end
+if eq w 6581861
+d = sub get bd 0 1
+put bd 0 d
+put nloc 0 get saved d
+emitstr 8
+if eq d 0
+ret 0
+end
+ret 1
+end
+if eq w 1702063205
+d = sub get bd 0 1
+if ne get bk d 2
+fail 15
+end
+put nloc 0 get saved d
+put bk d 3
+emitstr 7
+ret 1
+end
+if eq w 26217
+v = expr 1
+expect v 1
+emitstr 6
+eexpr v
+emitstr 9
+d = get bd 0
+if ge d 32
+fail 14
+end
+put bk d 2
+put saved d get nloc 0
+put bd 0 add d 1
+ret 1
+end
+if eq w 7628146
+t = get fn_ret get cfi 0
+v = expr t
+expect v t
+emitstr 5
+eexpr v
+e_b 59
+e_b 10
+ret 1
+end
+eassign
+ret 1
+end
+
+fn efn to void
+walk_sig 0
+f = get cfi 0
+signature f
+e_b 123
+e_b 10
+put nloc 0 0
+for i ulong get fn_np f
+s = add mul f 6 i
+add_loc get fn_poff s get fn_pnl s get fn_pt s
+end
+put bd 0 1
+put saved 0 0
+go = ulong 1
+while eq go 1
+tok
+if eq get tk 0 3
+fail 15
+end
+if ne get tk 0 0
+put nn 0 0
+go = eone
+tok
+if and ne get tk 0 0 ne get tk 0 3
+fail 16
+end
+put held 0 1
+end
+end
+end
+
+fn spread k ulong i ulong to void
+for j ulong get nf 0
+if eq get edges add mul k 64 j 1
+put edges add mul i 64 j 1
+end
+end
+end
+
+note Transitive closure rejects all recursive cycles, even in unexported helpers.
+fn acyclic to void
+for k ulong get nf 0
+for i ulong get nf 0
+if eq get edges add mul i 64 k 1
+spread k i
+end
+end
+end
+for i ulong get nf 0
+if eq get edges add mul i 64 i 1
+fail 24
+end
+end
+end
+
+fn exdecl f ulong to void
+emitstr 14
+e_src get fn_off f get fn_nl f
+e_b 40
+emitstr 15
+for i ulong get fn_np f
+e_comma
+emitstr 3
+named 112 i
+end
+end
+
+fn exportfn f ulong to void
+exdecl f
+emitstr 16
+for i ulong get fn_np f
+emitstr 12
+e_dec get fn_pt add mul f 6 i
+e_comma
+named 112 i
+emitstr 13
+end
+emitstr 17
+named 102 f
+e_b 40
+for i ulong get fn_np f
+if gt i 0
+e_comma
+end
+named 112 i
+end
+emitstr 18
+end
+
+fn generate to void
+put oc 0 0
+emitstr 0
+for f ulong get nf 0
+signature f
+e_b 59
+e_b 10
+end
+put cur 0 1
+put line 0 1
+put held 0 0
+tok
+while ne get tk 0 3
+if eq isw 28262 1
+efn
+else
+if or eq kwconst 1 eq isw 1702129518 1
+while and ne get tk 0 0 ne get tk 0 3
+tok
+end
+else
+if ne get tk 0 0
+fail 24
+end
+end
+end
+tok
+end
+acyclic
+exportfn sub get nf 0 1
+emitstr 1
+end
+
+fn main to int
+off = ulong 0
+go = ulong 1
+while eq go 1
+n = read 0 src off sub 65536 off
+if lt n 0
+fail 1
+end
+if eq n 0
+go = 0
+else
+off = add off ulong n
+if ge off 65536
+fail 14
+end
+end
+end
+put slen 0 off
+put seeded 0 1
+put line 0 1
+mode = get src 0
+if and ne mode 70 ne mode 72
+fail 24
+end
+namescan
+generate
+if eq mode 72
+put oc 0 0
+exdecl sub get nf 0 1
+emitstr 19
+end
+w = write 1 outb 0 get oc 0
+if ne w long get oc 0
+ret 1
+end
+ret 0
+end

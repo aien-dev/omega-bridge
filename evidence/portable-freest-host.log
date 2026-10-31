@@ -1,0 +1,69 @@
+Portable scalar freest targeted host evidence, 2026-10-28
+Base: omega-bridge dfd8393aa3d4a67280349921c479b8dd52f88e58
+Isolated worktree: /tmp/bridge-portable-scalar-freest
+Branch: feat/portable-scalar-freest
+No original worktree, src/toc.om, historical receipt, device, GPU or live service changed.
+
+Compiler fingerprints observed with sha256sum:
+191b776ef98821597c3e30655da6d680a9b66edbc9ceaca3c39c61ea6df098e9 /home/drakestapleton/workspace/omega-toc/seed/out/omc
+2c82480596bbdc50cda9626866209ef662d5834f278f839ff4ce0250c495029f /home/drakestapleton/workspace/omega-review/seed/out/omc
+Baseline compiler checkout: 29b12760f4c962606411d6bf25032aedef063301
+Frontend checkout HEAD: f1b9ecb5d13f3b7303c055a187fff06e802eb952 (the binary fingerprint above, not this HEAD, is the wrapper trust pin).
+CUDApp checkout HEAD observed: 3e4145d32be3a0bbc0ccce40374f8d7f82834c1c
+Actual root source fingerprints:
+e751e8fa8a624e214acf435f47e2f4d70fe2a2c56bffdd42edf36ca40fa16c33 om/pipeline/revision.om
+aa3426291cc008991d5278538594905c89484fa14b2cbd772d391d6f4d4e1b8f om/pipeline/epoch.om
+
+Implementation/test fingerprints:
+6e4f5099713d437229d890f1870908dcdf7c6bbb1ae2c52aae01170c57a0fd98 src/freest.om
+51b41794e7001c5606b715fd7de8a34ec935a6e4e4bc1da36ad08102c009537d tools/bridge-freest
+8aacc761963fef502275ab7edd4719f6cf3f9c90ea1f3f787ec3a75a087a1666 tests/freest.py
+
+Commands (in isolated worktree):
+export OMEGA_SEED=/home/drakestapleton/workspace/omega-toc/seed/out/omc
+export OMEGA_SEEDED_OMC=/home/drakestapleton/workspace/omega-review/seed/out/omc
+sh tools/build.sh
+Observed: exit 0.
+
+HOSTED_OPT=0 FREEST_CUDAPP_ROOT=/tmp/cudapp-ampere-port python3 tests/freest.py
+Observed exit 0, Linux AArch64 host:
+PASS hosted roots at O0; import-free freest roots at O0/O2; MAX boundaries, checked ABI, arbitrary helper names, wrap, signed comparisons and branch locals
+PASS O0/O2 objects and -r -nostdlib link: nm -u empty; no TLS sections
+PASS wrong-result negative control exits 10
+PASS 23 whole-unit refusal controls in c and h modes, including unused helpers; stdout empty
+PASS direct structural converter refusals independently of frontend, including recursive call graph
+
+HOSTED_OPT=0 FREEST_CUDAPP_ROOT=/tmp/cudapp-ampere-port CC=x86_64-linux-gnu-gcc FREEST_RUNNER='qemu-x86_64 -L /usr/x86_64-linux-gnu' python3 tests/freest.py
+Observed exit 0, x86-64 C objects and executed callers through qemu-x86_64:
+PASS hosted roots at O0; import-free freest roots at O0/O2; MAX boundaries, checked ABI, arbitrary helper names, wrap, signed comparisons and branch locals
+PASS O0/O2 objects and -r -nostdlib link: nm -u empty; no TLS sections
+PASS wrong-result negative control exits 10
+PASS 23 whole-unit refusal controls in c and h modes, including unused helpers; stdout empty
+PASS direct structural converter refusals independently of frontend, including recursive call graph
+
+Important limit: default hosted O2 check against unmodified dfd8393 FAILED with -Werror=clobbered for omega_native_epoch parameter p0 across setjmp. This was reported to ResumeAmpere, who owns src/toc.om and is implementing volatile wrapper parameters. No warning was suppressed here; HOSTED_OPT=0 explicitly selects the exercised comparison configuration. Default suite remains O2. This evidence does not claim that the parent fix was applied or verified in this isolated tree.
+
+Additional retained AArch64 object proof, using actual CUDApp roots:
+tools/bridge-freest c /tmp/cudapp-ampere-port/om/pipeline/revision.om -> build/freest-revision.c
+tools/bridge-freest c /tmp/cudapp-ampere-port/om/pipeline/epoch.om -> build/freest-epoch.c
+cc -std=c11 -O2 -Wall -Wextra -Werror -ffreestanding -fno-builtin -fno-stack-protector -fPIC -c build/freest-revision.c -o build/freest-revision.o
+cc -std=c11 -O2 -Wall -Wextra -Werror -ffreestanding -fno-builtin -fno-stack-protector -fPIC -c build/freest-epoch.c -o build/freest-epoch.o
+cc -r -nostdlib build/freest-revision.o build/freest-epoch.o -o build/freest-roots.o
+All exits 0.
+nm -u build/freest-revision.o -> exit 0, empty stdout
+nm -u build/freest-epoch.o -> exit 0, empty stdout
+nm -u build/freest-roots.o -> exit 0, empty stdout
+readelf -SW build/freest-roots.o -> exit 0; sections: NULL .text .eh_frame .rela.eh_frame .data .bss .comment .note.GNU-stack .symtab .strtab .shstrtab. No .tdata or .tbss; .data/.bss sizes zero.
+
+Observed proof hashes:
+1db7f7fde1206bff10b7d566b648e96d43ed1d54f27823099932145828c715b3 build/freest-revision.c
+3ab78331952ed48aaa2f28a312a62b1e7229423b77b58faf29176b5b14ecdbfe build/freest-epoch.c
+c247f0d7e6fb9729a6c536cd110f6c6da1d212c2c80bc87dca34b1eab454f21d build/freest-revision.o
+abcdb369b069e7c6cd7e3e3a98e0efd118a4552b808718fa2e5705a3f43c5e63 build/freest-epoch.o
+bd8e2c4dfc3c2cbf1c2f8ae259354c5e3bd8e34aee7dff22013f69251f3e92a0 build/freest-roots.o
+
+Tools observed: native and cross GCC Ubuntu 13.3.0-6ubuntu2~24.04.1; qemu-x86_64 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18).
+Native x86 Omega compiler923 was not used or needed.
+EXERCISED: targeted AArch64 host and x86-64 emulator checks above.
+NOT_RUN: device, GPU, full baseline repository suite, integrated parent O2 correction.
+Not merged, deployed or hardware-qualified. No PR opened.

@@ -1,0 +1,18 @@
+#!/bin/sh
+# Additive checked frontend for omega-mv@e5b32567; baseline tools/bridge remains required.
+# Authorized by Main acting for Drake for CUDApp native x86 portability.
+set -eu
+case ${1-} in c) mode=D;; python) mode=Q;; h) mode=H;; *) echo 'usage: tools/bridge-seeded c|python|h source.om' >&2; exit 64;; esac
+[ "$#" = 2 ] || exit 64
+input=$(realpath -- "$2")
+cd "$(dirname "$0")/.."
+sha256sum --status -c build/compiler.sha256 || { echo 'rebuild required: tools/build.sh' >&2; exit 65; }
+seed=${OMEGA_SEEDED_OMC:-}
+[ -n "$seed" ] && [ -f "$seed" ] || { echo 'NOT_RUN: set OMEGA_SEEDED_OMC' >&2; exit 3; }
+[ "$(sha256sum "$seed" | cut -d' ' -f1)" = 2c82480596bbdc50cda9626866209ef662d5834f278f839ff4ce0250c495029f ] || { echo 'seeded frontend fingerprint mismatch' >&2; exit 65; }
+tmp=$(mktemp -d build/seeded-request.XXXXXX)
+trap 'find "$tmp" -type f -delete; rmdir "$tmp"' EXIT HUP INT TERM
+cat "$input" > "$tmp/input.om"
+"$seed" < "$tmp/input.om" > "$tmp/native"
+[ -s "$tmp/native" ] || exit 65
+{ printf '%s' "$mode"; cat "$tmp/input.om"; } | build/bridge

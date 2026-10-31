@@ -1,0 +1,24 @@
+#!/bin/sh
+# Portable scalar-only profile; parser and emitter are implemented in src/freest.om.
+set -eu
+case ${1-} in c) mode=F;; h) mode=H;; *) echo 'usage: tools/bridge-freest c|h source.om' >&2; exit 64;; esac
+[ "$#" = 2 ] || exit 64
+input=$(realpath -- "$2")
+cd "$(dirname "$0")/.."
+seed=${OMEGA_SEED:-build/bootstrap/omc}
+front=${OMEGA_SEEDED_OMC:-}
+[ -f "$seed" ] || { echo 'NOT_RUN: set OMEGA_SEED to baseline compiler' >&2; exit 3; }
+[ -n "$front" ] && [ -f "$front" ] || { echo 'NOT_RUN: set OMEGA_SEEDED_OMC' >&2; exit 3; }
+[ "$(sha256sum "$seed" | cut -d' ' -f1)" = 191b776ef98821597c3e30655da6d680a9b66edbc9ceaca3c39c61ea6df098e9 ] || { echo 'baseline seed fingerprint mismatch' >&2; exit 65; }
+[ "$(sha256sum "$front" | cut -d' ' -f1)" = 2c82480596bbdc50cda9626866209ef662d5834f278f839ff4ce0250c495029f ] || { echo 'seeded frontend fingerprint mismatch' >&2; exit 65; }
+tmp=$(mktemp -d "${TMPDIR:-/tmp}/bridge-freest.XXXXXX")
+trap 'rm -f "$tmp/input.om" "$tmp/native" "$tmp/converter" "$tmp/generated"; rmdir "$tmp"' EXIT HUP INT TERM
+cat "$input" > "$tmp/input.om"
+# The exact snapshot passes full language/type validation before the structural profile.
+"$front" < "$tmp/input.om" > "$tmp/native"
+[ -s "$tmp/native" ] || exit 65
+"$seed" < src/freest.om > "$tmp/converter"
+[ -s "$tmp/converter" ] || exit 65
+chmod +x "$tmp/converter"
+{ printf '%s' "$mode"; cat "$tmp/input.om"; } | "$tmp/converter" > "$tmp/generated"
+cat "$tmp/generated"
