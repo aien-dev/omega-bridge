@@ -1,0 +1,5 @@
+PASS freestanding epoch increment/MAX trap, nested trap unwind, signed trap and four-thread isolation; GPU_FS_LINK imports and no TLS
+PASS freestanding refuses arrays, storage, text, host effects including unused helper and OM-2 before any output
+PASS pthread-import emitter mutant rejected by freestanding gate, installed object unchanged
+PASS failing/missing symbol inspector and failing import filter refuse; installed object unchanged
+PASS source-swap control refuses original non-pure snapshot; reread mutant admits mismatched source/code and is caught

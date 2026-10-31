@@ -1,0 +1,31 @@
+{
+ "schema": 1,
+ "date": "2026-10-31",
+ "status": "EMULATED_PASS",
+ "native_x86": "NOT_RUN",
+ "gpu": "NOT_RUN",
+ "pr": "aien-dev/omega-bridge#44",
+ "bridge_commit": "e32caee1f7e1872f4d827bc21dc3129e638ba39e",
+ "native_om_sha256": "5ccf97db9b46aea1fc580951d19e36423d94f545650496dcdb7acba99b983b6d",
+ "tools_native_sha256": "12b98b280347efdbaa4abb721835318f27e248e7c1783a6d6492fa858dd0fd89",
+ "suite_sha256": "38c4c84394578ab673ac36ee271e868cda11e487ad004192d48f28b168e87d7d",
+ "capacity_sha256": "0b1ed162a57be5c76249394781cd9314c23a3d2cac9ad6f5e529df1e8f53fd5b",
+ "freestanding_sha256": "bc92792dc3948f946f3623b34d325f5b7aaf8205181568dfb55517ff02c33b14",
+ "x86_omc_sha256": "be8c51301307555254fc59e351d281aae1aa096d91521777e33a41c8b446448a",
+ "baseline_omc_sha256": "734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61",
+ "qemu_binary_sha256": "fd7ae7768c1d698d387893688d28abde90512f1f445d171a1389110eb7c237ee",
+ "x86_suite": {
+  "pass": 316,
+  "fail": 0,
+  "verdict": "NATIVE-X86 EMULATED PASS (six languages built and run; native x86 NOT_RUN)"
+ },
+ "aarch64_capacity_pass_lines": 4,
+ "aarch64_freestanding_pass_lines": 5,
+ "negative_controls": "negative.log: no-op result-store mutant and absent mutant site each FAIL the freestanding_x86 step",
+ "logs": {
+  "capacity.log": "780922128cd2ad39a98cfb85153b2448a3df535219b1224999434d27d77bb386",
+  "freestanding.log": "3eb80249e49f7b6d71521fcacc4c88adeb3a2de334c77bf57a3a864f39fd421e",
+  "negative.log": "a3e3f235429b3a9323da88d06eb3ca59b4cd8c7202700c56be7c6abec2c55d7d",
+  "x86.log": "d2ce6ff6b4f5bff69209976fea0ab4265437f55c5bb935b1733e481eef4a7905"
+ }
+}

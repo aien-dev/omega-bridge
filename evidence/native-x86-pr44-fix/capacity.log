@@ -1,0 +1,4 @@
+CAPACITY PASS: current input pool exhaustion exits 106 with no output
+CAPACITY PASS: current output pool exhaustion exits 106 with no output
+CAPACITY PASS: compiler-built frame 10489536 bytes, C 21025708 bytes, both endpoint calls
+CAPACITY PASS: old input/output bound mutants and new input/output overflow controls refuse with no output
