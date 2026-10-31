@@ -5,6 +5,7 @@
 # reports what it saw, it does not gate anything.
 #   TMPDIR=/dev/shm taskset -c 10-14 nice -n 19 ionice -c3 max-cpu/mogg-cache-repro.sh
 set -eu
+export CUDA_VISIBLE_DEVICES=  # MAX 26.7.0 Graph() opens a visible GPU; see run.sh
 cd "$(dirname "$0")/.."
 MAXPY=${MAXPY:-$HOME/workspace/maxinterop/venv/bin/python}
 BUILD=${BUILD:-/dev/shm/omega-max-cpu}
