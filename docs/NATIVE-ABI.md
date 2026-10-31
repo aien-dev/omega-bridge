@@ -20,10 +20,11 @@ units and supplies their compiler identity, as before.
 
 For `--target x86linux`, `OMEGA_NATIVE_X86_OMC` compiles **both** OM-1 and OM-2
 units and must have sha256
-`62775d2a391cfef7cde64e387655caa9809a267093112910ec76bfa568f3712b`.
+`be8c51301307555254fc59e351d281aae1aa096d91521777e33a41c8b446448a`, the
+committed `seed/out/omc` of omega-mv main
+`474197e4fa0207e0e2fb3c0494594a975f5031fa` (last changed by omega-mv #994).
 Its compiler source sha256 is
-`96d51b63c8f451661ac715395078e04f39195e50c9e8fe37746cda121e4d7a1e`,
-at omega-mv `7ab5fdd067884fd3044155084b39163da1be5c8a` on pending compiler draft #923.
+`d4b4b89d8a58cc90d30d15a525b417e4b31e5bfe5288d21d665f1c7958a330f6`.
 This is a separate candidate compiler pin, not a replacement for the generator's
 baseline pin. `OMEGA_NATIVE_OMC2` is not used for this target. Each compiler
 input is `target x86linux\n` followed by the snapshotted source. The directive
@@ -52,11 +53,11 @@ compiler digest refuses before generating or installing outputs.
 **Evidence boundary:** the x86 integration is IMPLEMENTED and EXERCISED under
 QEMU 10.0.14, not qualified by the historical AArch64 receipts below. At the
 current x86 compiler pin, see
-[`evidence/native-x86-62775d2a.json`](../evidence/native-x86-62775d2a.json)
+[`evidence/native-x86-be8c5130.json`](../evidence/native-x86-be8c5130.json)
 and its command receipts; earlier pins' receipts remain in
-`evidence/native-x86-badedbb0/`, `evidence/native-x86-f7752bc5/` and `evidence/native-x86/`. Native physical x86-64 execution remains **NOT_RUN**.
-No GPU execution is part of this target. The compiler dependency is draft PR
-#923. The full compiler differential is recorded separately; this bridge
+`evidence/native-x86-62775d2a.json`, `evidence/native-x86-badedbb0/`, `evidence/native-x86-f7752bc5/` and `evidence/native-x86/`. Native physical x86-64 execution remains **NOT_RUN**.
+No GPU execution is part of this target. The compiler is merged on omega-mv
+main. The full compiler differential is recorded separately; this bridge
 receipt does not qualify the compiler.
 
 ### x86 emulator runner and QEMU oracle
@@ -121,8 +122,13 @@ existing ABI-v2 pointer/status-32, signal-reentry/status-33, stale-identity and
 thread controls, private-symbol/TLS isolation, and boundary/API mutants. Added
 controls cover nested traps, bad-runtime/status-34 recovery, SysV saved-register
 sentinels, and the fixed owned-stack floor after out-buffer allocation.
-All 150 baseline/output comparisons with `0c4cb9ff` passed byte-for-byte,
-including unchanged AArch64 freestanding refusals. The receipts retain the
+At the 62775d2a pin all 150 baseline/output comparisons with `0c4cb9ff` passed
+byte-for-byte, including unchanged AArch64 freestanding refusals. #26 (`f637021`)
+then changed AArch64 output on purpose (f32 and ushort array kinds, the Python
+header), so the parity baseline is now the generator at `f637021`, the last
+accepted AArch64 contract; `src/native.om` is unchanged since. The generator at
+`f637021^` still matches `0c4cb9ff` on every pre-#26 fixture and output, so the
+chain back to the pre-x86 generator is unbroken. The receipts retain the
 earlier failing emulator run rather than rewriting it as a pass.
 
 ## What Omega produces
@@ -213,8 +219,16 @@ not compiler-custody or behavioral evidence for the deliberately mismatched code
 Names must be C identifiers, a parameter name may not end in `_len` (the binding names a length
 `o_<name>_len`), and each unit name appears once; anything else is refused before any C is written.
 
-Supported signatures: up to 6 parameters, each `ulong`, `long`, or `edit`/`view` of `ulong` or `uchar`
-with a fixed length; result `ulong`, `long` or `void`. A unit may hold several functions: the seeded
+Supported signatures: up to 6 parameters, each `ulong`, `long`, or `edit`/`view` of `ulong`, `uchar`,
+`f32` or `ushort` with a fixed length; result `ulong`, `long` or `void`. An `f32` array is packed
+binary32 (4-byte elements, 4-byte alignment) and a `ushort` array is packed 16-bit words (2-byte
+elements, 2-byte alignment), for example binary16 bits that the Omega code converts itself. C and C++
+declarations stay `void *` / `const void *`; the generated library checks the element size, alignment,
+length and overlap. Python ctypes uses `c_float` and `c_uint16`. Rust and Zig declarations type these
+arrays as byte pointers (`*mut u8` / `*const u8`, Zig `?[*]u8`); Go stays `unsafe.Pointer`.
+`OMEGA_NATIVE_OMC=<seed omc> sh tests/native/kinds.sh` binds `fsum.om` and `halve.om`, compares every
+lane to a C `_Float16` oracle, refuses misaligned, wrong-length, overlapping and null arrays (status
+32), and requires a mutant that changes fsum's `add` to `sub` to fail. A unit may hold several functions: the seeded
 compiler enters function-mode code at the unit's last function (the leading entry branches to it), so the
 binding exports that one and the earlier functions stay private helpers, called directly inside the
 embedded code, with any Omega types. Only the last function's signature must be supported

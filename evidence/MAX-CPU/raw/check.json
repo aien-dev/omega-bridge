@@ -1,0 +1,245 @@
+{
+ "lib": "/dev/shm/omega-max-cpu/lib/libomega_native.so",
+ "rows": [
+  {
+   "shape": [
+    1,
+    1,
+    1
+   ],
+   "case": "random",
+   "load_s": 33.2615035570052,
+   "tol_ref": 0.0,
+   "tol_max": 0.0,
+   "ratio_ref": 0.0,
+   "maxerr_ref": 0.0,
+   "ratio_max": 0.0,
+   "maxerr_max": 0.0,
+   "result": "PASS"
+  },
+  {
+   "shape": [
+    1,
+    1,
+    1
+   ],
+   "case": "zeros",
+   "load_s": 33.2615035570052,
+   "tol_ref": 0.0,
+   "tol_max": 0.0,
+   "ratio_ref": 0.0,
+   "maxerr_ref": 0.0,
+   "ratio_max": 0.0,
+   "maxerr_max": 0.0,
+   "result": "PASS"
+  },
+  {
+   "shape": [
+    1,
+    1,
+    1
+   ],
+   "case": "identity",
+   "load_s": 33.2615035570052,
+   "tol_ref": 0.0,
+   "tol_max": 0.0,
+   "ratio_ref": 0.0,
+   "maxerr_ref": 0.0,
+   "ratio_max": 0.0,
+   "maxerr_max": 0.0,
+   "result": "PASS"
+  },
+  {
+   "shape": [
+    3,
+    5,
+    7
+   ],
+   "case": "random",
+   "load_s": 28.922642798017478,
+   "tol_ref": 2.384186363890841e-07,
+   "tol_max": 4.768372718899898e-07,
+   "ratio_ref": 0.0,
+   "maxerr_ref": 0.0,
+   "ratio_max": 0.0,
+   "maxerr_max": 0.0,
+   "result": "PASS"
+  },
+  {
+   "shape": [
+    3,
+    5,
+    7
+   ],
+   "case": "zeros",
+   "load_s": 28.922642798017478,
+   "tol_ref": 2.384186363890841e-07,
+   "tol_max": 4.768372718899898e-07,
+   "ratio_ref": 0.0,
+   "maxerr_ref": 0.0,
+   "ratio_max": 0.0,
+   "maxerr_max": 0.0,
+   "result": "PASS"
+  },
+  {
+   "shape": [
+    16,
+    16,
+    8
+   ],
+   "case": "random",
+   "load_s": 27.02427357598208,
+   "tol_ref": 8.940704726574863e-07,
+   "tol_max": 1.788140941984304e-06,
+   "ratio_ref": 0.04517529780314637,
+   "maxerr_ref": 4.76837158203125e-07,
+   "ratio_max": 0.0,
+   "maxerr_max": 0.0,
+   "result": "PASS"
+  },
+  {
+   "shape": [
+    16,
+    16,
+    8
+   ],
+   "case": "zeros",
+   "load_s": 27.02427357598208,
+   "tol_ref": 8.940704726574863e-07,
+   "tol_max": 1.788140941984304e-06,
+   "ratio_ref": 0.0,
+   "maxerr_ref": 0.0,
+   "ratio_max": 0.0,
+   "maxerr_max": 0.0,
+   "result": "PASS"
+  },
+  {
+   "shape": [
+    16,
+    16,
+    8
+   ],
+   "case": "large",
+   "load_s": 27.02427357598208,
+   "tol_ref": 8.940704726574863e-07,
+   "tol_max": 1.788140941984304e-06,
+   "ratio_ref": 0.04517529780314637,
+   "maxerr_ref": 6.338253001141147e+29,
+   "ratio_max": 0.0,
+   "maxerr_max": 0.0,
+   "result": "PASS"
+  },
+  {
+   "shape": [
+    33,
+    17,
+    9
+   ],
+   "case": "random",
+   "load_s": 35.78041400498478,
+   "tol_ref": 9.53675227678176e-07,
+   "tol_max": 1.907350451803638e-06,
+   "ratio_ref": 0.06695263274564199,
+   "maxerr_ref": 4.76837158203125e-07,
+   "ratio_max": 0.0,
+   "maxerr_max": 0.0,
+   "result": "PASS"
+  },
+  {
+   "shape": [
+    33,
+    17,
+    9
+   ],
+   "case": "zeros",
+   "load_s": 35.78041400498478,
+   "tol_ref": 9.53675227678176e-07,
+   "tol_max": 1.907350451803638e-06,
+   "ratio_ref": 0.0,
+   "maxerr_ref": 0.0,
+   "ratio_max": 0.0,
+   "maxerr_max": 0.0,
+   "result": "PASS"
+  },
+  {
+   "shape": [
+    64,
+    128,
+    32
+   ],
+   "case": "random",
+   "load_s": 43.17163815701497,
+   "tol_ref": 7.569847202727132e-06,
+   "tol_max": 1.51396943772546e-05,
+   "ratio_ref": 0.009072796680636935,
+   "maxerr_ref": 6.67572021484375e-06,
+   "ratio_max": 0.0,
+   "maxerr_max": 0.0,
+   "result": "PASS"
+  },
+  {
+   "shape": [
+    64,
+    128,
+    32
+   ],
+   "case": "zeros",
+   "load_s": 43.17163815701497,
+   "tol_ref": 7.569847202727132e-06,
+   "tol_max": 1.51396943772546e-05,
+   "ratio_ref": 0.0,
+   "maxerr_ref": 0.0,
+   "ratio_max": 0.0,
+   "maxerr_max": 0.0,
+   "result": "PASS"
+  },
+  {
+   "shape": [
+    256,
+    256,
+    256
+   ],
+   "case": "random",
+   "load_s": 41.92570396600058,
+   "tol_ref": 1.519941546475356e-05,
+   "tol_max": 3.039883087288574e-05,
+   "ratio_ref": 0.006772649166662281,
+   "maxerr_ref": 1.745671033859253e-05,
+   "ratio_max": 0.0,
+   "maxerr_max": 0.0,
+   "result": "PASS"
+  },
+  {
+   "shape": [
+    256,
+    256,
+    256
+   ],
+   "case": "zeros",
+   "load_s": 41.92570396600058,
+   "tol_ref": 1.519941546475356e-05,
+   "tol_max": 3.039883087288574e-05,
+   "ratio_ref": 0.0,
+   "maxerr_ref": 0.0,
+   "ratio_max": 0.0,
+   "maxerr_max": 0.0,
+   "result": "PASS"
+  },
+  {
+   "shape": [
+    256,
+    256,
+    256
+   ],
+   "case": "identity",
+   "load_s": 41.92570396600058,
+   "tol_ref": 1.519941546475356e-05,
+   "tol_max": 3.039883087288574e-05,
+   "ratio_ref": 0.0,
+   "maxerr_ref": 0.0,
+   "ratio_max": 0.0,
+   "maxerr_max": 0.0,
+   "result": "PASS"
+  }
+ ]
+}

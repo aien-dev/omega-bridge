@@ -1,0 +1,13 @@
+test_invalid_version_is_unknown (__main__.MaxVersionMetadataTests.test_invalid_version_is_unknown) ... ok
+test_missing_version_is_unknown (__main__.MaxVersionMetadataTests.test_missing_version_is_unknown) ... ok
+test_observed_version_is_preserved (__main__.MaxVersionMetadataTests.test_observed_version_is_preserved) ... ok
+test_unavailable_module_is_unknown (__main__.MaxVersionMetadataTests.test_unavailable_module_is_unknown) ... ok
+test_unreadable_version_is_unknown (__main__.MaxVersionMetadataTests.test_unreadable_version_is_unknown) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.037s
+
+OK
+build/fixtures/matmul-v1.json {'a': '3aa39ad076cf6dc08de24cfb31132d2d6adc6444623933786889b2bca15a76cf', 'b': 'ecad04839ce22217a1f5e35def8ceee26fce87819d28a70067574fc4cb7604fe'}
+build/fixtures/gqa-causal-v1.json {'q': '1644b426e47bebd43a1c9b91bb11376f07e7a2678e727a43b37a681313e9c729', 'k': 'a621e99db699a04a01876ff78e30f85f4ccdfa6aa2d4507ae6c92db4fdbd4b08', 'v': '4427d100d96dfe263dde83154be5f60ec368d068b86baaea0f02dd878014ddc9'}
+CUDApp library missing: ../../cudapp/build/libomega_gpu.a

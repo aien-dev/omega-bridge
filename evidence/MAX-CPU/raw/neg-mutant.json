@@ -1,0 +1,245 @@
+{
+ "lib": "/dev/shm/omega-max-cpu/lib-mutant/libomega_native.so",
+ "rows": [
+  {
+   "shape": [
+    1,
+    1,
+    1
+   ],
+   "case": "random",
+   "load_s": 33.18681114498759,
+   "tol_ref": 0.0,
+   "tol_max": 0.0,
+   "ratio_ref": 0.0,
+   "maxerr_ref": 0.0,
+   "ratio_max": 0.0,
+   "maxerr_max": 0.0,
+   "result": "PASS"
+  },
+  {
+   "shape": [
+    1,
+    1,
+    1
+   ],
+   "case": "zeros",
+   "load_s": 33.18681114498759,
+   "tol_ref": 0.0,
+   "tol_max": 0.0,
+   "ratio_ref": 0.0,
+   "maxerr_ref": 0.0,
+   "ratio_max": 0.0,
+   "maxerr_max": 0.0,
+   "result": "PASS"
+  },
+  {
+   "shape": [
+    1,
+    1,
+    1
+   ],
+   "case": "identity",
+   "load_s": 33.18681114498759,
+   "tol_ref": 0.0,
+   "tol_max": 0.0,
+   "ratio_ref": 0.0,
+   "maxerr_ref": 0.0,
+   "ratio_max": 0.0,
+   "maxerr_max": 0.0,
+   "result": "PASS"
+  },
+  {
+   "shape": [
+    3,
+    5,
+    7
+   ],
+   "case": "random",
+   "load_s": 29.470864246977726,
+   "tol_ref": 2.384186363890841e-07,
+   "tol_max": 4.768372718899898e-07,
+   "ratio_ref": 14123535.801890196,
+   "maxerr_ref": 3.211482048034668,
+   "ratio_max": 7061767.914098662,
+   "maxerr_max": 3.211482048034668,
+   "result": "FAIL"
+  },
+  {
+   "shape": [
+    3,
+    5,
+    7
+   ],
+   "case": "zeros",
+   "load_s": 29.470864246977726,
+   "tol_ref": 2.384186363890841e-07,
+   "tol_max": 4.768372718899898e-07,
+   "ratio_ref": 0.0,
+   "maxerr_ref": 0.0,
+   "ratio_max": 0.0,
+   "maxerr_max": 0.0,
+   "result": "PASS"
+  },
+  {
+   "shape": [
+    16,
+    16,
+    8
+   ],
+   "case": "random",
+   "load_s": 29.13271914701909,
+   "tol_ref": 8.940704726574863e-07,
+   "tol_max": 1.788140941984304e-06,
+   "ratio_ref": 1665955.7812995366,
+   "maxerr_ref": 13.617825508117676,
+   "ratio_max": 832977.892201309,
+   "maxerr_max": 13.617825508117676,
+   "result": "FAIL"
+  },
+  {
+   "shape": [
+    16,
+    16,
+    8
+   ],
+   "case": "zeros",
+   "load_s": 29.13271914701909,
+   "tol_ref": 8.940704726574863e-07,
+   "tol_max": 1.788140941984304e-06,
+   "ratio_ref": 0.0,
+   "maxerr_ref": 0.0,
+   "ratio_max": 0.0,
+   "maxerr_max": 0.0,
+   "result": "PASS"
+  },
+  {
+   "shape": [
+    16,
+    16,
+    8
+   ],
+   "case": "large",
+   "load_s": 29.13271914701909,
+   "tol_ref": 8.940704726574863e-07,
+   "tol_max": 1.788140941984304e-06,
+   "ratio_ref": 1665955.7812995366,
+   "maxerr_ref": 1.8101194907103962e+37,
+   "ratio_max": 832977.892201309,
+   "maxerr_max": 1.8101194907103962e+37,
+   "result": "FAIL"
+  },
+  {
+   "shape": [
+    33,
+    17,
+    9
+   ],
+   "case": "random",
+   "load_s": 29.32036009299918,
+   "tol_ref": 9.53675227678176e-07,
+   "tol_max": 1.907350451803638e-06,
+   "ratio_ref": 1741198.1685967492,
+   "maxerr_ref": 17.248628616333008,
+   "ratio_max": 870599.0697071122,
+   "maxerr_max": 17.248628616333008,
+   "result": "FAIL"
+  },
+  {
+   "shape": [
+    33,
+    17,
+    9
+   ],
+   "case": "zeros",
+   "load_s": 29.32036009299918,
+   "tol_ref": 9.53675227678176e-07,
+   "tol_max": 1.907350451803638e-06,
+   "ratio_ref": 0.0,
+   "maxerr_ref": 0.0,
+   "ratio_max": 0.0,
+   "maxerr_max": 0.0,
+   "result": "PASS"
+  },
+  {
+   "shape": [
+    64,
+    128,
+    32
+   ],
+   "case": "random",
+   "load_s": 28.917970139998943,
+   "tol_ref": 7.569847202727132e-06,
+   "tol_max": 1.51396943772546e-05,
+   "ratio_ref": 91290.39945158098,
+   "maxerr_ref": 55.392067551612854,
+   "ratio_max": 45645.198906754085,
+   "maxerr_max": 55.39206790924072,
+   "result": "FAIL"
+  },
+  {
+   "shape": [
+    64,
+    128,
+    32
+   ],
+   "case": "zeros",
+   "load_s": 28.917970139998943,
+   "tol_ref": 7.569847202727132e-06,
+   "tol_max": 1.51396943772546e-05,
+   "ratio_ref": 0.0,
+   "maxerr_ref": 0.0,
+   "ratio_max": 0.0,
+   "maxerr_max": 0.0,
+   "result": "PASS"
+  },
+  {
+   "shape": [
+    256,
+    256,
+    256
+   ],
+   "case": "random",
+   "load_s": 27.873068246000912,
+   "tol_ref": 1.519941546475356e-05,
+   "tol_max": 3.039883087288574e-05,
+   "ratio_ref": 0.006772649166662281,
+   "maxerr_ref": 1.745671033859253e-05,
+   "ratio_max": 0.0,
+   "maxerr_max": 0.0,
+   "result": "PASS"
+  },
+  {
+   "shape": [
+    256,
+    256,
+    256
+   ],
+   "case": "zeros",
+   "load_s": 27.873068246000912,
+   "tol_ref": 1.519941546475356e-05,
+   "tol_max": 3.039883087288574e-05,
+   "ratio_ref": 0.0,
+   "maxerr_ref": 0.0,
+   "ratio_max": 0.0,
+   "maxerr_max": 0.0,
+   "result": "PASS"
+  },
+  {
+   "shape": [
+    256,
+    256,
+    256
+   ],
+   "case": "identity",
+   "load_s": 27.873068246000912,
+   "tol_ref": 1.519941546475356e-05,
+   "tol_max": 3.039883087288574e-05,
+   "ratio_ref": 0.0,
+   "maxerr_ref": 0.0,
+   "ratio_max": 0.0,
+   "maxerr_max": 0.0,
+   "result": "PASS"
+  }
+ ]
+}

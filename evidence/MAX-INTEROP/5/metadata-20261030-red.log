@@ -1,0 +1,84 @@
+test_invalid_version_is_unknown (__main__.MaxVersionMetadataTests.test_invalid_version_is_unknown) ...
+  test_invalid_version_is_unknown (__main__.MaxVersionMetadataTests.test_invalid_version_is_unknown) (version=None) ... FAIL
+  test_invalid_version_is_unknown (__main__.MaxVersionMetadataTests.test_invalid_version_is_unknown) (version='') ... FAIL
+  test_invalid_version_is_unknown (__main__.MaxVersionMetadataTests.test_invalid_version_is_unknown) (version='   ') ... FAIL
+  test_invalid_version_is_unknown (__main__.MaxVersionMetadataTests.test_invalid_version_is_unknown) (version=267) ... FAIL
+  test_invalid_version_is_unknown (__main__.MaxVersionMetadataTests.test_invalid_version_is_unknown) (version=True) ... FAIL
+  test_invalid_version_is_unknown (__main__.MaxVersionMetadataTests.test_invalid_version_is_unknown) (version=(26, 7, 0)) ... FAIL
+test_missing_version_is_unknown (__main__.MaxVersionMetadataTests.test_missing_version_is_unknown) ... FAIL
+test_observed_version_is_preserved (__main__.MaxVersionMetadataTests.test_observed_version_is_preserved) ... ok
+test_unavailable_module_is_unknown (__main__.MaxVersionMetadataTests.test_unavailable_module_is_unknown) ... ok
+test_unreadable_version_is_unknown (__main__.MaxVersionMetadataTests.test_unreadable_version_is_unknown) ... ok
+
+======================================================================
+FAIL: test_invalid_version_is_unknown (__main__.MaxVersionMetadataTests.test_invalid_version_is_unknown) (version=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<checkout>/conformance/test_max_runner_metadata.py", line 65, in test_invalid_version_is_unknown
+    self.assertEqual(namespace["_max_version"](), "unknown")
+AssertionError: '26.7.0' != 'unknown'
+- 26.7.0
++ unknown
+
+
+======================================================================
+FAIL: test_invalid_version_is_unknown (__main__.MaxVersionMetadataTests.test_invalid_version_is_unknown) (version='')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<checkout>/conformance/test_max_runner_metadata.py", line 65, in test_invalid_version_is_unknown
+    self.assertEqual(namespace["_max_version"](), "unknown")
+AssertionError: '26.7.0' != 'unknown'
+- 26.7.0
++ unknown
+
+
+======================================================================
+FAIL: test_invalid_version_is_unknown (__main__.MaxVersionMetadataTests.test_invalid_version_is_unknown) (version='   ')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<checkout>/conformance/test_max_runner_metadata.py", line 65, in test_invalid_version_is_unknown
+    self.assertEqual(namespace["_max_version"](), "unknown")
+AssertionError: '   ' != 'unknown'
+-
++ unknown
+
+
+======================================================================
+FAIL: test_invalid_version_is_unknown (__main__.MaxVersionMetadataTests.test_invalid_version_is_unknown) (version=267)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<checkout>/conformance/test_max_runner_metadata.py", line 65, in test_invalid_version_is_unknown
+    self.assertEqual(namespace["_max_version"](), "unknown")
+AssertionError: 267 != 'unknown'
+
+======================================================================
+FAIL: test_invalid_version_is_unknown (__main__.MaxVersionMetadataTests.test_invalid_version_is_unknown) (version=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<checkout>/conformance/test_max_runner_metadata.py", line 65, in test_invalid_version_is_unknown
+    self.assertEqual(namespace["_max_version"](), "unknown")
+AssertionError: True != 'unknown'
+
+======================================================================
+FAIL: test_invalid_version_is_unknown (__main__.MaxVersionMetadataTests.test_invalid_version_is_unknown) (version=(26, 7, 0))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<checkout>/conformance/test_max_runner_metadata.py", line 65, in test_invalid_version_is_unknown
+    self.assertEqual(namespace["_max_version"](), "unknown")
+AssertionError: (26, 7, 0) != 'unknown'
+
+======================================================================
+FAIL: test_missing_version_is_unknown (__main__.MaxVersionMetadataTests.test_missing_version_is_unknown)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<checkout>/conformance/test_max_runner_metadata.py", line 57, in test_missing_version_is_unknown
+    self.assertEqual(namespace["_max_version"](), "unknown")
+AssertionError: '26.7.0' != 'unknown'
+- 26.7.0
++ unknown
+
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.044s
+
+FAILED (failures=7)

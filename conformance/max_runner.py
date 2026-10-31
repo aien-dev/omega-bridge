@@ -155,7 +155,9 @@ def main():
 def _max_version():
     try:
         import max as m
-        return getattr(m, "__version__", None) or "26.7.0"
+        version = getattr(m, "__version__", None)
+        # The requested release is not evidence of the installed release.
+        return version if isinstance(version, str) and version.strip() else "unknown"
     except Exception:
         return "unknown"
 

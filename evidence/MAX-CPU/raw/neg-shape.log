@@ -1,0 +1,39 @@
+shape=[16, 15, 8] want 'omega_matmul refused: status 0 result 2' got: An error occurred in kernel entry point named "__custom__omega_matmul_async":
+An error occurred in kernel named "__custom__omega_matmul":
+omega_matmul refused: status 0 result 2
+
+Fusion info:
+  custom__omega_matmul : (!mo.tensor<[384], bf16>, !mo.tensor<[3], si64>) -> !mo.tensor<[16, 8], f32>
+
+
+To see the Python source location of this op, run again with the `max-debug.source-tracebacks` config key enabled (for example, `Graph.debug.source_tracebacks = True` or `MODULAR_DEBUG=source-tracebacks`). -> PASS
+shape=[5000, 16, 8] want 'omega_matmul refused: status 0 result 1' got: An error occurred in kernel entry point named "__custom__omega_matmul_async":
+An error occurred in kernel named "__custom__omega_matmul":
+omega_matmul refused: status 0 result 1
+
+Fusion info:
+  custom__omega_matmul : (!mo.tensor<[384], bf16>, !mo.tensor<[3], si64>) -> !mo.tensor<[16, 8], f32>
+
+
+To see the Python source location of this op, run again with the `max-debug.source-tracebacks` config key enabled (for example, `Graph.debug.source_tracebacks = True` or `MODULAR_DEBUG=source-tracebacks`). -> PASS
+shape=[0, 16, 8] want 'omega_matmul refused: status 0 result 1' got: An error occurred in kernel entry point named "__custom__omega_matmul_async":
+An error occurred in kernel named "__custom__omega_matmul":
+omega_matmul refused: status 0 result 1
+
+Fusion info:
+  custom__omega_matmul : (!mo.tensor<[384], bf16>, !mo.tensor<[3], si64>) -> !mo.tensor<[16, 8], f32>
+
+
+To see the Python source location of this op, run again with the `max-debug.source-tracebacks` config key enabled (for example, `Graph.debug.source_tracebacks = True` or `MODULAR_DEBUG=source-tracebacks`). -> PASS
+shape=[12, 16, 12] want 'omega_matmul refused: status 0 result 3' got: An error occurred in kernel entry point named "__custom__omega_matmul_async":
+An error occurred in kernel named "__custom__omega_matmul":
+omega_matmul refused: status 0 result 3
+
+Fusion info:
+  custom__omega_matmul : (!mo.tensor<[384], bf16>, !mo.tensor<[3], si64>) -> !mo.tensor<[16, 8], f32>
+
+
+To see the Python source location of this op, run again with the `max-debug.source-tracebacks` config key enabled (for example, `Graph.debug.source_tracebacks = True` or `MODULAR_DEBUG=source-tracebacks`). -> PASS
+valid call after refusals ratio_ref=0.0336 PASS
+graph construction ops.matmul [16,16]x[15,8]: Failed to create op 'MatmulOp': -> PASS
+OMEGA_MAX_NEG_SHAPE: PASS

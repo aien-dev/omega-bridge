@@ -448,7 +448,9 @@ class Suite:
 
     def aarch64_parity(self):
         baseline = self.out / "baseline-native-gen"
-        source = self.must(["git", "-C", str(ROOT), "show", "0c4cb9ff:src/native.om"])
+        # Last accepted AArch64 contract: #26 (f637021) changed AArch64 output on purpose;
+        # its parent still matches the pre-x86 generator 0c4cb9ff on every earlier fixture.
+        source = self.must(["git", "-C", str(ROOT), "show", "f637021:src/native.om"])
         baseline.write_bytes(self.must([self.omc], data=source))
         baseline.chmod(0o755)
         frames = {}
@@ -473,7 +475,7 @@ class Suite:
             for word in (*OUTPUTS, "freest"):
                 old = self.generate(word, frame, baseline, target=False)
                 new = self.generate(word, frame, target=False)
-                self.check("AArch64 byte parity 0c4cb9ff " + name + " " + word,
+                self.check("AArch64 byte parity f637021 " + name + " " + word,
                            old.returncode == new.returncode and old.stdout == new.stdout and old.stderr == new.stderr)
 
     def trap_controls(self):
