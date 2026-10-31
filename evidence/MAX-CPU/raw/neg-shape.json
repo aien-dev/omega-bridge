@@ -1,0 +1,52 @@
+[
+ {
+  "shape": [
+   16,
+   15,
+   8
+  ],
+  "want": "omega_matmul refused: status 0 result 2",
+  "got": "An error occurred in kernel entry point named \"__custom__omega_matmul_async\":\nAn error occurred in kernel named \"__custom__omega_matmul\":\nomega_matmul refused: status 0 result 2\n\nFusion info:\n  custom__omega_matmul : (!mo.tensor<[384], bf16>, !mo.tensor<[3], si64>) -> !mo.tensor<[16, 8], f32>\n\n\nTo see the Python source location of this op, run again with the `max-debug.source-tracebacks` config key enabled (for example, `Graph.debug.source_tracebacks = True` or `MODULAR_DEBUG=source-tracebacks`).",
+  "result": "PASS"
+ },
+ {
+  "shape": [
+   5000,
+   16,
+   8
+  ],
+  "want": "omega_matmul refused: status 0 result 1",
+  "got": "An error occurred in kernel entry point named \"__custom__omega_matmul_async\":\nAn error occurred in kernel named \"__custom__omega_matmul\":\nomega_matmul refused: status 0 result 1\n\nFusion info:\n  custom__omega_matmul : (!mo.tensor<[384], bf16>, !mo.tensor<[3], si64>) -> !mo.tensor<[16, 8], f32>\n\n\nTo see the Python source location of this op, run again with the `max-debug.source-tracebacks` config key enabled (for example, `Graph.debug.source_tracebacks = True` or `MODULAR_DEBUG=source-tracebacks`).",
+  "result": "PASS"
+ },
+ {
+  "shape": [
+   0,
+   16,
+   8
+  ],
+  "want": "omega_matmul refused: status 0 result 1",
+  "got": "An error occurred in kernel entry point named \"__custom__omega_matmul_async\":\nAn error occurred in kernel named \"__custom__omega_matmul\":\nomega_matmul refused: status 0 result 1\n\nFusion info:\n  custom__omega_matmul : (!mo.tensor<[384], bf16>, !mo.tensor<[3], si64>) -> !mo.tensor<[16, 8], f32>\n\n\nTo see the Python source location of this op, run again with the `max-debug.source-tracebacks` config key enabled (for example, `Graph.debug.source_tracebacks = True` or `MODULAR_DEBUG=source-tracebacks`).",
+  "result": "PASS"
+ },
+ {
+  "shape": [
+   12,
+   16,
+   12
+  ],
+  "want": "omega_matmul refused: status 0 result 3",
+  "got": "An error occurred in kernel entry point named \"__custom__omega_matmul_async\":\nAn error occurred in kernel named \"__custom__omega_matmul\":\nomega_matmul refused: status 0 result 3\n\nFusion info:\n  custom__omega_matmul : (!mo.tensor<[384], bf16>, !mo.tensor<[3], si64>) -> !mo.tensor<[16, 8], f32>\n\n\nTo see the Python source location of this op, run again with the `max-debug.source-tracebacks` config key enabled (for example, `Graph.debug.source_tracebacks = True` or `MODULAR_DEBUG=source-tracebacks`).",
+  "result": "PASS"
+ },
+ {
+  "after_refusals": "valid call",
+  "ratio_ref": 0.03355616799862188,
+  "result": "PASS"
+ },
+ {
+  "graph": "ops.matmul [16,16]x[15,8]",
+  "got": "Failed to create op 'MatmulOp':",
+  "result": "PASS"
+ }
+]

@@ -1,0 +1,16 @@
+1x1x1 random   ratio_ref=0 maxerr_ref=0 ratio_max=0 maxerr_max=0 PASS
+1x1x1 zeros    ratio_ref=0 maxerr_ref=0 ratio_max=0 maxerr_max=0 PASS
+1x1x1 identity ratio_ref=0 maxerr_ref=0 ratio_max=0 maxerr_max=0 PASS
+3x5x7 random   ratio_ref=0 maxerr_ref=0 ratio_max=0 maxerr_max=0 PASS
+3x5x7 zeros    ratio_ref=0 maxerr_ref=0 ratio_max=0 maxerr_max=0 PASS
+16x16x8 random   ratio_ref=0.0452 maxerr_ref=4.77e-07 ratio_max=0 maxerr_max=0 PASS
+16x16x8 zeros    ratio_ref=0 maxerr_ref=0 ratio_max=0 maxerr_max=0 PASS
+16x16x8 large    ratio_ref=0.0452 maxerr_ref=6.34e+29 ratio_max=0 maxerr_max=0 PASS
+33x17x9 random   ratio_ref=0.067 maxerr_ref=4.77e-07 ratio_max=0 maxerr_max=0 PASS
+33x17x9 zeros    ratio_ref=0 maxerr_ref=0 ratio_max=0 maxerr_max=0 PASS
+64x128x32 random   ratio_ref=0.00907 maxerr_ref=6.68e-06 ratio_max=0 maxerr_max=0 PASS
+64x128x32 zeros    ratio_ref=0 maxerr_ref=0 ratio_max=0 maxerr_max=0 PASS
+256x256x256 random   ratio_ref=0.00677 maxerr_ref=1.75e-05 ratio_max=0 maxerr_max=0 PASS
+256x256x256 zeros    ratio_ref=0 maxerr_ref=0 ratio_max=0 maxerr_max=0 PASS
+256x256x256 identity ratio_ref=0 maxerr_ref=0 ratio_max=0 maxerr_max=0 PASS
+OMEGA_MAX_CHECK: PASS

@@ -1,0 +1,5 @@
+JIT session error: Symbols not found: [ omega2_omatmul ]
+kernels=/dev/shm/omega-max-cpu/extcall/kernels
+want 'Failed to materialize symbols'
+got: setup for model om_omega_16x16x8 returned error: Failed to materialize symbols: { (ac32e635ea223012, { mgp_buffer_constant, __kernel_e732968522176bb9b6944c8b8ed68aa0, __kernel_1be5131368383a2cb534e23e78edd3b7, __kernel_533740d011cd087faf040ca33252b085, __kernel_1b2c0abe58bc92f837d49b13aec8ba6d, __kernel_6b9331666371684a7dd0784eae03ae3b, __kernel_05bbea54493150d81bee7f9b5706111d, __kernel_9d2dc342c9d9544105e7d67621a848b8 }) }
+OMEGA_MAX_NEG_LOAD: PASS
