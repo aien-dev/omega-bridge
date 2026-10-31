@@ -40,6 +40,8 @@ quiet-build python3 tests/attachments.py
 
 See [supported features and limits](docs/CAPABILITIES.md), [caller ABI and ownership](docs/ABI.md), [design and study decisions](docs/DESIGN.md), and [provenance](docs/PROVENANCE.md). Text constants, floats, heap operations and other target languages are explicitly unsupported by the C/Python converters. GPU interoperability is a separate, opt-in adapter boundary (it converts no host program): see [GPU adapter](docs/GPU-ADAPTER.md) and the [support matrix](docs/GPU-SUPPORT-MATRIX.md). Python/C input conversion is not implemented. The Python test harness is infrastructure; all conversion logic and both runtime emitters are in [src/toc.om](src/toc.om).
 
+DeepInfer (deepseek-ai/DeepInfer) is a proposed translation and attachment target; its inventory, measured import coverage and extension plan are in [DeepInfer as a bridge target](docs/DEEPINFER.md).
+
 Call compiled Omega in place from six languages (the native call adapter, a separate claim from conversion: it runs Omega's own machine code, it does not turn Omega into another language):
 
 ```sh

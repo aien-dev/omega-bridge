@@ -1,0 +1,5 @@
+static int64_t pairs(int64_t begin, int64_t end, int64_t ratio, int64_t cap = 0) {
+    if (cap == 0)
+        return floor_prefix(end, ratio) - floor_prefix(begin, ratio);
+    return capped_prefix(end, ratio, cap) - capped_prefix(begin, ratio, cap);
+}
