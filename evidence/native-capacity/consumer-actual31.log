@@ -1,0 +1,8 @@
+HOST consumer-compiler path, 2026-10-28
+Native generator source SHA256: d3cfe0561696aad92164ddf11340522645cf6daf7af238835c3d3c61ecdef656
+Compiler SHA256: 2c82480596bbdc50cda9626866209ef662d5834f278f839ff4ce0250c495029f
+Generator compilation exit0.
+Exact captured actual31 frame SHA256: cf6ab2c745e632016c18da815f52bc0387713435440d816ae198201a8accefbd
+Frame length1778905 bytes. Generator c exit0, C output5063961 bytes.
+cc -std=gnu11 -O2 -Wall -Wextra -Werror -c consumer-actual31.c -o consumer-actual31.o: exit0.
+Aggregate C compilation is HOST evidence, not execution of those31 consumer functions. No GPU/service/deployment checks run.

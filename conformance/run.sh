@@ -3,7 +3,8 @@
 set -eu
 cd "$(dirname "$0")"
 PY=${PYTHON:-python3}
-MAXPY=${MAXPY:-/home/drakestapleton/workspace/maxinterop/venv/bin/python}
+MAXPY=${MAXPY:-$HOME/workspace/maxinterop/venv/bin/python}
+$PY test_max_runner_metadata.py
 mkdir -p build
 $PY gen_fixtures.py --out build/fixtures
 sh build.sh

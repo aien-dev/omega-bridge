@@ -1,0 +1,105 @@
+{
+  "schema": 1,
+  "status": "EXERCISED",
+  "backend": "EMULATED",
+  "native_x86": "NOT_RUN",
+  "gpu": "NOT_RUN",
+  "bridge_base": "0c4cb9ff980af278890b231b994eaede4dc7621c",
+  "compiler_commit": "f633bf986823741f377f1037ebd2171bbfb84178",
+  "compiler_source_sha256": "26b93cf3612077802a06d4eaee1a9f618857dbcb1c0cfb9c67474e85e4ce787e",
+  "baseline_omc_sha256": "734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61",
+  "x86_omc_sha256": "1f0fdef06574ffec782c164941114edcf51f36f9f9cd1e79bc0452dbcebb3322",
+  "qemu_source_url": "https://download.qemu.org/qemu-10.0.14.tar.xz",
+  "qemu_source_sha256": "c7230968906fdb5540d803e2af1f515e77590a414f2a4dbd3ec9ada3c47083d0",
+  "qemu_binary_sha256": "fd7ae7768c1d698d387893688d28abde90512f1f445d171a1389110eb7c237ee",
+  "command": "python3 tests/native/x86/test_build_failures.py build/x86-controls-final",
+  "exit": 0,
+  "environment": {
+    "OMEGA_NATIVE_OMC": "$BASELINE_OMC",
+    "OMEGA_NATIVE_X86_OMC": "$COMPILER/build/fr9-20261028-resume/bridge-omc-aarch64",
+    "CC": "x86_64-linux-gnu-gcc",
+    "CXX": "$HOME/.local/opt/zig-linux-aarch64-0.13.0/zig c++ -target x86_64-linux-gnu",
+    "ZIG": "$HOME/.local/opt/zig-linux-aarch64-0.13.0/zig",
+    "GO": "$HOME/.local/opt/go1.27.3/bin/go",
+    "GOMAXPROCS": "2",
+    "QEMU_X86_64": "$BRIDGE/build/qemu-oracle/build/qemu-x86_64",
+    "OMEGA_NATIVE_X86_PYTHON": "$BRIDGE/build/x86-python/root/usr/bin/python3.12",
+    "OMEGA_NATIVE_X86_LIBPATH": "$BRIDGE/build/x86-python/root/usr/lib/x86_64-linux-gnu:$BRIDGE/build/x86-python/root/lib/x86_64-linux-gnu:/usr/x86_64-linux-gnu/lib"
+  },
+  "tool_versions": {
+    "qemu": {
+      "command": "$BRIDGE/build/qemu-oracle/build/qemu-x86_64 --version",
+      "exit": 0,
+      "output": "qemu-x86_64 version 10.0.14\nCopyright (c) 2003-2025 Fabrice Bellard and the QEMU Project developers\n"
+    },
+    "cc": {
+      "command": "x86_64-linux-gnu-gcc --version",
+      "exit": 0,
+      "output": "x86_64-linux-gnu-gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n"
+    },
+    "rust": {
+      "command": "rustc --version",
+      "exit": 0,
+      "output": "rustc 1.98.1 (48a229cea 2026-09-01)\n"
+    },
+    "zig": {
+      "command": "$HOME/.local/opt/zig-linux-aarch64-0.13.0/zig version",
+      "exit": 0,
+      "output": "0.13.0\n"
+    },
+    "go": {
+      "command": "$HOME/.local/opt/go1.27.3/bin/go version",
+      "exit": 0,
+      "output": "go version go1.27.3 linux/arm64\n"
+    }
+  },
+  "aarch64_byte_parity_rows": 150,
+  "required_languages": [
+    "c",
+    "cpp",
+    "python",
+    "rust",
+    "zig",
+    "go"
+  ],
+  "required_language_evidence": {
+    "c": true,
+    "cpp": true,
+    "python": true,
+    "rust": true,
+    "zig": true,
+    "go": true
+  },
+  "source_files_sha256": {
+    "src/native.om": "6cdd7f05f02f776bcc04cdf827af4cb45d7107254c3b3a88780a4c8bfda1ea52",
+    "tools/native": "d1e6ea3553f8897d2d4575e4eddaec60797b7fa9bbe45e46add6ecd81606da0a",
+    "tests/native/x86/floorcheck.c": "290c8dc5c8e8c82e3ab7abf3e8f0491edbfcdf84afdd637be004b2baec0cea82",
+    "tests/native/x86/follow.om": "6fe21be222b4443c9b0b66327b4173315db03c7cbfdd03f67808b656946e311a",
+    "tests/native/x86/outtrap.om": "6a72610f24cea0f7abeb798eb08b872642609d866a4992dc48b57f1f865516aa",
+    "tests/native/x86/prepare.py": "de84bf3ebd16d56e96f9c5911d20b879a4e765d9bbfc6f31a573deef020baad9",
+    "tests/native/x86/run.sh": "6a87c86c8bf1ffb91c687e082e31530f341069d3746403128b96e160dd66359f",
+    "tests/native/x86/suite.py": "d04c319fcfc61fa23e1cc33a18d15da82b9a024ee2a7fce04f1c53147adeaa50",
+    "tests/native/x86/sysv.S": "277038e153b1f76cb2b58a3245a5e77a0abe8923b6ad12d8276d3ab65bf6d14b",
+    "tests/native/x86/sysv.c": "1c103e1a5e49b1ebceab381f7d5abfaae4a0dd84cf2ef9c753ecf9613c60aaf8",
+    "tests/native/x86/test_build_failures.py": "9b5ff1ced02ae86ab7c61ea8cf64280fd5ff9cd256a1958c309bf17b397856ef",
+    "tests/native/x86/trapcall.om": "f9342a7c0ad0e314f9efffe5af321de99cd17f38c3c4c43e2e836645402fd3fa",
+    "tests/native/x86/trapcheck.c": "de051efa0847bb37b3f3f202cc3dca66132d7526e697ae02f206817bc409ddc9"
+  },
+  "normalization": "Published text logs substitute $BRIDGE, $COMPILER, $HOME and $BASELINE_OMC for local paths only. Verdicts, commands, bytes and statuses are otherwise unchanged. Original unnormalized logs remain in build/x86-controls-final. commands.log includes every numbered positive command and failed-toolchain invocations; case summaries cover all controls.",
+  "scope": [
+    "ABI-v2 existing C oracle NULL/unaligned/wrapping/overlap32, signal-reentry33, threads",
+    "stale C/Python source identities and old-v1 link refusal all six languages",
+    "nested trap5, invalid trap/runtime34, stack exhaustion6, preserved registers and result/output sentinels",
+    "private local hidden symbols, separate-object TLS isolation, global-helper mutant",
+    "wrap, overlap, out-copy, API declaration/inline and fixed-floor mutants",
+    "failed Zig42 and Go43, missing Zig/Go refuse aggregate PASS (#34)",
+    "all AArch64 generator outputs compared byte-for-byte with main0c4cb9ff, including matching refusals"
+  ],
+  "limits": [
+    "No native physical x86 execution",
+    "No CET shadow-stack enforcement support",
+    "x86 freestanding refuses110; existing AArch64 output unchanged",
+    "Compiler dependency remains draft omega-mv#923",
+    "No benchmark or device qualification claim"
+  ]
+}

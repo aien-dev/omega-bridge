@@ -1,0 +1,2 @@
+#define OMEGA2_IDENT_omatmul "omega-ident 1 unit=omatmul abi=2 profile=OM-2 src=214493520a48487f44ec1c3dc7ac23771b15fe87bd587ed0e882b4a407f6c7a8 omc=499236398aabc652e2dae27fe4bdc4c5db3d3726314356e0dbef23e3345803ec"
+#define OMEGA2_IDENT_omatmul "omega-ident 1 unit=omatmul abi=2 profile=OM-2 src=8e2a67f1bd70985f6a64cfdd522b03e64e4078f2d25f865fd3e94f492f95d16b omc=499236398aabc652e2dae27fe4bdc4c5db3d3726314356e0dbef23e3345803ec"

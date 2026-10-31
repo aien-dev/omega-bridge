@@ -1,0 +1,1 @@
+tools/native: 1 unit(s) -> /dev/shm/omega-max-cpu/lib/libomega_native.so + omega_native.{c,h,py,rs,zig,go} + omega_api.h, omega_api_decl.h, omega_api_defs.c (+ work/)

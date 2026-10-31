@@ -9,7 +9,7 @@ Repository: `https://github.com/modular/modular`
 Pinned ref: tag `max/v26.7.0` (also `mojo/v1.2.0`)
 Pinned commit: `527d069ee11a41ac5320af1f9402db0a66b2b868`
 Tree: `0d873aea6bafed021bf6033b3904db392778d76d`
-Local checkout: `/home/drakestapleton/workspace/maxinterop/max-source` (HEAD = pinned commit, sparse, blobless clone)
+Local checkout: `~/workspace/maxinterop/max-source` (HEAD = pinned commit, sparse, blobless clone)
 
 Evidence conventions used below:
 
