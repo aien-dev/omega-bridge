@@ -101,7 +101,7 @@ loops = {
                    "r = count {k}\nret int and r 255\nend\n",
 }
 for name, shape in loops.items():
-    for k, want in [(999999, False), (1500000, True)]:
+    for k, want in [(999999, False), (1000000, False), (1000001, True), (1500000, True)]:
         src = b / f"loop-{name}-{k}.om"
         src.write_text(shape.replace("{k}", str(k)))
         exe = b / f"loop-{name}-{k}.native"
