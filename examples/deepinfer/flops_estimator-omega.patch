@@ -1,0 +1,55 @@
+--- a/csrc/engine/flops_estimator.hpp
++++ b/csrc/engine/flops_estimator.hpp
+@@ -10,6 +10,10 @@
+ #include <utility>
+ #include <vector>
+ 
++// floor_prefix, capped_prefix and pairs run the Omega unit flops_pairs.om (aien-dev/omega-bridge
++// examples/deepinfer), bound by omega-bridge tools/native into libomega_native.
++#include "omega_native.h"
++
+ // GEMM coefficients include multiply-add (2 FLOPs) and the FP8-equivalent weight.
+ namespace flops_coef {
+ constexpr int64_t FP4 = 1;
+@@ -237,23 +241,34 @@
+     // Sum floor(t / ratio), t=1..n: compressed query-key pairs without a cap.
+     // Used for dense core attention and full-context index attention.
+     static int64_t floor_prefix(int64_t n, int64_t ratio) {
+-        const int64_t blocks = n / ratio;
+-        return blocks * (n + 1) - ratio * blocks * (blocks + 1) / 2;
++        uint64_t bits = 0;
++        const uint32_t status = omega2_floor_prefix(&bits, static_cast<uint64_t>(n), static_cast<uint64_t>(ratio));
++        return omega_result(status, bits, "floor_prefix");
+     }
+ 
+     // Sum min(floor(t / ratio), cap), t=1..n.
+     // Used for topk/candidate limits and SWA windows (ratio=1).
+     static int64_t capped_prefix(int64_t n, int64_t ratio, int64_t cap) {
+-        const int64_t stop = std::min(n, ratio * cap);
+-        return floor_prefix(stop, ratio) + (n - stop) * cap;
++        uint64_t bits = 0;
++        const uint32_t status =
++            omega2_capped_prefix(&bits, static_cast<uint64_t>(n), static_cast<uint64_t>(ratio), static_cast<uint64_t>(cap));
++        return omega_result(status, bits, "capped_prefix");
+     }
+ 
+     // Query-key pairs for positions [begin, end), via prefix differences.
+     // Used for full/consumer query ranges; cap=0 means uncapped.
+     static int64_t pairs(int64_t begin, int64_t end, int64_t ratio, int64_t cap = 0) {
+-        if (cap == 0)
+-            return floor_prefix(end, ratio) - floor_prefix(begin, ratio);
+-        return capped_prefix(end, ratio, cap) - capped_prefix(begin, ratio, cap);
++        uint64_t bits = 0;
++        const uint32_t status = omega2_pairs(&bits, static_cast<uint64_t>(begin), static_cast<uint64_t>(end),
++                                             static_cast<uint64_t>(ratio), static_cast<uint64_t>(cap));
++        return omega_result(status, bits, "pairs");
++    }
++
++    // An Omega status is 0 when done; 1 when a step leaves int64_t (where the former C++ expression was
++    // undefined behaviour); 9 outside n >= 0, ratio > 0, cap >= 0, 0 <= begin <= end.
++    static int64_t omega_result(uint32_t status, uint64_t bits, const char *fn) {
++        TORCH_CHECK(status == OMEGA_OK, fn, ": Omega trap ", status);
++        return static_cast<int64_t>(bits);
+     }
+ 
+     std::pair<QueryRange, QueryRange> query_ranges(int q, int k, bool is_prompt, int full_len, int swa_valid_start) const {

@@ -1,0 +1,27 @@
+{
+  "extensions": {
+    "generated": {
+      "children": [
+        {
+          "digest": "0930c059d4792c524ead954ccfa16e3dab282f13db861da3cd00a446883eac4f",
+          "last_commit": "",
+          "name": "callers",
+          "purpose": "c, c-bti, cpp, python, rust, zig and go callers of flops_pairs.om through the generated bindings"
+        }
+      ],
+      "children_root": "sha256:55b6c520fea9b88868f31919ffa3761fe965588bf9f0f006a9e52928ab6d2a4a",
+      "compiled_at": "2026-10-31T00:23:54Z",
+      "compiler": "crumb-compile/1",
+      "digest": "sha256:d0a686f1689207de43dda23ac1769a106851e542d55b240b3512ed5b0b8294d3",
+      "evidence_files": 0,
+      "evidence_root": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "files": 0,
+      "generated_at_commit": "1958a1895279c0d4869bab39eaa20f070b174a6c",
+      "source_tree": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "layer": "examples",
+  "name": "deepinfer-flops-pairs",
+  "purpose": "DeepInfer FlopsEstimator floor_prefix/capped_prefix/pairs as an OM-2 Omega unit: differential harness, header patch, native callers",
+  "schema_version": "1.0.0"
+}

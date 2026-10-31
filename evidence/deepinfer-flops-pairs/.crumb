@@ -1,0 +1,20 @@
+{
+  "extensions": {
+    "generated": {
+      "children": [],
+      "children_root": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compiled_at": "2026-10-31T00:23:54Z",
+      "compiler": "crumb-compile/1",
+      "digest": "sha256:579eb72ebd1a11bcd3304f4b4a896f8e52dfa65e8b193feaeaea469d24844050",
+      "evidence_files": 0,
+      "evidence_root": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "files": 0,
+      "generated_at_commit": "1958a1895279c0d4869bab39eaa20f070b174a6c",
+      "source_tree": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "layer": "evidence",
+  "name": "deepinfer-flops-evidence",
+  "purpose": "Run log, overflow measurement, Wolfram checks and hashes for examples/deepinfer",
+  "schema_version": "1.0.0"
+}
