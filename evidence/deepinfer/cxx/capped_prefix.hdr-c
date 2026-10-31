@@ -1,0 +1,5 @@
+#include <stdint.h>
+static int64_t capped_prefix(int64_t n, int64_t ratio, int64_t cap) {
+    const int64_t stop = std::min(n, ratio * cap);
+    return floor_prefix(stop, ratio) + (n - stop) * cap;
+}

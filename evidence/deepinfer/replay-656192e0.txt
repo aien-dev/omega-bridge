@@ -1,0 +1,34 @@
+4c74b1f7f35ce2ebfeeb0b9e0c024f0deb7544f071e0a7fe512af199270e0eb9  /home/drakestapleton/workspace/deepinfer-bridge/omega-839/build/L627/import/python-import
+4cd9f0181f7d06cb9975bee4488b79cb6b95dede91912021c53de5a4aa190f24  /home/drakestapleton/workspace/deepinfer-bridge/omega-839/build/S2/c-i64-import
+ed90e640c6fc694712856b8fdaf8ed4865e8c56f2008203a201301312806bdd0  /home/drakestapleton/workspace/deepinfer-bridge/omega-839/build/L739/cpp-import
+PASS  python-import  want=66  got=66  out=    0B PY_IMPORT_UNSUPPORTED_TYPE               py-verbatim/000_is_power_of_two.py
+PASS  python-import  want=66  got=66  out=    0B PY_IMPORT_UNSUPPORTED_TYPE               py-verbatim/001_ceil_div.py
+PASS  python-import  want=66  got=66  out=    0B PY_IMPORT_UNSUPPORTED_TYPE               py-verbatim/002_i64.py
+PASS  python-import  want=72  got=72  out=    0B PY_IMPORT_UNSUPPORTED_SOURCE_FORM        py-verbatim/003_expanded_image_token_len.py
+PASS  python-import  want=72  got=72  out=    0B PY_IMPORT_UNSUPPORTED_SOURCE_FORM        py-verbatim/004__align_to_multiple.py
+PASS  python-import  want=71  got=71  out=    0B PY_IMPORT_UNSUPPORTED_SIGNATURE          py-verbatim/005__needs_compress_state.py
+PASS  python-import  want=0   got=0   out=  324B                                          py-verbatim/ctrl_pos.py
+PASS  python-import  want=68  got=68  out=    0B PY_IMPORT_UNSUPPORTED_ARITHMETIC         py-verbatim/ctrl_unmasked.py
+PASS  python-import  want=68  got=68  out=    0B PY_IMPORT_UNSUPPORTED_ARITHMETIC         py-stripped/000_is_power_of_two.py
+PASS  python-import  want=68  got=68  out=    0B PY_IMPORT_UNSUPPORTED_ARITHMETIC         py-stripped/001_ceil_div.py
+PASS  python-import  want=69  got=69  out=    0B PY_IMPORT_UNSUPPORTED_CONSTRUCT          py-stripped/002_i64.py
+PASS  python-import  want=68  got=68  out=    0B PY_IMPORT_UNSUPPORTED_ARITHMETIC         py-stripped/003_expanded_image_token_len.py
+PASS  python-import  want=68  got=68  out=    0B PY_IMPORT_UNSUPPORTED_ARITHMETIC         py-stripped/004__align_to_multiple.py
+PASS  python-import  want=68  got=68  out=    0B PY_IMPORT_UNSUPPORTED_ARITHMETIC         py-stripped/005__needs_compress_state.py
+PASS  c-i64-import   want=66  got=66  out=    0B C_IMPORT_UNSUPPORTED_TYPE                cxx/floor_prefix.hdr-c
+PASS  c-i64-import   want=66  got=66  out=    0B C_IMPORT_UNSUPPORTED_TYPE                cxx/capped_prefix.hdr-c
+PASS  c-i64-import   want=66  got=66  out=    0B C_IMPORT_UNSUPPORTED_TYPE                cxx/pairs.hdr-c
+PASS  c-i64-import   want=68  got=68  out=    0B C_IMPORT_UNSUPPORTED_ARITHMETIC          cxx/floor_prefix.c17
+PASS  c-i64-import   want=72  got=72  out=    0B C_IMPORT_UNSUPPORTED_PREPROCESSOR        cxx/floor_prefix.verbatim
+PASS  cpp-import     want=72  got=72  out=    0B CPP_IMPORT_UNSUPPORTED_PREPROCESSOR      cxx/floor_prefix.verbatim
+PASS  c-i64-import   want=72  got=72  out=    0B C_IMPORT_UNSUPPORTED_PREPROCESSOR        cxx/capped_prefix.verbatim
+PASS  cpp-import     want=72  got=72  out=    0B CPP_IMPORT_UNSUPPORTED_PREPROCESSOR      cxx/capped_prefix.verbatim
+PASS  c-i64-import   want=72  got=72  out=    0B C_IMPORT_UNSUPPORTED_PREPROCESSOR        cxx/pairs.verbatim
+PASS  cpp-import     want=72  got=72  out=    0B CPP_IMPORT_UNSUPPORTED_PREPROCESSOR      cxx/pairs.verbatim
+PASS  c-i64-import   want=0   got=0   out=  345B                                          cxx/ctrl_pos.c17
+PASS  cpp-import     want=69  got=69  out=    0B CPP_IMPORT_UNSUPPORTED_CONSTRUCT         cxx/floor_prefix.hdr-cpp
+PASS  cpp-import     want=69  got=69  out=    0B CPP_IMPORT_UNSUPPORTED_CONSTRUCT         cxx/capped_prefix.hdr-cpp
+PASS  cpp-import     want=69  got=69  out=    0B CPP_IMPORT_UNSUPPORTED_CONSTRUCT         cxx/pairs.hdr-cpp
+PASS  cpp-import     want=0   got=0   out=  361B                                          cxx/ctrl_pos.hdr-cpp
+PASS  cpp-import     want=71  got=71  out=    0B CPP_IMPORT_UNSUPPORTED_SIGNATURE         cxx/ctrl_name.hdr-cpp
+DEEPINFER-COVERAGE REPLAY PASS
