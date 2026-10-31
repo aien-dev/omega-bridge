@@ -1,8 +1,10 @@
 #!/bin/sh
 # Reproduce the MAX CPU route for the Omega matmul custom op (evidence/MAX-CPU/README.md).
-# Run from anywhere, pinned:  TMPDIR=/dev/shm taskset -c 10-14 nice -n 19 ionice -c3 max-cpu/run.sh
-# CPU only: every graph is built on DeviceRef.CPU(); nothing here opens the GPU.
+# Run from anywhere, pinned:  TMPDIR=/dev/shm taskset -c 5-9 nice -n 19 ionice -c3 max-cpu/run.sh
+# CPU only: every graph is built on DeviceRef.CPU(). MAX 26.7.0 Graph() still opens a CUDA
+# context when a GPU is visible, so the GPU is hidden here and omega_max.py refuses otherwise.
 set -eu
+export CUDA_VISIBLE_DEVICES=
 cd "$(dirname "$0")/.."
 MAXPY=${MAXPY:-$HOME/workspace/maxinterop/venv/bin/python}
 OMEGA_REPO=${OMEGA_REPO:-$HOME/workspace/omega}

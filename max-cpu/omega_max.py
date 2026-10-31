@@ -7,7 +7,9 @@ Subcommands (run with the MAX venv python, see max-cpu/run.sh):
   measure     one op/shape in this process: cold start, warm latencies, peak RSS
   measure-all spawns one `measure` child per (op, shape, cache state)
 
-Every graph runs on DeviceRef.CPU() only. Exit 0 = the expected outcome was observed.
+Every graph runs on DeviceRef.CPU() only, and main() refuses (exit 2) while an accelerator is
+visible, because MAX 26.7.0 Graph() otherwise opens a CUDA context. Exit 0 = the expected
+outcome was observed.
 """
 
 import argparse
@@ -306,6 +308,14 @@ def main():
             s.add_argument("--cache", default="fresh")
             s.add_argument("--t0", type=int, required=True)
     a = p.parse_args()
+    # MAX 26.7.0 Graph() creates an Accelerator() (a CUDA context) whenever one is visible, even
+    # for an all-CPU graph. Refuse unless the GPU is hidden: run.sh exports CUDA_VISIBLE_DEVICES=.
+    from max.driver import accelerator_count
+
+    if accelerator_count() != 0:
+        print("omega_max.py: an accelerator is visible; export CUDA_VISIBLE_DEVICES= "
+              "(this harness must not open the GPU)", file=sys.stderr)
+        sys.exit(2)
     fn = {"check": cmd_check, "neg-shape": cmd_neg_shape, "neg-load": cmd_neg_load,
           "measure": cmd_measure, "measure-all": cmd_measure_all}[a.cmd]
     sys.exit(fn(a))

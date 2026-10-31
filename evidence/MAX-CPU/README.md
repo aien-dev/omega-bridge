@@ -1,8 +1,17 @@
 # MAX CPU route: an Omega kernel as a MAX 26.7.0 graph custom op
 
 Status: **EXERCISED(host CPU)** on the DGX Spark's Grace aarch64 host, 2026-10-30/31. This is a
-host-CPU run, not a hardware qualification and not a GPU result. Nothing here opened the GPU:
-every graph is built on `DeviceRef.CPU()` and the session is `InferenceSession(devices=[CPU()])`.
+host-CPU run, not a hardware qualification and not a GPU result. Every graph is built on
+`DeviceRef.CPU()` and the session is `InferenceSession(devices=[CPU()])`, so no kernel ran on the
+GPU. That alone does not keep the GPU closed: MAX 26.7.0 `Graph()` (`_populate_device_info_mapping`)
+creates an `Accelerator()`, a CUDA context, whenever `accelerator_count() > 0`. The run of record
+did not hide the GPU, so [INFERENCE] each of its graph processes opened a GB10 context. On
+2026-10-31 a rerun at `6ec6dab7` exited 1 for that reason: the last `measure` child (matmul
+256x256x256 warm) failed in `Accelerator()` with `CUDA_ERROR_OUT_OF_MEMORY` while the GPU was busy;
+every check and negative control had passed. `run.sh` and `mogg-cache-repro.sh` now export
+`CUDA_VISIBLE_DEVICES=` and `omega_max.py` exits 2 while an accelerator is visible. With the GPU
+hidden, the 2026-10-31 rerun exited 0 (`OMEGA MAX CPU: PASS`, 16 of 16 measurements) and the warm
+omega 16x16x8 `maxrss_kib` was 495648 against 589472 in the GPU-visible rerun.
 
 ## What runs
 
@@ -36,8 +45,8 @@ the same f32 values.
 ## Reproduce
 
 ```sh
-TMPDIR=/dev/shm taskset -c 10-14 nice -n 19 ionice -c3 max-cpu/run.sh            # ~11 min
-TMPDIR=/dev/shm taskset -c 10-14 nice -n 19 ionice -c3 max-cpu/mogg-cache-repro.sh  # after run.sh
+TMPDIR=/dev/shm taskset -c 5-9 nice -n 19 ionice -c3 max-cpu/run.sh            # ~11 min
+TMPDIR=/dev/shm taskset -c 5-9 nice -n 19 ionice -c3 max-cpu/mogg-cache-repro.sh  # after run.sh
 ```
 
 `run.sh` extracts both omc stages from git objects and checks their sha256, builds the library and
@@ -103,7 +112,7 @@ ExecutionEngine; the MAX kernel JIT does not resolve symbols from the process im
 `LD_PRELOAD` gave the same error. The Mojo FFI docs at the pin (c-ffi.mdx, Limitations) say
 `external_call()` cannot load dynamic libraries and point to `OwnedDLHandle`.
 
-## Measurements (EXERCISED(host CPU), `taskset -c 10-14`)
+## Measurements (EXERCISED(host CPU), `taskset -c 10-14`; historical run of record. Cores 10-14 are reserved on this host now: rerun on 5-9)
 
 `measure-all` starts one child process per series. `cold_ns` runs from process start to the end
 of the first execute (import, graph build, compile, load, first call); `fresh` = empty
