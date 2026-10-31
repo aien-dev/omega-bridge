@@ -1,7 +1,7 @@
 # Audit scope
 
 Written for an outside, independent security audit. Revision described:
-`ed420fcbffa1ad83db78111deb836dd880ed891e` on `main`, 2026-10-28. Everything below is taken from
+`9532044efb80cc88d36af0f3fbc1744ee599c63a` on `main`, 2026-10-31. Everything below is taken from
 the repository's own files at that revision; items marked NOT_RUN were not executed while writing
 this document.
 
@@ -15,8 +15,9 @@ ABI v1 for OM-1 units and ABI v2 for OM-2 units, `docs/NATIVE-ABI.md`). `tools/n
 `tools/native --target x86linux` emits hosted x86-64 SysV Linux bindings from a separately pinned
 x86 compiler; that path is EXERCISED under emulation only (`evidence/native-x86-62775d2a.json`)
 and native x86-64 execution is NOT_RUN. `src/gpu_adapter.om` is an opt-in GPU adapter that
-negotiates and admits artifacts; it opens no device and converts no host program. The default
-target is Linux AArch64. There is no C or
+negotiates and admits artifacts; it opens no device and converts no host program. `max-cpu/` runs
+an Omega kernel as a Modular MAX 26.7.0 CPU custom op (status EXERCISED on a host CPU, draft;
+`evidence/MAX-CPU/README.md`). The default target is Linux AArch64. There is no C or
 Python input frontend. The Python under `tests/` and `conformance/` is test infrastructure and
 does not ship. Status: local differential tests and caller demos; independent review required
 before release.
@@ -45,9 +46,10 @@ before release.
    conformance test suite.
 7. Test integrity: `tools/test.sh`, `tests/differential.py`, `tests/refusals.py`,
    `tests/attachments.py`, `tests/controls.py`, `tests/robustness.py`, `tests/native/run.sh`,
-   `tests/native/v2/run.sh` (ABI v2 and freestanding), `tests/native/test_freestanding.py`,
-   `tests/native/x86/run.sh` (x86linux, EMULATED), `tests/native/test_build_failures.sh`,
-   `tests/gpu/test_gpu_adapter.py`.
+   `tests/native/v2/run.sh` (ABI v2 and freestanding), `tests/native/kinds.sh` (f32 and ushort
+   array kinds), `tests/native/test_freestanding.py`, `tests/native/x86/run.sh` (x86linux,
+   EMULATED), `tests/native/test_build_failures.sh`, `tests/gpu/test_gpu_adapter.py`,
+   `max-cpu/run.sh` and `max-cpu/test_run_evidence.py`.
 
 `.github/workflows/ci.yml` (added by the audit-readiness change) replays the compiler from
 source with `tools/bootstrap.sh` and runs `sh tools/test.sh` on a GitHub-hosted arm64 runner;
@@ -108,11 +110,14 @@ tools/test.sh
 python3 tests/attachments.py
 OMEGA_NATIVE_OMC=/path/to/omega-mv/seed/out/omc sh tests/native/run.sh
 OMEGA_NATIVE_OMC=/path/to/omega-mv/seed/out/omc sh tests/native/v2/run.sh
+OMEGA_NATIVE_OMC=/path/to/omega-mv/seed/out/omc sh tests/native/kinds.sh
 OMEGA_NATIVE_X86_OMC=/path/to/x86/omc sh tests/native/x86/run.sh
 sh tests/native/test_build_failures.sh
 OMEGA_SEED=build/bootstrap/omc sh tools/build-gpu-adapter.sh
 python3 tests/gpu/test_gpu_adapter.py
 MAXPY=/path/to/venv/bin/python conformance/run.sh
+python3 max-cpu/test_run_evidence.py
+max-cpu/run.sh
 conformance/run.sh --device
 tools/run-device-window.sh --ledger <ID>
 ```
@@ -122,11 +127,14 @@ tools/run-device-window.sh --ledger <ID>
 - `tests/native/run.sh`: prints `NATIVE-CALL PASS` only after all seven required callers build
   and run; missing toolchains print NOT_RUN and exit nonzero. NOT_RUN here.
 - `tests/native/v2/run.sh`: ABI v2 (OM-2) bindings and the `--freestanding` object. NOT_RUN here.
+- `tests/native/kinds.sh`: f32 and ushort array kinds called from C, their refusals, and a
+  negative control (fsum's add turned into sub) that must fail. NOT_RUN here.
 - `tests/native/x86/run.sh`: x86linux bindings under a QEMU user-mode oracle (`QEMU_X86_64`);
   EMULATED only, physical x86-64 NOT_RUN. NOT_RUN here.
 - `tests/gpu/test_gpu_adapter.py`: 47 checks, no device. NOT_RUN here.
 - `conformance/run.sh` needs a Modular MAX 26.7 venv (`modular==26.7.0`); CPU only without
   `--device`. NOT_RUN here.
+- `max-cpu/run.sh` needs the same MAX 26.7.0 venv; host CPU only. NOT_RUN here.
 - `conformance/run.sh --device` and `tools/run-device-window.sh` need the NVIDIA GB10 on a DGX
   Spark inside an authorized window plus a sibling CUDApp build. NOT_RUN on a plain host.
 
