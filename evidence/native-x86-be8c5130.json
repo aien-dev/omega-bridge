@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "date": "2026-10-31",
+  "status": "EMULATED_PASS",
+  "native_x86": "NOT_RUN",
+  "gpu": "NOT_RUN",
+  "bridge_commit": "ba8a75a6f9538b130383e1eb8ff459f82c589f92",
+  "bridge_tree": "ba8a75a plus branch pin/x86-omc-be8c5130 edits; tools_native_sha256 and suite_sha256 identify the files run",
+  "compiler_commit": "474197e4fa0207e0e2fb3c0494594a975f5031fa",
+  "compiler_source_sha256": "d4b4b89d8a58cc90d30d15a525b417e4b31e5bfe5288d21d665f1c7958a330f6",
+  "x86_omc_sha256": "be8c51301307555254fc59e351d281aae1aa096d91521777e33a41c8b446448a",
+  "baseline_omc_sha256": "734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61",
+  "tools_native_sha256": "527e233c1dafa755605475015d2164daf58143f0ad73f78b237f5df9a79dc523",
+  "suite_sha256": "263e7b34a80b698746fe8be9aa024422132d0e0eb0c111a191edee4fe3e2e718",
+  "controls_sha256": "9b5ff1ced02ae86ab7c61ea8cf64280fd5ff9cd256a1958c309bf17b397856ef",
+  "qemu_binary_sha256": "fd7ae7768c1d698d387893688d28abde90512f1f445d171a1389110eb7c237ee",
+  "aarch64_parity_baseline": "f637021f36f0cfff39240a62341a47e442ae05c3",
+  "commands": [
+    {
+      "command": "sh tools/bootstrap.sh",
+      "exit": 0
+    },
+    {
+      "command": "sh tools/test.sh",
+      "exit": 0,
+      "result": "ALL SUITES RC=0"
+    },
+    {
+      "command": "sh tests/native/x86/run.sh EMPTY_OUTPUT",
+      "exit": 0,
+      "result": "311 PASS, 0 FAIL; NATIVE-X86 EMULATED PASS"
+    },
+    {
+      "command": "python3 tests/native/x86/test_build_failures.py EMPTY_OUTPUT",
+      "exit": 0,
+      "result": "314 PASS, 0 FAIL; NATIVE-X86 CONTROLS PASS"
+    },
+    {
+      "command": "OMEGA_NATIVE_X86_OMC=<734f0a39 omc> sh tests/native/x86/run.sh EMPTY_OUTPUT",
+      "exit": 1,
+      "result": "negative control: FAIL x86 compiler pin; NATIVE-X86 FAIL x86 compiler pin"
+    },
+    {
+      "command": "OMEGA_NATIVE_X86_OMC=<be8c5130 omc with one byte appended, sha256 28751fb2...> sh tools/native --target x86linux OUTDIR tests/native/x86/follow.om",
+      "exit": 1,
+      "result": "negative control: tools/native refused, x86 omc sha256 differs from pin"
+    }
+  ],
+  "results": [
+    "six language callers built and executed",
+    "wrong compiler pin refused (suite and tools/native, wrong and mutated compiler)",
+    "actual floor positive and carved-floor mutant controls passed",
+    "failing Zig and Go toolchains refused aggregate pass",
+    "missing Zig and Go refused aggregate pass",
+    "real toolchain positive control passed",
+    "AArch64 byte parity with generator f637021: 150/150 comparisons passed"
+  ],
+  "transcript": {
+    "path": "evidence/native-x86-be8c5130-controls.log",
+    "sha256": "353355101aa7cbfe7d7964037e40aff4e457f470f904272f2036b25d3840a079",
+    "scope": "verdict lines; unchanged raw logs retained locally"
+  },
+  "raw_log_sha256": {
+    "positive": "f8ce272d0385b0f8989068189d3bc9d046f74c7608593eb517765984c7a61e81",
+    "controls": "4fab6f70e5a59a08a650e39dab1d1fc6cb75bb9ab157723fc6b42bc01e923f42",
+    "negative_wrong_pin": "39950f1abe283c0c5e3df3b96c2a2ae03ce2f3f216da5c555f7e59dfe2dcfc2d",
+    "negative_mutated_compiler": "5a6ee51c48ae3d6848911d8d8bae7aebdf9a50bb6372b7e761f3a00be1fe60d5"
+  },
+  "compiler_full_differential": "pending separate full compiler run; bridge PASS does not qualify the compiler"
+}

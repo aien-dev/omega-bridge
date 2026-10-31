@@ -74,8 +74,8 @@ QEMU 10.0.14 oracle and guest Python setup documented in
 QEMU 8.2.2 has observed signal and `/proc/self/maps` limitations for these
 callers. At the current x86 compiler pin, the full suite plus mismatched-pin and
 failed/missing-toolchain controls passed EMULATED; see
-[the pinned receipts](evidence/native-x86-62775d2a.json). Earlier
-pins' receipts remain in `evidence/native-x86-badedbb0/`, `evidence/native-x86-f7752bc5/` and `evidence/native-x86/`. Physical x86
+[the pinned receipts](evidence/native-x86-be8c5130.json). Earlier
+pins' receipts remain in `evidence/native-x86-62775d2a.json`, `evidence/native-x86-badedbb0/`, `evidence/native-x86-f7752bc5/` and `evidence/native-x86/`. Physical x86
 execution remains NOT_RUN.
 ## Human-Directed Agentic Engineering
 
