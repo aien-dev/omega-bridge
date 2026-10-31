@@ -1,0 +1,41 @@
+note flops_pairs.om: DeepInfer FlopsEstimator::floor_prefix, capped_prefix and pairs in Omega
+note (deepseek-ai/DeepInfer 553741557a57df44a46fb3ab72b6aafeaf945337 csrc/engine/flops_estimator.hpp
+note lines 237-257, Apache-2.0). Each step is the C++ expression's step in the same order, so a
+note step that leaves long traps 1 exactly where the C++ would be undefined behaviour. div truncates
+note toward zero like C++ /. Valid domain (the callers clamp with std::max(0, ...)): n >= 0,
+note ratio > 0, cap >= 0, 0 <= begin <= end; outside it a requires clause traps 9 instead of
+note returning a value. Bound through tools/native as omega2_floor_prefix, omega2_capped_prefix and
+note omega2_pairs (examples/deepinfer/README.md).
+om2
+note sum floor(t / ratio), t = 1 .. n
+export fn floor_prefix n long ratio long to long
+requires ge n 0
+requires gt ratio 0
+blocks = div n ratio
+a = mul blocks add n 1
+b = div mul mul ratio blocks add blocks 1 2
+ret sub a b
+end
+note sum min(floor(t / ratio), cap), t = 1 .. n
+export fn capped_prefix n long ratio long cap long to long
+requires ge n 0
+requires gt ratio 0
+requires ge cap 0
+stop = mul ratio cap
+if lt n stop
+stop = n
+end
+ret add floor_prefix stop ratio mul sub n stop cap
+end
+note query-key pairs for positions [begin, finish) by prefix differences; cap 0 means uncapped
+note (C++ names the second parameter end, which is an Omega keyword)
+export fn pairs begin long finish long ratio long cap long to long
+requires ge begin 0
+requires le begin finish
+requires gt ratio 0
+requires ge cap 0
+if eq cap 0
+ret sub floor_prefix finish ratio floor_prefix begin ratio
+end
+ret sub capped_prefix finish ratio cap capped_prefix begin ratio cap
+end

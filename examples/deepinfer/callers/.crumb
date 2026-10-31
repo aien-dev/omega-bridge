@@ -1,0 +1,20 @@
+{
+  "extensions": {
+    "generated": {
+      "children": [],
+      "children_root": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compiled_at": "2026-10-31T00:23:54Z",
+      "compiler": "crumb-compile/1",
+      "digest": "sha256:0930c059d4792c524ead954ccfa16e3dab282f13db861da3cd00a446883eac4f",
+      "evidence_files": 0,
+      "evidence_root": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "files": 0,
+      "generated_at_commit": "1958a1895279c0d4869bab39eaa20f070b174a6c",
+      "source_tree": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "layer": "examples",
+  "name": "deepinfer-flops-callers",
+  "purpose": "c, c-bti, cpp, python, rust, zig and go callers of flops_pairs.om through the generated bindings",
+  "schema_version": "1.0.0"
+}
