@@ -1,9 +1,9 @@
 #!/bin/sh
 # Native call ABI v2 qualification (docs/NATIVE-ABI.md, ABI v2). OMEGA_NATIVE_OMC names the seeded omc
 # (pinned by tools/native); OMEGA_NATIVE_OMC2 names the OM-2 compiler that compiles this folder's OM-2
-# units (omega-mv om2/compiler-s4 @ f6a6492fd, sha256 49923639...803ec, when this run was recorded; its
-# digest is what the identities carry). A missing language toolchain is reported
-# NOT_RUN, never PASS. Exit 0 only when every run check passed. `run.sh measure` also runs the cost
+# units; it must hoist loop constants (omega-mv hoist/865-main, the #865 port onto main 9920aab1, sha256
+# 07820046...def7, when this run was recorded; its digest is what the identities carry), or the hoist
+# check fails. A missing language toolchain is reported NOT_RUN, never PASS. Exit 0 only when every run check passed. `run.sh measure` also runs the cost
 # measurement (tests/native/v2/measure.c).
 set -eu
 ROOT=$(cd "$(dirname "$0")/../../.." && pwd)
@@ -20,25 +20,26 @@ fails=0; notrun=""
 pass() { echo "PASS $1"; }
 fail() { echo "FAIL $1"; fails=$((fails + 1)); }
 echo "INFO omc $got; OM-2 compiler $OMC2 sha256 $(sha256sum < "$OMC2" | cut -d' ' -f1)"
-V2="vec lay one"
+V2="vec lay one hoist"
 units="$ROOT/tests/native/madd.om"; for u in $V2; do units="$units $T/$u.om"; done
-if "$ROOT/tools/native" "$O" $units > "$O/tools-native.log" 2>&1; then pass "tools/native: madd (OM-1) + vec, lay, one (OM-2): library, six bindings, omega_api.h"
+if "$ROOT/tools/native" "$O" $units > "$O/tools-native.log" 2>&1; then pass "tools/native: madd (OM-1) + vec, lay, one, hoist (OM-2): library, six bindings, omega_api.h"
 else fail "tools/native"; cat "$O/tools-native.log"; exit 1; fi
 W=$O/work; GEN=$W/native-gen
 
 # basegen REV NAME: the historical generator, with the current C runtime prelude and only
 # private assembly-linkage directives normalized. Public wrappers, signatures, compiler bytes
-# and declarations remain byte-compared. REVs are reachable on this branch: 5458684 has the blob
-# of pre-rebase 3f05908, 3d79d77 that of 3bb8b8a.
+# and declarations remain byte-compared. The REV is f637021 (#26: f32 and ushort array kinds), the last
+# intentional change to the bindings; its python preamble and the f32/ushort units (fsum, halve) do not
+# exist for the older generators 5458684 and 3d79d77, which trap 9 on those units.
 basegen() {
   PRE=$(grep '^text pre ' "$ROOT/src/native.om"); export PRE
   git -C "$ROOT" show "$1:src/native.om" | awk '/^text pre /{print ENVIRON["PRE"]; next} /^text fr |^text fv /{gsub(/[.]globl ombr_code_/, ".local ombr_code_"); gsub(/[.]globl ombr_entry_/, ".local ombr_entry_"); gsub(/[.]globl ombr2_code_/, ".local ombr2_code_"); gsub(/[.]globl ombr2_entry_/, ".local ombr2_entry_")} {print}' > "$O/native-$2.om"
   "$OMC" < "$O/native-$2.om" > "$O/gen-$2"; chmod +x "$O/gen-$2"
 }
 
-# 1. ABI v1 output unchanged: the generator of 5458684 (plus #17's prelude) and this one, on every
+# 1. ABI v1 output unchanged: the generator of f637021 (with this prelude) and this one, on every
 # existing unit alone and on the v1 suite's set, for all six outputs.
-basegen 5458684 v1
+basegen f637021 v1
 same=0; diff=0; : > "$O/v1set.in"
 for u in "$ROOT"/tests/native/*.om "$ROOT"/tests/native/g1/*.om; do
   "$OMC" < "$u" > "$O/one.bin" 2> /dev/null || continue
@@ -54,7 +55,7 @@ for w in c h python rust zig go; do
   "$O/gen-v1" $w < "$O/v1set.in" > "$O/a.out"; "$GEN" $w < "$O/v1set.in" > "$O/b.out"
   if cmp -s "$O/a.out" "$O/b.out"; then same=$((same + 1)); else diff=$((diff + 1)); echo "DIFF set $w"; fi
 done
-if [ $diff = 0 ]; then pass "ABI v1 bindings byte-identical to 5458684's generator (runtime/private linkage normalized): $same unit x output cases (every tests/native and g1 unit, and the set)"
+if [ $diff = 0 ]; then pass "ABI v1 bindings byte-identical to f637021's generator (runtime/private linkage normalized): $same unit x output cases (every tests/native and g1 unit, and the set)"
 else fail "ABI v1 bindings changed in $diff cases"; fi
 
 # 2. Identity: each v2 unit's embedded source digest equals sha256sum of its file (oracle), the omc digest
@@ -86,13 +87,27 @@ for u in $V2; do
   cmp -s "$W/$u.bin" "$O/$u.emb" || ok=0
 done
 if [ $ok = 1 ]; then pass "embedded code == compiler output, per OM-2 unit"; else fail "embedded code differs"; fi
+# Registers the code writes, decoded: the first operand of every instruction that has a destination (not
+# a store, compare, test or branch). hoist must write x20..x26 (hadd's seven hoisted constants) and some of
+# d8..d15 (inner's conversions; s8..s15 count); no unit's code may name x19 or x29 at all (NATIVE-ABI.md:
+# the trampoline's trap path rests on x19). A non-hoisting OMEGA_NATIVE_OMC2 fails here.
+dst() { objdump -D -b binary -m aarch64 "$1" | awk -F'\t' 'NF >= 4 && $3 !~ /^(st|cmp|cmn|tst|cb|tb|b$|b\.|bl|br|ret|ccmp|fcmp|prfm|hint|nop|dmb)/ {split($4, a, ","); gsub(/ /, "", a[1]); print a[1]}' | sort -u; }
+dst "$W/hoist.bin" > "$O/hoist.dst"
+hx=$(grep -c -x -E 'x2[0-6]' "$O/hoist.dst" || true); hd=$(grep -c -x -E '[ds]([89]|1[0-5])' "$O/hoist.dst" || true)
+if [ "$hx" = 7 ] && [ "$hd" -ge 1 ]; then pass "hoist writes x20..x26 and $hd of d8..d15 (decoded destinations)"
+else fail "hoist writes $hx of x20..x26 and $hd of d8..d15: OMEGA_NATIVE_OMC2 does not hoist (omega-mv perf/omc-loop-checks)"; fi
+ok=1; for u in $V2; do
+  if objdump -D -b binary -m aarch64 "$W/$u.bin" | awk -F'\t' 'NF >= 4' | cut -f4 | grep -q -w -E '[xw](19|29)'; then ok=0; echo "INFO $u names x19 or x29"; fi
+done
+if [ $ok = 1 ]; then pass "no OM-2 unit's code names x19 or x29"; else fail "a unit's code names x19 or x29"; fi
 # The exported symbols: one omega2_ per export, one ident per unit, the OM-1 unit's omega_, nothing else.
 nm -D --defined-only "$O/libomega_native.so" | awk '{print $3}' | grep -E '^omega' | sort > "$O/syms.txt"
-printf '%s\n' omega2_absorb omega2_bsum omega2_digest omega2_fillv omega2_halt omega2_ident_lay omega2_ident_one \
-  omega2_ident_vec omega2_lsum omega2_swap8 omega2_two omega2_vcopy omega2_vlen omega2_vpart omega2_wsum omega_madd | sort > "$O/syms.want"
-if cmp -s "$O/syms.txt" "$O/syms.want"; then pass "exported symbols: 15 omega2_ (12 exports, 3 idents) + omega_madd; no psum, no v1 name for a v2 unit"
+printf '%s\n' omega2_absorb omega2_bsum omega2_digest omega2_fillv omega2_hadd omega2_halt omega2_ident_hoist omega2_ident_lay \
+  omega2_ident_one omega2_ident_vec omega2_lsum omega2_swap8 omega2_two omega2_vcopy omega2_vlen omega2_vpart omega2_wsum omega_madd \
+  | sort > "$O/syms.want"
+if cmp -s "$O/syms.txt" "$O/syms.want"; then pass "exported symbols: 17 omega2_ (13 exports, 4 idents) + omega_madd; no psum, no v1 name for a v2 unit"
 else fail "exported symbols"; diff "$O/syms.want" "$O/syms.txt" || true; fi
-if nm --defined-only "$O/libomega_native.so" | awk '$3 ~ /^ombr2_code_/ {n++; if ($2 != "t") bad=1} END {exit bad || n != 3}'; then
+if nm --defined-only "$O/libomega_native.so" | awk '$3 ~ /^ombr2_code_/ {n++; if ($2 != "t") bad=1} END {exit bad || n != 4}'; then
   pass "ABI v2 embedded code labels are private local text symbols"
 else fail "ABI v2 private code linkage"; fi
 if nm --defined-only "$O/libomega_native.so" | awk '$3 ~ /^ombr/ && $2 !~ /^[a-z]$/ {bad=1} END {exit bad}'; then
@@ -268,17 +283,48 @@ mut wrap '/^text fv /s/ || n \* es > UINTPTR_MAX - lo)/)/' '#748 golden: vpart l
 mut overlap '/^text fv /s/if ((sp\[i\].w == 1 || sp\[j\].w == 1 ||/if ((/' 'vcopy edit == view'
 mut outcopy '/^text fv /s/memmove(o\[i\].dst, buf\[i\], o\[i\].n);/;/' 'digest: tag'
 
+# 9b. The trampoline alone: tramp.c includes the generated omega_native.c and calls ombr_enter directly
+# (no C wrapper that could keep a register for itself) with a hand-assembled unit that writes x20..x29 and
+# d8..d15, returning and trapping. Then one mutant per restore pair in ombr_leave, each removed in a copy
+# of the generator (x29: restored no more, x30 still): every one must make tramp fail.
+tb() { cc -std=gnu11 -O2 -Wall -Wextra -Werror -include "$1/omega_native.h" -I "$1" "$T/tramp.c" -o "$1/tramp" > "$1/tramp-build.log" 2>&1; }
+if tb "$O" && "$O/tramp" > "$O/tramp.log" 2>&1; then pass "trampoline called directly: $(grep -c '^PASS' "$O/tramp.log") checks (return, trap)"
+else fail "trampoline called directly"; cat "$O/tramp-build.log" "$O/tramp.log"; fi
+tmut() {
+  name=$1; M=$O/tmut-$name; mkdir -p "$M"
+  # Only the hosted trampoline (text pre); the freestanding one (text fp) has the same restores.
+  sed "/^text pre /$2" "$ROOT/src/native.om" > "$M/native.om"
+  n=$(diff "$ROOT/src/native.om" "$M/native.om" | grep -c '^<' || true)
+  [ "$n" = 1 ] || { fail "trampoline mutant $name changed $n lines"; return 0; }
+  "$OMC" < "$M/native.om" > "$M/gen"; chmod +x "$M/gen"
+  "$M/gen" c < "$W/units.in" > "$M/omega_native.c"; "$M/gen" h < "$W/units.in" > "$M/omega_native.h"
+  cmp -s "$M/omega_native.c" "$O/omega_native.c" && { fail "trampoline mutant $name: library unchanged"; return 0; }
+  tb "$M" || { fail "trampoline mutant $name: build"; cat "$M/tramp-build.log"; return 0; }
+  if timeout 10 "$M/tramp" > "$M/tramp.log" 2>&1; then fail "trampoline mutant $name not caught"
+  else pass "trampoline mutant $name caught ($(grep -c '^FAIL' "$M/tramp.log") failing checks$(grep -q 'TRAMP FAIL' "$M/tramp.log" || echo ', crashed'))"; fi
+}
+tmut x19x20 's/ldp x19,x20,\[sp,#16\]\\\\n//'
+tmut x21x22 's/ldp x21,x22,\[sp,#32\]\\\\n//'
+tmut x23x24 's/ldp x23,x24,\[sp,#48\]\\\\n//'
+tmut x25x26 's/ldp x25,x26,\[sp,#64\]\\\\n//'
+tmut x27x28 's/ldp x27,x28,\[sp,#80\]\\\\n//'
+tmut d8d9 's/ldp d8,d9,\[sp,#96\]\\\\n//'
+tmut d10d11 's/ldp d10,d11,\[sp,#112\]\\\\n//'
+tmut d12d13 's/ldp d12,d13,\[sp,#128\]\\\\n//'
+tmut d14d15 's/ldp d14,d15,\[sp,#144\]\\\\n//'
+tmut x29 's/ldp x29,x30,\[sp\],#176\\\\n/ldr x30,[sp,#8]\\\\nadd sp,sp,#176\\\\n/'
+
 # 10a. The C API out of line (outputs apih, apic) for freestanding consumers. The inline header
 # (output api) stays byte for byte what 3d79d77's generator (with #17's prelude) wrote, as does every
 # other output.
-basegen 3d79d77 3bb
+basegen f637021 3bb
 ok=1
 for w in c h python rust zig go api; do
   "$O/gen-3bb" $w < "$W/units.in" > "$O/a.out"; "$GEN" $w < "$W/units.in" > "$O/b.out"
   cmp -s "$O/a.out" "$O/b.out" || { ok=0; echo "DIFF $w"; }
 done
-if [ $ok = 1 ]; then pass "outputs c h python rust zig go api byte-identical to 3d79d77's generator (runtime/private linkage normalized) on the v2 set"
-else fail "an existing output changed against 3d79d77"; fi
+if [ $ok = 1 ]; then pass "outputs c h python rust zig go api byte-identical to f637021's generator (runtime/private linkage normalized) on the v2 set"
+else fail "an existing output changed against f637021"; fi
 FS=$O/fs; mkdir -p "$FS"
 FSCF="-std=gnu11 -ffreestanding -fno-builtin -O2 -Wall -Wextra -Werror -c"
 # fsobj DIR: the freestanding object from DIR's omega_api_decl.h; prints its undefined symbols.

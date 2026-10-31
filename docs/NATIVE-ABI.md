@@ -160,7 +160,14 @@ is refused (exit 110, no output). The default AArch64 C file:
 - gives the code a read-only 32-entry runtime table whose trap entry restores the caller's stack pointer from x19
   and returns the trap code from the exported function (no setjmp/longjmp, nothing crosses the caller's
   frame) and whose other entries refuse with status 34, since function-mode units of this ABI use none
-  of them. This relies on the seeded compiler never writing x19..x28 (OSC-1 uses x0..x16, x29, x30);
+  of them. The contract for a unit's code is what the trampoline guarantees: it may write x0..x18,
+  x20..x28, v0..v31 and the flags (x20..x28 and d8..d15 are restored on a return and on a trap); it must
+  not write x19 or x29 and must keep sp balanced. OSC-1 (OM-1) allocates x0..x6, x8..x15 and x17, with x7
+  the runtime table and x16 scratch; an OM-2 omc with loop-constant hoisting (omega-mv
+  perf/omc-loop-checks) also keeps loop constants in x20..x26, and its int/float conversions can write
+  d8..d15. tests/native/v2 decodes `hoist`'s code (x20..x26 and d8..d15 written, x19 and x29 never named
+  in any unit) and calls the trampoline directly with a hand-assembled unit that writes x20..x29 and
+  d8..d15, with one mutant per restore pair;
 - reaches each unit through a two-instruction stub (`bti c`, branch) so the code runs under branch
   target identification (BTI) without changing the compiler's bytes;
 - exports, per unit, `uint32_t omega_<name>(uint64_t *result, ...)`.
@@ -364,7 +371,8 @@ also checks that the binding refuses 2^64+3, -1 and 2.0 as scalars and `bytes` f
 that a call works after those refusals. The C caller also checks a null buffer, a wrong length,
 misalignment, result/buffer overlap, a view overlapping an edit array, a call after traps, reentry from a
 signal handler (status 33), a trap from a frame holding a 4,000,000-byte local array, that array on a
-256 KiB thread, and that x19..x28 and d8..d15 keep the caller's values across a normal return and a trap.
+256 KiB thread, and that x19..x28 and d8..d15 keep the caller's values across a normal return and a trap
+raised in a callee of the exported function, and runs the hoisting unit on two threads.
 The Rust caller runs the array on a default thread and is built twice, under edition 2021 and edition
 2024, with warnings as errors. The C caller runs a second time against a library built with BTI enforced.
 `tests/native/reference.c`, prototypes for the seven test units (with `hsum`, bound at its last function)
@@ -538,6 +546,12 @@ and element counts, the out pointers, and the traps the callers expect (the `par
 contract's order, element bounds, trap 9 after an out write). Before S4 existed the bridge was developed
 against hand-written OM-1 stand-ins of these units (commit 1392549); they are removed.
 
+The `hoist` unit needs an OM-2 compiler that hoists loop constants: recorded with omega-mv
+`perf/omc-loop-checks` @ c4953df7b (draft PR #865), sha256
+`13ce76c274d6bdce50613a242faa7cb07aadf65441ceecddf2d06bcfa4e48b69`, which keeps at most seven constants
+(x20..x26). Its decoded `hoist` code writes x20..x26 and d13, d14 and s15; that of 0d006207 (no hoisting)
+writes none of x20..x26, and the hoist check fails with it.
+
 The run checks: v1 byte identity (above); every identity string against `sha256sum` (oracle); the
 embedded code against the compiler's bytes; the exact exported symbol set (15 `omega2_` symbols, 12
 exports and 3 identities, and `omega_madd`; no private helper, no v1 name for a v2 unit); no caller
@@ -546,9 +560,14 @@ Python, Rust (2021 and 2024), Zig and Go callers (16 to 18 checks each); the lin
 languages (v1 bindings of an OM-1 unit named `bsum` against the library: `undefined reference to
 omega_bsum`, Python `undefined symbol: omega_bsum`); the stale identity (a header from `vec.om` with one
 note byte changed is detected; its Python binding refuses to import; the matching header passes); 15
-generator refusals of OM-2 input with a control; and three negative controls (the wrap check, the
+generator refusals of OM-2 input with a control; three negative controls (the wrap check, the
 edit-overlap rule and the out copy each removed from a copy of the generator must make the C caller
-fail, on the checks named).
+fail, on the checks named); `hoist`'s decoded destinations (x20..x26 and some of d8..d15 written) and no
+unit's code naming x19 or x29; and the trampoline called directly (`tests/native/v2/tramp.c`, which
+includes the generated C, so no C wrapper can keep a register for it) with a hand-assembled unit that
+writes x20..x29 and d8..d15, on a return and on a trap, plus ten mutants, each removing one restore from
+`ombr_leave` (x19/x20, x21/x22, x23/x24, x25/x26, x27/x28, the four d pairs, x29) in a copy of the
+generator, every one of which must make it fail.
 
 For the out-of-line API the run also checks: every existing output (`c h python rust zig go api`)
 byte-identical to 3bb8b8a's generator on the v2 set; `tests/native/v2/fsuse.c`, built with
