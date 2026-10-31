@@ -228,7 +228,10 @@ length and overlap. Python ctypes uses `c_float` and `c_uint16`. Rust and Zig de
 arrays as byte pointers (`*mut u8` / `*const u8`, Zig `?[*]u8`); Go stays `unsafe.Pointer`.
 `OMEGA_NATIVE_OMC=<seed omc> sh tests/native/kinds.sh` binds `fsum.om` and `halve.om`, compares every
 lane to a C `_Float16` oracle, refuses misaligned, wrong-length, overlapping and null arrays (status
-32), and requires a mutant that changes fsum's `add` to `sub` to fail. A unit may hold several functions: the seeded
+32), and requires a mutant that changes fsum's `add` to `sub` to fail. The same script calls both units
+through the `python` binding (`tests/native/pykinds.py`): lanes and halving against Python `struct`
+values, wrong lengths refused with status 32 and the arrays untouched, `f64`/`int32` arrays for an `f32`
+view, `bytes` for an `edit ushort` array and a 2^64 length refused by ctypes; the fsum mutant must fail there too. A unit may hold several functions: the seeded
 compiler enters function-mode code at the unit's last function (the leading entry branches to it), so the
 binding exports that one and the earlier functions stay private helpers, called directly inside the
 embedded code, with any Omega types. Only the last function's signature must be supported

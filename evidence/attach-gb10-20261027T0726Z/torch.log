@@ -1,0 +1,15 @@
+{"op": "cudapp::mm", "m": 1, "k": 1, "n": 1, "dtype": "float32", "mutant": 0, "route": 3, "route_expected": 3, "max_abs_err": 1.4553855010035477e-08, "max_err_over_bound": 0.2094172903959941, "inside_bound": true}
+{"op": "cudapp::mm", "m": 3, "k": 257, "n": 129, "dtype": "float32", "mutant": 0, "route": 3, "route_expected": 3, "max_abs_err": 1.4199952246940484e-05, "max_err_over_bound": 0.0006810386003039764, "inside_bound": true}
+{"op": "cudapp::mm", "m": 17, "k": 2048, "n": 96, "dtype": "float32", "mutant": 0, "route": 3, "route_expected": 3, "max_abs_err": 0.00031148626860044715, "max_err_over_bound": 0.00022958310801540795, "inside_bound": true}
+{"op": "cudapp::mm", "m": 64, "k": 64, "n": 64, "dtype": "float32", "mutant": 0, "route": 3, "route_expected": 3, "max_abs_err": 4.476430376598728e-06, "max_err_over_bound": 0.002678575901699341, "inside_bound": true}
+{"op": "cudapp::mm", "m": 5, "k": 1809, "n": 33, "dtype": "float32", "mutant": 0, "route": 3, "route_expected": 3, "max_abs_err": 0.00028849767313943175, "max_err_over_bound": 0.0002479941293363415, "inside_bound": true}
+{"op": "cudapp::mm", "m": 5, "k": 300, "n": 7, "dtype": "bfloat16", "mutant": 0, "route": 1, "route_expected": 1, "max_abs_err": 2.4061650037765503e-05, "max_err_over_bound": 0.006565537468473077, "inside_bound": true}
+{"op": "cudapp::mm", "m": 32, "k": 128, "n": 64, "dtype": "bfloat16", "mutant": 0, "route": 1, "route_expected": 1, "max_abs_err": 8.58306884765625e-06, "max_err_over_bound": 0.013155373834931455, "inside_bound": true}
+{"op": "cudapp::mm", "m": 5, "k": 300, "n": 7, "dtype": "float16", "mutant": 0, "route": 1, "route_expected": 1, "max_abs_err": 1.6046687960624695e-05, "max_err_over_bound": 0.004848975923834368, "inside_bound": true}
+{"op": "cudapp::mm", "m": 32, "k": 128, "n": 64, "dtype": "float16", "mutant": 0, "route": 1, "route_expected": 1, "max_abs_err": 1.1332333087921143e-05, "max_err_over_bound": 0.018825492524675278, "inside_bound": true}
+{"op": "cudapp::swiglu", "n": 1, "max_abs_err": 8.461514294788586e-09, "max_err_over_bound": 0.0034650273184958064, "inside_bound": true}
+{"op": "cudapp::swiglu", "n": 1000, "max_abs_err": 1.3221445520628095e-06, "max_err_over_bound": 0.015685670748588225, "inside_bound": true}
+{"op": "cudapp::swiglu", "n": 65536, "max_abs_err": 3.6893320967124055e-06, "max_err_over_bound": 0.02078471047596202, "inside_bound": true}
+{"op": "cudapp::mm", "m": 3, "k": 257, "n": 129, "dtype": "float32", "mutant": 1, "route": 3, "route_expected": 3, "max_abs_err": 5.5826134483306085, "max_err_over_bound": 256.6837092618614, "inside_bound": false, "negative_control": true, "caught": true}
+PASS
+torch rc=0

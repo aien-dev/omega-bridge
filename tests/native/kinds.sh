@@ -18,6 +18,11 @@ frame() {  # frame <dir> <fsum source>
   { cat "$2"; printf '\0'; printf '%08d' "$(wc -c < "$1/fsum.bin")"; cat "$1/fsum.bin"
     cat "$T/halve.om"; printf '\0'; printf '%08d' "$(wc -c < "$1/halve.bin")"; cat "$1/halve.bin"; }
 }
+pylib() {  # pylib <dir> <fsum source>: the python word's binding and its library, side by side
+  mkdir -p "$1/py"; frame "$1" "$2" | "$O/native" python > "$1/py/omega_native.py"
+  frame "$1" "$2" | "$O/native" c > "$1/py/omega_native.c"
+  cc -std=gnu11 -O2 -Wall -Wextra -Werror -fPIC -shared -o "$1/py/libomega_native.so" "$1/py/omega_native.c"
+}
 build() {  # build <dir> <fsum source>
   frame "$1" "$2" | "$O/native" c > "$1/omega_native.c"
   cc -std=gnu11 -O2 -Wall -Wextra -Werror -o "$1/kinds" "$T/kinds.c" "$1/omega_native.c"
@@ -32,6 +37,10 @@ grep -q '_a10 = ctypes.POINTER(ctypes.c_uint16)' "$O/omega_native.py"
 grep -q 'omega_fsum.argtypes = \[_res, _a8, _u64, _a10, _u64, _a7, _u64\]' "$O/omega_native.py"
 frame "$O" "$T/fsum.om" | "$O/native" rust > "$O/omega_native.rs"
 grep -q 'o_a: \*const u8, o_a_len: u64, o_h: \*const u8, o_h_len: u64, o_d: \*mut u8, o_d_len: u64' "$O/omega_native.rs"
+# The f32/ushort kinds called through the generated Python binding, with refusal controls.
+pylib "$O" "$T/fsum.om"
+if python3 -I "$T/pykinds.py" "$O/py" > "$O/py.log" 2>&1; then echo "PASS python binding: f32/ushort calls and refusals ($(grep -c '^PASS' "$O/py.log") checks)"
+else echo "FAIL python binding"; cat "$O/py.log"; exit 1; fi
 # A uint array is still outside the subset: exit 110, and the previous C file is untouched.
 cp "$O/omega_native.c" "$O/keep.c"
 printf 'fn bad a view uint 1 to ulong\nret 0\nend\n' > "$O/bad.om"
@@ -48,4 +57,7 @@ grep -q '^put d i sub' "$O/mut/fsum.om" || { echo "FAIL mutant not applied"; exi
 build "$O/mut" "$O/mut/fsum.om"
 if "$O/mut/kinds" > "$O/mut/log" 2>&1; then echo "FAIL mutant fsum (add -> sub) not caught"; exit 1; fi
 echo "PASS mutant fsum (add -> sub) caught ($(grep -c '^FAIL' "$O/mut/log") failing checks)"
+pylib "$O/mut" "$O/mut/fsum.om"
+if python3 -I "$T/pykinds.py" "$O/mut/py" > "$O/mut/py.log" 2>&1; then echo "FAIL mutant fsum not caught through the python binding"; exit 1; fi
+echo "PASS mutant fsum (add -> sub) caught through the python binding ($(grep -c '^FAIL' "$O/mut/py.log") failing checks)"
 echo "NATIVE-KINDS PASS"

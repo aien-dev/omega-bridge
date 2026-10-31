@@ -77,6 +77,15 @@ failed/missing-toolchain controls passed EMULATED; see
 [the pinned receipts](evidence/native-x86-be8c5130.json). Earlier
 pins' receipts remain in `evidence/native-x86-62775d2a.json`, `evidence/native-x86-badedbb0/`, `evidence/native-x86-f7752bc5/` and `evidence/native-x86/`. Physical x86
 execution remains NOT_RUN.
+## Framework attachments
+
+| Framework | Attachment | Scope (receipt) |
+|---|---|---|
+| llama.cpp / ggml | [aien-dev/ggml-omega](https://github.com/aien-dev/ggml-omega), an out-of-tree ggml backend built on `src/native.om` | host device (draft ggml-omega#1): 16 ops on Omega CPU code; opt-in `OmegaGB10` device (draft ggml-omega#2): MUL_MAT, RMS_NORM, swiglu on the GB10 through CUDA++ (CUDApp#139 `gemm_ex`), every other op on ggml's CPU backend; test-backend-ops against the CPU backend on the chip, MUL_MAT 871 / RMS_NORM 7 / SWIGLU 12 cases OK, 0 FAIL |
+| PyTorch | [attach/torch](attach/torch/cudapp_torch.py): `torch.library` ops `cudapp::mm` (f32, bf16, f16) and `cudapp::swiglu` (f32) calling CUDA++ (`omega_gpu_gemm_ex`, `omega_gpu_swiglu_f32`) on the GB10 | CPU tensors in and out (staged to the chip per call), no autograd; checked against torch CPU plus `torch.library.opcheck` and a mutant (`attach/torch/test_cudapp_torch.py`); receipt `evidence/attach-gb10-20261027T0726Z/`, EXERCISED on a single GB10 |
+
+`attach/torch` is migration-pending host glue (`ctypes` at the torch ABI surface, switch `MIGRATION_PENDING`); its named successor is the `omega_native.py` binding that `tools/native` writes (the `python` word of `src/native.om`) once CUDA++ entries are callable as Omega units. Neither attachment has run a model on the GB10 yet: that needs an exclusive GPU window.
+
 ## Human-Directed Agentic Engineering
 
 Development follows Human-Directed Agentic Engineering (HDAE): humans define goals, architecture, constraints, acceptance criteria, and stopping points; agents implement, execute checks, diagnose failures, and revise within those boundaries. Human review retains responsibility for claims, acceptance, and release decisions.
