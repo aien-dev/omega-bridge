@@ -45,8 +45,12 @@ tools/native --target x86linux build/native-x86 \
   tests/native/madd.om tests/native/v2/vec.om
 ```
 
-The x86 target is hosted Linux x86-64 SysV output. `--freestanding` remains
-AArch64-only: combining it with `--target x86linux` refuses with exit 110 before
+The x86 target is hosted Linux x86-64 SysV output. With `--freestanding` it emits
+the same pure-scalar binding with a SysV adapter that runs on the caller's stack,
+keeps the trap anchor in R12 and sets the owned-stack floor R15 to 0 (no bound
+check, as in the AArch64 freestanding binding). x86 code bytes are packed as
+little-endian `.quad` words plus a `.byte` tail; the assembled bytes are the
+compiler's bytes. Before omega-mv#940 the combination refused with exit 110 before
 creating OUTDIR. An unknown target or malformed option exits 2. A mismatched
 compiler digest refuses before generating or installing outputs.
 
@@ -126,7 +130,8 @@ At the 62775d2a pin all 150 baseline/output comparisons with `0c4cb9ff` passed
 byte-for-byte, including unchanged AArch64 freestanding refusals. #26 (`f637021`)
 then changed AArch64 output on purpose (f32 and ushort array kinds, the Python
 header), so the parity baseline is now the generator at `f637021`, the last
-accepted AArch64 contract; `src/native.om` is unchanged since. The generator at
+accepted AArch64 contract; later `src/native.om` changes keep AArch64 output
+byte-identical to it (the x86 suite's `aarch64_parity` check). The generator at
 `f637021^` still matches `0c4cb9ff` on every pre-#26 fixture and output, so the
 chain back to the pre-x86 generator is unbroken. The receipts retain the
 earlier failing emulator run rather than rewriting it as a pass.
@@ -205,13 +210,16 @@ remains distinct; public `omega_`/`omega2_` exports and compiler machine bytes a
 `nm` visibility and exact public exports, exercises traps and concurrent threads, and
 requires a `.globl ombr_enter` emitter mutant to fail linking.
 
-The emitter has finite pools of 4194304 input bytes and 16777216 output bytes for
-the complete framed unit set and one generated output. Input must be strictly smaller
-than its pool (maximum 4194303 bytes); output may fill its pool exactly. Exhausting
+The emitter has finite pools of 16777216 input bytes and 33554432 output bytes (two
+16777216-byte pools, the per-pool maximum) for the complete framed unit set and one
+generated output. Input must be strictly smaller than its pool (maximum 16777215
+bytes); output may fill its pools exactly. Exhausting
 a pool traps with resource status 6 (process exit 106), before any generated output
 is written. This does not relax individual compiler, source-language, slot or unit-count limits.
-`tests/native/test_capacity.py` compiles a matching 16-unit frame exceeding the former
-1048576-byte input and 4194304-byte output pools, builds and calls both endpoint units,
+`tests/native/test_capacity.py` compiles a matching 64-unit frame exceeding the former
+4194304-byte input and 16777216-byte output pools, builds and calls both endpoint units
+(`cap00`, and `cap63`, whose generated code lies past byte 16777216 and is therefore read
+from the second output pool `outc`) plus `cap15`,
 restores each old pool size as a failing mutant, and checks both current overflow
 boundaries. Its oversized output control is a hostile framing-only resource probe,
 not compiler-custody or behavioral evidence for the deliberately mismatched code.

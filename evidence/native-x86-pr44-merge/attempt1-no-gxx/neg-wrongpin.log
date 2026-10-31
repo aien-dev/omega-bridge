@@ -1,0 +1,6 @@
+NOT_RUN cpp caller/tool: x86_64-linux-gnu-g++ unavailable
+PASS Python is ELF64 x86-64, not the host interpreter
+PASS generator compiler pin
+FAIL x86 compiler pin
+NATIVE-X86 NATIVE NOT_RUN (physical x86 execution not requested)
+NATIVE-X86 FAIL x86 compiler pin

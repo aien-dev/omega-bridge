@@ -1,0 +1,12 @@
+== control noop (no-op mutant)
+PASS freestanding result-store mutant applies once to xfasm
+PASS freestanding-x86 object is x86-64 with only GPU_FS_LINK imports
+PASS freestanding x86 epoch/MAX trap, nested and signed trap, four threads EMULATED
+PASS freestanding-x86-mutant object is x86-64 with only GPU_FS_LINK imports
+FAIL freestanding x86 result-store mutant caught by caller EMULATED
+FAILED: ['freestanding x86 result-store mutant caught by caller EMULATED']
+
+== control miss (mutant site absent)
+FAIL freestanding result-store mutant applies once to xfasm
+FAILED: ['freestanding result-store mutant applies once to xfasm']
+

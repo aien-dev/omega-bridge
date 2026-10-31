@@ -1,0 +1,81 @@
+{
+ "schema": 1,
+ "date": "2026-10-31",
+ "status": "EMULATED_PASS",
+ "native_x86": "NOT_RUN",
+ "gpu": "NOT_RUN",
+ "pr": "aien-dev/omega-bridge#44",
+ "bridge_commit": "1df527aa5890314d6148b0b6c347ee8886d3fc69",
+ "bridge_tree": "merge of origin/main 74fcd43 into PR #44 head f08dbcd; the files run are identified by the sha256 fields",
+ "native_om_sha256": "5ccf97db9b46aea1fc580951d19e36423d94f545650496dcdb7acba99b983b6d",
+ "tools_native_sha256": "12b98b280347efdbaa4abb721835318f27e248e7c1783a6d6492fa858dd0fd89",
+ "suite_sha256": "4038530caf32ad69f748360f964809a09ad5832f7753222560aea9759d762f39",
+ "controls_sha256": "9b5ff1ced02ae86ab7c61ea8cf64280fd5ff9cd256a1958c309bf17b397856ef",
+ "compiler_commit": "474197e4fa0207e0e2fb3c0494594a975f5031fa",
+ "x86_omc_sha256": "be8c51301307555254fc59e351d281aae1aa096d91521777e33a41c8b446448a",
+ "x86_omc_source": "git show 474197e4fa0207e0e2fb3c0494594a975f5031fa:seed/out/omc from an omega-mv clone",
+ "baseline_omc_sha256": "734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61",
+ "qemu_binary_sha256": "fd7ae7768c1d698d387893688d28abde90512f1f445d171a1389110eb7c237ee",
+ "qemu_version": "10.0.14",
+ "x86_python": {
+  "interpreter_sha256": "e50d468e8b0adfb05733f5b87b3cff34829c4a8c1aea50c865aa8bdfe4bb150f",
+  "version": "3.12.3",
+  "packages": 18,
+  "source": "the 18 amd64 debs listed in the x86 runtime manifest, each sha256-checked against the manifest, then dpkg-deb -x into a private root"
+ },
+ "cross_toolchain": "x86_64-linux-gnu-gcc and x86_64-linux-gnu-g++ 13.3.0 (Ubuntu 13.3.0-6ubuntu2~24.04.1)",
+ "aarch64_parity_baseline": "f637021f36f0cfff39240a62341a47e442ae05c3",
+ "commands": [
+  {
+   "command": "sh tools/bootstrap.sh",
+   "exit": 0,
+   "log": "bootstrap.log"
+  },
+  {
+   "command": "sh tools/test.sh",
+   "exit": 0,
+   "result": "ALL SUITES RC=0",
+   "log": "test.log"
+  },
+  {
+   "command": "OMEGA_NATIVE_OMC=<734f0a39 omc> sh tests/native/run.sh",
+   "exit": 0,
+   "result": "NATIVE-CALL PASS (not run: none)",
+   "log": "native.log"
+  },
+  {
+   "command": "sh tests/native/x86/run.sh OUT/x86 (first attempt, x86_64-linux-gnu-g++ not installed)",
+   "exit": 1,
+   "result": "NATIVE-X86 NOT_RUN (not run: c cpp go python rust zig); environment, not a code result",
+   "log": "attempt1-no-gxx/x86.log"
+  },
+  {
+   "command": "sh tests/native/x86/run.sh OUT/x86",
+   "exit": 0,
+   "result": "311 PASS, 0 FAIL; NATIVE-X86 EMULATED PASS",
+   "log": "x86.log"
+  },
+  {
+   "command": "python3 tests/native/x86/test_build_failures.py OUT/ctl",
+   "exit": 0,
+   "result": "314 PASS, 0 FAIL; NATIVE-X86 CONTROLS PASS",
+   "log": "controls.log"
+  },
+  {
+   "command": "OMEGA_NATIVE_X86_OMC=<734f0a39 omc> sh tests/native/x86/run.sh OUT/neg",
+   "exit": 1,
+   "result": "negative control: FAIL x86 compiler pin",
+   "log": "neg-wrongpin.log"
+  }
+ ],
+ "log_redaction": "worktree path replaced by WORKTREE and output directory by OUT; raw_log_sha256 is of the unredacted logs",
+ "raw_log_sha256": {
+  "bootstrap.log": "e6c7b5198e091b5faa0878697ef5c3ce396a9406c94580abeb34918e07a03df9",
+  "test.log": "bc91ed91639ea18f04c7867ce421825c3857cd43c6d00ac813417ebf957eed50",
+  "native.log": "f918d8ddd6f2a704f5b6958dad1eec0bd49fb273627ab0ae31a818d34719a9e9",
+  "x86.log": "6f25f737b20fd7db61e3095486eb7821f14a58fbb5ee12ae017869fe66745e4a",
+  "controls.log": "77aef8608578b27e85c32a360025e8f4c272bfcafb57ebc2b29cdb2a11e5bb31",
+  "neg-wrongpin.log": "39950f1abe283c0c5e3df3b96c2a2ae03ce2f3f216da5c555f7e59dfe2dcfc2d"
+ },
+ "scope": "x86 binaries run only under qemu-x86_64 (EMULATED) on an AArch64 host; no native x86 execution, no timing, no compiler qualification"
+}

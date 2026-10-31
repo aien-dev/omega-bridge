@@ -64,7 +64,7 @@ The existing pinned `OMEGA_NATIVE_OMC` remains required to build the generator.
 The separately pinned `OMEGA_NATIVE_X86_OMC` compiles both OM-1 and OM-2 inputs;
 its target directive is not added to the source identity. Pins and the exact
 generator contract are in [native call ABI](docs/NATIVE-ABI.md#target-selection-and-compiler-custody).
-`--freestanding` remains AArch64-only and refuses x86. Cross-building a library
+`--freestanding` also accepts `--target x86linux` (omega-mv#940). Cross-building a library
 does not execute its callers. QEMU results are emulator evidence, not native
 x86-64 qualification; native execution is NOT_RUN until exercised on an x86-64
 host. The historical AArch64 evidence does not qualify this x86 integration.

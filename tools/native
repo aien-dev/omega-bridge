@@ -34,7 +34,7 @@
 # --freestanding accepts only pure integer-scalar OM-1 units and installs omega_native.{c,h,o}
 # plus work/. The object has no undefined symbols except the GPU_FS_LINK libc-string allowlist.
 # Calls use the caller's stack; traps return status without TLS, heap or a hosted runtime.
-# Freestanding x86 output is not supported and is refused before creating OUTDIR.
+# Freestanding x86 output uses the same contract with a SysV adapter (owned-stack floor 0, as on AArch64).
 set -eu
 PIN=734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61
 X86_PIN=be8c51301307555254fc59e351d281aae1aa096d91521777e33a41c8b446448a
@@ -58,7 +58,6 @@ done
 case "$TARGET" in
   aarch64linux) ;;
   x86linux)
-    [ "$CMODE" != freest ] || { echo "tools/native: --freestanding is supported only for aarch64linux; nothing installed" >&2; exit 110; }
     X86_OMC=${OMEGA_NATIVE_X86_OMC:?set OMEGA_NATIVE_X86_OMC to the pinned x86 Linux compiler (sha256 $X86_PIN)}
     got=$(sha256sum < "$X86_OMC" | cut -d' ' -f1)
     [ "$got" = "$X86_PIN" ] || { echo "tools/native: x86 omc sha256 $got, pinned $X86_PIN" >&2; exit 1; } ;;
