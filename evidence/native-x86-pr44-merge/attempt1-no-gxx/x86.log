@@ -1,0 +1,6 @@
+NOT_RUN cpp caller/tool: x86_64-linux-gnu-g++ unavailable
+PASS Python is ELF64 x86-64, not the host interpreter
+PASS generator compiler pin
+PASS x86 compiler pin
+NATIVE-X86 NATIVE NOT_RUN (physical x86 execution not requested)
+NATIVE-X86 NOT_RUN (not run: c cpp go python rust zig)
