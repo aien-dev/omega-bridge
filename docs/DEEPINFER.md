@@ -73,7 +73,7 @@ Python sizes are file and line counts at the pin; csrc is C/C++.
 
 ## Measured translation coverage (layer 1)
 
-Replay: `OMEGA_MV=<built omega-mv> sh evidence/deepinfer/run.sh` re-runs all 30 inputs below and prints
+Replay: `OMEGA_MV=<built omega-mv> sh evidence/deepinfer/run.sh` re-runs all 32 inputs below and prints
 `DEEPINFER-COVERAGE REPLAY PASS` when every exit status matches. Negative control: replacing
 `ctrl_pos.py` with the unmasked control makes that row `FAIL` and the script prints
 `DEEPINFER-COVERAGE REPLAY FAIL`. Both outcomes were observed on 2026-10-31.
@@ -91,11 +91,14 @@ docstrings and leading underscores removed (`py-stripped/`) to expose the next r
 | `is_power_of_two` | `model_executor/layers/tilelang_ops/common.py:30` | 66 TYPE (annotation) | 68 ARITHMETIC (`&`, `==`) |
 | `ceil_div` | `tilelang_ops/common.py:34` | 66 TYPE | 68 ARITHMETIC (`//`, unmasked) |
 | `i64` | `tilelang_ops/random_sampling.py:49` | 66 TYPE | 69 CONSTRUCT (conditional expression) |
-| `expanded_image_token_len` | `ve/processor/image_processor.py:76` | 72 SOURCE_FORM (docstring) | 68 ARITHMETIC (unmasked `+ *`) |
-| `_align_to_multiple` | `worker/cache_engine.py:36` | 72 SOURCE_FORM (docstring) | 68 ARITHMETIC (`//`) |
+| `expanded_image_token_len` | `ve/processor/image_processor.py:76` | 72 SOURCE_FORM (non-ASCII docstring) | 68 ARITHMETIC (unmasked `+ *`) |
+| `_align_to_multiple` | `worker/cache_engine.py:36` | 72 SOURCE_FORM (non-ASCII docstring) | 68 ARITHMETIC (`//`) |
 | `_needs_compress_state` | `worker/cache_engine.py:119` | 71 SIGNATURE (leading `_`) | 68 ARITHMETIC (comparison) |
 
 Controls: `ctrl_pos.py` (one masked u64 add) imports, rc 0, 324 bytes; `ctrl_unmasked.py` refuses 68.
+Cause probes: the same positive body with an ASCII docstring refuses 69 CONSTRUCT
+(`probe_doc_ascii.py`) and with a non-ASCII comment refuses 72 (`probe_nonascii_comment.py`), so the two
+72 verdicts come from the Chinese text, and an ASCII docstring would still refuse.
 
 The refusals are the profile working as specified, not adapter bugs. python-u64-v1 refuses unmasked
 arithmetic because Python `int` is unbounded; idiomatic DeepInfer integer code is unmasked. The S2 Python
@@ -124,8 +127,8 @@ bytes); `ctrl_name.hdr-cpp` (same body, name `f`) rc 71, because cpp17 profiles 
 No DeepInfer function imports with the current adapters: 1,909 Python functions fall outside every
 profile by shape, the 6 in-shape Python functions refuse, and the 3 C/C++ functions tried refuse in
 every form. The gaps, in order of reach: integer division and remainder with each language's rounding,
-unbounded Python `int`, comparisons and selects outside the `_ck` form, specifiers and default
-arguments, classes, and every tensor operation.
+unbounded Python `int`, comparisons and selects outside the `_ck` form, docstrings and non-ASCII source
+text, specifiers and default arguments, classes, and every tensor operation.
 
 ## Extensions
 

@@ -11,6 +11,8 @@ PASS  python-import  want=0   got=0   out=  324B                                
 PASS  python-import  want=68  got=68  out=    0B PY_IMPORT_UNSUPPORTED_ARITHMETIC         py-verbatim/ctrl_unmasked.py
 PASS  python-import  want=68  got=68  out=    0B PY_IMPORT_UNSUPPORTED_ARITHMETIC         py-stripped/000_is_power_of_two.py
 PASS  python-import  want=68  got=68  out=    0B PY_IMPORT_UNSUPPORTED_ARITHMETIC         py-stripped/001_ceil_div.py
+PASS  python-import  want=69  got=69  out=    0B PY_IMPORT_UNSUPPORTED_CONSTRUCT          py-verbatim/probe_doc_ascii.py
+PASS  python-import  want=72  got=72  out=    0B PY_IMPORT_UNSUPPORTED_SOURCE_FORM        py-verbatim/probe_nonascii_comment.py
 PASS  python-import  want=69  got=69  out=    0B PY_IMPORT_UNSUPPORTED_CONSTRUCT          py-stripped/002_i64.py
 PASS  python-import  want=68  got=68  out=    0B PY_IMPORT_UNSUPPORTED_ARITHMETIC         py-stripped/003_expanded_image_token_len.py
 PASS  python-import  want=68  got=68  out=    0B PY_IMPORT_UNSUPPORTED_ARITHMETIC         py-stripped/004__align_to_multiple.py
