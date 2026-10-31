@@ -13,7 +13,7 @@ Python, Rust, Zig and Go can call machine code produced by the seeded Omega comp
 ABI v1 for OM-1 units and ABI v2 for OM-2 units, `docs/NATIVE-ABI.md`). `tools/native
 --freestanding` emits an AArch64 object for pure integer-scalar OM-1 units with no hosted runtime.
 `tools/native --target x86linux` emits hosted x86-64 SysV Linux bindings from a separately pinned
-x86 compiler; that path is EXERCISED under emulation only (`evidence/native-x86-62775d2a.json`)
+x86 compiler; that path is EXERCISED under emulation only (`evidence/native-x86-be8c5130.json`)
 and native x86-64 execution is NOT_RUN. `src/gpu_adapter.om` is an opt-in GPU adapter that
 negotiates and admits artifacts; it opens no device and converts no host program. `max-cpu/` runs
 an Omega kernel as a Modular MAX 26.7.0 CPU custom op (status EXERCISED on a host CPU, draft;
