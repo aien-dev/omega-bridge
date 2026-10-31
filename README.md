@@ -77,6 +77,22 @@ failed/missing-toolchain controls passed EMULATED; see
 [the pinned receipts](evidence/native-x86-be8c5130.json). Earlier
 pins' receipts remain in `evidence/native-x86-62775d2a.json`, `evidence/native-x86-badedbb0/`, `evidence/native-x86-f7752bc5/` and `evidence/native-x86/`. Physical x86
 execution remains NOT_RUN.
+
+## Pending Linux kernel-leaf envelope experiment
+
+[`src/kernel_leaf.om`](src/kernel_leaf.om) emits a fixed-symbol AArch64 assembly
+envelope for the companion restricted `kleaf` compiler experiment. It matches
+the inspected Linux `7.0.0-1019-nvidia` leaf tracing/PAC metadata, not an arbitrary
+kernel ABI. It requires trusted compiler/source custody: framing checks are not
+a general machine-code verifier. It does not implement driver policy, Linux
+effects, a module loader or the userspace native trampoline.
+
+This source-only experiment is not integrated into `tools/native`, does not
+change any compiler fingerprint or production admission path, and is not a
+kernel/GPU qualification claim. The compiler-side
+`seed/omc/kernel-leaf-experiment.py` is its host oracle and exact kbuild-object
+comparison. GNU assembly/object tooling remains a disclosed build dependency.
+
 ## Human-Directed Agentic Engineering
 
 Development follows Human-Directed Agentic Engineering (HDAE): humans define goals, architecture, constraints, acceptance criteria, and stopping points; agents implement, execute checks, diagnose failures, and revise within those boundaries. Human review retains responsibility for claims, acceptance, and release decisions.
