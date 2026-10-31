@@ -46,7 +46,10 @@ def main():
         cfile = tmp / "capacity.c"
         cfile.write_bytes(result.stdout)
         caller = tmp / "caller.c"
-        caller.write_text("#include <stdint.h>\nuint32_t omega_cap00(uint64_t *, uint64_t);\nuint32_t omega_cap15(uint64_t *, uint64_t);\nint main(void) { uint64_t r=0; if(omega_cap00(&r,0)!=0 || r!=7) return 1; r=0; return omega_cap15(&r,0)!=0 || r!=7; }\n")
+        # cap63's code is emitted past the first 16777216-byte output pool, i.e. from `outc`;
+        # calling it executes bytes stored in the second pool.
+        assert result.stdout.find(b"ombr_code_cap63:") >= 16777216, "cap63 not in second output pool"
+        caller.write_text("#include <stdint.h>\nuint32_t omega_cap00(uint64_t *, uint64_t);\nuint32_t omega_cap15(uint64_t *, uint64_t);\nuint32_t omega_cap63(uint64_t *, uint64_t);\nint main(void) { uint64_t r=0; if(omega_cap00(&r,0)!=0 || r!=7) return 1; r=0; if(omega_cap15(&r,0)!=0 || r!=7) return 1; r=0; return omega_cap63(&r,0)!=0 || r!=7; }\n")
         checked([os.environ.get("CC", "cc"), "-std=gnu11", "-O2", "-Wall", "-Wextra", "-Werror", "-pthread", str(cfile), str(caller), "-o", str(tmp / "caller")])
         checked([str(tmp / "caller")])
         for pool, old in ((b"inb uchar 16777216", b"inb uchar 4194304"),

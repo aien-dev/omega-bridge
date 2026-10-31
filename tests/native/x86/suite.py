@@ -520,6 +520,47 @@ class Suite:
             self.check(name + ": status " + str(expected) + ", sentinel, saved regs and subsequent call EMULATED",
                        result.returncode == 0 and b"PASS trap status" in result.stdout)
 
+    def freestanding_x86(self):
+        # tests/native/test_freestanding.py's caller (four threads, nested trap, signed trap)
+        # against `tools/native --target x86linux --freestanding`, i.e. the xfasm adapter.
+        sys.path.insert(0, str(N))
+        import test_freestanding
+        good = (ROOT / "src/native.om").read_bytes()
+        old, new = b"mov %rax,(%rcx)", b"mov %rbx,(%rcx)"
+        xfasm = [line for line in good.split(b"\n") if line.startswith(b"text xfasm ")]
+        # The mutant must hit the freestanding adapter's result store exactly once.
+        if not self.check("freestanding result-store mutant applies once to xfasm",
+                          len(xfasm) == 1 and xfasm[0].count(old) == 1):
+            return
+        bad = good.replace(xfasm[0], xfasm[0].replace(old, new))
+        for name, source in (("freestanding-x86", good), ("freestanding-x86-mutant", bad)):
+            tree = self.out / name
+            (tree / "tools").mkdir(parents=True)
+            (tree / "src").mkdir()
+            shutil.copy2(ROOT / "tools/native", tree / "tools/native")
+            (tree / "src/native.om").write_bytes(source)
+            epoch = tree / "epoch.om"
+            epoch.write_text(test_freestanding.EPOCH)
+            lib = tree / "lib"
+            self.must([tree / "tools/native", "--target", "x86linux", "--freestanding", lib, epoch, N / "smadd.om"])
+            obj = lib / "omega_native.o"
+            elf = obj.read_bytes()
+            imports = {line.split()[-1] for line in self.must(self.nm + ["-u", str(obj)]).decode().splitlines() if line.split()}
+            self.check(name + " object is x86-64 with only GPU_FS_LINK imports",
+                       elf[:6] == b"\x7fELF\x02\x01" and elf[18:20] == b"\x3e\x00"
+                       and not imports - test_freestanding.ALLOWED)
+            caller = tree / "caller.c"
+            caller.write_text(test_freestanding.CALLER)
+            self.must_build(self.call(self.cc + ["-std=gnu11", "-O2", "-Wall", "-Wextra", "-Werror", "-pthread",
+                                                 "-I", str(lib), str(caller), str(obj), "-o", str(tree / "caller")]))
+            result = self.call(self.guest(tree / "caller"))
+            if source is good:
+                self.check("freestanding x86 epoch/MAX trap, nested and signed trap, four threads EMULATED",
+                           result.returncode == 0)
+            else:
+                self.check("freestanding x86 result-store mutant caught by caller EMULATED",
+                           result.returncode == 1)
+
     def floor_controls(self):
         # This is a byte-level foreign ABI oracle, not compiler behavior:
         # mov %r15,%rax; ret; nop; nop occupies one six-byte export slot.
@@ -577,7 +618,8 @@ def main():
         if suite.preflight():
             for step in (suite.initial_library, suite.identity_and_code, suite.aarch64_parity,
                          suite.callers, suite.stale_and_v1, suite.refusals, suite.runtime_mutants,
-                         suite.private_symbols, suite.freestanding_api, suite.trap_controls, suite.floor_controls):
+                         suite.private_symbols, suite.freestanding_api, suite.trap_controls,
+                         suite.freestanding_x86, suite.floor_controls):
                 try:
                     step()
                 except (RuntimeError, AssertionError, OSError, StopIteration) as error:

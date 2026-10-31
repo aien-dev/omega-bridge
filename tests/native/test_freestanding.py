@@ -9,36 +9,9 @@ import tempfile
 ROOT = Path(__file__).resolve().parents[2]
 OMC = os.environ['OMEGA_NATIVE_OMC']
 ALLOWED = {'_GLOBAL_OFFSET_TABLE_', 'memcpy', 'memmove', 'memset', 'memcmp', 'strlen', 'strcmp'}
-
-
-def run(args, **kw):
-    p = subprocess.run([str(a) for a in args], capture_output=True, **kw)
-    if p.returncode:
-        raise AssertionError(f'{args}: exit {p.returncode}\n{p.stdout!r}\n{p.stderr!r}')
-    return p.stdout
-
-
-def imports(obj):
-    return {line.split()[-1] for line in run(['nm', '-u', obj]).decode().splitlines() if line.split()}
-
-
-def main():
-    with tempfile.TemporaryDirectory(prefix='bridge-freestanding-') as td:
-        t = Path(td)
-        epoch = t / 'epoch.om'
-        epoch.write_text('fn guard n ulong to ulong\nif eq n 18446744073709551615\ntrap 1\nend\nret n\nend\nfn epoch n ulong to ulong\nx = guard n\nret add x 1\nend\n')
-        out = t / 'lib'
-        run([ROOT / 'tools/native', '--freestanding', out, epoch, ROOT / 'tests/native/smadd.om'])
-        assert not imports(out / 'omega_native.o') - ALLOWED
-        linked = t / 'freestanding.o'
-        run(['cc', '-r', '-nostdlib', out / 'omega_native.o', '-o', linked])
-        assert not imports(linked) - ALLOWED
-        assert '.tbss' not in run(['readelf', '-SW', linked]).decode()
-        assert '.tdata' not in run(['readelf', '-SW', linked]).decode()
-        assert not (out / 'libomega_native.so').exists()
-        assert not (out / 'omega_native.py').exists()
-        caller = t / 'caller.c'
-        caller.write_text('''#include "omega_native.h"
+# Shared with tests/native/x86/suite.py, which runs the same caller under qemu-x86_64.
+EPOCH = 'fn guard n ulong to ulong\nif eq n 18446744073709551615\ntrap 1\nend\nret n\nend\nfn epoch n ulong to ulong\nx = guard n\nret add x 1\nend\n'
+CALLER = '''#include "omega_native.h"
 #include <pthread.h>
 #include <stdint.h>
 static pthread_barrier_t barrier;
@@ -62,7 +35,37 @@ int main(void) {
     for (unsigned i = 0; i < 4; ++i) { void *v; if (pthread_join(threads[i], &v) || v) return 1; }
     return pthread_barrier_destroy(&barrier) != 0;
 }
-''')
+'''
+
+
+def run(args, **kw):
+    p = subprocess.run([str(a) for a in args], capture_output=True, **kw)
+    if p.returncode:
+        raise AssertionError(f'{args}: exit {p.returncode}\n{p.stdout!r}\n{p.stderr!r}')
+    return p.stdout
+
+
+def imports(obj):
+    return {line.split()[-1] for line in run(['nm', '-u', obj]).decode().splitlines() if line.split()}
+
+
+def main():
+    with tempfile.TemporaryDirectory(prefix='bridge-freestanding-') as td:
+        t = Path(td)
+        epoch = t / 'epoch.om'
+        epoch.write_text(EPOCH)
+        out = t / 'lib'
+        run([ROOT / 'tools/native', '--freestanding', out, epoch, ROOT / 'tests/native/smadd.om'])
+        assert not imports(out / 'omega_native.o') - ALLOWED
+        linked = t / 'freestanding.o'
+        run(['cc', '-r', '-nostdlib', out / 'omega_native.o', '-o', linked])
+        assert not imports(linked) - ALLOWED
+        assert '.tbss' not in run(['readelf', '-SW', linked]).decode()
+        assert '.tdata' not in run(['readelf', '-SW', linked]).decode()
+        assert not (out / 'libomega_native.so').exists()
+        assert not (out / 'omega_native.py').exists()
+        caller = t / 'caller.c'
+        caller.write_text(CALLER)
         run(['cc', '-std=gnu11', '-O2', '-Wall', '-Wextra', '-Werror', '-pthread', '-I', out, caller, linked, '-o', t / 'caller'])
         run([t / 'caller'])
         print('PASS freestanding epoch increment/MAX trap, nested trap unwind, signed trap and four-thread isolation; GPU_FS_LINK imports and no TLS')

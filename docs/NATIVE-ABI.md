@@ -217,7 +217,9 @@ bytes); output may fill its pools exactly. Exhausting
 a pool traps with resource status 6 (process exit 106), before any generated output
 is written. This does not relax individual compiler, source-language, slot or unit-count limits.
 `tests/native/test_capacity.py` compiles a matching 64-unit frame exceeding the former
-4194304-byte input and 16777216-byte output pools, builds and calls both endpoint units,
+4194304-byte input and 16777216-byte output pools, builds and calls both endpoint units
+(`cap00`, and `cap63`, whose generated code lies past byte 16777216 and is therefore read
+from the second output pool `outc`) plus `cap15`,
 restores each old pool size as a failing mutant, and checks both current overflow
 boundaries. Its oversized output control is a hostile framing-only resource probe,
 not compiler-custody or behavioral evidence for the deliberately mismatched code.
