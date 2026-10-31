@@ -45,8 +45,8 @@ the same f32 values.
 ## Reproduce
 
 ```sh
-TMPDIR=/dev/shm taskset -c 10-14 nice -n 19 ionice -c3 max-cpu/run.sh            # ~11 min
-TMPDIR=/dev/shm taskset -c 10-14 nice -n 19 ionice -c3 max-cpu/mogg-cache-repro.sh  # after run.sh
+TMPDIR=/dev/shm taskset -c 5-9 nice -n 19 ionice -c3 max-cpu/run.sh            # ~11 min
+TMPDIR=/dev/shm taskset -c 5-9 nice -n 19 ionice -c3 max-cpu/mogg-cache-repro.sh  # after run.sh
 ```
 
 `run.sh` extracts both omc stages from git objects and checks their sha256, builds the library and
@@ -112,7 +112,7 @@ ExecutionEngine; the MAX kernel JIT does not resolve symbols from the process im
 `LD_PRELOAD` gave the same error. The Mojo FFI docs at the pin (c-ffi.mdx, Limitations) say
 `external_call()` cannot load dynamic libraries and point to `OwnedDLHandle`.
 
-## Measurements (EXERCISED(host CPU), `taskset -c 10-14`)
+## Measurements (EXERCISED(host CPU), `taskset -c 10-14`; historical run of record. Cores 10-14 are reserved on this host now: rerun on 5-9)
 
 `measure-all` starts one child process per series. `cold_ns` runs from process start to the end
 of the first execute (import, graph build, compile, load, first call); `fresh` = empty

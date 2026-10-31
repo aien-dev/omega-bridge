@@ -3,7 +3,7 @@
 # source changes, when the package path and MODULAR_CACHE_DIR stay the same. Needs max-cpu/run.sh
 # to have built $BUILD first (lib/ and extcall/kernels). Prints one line per step; exit 0 always
 # reports what it saw, it does not gate anything.
-#   TMPDIR=/dev/shm taskset -c 10-14 nice -n 19 ionice -c3 max-cpu/mogg-cache-repro.sh
+#   TMPDIR=/dev/shm taskset -c 5-9 nice -n 19 ionice -c3 max-cpu/mogg-cache-repro.sh
 set -eu
 export CUDA_VISIBLE_DEVICES=  # MAX 26.7.0 Graph() opens a visible GPU; see run.sh
 cd "$(dirname "$0")/.."
@@ -28,4 +28,5 @@ step 3-fixed-cacheB-fresh "$R/pkg/kernels" "$R/cacheB"
 cp max-cpu/kernels/__init__.mojo "$R/other/kernels/"    # the fixed glue, another path
 step 4-fixed-otherpath-cacheA "$R/other/kernels" "$R/cacheA"
 sha256sum "$R/pkg/kernels/__init__.mojo" "$BUILD/extcall/kernels/__init__.mojo"
-diff "$R/cacheA-after-1.txt" "$R/cacheA-after-2.txt" >/dev/null && echo "cacheA: no new files in step 2"
+if diff "$R/cacheA-after-1.txt" "$R/cacheA-after-2.txt" >/dev/null; then echo "cacheA: no new files in step 2"
+else echo "cacheA: step 2 added $(comm -13 "$R/cacheA-after-1.txt" "$R/cacheA-after-2.txt" | wc -l) files"; fi
