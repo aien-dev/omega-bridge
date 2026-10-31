@@ -1,0 +1,51 @@
+note hfile.om: an OM-2 unit for the host-word checks of tests/native/v2/run.sh (section 11). It uses all
+note nine function-mode host words a bridged unit may use (getuid geteuid getgid getegid stat lstat fopen
+note fstat fclose) and read, so tools/native refuses it without --host and accepts it with --host.
+om2
+export fn ids to ulong
+a = ulong getuid
+b = ulong geteuid
+c = ulong getgid
+e = ulong getegid
+ret add add a b add c e
+end
+
+note peek p: lstat and stat p, open it (O_NOFOLLOW O_NONBLOCK O_CLOEXEC, 559104 on AArch64), fstat the
+note descriptor, read up to 16 bytes, close; the byte count read, or minus errno of the first failure.
+export fn peek p view uchar * to long
+s = new uchar 128 0
+r = lstat p 0 len p s 0 128
+if ne r 0
+ret r
+end
+r = stat p 0 len p s 0 128
+if ne r 0
+ret r
+end
+fd = fopen p 0 len p 559104 0
+if lt fd 0
+ret fd
+end
+b = new uchar 16 0
+k = fstat int fd s 0 128
+n = read int fd b 0 16
+z = fclose int fd
+if ne k 0
+ret k
+end
+ret n
+end
+
+note size p: the st_size field (offset 48 of the 128-byte AArch64 stat) of p, or minus errno.
+export fn size p view uchar * to long
+s = new uchar 128 0
+r = stat p 0 len p s 0 128
+if ne r 0
+ret r
+end
+x = ulong 0
+for i ulong 8
+x = or x shl ulong get s add 48 i mul i 8
+end
+ret long x
+end
