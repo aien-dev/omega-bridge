@@ -249,8 +249,9 @@ guarded stack, stack-allocation status or hosted reentry restriction.
 The emitter validates every source token, including unused helpers, against the bounded
 function-mode integer-scalar subset: integer/bool types, decimal integer literals,
 scalar locals, functions, arithmetic, comparisons, control flow, contracts and traps.
-Arrays (including local arrays), globals, text, host words, floating-point operations
-and OM-2 units are refused with exit 110 and no output. Ordinary compiler source
+Arrays (including local arrays), globals, text, host words and floating-point operations
+are refused with exit 110 and no output, as is an OM-2 frame without its `omega-unit`
+trailer. Ordinary compiler source
 validation still applies. As with hosted transport, framed source and machine bytes
 must come from the same pinned compiler invocation; this is not an arbitrary-bytecode
 sandbox. `tools/native` snapshots each input once in private scratch storage; profile
@@ -265,6 +266,28 @@ untouched. `tests/native/test_freestanding.py` exercises epoch increment/MAX ref
 nested trap unwind, independent scalar units, concurrent threads, non-pure source
 refusals, a pthread-emitter mutant, failed inspectors and a deterministic source-swap
 control whose old-reread mutant admits mismatched source/code and is caught.
+
+**OM-2 freestanding** (the same `--freestanding` flag with an OM-2 unit; output `freest`).
+An OM-2 unit without host effects is accepted: its compiler bytes are embedded unchanged
+and bound as `omega2_<name>`, with the same argument checks as output `c` (views, layouts,
+out, overlaps). Each out parameter is a zero-filled, 16-byte-aligned buffer in the entry's
+own frame, rounded up to 16 bytes, passed in its slot and copied back to the caller only
+after status 0; a nonzero status (a trap, a refused argument) leaves the caller's buffer as
+it was. The runtime table has one entry, the trap, and nothing else: no TLS, no heap, no
+stack mapping, no pthread and no stack guard, so the caller must provide a stack large
+enough for the compiled functions. The only C library calls are `memset` and `memmove`.
+
+With an OM-2 unit, `--freestanding` also installs `omega_api_decl.h` and
+`omega_api_defs.{c,o}` (output `fapic`): the same prototypes as output `apih`, but each
+definition calls `__builtin_trap()` on a nonzero status instead of `abort()`, so the
+definition object imports no C library function either. It does not install `omega_api.h`,
+whose inline wrappers call `abort()`. The two objects are inspected together: a global
+definition in one satisfies a reference in the other (the wrappers calling `omega2_*`),
+and every other undefined symbol must be on the GPU_FS_LINK allowlist.
+`tests/native/test_freestanding_om2.py` runs the FIPS 180-4 digests of `sha256-om2.om`
+(empty, abc, the 448-bit message, a million `a` through a split update), the untouched
+out buffer after a refused argument and after a trap, four threads hashing concurrently,
+and the trap wrapper (exit 133); a mutant runtime that drops the copy-back must fail it.
 
 ## The declarations for each language (`tools/native`)
 
@@ -522,6 +545,12 @@ the inline ones; it is compiled into the consumer's hosted binding (for the SHA 
 `src/omega_om_units.c`). `tools/native` compiles the header alone and the definitions against it
 (`-Wmissing-prototypes -Werror`). `omega_api.h` is unchanged, byte for byte. Use one form or the
 other in a program, not both: each defines the functions under the same names.
+
+**Freestanding API** (output word `fapic`, installed as `omega_api_defs.c` by `--freestanding`
+only, in place of the `apic` output). It is the same definitions except that a nonzero status
+executes `__builtin_trap()` instead of calling `abort()`, so the object imports no C library
+function and can be linked into a freestanding binding. The prototypes stay those of output
+`apih`.
 
 **Unsupported (caller precondition, not detected),** as the contract states: that the memory exists for
 `len` elements, is writable for edit, or stays alive during the call; forged lengths and read-only

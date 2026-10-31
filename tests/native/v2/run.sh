@@ -28,17 +28,19 @@ W=$O/work; GEN=$W/native-gen
 
 # basegen REV NAME: the historical generator, with the current C runtime prelude and only
 # private assembly-linkage directives normalized. Public wrappers, signatures, compiler bytes
-# and declarations remain byte-compared. REVs are reachable on this branch: 5458684 has the blob
-# of pre-rebase 3f05908, 3d79d77 that of 3bb8b8a.
+# and declarations remain byte-compared. REVs are reachable on this branch: 3d79d77 has the blob
+# of 3bb8b8a; f637021 is #26, the last commit that changed ABI v1 output on purpose (f32 and
+# ushort array kinds: new units, and the Python binding's kind comment and aliases).
 basegen() {
   PRE=$(grep '^text pre ' "$ROOT/src/native.om"); export PRE
   git -C "$ROOT" show "$1:src/native.om" | awk '/^text pre /{print ENVIRON["PRE"]; next} /^text fr |^text fv /{gsub(/[.]globl ombr_code_/, ".local ombr_code_"); gsub(/[.]globl ombr_entry_/, ".local ombr_entry_"); gsub(/[.]globl ombr2_code_/, ".local ombr2_code_"); gsub(/[.]globl ombr2_entry_/, ".local ombr2_entry_")} {print}' > "$O/native-$2.om"
   "$OMC" < "$O/native-$2.om" > "$O/gen-$2"; chmod +x "$O/gen-$2"
 }
 
-# 1. ABI v1 output unchanged: the generator of 5458684 (plus #17's prelude) and this one, on every
-# existing unit alone and on the v1 suite's set, for all six outputs.
-basegen 5458684 v1
+# 1. ABI v1 output unchanged: the generator of f637021 (#26) and this one, on every existing unit
+# alone and on the v1 suite's set, for all six outputs. (Before #26 this compared against 5458684;
+# #26 changed every Python binding and added the f32/ushort units, which 5458684 refuses.)
+basegen f637021 v1
 same=0; diff=0; : > "$O/v1set.in"
 for u in "$ROOT"/tests/native/*.om "$ROOT"/tests/native/g1/*.om; do
   "$OMC" < "$u" > "$O/one.bin" 2> /dev/null || continue
@@ -54,7 +56,7 @@ for w in c h python rust zig go; do
   "$O/gen-v1" $w < "$O/v1set.in" > "$O/a.out"; "$GEN" $w < "$O/v1set.in" > "$O/b.out"
   if cmp -s "$O/a.out" "$O/b.out"; then same=$((same + 1)); else diff=$((diff + 1)); echo "DIFF set $w"; fi
 done
-if [ $diff = 0 ]; then pass "ABI v1 bindings byte-identical to 5458684's generator (runtime/private linkage normalized): $same unit x output cases (every tests/native and g1 unit, and the set)"
+if [ $diff = 0 ]; then pass "ABI v1 bindings byte-identical to f637021's generator (#26; runtime/private linkage normalized): $same unit x output cases (every tests/native and g1 unit, and the set)"
 else fail "ABI v1 bindings changed in $diff cases"; fi
 
 # 2. Identity: each v2 unit's embedded source digest equals sha256sum of its file (oracle), the omc digest
@@ -270,15 +272,16 @@ mut outcopy '/^text fv /s/memmove(o\[i\].dst, buf\[i\], o\[i\].n);/;/' 'digest: 
 
 # 10a. The C API out of line (outputs apih, apic) for freestanding consumers. The inline header
 # (output api) stays byte for byte what 3d79d77's generator (with #17's prelude) wrote, as does every
-# other output.
+# other output except python, which #26 changed on purpose and is compared with f637021's (gen-v1).
 basegen 3d79d77 3bb
 ok=1
 for w in c h python rust zig go api; do
-  "$O/gen-3bb" $w < "$W/units.in" > "$O/a.out"; "$GEN" $w < "$W/units.in" > "$O/b.out"
+  g=$O/gen-3bb; [ $w != python ] || g=$O/gen-v1
+  "$g" $w < "$W/units.in" > "$O/a.out"; "$GEN" $w < "$W/units.in" > "$O/b.out"
   cmp -s "$O/a.out" "$O/b.out" || { ok=0; echo "DIFF $w"; }
 done
-if [ $ok = 1 ]; then pass "outputs c h python rust zig go api byte-identical to 3d79d77's generator (runtime/private linkage normalized) on the v2 set"
-else fail "an existing output changed against 3d79d77"; fi
+if [ $ok = 1 ]; then pass "outputs c h rust zig go api byte-identical to 3d79d77's generator, python to f637021's (runtime/private linkage normalized) on the v2 set"
+else fail "an existing output changed against 3d79d77 (python: f637021)"; fi
 FS=$O/fs; mkdir -p "$FS"
 FSCF="-std=gnu11 -ffreestanding -fno-builtin -O2 -Wall -Wextra -Werror -c"
 # fsobj DIR: the freestanding object from DIR's omega_api_decl.h; prints its undefined symbols.
