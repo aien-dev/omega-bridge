@@ -53,7 +53,7 @@ six parameters per function, function names up to the frontend's 63-byte limit
 (other names retain its limits), fixed view/edit shapes up to
 16,777,216 elements, explicit `view`/`edit` call prefixes and bounded-loop
 `break`. Seeded C also supports `continue` within a checked enclosing loop.
-Default variable-loop and while guards are 16,777,216 iterations. Source and
+Default variable-loop and while guards match omc's 1,000,000-pass trap 4. Source and
 emission storage are bounded at 1 MiB and 4 MiB; seeded local array storage is
 bounded at 16 MiB, while the baseline local-storage refusal remains 32 KiB.
 Checked arithmetic, bounds, alias refusals, call budget and no-heap restrictions

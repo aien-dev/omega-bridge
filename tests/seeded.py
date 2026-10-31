@@ -91,6 +91,35 @@ mutant = b / "mutant.c"
 mutant.write_bytes(outputs["c"].replace(b"(a+b)&mask", b"(a-b)&mask"))
 checked(["gcc", "-std=gnu11", "-O2", mutant, "-o", b / "mutant"])
 assert result(run([b / "mutant"])) != expected
+# Loop guards: generated C and Python must trap 4 (exit 104) exactly where omc does.
+loops = {
+    "while": "fn main to int\nn = ulong 0\nwhile lt n {k}\nn = add n 1\nend\nret 7\nend\n",
+    "for": "fn count k ulong to ulong\ns = ulong 0\nfor i ulong k\ns = add s 1\nend\nret s\n"
+           "end\nfn main to int\nr = count {k}\nret int and r 255\nend\n",
+    "forcontinue": "fn count k ulong to ulong\ns = ulong 0\nfor i ulong k\ns = add s 1\n"
+                   "if gt s 0\ncontinue\nend\nend\nret s\nend\nfn main to int\n"
+                   "r = count {k}\nret int and r 255\nend\n",
+}
+for name, shape in loops.items():
+    for k, want in [(999999, False), (1500000, True)]:
+        src = b / f"loop-{name}-{k}.om"
+        src.write_text(shape.replace("{k}", str(k)))
+        exe = b / f"loop-{name}-{k}.native"
+        exe.write_bytes(checked([seed], src.read_bytes()))
+        exe.chmod(0o755)
+        native_loop = result(run([exe]))
+        assert (native_loop[0] == 104) == want, (name, k, native_loop)
+        c = b / f"loop-{name}-{k}.c"
+        c.write_bytes(checked(["sh", "tools/bridge-seeded", "c", src]))
+        checked(["gcc", "-std=gnu11", "-O2", "-Wall", "-Wextra", "-Werror", c, "-o", b / "loop-c"])
+        assert result(run([b / "loop-c"])) == native_loop, (name, k, "c", native_loop)
+        if name == "forcontinue":  # seeded `continue` is C-only; Python refuses it
+            p = run(["sh", "tools/bridge-seeded", "python", src])
+            assert p.returncode != 0 and not p.stdout, (name, k, "python", result(p))
+            continue
+        py = b / f"loop-{name}-{k}.py"
+        py.write_bytes(checked(["sh", "tools/bridge-seeded", "python", src]))
+        assert result(run([sys.executable, py])) == native_loop, (name, k, "python", native_loop)
 # Explicit native x86 instruction-set execution, not AArch64 emulation.
 if not shutil.which("x86_64-linux-gnu-gcc") or not shutil.which("qemu-x86_64"):
     sys.exit("NOT_RUN: install x86_64-linux-gnu-gcc and qemu-x86_64 for x86 differential")
