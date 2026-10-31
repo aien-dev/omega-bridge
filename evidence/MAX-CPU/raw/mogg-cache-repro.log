@@ -1,0 +1,6 @@
+1-extcall-cacheA           got: setup for model om_omega_16x16x8 returned error: Failed to materialize symbols: { (e9
+2-fixed-cacheA             got: setup for model om_omega_16x16x8 returned error: Failed to materialize symbols: { (e9
+3-fixed-cacheB-fresh       got: ran
+4-fixed-otherpath-cacheA   got: setup for model om_omega_16x16x8 returned error: Failed to materialize symbols: { (e9
+6159e31aaa0743900543ba356c5156da29bb284f82932f51a0387ff07bc08e02  /dev/shm/omega-max-cpu/mogg-repro/pkg/kernels/__init__.mojo
+6684216a1467cac78b6fcbab550f593b0e4d33d7078763c3abc8bb303f948fd2  /dev/shm/omega-max-cpu/extcall/kernels/__init__.mojo

@@ -1,0 +1,51 @@
+note omatmul.om: the Omega kernel behind the MAX CPU custom op "omega_matmul" (max-cpu/README.md).
+note C[M,N] = A[M,K] @ B[K,N], row-major. A and B arrive as bfloat16 bit patterns in ONE view ab
+note (A's M*K elements, then B's K*N): bf16 to f32 is exact (the 16 bits become the high half), each
+note product of two bf16 values is exact in f32, and the K-term sum accumulates in f32 in order
+note p = 0..K-1, one rounding per add (RNE, no fused multiply-add). C is written as f32 bit patterns.
+note s holds the shape [M, K, N]. A, B and C cannot be three separate views because OM-2 function
+note mode has six parameter slots and an unsized view takes two (spec/omegese-om2.md section 4).
+note Result codes (status 0): 0 done; 1 a dimension is 0 or above 4096; 2 len ab is not M*K + K*N;
+note 3 len c is not M*N. C is untouched unless the result is 0. Every index is also checked (trap 3).
+om2
+fn bdot ab view ushort * ai ulong bj ulong k ulong n ulong to uint
+acc = f32 0.0
+for p ulong k
+x = bitcast f32 shl uint get ab add ai p 16
+y = bitcast f32 shl uint get ab add bj mul p n 16
+acc = add acc mul x y
+end
+ret bitcast uint acc
+end
+fn brow ab view ushort * c edit uint * s view ulong 3 i ulong to void
+k = get s 1
+n = get s 2
+ka = mul get s 0 k
+ai = mul i k
+ci = mul i n
+for j ulong n
+put c add ci j bdot ab ai add ka j k n
+end
+end
+export fn omatmul ab view ushort * c edit uint * s view ulong 3 to ulong
+m = get s 0
+k = get s 1
+n = get s 2
+if or or eq m 0 eq k 0 eq n 0
+ret 1
+end
+if or or gt m 4096 gt k 4096 gt n 4096
+ret 1
+end
+ka = mul m k
+if ne len ab add ka mul k n
+ret 2
+end
+if ne len c mul m n
+ret 3
+end
+for i ulong m
+brow ab c s i
+end
+ret 0
+end

@@ -1,0 +1,7 @@
+shape=[16, 15, 8] want 'result 2' got: To see the Python source location of this op, run again with the `max-debug.source-tracebacks` config key enabled (for example, `Graph.debug.source_tracebacks = True` or `MODULAR_DEBUG=source-tracebacks`). -> FAIL
+shape=[5000, 16, 8] want 'result 1' got: To see the Python source location of this op, run again with the `max-debug.source-tracebacks` config key enabled (for example, `Graph.debug.source_tracebacks = True` or `MODULAR_DEBUG=source-tracebacks`). -> FAIL
+shape=[0, 16, 8] want 'result 1' got: To see the Python source location of this op, run again with the `max-debug.source-tracebacks` config key enabled (for example, `Graph.debug.source_tracebacks = True` or `MODULAR_DEBUG=source-tracebacks`). -> FAIL
+shape=[12, 16, 12] want 'result 3' got: To see the Python source location of this op, run again with the `max-debug.source-tracebacks` config key enabled (for example, `Graph.debug.source_tracebacks = True` or `MODULAR_DEBUG=source-tracebacks`). -> FAIL
+valid call after refusals ratio_ref=0.0336 PASS
+graph construction ops.matmul [16,16]x[15,8]: Failed to create op 'MatmulOp': -> PASS
+OMEGA_MAX_NEG_SHAPE: FAIL
