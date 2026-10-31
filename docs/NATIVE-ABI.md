@@ -213,8 +213,16 @@ not compiler-custody or behavioral evidence for the deliberately mismatched code
 Names must be C identifiers, a parameter name may not end in `_len` (the binding names a length
 `o_<name>_len`), and each unit name appears once; anything else is refused before any C is written.
 
-Supported signatures: up to 6 parameters, each `ulong`, `long`, or `edit`/`view` of `ulong` or `uchar`
-with a fixed length; result `ulong`, `long` or `void`. A unit may hold several functions: the seeded
+Supported signatures: up to 6 parameters, each `ulong`, `long`, or `edit`/`view` of `ulong`, `uchar`,
+`f32` or `ushort` with a fixed length; result `ulong`, `long` or `void`. An `f32` array is packed
+binary32 (4-byte elements, 4-byte alignment) and a `ushort` array is packed 16-bit words (2-byte
+elements, 2-byte alignment), for example binary16 bits that the Omega code converts itself. C and C++
+declarations stay `void *` / `const void *`; the generated library checks the element size, alignment,
+length and overlap. Python ctypes uses `c_float` and `c_uint16`. Rust and Zig declarations type these
+arrays as byte pointers (`*mut u8` / `*const u8`, Zig `?[*]u8`); Go stays `unsafe.Pointer`.
+`OMEGA_NATIVE_OMC=<seed omc> sh tests/native/kinds.sh` binds `fsum.om` and `halve.om`, compares every
+lane to a C `_Float16` oracle, refuses misaligned, wrong-length, overlapping and null arrays (status
+32), and requires a mutant that changes fsum's `add` to `sub` to fail. A unit may hold several functions: the seeded
 compiler enters function-mode code at the unit's last function (the leading entry branches to it), so the
 binding exports that one and the earlier functions stay private helpers, called directly inside the
 embedded code, with any Omega types. Only the last function's signature must be supported

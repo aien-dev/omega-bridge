@@ -1,6 +1,8 @@
-# Omega Bridge (an Omega-written compiler from a checked Omega subset to C and Python, plus native call and GPU adapter boundaries)
+# Omega Bridge (Omega's compatibility gateway: a checked Omega subset converted to C and Python, native call bindings and GPU artifact negotiation)
 
 > `src/toc.om` is an Omega program, built by the pinned seeded Omega compiler, that emits executable C and Python from a checked, bounded Omega subset (ABI v0). `src/native.om` generates a C binding so C, C++, Python, Rust, Zig and Go call the machine code the seeded compiler produced (native call ABI v1/v2). `src/gpu_adapter.om` is an opt-in GPU adapter boundary that negotiates and admits artifacts; it converts no host program. The bootstrap and generators require Linux AArch64; hosted native output also has explicit x86-64 SysV Linux selection, exercised under QEMU 10.0.14 (physical x86 NOT_RUN). Independent review remains required before release; no universal conversion or speedup is claimed.
+
+> Ownership rule (ARCH-0042, aien-dev/aien-architecture-mv#342, Accepted (Drake, 2026-10-30)): Omega owns computation, CUDA++ owns GPU execution, Omega Bridge owns compatibility. This repository is not a second Omega compiler, encoder or GPU runtime: it builds with omega-mv's pinned compiler and runs Omega GPU work only through aien-dev/CUDApp. Remaining overlaps: omega-mv#870 (own seed bootstrap), omega-mv#871 (own front end in `src/toc.om`).
 
 Shared rules: read https://www.aienos.com/agents/RULES.md first. This file adds what is specific to this repository; where the two differ, this file wins here.
 
@@ -32,9 +34,9 @@ The bootstrap fetches the Omega source commit recorded in `docs/PROVENANCE.md` (
 - `OMEGA_SEED`: an already qualified seed compiler; its sha256 must be the pinned one above.
 - `OMEGA_NATIVE_OMC`: mandatory baseline compiler for building the native generator and compiling AArch64 OM-1 units, sha256 `734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61` (omega-mv PR #696). Do not replace this pin with the x86 compiler.
 - `OMEGA_NATIVE_OMC2`: compiler for AArch64 OM-2 units; its digest is recorded in their identities.
-- `OMEGA_NATIVE_X86_OMC`: separate compiler for both OM-1 and OM-2 units under `tools/native --target x86linux`, sha256 `badedbb0c6287887641fcd7e97301b43b5f82f2d7a2838bbe0d17547873108be`. `OMEGA_NATIVE_OMC2` is unused for this target.
+- `OMEGA_NATIVE_X86_OMC`: separate compiler for both OM-1 and OM-2 units under `tools/native --target x86linux`, sha256 `62775d2a391cfef7cde64e387655caa9809a267093112910ec76bfa568f3712b`. `OMEGA_NATIVE_OMC2` is unused for this target.
 - `CC`: native library C compiler, for example `x86_64-linux-gnu-gcc` with `--target x86linux`; no host-architecture inference changes the requested target. `OMEGA_NATIVE_CFLAGS` supplies extra C flags.
-- `QEMU_X86_64`: emulator command for `tests/native/x86/run.sh`. Use the unpatched QEMU 10.0.14 oracle documented in `docs/NATIVE-ABI.md`; integration observed signal and `/proc/self/maps` failures with 8.2.2. This is verification infrastructure, not a production dependency. At the current x86 compiler pin, full-suite, mismatched-pin and failed/missing-toolchain controls passed EMULATED; physical x86 execution remains NOT_RUN. Receipts: `evidence/native-x86-badedbb0/`; earlier pins' receipts remain in `evidence/native-x86-f7752bc5/` and `evidence/native-x86/`.
+- `QEMU_X86_64`: emulator command for `tests/native/x86/run.sh`. Use the unpatched QEMU 10.0.14 oracle documented in `docs/NATIVE-ABI.md`; integration observed signal and `/proc/self/maps` failures with 8.2.2. This is verification infrastructure, not a production dependency. At the current x86 compiler pin, full-suite, mismatched-pin and failed/missing-toolchain controls passed EMULATED; physical x86 execution remains NOT_RUN. Receipt: `evidence/native-x86-62775d2a.json`; earlier pins' receipts remain in `evidence/native-x86-badedbb0/`, `evidence/native-x86-f7752bc5/` and `evidence/native-x86/`.
 - `OMEGA_NATIVE_X86_PYTHON`, `OMEGA_NATIVE_X86_SYSROOT`, `OMEGA_NATIVE_X86_LIBPATH`: guest Python executable, loader sysroot and optional guest library path for the x86 emulator suite. The Python must be x86 Linux, not the host interpreter.
 - `MAXPY`: Python interpreter of a venv with `modular==26.7.0`, used by `conformance/run.sh`.
 - On a shared build host, prefix the build and test commands with `quiet-build`, as the README does. Without it, run the scripts directly.
@@ -57,6 +59,9 @@ python3 tests/attachments.py
 
 # Native call ABI v1: one compiled Omega function called from C, C++, Python, Rust, Zig, Go
 OMEGA_NATIVE_OMC=/path/to/omega-mv/seed/out/omc sh tests/native/run.sh
+
+# f32 and ushort array kinds (C oracle, refusals, add->sub mutant)
+OMEGA_NATIVE_OMC=/path/to/omega-mv/seed/out/omc sh tests/native/kinds.sh
 
 # Hosted x86 native output (cross-build only; this command does not execute callers)
 OMEGA_NATIVE_OMC=/path/to/baseline/omc OMEGA_NATIVE_X86_OMC=/path/to/x86/omc \

@@ -20,7 +20,7 @@ Do not install Jarvis, switch drivers, change 18091, alter other worktrees, or c
 
 ## GPU scope decision (2026-10-23)
 
-The user explicitly moved GPUs, accelerators and graph runtimes into Omega Bridge's scope. Bridge owns source-language bindings, graph-runtime adapters, GPU-runtime interop, capability manifests, tensor ownership handoff and explicit refusal. Omega and CUDApp keep ownership of the native compiler, sm_121 encoder, driver client, kernel runtime, artifact exporter and verifier. Bridge must not duplicate any of them. The versioned contract is `omega-bridge-gpu-adapter/1` in [GPU-ADAPTER.md](GPU-ADAPTER.md); the implemented native checker is `src/gpu_adapter.om`.
+The user explicitly moved GPUs, accelerators and graph runtimes into Omega Bridge's scope. Bridge owns source-language bindings, graph-runtime adapters, GPU-runtime interop, capability manifests, tensor ownership handoff and explicit refusal. Under ARCH-0042 (Omega owns computation, CUDA++ owns GPU execution, Omega Bridge owns compatibility), Omega keeps the language and the native compiler, and CUDA++ keeps the sm_121 encoder, GPU code generator, driver client, kernel runtime, artifact exporter and verifier. Bridge must not duplicate any of them. The versioned contract is `omega-bridge-gpu-adapter/1` in [GPU-ADAPTER.md](GPU-ADAPTER.md); the implemented native checker is `src/gpu_adapter.om`.
 
 ## Implemented architecture and study reconciliation (L483)
 
