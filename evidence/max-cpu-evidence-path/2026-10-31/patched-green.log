@@ -1,0 +1,16 @@
+test_dangling_explicit_evidence_link_refuses_before_reset (__main__.EvidenceDestinationTests.test_dangling_explicit_evidence_link_refuses_before_reset) ... ok
+test_default_does_not_overwrite_original_even_when_build_fails (__main__.EvidenceDestinationTests.test_default_does_not_overwrite_original_even_when_build_fails) ... ok
+test_default_rerun_keeps_previous_evidence (__main__.EvidenceDestinationTests.test_default_rerun_keeps_previous_evidence) ... ok
+test_default_tmpdir_inside_build_refuses_including_alias (__main__.EvidenceDestinationTests.test_default_tmpdir_inside_build_refuses_including_alias) ... ok
+test_existing_explicit_evidence_refuses_before_build_reset (__main__.EvidenceDestinationTests.test_existing_explicit_evidence_refuses_before_build_reset) ... ok
+test_explicit_evidence_ancestor_of_build_refuses_without_creating_it (__main__.EvidenceDestinationTests.test_explicit_evidence_ancestor_of_build_refuses_without_creating_it) ... ok
+test_explicit_outward_alias_uses_resolved_destination_after_reset (__main__.EvidenceDestinationTests.test_explicit_outward_alias_uses_resolved_destination_after_reset) ... ok
+test_explicit_overlap_aliases_refuse_before_reset (__main__.EvidenceDestinationTests.test_explicit_overlap_aliases_refuse_before_reset) ... ok
+test_missing_explicit_parent_refuses_before_build_reset (__main__.EvidenceDestinationTests.test_missing_explicit_parent_refuses_before_build_reset) ... ok
+test_new_explicit_evidence_directory_is_used (__main__.EvidenceDestinationTests.test_new_explicit_evidence_directory_is_used) ... ok
+test_new_explicit_evidence_under_build_refuses_before_reset (__main__.EvidenceDestinationTests.test_new_explicit_evidence_under_build_refuses_before_reset) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.156s
+
+OK

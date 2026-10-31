@@ -7,7 +7,6 @@ cd "$(dirname "$0")/.."
 MAXPY=${MAXPY:-$HOME/workspace/maxinterop/venv/bin/python}
 OMEGA_REPO=${OMEGA_REPO:-$HOME/workspace/omega}
 BUILD=${BUILD:-/dev/shm/omega-max-cpu}
-EV=${EV:-$PWD/evidence/MAX-CPU/raw}
 ITERS=${ITERS:-300}
 OMC1_REV=55f9b0af OMC1_SHA=734f0a39319fbfa930bcc62cb30dbf06d47d78e126372b74f5baf478e6126b61
 OMC2_REV=ec07d25d OMC2_SHA=499236398aabc652e2dae27fe4bdc4c5db3d3726314356e0dbef23e3345803ec
@@ -17,8 +16,52 @@ GLUE_CALL='process.get_function[UInt32]("omega2_omatmul")('
 MUT_FROM='ai = mul i k'
 MUT_TO='ai = mul i n'
 
+# Never replay into the committed run of record or an earlier evidence directory.
+# Resolve aliases before checking containment. These are caller-owned paths on a
+# stable local filesystem, not a sandbox against concurrent namespace changes.
+inside() {
+    case "$1/" in "${2%/}/"*) return 0 ;; *) return 1 ;; esac
+}
+build_path=$(realpath -m -- "$BUILD") || exit 2
+if [ -n "${EV:-}" ]; then
+    evidence_path=$(realpath -m -- "$EV") || exit 2
+    if inside "$evidence_path" "$build_path" || inside "$build_path" "$evidence_path"; then
+        echo 'run.sh: EV must not overlap BUILD' >&2
+        exit 2
+    fi
+    # Check the supplied path before resolving away a dangling leaf symlink.
+    evidence_input=$EV
+    while [ "$evidence_input" != / ] && [ "${evidence_input%/}" != "$evidence_input" ]; do
+        evidence_input=${evidence_input%/}
+    done
+    evidence_input_parent=$(dirname -- "$evidence_input")
+    if [ -e "$evidence_input" ] || [ -L "$evidence_input" ] ||
+       [ ! -d "$evidence_input_parent" ] || [ ! -w "$evidence_input_parent" ]; then
+        echo 'run.sh: EV must name a new directory with an existing writable parent' >&2
+        exit 2
+    fi
+    # A lexical path may traverse a BUILD symlink that the reset removes.
+    EV=$evidence_path
+else
+    evidence_parent=$(realpath -e -- "${TMPDIR:-/tmp}") || exit 2
+    if [ ! -d "$evidence_parent" ] || inside "$evidence_parent" "$build_path"; then
+        echo 'run.sh: default evidence TMPDIR must be a directory outside BUILD' >&2
+        exit 2
+    fi
+fi
+# Refuse before resetting BUILD or opening any output log.
 rm -rf "$BUILD"
-mkdir -p "$BUILD/omc" "$EV"
+mkdir -p "$BUILD/omc"
+# Atomic creation refuses a destination that appeared after the preflight.
+if [ -n "${EV:-}" ]; then
+    if ! mkdir -- "$EV"; then
+        echo 'run.sh: EV must name a new directory with an existing writable parent' >&2
+        exit 2
+    fi
+else
+    EV=$(mktemp -d "$evidence_parent/omega-max-cpu-evidence.XXXXXXXX")
+fi
+printf 'evidence=%s\n' "$EV"
 for v in 1 2; do
     eval rev=\$OMC${v}_REV sha=\$OMC${v}_SHA
     git -C "$OMEGA_REPO" show "$rev:seed/out/omc" >"$BUILD/omc/omc$v"
